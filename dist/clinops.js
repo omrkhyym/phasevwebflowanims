@@ -1,142 +1,91 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
+import { a as n, c as r, i, r as a, s as o, t as s } from "./hero-stage-DpBC6yvy.mjs";
 //#region src/clinops-hero-bg.js
-function n() {
-	if (document.getElementById("pv-clinops-hero-css")) return;
-	let e = document.createElement("style");
-	e.id = "pv-clinops-hero-css", e.textContent = o, document.head.appendChild(e);
-}
-function r(e) {
-	return () => {
-		e |= 0, e = e + 1831565813 | 0;
-		let t = Math.imul(e ^ e >>> 15, 1 | e);
-		return t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t, ((t ^ t >>> 14) >>> 0) / 4294967296;
-	};
-}
-function i(e) {
+function c(e) {
 	if (!e || e.dataset.pvInit) return;
-	let t = document.createElement("canvas");
-	t.setAttribute("aria-hidden", "true");
-	let i = t.getContext("2d");
-	if (!i) return;
-	e.dataset.pvInit = "1", n(), e.appendChild(t);
-	let a = matchMedia("(prefers-reduced-motion: reduce)").matches, o = r(11), d = s.length / 2, b = new Float32Array(d), x = new Float32Array(d), S = new Float32Array(d);
-	for (let e = 0; e < d; e++) b[e] = s[2 * e] / 3600, x[e] = s[2 * e + 1] / 3600;
-	let C = c.map(([e, t]) => ({
+	let t = o(11), i = l.length / 2, c = new Float32Array(i), _ = new Float32Array(i), v = new Float32Array(i);
+	for (let e = 0; e < i; e++) c[e] = l[2 * e] / 3600, _[e] = l[2 * e + 1] / 3600;
+	let y = u.map(([e, t]) => ({
 		px: (e + 180) / 360,
 		py: (74 - t) / 360
 	}));
-	C.forEach((e) => {
+	y.forEach((e) => {
 		e.near = [];
-		for (let t = 0; t < d; t++) {
-			let n = Math.hypot(b[t] - e.px, x[t] - e.py);
-			n < y && e.near.push(t, n);
+		for (let t = 0; t < i; t++) {
+			let n = Math.hypot(c[t] - e.px, _[t] - e.py);
+			n < g && e.near.push(t, n);
 		}
 	});
-	let w = [];
-	function T(e) {
+	let b = [];
+	function x(e) {
 		return {
 			start: e,
-			sites: [...C.keys()].sort(() => o() - .5).slice(0, _).map((e, t) => ({
-				s: C[e],
-				at: o() * 2.2,
-				keep: t < v,
-				rad: .018 + o() * .03,
-				ph: o() * l
+			sites: [...y.keys()].sort(() => t() - .5).slice(0, m).map((e, n) => ({
+				s: y[e],
+				at: t() * 2.2,
+				keep: n < h,
+				rad: .018 + t() * .03,
+				ph: t() * s
 			}))
 		};
 	}
-	let E = 0, D = 0, O = 1, k = 0, A = 0, j = 1, M = !1;
-	function N() {
-		let n = e.getBoundingClientRect();
-		n.width && n.height && (j = Math.min(devicePixelRatio || 1, 2), E = n.width, D = n.height, t.width = Math.round(E * j), t.height = Math.round(D * j), i.setTransform(j, 0, 0, j, 0, 0), M = E < 900, O = Math.max(E * 1.04, D / u), k = (E - O) / 2, A = (D - u * O) / 2 + D * .05, a && z(5.5));
+	let S = 1, C = 0, w = 0;
+	function T({ W: e, H: t, flow: n }) {
+		n ? (S = e * 1.04, C = (e - S) / 2, w = (t - d * S) / 2) : (S = Math.max(e * 1.04, t / d), C = (e - S) / 2, w = (t - d * S) / 2 + t * .05);
 	}
-	let P = new ResizeObserver(N);
-	P.observe(e);
-	let F = e.parentElement || document.body, I = {
-		x: 0,
-		y: 0,
-		tx: 0,
-		ty: 0
-	}, L = (t) => {
-		let n = e.getBoundingClientRect();
-		I.tx = (t.clientX - n.left) / n.width - .5, I.ty = (t.clientY - n.top) / n.height - .5;
-	};
-	F.addEventListener("pointermove", L, { passive: !0 });
-	let R = (e) => M ? .55 : .22 + .78 * m(E * .22, E * .62, e);
-	function z(e) {
-		for (i.clearRect(0, 0, E, D); !w.length || e >= w[w.length - 1].start + h;) w.push(T(w.length ? w[w.length - 1].start + h : 0));
-		for (; w.length && e > w[0].start + g + 1;) w.shift();
-		I.x += (I.tx - I.x) * .05, I.y += (I.ty - I.y) * .05;
-		let t = a ? 0 : -I.x * 14, n = a ? 0 : -I.y * 10, r = (e) => k + e * O + t, o = (e) => A + e * O + n;
-		S.fill(0);
-		let s = [];
-		for (let t of w) for (let n of t.sites) {
-			let r = e - t.start - n.at;
-			if (r < 0) continue;
-			let i = p(f(r, 0, 1.4)), a = i * (n.keep ? 1 - p(f(r, 10 - n.at, g - n.at)) : 1 - p(f(r, 3.6 - n.at + 1, 4.8 - n.at + 1)));
-			if (a <= .002) continue;
-			let o = n.keep ? p(f(r, 3.6 - n.at + 1, 4.4 - n.at + 1)) : 0, c = n.rad * (.6 + .4 * i) * (n.keep ? 1 : .8), u = n.s.near;
-			for (let t = 0; t < u.length; t += 2) {
-				let r = u[t + 1];
-				if (r > c) continue;
-				let i = (1 - r / c) ** 1.6 * (.78 + .22 * Math.sin(l * (r / c * 1.4) - e * 1.6 + n.ph));
-				S[u[t]] = Math.max(S[u[t]], i * a * (.55 + .45 * o));
+	function E(e, t) {
+		let { ctx: n, W: o, H: l, mouse: u } = e;
+		for (n.clearRect(0, 0, o, l); !b.length || t >= b[b.length - 1].start + f;) b.push(x(b.length ? b[b.length - 1].start + f : 0));
+		for (; b.length && t > b[0].start + p + 1;) b.shift();
+		let d = -u.x * 14, m = -u.y * 10, h = (e) => C + e * S + d, g = (e) => w + e * S + m, y = (t) => e.fade(t);
+		v.fill(0);
+		let T = [];
+		for (let e of b) for (let n of e.sites) {
+			let i = t - e.start - n.at;
+			if (i < 0) continue;
+			let o = a(r(i, 0, 1.4)), c = o * (n.keep ? 1 - a(r(i, 10 - n.at, p - n.at)) : 1 - a(r(i, 3.6 - n.at + 1, 4.8 - n.at + 1)));
+			if (c <= .002) continue;
+			let l = n.keep ? a(r(i, 3.6 - n.at + 1, 4.4 - n.at + 1)) : 0, u = n.rad * (.6 + .4 * o) * (n.keep ? 1 : .8), d = n.s.near;
+			for (let e = 0; e < d.length; e += 2) {
+				let r = d[e + 1];
+				if (r > u) continue;
+				let i = (1 - r / u) ** 1.6 * (.78 + .22 * Math.sin(s * (r / u * 1.4) - t * 1.6 + n.ph));
+				v[d[e]] = Math.max(v[d[e]], i * c * (.55 + .45 * l));
 			}
-			s.push({
+			T.push({
 				c: n,
-				k: a,
-				sel: o
+				k: c,
+				sel: l
 			});
 		}
-		let c = Math.max(1.2, O * .0016);
-		i.fillStyle = "#928ACD";
-		for (let e = 0; e < d; e++) {
-			let t = r(b[e]), n = o(x[e]);
-			t < -4 || t > E + 4 || n < -4 || n > D + 4 || (i.globalAlpha = .17 * R(t), i.fillRect(t - c / 2, n - c / 2, c, c));
+		let E = Math.max(1.2, S * .0016);
+		n.fillStyle = "#928ACD";
+		for (let e = 0; e < i; e++) {
+			let t = h(c[e]), r = g(_[e]);
+			t < -4 || t > o + 4 || r < -4 || r > l + 4 || (n.globalAlpha = .17 * y(t), n.fillRect(t - E / 2, r - E / 2, E, E));
 		}
-		i.fillStyle = "#C7E0F4";
-		for (let e = 0; e < d; e++) {
-			let t = S[e];
+		n.fillStyle = "#C7E0F4";
+		for (let e = 0; e < i; e++) {
+			let t = v[e];
 			if (t < .01) continue;
-			let n = r(b[e]), a = o(x[e]);
-			i.globalAlpha = Math.min(1, t * .85) * R(n), i.fillRect(n - c / 2, a - c / 2, c, c);
+			let r = h(c[e]), i = g(_[e]);
+			n.globalAlpha = Math.min(1, t * .85) * y(r), n.fillRect(r - E / 2, i - E / 2, E, E);
 		}
-		for (let { c: t, k: n, sel: a } of s) {
-			let s = r(t.s.px), c = o(t.s.py), u = R(s), d = .5 + .5 * Math.sin(e * 2.2 + t.ph);
-			i.globalAlpha = n * (1 - a) * u, i.fillStyle = "#F4F4F4", i.beginPath(), i.arc(s, c, 2.2 + .6 * d, 0, l), i.fill(), a > 0 && (i.globalAlpha = n * a * u, i.fillStyle = "#E2C70A", i.beginPath(), i.arc(s, c, 2.6, 0, l), i.fill(), i.strokeStyle = "#E2C70A", i.lineWidth = 1, i.globalAlpha = n * a * u * (.35 + .35 * d), i.beginPath(), i.arc(s, c, 7 + 3 * d, 0, l), i.stroke());
+		for (let { c: e, k: r, sel: i } of T) {
+			let a = h(e.s.px), o = g(e.s.py), c = y(a), l = .5 + .5 * Math.sin(t * 2.2 + e.ph);
+			n.globalAlpha = r * (1 - i) * c, n.fillStyle = "#F4F4F4", n.beginPath(), n.arc(a, o, 2.2 + .6 * l, 0, s), n.fill(), i > 0 && (n.globalAlpha = r * i * c, n.fillStyle = "#E2C70A", n.beginPath(), n.arc(a, o, 2.6, 0, s), n.fill(), n.strokeStyle = "#E2C70A", n.lineWidth = 1, n.globalAlpha = r * i * c * (.35 + .35 * l), n.beginPath(), n.arc(a, o, 7 + 3 * l, 0, s), n.stroke());
 		}
-		i.globalAlpha = 1;
+		n.globalAlpha = 1;
 	}
-	N();
-	let B = 0, V = !1, H = !1, U = 0, W = 0;
-	function G(e) {
-		B = requestAnimationFrame(G);
-		let t = Math.min((e - W) / 1e3, .05);
-		W = e, U += t, z(U);
-	}
-	function K() {
-		V || a || !H || document.hidden || (V = !0, W = performance.now(), B = requestAnimationFrame(G));
-	}
-	function q() {
-		V && (V = !1, cancelAnimationFrame(B));
-	}
-	let J = new IntersectionObserver(([e]) => {
-		H = e.isIntersecting, H ? K() : q();
+	return n(e, {
+		name: "clinops",
+		draw: E,
+		still: 5.5,
+		onResize: T
 	});
-	J.observe(e);
-	let Y = () => {
-		document.hidden ? q() : K();
-	};
-	return document.addEventListener("visibilitychange", Y), function() {
-		q(), J.disconnect(), P.disconnect(), document.removeEventListener("visibilitychange", Y), F.removeEventListener("pointermove", L), t.remove(), delete e.dataset.pvInit;
-	};
 }
-var a, o, s, c, l, u, d, f, p, m, h, g, _, v, y, b = e((() => {
-	a = "[data-pv=\"clinops-hero-bg\"]", o = `
-:has(> ${a}){ position:relative; overflow:hidden; }
-:has(> ${a}) > :not(${a}){ position:relative; z-index:1; }
-${a}{ position:absolute; inset:0; z-index:0; pointer-events:none; }
-${a} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }`, s = [
+var l, u, d, f, p, m, h, g, _ = e((() => {
+	i(), l = [
 		561,
 		0,
 		578,
@@ -10387,7 +10336,7 @@ ${a} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block;
 		1292,
 		1139,
 		1292
-	], c = [
+	], u = [
 		[-71, 42.4],
 		[-95.4, 29.8],
 		[-79.4, 43.7],
@@ -10439,12 +10388,9 @@ ${a} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block;
 		[145, -37.8],
 		[115.9, -31.9],
 		[174.8, -36.8]
-	], l = Math.PI * 2, u = .361, d = (e) => Math.max(0, Math.min(1, e)), f = (e, t, n) => d((e - t) / (n - t)), p = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, m = (e, t, n) => {
-		let r = d((n - e) / (t - e));
-		return r * r * (3 - 2 * r);
-	}, h = 9, g = 12, _ = 13, v = 5, y = .05;
-})), x = /* @__PURE__ */ t((() => {
-	b(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => i(e));
+	], d = .361, f = 9, p = 12, m = 13, h = 5, g = .05;
+})), v = /* @__PURE__ */ t((() => {
+	_(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => c(e));
 }));
 //#endregion
-export default x();
+export default v();

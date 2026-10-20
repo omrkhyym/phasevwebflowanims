@@ -1,25 +1,12 @@
 /* PhaseV · hero /clinops-optimizer · carte des sites
-   Monté dans <div data-pv="clinops-hero-bg"></div>, premier enfant du header du hero.
+   Montage via le socle hero-stage :
+   - <div data-pv="clinops-hero-bg"></div>, premier enfant du header : fond plein cadre au-dessus de 991 px ;
+   - <div data-pv="clinops-hero-slot"></div>, dernier enfant de la grille header_content : bloc 4:3 sous les boutons à 991 px et moins.
    Carte du monde en points (Canvas 2D) : des sites s'allument, éclairent leur bassin,
-   certains passent en jaune (sites retenus). La carte s'atténue côté texte.
+   certains passent en jaune (sites retenus). La carte s'atténue côté texte en mode fond.
    Titre, texte et boutons restent dans Webflow. */
 
-const SEL = '[data-pv="clinops-hero-bg"]';
-
-/* CSS ciblé sur le header qui contient notre div : aucune classe Webflow n'est modifiée. */
-const CSS = `
-:has(> ${SEL}){ position:relative; overflow:hidden; }
-:has(> ${SEL}) > :not(${SEL}){ position:relative; z-index:1; }
-${SEL}{ position:absolute; inset:0; z-index:0; pointer-events:none; }
-${SEL} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }`;
-
-function injectCSS() {
-  if (document.getElementById('pv-clinops-hero-css')) return;
-  const s = document.createElement('style');
-  s.id = 'pv-clinops-hero-css';
-  s.textContent = CSS;
-  document.head.appendChild(s);
-}
+import { mountHeroStage, seg, ease, rng, TAU } from './hero-stage.js';
 
 /* Grille des terres, précalculée depuis world-atlas 110m (pas de 1.7°).
    Paires [longitude, latitude] en dixièmes de degré, origine 180°W / 74°N. */
@@ -35,11 +22,7 @@ const POOL_LONLAT=[[-71,42.4],[-95.4,29.8],[-79.4,43.7],[-73.6,45.5],[-123.1,49.
   [115.9,-31.9],[174.8,-36.8]
 ];
 
-const TAU = Math.PI * 2, MH = .361;
-const cl = v => Math.max(0, Math.min(1, v)), seg = (t, a, b) => cl((t - a) / (b - a));
-const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
-const smooth = (a, b, v) => { const k = cl((v - a) / (b - a)); return k * k * (3 - 2 * k); };
-function rng(s) { return () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const MH = .361;
 
 /* Un tirage = un lot de sites candidats, dont quelques-uns sont retenus.
    Les tirages se chevauchent pour un fondu enchaîné continu. */
@@ -47,15 +30,6 @@ const ROUND = 9, LIFE = 12, CAND = 13, KEEP = 5, RMAX = .05;
 
 export function initClinopsHeroBg(root) {
   if (!root || root.dataset.pvInit) return;
-  const cv = document.createElement('canvas');
-  cv.setAttribute('aria-hidden', 'true');
-  const x = cv.getContext('2d'); if (!x) return;
-  root.dataset.pvInit = '1';
-  injectCSS();
-  root.appendChild(cv);
-
-  const mq = matchMedia('(prefers-reduced-motion: reduce)');
-  const reduce = mq.matches;
   const R = rng(11);
 
   const N = LAND.length / 2, DX = new Float32Array(N), DY = new Float32Array(N), BOOST = new Float32Array(N);
@@ -75,39 +49,26 @@ export function initClinopsHeroBg(root) {
     return { start, sites: idx.map((k, j) => ({ s: POOL[k], at: R() * 2.2, keep: j < KEEP, rad: .018 + R() * .03, ph: R() * TAU })) };
   }
 
-  let W = 0, H = 0, S = 1, OX = 0, OY = 0, dpr = 1, mobile = false;
-  function fit() {
-    const r = root.getBoundingClientRect(); if (!r.width || !r.height) return;
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); x.setTransform(dpr, 0, 0, dpr, 0, 0);
-    mobile = W < 900;
-    // la carte couvre la largeur, et reste assez haute pour remplir le hero
-    S = Math.max(W * 1.04, H / MH); OX = (W - S) / 2; OY = (H - MH * S) / 2 + H * .05;
-    if (reduce) frame(5.5);
+  let S = 1, OX = 0, OY = 0;
+  function onResize({ W, H, flow }) {
+    if (flow) {
+      // mode bloc : la carte entière tient dans la largeur, centrée
+      S = W * 1.04; OX = (W - S) / 2; OY = (H - MH * S) / 2;
+    } else {
+      // mode fond : la carte couvre toute la hauteur du hero, centrée et un peu descendue
+      S = Math.max(W * 1.04, H / MH); OX = (W - S) / 2; OY = (H - MH * S) / 2 + H * .05;
+    }
   }
-  const ro = new ResizeObserver(fit);
-  ro.observe(root);
 
-  /* La souris est écoutée sur le header qui porte la div, le canvas reste en pointer-events:none. */
-  const host = root.parentElement || document.body;
-  const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
-  const onMove = e => {
-    const r = root.getBoundingClientRect();
-    mouse.tx = (e.clientX - r.left) / r.width - .5; mouse.ty = (e.clientY - r.top) / r.height - .5;
-  };
-  host.addEventListener('pointermove', onMove, { passive: true });
-
-  /* Atténuation côté texte : la carte s'efface sous la colonne de gauche. */
-  const fade = px => mobile ? .55 : .22 + .78 * smooth(W * .22, W * .62, px);
-
-  function frame(t) {
+  function draw(stage, t) {
+    const { ctx: x, W, H, mouse } = stage;
     x.clearRect(0, 0, W, H);
     while (!rounds.length || t >= rounds[rounds.length - 1].start + ROUND) rounds.push(draw0(rounds.length ? rounds[rounds.length - 1].start + ROUND : 0));
     while (rounds.length && t > rounds[0].start + LIFE + 1) rounds.shift();
 
-    mouse.x += (mouse.tx - mouse.x) * .05; mouse.y += (mouse.ty - mouse.y) * .05;
-    const mx = reduce ? 0 : -mouse.x * 14, my = reduce ? 0 : -mouse.y * 10;
+    const mx = -mouse.x * 14, my = -mouse.y * 10;
     const X = v => OX + v * S + mx, Y = v => OY + v * S + my;
+    const fade = px => stage.fade(px);
 
     // éclairage des bassins
     BOOST.fill(0);
@@ -158,27 +119,5 @@ export function initClinopsHeroBg(root) {
     x.globalAlpha = 1;
   }
 
-  fit();
-
-  /* ---------- boucle : ne tourne que visible, onglet actif, sans reduced-motion ---------- */
-  let raf = 0, running = false, visible = false, t = 0, last = 0;
-  function loop(now) {
-    raf = requestAnimationFrame(loop);
-    const dt = Math.min((now - last) / 1000, .05); last = now;
-    t += dt; frame(t);
-  }
-  function start() { if (running || reduce || !visible || document.hidden) return; running = true; last = performance.now(); raf = requestAnimationFrame(loop); }
-  function stop() { if (!running) return; running = false; cancelAnimationFrame(raf); }
-
-  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); });
-  io.observe(root);
-  const onVis = () => { document.hidden ? stop() : start(); };
-  document.addEventListener('visibilitychange', onVis);
-
-  return function destroy() {
-    stop(); io.disconnect(); ro.disconnect();
-    document.removeEventListener('visibilitychange', onVis);
-    host.removeEventListener('pointermove', onMove);
-    cv.remove(); delete root.dataset.pvInit;
-  };
+  return mountHeroStage(root, { name: 'clinops', draw, still: 5.5, onResize });
 }

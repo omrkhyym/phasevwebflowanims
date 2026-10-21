@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Success Story Protos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* --bg : approximation de .is-lightpurple, à caler sur la vraie valeur Webflow */
+  :root{ --bg:#ECEAF6; --ink:#141238; --mut:#7d7b9c; --line:#d3d0e8; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:Roboto,system-ui,sans-serif; }
+
+  .proto{ max-width:1320px; margin:0 auto; padding:88px 44px; border-bottom:1px solid var(--line); }
+  @media(max-width:700px){ .proto{ padding:64px 22px; } }
+  .bar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:44px;
+        font:500 11px/1 'Roboto Mono',monospace; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); }
+  .bar button{ font:500 11px/1 'Roboto Mono',monospace; letter-spacing:.1em; text-transform:uppercase;
+        padding:9px 14px; background:transparent; color:var(--ink); border:1px solid var(--line); cursor:pointer; }
+  .bar button:hover{ background:#fff; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:64px; align-items:center; }
+  @media(max-width:900px){ .grid{ grid-template-columns:1fr; gap:36px; } }
+  .label{ font:400 12px/1.4 'Roboto Mono',monospace; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin-bottom:20px; }
+  .num{ font-size:clamp(48px,6vw,84px); font-weight:700; letter-spacing:-.03em; line-height:1; }
+  .sub{ font-size:clamp(22px,2.4vw,32px); font-weight:600; letter-spacing:-.015em; margin:8px 0 24px; }
+  p{ font-size:17px; line-height:1.6; color:#2b2a48; margin:0; }
+
+  .anim{ position:relative; width:100%; aspect-ratio:1.15/1; min-height:340px; }
+  .anim.wide{ aspect-ratio:1.4/1; min-height:300px; }
+  .anim canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+</style>
+</head>
+<body>
+
+<!-- ============ PROTO 1 ============ -->
+<section class="proto">
+  <div class="bar"><span>Proto 1 · Design space</span><button data-replay="a1">Replay</button></div>
+  <div class="grid">
+    <div>
+      <div class="label">Anonymized Phase 3 infectious disease trial</div>
+      <div class="num">$6.05M</div>
+      <div class="sub">conservative direct cost savings</div>
+      <p>By simulating millions of candidate designs, PhaseV identified an adaptive protocol that reduced modeled enrollment from 629 to 574 participants and shortened modeled trial duration by 6 months.</p>
+    </div>
+    <div class="anim" id="a1"><canvas></canvas></div>
+  </div>
+</section>
+
+<!-- ============ PROTO 2 ============ -->
+<section class="proto">
+  <div class="bar"><span>Proto 2 · Enrollment curves</span><button data-replay="a2">Replay</button></div>
+  <div class="grid">
+    <div>
+      <div class="label">Anonymized Phase 3 infectious disease trial</div>
+      <div class="num">$6.05M</div>
+      <div class="sub">conservative direct cost savings</div>
+      <p>By simulating millions of candidate designs, PhaseV identified an adaptive protocol that reduced modeled enrollment from 629 to 574 participants and shortened modeled trial duration by 6 months.</p>
+    </div>
+    <div class="anim" id="a2"><canvas></canvas></div>
+  </div>
+</section>
+
+<!-- ============ PROTO 3 ============ -->
+<section class="proto">
+  <div class="bar"><span>Proto 3 · Timeline contracts</span><button data-replay="a3">Replay</button></div>
+  <div class="grid">
+    <div>
+      <div class="label">Anonymized Phase 3 infectious disease trial</div>
+      <div class="num">$6.05M</div>
+      <div class="sub">conservative direct cost savings</div>
+      <p>By simulating millions of candidate designs, PhaseV identified an adaptive protocol that reduced modeled enrollment from 629 to 574 participants and shortened modeled trial duration by 6 months.</p>
+    </div>
+    <div class="anim wide" id="a3"><canvas></canvas></div>
+  </div>
+</section>
+
+<script>
+const INK='#141238', YEL='#E2C70A', MAU='#928ACD', MUT='#7d7b9c', GRID='#d3d0e8', GHOST='#cfcbe6', BG='#ECEAF6';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const seg=(t,a,b)=>cl((t-a)/(b-a));
+const ease=v=>v<.5?4*v*v*v:1-Math.pow(-2*v+2,3)/2;
+const easeOut=v=>1-Math.pow(1-v,3);
+const back=v=>{ const c1=1.70158,c3=c1+1; return 1+c3*Math.pow(v-1,3)+c1*Math.pow(v-1,2); };
+const mono=(w,s)=>`${w} ${s}px 'Roboto Mono',monospace`;
+function rng(s){ return ()=>{ s|=0; s=s+0x6D2B79F5|0; let t=Math.imul(s^s>>>15,1|s); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+
+/* Texte avec fond de la couleur de section : les étiquettes restent lisibles
+   quand elles passent au-dessus du nuage de points. */
+function tag(x,s,px,py,f,c,al='left',a=1,bg=true){
+  if(a<=0) return;
+  x.font=f; const w=x.measureText(s).width;
+  const x0=al==='left'?px:al==='right'?px-w:px-w/2;
+  if(bg){ x.globalAlpha=a*.92; x.fillStyle=BG; x.fillRect(x0-4,py-11,w+8,15); }
+  x.globalAlpha=a; x.fillStyle=c; x.textAlign='left'; x.fillText(s,x0,py); x.globalAlpha=1;
+}
+function hatch(x,x0,x1,y0,y1,c,a){
+  if(a<=0||x1<=x0) return;
+  const h=y1-y0; x.save(); x.beginPath(); x.rect(x0,y0,x1-x0,h); x.clip();
+  x.strokeStyle=c; x.globalAlpha=a; x.lineWidth=1;
+  for(let p=x0-h; p<x1; p+=6){ x.beginPath(); x.moveTo(p,y1); x.lineTo(p+h,y0); x.stroke(); }
+  x.restore(); x.globalAlpha=1;
+}
+function arrow(x,xa,xb,y,c,k){
+  if(k<=0) return; const xe=xa+(xb-xa)*k, dir=Math.sign(xb-xa)||1;
+  x.strokeStyle=c; x.fillStyle=c; x.lineWidth=1.25;
+  x.beginPath(); x.moveTo(xa,y+.5); x.lineTo(xe,y+.5); x.stroke();
+  x.beginPath(); x.moveTo(xe,y+.5); x.lineTo(xe-dir*7,y-3.5); x.lineTo(xe-dir*7,y+4.5); x.closePath(); x.fill();
+}
+function axes(x,L,R,T,B){
+  x.strokeStyle=INK; x.globalAlpha=.55; x.lineWidth=1;
+  x.beginPath(); x.moveTo(L+.5,T); x.lineTo(L+.5,B+.5); x.lineTo(R,B+.5); x.stroke(); x.globalAlpha=1;
+}
+
+/* Monte un canvas : rendu = fonction pure du temps t, joué une fois quand le bloc
+   entre à l'écran. La boucle s'arrête à la fin, rien ne tourne au repos. */
+function mount(id,draw,DUR){
+  const box=document.getElementById(id), cv=box.querySelector('canvas'), x=cv.getContext('2d');
+  let W=0,H=0,t=0,started=false,running=false,last=0;
+  const render=()=>{ x.clearRect(0,0,W,H); draw(x,W,H,started?t:0); };
+  function fit(){ const dpr=Math.min(devicePixelRatio||1,2), r=box.getBoundingClientRect();
+    W=r.width; H=r.height; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); x.setTransform(dpr,0,0,dpr,0,0); render(); }
+  function frame(now){ t+=Math.min((now-last)/1000,.05); last=now; render();
+    if(t<DUR) requestAnimationFrame(frame); else running=false; }
+  function play(){ started=true;
+    if(reduce){ t=DUR; render(); return; }
+    t=0; if(!running){ running=true; last=performance.now(); requestAnimationFrame(frame); } }
+  new ResizeObserver(fit).observe(box);
+  new IntersectionObserver(([e],io)=>{ if(e.isIntersecting){ play(); io.disconnect(); } },{threshold:.45}).observe(box);
+  document.querySelector(`[data-replay="${id}"]`)?.addEventListener('click',play);
+  if(document.fonts) document.fonts.ready.then(render);
+}
+
+/* ============================================================
+   PROTO 1 · espace des designs : N attendu vs puissance
+   ============================================================ */
+const D1=(()=>{ const R=rng(7), g=()=>Math.sqrt(-2*Math.log(R()+1e-9))*Math.cos(6.2832*R());
+  /* frontière concave qui passe par le design retenu (574, ~90.5%) :
+     aucun design plus petit n'atteint 90 %, c'est ce qui le rend optimal */
+  const f=n=>.955-.05*Math.exp(-(n-574)/60), P=[];
+  for(let i=0;i<1600;i++){ const n=500+R()*240;
+    let p=f(n)-Math.abs(g())*.028-Math.pow(R(),2.2)*.12;
+    if(n<580 && p>=.899) p=.897-R()*.012;
+    P.push({n, p:Math.max(.725,p), d:R()}); }
+  return P; })();
+
+function draw1(x,W,H,t){
+  const L=52,R=W-16,T=48,B=H-56, pw=R-L, ph=B-T;
+  const N0=490,N1=750,P0=.72,P1=.98;
+  const X=n=>L+(n-N0)/(N1-N0)*pw, Y=p=>B-(p-P0)/(P1-P0)*ph;
+
+  // grille et axes
+  x.font=mono(400,10); x.fillStyle=MUT; x.textAlign='right';
+  for(const p of [.75,.80,.85,.90,.95]){ const y=Math.round(Y(p))+.5;
+    x.fillText(Math.round(p*100)+'%',L-10,y+3);
+    x.strokeStyle=GRID; x.globalAlpha=.6; x.beginPath(); x.moveTo(L,y); x.lineTo(R,y); x.stroke(); x.globalAlpha=1; }
+  x.textAlign='center';
+  for(let n=500;n<=750;n+=50){ x.fillStyle=MUT; x.fillText(n,X(n),B+18); }
+  axes(x,L,R,T,B);
+  tag(x,'POWER',0,T-16,mono(500,10),MUT,'left',1,false);
+  tag(x,'EXPECTED SAMPLE SIZE',R,B+40,mono(500,10),MUT,'right',1,false);
+  tag(x,'CANDIDATE DESIGNS · SIMULATED',L+pw/2,16,mono(500,10),INK,'center',seg(t,.1,.6),false);
+
+  // nuage : les designs arrivent, puis ceux sous la cible s'éteignent
+  const filt=ease(seg(t,2.7,3.3));
+  x.fillStyle=MAU;
+  for(const q of D1){
+    const a=easeOut(seg(t,.25+q.d*1.5,.7+q.d*1.5)); if(a<=0) continue;
+    const ok=q.p>=.90, al=ok? a*(.5+.3*filt) : a*.5*(1-.72*filt);
+    x.globalAlpha=al; x.beginPath(); x.arc(X(q.n),Y(q.p)-(1-a)*10,2,0,6.2832); x.fill();
+  }
+  x.globalAlpha=1;
+
+  // cible de puissance
+  const yT=Y(.90), kl=ease(seg(t,2.0,2.7));
+  if(kl>0){ x.strokeStyle=INK; x.lineWidth=1.25; x.beginPath(); x.moveTo(L,yT); x.lineTo(L+kl*pw,yT); x.stroke(); }
+  tag(x,'TARGET 90%',L+6,yT-8,mono(500,10),INK,'left',seg(t,2.5,2.9));
+
+  // design de référence (puissance d'origine inconnue : posé sur la cible)
+  const xr=X(629), kr=seg(t,3.3,3.7);
+  if(kr>0){ x.globalAlpha=kr; x.strokeStyle=INK; x.lineWidth=1.5; x.fillStyle=BG;
+    x.beginPath(); x.arc(xr,yT,7,0,6.2832); x.fill(); x.stroke(); x.globalAlpha=1; }
+  tag(x,'FIXED DESIGN · N 629',xr+12,yT+20,mono(500,10),INK,'left',kr);
+
+  // design retenu : le moment de décision, seul usage du jaune
+  const xs=X(574), ys=Y(.903), ks=seg(t,3.9,4.4);
+  if(ks>0){ const sc=back(ks);
+    x.fillStyle=YEL; x.beginPath(); x.arc(xs,ys,6*sc,0,6.2832); x.fill();
+    x.strokeStyle=INK; x.lineWidth=1.5; x.beginPath(); x.arc(xs,ys,9.5*sc,0,6.2832); x.stroke(); }
+  tag(x,'ADAPTIVE DESIGN',xs+14,ys-30,mono(700,10),INK,'left',seg(t,4.2,4.6));
+  tag(x,'N 574 · POWER 90.3%',xs+14,ys-16,mono(400,10),INK,'left',seg(t,4.3,4.7));
+
+  // écart de taille d'échantillon
+  arrow(x,xr,xs,yT+40,INK,ease(seg(t,4.5,5.1)));
+  tag(x,'−55 PARTICIPANTS',(xr+xs)/2,yT+58,mono(700,11),INK,'center',seg(t,4.9,5.3));
+  tag(x,'TYPE I ERROR HELD AT 2.5%',0,H-8,mono(400,10),MUT,'left',seg(t,5.2,5.6),false);
+}
+
+/* ============================================================
+   PROTO 2 · enrôlement cumulé, fixe vs adaptatif
+   ============================================================ */
+function draw2(x,W,H,t){
+  const L=52,R=W-16,T=48,B=H-56, pw=R-L, ph=B-T;
+  const U=u=>L+u*pw, V=v=>B-v/700*ph;
+  /* même rythme d'enrôlement pour les deux designs : le fixe va jusqu'à 629,
+     l'adaptatif ferme à 574. Échelle de temps sans valeurs, faute de durée réelle. */
+  const u0=.04, u1=.60, ua=u0+.818*(u1-u0), ef=.94, ea=ef-.18;
+  const E=u=>{ const v=cl((u-u0)/(u1-u0)); return 629*(3*v*v-2*v*v*v); };
+
+  x.font=mono(400,10); x.textAlign='right';
+  for(const v of [0,200,400,600]){ const y=Math.round(V(v))+.5; x.fillStyle=MUT; x.fillText(v,L-10,y+3);
+    if(v){ x.strokeStyle=GRID; x.globalAlpha=.6; x.beginPath(); x.moveTo(L,y); x.lineTo(R,y); x.stroke(); x.globalAlpha=1; } }
+  axes(x,L,R,T,B);
+  x.strokeStyle=INK; x.globalAlpha=.4; for(let i=1;i<10;i++){ const px=Math.round(U(i/10))+.5; x.beginPath(); x.moveTo(px,B); x.lineTo(px,B+5); x.stroke(); } x.globalAlpha=1;
+  tag(x,'PARTICIPANTS ENROLLED',0,T-16,mono(500,10),MUT,'left',1,false);
+  tag(x,'TIME',R,B+24,mono(500,10),MUT,'right',1,false);
+
+  const h=ease(seg(t,.3,3.6))*ef;   // tête de lecture
+  function series(cap,end,c){
+    const e=Math.min(h,end); if(e<=0) return;
+    x.strokeStyle=c; x.lineWidth=2; x.beginPath();
+    for(let i=0;i<=220;i++){ const u=e*i/220, y=V(Math.min(E(u),cap)); i?x.lineTo(U(u),y):x.moveTo(U(u),y); }
+    x.stroke();
+  }
+  series(629,ef,MAU);   // fixe, dessous
+  series(574,ea,INK);   // adaptatif, par-dessus : la séparation se voit au point de fermeture
+
+  // fin d'étude de chaque design
+  const kf=seg(h,ef-.01,ef), ka=seg(h,ea-.01,ea);
+  if(ka>0){ x.globalAlpha=ka; x.strokeStyle=INK; x.lineWidth=1.5; x.beginPath(); x.moveTo(U(ea),T); x.lineTo(U(ea),B); x.stroke(); x.globalAlpha=1; }
+  if(kf>0){ x.save(); x.setLineDash([3,4]); x.globalAlpha=kf; x.strokeStyle=MUT; x.lineWidth=1.25;
+    x.beginPath(); x.moveTo(U(ef),T); x.lineTo(U(ef),B); x.stroke(); x.restore(); }
+  tag(x,'ADAPTIVE END',U(ea),T-16,mono(500,9),INK,'center',ka,false);
+  tag(x,'FIXED END',U(ef),T-4,mono(400,9),MUT,'center',kf,false);
+
+  // fermeture des inclusions : le moment de décision
+  const kd=seg(h,ua,ua+.03);
+  if(kd>0){ const sc=back(kd), px=U(ua), py=V(574), r=6*sc;
+    x.fillStyle=YEL; x.beginPath(); x.moveTo(px,py-r); x.lineTo(px+r,py); x.lineTo(px,py+r); x.lineTo(px-r,py); x.closePath(); x.fill();
+    x.strokeStyle=INK; x.lineWidth=1.5; x.stroke(); }
+  tag(x,'ENROLLMENT CLOSES · N 574',U(ua)-14,V(574)+4,mono(700,10),INK,'right',kd);
+  tag(x,'FIXED · N 629',U(u1)+8,V(629)-10,mono(400,10),MUT,'left',seg(h,u1,u1+.04));
+
+  // gain de durée
+  const kg=seg(t,3.6,4.1);
+  hatch(x,U(ea),U(ef),T,B,MAU,.28*kg);
+  tag(x,'−6 MONTHS',(U(ea)+U(ef))/2,V(300),mono(700,11),INK,'center',seg(t,3.9,4.3));
+
+  // gain de taille d'échantillon
+  const kb=ease(seg(t,4.2,4.6)), bx=U(.645);
+  if(kb>0){ x.globalAlpha=kb; x.strokeStyle=INK; x.lineWidth=1.25; x.beginPath();
+    x.moveTo(bx-4,V(629)); x.lineTo(bx,V(629)); x.lineTo(bx,V(574)); x.lineTo(bx-4,V(574)); x.stroke(); x.globalAlpha=1; }
+  tag(x,'−55',bx+6,(V(629)+V(574))/2+4,mono(700,11),INK,'left',kb);
+  tag(x,'POWER 90.3% · TYPE I ERROR 2.5%',0,H-8,mono(400,10),MUT,'left',seg(t,4.6,5),false);
+}
+
+/* ============================================================
+   PROTO 3 · le planning qui se contracte
+   ============================================================ */
+const TASKS3=[
+  {n:'PROTOCOL FINAL',  a:.00,b:.10},
+  {n:'SITE ACTIVATION', a:.07,b:.27},
+  {n:'ENROLLMENT',      a:.20,b:.60, shrink:true},
+  {n:'FOLLOW-UP',       a:.60,b:.76},
+  {n:'DATABASE LOCK',   a:.76,b:.81},
+  {n:'CSR & SUBMISSION',a:.81,b:.93}
+];
+const SH=.15;   // 6 mois, en fraction de largeur : à caler si on obtient la durée totale
+function draw3(x,W,H,t){
+  const padL=Math.min(150,W*.3), R=W-16, w=R-padL, top=46, bot=60;
+  const rowH=(H-top-bot)/TASKS3.length, BH=Math.min(18,rowH*.5);
+  const sx=v=>padL+v*w;
+
+  tag(x,'STUDY TIMELINE',0,24,mono(500,10),MUT,'left',1,false);
+  x.globalAlpha=.6; x.fillStyle=GHOST; x.fillRect(padL,15,14,10); x.globalAlpha=1;
+  tag(x,'ORIGINAL PLAN',padL+20,24,mono(400,10),MUT,'left',1,false);
+  x.strokeStyle=GRID; x.lineWidth=1; x.beginPath(); x.moveTo(padL,34.5); x.lineTo(R,34.5); x.stroke();
+
+  let lastK=0;
+  TASKS3.forEach((tk,i)=>{
+    const y=top+i*rowH+rowH/2;
+    const k = tk.shrink ? ease(seg(t,1.0,2.0))
+            : i>2 ? ease(seg(t,1.4+(i-3)*.18,2.4+(i-3)*.18)) : 0;
+    if(i===TASKS3.length-1) lastK=k;
+    const a=tk.a-(tk.shrink?0:SH*k), b=tk.b-SH*k;
+    const fin=easeOut(seg(t,.1+i*.08,.6+i*.08));
+
+    tag(x,tk.n,0,y+4,mono(500,10),INK,'left',fin,false);
+    x.globalAlpha=.6*fin; x.fillStyle=GHOST; x.fillRect(sx(tk.a),y-BH/2,(tk.b-tk.a)*w,BH);
+    x.globalAlpha=.9*fin; x.fillStyle=INK; x.fillRect(sx(a),y-BH/2,(b-a)*w,BH); x.globalAlpha=1;
+    if(tk.shrink) tag(x,'N 629 → 574',sx(b)+8,y+4,mono(500,10),INK,'left',seg(t,2.0,2.4),false);
+  });
+
+  // soumission : date d'origine, puis date réelle
+  const vT=36, vB=H-bot+10, x0=sx(.93), x1=sx(.93-SH*lastK);
+  x.save(); x.setLineDash([3,4]); x.strokeStyle=MUT; x.lineWidth=1.25;
+  x.beginPath(); x.moveTo(x0,vT); x.lineTo(x0,vB); x.stroke(); x.restore();
+  tag(x,'PLANNED',x0,vB+16,mono(400,10),MUT,'center',1,false);
+  if(lastK>.02){
+    hatch(x,x1,x0,vT,vB,MAU,.3*lastK);
+    x.strokeStyle=INK; x.lineWidth=2; x.beginPath(); x.moveTo(x1,vT); x.lineTo(x1,vB); x.stroke();
+    // le moment de décision : seul usage du jaune
+    const sc=back(seg(t,2.9,3.3)), r=6*sc;
+    if(sc>0){ x.fillStyle=YEL; x.beginPath(); x.moveTo(x1,vT-r); x.lineTo(x1+r,vT); x.lineTo(x1,vT+r); x.lineTo(x1-r,vT); x.closePath(); x.fill();
+      x.strokeStyle=INK; x.lineWidth=1.5; x.stroke(); }
+    tag(x,'SUBMISSION −6 MONTHS',x1-10,vB+16,mono(700,11),INK,'right',seg(t,3.0,3.4),false);
+  }
+  tag(x,'TARGET OPERATING CHARACTERISTICS MAINTAINED',0,H-8,mono(400,10),MUT,'left',seg(t,3.4,3.8),false);
+}
+
+mount('a1',draw1,5.7);
+mount('a2',draw2,5.1);
+mount('a3',draw3,3.9);
+</script>
+</body>
+</html>

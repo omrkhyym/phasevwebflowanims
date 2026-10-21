@@ -2,7 +2,7 @@
 
 Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. Chaque modification future y est ajoutée, en haut du journal, avec sa date.
 
-## État actuel (20 octobre 2026)
+## État actuel (21 octobre 2026)
 
 ### Pages animées
 
@@ -11,11 +11,11 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.4.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
-| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.4.0` | `clinops-hero-bg`, `clinops-hero-slot` |
-| Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.4.0` | `response-hero-bg`, `response-hero-slot` |
-| Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.5.0` | `trial-hero-bg`, `trial-hero-slot`, `success-design-space` (div dans `.animation-wrapper` du bloc Success story) |
-| Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.4.0` | `portfolio-hero-bg`, `portfolio-hero-slot` |
-| AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.4.0` | `conductor-hero-bg`, `conductor-hero-slot` |
+| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.6.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect` |
+| Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.6.0` | `response-hero-bg`, `response-hero-slot`, `platform-connect` |
+| Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` | `trial-hero-bg`, `trial-hero-slot`, `success-design-space` (div dans `.animation-wrapper` du bloc Success story), `platform-connect` |
+| Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` | `portfolio-hero-bg`, `portfolio-hero-slot`, `platform-connect` |
+| AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` | `conductor-hero-bg`, `conductor-hero-slot`, `platform-connect` (dans un `.animation-wrapper` créé à la place de l'`.entry-grid`) |
 
 ### Modules
 
@@ -32,6 +32,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/trial-hero-bg.js` | Courbes de puissance avec balayage |
 | `src/portfolio-hero-bg.js` | Diagramme en tornade |
 | `src/conductor-hero-bg.js` | Chaîne documentaire de six pages |
+| `src/platform-connect.js` | Bloc « plateforme connectée » des cinq pages produit : particules, cinq amas, flux entre produits (proto `protos/phasev-platform-particles-proto.html`). Produit central via `data-current`, noms surchargeables par `data-name-<clé>` |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/phasev-success-story-protos.html`) |
 
 ### Socle des heros produit (`src/hero-stage.js`)
@@ -44,7 +45,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Sans slot sur la page, l'animation reste en fond à toutes les tailles.
 - En mode bloc : pleine opacité, sans parallaxe.
 - Sur tablette, la colonne de texte `header_content-left` est réglée en « Order : Last » dans le Designer, donc le bloc s'affiche au-dessus du texte. C'est un réglage d'élément, invisible dans l'API, qu'on retrouve dans le CSS publié.
-- Le build produit un chunk partagé `dist/hero-stage-<hash>.mjs`, à commiter avec `dist/`.
+- Le build produit un chunk partagé, à commiter avec `dist/`. Depuis `v0.6.0`, `hero-stage` et `platform-connect` servent aux cinq mêmes entrées et Vite les réunit dans `dist/platform-connect-<hash>.mjs` (avant : `dist/hero-stage-<hash>.mjs`).
 
 ### Releases
 
@@ -54,7 +55,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.2.0` | `7e8b0a3` | Entrée Company (hero lines, careers), platform-hub sur la Home |
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
-| `v0.5.0` | voir le tag | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.6.0` | voir le tag | Bloc « plateforme connectée » (`platform-connect`) sur les cinq pages produit ; chunk partagé renommé `platform-connect-<hash>.mjs` |
 
 ### Modifications Webflow encore en place
 
@@ -63,6 +65,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
   - ancien bloc About us (`grid-2 gap-1,5 reverse`) masqué, remplacé par `section-top` + `grid-3 gap-1,5` avec trois textes `text-size-quote text-weight-light` ;
   - embed du bloc Build with us : code remplacé par `<!-- pv -->`, l'attribut `data-pv="company-careers"` est posé sur l'embed lui-même.
 - Pages produit : le bloc de droite `header_image-wrapper` a été supprimé par Romain sur les cinq pages.
+- Pages produit, bloc « plateforme connectée » : image placeholder `.animation-2` supprimée sur Trial, ClinOps, Response et Portfolio ; sur AI Conductor, `.entry-grid` et ses six `.conductor-card` supprimées (décision de Romain), remplacées par un `.animation-wrapper` (classes conservées dans le système).
+- Trial Optimizer, Success story : image placeholder `.animation-2` supprimée.
 - Home : contenu remplacé par celui de Home DEV (copier-coller fait par Romain, sauvegarde du site faite avant).
 - Footer : `data-line-field` retiré de `section_footer` ; bloc centré `section-top` masqué dans `section_footer`.
 - Footer : composant `footer-bottom` partagé par `section_footer` et `only-footer` ; anciens blocs `footer-bottom` masqués dans `only-footer`, ligne légale en double masquée dans `section_footer` ; 404 sur `only-footer`, footer détaché masqué.
@@ -71,12 +75,19 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-10-21
 
+- **Pages produit, bloc « plateforme connectée »** (brief `brief-platform-connect.md`) : module partagé `src/platform-connect.js`, portage à l'identique du proto (seed 11, `SPOT`, rayons, chronologie 14,6 s, `EVENTS`, recrutement des flux, parallaxe), monté depuis les cinq entrées produit.
+  - Écarts au proto, selon le brief : typo et espacement lus sur la `.text-size-label` du bloc ; fond de section lu et gardé en constante ; particules reconstruites seulement au franchissement de 500 px (1100 / 1800) ; `pointermove` passif, branché au start et retiré au stop ; reduced motion = état à t = 7,2 s sans boucle ni parallaxe ; `aspect-ratio: 1.2/1` sans `min-height` ; noms recalés vers l'intérieur s'ils sortent du canvas ; sélecteur de page et colonne texte du proto non portés.
+  - Noms des produits : par défaut dans le JS, surchargeables sur le montage par `data-name-<clé>`. `data-current` manquant ou inconnu : `console.warn`, rien n'est monté.
+  - Webflow : div `data-pv="platform-connect" data-current="<clé>"` dans le `.animation-wrapper` `fb9425b9…` de Trial, ClinOps, Response et Portfolio (image `.animation-2` supprimée) ; sur AI Conductor, `.animation-wrapper` créé en second enfant de la grille `d9bf6c2d…` (`grid-2 gap-1,5 bottom`), `.entry-grid` et ses six cartes supprimées.
+  - Testé en local (captures headless desktop et 375 px, Trial et Conductor au centre) puis en Preview `?dev` par Romain, alignement sur AI Conductor compris.
+  - **Release `v0.6.0`**, loaders des cinq pages produit passés à `v0.6.0`.
+
 - **Trial Optimizer, Success story** : animation « design space » (proto 1, brief `brief-success-design-space.md`), module `src/success-design-space.js` monté depuis `trial.js`.
   - Image placeholder `.animation-2` supprimée (accord de Romain), div `data-pv="success-design-space"` ajouté dans `.animation-wrapper`.
   - Écarts au proto, selon le brief : typo et espacement lus sur la `.text-size-label` du bloc ; fond des pastilles lu sur la section (ou le premier parent opaque) ; lecture à 45 % de visibilité, état final tenu, relance à t = 0 après une sortie complète, aucune RAF au repos ; reduced motion = état final direct ; sous 600 px, étiquettes en 9 px et 1000 points.
   - Écart au brief : la hauteur est calculée en JS (largeur / 1.15, 320 px minimum) au lieu de `aspect-ratio` + `min-height`, qui imposait 368 px de large et débordait à 375 px. Garde-fou : la note « TYPE I ERROR » et le titre d'axe s'écartent verticalement s'ils se croisent (sous 375 px).
   - Testé en local (captures headless desktop, 375 et 320 px) puis en Preview `?dev` par Romain.
-  - **Release `v0.5.0`**, loader de Trial passé de `v0.4.0` à `v0.5.0`.
+  - **Release `v0.5.0`** (`fc6e0a4`), URL jsDelivr vérifiée (trial.js et chunks), loader de Trial passé de `v0.4.0` à `v0.5.0`. Incident : un premier commit raté a laissé le tag poussé sur `b4df313` ; avec l'accord de Romain, le tag a été supprimé puis recréé sur `fc6e0a4` avant toute requête jsDelivr. Les commits passent désormais leur message par fichier (`git commit -F`).
 
 - **Repo** : dossier `medias/` ajouté au `.gitignore`. Il contient les 40 images uniques des 56 articles Publications & Media (`medias/original/`), `correspondance.csv` et `correspondance.json` (fichier → asset Webflow → articles), et `medias/new/` pour les visuels refaits par Romain, à remplacer ensuite par l'API (upload d'asset puis mise à jour de « Main Image »).
 
@@ -152,6 +163,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Brief ClinOps : opacité côté texte, Amériques sous le texte.
 - Brief Response : lisibilité de la séparation des deux bras.
 - Brief Trial : lisibilité des croisements entre courbes.
+- Plateforme connectée : valeur exacte de `.is-lightpurple` et lisibilité du cœur jaune à capturer en ligne ; flux à juger en ligne avant de toucher aux comptes de particules.
 - Success story Trial : puissance réelle du design fixe inconnue (posé sur la ligne des 90 % en attendant le client) ; lisibilité du jaune cerclé sur le fond `.is-lightpurple` à confirmer.
 - Brief Conductor : vitesse du glissement en mode bloc (environ 3,5 s).
 - Audit : liens morts, contenu provisoire de Contact, SEO, code dupliqué, ménage des classes (voir la page d'audit).

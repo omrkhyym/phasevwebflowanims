@@ -1,91 +1,91 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
-import { a as n, c as r, i, r as a, s as o, t as s } from "./hero-stage-DpBC6yvy.mjs";
+import { a as n, l as r, n as i, o as a, r as o, s, t as c, u as l } from "./platform-connect-Bf2sdhRo.mjs";
 //#region src/clinops-hero-bg.js
-function c(e) {
+function u(e) {
 	if (!e || e.dataset.pvInit) return;
-	let t = o(11), i = l.length / 2, c = new Float32Array(i), _ = new Float32Array(i), v = new Float32Array(i);
-	for (let e = 0; e < i; e++) c[e] = l[2 * e] / 3600, _[e] = l[2 * e + 1] / 3600;
-	let y = u.map(([e, t]) => ({
+	let t = r(11), i = d.length / 2, a = new Float32Array(i), c = new Float32Array(i), u = new Float32Array(i);
+	for (let e = 0; e < i; e++) a[e] = d[2 * e] / 3600, c[e] = d[2 * e + 1] / 3600;
+	let y = f.map(([e, t]) => ({
 		px: (e + 180) / 360,
 		py: (74 - t) / 360
 	}));
 	y.forEach((e) => {
 		e.near = [];
 		for (let t = 0; t < i; t++) {
-			let n = Math.hypot(c[t] - e.px, _[t] - e.py);
-			n < g && e.near.push(t, n);
+			let n = Math.hypot(a[t] - e.px, c[t] - e.py);
+			n < v && e.near.push(t, n);
 		}
 	});
 	let b = [];
 	function x(e) {
 		return {
 			start: e,
-			sites: [...y.keys()].sort(() => t() - .5).slice(0, m).map((e, n) => ({
+			sites: [...y.keys()].sort(() => t() - .5).slice(0, g).map((e, n) => ({
 				s: y[e],
 				at: t() * 2.2,
-				keep: n < h,
+				keep: n < _,
 				rad: .018 + t() * .03,
-				ph: t() * s
+				ph: t() * o
 			}))
 		};
 	}
 	let S = 1, C = 0, w = 0;
 	function T({ W: e, H: t, flow: n }) {
-		n ? (S = e * 1.04, C = (e - S) / 2, w = (t - d * S) / 2) : (S = Math.max(e * 1.04, t / d), C = (e - S) / 2, w = (t - d * S) / 2 + t * .05);
+		n ? (S = e * 1.04, C = (e - S) / 2, w = (t - p * S) / 2) : (S = Math.max(e * 1.04, t / p), C = (e - S) / 2, w = (t - p * S) / 2 + t * .05);
 	}
 	function E(e, t) {
-		let { ctx: n, W: o, H: l, mouse: u } = e;
-		for (n.clearRect(0, 0, o, l); !b.length || t >= b[b.length - 1].start + f;) b.push(x(b.length ? b[b.length - 1].start + f : 0));
-		for (; b.length && t > b[0].start + p + 1;) b.shift();
-		let d = -u.x * 14, m = -u.y * 10, h = (e) => C + e * S + d, g = (e) => w + e * S + m, y = (t) => e.fade(t);
-		v.fill(0);
+		let { ctx: r, W: s, H: d, mouse: f } = e;
+		for (r.clearRect(0, 0, s, d); !b.length || t >= b[b.length - 1].start + m;) b.push(x(b.length ? b[b.length - 1].start + m : 0));
+		for (; b.length && t > b[0].start + h + 1;) b.shift();
+		let p = -f.x * 14, g = -f.y * 10, _ = (e) => C + e * S + p, v = (e) => w + e * S + g, y = (t) => e.fade(t);
+		u.fill(0);
 		let T = [];
-		for (let e of b) for (let n of e.sites) {
-			let i = t - e.start - n.at;
+		for (let e of b) for (let r of e.sites) {
+			let i = t - e.start - r.at;
 			if (i < 0) continue;
-			let o = a(r(i, 0, 1.4)), c = o * (n.keep ? 1 - a(r(i, 10 - n.at, p - n.at)) : 1 - a(r(i, 3.6 - n.at + 1, 4.8 - n.at + 1)));
-			if (c <= .002) continue;
-			let l = n.keep ? a(r(i, 3.6 - n.at + 1, 4.4 - n.at + 1)) : 0, u = n.rad * (.6 + .4 * o) * (n.keep ? 1 : .8), d = n.s.near;
-			for (let e = 0; e < d.length; e += 2) {
-				let r = d[e + 1];
-				if (r > u) continue;
-				let i = (1 - r / u) ** 1.6 * (.78 + .22 * Math.sin(s * (r / u * 1.4) - t * 1.6 + n.ph));
-				v[d[e]] = Math.max(v[d[e]], i * c * (.55 + .45 * l));
+			let a = n(l(i, 0, 1.4)), s = a * (r.keep ? 1 - n(l(i, 10 - r.at, h - r.at)) : 1 - n(l(i, 3.6 - r.at + 1, 4.8 - r.at + 1)));
+			if (s <= .002) continue;
+			let c = r.keep ? n(l(i, 3.6 - r.at + 1, 4.4 - r.at + 1)) : 0, d = r.rad * (.6 + .4 * a) * (r.keep ? 1 : .8), f = r.s.near;
+			for (let e = 0; e < f.length; e += 2) {
+				let n = f[e + 1];
+				if (n > d) continue;
+				let i = (1 - n / d) ** 1.6 * (.78 + .22 * Math.sin(o * (n / d * 1.4) - t * 1.6 + r.ph));
+				u[f[e]] = Math.max(u[f[e]], i * s * (.55 + .45 * c));
 			}
 			T.push({
-				c: n,
-				k: c,
-				sel: l
+				c: r,
+				k: s,
+				sel: c
 			});
 		}
 		let E = Math.max(1.2, S * .0016);
-		n.fillStyle = "#928ACD";
+		r.fillStyle = "#928ACD";
 		for (let e = 0; e < i; e++) {
-			let t = h(c[e]), r = g(_[e]);
-			t < -4 || t > o + 4 || r < -4 || r > l + 4 || (n.globalAlpha = .17 * y(t), n.fillRect(t - E / 2, r - E / 2, E, E));
+			let t = _(a[e]), n = v(c[e]);
+			t < -4 || t > s + 4 || n < -4 || n > d + 4 || (r.globalAlpha = .17 * y(t), r.fillRect(t - E / 2, n - E / 2, E, E));
 		}
-		n.fillStyle = "#C7E0F4";
+		r.fillStyle = "#C7E0F4";
 		for (let e = 0; e < i; e++) {
-			let t = v[e];
+			let t = u[e];
 			if (t < .01) continue;
-			let r = h(c[e]), i = g(_[e]);
-			n.globalAlpha = Math.min(1, t * .85) * y(r), n.fillRect(r - E / 2, i - E / 2, E, E);
+			let n = _(a[e]), i = v(c[e]);
+			r.globalAlpha = Math.min(1, t * .85) * y(n), r.fillRect(n - E / 2, i - E / 2, E, E);
 		}
-		for (let { c: e, k: r, sel: i } of T) {
-			let a = h(e.s.px), o = g(e.s.py), c = y(a), l = .5 + .5 * Math.sin(t * 2.2 + e.ph);
-			n.globalAlpha = r * (1 - i) * c, n.fillStyle = "#F4F4F4", n.beginPath(), n.arc(a, o, 2.2 + .6 * l, 0, s), n.fill(), i > 0 && (n.globalAlpha = r * i * c, n.fillStyle = "#E2C70A", n.beginPath(), n.arc(a, o, 2.6, 0, s), n.fill(), n.strokeStyle = "#E2C70A", n.lineWidth = 1, n.globalAlpha = r * i * c * (.35 + .35 * l), n.beginPath(), n.arc(a, o, 7 + 3 * l, 0, s), n.stroke());
+		for (let { c: e, k: n, sel: i } of T) {
+			let a = _(e.s.px), s = v(e.s.py), c = y(a), l = .5 + .5 * Math.sin(t * 2.2 + e.ph);
+			r.globalAlpha = n * (1 - i) * c, r.fillStyle = "#F4F4F4", r.beginPath(), r.arc(a, s, 2.2 + .6 * l, 0, o), r.fill(), i > 0 && (r.globalAlpha = n * i * c, r.fillStyle = "#E2C70A", r.beginPath(), r.arc(a, s, 2.6, 0, o), r.fill(), r.strokeStyle = "#E2C70A", r.lineWidth = 1, r.globalAlpha = n * i * c * (.35 + .35 * l), r.beginPath(), r.arc(a, s, 7 + 3 * l, 0, o), r.stroke());
 		}
-		n.globalAlpha = 1;
+		r.globalAlpha = 1;
 	}
-	return n(e, {
+	return s(e, {
 		name: "clinops",
 		draw: E,
 		still: 5.5,
 		onResize: T
 	});
 }
-var l, u, d, f, p, m, h, g, _ = e((() => {
-	i(), l = [
+var d, f, p, m, h, g, _, v, y = e((() => {
+	a(), d = [
 		561,
 		0,
 		578,
@@ -10336,7 +10336,7 @@ var l, u, d, f, p, m, h, g, _ = e((() => {
 		1292,
 		1139,
 		1292
-	], u = [
+	], f = [
 		[-71, 42.4],
 		[-95.4, 29.8],
 		[-79.4, 43.7],
@@ -10388,9 +10388,9 @@ var l, u, d, f, p, m, h, g, _ = e((() => {
 		[145, -37.8],
 		[115.9, -31.9],
 		[174.8, -36.8]
-	], d = .361, f = 9, p = 12, m = 13, h = 5, g = .05;
-})), v = /* @__PURE__ */ t((() => {
-	_(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => c(e));
+	], p = .361, m = 9, h = 12, g = 13, _ = 5, v = .05;
+})), b = /* @__PURE__ */ t((() => {
+	y(), i(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => c(e));
 }));
 //#endregion
-export default v();
+export default b();

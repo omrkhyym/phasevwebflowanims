@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Platform Particles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* --bg : approximation de .is-lightpurple */
+  :root{ --bg:#ECEAF6; --ink:#141238; --mut:#7d7b9c; --line:#d3d0e8; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:Roboto,system-ui,sans-serif; }
+  .pick{ position:sticky; top:0; z-index:5; background:var(--bg); border-bottom:1px solid var(--line);
+         display:flex; flex-wrap:wrap; gap:6px; padding:14px 44px; }
+  @media(max-width:700px){ .pick{ padding:12px 16px; } }
+  .pick button{ font:500 11px/1 'Roboto Mono',monospace; letter-spacing:.08em; text-transform:uppercase;
+         padding:9px 12px; background:transparent; color:var(--ink); border:1px solid var(--line); cursor:pointer; }
+  .pick button[aria-pressed="true"]{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .proto{ max-width:1320px; margin:0 auto; padding:72px 44px; }
+  @media(max-width:700px){ .proto{ padding:56px 16px; } }
+  .grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:64px; align-items:center; }
+  @media(max-width:900px){ .grid{ grid-template-columns:1fr; gap:36px; } }
+  .label{ font:400 12px/1.4 'Roboto Mono',monospace; letter-spacing:.14em; text-transform:uppercase; color:var(--mut); margin-bottom:20px; }
+  h2{ font-size:clamp(30px,3.6vw,48px); line-height:1.08; font-weight:600; letter-spacing:-.02em; margin:0 0 24px; }
+  p{ font-size:17px; line-height:1.6; color:#2b2a48; margin:0; }
+  .anim{ position:relative; width:100%; aspect-ratio:1.2/1; }
+  .anim canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+</style>
+</head>
+<body>
+
+<nav class="pick" id="pick"></nav>
+
+<section class="proto">
+  <div class="grid">
+    <div class="anim" id="anim"><canvas></canvas></div>
+    <div class="copy"><div class="label"></div><h2></h2><p></p></div>
+  </div>
+</section>
+
+<script>
+(() => {
+const INK=[20,18,56], YEL=[226,199,10], MAU=[146,138,205];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const seg=(t,a,b)=>cl((t-a)/(b-a));
+const ease=v=>v<.5?4*v*v*v:1-Math.pow(-2*v+2,3)/2;
+const mono=(w,s)=>`${w} ${s}px 'Roboto Mono',monospace`;
+function rng(s){ return ()=>{ s|=0; s=s+0x6D2B79F5|0; let t=Math.imul(s^s>>>15,1|s); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+
+/* Textes de colonne recopiés du Webflow, pour juger le bloc complet */
+const P={
+  portfolio:{ n:'PORTFOLIO OPTIMIZER', l:'Connected value creation', h:'Do more than price the risk.',
+    p:'Once a path is selected or capital is deployed, the broader PhaseV platform can address the specific development risks surfaced in the analysis.' },
+  trial:{ n:'TRIAL OPTIMIZER', l:'Standalone or connected', h:'Complete on its own. Stronger when connected.',
+    p:'When connected to the broader PhaseV platform, reviewed insights can enter the scenario space, design decisions can inform operational planning, and approved parameters can return to connected documents for expert review.' },
+  response:{ n:'RESPONSE OPTIMIZER', l:'The PhaseV platform', h:'Response insights should not stop at the analysis.',
+    p:'Reviewed findings can inform trial design, patient access, portfolio choices, and connected study documents across the broader PhaseV platform.' },
+  clinops:{ n:'CLINOPS OPTIMIZER', l:'Connected PhaseV platform', h:'Strong on its own. Connected when useful.',
+    p:'ClinOps Optimizer can begin from a protocol, an existing list, sponsor and CRO history, or manual assumptions, then connect to upstream design insight and downstream document workflows when that adds value.' },
+  conductor:{ n:'AI CONDUCTOR', l:'Flexible entry points', h:'Start where you need us.',
+    p:'Use one workflow or connect the full study lifecycle through the same governed foundation.' }
+};
+const ORDER=['portfolio','trial','response','clinops','conductor'];
+let current='trial';
+
+/* Chronologie (s) : un nuage commun, division en cinq amas, échanges, refonte */
+const T_SPLIT=1.3, T_EX=3.6, T_MERGE=12.0, LOOP=14.6;
+/* Échanges [de, vers, début] ; 0 = produit de la page, 1..4 = voisins.
+   Le centre émet et reçoit le plus ; un échange voisin-voisin pour que ce ne soit pas qu'une étoile. */
+const EVENTS=[[1,0,3.7],[0,2,4.5],[3,0,5.4],[0,4,6.2],[2,0,7.1],[0,1,7.9],[4,3,8.7],[0,3,9.4]];
+const TRAVEL=1.9;
+
+/* Places des amas en fraction du canvas, volontairement pas symétriques */
+const SPOT=[[0,0],[-.33,-.29],[.32,-.31],[-.31,.30],[.34,.27]];
+
+function build(N){
+  const R=rng(11), g=()=>{ const v=Math.sqrt(-2*Math.log(R()+1e-9))*Math.cos(6.2832*R()); return cl(v,-2.3,2.3); };
+  const share=[.40,.15,.15,.15,.15], pts=[];
+  for(let i=0;i<N;i++){
+    let u=R(), c=0, acc=share[0]; while(u>acc && c<4){ c++; acc+=share[c]; }
+    const ox=g()*.5, oy=g()*.5, r=Math.hypot(ox,oy);
+    let col, a;
+    if(c===0){ if(r<.34){ col=YEL; a=1; } else { col=INK; a=.75; } }
+    else { if(R()<.7){ col=MAU; a=.85; } else { col=INK; a=.45; } }
+    pts.push({ c, ox, oy, ax:g()*.5, ay:g()*.5, mx:g()*.5, my:g()*.5, w:(R()-.5)*.3, s:(c===0&&r<.34?1.6:1)+R()*1.2, col, a, d:R(), j:R()*2-1, trip:null });
+  }
+  /* chaque échange recrute des particules de l'amas source, qui restent ensuite dans l'amas d'arrivée */
+  EVENTS.forEach(([from,to,t0])=>{
+    const K=from===0?130:75; let k=0;
+    for(const p of pts){ if(k>=K) break; if(p.c===from && !p.trip){ p.trip={to, ts:t0+(k/K)*1.4, side:(from+to)%2?1:-1}; k++; } }
+  });
+  return pts;
+}
+
+const box=document.getElementById('anim'), cv=box.querySelector('canvas'), x=cv.getContext('2d');
+let W=0,H=0,pts=build(1800),clock=0,raf=0,last=0;
+const mouse={x:0,y:0,tx:0,ty:0};
+
+function draw(T){
+  const t=T%LOOP;
+  x.clearRect(0,0,W,H);
+  const m=Math.min(W,H), cx=W/2, cy=H/2-m*.01;
+  const RAD=[m*.105,m*.055,m*.055,m*.055,m*.055], RM=m*.13;
+  // parallaxe : les voisins bougent plus que le centre
+  const C=SPOT.map(([u,v],i)=>[cx+u*W-mouse.x*(i?14:6), cy+v*H-mouse.y*(i?10:4)]);
+
+  const split=t<T_MERGE;
+  const lab=Math.min(seg(t,T_SPLIT+1.4,T_SPLIT+2.0),1-seg(t,T_MERGE-.3,T_MERGE+.3));
+
+  for(const p of pts){
+    // rotation lente propre à chaque particule : le nuage respire sans jamais se figer
+    const ang=p.w*T, ca=Math.cos(ang), sa=Math.sin(ang);
+    const rx=p.ox*ca-p.oy*sa, ry=p.ox*sa+p.oy*ca;
+    const qx=p.ax*ca-p.ay*sa, qy=p.ax*sa+p.ay*ca;   // place dans l'amas d'arrivée, tirée à part pour que les arrivants se mêlent au nuage au lieu d'en recréer le cœur
+    const mergedX=cx+(p.mx*ca-p.my*sa)*RM*2, mergedY=cy+(p.mx*sa+p.my*ca)*RM*2;
+
+    // amas courant, ou position sur le filament
+    let px,py, c=p.c;
+    if(p.trip && t>=p.trip.ts){
+      const u=seg(t,p.trip.ts,p.trip.ts+TRAVEL);
+      const a=C[p.c], b=C[p.trip.to];
+      const A=[a[0]+rx*RAD[p.c]*2,a[1]+ry*RAD[p.c]*2], B=[b[0]+qx*RAD[p.trip.to]*2,b[1]+qy*RAD[p.trip.to]*2];
+      if(u<1){
+        const k=u, dx=B[0]-A[0], dy=B[1]-A[1], len=Math.hypot(dx,dy)||1, nx=-dy/len, ny=dx/len;
+        const bow=len*.22*p.trip.side, wob=p.j*4*Math.sin(Math.PI*k);
+        const mx2=(A[0]+B[0])/2+nx*bow, my2=(A[1]+B[1])/2+ny*bow, q=1-k;
+        px=q*q*A[0]+2*q*k*mx2+k*k*B[0]+nx*wob;
+        py=q*q*A[1]+2*q*k*my2+k*k*B[1]+ny*wob;
+      } else { c=p.trip.to; px=B[0]; py=B[1]; }
+    } else { px=C[c][0]+rx*RAD[c]*2; py=C[c][1]+ry*RAD[c]*2; }
+
+    // division puis refonte, chaque particule avec son propre retard
+    const kIn=ease(seg(t,T_SPLIT+p.d*.8,T_SPLIT+1.4+p.d*.8));
+    const kOut=ease(seg(t,T_MERGE+p.d*.6,T_MERGE+1.6+p.d*.6));
+    const k=split?kIn:1-kOut;
+    const X=mergedX+(px-mergedX)*k, Y=mergedY+(py-mergedY)*k;
+
+    x.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${p.a})`;
+    x.fillRect(X-p.s/2,Y-p.s/2,p.s,p.s);
+  }
+
+  // noms
+  if(lab>0){
+    const sats=ORDER.filter(k=>k!==current), fs=W<420?9:10;
+    x.textAlign='center';
+    sats.forEach((k,i)=>{ const c=C[i+1]; x.globalAlpha=lab*.75; x.fillStyle='#141238'; x.font=mono(500,fs);
+      x.fillText(P[k].n,c[0],Math.min(H-4,c[1]+RAD[1]*2.4+fs)); });
+    x.globalAlpha=lab; x.font=mono(700,fs+2);
+    x.fillText(P[current].n,C[0][0],C[0][1]+RAD[0]*2.3+fs+4);
+    x.globalAlpha=1; x.textAlign='left';
+  }
+}
+
+function fit(){ const dpr=Math.min(devicePixelRatio||1,2), r=box.getBoundingClientRect();
+  W=r.width; H=r.height; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); x.setTransform(dpr,0,0,dpr,0,0);
+  pts=build(W<500?1100:1800); draw(reduce?7.2:clock); }
+function frame(now){ raf=requestAnimationFrame(frame);
+  clock+=Math.min((now-last)/1000,.05); last=now;
+  mouse.x+=(mouse.tx-mouse.x)*.06; mouse.y+=(mouse.ty-mouse.y)*.06;
+  draw(clock); }
+function start(){ if(raf||reduce) return; last=performance.now(); raf=requestAnimationFrame(frame); }
+function stop(){ cancelAnimationFrame(raf); raf=0; }
+
+new ResizeObserver(fit).observe(box);
+new IntersectionObserver(([e])=>e.isIntersecting?start():stop(),{threshold:.3}).observe(box);
+addEventListener('pointermove',e=>{ const r=box.getBoundingClientRect();
+  mouse.tx=cl((e.clientX-r.left)/r.width*2-1,-1,1); mouse.ty=cl((e.clientY-r.top)/r.height*2-1,-1,1); },{passive:true});
+if(document.fonts) document.fonts.ready.then(()=>draw(reduce?7.2:clock));
+
+/* sélecteur de page : change le produit central et le texte */
+function setPage(k){
+  current=k;
+  const c=document.querySelector('.copy');
+  c.querySelector('.label').textContent=P[k].l; c.querySelector('h2').textContent=P[k].h; c.querySelector('p').textContent=P[k].p;
+  document.querySelectorAll('#pick button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
+  clock=0; draw(reduce?7.2:0);
+}
+const pick=document.getElementById('pick');
+ORDER.forEach(k=>{ const b=document.createElement('button'); b.dataset.k=k; b.textContent=P[k].n; b.onclick=()=>setPage(k); pick.appendChild(b); });
+setPage('trial');
+})();
+</script>
+</body>
+</html>

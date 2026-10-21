@@ -10389,8 +10389,150 @@ var d, f, p, m, h, g, _, v, y = e((() => {
 		[115.9, -31.9],
 		[174.8, -36.8]
 	], p = .361, m = 9, h = 12, g = 13, _ = 5, v = .05;
-})), b = /* @__PURE__ */ t((() => {
-	y(), i(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => c(e));
 }));
 //#endregion
-export default b();
+//#region src/clinops-proof.js
+function b(e) {
+	return () => {
+		e |= 0, e = e + 1831565813 | 0;
+		let t = Math.imul(e ^ e >>> 15, 1 | e);
+		return t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t, ((t ^ t >>> 14) >>> 0) / 4294967296;
+	};
+}
+function x(e, t, n) {
+	let r = b(9), i = () => Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(6.2832 * r()), a = [];
+	for (let t = 0; t < e; t++) {
+		let e = r() < A, n = .55;
+		a.push({
+			i: t,
+			rec: e,
+			v: Math.exp(n * i() - n * n / 2),
+			jx: r() - .5,
+			d: r()
+		});
+	}
+	for (let [e, r] of [[!0, t], [!1, n]]) {
+		let t = a.filter((t) => t.rec === e), n = t.reduce((e, t) => e + t.v, 0) / t.length;
+		t.forEach((e) => e.v = Math.min(e.v * r / n, .97));
+	}
+	return a;
+}
+function S(e, t, n) {
+	if (!e) return n;
+	let r = getComputedStyle(e)[t], i = r && r.match(/rgba?\(([^)]+)\)/);
+	if (!i) return n;
+	let a = i[1].split(",")[3];
+	return a !== void 0 && parseFloat(a) === 0 ? n : r;
+}
+function C(e) {
+	if (e.dataset.pvReady) return;
+	e.dataset.pvReady = "1";
+	let t = (t, n) => {
+		let r = parseFloat(e.dataset[t]);
+		return Number.isFinite(r) && r > 0 ? r : n;
+	}, n = Math.round(t("sites", 357)), r = t("rec", .43), i = t("other", .28), a = Math.round(t("gain", 53)), o = Math.ceil(n / k), s = x(n, r, i), c = r.toFixed(2), l = i.toFixed(2);
+	e.style.cssText += "position:relative;width:100%;aspect-ratio:1/1;";
+	let u = document.createElement("canvas");
+	u.style.cssText = "position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .5s ease;", u.setAttribute("role", "img"), u.setAttribute("aria-label", `Blinded retrospective: sites recommended by PhaseV recruited ${c} patients per site per month versus ${l} for non-recommended sites, ${a}% faster.`), e.appendChild(u);
+	let d = u.getContext("2d"), f = e.closest("section") || document.body, p = document.querySelector(".text-size-label"), m = getComputedStyle(p || document.body), h = m.fontFamily, g = p && m.letterSpacing !== "normal" ? (parseFloat(m.letterSpacing) || 0) / (parseFloat(m.fontSize) || 16) : 0, _ = "letterSpacing" in d, v = S(f.querySelector(".text-color-green") || document.querySelector(".text-color-green"), "color", "#087f6a"), y = S(f, "backgroundColor", "#ffffff");
+	function b(e, t) {
+		d.font = `${e} ${t}px ${h}`, _ && (d.letterSpacing = (g * t).toFixed(2) + "px");
+	}
+	function C(e, t, n, r, i, a, o = 1, s = "left", c = !1) {
+		if (o <= 0) return;
+		b(r, i);
+		let l = d.measureText(e).width, u = s === "left" ? t : s === "right" ? t - l : t - l / 2;
+		c && (d.globalAlpha = o * .92, d.fillStyle = y, d.fillRect(u - 4, n - 12, l + 8, 16)), d.globalAlpha = o, d.fillStyle = a, d.textAlign = "left", d.fillText(e, u, n), d.globalAlpha = 1;
+	}
+	let A = 0, j = 0;
+	function P(e) {
+		d.clearRect(0, 0, A, j);
+		let t = A < 420 ? 9 : 10, u = Math.max(40, A * .09), f = A - 8, p = A < 480 ? 54 : 40, m = j - 44, h = (e) => m - e * (m - p), g = (f - u) * .34, _ = u + (f - u) * .27, y = u + (f - u) * .75, x = Math.min(A * .78 / k, j * .55 / o), S = A / 2 - x * 20 / 2, O = j * .48 - x * (o - 1) / 2, P = M(e, D.reveal, D.reveal + .6);
+		if (P > 0) {
+			b(400, t), d.textAlign = "right";
+			for (let e of [
+				0,
+				.2,
+				.4,
+				.6,
+				.8
+			]) {
+				let t = Math.round(h(e)) + .5;
+				d.globalAlpha = P, d.fillStyle = T, d.fillText(e.toFixed(1), u - 8, t + 3), d.strokeStyle = E, d.lineWidth = 1, d.beginPath(), d.moveTo(u, t), d.lineTo(f, t), d.stroke();
+			}
+			d.globalAlpha = 1, d.textAlign = "left", C("PATIENTS / SITE / MONTH", 0, p - 14, 500, t, T, P), C("RECOMMENDED", _, m + 22, 700, t, v, P, "center"), C("NOT RECOMMENDED", y, m + 22, 500, t, T, P, "center");
+		}
+		for (let t of s) {
+			let n = S + t.i % k * x, r = O + Math.floor(t.i / k) * x, i = N(M(e, D.reveal + t.d * 1.1, D.reveal + 1.2 + t.d * 1.1)), a = (t.rec ? _ : y) + t.jx * g, o = h(t.v), s = n + (a - n) * i, c = r + (o - r) * i, l = t.rec ? M(e, D.pick + t.d * 1.2, D.pick + .25 + t.d * 1.2) : 0, u = t.rec ? 1 : 1 - .35 * M(e, D.means, D.means + .6);
+			d.globalAlpha = (l > 0 ? .35 + .65 * l : .35) * u, d.fillStyle = l > 0 ? v : w, d.beginPath(), d.arc(s, c, l > 0 ? 2.4 + .6 * l : 2.4, 0, 6.2832), d.fill();
+		}
+		d.globalAlpha = 1;
+		let F = N(M(e, D.means, D.means + .6)), I = N(M(e, D.means + .3, D.means + .9)), L = h(r), R = h(i), z = _ - g * .62, B = y - g * .62;
+		if (I > 0 && (d.strokeStyle = w, d.lineWidth = 1.5, d.globalAlpha = .7, d.beginPath(), d.moveTo(B, R), d.lineTo(B + g * 1.24 * I, R), d.stroke(), d.globalAlpha = 1), F > 0) {
+			d.strokeStyle = v, d.lineWidth = 2, d.beginPath(), d.moveTo(z, L), d.lineTo(z + g * 1.24 * F, L), d.stroke();
+			let t = N(M(e, D.gap, D.gap + .6));
+			t > 0 && (d.save(), d.setLineDash([3, 4]), d.globalAlpha = .8, d.lineWidth = 1.25, d.beginPath(), d.moveTo(z + g * 1.24, L), d.lineTo(z + g * 1.24 + (B + g * 1.24 - z - g * 1.24) * t, L), d.stroke(), d.restore());
+		}
+		C(c, z, L - 8, 700, t + 1, v, M(e, D.means + .4, D.means + .8), "left", !0), C(l, B + g * 1.24, R - 8, 700, t + 1, w, M(e, D.means + .7, D.means + 1.1), "right", !0);
+		let V = N(M(e, D.gap + .4, D.gap + 1)), H = B - 10;
+		V > 0 && (d.strokeStyle = v, d.lineWidth = 1.5, d.globalAlpha = V, d.beginPath(), d.moveTo(H + 5, L), d.lineTo(H, L), d.lineTo(H, L + (R - L) * V), d.lineTo(H + 5, L + (R - L) * V), d.stroke(), d.globalAlpha = 1), C("+" + a + "%", H - 8, (L + R) / 2 + 5, 700, t + 4, v, M(e, D.gap + .8, D.gap + 1.2), "right", !0);
+		let U = [
+			[
+				n + " SITES · OUTCOMES BLINDED",
+				0,
+				D.pick,
+				T
+			],
+			[
+				"PHASEV RECOMMENDS",
+				D.pick,
+				D.reveal,
+				v
+			],
+			[
+				"WHAT ACTUALLY HAPPENED",
+				D.reveal,
+				99,
+				w
+			]
+		];
+		for (let [n, r, i, a] of U) C(n, A, 14, 700, t, a, Math.min(M(e, r, r + .3), 1 - M(e, i - .3, i)), "right");
+	}
+	let F = matchMedia("(prefers-reduced-motion: reduce)").matches, I = !1, L = 0, R = 0, z = 0;
+	function B() {
+		let t = Math.min(devicePixelRatio || 1, 2);
+		A = e.clientWidth, j = e.clientHeight, u.width = Math.round(A * t), u.height = Math.round(j * t), d.setTransform(t, 0, 0, t, 0, 0), I && P(F ? O : L);
+	}
+	function V(e) {
+		R = requestAnimationFrame(V), L += Math.min((e - z) / 1e3, .05), z = e, L > D.loop && (L = 0), u.style.opacity = L > D.out ? 0 : 1, P(L);
+	}
+	function H() {
+		R || F || (L = 0, u.style.opacity = 1, z = performance.now(), R = requestAnimationFrame(V));
+	}
+	function U() {
+		cancelAnimationFrame(R), R = 0;
+	}
+	let W = new ResizeObserver(B);
+	W.observe(e);
+	let G = null;
+	return (document.fonts ? Promise.race([document.fonts.load(`500 10px ${h}`), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
+		I = !0, B(), !F && (G = new IntersectionObserver(([e]) => e.isIntersecting ? H() : U(), { threshold: .35 }), G.observe(e));
+	}), { destroy() {
+		U(), W.disconnect(), G && G.disconnect(), u.remove(), delete e.dataset.pvReady;
+	} };
+}
+var w, T, E, D, O, k, A, j, M, N, P = e((() => {
+	w = "#141238", T = "#7d7b9c", E = "#e3e1ef", D = {
+		grid: 0,
+		pick: 1.4,
+		reveal: 3.2,
+		means: 5.8,
+		gap: 6.8,
+		out: 11.2,
+		loop: 12
+	}, O = 9, k = 21, A = .4, j = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), M = (e, t, n) => j((e - t) / (n - t)), N = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
+})), F = /* @__PURE__ */ t((() => {
+	y(), i(), P(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => c(e)), document.querySelectorAll("[data-pv=\"clinops-proof\"]").forEach((e) => C(e));
+}));
+//#endregion
+export default F();

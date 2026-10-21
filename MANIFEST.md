@@ -11,7 +11,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.4.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
-| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.6.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect` |
+| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.7.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof) |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.6.0` | `response-hero-bg`, `response-hero-slot`, `platform-connect` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` | `trial-hero-bg`, `trial-hero-slot`, `success-design-space` (div dans `.animation-wrapper` du bloc Success story), `platform-connect` |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` | `portfolio-hero-bg`, `portfolio-hero-slot`, `platform-connect` |
@@ -33,6 +33,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/portfolio-hero-bg.js` | Diagramme en tornade |
 | `src/conductor-hero-bg.js` | Chaîne documentaire de six pages |
 | `src/platform-connect.js` | Bloc « plateforme connectée » des cinq pages produit : particules, cinq amas, flux entre produits (proto `protos/phasev-platform-particles-proto.html`). Produit central via `data-current`, noms surchargeables par `data-name-<clé>` |
+| `src/clinops-proof.js` | Bloc Proof de ClinOps : levée d'aveugle, 357 sites, moyennes 0.43 / 0.28, accolade +53 % (proto `protos/phasev-clinops-proof-proto.html`). Chiffres en attributs : `data-sites`, `data-rec`, `data-other`, `data-gain` |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/phasev-success-story-protos.html`) |
 
 ### Socle des heros produit (`src/hero-stage.js`)
@@ -56,7 +57,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
-| `v0.6.0` | voir le tag | Bloc « plateforme connectée » (`platform-connect`) sur les cinq pages produit ; chunk partagé renommé `platform-connect-<hash>.mjs` |
+| `v0.7.0` | voir le tag | Bloc Proof de ClinOps (`clinops-proof`) ; seul `dist/clinops.js` change |
+| `v0.6.0` | `2bc93ac` | Bloc « plateforme connectée » (`platform-connect`) sur les cinq pages produit ; chunk partagé renommé `platform-connect-<hash>.mjs` |
 
 ### Modifications Webflow encore en place
 
@@ -67,7 +69,9 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Pages produit : le bloc de droite `header_image-wrapper` a été supprimé par Romain sur les cinq pages.
 - Pages produit, bloc « plateforme connectée » : image placeholder `.animation-2` supprimée sur Trial, ClinOps, Response et Portfolio ; sur AI Conductor, `.entry-grid` et ses six `.conductor-card` supprimées (décision de Romain), remplacées par un `.animation-wrapper` (classes conservées dans le système).
 - Trial Optimizer, Success story : image placeholder `.animation-2` supprimée.
+- ClinOps, bloc Proof : image placeholder `.animation-2` `99086e1f…` supprimée, div `data-pv="clinops-proof"` dans le wrapper `1cf29878…`.
 - Home : contenu remplacé par celui de Home DEV (copier-coller fait par Romain, sauvegarde du site faite avant).
+- Contact : nav détachée masquée, composant `nav` partagé à sa place.
 - Footer : `data-line-field` retiré de `section_footer` ; bloc centré `section-top` masqué dans `section_footer`.
 - Footer : composant `footer-bottom` partagé par `section_footer` et `only-footer` ; anciens blocs `footer-bottom` masqués dans `only-footer`, ligne légale en double masquée dans `section_footer` ; 404 sur `only-footer`, footer détaché masqué.
 
@@ -75,12 +79,30 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-10-21
 
+- **ClinOps, bloc Proof** (brief `brief-clinops-proof.md`) : module `src/clinops-proof.js`, portage à l'identique du proto (seed 9, part de recommandés 0,4, dispersion 0,55, colonnes 27 % / 75 %, chronologie 12 s), monté depuis `clinops.js`.
+  - Écarts au proto, selon le brief : typo lue sur la première `.text-size-label` de la page (repli : police du body) ; vert lu sur `.text-color-green` (repli `#087f6a`) ; pastilles de la couleur de section ; chiffres en attributs (`data-sites` 357, `data-rec` 0.43, `data-other` 0.28), grille de 21 colonnes et `ceil(sites / 21)` lignes ; reduced motion = état à t = 9 s ; `aspect-ratio: 1/1` sans `min-height` ; boucle relancée à t = 0 à chaque entrée.
+  - Écart au brief, validé par Romain : l'accolade affiche `data-gain` (53 par défaut) au lieu d'un calcul, car 0.43 / 0.28 donne +54 % alors que le chiffre officiel est 53 %.
+  - Webflow : image `.animation-2` supprimée, div `data-pv="clinops-proof"` ajouté (deux délais dépassés de l'API pendant la création ; un seul div au final, vérifié).
+  - Testé en local (captures headless desktop et 375 px) puis en Preview `?dev` par Romain.
+  - **Release `v0.7.0`**, loader de ClinOps passé de `v0.6.0` à `v0.7.0`.
+
+- **Resources, images Publications & Media** : les 40 visuels refaits par Romain (`medias/new/`, 1280×720, 17 à 123 Ko) remplacent les anciens bandeaux de logo sur les 56 articles.
+  - Envoi : 40 assets créés par l'API (`pm-<média>.png`), fichiers envoyés vers S3 (201), puis champ « Main Image » mis à jour article par article (le lot groupé est refusé : « Missing fields »). Le champ image exige `fileId`, `url` et `alt`.
+  - Webflow réimporte l'image dans le CMS sous un nouvel identifiant : les 40 assets `pm-*` de la bibliothèque étaient des doublons. Vérifié avant suppression : aucune référence dans l'export complet de Resources, aucune page modifiée après leur création. Supprimés avec l'accord de Romain ; les 40 images CMS des articles répondent toujours en 200. Les anciens visuels étaient des fichiers internes au CMS, absents de la bibliothèque : rien à nettoyer côté assets (82 → 42).
+  - Non publié : à publier par Romain.
+
+- **Home, Latest news** : la liste CMS du slider (`023caa4c…aa7f`, collection Resources) chargeait les 82 ressources sans tri. Réglée sur 6 éléments, filtre Category Primary = Blog Posts, tri Date décroissant. Le bouton « All insights » existant (vers Resources) sert d'accès aux autres. Carte : l'instance du composant `swiper-item` (lien jamais branché) a été remplacée par Romain, dans le Designer, par une copie de la carte de la page Resources (même classe, lien conditionnel External Link / page de l'article). Le site a donc deux cartes de ressources : le composant `swiper-item` (plus utilisé sur la Home) et la carte détachée de Resources, maintenant présente sur les deux pages.
+
+- **Contact, nav** : la page utilisait une copie détachée de la nav (`navbar_component is-dark`, liens en variante Dark, lien Evidence, bouton « Discuss your program », sans Careers). Composant `nav` partagé inséré à sa place, copie détachée masquée.
+  - Variante « Dark » créée sur le composant `nav` (id `cfe61ff1-0b4b-351f-495c-fb82092ccbe4`) : seule différence avec la base, fond de barre `#141238` ; logo, liens et icône de menu restent clairs comme sur les autres pages. Instance de Contact réglée sur « Dark ». Les 13 autres pages restent sur la base.
+- **Contact, texte** : lorem ipsum remplacé (version A validée) : titre « Bring us the decision in front of your team. », paragraphe « Tell us about your study, your portfolio or the question you need to answer. A member of the PhaseV team will follow up to understand your context and set up a tailored conversation or demo. » Titre passé de `h2` à `h1` (la page n'avait pas de `h1`).
+
 - **Pages produit, bloc « plateforme connectée »** (brief `brief-platform-connect.md`) : module partagé `src/platform-connect.js`, portage à l'identique du proto (seed 11, `SPOT`, rayons, chronologie 14,6 s, `EVENTS`, recrutement des flux, parallaxe), monté depuis les cinq entrées produit.
   - Écarts au proto, selon le brief : typo et espacement lus sur la `.text-size-label` du bloc ; fond de section lu et gardé en constante ; particules reconstruites seulement au franchissement de 500 px (1100 / 1800) ; `pointermove` passif, branché au start et retiré au stop ; reduced motion = état à t = 7,2 s sans boucle ni parallaxe ; `aspect-ratio: 1.2/1` sans `min-height` ; noms recalés vers l'intérieur s'ils sortent du canvas ; sélecteur de page et colonne texte du proto non portés.
   - Noms des produits : par défaut dans le JS, surchargeables sur le montage par `data-name-<clé>`. `data-current` manquant ou inconnu : `console.warn`, rien n'est monté.
   - Webflow : div `data-pv="platform-connect" data-current="<clé>"` dans le `.animation-wrapper` `fb9425b9…` de Trial, ClinOps, Response et Portfolio (image `.animation-2` supprimée) ; sur AI Conductor, `.animation-wrapper` créé en second enfant de la grille `d9bf6c2d…` (`grid-2 gap-1,5 bottom`), `.entry-grid` et ses six cartes supprimées.
   - Testé en local (captures headless desktop et 375 px, Trial et Conductor au centre) puis en Preview `?dev` par Romain, alignement sur AI Conductor compris.
-  - **Release `v0.6.0`**, loaders des cinq pages produit passés à `v0.6.0`.
+  - **Release `v0.6.0`** (`2bc93ac`), URL jsDelivr vérifiées (cinq entrées, chunk `platform-connect-Bf2sdhRo.mjs`, runtime). Loaders des cinq pages produit passés à `v0.6.0` (Trial depuis `v0.5.0`, les autres depuis `v0.4.0`) ; scripts d'onglets GSAP conservés sur Response, Portfolio et AI Conductor.
 
 - **Trial Optimizer, Success story** : animation « design space » (proto 1, brief `brief-success-design-space.md`), module `src/success-design-space.js` monté depuis `trial.js`.
   - Image placeholder `.animation-2` supprimée (accord de Romain), div `data-pv="success-design-space"` ajouté dans `.animation-wrapper`.
@@ -163,6 +185,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Brief ClinOps : opacité côté texte, Amériques sous le texte.
 - Brief Response : lisibilité de la séparation des deux bras.
 - Brief Trial : lisibilité des croisements entre courbes.
+- ClinOps Proof : la part de sites recommandés (40 %) et la dispersion de chaque groupe sont des hypothèses ; seuls les 357 sites et les deux moyennes sont réels, à faire confirmer par PhaseV.
 - Plateforme connectée : valeur exacte de `.is-lightpurple` et lisibilité du cœur jaune à capturer en ligne ; flux à juger en ligne avant de toucher aux comptes de particules.
 - Success story Trial : puissance réelle du design fixe inconnue (posé sur la ligne des 90 % en attendant le client) ; lisibilité du jaune cerclé sur le fond `.is-lightpurple` à confirmer.
 - Brief Conductor : vitesse du glissement en mode bloc (environ 3,5 s).

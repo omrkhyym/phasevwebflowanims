@@ -101,7 +101,7 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.4.0` |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` (page de test) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` |
-| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.7.0` |
+| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.6.0` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` |

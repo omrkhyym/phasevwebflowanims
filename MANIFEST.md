@@ -11,7 +11,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.4.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
-| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.7.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof) |
+| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof), `clinops-workflow` (div `margin-top margin-large` dans le `container-large` du bloc « The ClinOps workflow ») |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.6.0` | `response-hero-bg`, `response-hero-slot`, `platform-connect` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` | `trial-hero-bg`, `trial-hero-slot`, `success-design-space` (div dans `.animation-wrapper` du bloc Success story), `platform-connect` |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` | `portfolio-hero-bg`, `portfolio-hero-slot`, `platform-connect` |
@@ -33,6 +33,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/portfolio-hero-bg.js` | Diagramme en tornade |
 | `src/conductor-hero-bg.js` | Chaîne documentaire de six pages |
 | `src/platform-connect.js` | Bloc « plateforme connectée » des cinq pages produit : particules, cinq amas, flux entre produits (proto `protos/phasev-platform-particles-proto.html`). Produit central via `data-current`, noms surchargeables par `data-name-<clé>` |
+| `src/clinops-workflow.js` | Bande « The ClinOps workflow » : une population de particules, patients puis sites puis plan d'enrôlement, quatre étapes et reforecast (proto `protos/phasev-clinops-workflow-proto.html`) |
 | `src/clinops-proof.js` | Bloc Proof de ClinOps : levée d'aveugle, 357 sites, moyennes 0.43 / 0.28, accolade +53 % (proto `protos/phasev-clinops-proof-proto.html`). Chiffres en attributs : `data-sites`, `data-rec`, `data-other`, `data-gain` |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/phasev-success-story-protos.html`) |
 
@@ -57,7 +58,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
-| `v0.7.0` | voir le tag | Bloc Proof de ClinOps (`clinops-proof`) ; seul `dist/clinops.js` change |
+| `v0.8.0` | voir le tag | Bande « The ClinOps workflow » (`clinops-workflow`) ; seul `dist/clinops.js` change |
+| `v0.7.0` | `3767f0e` | Bloc Proof de ClinOps (`clinops-proof`) ; seul `dist/clinops.js` change |
 | `v0.6.0` | `2bc93ac` | Bloc « plateforme connectée » (`platform-connect`) sur les cinq pages produit ; chunk partagé renommé `platform-connect-<hash>.mjs` |
 
 ### Modifications Webflow encore en place
@@ -69,6 +71,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Pages produit : le bloc de droite `header_image-wrapper` a été supprimé par Romain sur les cinq pages.
 - Pages produit, bloc « plateforme connectée » : image placeholder `.animation-2` supprimée sur Trial, ClinOps, Response et Portfolio ; sur AI Conductor, `.entry-grid` et ses six `.conductor-card` supprimées (décision de Romain), remplacées par un `.animation-wrapper` (classes conservées dans le système).
 - Trial Optimizer, Success story : image placeholder `.animation-2` supprimée.
+- ClinOps, bloc « The ClinOps workflow » : div `data-pv="clinops-workflow"` ajouté dans `container-large` `3a4f72bf…cdd`, après `section-top` ; combo `margin-top margin-large` créé (48 / 40 / 24 px).
 - ClinOps, bloc Proof : image placeholder `.animation-2` `99086e1f…` supprimée, div `data-pv="clinops-proof"` dans le wrapper `1cf29878…`.
 - Home : contenu remplacé par celui de Home DEV (copier-coller fait par Romain, sauvegarde du site faite avant).
 - Contact : nav détachée masquée, composant `nav` partagé à sa place.
@@ -78,6 +81,14 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-10-21
+
+- **ClinOps, « The ClinOps workflow »** (brief `brief-clinops-workflow.md`) : module `src/clinops-workflow.js`, portage du proto (seed 17, tirage par rejet, exclusions 22 / 18 / 15 %, 14 sites dont 9 retenus, 12 courbes, chronologie de 18 s), monté depuis `clinops.js`.
+  - Écarts au proto, selon le brief : typo lue sur la `.text-size-label` du bloc ; fond de section gardé en constante ; taille par CSS injecté (`aspect-ratio` 16/5.4, 4/3.4 sous 700 px) ; reconstruction seulement au franchissement de 500 px (2600 / 1500 particules) ; reduced motion = état à t = 16 s ; boucle relancée à t = 0 à chaque entrée.
+  - Mobile (375 px) : noms d'étapes répartis à espaces égaux (« SITE STRATEGY » et « ENROLLMENT » se touchaient) ; « UPDATED FORECAST » placé sous la courbe quand il croise « PLAN » (chevauchement présent dans le proto). Données inchangées.
+  - Performance : mesure en temps réel dans Edge headless, pire cas 2,2 ms par frame (≈ 8,8 ms en ×4, au-dessus du seuil de 8 ms). Particules regroupées par couleur et opacité arrondie au 1/20, un `fillStyle` par groupe : pire cas 1,1 ms (≈ 4,4 ms en ×4). Un essai avec un seul tracé par groupe (`rect` + `fill`) était plus lent (3,9 ms), abandonné. Nombre de particules inchangé.
+  - Webflow : div `data-pv="clinops-workflow"` ajouté ; l'API n'a pas créé seule la combinaison `margin-top margin-large`, créée explicitement avec les valeurs de `margin-large`.
+  - Testé en local (captures desktop et 375 px, t = 2, 6,5 et 16 s) puis en Preview `?dev` par Romain.
+  - **Release `v0.8.0`**, loader de ClinOps passé de `v0.7.0` à `v0.8.0`.
 
 - **ClinOps, bloc Proof** (brief `brief-clinops-proof.md`) : module `src/clinops-proof.js`, portage à l'identique du proto (seed 9, part de recommandés 0,4, dispersion 0,55, colonnes 27 % / 75 %, chronologie 12 s), monté depuis `clinops.js`.
   - Écarts au proto, selon le brief : typo lue sur la première `.text-size-label` de la page (repli : police du body) ; vert lu sur `.text-color-green` (repli `#087f6a`) ; pastilles de la couleur de section ; chiffres en attributs (`data-sites` 357, `data-rec` 0.43, `data-other` 0.28), grille de 21 colonnes et `ceil(sites / 21)` lignes ; reduced motion = état à t = 9 s ; `aspect-ratio: 1/1` sans `min-height` ; boucle relancée à t = 0 à chaque entrée.
@@ -185,6 +196,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Brief ClinOps : opacité côté texte, Amériques sous le texte.
 - Brief Response : lisibilité de la séparation des deux bras.
 - Brief Trial : lisibilité des croisements entre courbes.
+- ClinOps workflow : l'étape Feasibility est la moins lisible en capture fixe, à juger en ligne ; chiffres illustratifs (aucune valeur affichée).
 - ClinOps Proof : la part de sites recommandés (40 %) et la dispersion de chaque groupe sont des hypothèses ; seuls les 357 sites et les deux moyennes sont réels, à faire confirmer par PhaseV.
 - Plateforme connectée : valeur exacte de `.is-lightpurple` et lisibilité du cœur jaune à capturer en ligne ; flux à juger en ligne avant de toucher aux comptes de particules.
 - Success story Trial : puissance réelle du design fixe inconnue (posé sur la ligne des 90 % en attendant le client) ; lisibilité du jaune cerclé sur le fond `.is-lightpurple` à confirmer.

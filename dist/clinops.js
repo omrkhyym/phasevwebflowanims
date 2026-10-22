@@ -10531,8 +10531,237 @@ var w, T, E, D, O, k, A, j, M, N, P = e((() => {
 		out: 11.2,
 		loop: 12
 	}, O = 9, k = 21, A = .4, j = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), M = (e, t, n) => j((e - t) / (n - t)), N = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
-})), F = /* @__PURE__ */ t((() => {
-	y(), i(), P(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => c(e)), document.querySelectorAll("[data-pv=\"clinops-proof\"]").forEach((e) => C(e));
 }));
 //#endregion
-export default F();
+//#region src/clinops-workflow.js
+function F(e) {
+	return () => {
+		e |= 0, e = e + 1831565813 | 0;
+		let t = Math.imul(e ^ e >>> 15, 1 | e);
+		return t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t, ((t ^ t >>> 14) >>> 0) / 4294967296;
+	};
+}
+function I(e) {
+	let t = F(17), n = () => {
+		let e;
+		do
+			e = Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(6.2832 * t());
+		while (Math.abs(e) > 2.4);
+		return e;
+	}, r = [...Array(ae)].map((e, n) => Math.exp(-n * .15) * (.75 + .5 * t())).sort((e, t) => t - e), i = r.reduce((e, t) => e + t, 0), a = [...Array(ne)].map((e, t) => t === 0 ? 0 : n()), o = [];
+	for (let a = 0; a < e; a++) {
+		let e = t(), a = e < .22 ? 0 : e < .4 ? 1 : e < .55 ? 2 : -1, s = -1;
+		if (a < 0) {
+			let e = t() * i;
+			for (s = 0; e > r[s] && s < 13;) e -= r[s], s++;
+		}
+		o.push({
+			wave: a,
+			site: s,
+			ax: n(),
+			ay: n(),
+			bx: n(),
+			by: n(),
+			sx: n(),
+			sy: n(),
+			d: t(),
+			k: Math.floor(t() * ne),
+			u: t(),
+			j: t() - .5,
+			s: 1.2 + t() * .9,
+			ink: t() < .35
+		});
+	}
+	return {
+		P: o,
+		w: r,
+		CG: a
+	};
+}
+function L() {
+	if (document.getElementById("pv-clinops-workflow-css")) return;
+	let e = document.createElement("style");
+	e.id = "pv-clinops-workflow-css", e.textContent = ce, document.head.appendChild(e);
+}
+function R(e) {
+	if (e.dataset.pvReady) return;
+	e.dataset.pvReady = "1", L();
+	let t = document.createElement("canvas");
+	t.style.cssText = "position:absolute;inset:0;width:100%;height:100%;display:block;", t.setAttribute("role", "img"), t.setAttribute("aria-label", "ClinOps workflow: the patient pool narrows through feasibility, becomes a ranked site footprint, then an enrollment forecast that updates as actual study data arrive."), e.appendChild(t);
+	let n = t.getContext("2d"), r = e.closest("section") || document.body, i = r.querySelector(".text-size-label") || document.querySelector(".text-size-label"), a = getComputedStyle(i || document.body), o = a.fontFamily, s = i && a.letterSpacing !== "normal" ? (parseFloat(a.letterSpacing) || 0) / (parseFloat(a.fontSize) || 16) : 0, c = "letterSpacing" in n;
+	getComputedStyle(r).backgroundColor;
+	function l(e, t) {
+		n.font = `${e} ${t}px ${o}`, c && (n.letterSpacing = (s * t).toFixed(2) + "px");
+	}
+	function u(e, t, r, i, a, o, s = 1, c = "left") {
+		s <= 0 || (l(i, a), n.textAlign = c, n.globalAlpha = s, n.fillStyle = o, n.fillText(e, t, r), n.globalAlpha = 1, n.textAlign = "left");
+	}
+	let d = 0, f = 0, p = null;
+	function m(e) {
+		n.clearRect(0, 0, d, f);
+		let t = d < 500 ? 9 : 10, r = d < 500 ? 30 : 44, i = d - 8, a = f - 46, o = d / 2, s = (26 + a) / 2, c = (e) => r + e * (i - r), m = (e) => a - e * (a - 26) * .86, { P: h, w: g, CG: _ } = p, v = g[0], y = (e) => r + (e + .5) / ae * (i - r), b = s + 6, x = Q(Z(e, G.pick + .4, G.pick + 1)) * (1 - Z(e, G.fan - .4, G.fan));
+		if (x > 0) {
+			let e = y(0) - 14, r = y(8) + 14, i = b + (a - 26) * .32;
+			n.strokeStyle = V, n.lineWidth = 3, n.globalAlpha = x, n.beginPath(), n.moveTo(e, i), n.lineTo($(e, r, x), i), n.stroke(), n.globalAlpha = 1, u("SELECTED FOOTPRINT", e, i + 16, 700, t, W, x);
+		}
+		let S = Z(e, G.fan - .2, G.fan + .4) * (1 - Z(e, G.out - .2, G.out));
+		if (S > 0) {
+			n.globalAlpha = S * .5, n.strokeStyle = W, n.lineWidth = 1, n.beginPath(), n.moveTo(r + .5, 26), n.lineTo(r + .5, a + .5), n.lineTo(i, a + .5), n.stroke(), n.globalAlpha = 1, u("ENROLLED", r, 16, 500, t, H, S), u("TIME", i, a + 16, 500, t, H, S, "right");
+			let o = Z(e, G.fan + 1.4, G.fan + 1.9) * (1 - Z(e, G.out - .2, G.out));
+			o > 0 && (n.save(), n.setLineDash([4, 4]), n.strokeStyle = W, n.globalAlpha = .6 * o, n.beginPath(), n.moveTo(r, m(1)), n.lineTo(i, m(1)), n.stroke(), n.beginPath(), n.moveTo(c(re), 26), n.lineTo(c(re), a), n.stroke(), n.restore(), u("TARGET", r + 6, m(1) - 6, 500, t, W, o), u("MILESTONE", c(re) + 6, a - 6, 500, t, W, o));
+			let s = Z(e, G.act, G.act + .4) * (1 - Z(e, G.out - .2, G.out));
+			s > 0 && (n.strokeStyle = W, n.lineWidth = 1.25, n.globalAlpha = s, n.beginPath(), n.moveTo(c(K), 26), n.lineTo(c(K), a), n.stroke(), n.globalAlpha = 1, u("TODAY · ACTUAL DATA", c(K) - 6, 36, 700, t, W, s, "right"));
+		}
+		for (let t of h) {
+			let n = o + t.ax * (i - r) * .13, l = s + t.ay * (a - 26) * .2, u = o + t.bx * (i - r) * .05, f = s + t.by * (a - 26) * .13, p = n, h = l, x = 0, S = B, C = Q(Z(e, 0, .8 + t.d * .4));
+			if (t.wave >= 0) {
+				let r = Q(Z(e, G.waves[t.wave] + t.d * .3, G.waves[t.wave] + .5 + t.d * .3));
+				p = n, h = l + r * 18, x = C * (.55 - .45 * r) * (1 - Z(e, G.pool, G.sites)), S = t.ink ? z : B;
+			} else {
+				let r = Q(Z(e, G.pool + t.d * .4, G.pool + .9 + t.d * .4));
+				p = $(n, u, r), h = $(l, f, r), x = C * .7, S = r > .5 || t.ink ? z : B;
+				let i = Q(Z(e, G.sites + t.d * .6, G.sites + 1.2 + t.d * .6)), a = (6 + 12 * Math.sqrt(g[t.site] / v)) * (d < 500 ? .6 : 1), o = y(t.site) + t.sx * a * .55, s = b + t.sy * a * .55;
+				p = $(p, o, i), h = $(h, s, i);
+				let w = t.site < oe, T = Z(e, G.pick + t.site * .05, G.pick + .4 + t.site * .05);
+				i > .5 && (S = w ? z : B, x = w ? .8 : .75 - .45 * T);
+				let E = Q(Z(e, G.fan + t.u * 1.2, G.fan + .8 + t.u * 1.2));
+				if (w) {
+					let n = _[t.k], r = c(t.u), i = m(q(t.u, n)) + t.j * 2;
+					if (p = $(p, r, E), h = $(h, i, E), E > .5 && (S = t.k === 0 ? z : B, x = t.k === 0 ? .9 : .6), t.u < K) {
+						let n = Q(Z(e, G.act + t.u * 2.6, G.act + .5 + t.u * 2.6));
+						p = $(p, c(t.u), n), h = $(h, m(ie(t.u)) + t.j * 1.5, n), n > .5 && (S = z, x = .9);
+					} else {
+						let n = Q(Z(e, G.refc + (t.u - K) * 1.6, G.refc + .9 + (t.u - K) * 1.6));
+						h = $(h, m(J(t.u, _[t.k])) + t.j * 2, n);
+					}
+				} else x *= 1 - Z(e, G.fan, G.fan + .6);
+			}
+			x *= 1 - Z(e, G.out, G.out + .5), !(x <= .01) && X[(S === z ? 0 : 21) + Math.round(x * Y)].push(p - t.s / 2, h - t.s / 2, t.s);
+		}
+		for (let e = 0; e < X.length; e++) {
+			let t = X[e];
+			if (!t.length) continue;
+			let r = e <= Y ? z : B, i = (e <= Y ? e : e - Y - 1) / Y;
+			n.fillStyle = `rgba(${r[0]},${r[1]},${r[2]},${i})`;
+			for (let e = 0; e < t.length; e += 3) n.fillRect(t[e], t[e + 1], t[e + 2], t[e + 2]);
+			t.length = 0;
+		}
+		let C = c(.62), w = m(q(.62, 0)) - 10, T = m(J(.9, 0)) + 20;
+		l(500, t);
+		let E = n.measureText("PLAN").width;
+		l(700, t);
+		let D = n.measureText("UPDATED FORECAST").width;
+		if (c(.9) - D < C + E + 6 && Math.abs(T - w) < t + 4) {
+			let e = se((c(.9) - D - r) / (i - r), K, 1);
+			T = Math.max(T + t + 8, m(J(e, 0)) + t + 6);
+		}
+		let O = Z(e, G.refc, G.refc + .6) * (1 - Z(e, G.out - .2, G.out));
+		if (O > 0) {
+			n.save(), n.setLineDash([2, 4]), n.strokeStyle = W, n.globalAlpha = .45 * O, n.lineWidth = 1.25, n.beginPath();
+			for (let e = 0; e <= 80; e++) {
+				let t = K + .55 * e / 80;
+				e ? n.lineTo(c(t), m(q(t, 0))) : n.moveTo(c(t), m(q(t, 0)));
+			}
+			n.stroke(), n.restore(), u("PLAN", C, w, 500, t, H, O);
+		}
+		let k = Q(Z(e, G.upd, G.upd + .9)) * (1 - Z(e, G.out - .2, G.out));
+		if (k > 0) {
+			let r = () => {
+				n.beginPath();
+				for (let e = 0; e <= 80; e++) {
+					let t = K + .55 * k * e / 80;
+					e ? n.lineTo(c(t), m(J(t, 0))) : n.moveTo(c(t), m(J(t, 0)));
+				}
+			};
+			r(), n.strokeStyle = W, n.lineWidth = 4.5, n.stroke(), r(), n.strokeStyle = V, n.lineWidth = 2.5, n.stroke(), u("UPDATED FORECAST", c(.9), T, 700, t, W, Z(e, G.upd + .7, G.upd + 1.1), "right");
+		}
+		[
+			"ELIGIBILITY CRITERIA",
+			"SCREEN FAILURE",
+			"COMPETING TRIALS"
+		].forEach((n, i) => {
+			let a = G.waves[i];
+			u("− " + n, r, 26 + i * 16, 500, t, H, Z(e, a, a + .3) * (1 - Z(e, G.sites - .3, G.sites)));
+		}), u("ACCESSIBLE PATIENTS", o, s + (a - 26) * .13 * 2.6 + 14, 700, t, W, Z(e, G.pool + .8, G.pool + 1.2) * (1 - Z(e, G.sites, G.sites + .4)), "center"), u("SITES RANKED BY PROTOCOL FIT · RECRUITMENT · OPERATIONS", r, 26, 500, t, H, Z(e, G.sites + .8, G.sites + 1.2) * (1 - Z(e, G.fan - .4, G.fan)));
+		let A = 0;
+		ee.forEach(([, t], n) => {
+			e >= t && (A = n);
+		});
+		let j = (i - r) / 4, M = f - 8;
+		n.strokeStyle = U, n.lineWidth = 1, n.beginPath(), n.moveTo(r, M - 16.5), n.lineTo(i, M - 16.5), n.stroke();
+		let N = se(e / G.out);
+		n.strokeStyle = W, n.lineWidth = 1.5, n.beginPath(), n.moveTo(r, M - 16.5), n.lineTo(r + (i - r) * N, M - 16.5), n.stroke();
+		let P = d < 500 ? 8 : t, F = ee.map(([e], t) => (d < 500 ? "" : "0" + (t + 1) + " · ") + e), I = F.map((e, t) => r + j * t);
+		if (d < 500) {
+			let e = F.map((e, t) => (l(t === A ? 700 : 500, P), n.measureText(e).width)), t = (i - r - e.reduce((e, t) => e + t, 0)) / (F.length - 1), a = r;
+			I = e.map((e) => {
+				let n = a;
+				return a += e + t, n;
+			});
+		}
+		F.forEach((e, t) => {
+			let n = t === A;
+			u(e, I[t], M, n ? 700 : 500, P, n ? W : H, n ? 1 : .8);
+		});
+	}
+	let h = matchMedia("(prefers-reduced-motion: reduce)").matches, g = !1, _ = 0, v = 0, y = 0;
+	function b() {
+		let r = Math.min(devicePixelRatio || 1, 2), i = e.clientWidth, a = i >= 500;
+		(!p || a !== d >= 500) && (p = I(a ? 2600 : 1500)), d = i, f = e.clientHeight, t.width = Math.round(d * r), t.height = Math.round(f * r), n.setTransform(r, 0, 0, r, 0, 0), g && m(h ? te : _);
+	}
+	function x(e) {
+		v = requestAnimationFrame(x), _ += Math.min((e - y) / 1e3, .05), y = e, _ > G.loop && (_ = 0), m(_);
+	}
+	function S() {
+		v || h || (_ = 0, y = performance.now(), v = requestAnimationFrame(x));
+	}
+	function C() {
+		cancelAnimationFrame(v), v = 0;
+	}
+	let w = new ResizeObserver(b);
+	w.observe(e);
+	let T = null;
+	return (document.fonts ? Promise.race([document.fonts.load(`500 10px ${o}`), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
+		g = !0, b(), !h && (T = new IntersectionObserver(([e]) => e.isIntersecting ? S() : C(), { threshold: .35 }), T.observe(e));
+	}), { destroy() {
+		C(), w.disconnect(), T && T.disconnect(), t.remove(), delete e.dataset.pvReady;
+	} };
+}
+var z, B, V, H, U, W, G, ee, te, ne, K, re, q, ie, J, ae, oe, Y, X, se, Z, Q, $, ce, le = e((() => {
+	z = [
+		20,
+		18,
+		56
+	], B = [
+		146,
+		138,
+		205
+	], V = "#E2C70A", H = "#7d7b9c", U = "#d3d0e8", W = "#141238", G = {
+		waves: [
+			1,
+			1.7,
+			2.4
+		],
+		pool: 3,
+		sites: 4.2,
+		pick: 6,
+		fan: 8,
+		act: 12,
+		refc: 13.6,
+		upd: 15,
+		out: 17,
+		loop: 18
+	}, ee = [
+		["FEASIBILITY", 0],
+		["SITE STRATEGY", 4.1],
+		["ENROLLMENT", 7.9],
+		["REFORECASTING", 11.9]
+	], te = 16, ne = 12, K = .45, re = .78, q = (e, t) => (1 + .16 * t) / (1 + Math.exp(-(e - .42) / .1)) - (1 + .16 * t) / (1 + Math.exp(.42 / .1)), ie = (e) => q(e, 0) * .8, J = (e, t) => {
+		let n = ie(K), r = (e - K) / .55;
+		return n + (1 + .12 * t - n) * (1 - Math.exp(-r * 2.6)) / (1 - Math.exp(-2.6));
+	}, ae = 14, oe = 9, Y = 20, X = Array.from({ length: 42 }, () => []), se = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), Z = (e, t, n) => se((e - t) / (n - t)), Q = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, $ = (e, t, n) => e + (t - e) * n, ce = "[data-pv=\"clinops-workflow\"]{position:relative;width:100%;aspect-ratio:16/5.4}\n@media (max-width:700px){[data-pv=\"clinops-workflow\"]{aspect-ratio:4/3.4}}";
+})), ue = /* @__PURE__ */ t((() => {
+	y(), i(), P(), le(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => c(e)), document.querySelectorAll("[data-pv=\"clinops-proof\"]").forEach((e) => C(e)), document.querySelectorAll("[data-pv=\"clinops-workflow\"]").forEach((e) => R(e));
+}));
+//#endregion
+export default ue();

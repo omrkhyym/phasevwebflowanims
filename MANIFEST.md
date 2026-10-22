@@ -2,7 +2,7 @@
 
 Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. Chaque modification future y est ajoutée, en haut du journal, avec sa date.
 
-## État actuel (21 octobre 2026)
+## État actuel (22 octobre 2026)
 
 ### Pages animées
 
@@ -58,7 +58,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
-| `v0.8.0` | voir le tag | Bande « The ClinOps workflow » (`clinops-workflow`) ; seul `dist/clinops.js` change |
+| `v0.8.0` | `9f43e3b` | Bande « The ClinOps workflow » (`clinops-workflow`) ; seul `dist/clinops.js` change |
 | `v0.7.0` | `3767f0e` | Bloc Proof de ClinOps (`clinops-proof`) ; seul `dist/clinops.js` change |
 | `v0.6.0` | `2bc93ac` | Bloc « plateforme connectée » (`platform-connect`) sur les cinq pages produit ; chunk partagé renommé `platform-connect-<hash>.mjs` |
 
@@ -72,6 +72,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Pages produit, bloc « plateforme connectée » : image placeholder `.animation-2` supprimée sur Trial, ClinOps, Response et Portfolio ; sur AI Conductor, `.entry-grid` et ses six `.conductor-card` supprimées (décision de Romain), remplacées par un `.animation-wrapper` (classes conservées dans le système).
 - Trial Optimizer, Success story : image placeholder `.animation-2` supprimée.
 - ClinOps, bloc « The ClinOps workflow » : div `data-pv="clinops-workflow"` ajouté dans `container-large` `3a4f72bf…cdd`, après `section-top` ; combo `margin-top margin-large` créé (48 / 40 / 24 px).
+- Company, « PhaseV at a glance » : `grid-company` et `grid-company-s` masqués, remplacés par `glance-grid` (6 chiffres avec icônes) ; h2 et texte ajoutés dans le `section-top`.
+- Cinq pages produit : instance du composant `inner-nav` (navigation secondaire sticky) supprimée de la section des blocs `is-feature` ; ces blocs sont en `container-large` (au lieu de `container-medium`), le premier en `is-feature is-white` (au lieu de `_1st`).
 - ClinOps, bloc Proof : image placeholder `.animation-2` `99086e1f…` supprimée, div `data-pv="clinops-proof"` dans le wrapper `1cf29878…`.
 - Home : contenu remplacé par celui de Home DEV (copier-coller fait par Romain, sauvegarde du site faite avant).
 - Contact : nav détachée masquée, composant `nav` partagé à sa place.
@@ -79,6 +81,23 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Footer : composant `footer-bottom` partagé par `section_footer` et `only-footer` ; anciens blocs `footer-bottom` masqués dans `only-footer`, ligne légale en double masquée dans `section_footer` ; 404 sur `only-footer`, footer détaché masqué.
 
 ## Journal
+
+### 2026-10-22
+
+- **Company, bloc « PhaseV at a glance »** refait, décision de Romain : on ne garde que les chiffres. Proto `protos/phasev-company-glance-protos.html` (grille 3 × 2, filet light-purple, icône sur la ligne du chiffre), construit sur les tokens du site (Aspekta, display, `number-span is-company`, `company-subtitle`). Les premiers essais (schéma données → couche → usages, palette des animations, Roboto) ont été écartés : hors charte UI.
+  - Webflow : h2 « Trusted across clinical development. » (`text-size-display text-color-alternate`) ajouté dans `section-top_left` ; `section-top_right` + texte (`text-size-large text-color-alternate`) ajoutés ; grille `glance-grid` insérée après l'ancien contenu ; `grid-company` (`8b40…ff1a`) et `grid-company-s` (`ff1c72b9…`) masqués.
+  - Classes créées (accord de Romain) : `glance-grid` (3 colonnes, 2 sous 767 px), `glance-stat` (filet 0.5px `#684a9e`, colonne), `glance-stat_head` (icône + chiffre en ligne), `glance-icon` (3rem, 2.5rem sous 767 px).
+  - Six icônes SVG dessinées dans le style des icônes du site (grille 80, trait 3.2, jaune `#E1C721`), sources dans `protos/icons/`, uploadées en assets : `glance-sponsors`, `glance-top20`, `glance-trials`, `glance-records`, `glance-models`, `glance-papers`.
+  - Pas de module JS : les chiffres gardent `number-span`, animé par le compteur du script global du site.
+- **Response, Trial, Portfolio, AI Conductor, navigation secondaire** : même traitement que ClinOps, à la demande de Romain. Instance `inner-nav` supprimée ; premier bloc feature passé de `is-feature _1st` à `is-feature is-white` ; tous les blocs feature passés de `container-medium` à `container-large`. Structure identique sur les quatre pages (mêmes ids d'éléments que ClinOps, page dupliquée).
+  - Pour recréer les barres : variante base (3 liens) sur Response, Portfolio et AI Conductor, variante 4 sur Trial ; liens vers `ff611726…`, `acfb0bb0…`, `0679ea4c…` (et `4a881a5c…` sur Trial). Textes : Response « Sharpen the Readout », « Reveal Differential Benefit », « Act on the Evidence » ; Trial « Set Up », « Explore », « Simulate », « Optimize » ; Portfolio « Translate to Value », « Quantify Probability », « Translate to Value » (doublon d'origine) ; AI Conductor « Study Backbone », « Interactive Protocol », « Analysis & Reporting ».
+  - Le composant `inner-nav` n'a plus aucune instance sur le site ; il reste dans la bibliothèque, comme ses classes et le CSS `data-sticky-nav-offset` de `global styles`.
+- **ClinOps, navigation secondaire** : instance `inner-nav` (`8b4ce4b2…48`) supprimée, décision de Romain (la bande « The ClinOps workflow » annonce déjà les quatre étapes). Le masquage était impossible : l'API refuse `set_visibility` sur une instance de composant.
+  - Fonctionnement relevé : composant `inner-nav` (groupe navigation, 5 instances, variantes 3 à 6 selon le nombre de liens), racine `.container-large.is-sticky` avec `data-sticky-nav-offset`, slot `inner-nav-wrapper` rempli d'instances `inner-nav_link` (ancres « page section »). Aucun JS propre : CSS sticky dans l'embed `global styles` (`top: var(--nav-h)`, `top: 0` sous `html.nav-hidden`), classe `nav-hidden` posée par le script navbar du site. Déjà en `display: none` à 991 px et moins.
+  - Pour la recréer : variante 4 (`14b8fa72…`), liens Feasibility → `ff611726…`, Site Strategy → `acfb0bb0…`, ENROLLMENt → `0679ea4c…`, Reforecasting → `07dbbd09…`.
+  - Composant et classes inchangés, les quatre autres pages produit gardent la barre.
+  - Bloc Feasibility : classes changées par Romain dans le Designer (`_1st` remplacé par `is-white`, 80 px en haut et en bas, 48 px sous 991 px).
+  - Les quatre blocs `is-feature` passent de `container-medium` (73rem) à `container-large` (90rem) : le texte était décalé vers la droite par rapport aux sections précédentes au-dessus d'environ 1250 px.
 
 ### 2026-10-21
 
@@ -204,4 +223,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Audit : liens morts, contenu provisoire de Contact, SEO, code dupliqué, ménage des classes (voir la page d'audit).
 - Footer : maquette validée, structure faite (étape 1), bas de footer fait (passe 2a), bandeaux faits (passes 2b et 2c), restent la vérification en Preview et les liens (étape 3). LinkedIn fait ; reste à savoir si les pages Terms et Privacy existent.
 - Resources : texte du bouton « Watch recording » à adapter pour les cartes qui ne sont pas des webinars.
+- Pages produit sans `inner-nav` : à valider en Preview sur les cinq pages (largeur de `feature-grid` avec les vidéos en `container-large`). Ensuite, décider du sort du composant `inner-nav` (plus aucune instance), de `._1st` et du CSS `data-sticky-nav-offset`.
+- ClinOps, rythme vertical : padding-bottom irréguliers (40 px sous The PhaseV difference, 145 px sous le workflow, 80 px sous les blocs feature) ; `padding-section-custom2` ne se réduit qu'en mobile.
+- Company, « PhaseV at a glance » : h2 et texte d'intro proposés par Claude, à valider ; chiffres à confirmer par PhaseV (l'ancien site disait 45+ clients) ; vérifier en Preview le compteur et l'alignement icône / chiffre ; supprimer l'ancien contenu masqué après validation.
 - Evidence en brouillon : les fiches `/evidence/<étude>` restent publiées via le template.

@@ -27,7 +27,7 @@ const TOOLS = [
 ];
 /* Le planning, en fraction de la largeur totale */
 const TASKS = [
-  { n: 'PROTOCOL FINAL',   a: .00, b: .13, tool: 0 },
+  { n: 'FINAL PROTOCOL',   a: .00, b: .13, tool: 0 },
   { n: 'SITE ACTIVATION',  a: .11, b: .33, tool: 1 },
   { n: 'FPI → LPI',        a: .30, b: .61, tool: 1 },
   { n: 'DATA CLEANING',    a: .57, b: .73, tool: 2 },

@@ -98,7 +98,7 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 
 | Page | ID | Entrée | Tag |
 |---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.9.0` |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.10.0` |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` (page de test) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` |

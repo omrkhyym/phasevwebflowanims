@@ -90,7 +90,7 @@ var r, i, a, o, s, c, l, u, d, f, p, m, h, g = e((() => {
 		}
 	], u = [
 		{
-			n: "PROTOCOL FINAL",
+			n: "FINAL PROTOCOL",
 			a: 0,
 			b: .13,
 			tool: 0

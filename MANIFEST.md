@@ -8,7 +8,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 | Page | ID Webflow | Entrée | Tag du loader | Points de montage |
 |---|---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.9.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.10.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof), `clinops-workflow` (div `margin-top margin-large` dans le `container-large` du bloc « The ClinOps workflow ») |
@@ -59,7 +59,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
-| `v0.9.0` | voir le tag | Barres du cas Evidence de la Home (`evidence-bars`) ; seul `dist/main.js` change |
+| `v0.10.0` | voir le tag | Gantt de la Home : libellé « FINAL PROTOCOL » ; seul `dist/main.js` change |
+| `v0.9.0` | `ad90520` | Barres du cas Evidence de la Home (`evidence-bars`) ; seul `dist/main.js` change |
 | `v0.8.0` | `9f43e3b` | Bande « The ClinOps workflow » (`clinops-workflow`) ; seul `dist/clinops.js` change |
 | `v0.7.0` | `3767f0e` | Bloc Proof de ClinOps (`clinops-proof`) ; seul `dist/clinops.js` change |
 | `v0.6.0` | `2bc93ac` | Bloc « plateforme connectée » (`platform-connect`) sur les cinq pages produit ; chunk partagé renommé `platform-connect-<hash>.mjs` |
@@ -89,12 +90,15 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-10-23
 
+- **Home, « The Problem » (gantt)** : libellé « PROTOCOL FINAL » → « FINAL PROTOCOL » dans `src/gantt.js` (texte en dur dans `TASKS`), à la demande de Romain. **Release `v0.10.0`**, loader de la Home passé de `v0.9.0` à `v0.10.0`.
+- **Home, « The PhaseV Platform »** : ordre des questions changé, à la demande de Romain : Portfolio → Trial → ClinOps → Response → AI Conductor (avant : Portfolio, Response, ClinOps, Trial, AI Conductor). Fait dans Webflow en réordonnant les instances `dm-panel` de `#dm-panels` : `platform-hub` construit les onglets dans l'ordre du DOM, aucune release. Chaque panneau garde son `target`, donc sa forme de nuage. Home DEV non touchée.
 - **Home, bloc Evidence** refait (proto V1 de `protos/phasev-home-evidence-proto.html` : une carte, deux moitiés égales ; le proto simule aussi 3 cas pour le futur slider). Décision de Romain : un seul cas au lancement, Swiper gardé pour la suite.
   - En-tête : nouveau `section-top _2col is-bottom` (label + h2 à gauche ; intro + flèches `slider-arrows` sombres déplacées à droite) ; ancien `slider-top` masqué.
   - Cas : nouvelle slide `swiper-slide full` > `ev-case` (moitié récit : produit, type, titre « Recommended sites recruited 53% faster. », texte, lien « Read the case » masqué tant qu'Evidence est en brouillon ; moitié données : +53 %, barres 0.43 / 0.28, paire 349 ≈ 357). Ancienne slide sortie du `swiper-wrapper` et masquée (une slide masquée compterait encore pour Swiper).
   - Classes créées (préfixe `ev-case`, les `evidence-*` existent déjà pour la page Evidence) : `ev-case`, `ev-case_half` (+ combo `is-data`), `ev-case_meta`, `ev-case_small`, `ev-case_title`, `ev-case_link`, `ev-case_kpi`, `ev-case_kpi-n`, `ev-case_kpi-t`, `ev-case_bars`, `ev-case_bars-head`, `ev-case_bar` (+ `is-main`), `ev-case_track`, `ev-case_fill` (+ `is-main`), `ev-case_pair`, `ev-case_pair-n`, `ev-case_op`.
   - Repo : module `src/evidence-bars.js` monté depuis `main.js` sur `[data-pv="evidence-bars"]` (le bloc des barres) ; chaque remplissage porte `data-value` / `data-max`, le module fixe la largeur et anime l'entrée à l'écran (décalage 0,12 s, reduced motion = état final).
   - Script Swiper de la Home : les flèches sont masquées quand le slider est verrouillé (`isLocked`, événements `lock` / `unlock`) ; vaut pour tous les sliders de la page.
+  - Espace entre l'en-tête et la carte : `margin-top` sur le combo `swiper-div evidence` (2.6875rem, 2rem sous 991 px, 0 sous 479 px où le combo a déjà 2rem de padding), valeurs de l'ancien `slider-top`.
   - Testé en `?dev` par Romain. **Release `v0.9.0`** (seul `dist/main.js` change), loader de la Home passé de `v0.4.0` à `v0.9.0`.
 
 - **Home, citations** : l'accordéon épinglé (ScrollTrigger + GSAP, 3 citations identiques de remplissage) remplacé par un slider Swiper de cartes, décision de Romain (proto C de `protos/phasev-home-quotes-proto.html`). Textes : les 9 témoignages de la section « What our partners are saying » de phasevtrials.com, repris en entier ; logos Enlivex, EMD Serono, NeuroSense, Oramed, Alimentiv, iOMEDICO uploadés en assets (`logo-*.svg|avif`), guillemet en asset `quote-mark.svg` (source `protos/icons/`).

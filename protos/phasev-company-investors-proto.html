@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Company Investors</title>
+<style>
+  /* Charte du site : Aspekta, fond blanc (.is-white), label gris uppercase, h2 navy, filets #e3e1ef.
+     Logos : ceux de l'ancien site (phasevtrials.com/about), rendus en silhouette navy pour unifier. */
+  @font-face{ font-family:Aspekta; src:url("https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a75fb545c817a6953af180d_AspektaVF.woff2") format("woff2"); font-weight:100 900; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Aspekta,Arial,sans-serif; color:#141238; background:#fff; }
+  .section{ padding:7rem 2.5rem; }
+  @media(max-width:991px){ .section{ padding:4rem 1rem; } }
+  .container{ max-width:90rem; margin:0 auto; }
+  .top{ display:flex; justify-content:space-between; align-items:flex-end; gap:3rem; margin-bottom:3.5rem; }
+  .label{ font-size:.875rem; letter-spacing:1.15px; text-transform:uppercase; color:#626262; }
+  h2{ font-size:2.25rem; font-weight:600; line-height:110%; margin:.75rem 0 0; }
+  .intro{ font-size:1.125rem; line-height:150%; color:#626262; max-width:27.5rem; margin:0; }
+  @media(max-width:767px){ .top{ flex-direction:column; align-items:flex-start; gap:1.25rem; } h2{ font-size:1.75rem; } }
+  /* grille de 6 cases égales, filets fins entre les cases */
+  .grid{ display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid #e3e1ef; border-left:1px solid #e3e1ef; }
+  .cell{ display:flex; align-items:center; justify-content:center; height:8.5rem; padding:1.5rem 2rem; border-right:1px solid #e3e1ef; border-bottom:1px solid #e3e1ef; }
+  .cell img{ max-width:100%; max-height:2.75rem; object-fit:contain; filter:brightness(0); opacity:.7; transition:opacity .2s; }
+  .cell:hover img{ opacity:1; }
+  @media(max-width:991px){ .grid{ grid-template-columns:repeat(3,1fr); } }
+  @media(max-width:479px){ .grid{ grid-template-columns:repeat(2,1fr); } .cell{ height:6.5rem; padding:1rem 1.25rem; } }
+</style>
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <div class="top">
+      <div><div class="label">Investors</div><h2>Backed by leading investors.</h2></div>
+      <p class="intro">PhaseV is supported by investors in technology, life sciences, and healthcare.</p>
+    </div>
+    <div class="grid">
+      <div class="cell"><img src="https://cdn.prod.website-files.com/6820540753e51f1e535f0046/6820540753e51f1e535f0119_Accel.avif" alt="Accel"></div>
+      <div class="cell"><img src="https://cdn.prod.website-files.com/6820540753e51f1e535f0046/6820540753e51f1e535f011a_Insights%20Partners.avif" alt="Insight Partners"></div>
+      <div class="cell"><img src="https://cdn.prod.website-files.com/6820540753e51f1e535f0046/6823b06ffe5bac2d8fd66e93_fd0c0e7ab754193013bf2539f5f75f09_xor%20ventures.avif" alt="XOR Ventures"></div>
+      <div class="cell"><img src="https://cdn.prod.website-files.com/6820540753e51f1e535f0046/6820540753e51f1e535f011c_viola%20ventures.avif" alt="Viola Ventures"></div>
+      <div class="cell"><img src="https://cdn.prod.website-files.com/6820540753e51f1e535f0046/6820540753e51f1e535f011b_lionbird%20logo.avif" alt="Lionbird"></div>
+      <div class="cell"><img src="https://cdn.prod.website-files.com/6820540753e51f1e535f0046/6823b054d09c799d130b8fd2_Getty.avif" alt="Getty"></div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

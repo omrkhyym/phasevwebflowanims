@@ -1,0 +1,44 @@
+/* À coller dans l'embed du composant « global styles », à la place de l'ancienne règle [data-bg='purple-gradient']
+   (sauvegardée dans protos/legacy/data-bg-global-styles.css). Repris du proto 7 (protos/phasev-line-textures-proto7.html).
+
+   C'est le FALLBACK : il ne sert que si site.js ne charge pas. Dès que le JS tourne, il pose .pv-live sur la section,
+   ce qui coupe les pseudo-éléments au profit des nappes injectées.
+
+   Écart au proto : overflow:clip seulement sans .pv-live. Le hero de la Home déborde volontairement de son header
+   (canvas à -10 %) ; avec le JS actif, les nappes sont rognées par leur propre conteneur et la section n'est plus rognée. */
+  [data-bg='purple-gradient']{
+    position:relative; isolation:isolate;
+    background:#141238;
+  }
+  [data-bg='purple-gradient']:not(.pv-live){ overflow:clip; }   /* clip et pas hidden : ne casse pas les sticky */
+  [data-bg='purple-gradient']::before,
+  [data-bg='purple-gradient']::after{
+    content:''; position:absolute; z-index:-3; pointer-events:none; will-change:transform;
+  }
+  /* nappe violette, haut droite */
+  [data-bg='purple-gradient']::before{
+    left:42%; top:-48%; width:95%; height:120%;
+    background:radial-gradient(closest-side, rgba(126,91,178,.50), rgba(126,91,178,.18) 55%, rgba(126,91,178,0));
+    animation:pv-d1 46s ease-in-out infinite;
+    animation-delay:calc(var(--pv-phase,0) * -1s);
+  }
+  /* nappe profonde bas gauche + accent mauve, dans la même couche */
+  [data-bg='purple-gradient']::after{
+    left:-36%; top:10%; width:114%; height:143%;
+    background:
+      radial-gradient(closest-side, rgba(146,138,205,.12), rgba(146,138,205,0)) 100% 0% / 52.6% 49% no-repeat,
+      radial-gradient(closest-side, rgba(65,34,125,.58), rgba(65,34,125,.2) 55%, rgba(65,34,125,0)) 0% 100% / 87.7% 80.4% no-repeat;
+    animation:pv-d2 58s ease-in-out infinite;
+    animation-delay:calc(var(--pv-phase,0) * -1s);
+  }
+  @keyframes pv-d1{ 0%,100%{ transform:translate(0,0) rotate(0) scale(1,1); }
+    33%{ transform:translate(-9%,7%) rotate(14deg) scale(1.12,.9); }
+    66%{ transform:translate(5%,12%) rotate(-8deg) scale(.92,1.08); } }
+  @keyframes pv-d2{ 0%,100%{ transform:translate(0,0) rotate(0) scale(1,1); }
+    40%{ transform:translate(11%,-8%) rotate(-12deg) scale(.9,1.12); }
+    75%{ transform:translate(4%,-14%) rotate(9deg) scale(1.1,.94); } }
+  @media (prefers-reduced-motion:reduce){
+    [data-bg='purple-gradient']::before, [data-bg='purple-gradient']::after{ animation:none; } }
+
+  [data-bg='purple-gradient'].pv-live::before,
+  [data-bg='purple-gradient'].pv-live::after{ display:none; }

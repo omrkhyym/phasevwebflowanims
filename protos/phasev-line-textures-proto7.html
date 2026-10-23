@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV — Line field textures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --yel:#E2C70A; --pale:#F4F4F4; --mut:#8F8CB5; --line2:#3A3468; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Roboto,system-ui,sans-serif; color:var(--pale); background:#141238; }
+
+  .sec{ padding:96px 64px 104px; min-height:660px; }
+  /* ============================================================
+     Règle [data-bg='purple-gradient'] telle qu'elle partira dans
+     l'embed global Webflow. C'est le FALLBACK : il ne sert que si le JS
+     ne charge pas. Dès que le JS tourne, il pose .pv-live sur la section,
+     ce qui coupe les pseudo-éléments au profit des nappes injectées.
+     ============================================================ */
+  [data-bg='purple-gradient']{
+    position:relative; isolation:isolate; overflow:clip;   /* clip et pas hidden : ne casse pas les sticky */
+    background:#141238;
+  }
+  [data-bg='purple-gradient']::before,
+  [data-bg='purple-gradient']::after{
+    content:''; position:absolute; z-index:-3; pointer-events:none; will-change:transform;
+  }
+  /* nappe violette, haut droite */
+  [data-bg='purple-gradient']::before{
+    left:42%; top:-48%; width:95%; height:120%;
+    background:radial-gradient(closest-side, rgba(126,91,178,.50), rgba(126,91,178,.18) 55%, rgba(126,91,178,0));
+    animation:pv-d1 46s ease-in-out infinite;
+    animation-delay:calc(var(--pv-phase,0) * -1s);
+  }
+  /* nappe profonde bas gauche + accent mauve, dans la même couche */
+  [data-bg='purple-gradient']::after{
+    left:-36%; top:10%; width:114%; height:143%;
+    background:
+      radial-gradient(closest-side, rgba(146,138,205,.12), rgba(146,138,205,0)) 100% 0% / 52.6% 49% no-repeat,
+      radial-gradient(closest-side, rgba(65,34,125,.58), rgba(65,34,125,.2) 55%, rgba(65,34,125,0)) 0% 100% / 87.7% 80.4% no-repeat;
+    animation:pv-d2 58s ease-in-out infinite;
+    animation-delay:calc(var(--pv-phase,0) * -1s);
+  }
+  @keyframes pv-d1{ 0%,100%{ transform:translate(0,0) rotate(0) scale(1,1); }
+    33%{ transform:translate(-9%,7%) rotate(14deg) scale(1.12,.9); }
+    66%{ transform:translate(5%,12%) rotate(-8deg) scale(.92,1.08); } }
+  @keyframes pv-d2{ 0%,100%{ transform:translate(0,0) rotate(0) scale(1,1); }
+    40%{ transform:translate(11%,-8%) rotate(-12deg) scale(.9,1.12); }
+    75%{ transform:translate(4%,-14%) rotate(9deg) scale(1.1,.94); } }
+  @media (prefers-reduced-motion:reduce){
+    [data-bg='purple-gradient']::before, [data-bg='purple-gradient']::after{ animation:none; } }
+
+  [data-bg='purple-gradient'].pv-live::before,
+  [data-bg='purple-gradient'].pv-live::after{ display:none; }
+
+  .sec + .sec{ border-top:1px solid #241f4a; }
+  .sec canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:-2; pointer-events:none; display:block; }
+
+  /* ---------- gradient flottant ----------
+     Les deux radiaux de la charte deviennent des nappes elliptiques qui
+     dérivent, tournent et respirent. Transform uniquement : composité GPU,
+     aucun repaint. Une troisième nappe mauve très faible casse la symétrie. */
+  .bg{ position:absolute; inset:0; z-index:-3; pointer-events:none; overflow:hidden; }
+  /* proto : bouton off = on simule un JS qui a planté */
+  body:not(.flow) .bg{ display:none; }
+  body:not(.flow) [data-bg='purple-gradient'].pv-live::before, body:not(.flow) [data-bg='purple-gradient'].pv-live::after{ display:block; }
+  .blob{ position:absolute; display:block; border-radius:50%; will-change:transform; }
+  .b1{ width:95%; height:120%; left:42%; top:-48%;
+       background:radial-gradient(closest-side, rgba(126,91,178,.50), rgba(126,91,178,.18) 55%, rgba(126,91,178,0));
+       animation:d1 46s ease-in-out infinite; }
+  .b2{ width:100%; height:115%; left:-36%; top:38%;
+       background:radial-gradient(closest-side, rgba(65,34,125,.58), rgba(65,34,125,.2) 55%, rgba(65,34,125,0));
+       animation:d2 58s ease-in-out infinite; }
+  .b3{ width:60%; height:70%; left:18%; top:10%;
+       background:radial-gradient(closest-side, rgba(146,138,205,.12), rgba(146,138,205,0));
+       animation:d3 39s ease-in-out infinite; }
+  @keyframes d1{ 0%,100%{ transform:translate(0,0) rotate(0) scale(1,1); }
+    33%{ transform:translate(-9%,7%) rotate(14deg) scale(1.12,.9); }
+    66%{ transform:translate(5%,12%) rotate(-8deg) scale(.92,1.08); } }
+  @keyframes d2{ 0%,100%{ transform:translate(0,0) rotate(0) scale(1,1); }
+    40%{ transform:translate(11%,-8%) rotate(-12deg) scale(.9,1.12); }
+    75%{ transform:translate(4%,-14%) rotate(9deg) scale(1.1,.94); } }
+  @keyframes d3{ 0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(22%,18%) scale(1.25); } }
+
+  /* ---------- grain ----------
+     Tuile de bruit générée une fois en JS, fixe. Sous le contenu, au-dessus des lignes. */
+  .grain{ position:absolute; inset:0; z-index:-1; pointer-events:none; display:none;
+          background-image:var(--grain); background-size:180px 180px;
+          mix-blend-mode:soft-light; opacity:var(--grain-op,.18); }
+  body.grainy .grain{ display:block; }
+  @media(prefers-reduced-motion:reduce){ .blob{ animation:none; } }
+
+  /* ---------- réglages proto, à retirer ---------- */
+  .ctl{ position:fixed; right:16px; bottom:16px; z-index:10; display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+        font:400 11px/1 'Roboto Mono',monospace; background:rgba(10,9,30,.82); border:1px solid #3A3468; padding:10px; }
+  .ctl button{ font:inherit; color:#C7C4E2; background:transparent; border:1px solid #3A3468; padding:7px 10px; cursor:pointer; }
+  .ctl button.on{ color:#141238; background:#C7C4E2; border-color:#C7C4E2; }
+  .ctl label{ color:#8F8CB5; display:flex; gap:6px; align-items:center; }
+  .ctl input{ width:90px; accent-color:#C7C4E2; }
+
+  .proto{ position:absolute; top:24px; left:64px; font:500 10px/1 'Roboto Mono',monospace; letter-spacing:.16em;
+          text-transform:uppercase; color:var(--yel); }
+  .proto span{ color:var(--mut); margin-left:12px; letter-spacing:.08em; }
+
+  .head{ max-width:760px; margin-bottom:56px; }
+  h2{ font-size:clamp(32px,4.2vw,56px); font-weight:400; letter-spacing:-.022em; line-height:1.06; margin:0 0 20px; }
+  p{ font-size:17px; line-height:1.6; color:#C7C4E2; margin:0; }
+  .cards{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+  .card{ border:1px solid var(--line2); border-radius:8px; padding:28px; background:rgba(20,18,56,.35); }
+  .card h3{ font-size:22px; font-weight:400; margin:0 0 12px; }
+  .card p{ font-size:15px; }
+  @media(max-width:900px){ .sec{ padding:72px 24px 80px; } .proto{ left:24px; } .cards{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body class="flow grainy">
+
+<div class="ctl">
+  <button id="tflow" class="on">JS actif (off = fallback CSS)</button>
+  <button id="tgrain" class="on">Grain</button>
+  <label>grain <input id="gop" type="range" min="0" max=".4" step=".01" value=".18"><b id="vgop">.18</b></label>
+</div>
+
+<section class="sec" data-bg="purple-gradient" data-line-field="swimmer" data-line-seed="4" data-tex="swimmer">
+  <div class="proto">A · Swimmer plot<span>3 plans de profondeur, ticks, parallaxe</span></div>
+  <div class="head" data-calm>
+    <h2>Built by statisticians, clinicians and engineers</h2>
+    <p>PhaseV brings advanced statistical, causal, and simulation methods into one clinical development platform.</p>
+  </div>
+  <div class="cards">
+    <div class="card" data-calm><h3>Scientific rigor</h3><p>Methods reviewed by an independent scientific advisory board.</p></div>
+    <div class="card" data-calm><h3>Regulatory fluency</h3><p>Designs and documentation built for agency review.</p></div>
+    <div class="card" data-calm><h3>Experts in control</h3><p>AI assists. Your team approves every decision.</p></div>
+  </div>
+</section>
+
+<section class="sec" data-bg="purple-gradient" data-line-field="matrix" data-line-seed="7" data-tex="matrix">
+  <div class="proto">B · Matrice patients × visites<span>visites qui se remplissent, ligne et colonne au survol</span></div>
+  <div class="head" data-calm>
+    <h2>Built by statisticians, clinicians and engineers</h2>
+    <p>PhaseV brings advanced statistical, causal, and simulation methods into one clinical development platform.</p>
+  </div>
+  <div class="cards">
+    <div class="card" data-calm><h3>Scientific rigor</h3><p>Methods reviewed by an independent scientific advisory board.</p></div>
+    <div class="card" data-calm><h3>Regulatory fluency</h3><p>Designs and documentation built for agency review.</p></div>
+    <div class="card" data-calm><h3>Experts in control</h3><p>AI assists. Your team approves every decision.</p></div>
+  </div>
+</section>
+
+<section class="sec" data-bg="purple-gradient" data-line-field="km" data-line-seed="3" data-tex="km">
+  <div class="proto">C · Strates Kaplan-Meier<span>courbes en escalier, ticks de censure, halo souris</span></div>
+  <div class="head" data-calm>
+    <h2>Built by statisticians, clinicians and engineers</h2>
+    <p>PhaseV brings advanced statistical, causal, and simulation methods into one clinical development platform.</p>
+  </div>
+  <div class="cards">
+    <div class="card" data-calm><h3>Scientific rigor</h3><p>Methods reviewed by an independent scientific advisory board.</p></div>
+    <div class="card" data-calm><h3>Regulatory fluency</h3><p>Designs and documentation built for agency review.</p></div>
+    <div class="card" data-calm><h3>Experts in control</h3><p>AI assists. Your team approves every decision.</p></div>
+  </div>
+</section>
+
+<section class="sec" data-bg="purple-gradient" data-line-field="forest" data-line-seed="5" data-tex="forest">
+  <div class="proto">D · Forest plot<span>estimations et IC qui se réactualisent une à une</span></div>
+  <div class="head" data-calm>
+    <h2>Built by statisticians, clinicians and engineers</h2>
+    <p>PhaseV brings advanced statistical, causal, and simulation methods into one clinical development platform.</p>
+  </div>
+  <div class="cards">
+    <div class="card" data-calm><h3>Scientific rigor</h3><p>Methods reviewed by an independent scientific advisory board.</p></div>
+    <div class="card" data-calm><h3>Regulatory fluency</h3><p>Designs and documentation built for agency review.</p></div>
+    <div class="card" data-calm><h3>Experts in control</h3><p>AI assists. Your team approves every decision.</p></div>
+  </div>
+</section>
+
+<section class="sec" data-bg="purple-gradient" data-line-field="waterfall" data-line-seed="8" data-tex="waterfall">
+  <div class="proto">E · Waterfall plot<span>barres triées, seuils RECIST +20 / −30 %</span></div>
+  <div class="head" data-calm>
+    <h2>Built by statisticians, clinicians and engineers</h2>
+    <p>PhaseV brings advanced statistical, causal, and simulation methods into one clinical development platform.</p>
+  </div>
+  <div class="cards">
+    <div class="card" data-calm><h3>Scientific rigor</h3><p>Methods reviewed by an independent scientific advisory board.</p></div>
+    <div class="card" data-calm><h3>Regulatory fluency</h3><p>Designs and documentation built for agency review.</p></div>
+    <div class="card" data-calm><h3>Experts in control</h3><p>AI assists. Your team approves every decision.</p></div>
+  </div>
+</section>
+
+<section class="sec" data-bg="purple-gradient" data-line-field="volcano" data-line-seed="2" data-tex="volcano">
+  <div class="proto">H · Volcano plot<span>fold change × significativité, réanalyse lente</span></div>
+  <div class="head" data-calm>
+    <h2>Built by statisticians, clinicians and engineers</h2>
+    <p>PhaseV brings advanced statistical, causal, and simulation methods into one clinical development platform.</p>
+  </div>
+  <div class="cards">
+    <div class="card" data-calm><h3>Scientific rigor</h3><p>Methods reviewed by an independent scientific advisory board.</p></div>
+    <div class="card" data-calm><h3>Regulatory fluency</h3><p>Designs and documentation built for agency review.</p></div>
+    <div class="card" data-calm><h3>Experts in control</h3><p>AI assists. Your team approves every decision.</p></div>
+  </div>
+</section>
+
+<script>
+(() => {
+'use strict';
+const cl=(v,a,b)=>Math.max(a,Math.min(b,v)), rnd=(a,b)=>a+(b-a)*Math.random();
+const sq=v=>v*v;
+const outExpo=v=>v>=1?1:1-Math.pow(2,-10*v);
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const COL={ mau:'146,138,205', blu:'120,168,224', tea:'127,232,207' };
+/* Pas de jaune dans les textures : il reste réservé au moment de décision. */
+
+/* ============================================================
+   Socle commun : canvas, resize, souris, calm zone, boucle
+   ============================================================ */
+function mount(sec, Kind){
+  const cv=document.createElement('canvas'); cv.setAttribute('aria-hidden','true'); sec.prepend(cv);
+  const x=cv.getContext('2d');
+  const mask=document.createElement('canvas'), mk=mask.getContext('2d');
+  const m={x:0,y:0,tx:0,ty:0,a:0,in:false};
+  const S={W:0,H:0,dpr:1,m,nx:0,ny:0,fade:reduced?1:0,
+    /* éclaircissement local, ellipse étirée en largeur */
+    glow:(px,py,rx=240,ry=90)=>{ if(m.a<.01) return 0; const dx=(px-m.x)/rx, dy=(py-m.y)/ry; return m.a*Math.exp(-(dx*dx+dy*dy)); }};
+  const tex=Kind(S);
+
+  /* Calm zone : un masque précalculé au resize. Chaque bloc [data-calm]
+     retire jusqu'à 78 % de la texture, avec un fondu de 90 px autour.
+     Empilement de rectangles en destination-out, pas de ctx.filter (Safari). */
+  function buildMask(){
+    mask.width=cv.width; mask.height=cv.height;
+    mk.setTransform(S.dpr,0,0,S.dpr,0,0);
+    mk.globalCompositeOperation='source-over'; mk.fillStyle='#fff'; mk.fillRect(0,0,S.W,S.H);
+    mk.globalCompositeOperation='destination-out';
+    const r0=sec.getBoundingClientRect(), F=90, DEPTH=.78, N=16, a=1-Math.pow(1-DEPTH,1/N);
+    mk.fillStyle='rgba(0,0,0,'+a+')';
+    sec.querySelectorAll('[data-calm]').forEach(el=>{
+      const r=el.getBoundingClientRect(), L=r.left-r0.left, T=r.top-r0.top;
+      for(let i=0;i<N;i++){ const e=F*(1-i/N);
+        mk.beginPath();
+        if(mk.roundRect) mk.roundRect(L-e,T-e,r.width+2*e,r.height+2*e,e+8); else mk.rect(L-e,T-e,r.width+2*e,r.height+2*e);
+        mk.fill(); }
+    });
+  }
+
+  function frame(dt){
+    const k=1-Math.exp(-dt*8);
+    m.x+=(m.tx-m.x)*k; m.y+=(m.ty-m.y)*k; m.a+=((m.in?1:0)-m.a)*(1-Math.exp(-dt*4));
+    S.nx=(m.x/S.W-.5)*2*m.a; S.ny=(m.y/S.H-.5)*2*m.a;
+    if(S.fade<1) S.fade=Math.min(1,S.fade+dt/1.2);
+    x.setTransform(S.dpr,0,0,S.dpr,0,0); x.globalCompositeOperation='source-over'; x.globalAlpha=1;
+    x.clearRect(0,0,S.W,S.H);
+    x.globalAlpha=S.fade; tex.draw(x,T,dt); x.globalAlpha=1;
+    x.setTransform(1,0,0,1,0,0); x.globalCompositeOperation='destination-in'; x.drawImage(mask,0,0);
+    x.globalCompositeOperation='source-over';
+  }
+
+  function resize(){
+    S.dpr=Math.min(devicePixelRatio||1,2); const r=sec.getBoundingClientRect(); S.W=r.width; S.H=r.height;
+    cv.width=Math.max(1,Math.round(S.W*S.dpr)); cv.height=Math.max(1,Math.round(S.H*S.dpr));
+    if(!m.in){ m.x=m.tx=S.W/2; m.y=m.ty=S.H/2; }
+    buildMask(); tex.resize(T);
+    if(reduced) frame(0);
+  }
+
+  sec.addEventListener('pointermove',e=>{ const r=sec.getBoundingClientRect(); m.tx=e.clientX-r.left; m.ty=e.clientY-r.top;
+    if(m.a<.02){ m.x=m.tx; m.y=m.ty; } m.in=true; });
+  sec.addEventListener('pointerleave',()=>m.in=false);
+
+  let T=reduced?9:0, last=performance.now(), vis=true;
+  new IntersectionObserver(([e])=>{ vis=e.isIntersecting; last=performance.now(); }).observe(sec);
+  new ResizeObserver(resize).observe(sec);
+  if(document.fonts) document.fonts.ready.then(buildMask);
+  (function loop(now){ requestAnimationFrame(loop);
+    const dt=Math.min((now-last)/1000,.05); last=now;
+    if(!vis||reduced||!S.W) return; T+=dt; frame(dt); })(performance.now());
+}
+
+/* ============================================================
+   A · Swimmer plot sur trois plans
+   ============================================================ */
+function Swimmer(S){
+  /* p = écart entre pistes, a = opacité, w = épaisseur, z = profondeur (1 = devant) */
+  const PLANES=[ {p:7,a:.06,w:.6,z:.25,spd:.6}, {p:13,a:.12,w:1,z:.6,spd:.8}, {p:26,a:.24,w:1.4,z:1,spd:1} ];
+  let lanes=[];
+  function spawn(L,t,first){
+    L.x0=rnd(-.08,.86); L.len=rnd(.12,.5);
+    L.g=rnd(2.6,5)/L.pl.spd; L.h=rnd(3,8); L.r=L.g*.85;
+    L.t0=first ? t-rnd(-3,L.g+L.h) : t+rnd(.4,3);
+    L.col=Math.random()<.16?COL.blu:COL.mau;
+    L.mk=[]; const n=Math.floor(rnd(0,3));
+    for(let i=0;i<n;i++) L.mk.push({f:rnd(.2,.9), c:Math.random()<.6?COL.tea:COL.blu});
+    L.end=L.pl.z===1 && Math.random()<.4;
+  }
+  return {
+    resize(t){ lanes=[];
+      PLANES.forEach(P=>{ for(let y=P.p/2; y<S.H+P.p; y+=P.p){ const L={pl:P,y}; spawn(L,t,true); lanes.push(L); } }); },
+    draw(x,t){
+      const m=S.m;
+      for(const L of lanes){
+        const P=L.pl; let u=t-L.t0;
+        if(u>L.g+L.h+L.r){ spawn(L,t,false); continue; }
+        if(u<0) continue;
+        let head,tail;
+        if(u<L.g){ head=outExpo(u/L.g); tail=0; }
+        else if(u<L.g+L.h){ head=1; tail=0; }
+        else { head=1; tail=outExpo((u-L.g-L.h)/L.r); }
+        const ox=S.nx*14*P.z, oy=S.ny*6*P.z;
+        const xa=(L.x0+L.len*tail)*S.W+ox, xb=(L.x0+L.len*head)*S.W+ox, y=L.y+oy;
+        if(xb-xa<.5) continue;
+        const g=S.glow(cl(m.x,xa,xb),y);
+        const al=Math.min(.6,P.a*(1+2*g*P.z));
+        x.fillStyle='rgba('+L.col+','+al+')';
+        x.fillRect(xa,y-P.w/2,xb-xa,P.w);
+        for(const k of L.mk){
+          if(head<k.f||tail>k.f) continue;
+          const pop=outExpo(cl((head-k.f)/.05,0,1)), px=(L.x0+L.len*k.f)*S.W+ox, h=(2+4*P.z)*pop;
+          x.fillStyle='rgba('+k.c+','+Math.min(.85,al*2.4)+')';
+          x.fillRect(px-.5,y-h,1,h*2);
+        }
+        if(L.end && head>=1 && tail<1){ x.fillStyle='rgba('+COL.mau+','+Math.min(.8,al*2)+')'; x.fillRect(xb-1.5,y-1.5,3,3); }
+      }
+    }
+  };
+}
+
+/* ============================================================
+   B · Matrice patients × visites
+   Une ligne = un patient, une colonne = une visite planifiée.
+   ============================================================ */
+function Matrix(S){
+  const P=18; let rows=[], cols=0, ox0=0, oy0=0;
+  function newRow(r,t,first){
+    r.start=Math.floor(rnd(0,.5)*cols);
+    const span=cols-r.start;
+    r.stop=Math.random()<.14 ? r.start+Math.floor(rnd(.3,.8)*span) : cols;   // arrêt prématuré
+    r.done=first ? Math.floor(rnd(0,r.stop-r.start)) : 0;
+    r.born=new Float32Array(cols).fill(-99);
+    r.kind=new Uint8Array(cols);
+    for(let c=0;c<cols;c++){ const q=Math.random(); r.kind[c]=q<.05?1:q<.09?2:0; }   // 1 visite manquée, 2 query ouverte
+    r.next=t+rnd(.5,5); r.endAt=-1; r.t0=first?-99:t;
+  }
+  return {
+    resize(t){ cols=Math.ceil(S.W/P)+1; const n=Math.ceil(S.H/P)+1;
+      ox0=(S.W-(cols-1)*P)/2; oy0=(S.H-(n-1)*P)/2;
+      rows=[]; for(let i=0;i<n;i++){ const r={}; newRow(r,t,true); rows.push(r); } },
+    draw(x,t){
+      const m=S.m, sx=S.nx*5, sy=S.ny*3;
+      rows.forEach((r,ri)=>{
+        if(r.start+r.done<r.stop && t>=r.next){ r.born[r.start+r.done]=t; r.done++; r.next=t+rnd(1.5,5.5); }
+        if(r.start+r.done>=r.stop && r.endAt<0) r.endAt=t+rnd(4,9);
+        let rf=cl((t-r.t0)/1.5,0,1);
+        if(r.endAt>0){ if(t>r.endAt+1.5){ newRow(r,t,false); rf=0; } else if(t>r.endAt) rf=1-(t-r.endAt)/1.5; }
+        const y=oy0+ri*P+sy;
+        const gr=m.a*Math.exp(-sq((y-m.y)/18));
+        for(let c=0;c<cols;c++){
+          const px=ox0+c*P+sx, rel=c-r.start;
+          const gc=m.a*Math.exp(-sq((px-m.x)/18));
+          const g=Math.max(gr*Math.exp(-sq((px-m.x)/360)), gc*Math.exp(-sq((y-m.y)/240)));
+          let col=COL.mau, al, rad;
+          if(rel<0 || c>=r.stop){ al=.03; rad=.7; }                     // grille de fond
+          else if(rel<r.done){
+            if(r.kind[c]===1){ al=.03; rad=.7; }                          // visite manquée : trou
+            else { const pop=outExpo(cl((t-r.born[c])/.6,0,1));
+              col=r.kind[c]===2?COL.tea:COL.mau; al=(.07+.15*pop)*rf+.03*(1-rf); rad=.8+.7*pop*rf; }
+          } else { al=.03+.04*rf; rad=.8; }                                // visite planifiée
+          if(c===r.stop-1 && r.stop<cols && rel<r.done){ col=COL.blu; }   // dernière visite avant arrêt
+          al=Math.min(.6,al+.2*g);
+          x.fillStyle='rgba('+col+','+al+')';
+          x.beginPath(); x.arc(px,y,rad,0,6.2832); x.fill();
+        }
+      });
+    }
+  };
+}
+
+/* ============================================================
+   C · Strates Kaplan-Meier
+   ============================================================ */
+function KM(S){
+  let curves=[];
+  function spawn(c,t,first){
+    c.y0=c.base+rnd(-8,8); c.D=rnd(40,150); const lam=rnd(.6,2.6);
+    const n=Math.floor(rnd(10,26)); c.ev=[];
+    for(let i=0;i<n;i++) c.ev.push(Math.random()); c.ev.sort((a,b)=>a-b);
+    c.ys=c.ev.map(e=>c.y0+c.D*(1-Math.exp(-lam*e))/(1-Math.exp(-lam)));
+    c.cs=[]; const k=Math.floor(rnd(5,13)); for(let i=0;i<k;i++) c.cs.push(Math.random());
+    c.z=Math.random()<.3?1:.45; c.col=Math.random()<.2?COL.blu:COL.mau;
+    c.g=rnd(5,8); c.h=rnd(4,9); c.f=1.6;
+    c.t0=first ? t-rnd(-2,c.g+c.h) : t+rnd(.5,3);
+  }
+  const X=v=>(-.02+1.04*v)*S.W;
+  function yAt(c,v){ let y=c.y0; for(let i=0;i<c.ev.length&&c.ev[i]<=v;i++) y=c.ys[i]; return y; }
+  function path(x,c,head,ox,oy){
+    x.beginPath(); let y=c.y0+oy; x.moveTo(X(0)+ox,y);
+    for(let i=0;i<c.ev.length&&c.ev[i]<=head;i++){ const px=X(c.ev[i])+ox; x.lineTo(px,y); y=c.ys[i]+oy; x.lineTo(px,y); }
+    x.lineTo(X(head)+ox,y);
+    const tk=c.z===1?3:2;
+    for(const v of c.cs){ if(v>head) continue; const px=X(v)+ox, py=yAt(c,v)+oy; x.moveTo(px,py-tk); x.lineTo(px,py+tk); }
+  }
+  return {
+    resize(t){ curves=[]; const n=Math.ceil(S.H/30)+3;
+      for(let i=0;i<n;i++){ const c={base:-60+i*(S.H+60)/(n-1)}; spawn(c,t,true); curves.push(c); } },
+    draw(x,t){
+      const m=S.m;
+      const live=[];
+      for(const c of curves){
+        let u=t-c.t0;
+        if(u>c.g+c.h+c.f){ spawn(c,t,false); continue; }
+        if(u<0) continue;
+        const head=outExpo(cl(u/c.g,0,1)), fade=u>c.g+c.h?1-(u-c.g-c.h)/c.f:1;
+        const ox=S.nx*12*c.z, oy=S.ny*6*c.z;
+        x.lineWidth=c.z===1?1.1:.7;
+        x.strokeStyle='rgba('+c.col+','+((c.z===1?.2:.09)*fade)+')';
+        path(x,c,head,ox,oy); x.stroke();
+        live.push([c,head,ox,oy,fade]);
+      }
+      /* halo souris : on repasse les courbes avec un dégradé radial en strokeStyle,
+         ça éclaire localement sans découpe nette */
+      if(m.a>.01){
+        const gr=x.createRadialGradient(m.x,m.y,0,m.x,m.y,220);
+        gr.addColorStop(0,'rgba('+COL.mau+','+(.32*m.a)+')'); gr.addColorStop(1,'rgba('+COL.mau+',0)');
+        x.strokeStyle=gr;
+        for(const [c,head,ox,oy,fade] of live){ x.lineWidth=c.z===1?1.1:.7; x.globalAlpha=S.fade*fade; path(x,c,head,ox,oy); x.stroke(); }
+        x.globalAlpha=S.fade;
+      }
+    }
+  };
+}
+
+const gauss=()=>Math.sqrt(-2*Math.log(Math.random()+1e-9))*Math.cos(6.2832*Math.random());
+
+/* ============================================================
+   D · Forest plot en panneaux
+   Chaque ligne = une étude ou un sous-groupe : estimation + IC.
+   Les estimations se réactualisent une par une, lentement.
+   ============================================================ */
+function Forest(S){
+  const RP=22; let rows=[], panels=[];
+  function reest(r,t){ r.fe=r.e; r.fh=r.h; r.te=gauss()*.15+.04; r.th=rnd(.035,.15); r.t0=t; r.next=t+rnd(7,16); }
+  return {
+    resize(t){ rows=[]; panels=[];
+      const pc=Math.max(2,Math.round(S.W/330)), pw=S.W/pc;
+      for(let p=0;p<pc;p++){ const P={pw, nx:p*pw+pw*.42}; panels.push(P);
+        for(let y=RP/2; y<S.H+RP; y+=RP){
+          const r={P, y:y+(p%2)*RP/2, w:rnd(.3,1), z:Math.random()<.35?1:.5, dia:Math.random()<.07};
+          r.e=gauss()*.15+.04; r.h=rnd(.035,.15); reest(r,t-3); r.next=t+rnd(0,14); rows.push(r); } } },
+    draw(x,t){
+      x.strokeStyle='rgba('+COL.mau+',.08)'; x.lineWidth=1; x.setLineDash([2,4]); x.beginPath();
+      for(const P of panels){ const px=Math.round(P.nx+S.nx*6)+.5; x.moveTo(px,0); x.lineTo(px,S.H); }
+      x.stroke(); x.setLineDash([]);
+      for(const r of rows){
+        if(t>=r.next) reest(r,t);
+        const k=outExpo(cl((t-r.t0)/2.4,0,1)); r.e=r.fe+(r.te-r.fe)*k; r.h=r.fh+(r.th-r.fh)*k;
+        const ox=S.nx*10*r.z, oy=S.ny*5*r.z, cx=r.P.nx+r.e*r.P.pw+ox, y=r.y+oy, hw=r.h*r.P.pw;
+        const g=S.glow(cx,y,220,70), a=Math.min(.6,(r.z===1?.2:.1)*(1+2*g));
+        if(r.dia){
+          x.fillStyle='rgba('+COL.blu+','+Math.min(.7,a*1.4)+')';
+          x.beginPath(); x.moveTo(cx-hw,y); x.lineTo(cx,y-3.5); x.lineTo(cx+hw,y); x.lineTo(cx,y+3.5); x.fill();
+        } else {
+          x.fillStyle='rgba('+COL.mau+','+a+')'; x.fillRect(cx-hw,y-.5,hw*2,1);
+          const sz=(1.5+3.5*r.w)*(r.z===1?1:.7);
+          x.fillStyle='rgba('+COL.mau+','+Math.min(.75,a*1.8)+')'; x.fillRect(cx-sz/2,y-sz/2,sz,sz);
+        }
+      }
+    }
+  };
+}
+
+/* ============================================================
+   E · Waterfall plot (meilleure variation vs baseline)
+   Barres triées, seuils RECIST +20 % / −30 %. Le jeu se redessine
+   de gauche à droite, tient, se rétracte, puis un autre arrive.
+   ============================================================ */
+function Waterfall(S){
+  const PITCH=5, BW=3, CYC=17; let n=0, v=[], t0=0, base=0, x0=0;
+  function gen(t){ v=[]; for(let i=0;i<n;i++) v.push(cl(gauss()*38-8,-100,120)); v.sort((a,b)=>b-a); t0=t; }
+  return {
+    resize(t){ n=Math.ceil(S.W/PITCH); x0=(S.W-n*PITCH)/2; base=S.H*.5; gen(t-5); },
+    draw(x,t){
+      let u=t-t0; if(u>CYC){ gen(t); u=0; }
+      const sc=S.H*.42/100, ox=S.nx*8, oy=S.ny*4, by=base+oy, m=S.m;
+      x.strokeStyle='rgba('+COL.mau+',.09)'; x.lineWidth=1; x.setLineDash([2,4]); x.beginPath();
+      for(const th of [20,-30]){ const y=Math.round(by-th*sc)+.5; x.moveTo(0,y); x.lineTo(S.W,y); }
+      x.stroke(); x.setLineDash([]);
+      x.fillStyle='rgba('+COL.mau+',.12)'; x.fillRect(0,Math.round(by),S.W,1);
+      for(let i=0;i<n;i++){
+        const d=i/n*1.4, k=outExpo(cl((u-d)/1.6,0,1))*(1-outExpo(cl((u-13.5-d*.6)/1.6,0,1)));
+        if(k<=.002) continue;
+        const h=v[i]*sc*k, px=x0+i*PITCH+ox;
+        const resp=v[i]<=-30, g=S.glow(px+BW/2,by-h/2,200,140);
+        const a=Math.min(.6,(resp?.2:v[i]>=20?.15:.09)*(1+2*g));
+        x.fillStyle='rgba('+(resp?COL.blu:COL.mau)+','+a+')';
+        if(h>0) x.fillRect(px,by-h,BW,h); else x.fillRect(px,by,BW,-h);
+      }
+    }
+  };
+}
+
+/* ============================================================
+   H · Volcano plot (biomarqueurs : fold change × significativité)
+   Le nuage se réanalyse toutes les 14 s : les points glissent vers
+   leur nouvelle position, appariés par rang pour rester lisibles.
+   ============================================================ */
+function Volcano(S){
+  const NP=900, CYC=14, MOR=3.2; let A=[], B=[], t0=0, ph=null, zz=null;
+  function gen(){ const a=[]; for(let i=0;i<NP;i++){ const fc=gauss()*1.1; a.push([fc, Math.min(9.6,sq(fc)*rnd(.5,1.7)+Math.abs(gauss())*.5)]); }
+    return a.sort((p,q)=>p[0]-q[0]); }
+  return {
+    resize(t){ A=gen(); B=gen(); t0=t-MOR; ph=Float32Array.from({length:NP},()=>Math.random()*6.2832);
+      zz=Float32Array.from({length:NP},()=>Math.random()<.3?1:.45); },
+    draw(x,t){
+      let u=t-t0; if(u>CYC){ A=B; B=gen(); t0=t; u=0; }
+      const e=outExpo(cl(u/MOR,0,1));
+      const X=f=>S.W/2+f/4.2*S.W/2, Y=l=>S.H*.95-l/10*S.H*.9;
+      x.strokeStyle='rgba('+COL.mau+',.08)'; x.lineWidth=1; x.setLineDash([2,4]); x.beginPath();
+      for(const f of [-1,1]){ const px=Math.round(X(f)+S.nx*6)+.5; x.moveTo(px,0); x.lineTo(px,S.H); }
+      const py=Math.round(Y(1.3)+S.ny*3)+.5; x.moveTo(0,py); x.lineTo(S.W,py);
+      x.stroke(); x.setLineDash([]);
+      for(let i=0;i<NP;i++){
+        const fc=A[i][0]+(B[i][0]-A[i][0])*e, lp=A[i][1]+(B[i][1]-A[i][1])*e, z=zz[i];
+        const px=X(fc)+S.nx*12*z+Math.sin(t*.3+ph[i])*1.5, qy=Y(lp)+S.ny*6*z+Math.cos(t*.27+ph[i])*1.5;
+        const hit=Math.abs(fc)>1 && lp>1.3, g=S.glow(px,qy,160,120);
+        const a=Math.min(.7,(hit?.32:.11)*(z===1?1:.6)*(1+2*g));
+        x.fillStyle='rgba('+(hit?(fc>0?COL.tea:COL.blu):COL.mau)+','+a+')';
+        x.beginPath(); x.arc(px,qy,z===1?1.5:1.05,0,6.2832); x.fill();
+      }
+    }
+  };
+}
+
+/* ---------- gradient flottant + grain ---------- */
+(function(){
+  const N=180, c=document.createElement('canvas'); c.width=c.height=N;
+  const g=c.getContext('2d'), d=g.createImageData(N,N);
+  for(let i=0;i<d.data.length;i+=4){ const v=128+(Math.random()-.5)*110|0; /* contraste réduit : ±55 autour du gris moyen */ d.data[i]=d.data[i+1]=d.data[i+2]=v; d.data[i+3]=255; }
+  g.putImageData(d,0,0);
+  document.documentElement.style.setProperty('--grain','url('+c.toDataURL()+')');
+  document.querySelectorAll('.sec').forEach((s,i)=>{
+    const bg=document.createElement('div'); bg.className='bg'; bg.setAttribute('aria-hidden','true');
+    bg.innerHTML='<i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>';
+    /* décalage de phase par section, sinon toutes les nappes bougent en même temps */
+    bg.querySelectorAll('.blob').forEach((b,j)=>b.style.animationDelay=(-(i*17+j*11))+'s');
+    const gr=document.createElement('div'); gr.className='grain'; gr.setAttribute('aria-hidden','true');
+    s.prepend(bg); s.append(gr); s.classList.add('pv-live');
+    s.style.setProperty('--pv-phase', ((+s.dataset.lineSeed||i+1)*17)%60);
+  });
+  const b=document.body;
+  const tog=(id,cls)=>{ const el=document.getElementById(id); el.onclick=()=>{ b.classList.toggle(cls); el.classList.toggle('on',b.classList.contains(cls)); }; };
+  tog('tflow','flow'); tog('tgrain','grainy');
+  const op=document.getElementById('gop'), vo=document.getElementById('vgop');
+  op.oninput=()=>{ document.documentElement.style.setProperty('--grain-op',op.value); vo.textContent=op.value; };
+})();
+
+const KINDS={swimmer:Swimmer, matrix:Matrix, km:KM, forest:Forest, waterfall:Waterfall, volcano:Volcano};
+document.querySelectorAll('[data-tex]').forEach(s=>mount(s,KINDS[s.dataset.tex]));
+})();
+</script>
+</body>
+</html>

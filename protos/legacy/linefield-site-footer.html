@@ -1,0 +1,209 @@
+<!-- Sauvegarde du 2026-10-23, avant line field v2. Source : footer de code global du site Webflow (copie depuis la page publiée). -->
+<script>
+  window.LineField = (function () {
+    var GLOBAL = {
+      count: 3,
+      seed: 5,
+      strokeOpacity: 0.1,
+      strokeColor: '255,255,225',
+      lineWidth: 1,
+      amp: 0.3,
+      wave: 0.6,
+      slope: 0.6,
+      maxSteep: 0.05,
+      driftSpeed: 0.15,
+      driftAmp: 0.05,
+      ease: 0.03,
+      reach: 0.18,
+    };
+
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var instances = [],
+      raf = null;
+    var mouse = { x: -99999, y: -99999, moved: false };
+    window.addEventListener(
+      'pointermove',
+      function (e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.moved = true;
+      },
+      { passive: true },
+    );
+
+    function num(v, f) {
+      v = parseFloat(v);
+      return isNaN(v) ? f : v;
+    }
+    function cfgFor(root) {
+      var d = root.dataset;
+      return {
+        count: Math.max(1, Math.round(num(d.lineCount, GLOBAL.count))),
+        seed: num(d.lineSeed, GLOBAL.seed),
+        strokeOpacity: num(d.lineOpacity, GLOBAL.strokeOpacity),
+        strokeColor: d.lineColor || GLOBAL.strokeColor,
+        lineWidth: num(d.lineWidth, GLOBAL.lineWidth),
+        amp: num(d.lineAmp, GLOBAL.amp),
+        wave: num(d.lineWave, GLOBAL.wave),
+        slope: num(d.lineSlope, GLOBAL.slope),
+        maxSteep: num(d.lineSteep, GLOBAL.maxSteep),
+        driftSpeed: num(d.lineDrift, GLOBAL.driftSpeed),
+        driftAmp: GLOBAL.driftAmp,
+        ease: num(d.lineEase, GLOBAL.ease),
+        reach: num(d.lineReach, GLOBAL.reach),
+      };
+    }
+
+    function makeInstance(root) {
+      var cfg = cfgFor(root);
+      if (getComputedStyle(root).position === 'static') root.style.position = 'relative';
+      var canvas = root.querySelector('canvas[data-bg-canvas]');
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.setAttribute('data-bg-canvas', '');
+        canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;';
+        root.appendChild(canvas);
+      }
+      var ctx = canvas.getContext('2d');
+
+      function h(n) {
+        var x = Math.sin(n * 127.1 + cfg.seed * 311.7) * 43758.5453;
+        return x - Math.floor(x);
+      }
+      var L = [],
+        spacingF = 0;
+      function build() {
+        L = [];
+        var bandTop = 0.2,
+          bandRange = 0.6;
+        spacingF = cfg.count > 1 ? bandRange / (cfg.count - 1) : 0; // vertical gap (fraction of H)
+        for (var i = 0; i < cfg.count; i++) {
+          var r1 = h(i + 1),
+            r2 = h(i + 7.3),
+            r3 = h(i + 13.9);
+          L.push({ baseF: cfg.count > 1 ? bandTop + bandRange * (i / (cfg.count - 1)) : 0.5, microVar: 0.45 + 0.55 * r1, microWave: 0.8 + 0.9 * r2, microPhase0: r3 * Math.PI * 2 });
+        }
+      }
+      build();
+
+      var W = 0,
+        H = 0;
+      function resize() {
+        var r = root.getBoundingClientRect();
+        W = Math.max(1, r.width);
+        H = Math.max(1, r.height);
+        canvas.width = Math.round(W * DPR);
+        canvas.height = Math.round(H * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      var inst = { root: root, cfg: cfg, visible: false, iter: 0, lx: 0, ly: 0, resize: resize, step: step, rebuild: build };
+
+      function step() {
+        inst.iter++;
+        var rect = canvas.getBoundingClientRect();
+        var mx = mouse.moved ? mouse.x - rect.left : rect.width / 2;
+        var my = mouse.moved ? mouse.y - rect.top : rect.height / 2;
+        inst.lx += ((mx - rect.width / 2) * cfg.reach - inst.lx) * cfg.ease;
+        inst.ly += ((my - rect.height / 2) * cfg.reach - inst.ly) * cfg.ease;
+        draw();
+      }
+
+      function draw() {
+        var t = inst.iter / 60;
+        var phaseMacro = t * cfg.driftSpeed;
+        // cap vertical travel by width too, so arcs stay gentle on tall/narrow (mobile) screens
+        var lim = cfg.maxSteep * W;
+        var ampPx = Math.min(cfg.amp * H, lim);
+        var slopePx = Math.min(cfg.slope * H, lim);
+        var microCap = Math.min(0.35 * spacingF * H, lim); // still <= gap, so still can't cross
+        ctx.clearRect(0, 0, W, H);
+        ctx.lineWidth = cfg.lineWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'rgba(' + cfg.strokeColor + ',' + cfg.strokeOpacity + ')';
+        var STEPS = 80;
+        for (var i = 0; i < cfg.count; i++) {
+          var ln = L[i],
+            baseY = H * ln.baseF;
+          ctx.beginPath();
+          for (var s = 0; s <= STEPS; s++) {
+            var u = -0.15 + 1.3 * (s / STEPS);
+            // shared sweep: identical for every line, so they stay parallel and never cross
+            var macro = slopePx * (u - 0.5) + ampPx * Math.sin(u * cfg.wave * Math.PI * 2 + phaseMacro);
+            // per-line wobble, capped below the line gap, so it still can't cross
+            var micro = microCap * ln.microVar * Math.sin(u * ln.microWave * Math.PI * 2 + ln.microPhase0 + t * cfg.driftSpeed * 0.6);
+            var x = u * W + inst.lx;
+            var y = baseY + macro + micro + inst.ly;
+            if (s === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+      }
+
+      if (reduce) {
+        draw();
+        return null;
+      }
+      return inst;
+    }
+
+    function loop() {
+      var any = false;
+      for (var i = 0; i < instances.length; i++) {
+        if (instances[i].visible) {
+          any = true;
+          instances[i].step();
+        }
+      }
+      raf = any ? requestAnimationFrame(loop) : null;
+    }
+    function kick() {
+      if (!raf) raf = requestAnimationFrame(loop);
+    }
+
+    function boot() {
+      var els = document.querySelectorAll('[data-line-field]');
+      if (!els.length) return;
+      var io =
+        'IntersectionObserver' in window
+          ? new IntersectionObserver(
+              function (ents) {
+                for (var i = 0; i < ents.length; i++) {
+                  var inst = ents[i].target.__lf;
+                  if (inst && inst.step) {
+                    inst.visible = ents[i].isIntersecting;
+                    if (inst.visible) inst.resize();
+                  }
+                }
+                kick();
+              },
+              { rootMargin: '120px' },
+            )
+          : null;
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        if (el.__lf) continue;
+        var inst = makeInstance(el);
+        if (!inst) {
+          el.__lf = true;
+          continue;
+        }
+        el.__lf = inst;
+        instances.push(inst);
+        if (io) io.observe(el);
+        else inst.visible = true;
+      }
+      if (!io) kick();
+    }
+
+    if (document.readyState !== 'loading') boot();
+    else document.addEventListener('DOMContentLoaded', boot);
+
+    return { boot: boot, defaults: GLOBAL };
+  })();
+</script>

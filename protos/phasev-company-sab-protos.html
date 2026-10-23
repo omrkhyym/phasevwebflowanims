@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Company SAB</title>
+<style>
+  /* Carte reprise telle quelle du composant leadership-card, variante « dark » :
+     portrait (cover, rayon 1rem) ; bloc texte avec filet gauche 0.5px jaune, padding-left 1rem, gap 1rem ;
+     nom heading-style-h4 en jaune ; poste heading-style-h5 semibold en blanc.
+     Seul le contenu change : nom avec titres, poste actuel. Portraits : medias/people/ (non versionné). */
+  @font-face{ font-family:Aspekta; src:url("https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a75fb545c817a6953af180d_AspektaVF.woff2") format("woff2"); font-weight:100 900; font-display:swap; }
+  :root{ --navy:#141238; --yellow:#e1c721; --white:#f8f8f8; --soft:#ffffffa3; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Aspekta,Arial,sans-serif; color:var(--white); background:var(--navy); }
+  .section{ background:radial-gradient(157.44% 98.4% at 84% 18%, rgba(126,91,178,.46) 0%, rgba(126,91,178,0) 28%),
+                       radial-gradient(162.26% 101.42% at 14% 86%, rgba(65,34,125,.48) 0%, rgba(65,34,125,0) 34%), #141238; }
+  .section + .section{ border-top:1px dashed #ffffff30; }
+  .padding-global{ padding:7rem 2.5rem; }
+  .container-large{ max-width:min(100%,90rem); margin:0 auto; }
+  @media(max-width:991px){ .padding-global{ padding:4rem 1rem; } }
+  @media(max-width:767px){ .padding-global{ padding:3rem 1rem; } }
+  .proto-bar{ margin-bottom:3rem; font-size:.75rem; letter-spacing:1.15px; text-transform:uppercase; color:#ffffff60; }
+
+  .heading-style-h2{ font-size:2.25rem; font-weight:600; line-height:110%; margin:0; color:var(--yellow); }
+  @media(max-width:991px){ .heading-style-h2{ font-size:2rem; } }
+
+  .leadership-card{ display:flex; flex-direction:column; align-items:flex-start; gap:1.5rem; }
+  /* portrait 4:5, le format natif des photos (928 × 1152) ; la carte du site est en carré */
+  .leadership-image{ display:block; width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:1rem; background:#ffffff14; }
+  .leadership-text-div{ display:flex; flex-direction:column; justify-content:center; gap:1rem; padding-left:1rem; border-left:.5px solid var(--yellow); }
+  .name{ font-size:1.5rem; font-weight:600; line-height:120%; margin:0; color:var(--yellow); }
+  .role{ font-size:1.25rem; font-weight:600; line-height:130%; color:var(--white); }
+
+  /* A : grille 3 × 2, comme la grille Leadership du dessus (plus de slider : six profils tiennent sur la page) */
+  .grid-a{ display:grid; grid-template-columns:repeat(3,1fr); gap:3.5rem 1.25rem; margin-top:2.6875rem; }
+  @media(max-width:991px){ .grid-a{ grid-template-columns:1fr 1fr; gap:2.5rem 1.25rem; } }
+
+  /* B : une seule rangée de six, cartes plus compactes ; 3 colonnes sur tablette, 2 sur mobile */
+  .grid-b{ display:grid; grid-template-columns:repeat(6,1fr); gap:2.5rem 1.25rem; margin-top:2.6875rem; }
+  .grid-b .leadership-card{ gap:1.25rem; }
+  .grid-b .leadership-text-div{ gap:.5rem; padding-left:.875rem; }
+  .grid-b .name{ font-size:1.125rem; }
+  .grid-b .role{ font-size:1rem; font-weight:500; line-height:135%; color:var(--soft); }
+  @media(max-width:1100px){ .grid-b{ grid-template-columns:repeat(3,1fr); } }
+  @media(max-width:600px){ .grid-b{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:600px){ .grid-a .name{ font-size:1.25rem; } .grid-a .role{ font-size:1.0625rem; } }
+</style>
+</head>
+<body>
+
+<section class="section" id="a">
+  <div class="padding-global"><div class="container-large">
+    <div class="proto-bar">Proto A · grille 3 × 2 · carte actuelle</div>
+    <h2 class="heading-style-h2">Scientific Advisory Board</h2>
+    <div class="grid-a" data-list></div>
+  </div></div>
+</section>
+
+<section class="section" id="b">
+  <div class="padding-global"><div class="container-large">
+    <div class="proto-bar">Proto B · une rangée de six · carte compacte</div>
+    <h2 class="heading-style-h2">Scientific Advisory Board</h2>
+    <div class="grid-b" data-list></div>
+  </div></div>
+</section>
+
+<script>
+/* Données : medias/people/SAB-content.md (nom avec titres, poste actuel). Dans Webflow : collection « Scientific Advisory Boards ». */
+const SAB = [
+  ['Klaus Beck, MD, PhD, PhD', 'Former SVP & CMO, Organon', 'Klaus Beck.jpeg'],
+  ['William F. Doyle', 'Executive Chairman, Novocure', 'William F Doyle.jpeg'],
+  ['Avi Kulkarni, PhD', 'CEO, InoRx', 'Avi Kulkarni.jpeg'],
+  ['Howard Trachtman, MD', 'Former Professor of Pediatrics, NYU Langone Health', 'Howard Trachtman.jpeg'],
+  ['Murray Urowitz, MD', 'Professor of Medicine, University of Toronto', 'Murray Urowitz.jpeg'],
+  ['Sofia Villar, PhD', 'Professor, University of Cambridge', 'Sofia-villar.jpeg'],
+];
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const card = ([n, r, f]) => `
+  <div class="leadership-card">
+    <img class="leadership-image" src="../medias/people/${encodeURIComponent(f)}" alt="" loading="lazy">
+    <div class="leadership-text-div"><h3 class="name">${esc(n)}</h3><div class="role">${esc(r)}</div></div>
+  </div>`;
+document.querySelectorAll('[data-list]').forEach(el => el.innerHTML = SAB.map(card).join(''));
+</script>
+</body>
+</html>

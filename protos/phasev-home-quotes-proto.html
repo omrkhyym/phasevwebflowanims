@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Home Quotes</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<style>
+  /* Tokens repris du CSS publié : section .is-lightpurple (#f4f1f8) ; .text-size-quote 2rem / 120 %, light, navy ;
+     guillemet .mark (SVG du site, #684A9E) ; .heading-style-h5 1.25rem ; .text-color-lpurple #684a9e ; filet 0.5px light-purple ;
+     cartes : rayon 1rem (comme .grid-company / .difference-div) ; flèches .arrow (rond 44px navy, flèche blanche, .is-disabled 0.1).
+     Swiper : réglage du type « evidence » de la Home (A, B) ; C en slidesPerView 'auto' comme le type « news ».
+     Textes : section « What our partners are saying » de phasevtrials.com. */
+  @font-face{ font-family:Aspekta; src:url("https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a75fb545c817a6953af180d_AspektaVF.woff2") format("woff2"); font-weight:100 900; font-display:swap; }
+  :root{ --navy:#141238; --lpurple:#684a9e; --gray:#626262; --bg:#f4f1f8; --white:#ffffff; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Aspekta,Arial,sans-serif; color:var(--navy); background:var(--bg); }
+  .section{ background:var(--bg); padding:5rem 2.5rem 6.6875rem; overflow:hidden; }
+  .section + .section{ border-top:1px dashed #14123830; }
+  @media(max-width:991px){ .section{ padding:3rem 1rem; } }
+  .container-large{ max-width:min(100%,90rem); margin:0 auto; }
+  .proto-bar{ margin-bottom:2.5rem; font-size:.75rem; letter-spacing:1.15px; text-transform:uppercase; color:#14123860; }
+
+  .text-size-label{ font-size:.875rem; letter-spacing:1.15px; text-transform:uppercase; line-height:130%; color:var(--gray); }
+  .heading-style-h2{ font-size:2.25rem; font-weight:600; line-height:110%; margin:.75rem 0 0; }
+  .heading-style-h5{ font-size:1.25rem; font-weight:600; line-height:130%; margin:0; }
+  .text-size-medium{ font-size:1rem; line-height:140%; }
+  .text-color-lpurple{ color:var(--lpurple); } .text-color-gray{ color:var(--gray); }
+  .text-size-quote{ font-size:2rem; line-height:120%; font-weight:300; margin:0; }
+  @media(max-width:991px){ .heading-style-h2{ font-size:2rem; } }
+  @media(max-width:767px){ .heading-style-h2{ font-size:1.5rem; } .text-size-quote{ font-size:1.375rem; } }
+  .mark{ width:2.5rem; height:2.5rem; flex:none; } .mark svg{ width:100%; height:100%; display:block; }
+  /* logos en silhouette navy : certains sont blancs (EMD Serono), invisibles sur fond clair */
+  .logo{ height:2.25rem; width:auto; max-width:9rem; object-fit:contain; filter:brightness(0); opacity:.55; }
+  .who{ display:flex; flex-direction:column; gap:.5rem; }
+
+  .nav{ display:flex; align-items:center; gap:1.25rem; }
+  .count{ font-size:.875rem; letter-spacing:1.15px; color:var(--gray); font-variant-numeric:tabular-nums; min-width:4.5rem; }
+  .arrow{ width:2.75rem; height:2.75rem; color:var(--navy); cursor:pointer; border:0; padding:0; background:none; transition:opacity .2s, color .2s; flex:none; }
+  .arrow:hover{ color:var(--lpurple); } .arrow svg{ width:100%; height:100%; display:block; }
+  .arrow.is-right svg{ transform:scaleX(-1); } .arrow.is-disabled{ opacity:.1; cursor:default; }
+  .swiper-slide{ height:auto; }
+
+  /* ---------- A : deux colonnes. À gauche le titre, l'auteur et la navigation ; à droite la citation en grand ---------- */
+  .A .layout{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:5rem; align-items:stretch; }
+  .A .side{ display:flex; flex-direction:column; justify-content:space-between; gap:3rem; }
+  .A .side-who{ border-left:.5px solid var(--lpurple); padding-left:1rem; min-height:7.5rem; display:flex; flex-direction:column; justify-content:space-between; gap:1.25rem; }
+  .A .swiper{ width:100%; min-width:0; }
+  .A .slide{ display:flex; gap:2rem; align-items:flex-start; }
+  .A .slide > div:last-child{ flex:1; min-width:0; }
+  .A .text-size-quote{ font-size:2.25rem; }
+  .A .who-inline{ display:none; }
+  @media(max-width:991px){ .A .layout{ grid-template-columns:1fr; gap:2.5rem; } .A .side-who{ display:none; } .A .who-inline{ display:flex; margin-top:2rem; padding-top:1.5rem; border-top:.5px solid var(--lpurple); } .A .slide{ flex-direction:column; gap:1.25rem; } .A .text-size-quote{ font-size:1.5rem; } }
+
+  /* ---------- B : centré. Citation au centre, auteur et logo dessous, navigation en bas ---------- */
+  .B .head{ text-align:center; margin-bottom:3.5rem; }
+  .B .slide{ max-width:56.25rem; margin:0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; gap:2rem; }
+  .B .foot{ display:flex; align-items:center; gap:1.5rem; }
+  .B .foot .logo{ padding-left:1.5rem; border-left:.5px solid var(--lpurple); }
+  .B .who{ align-items:center; }
+  .B .nav{ justify-content:center; margin-top:3rem; }
+  .B .count{ text-align:center; }
+  @media(max-width:767px){ .B .foot{ flex-direction:column; gap:1rem; } .B .foot .logo{ padding:1rem 0 0; border-left:0; border-top:.5px solid var(--lpurple); } }
+
+  /* ---------- C : cartes blanches qui défilent, la suivante dépasse à droite ---------- */
+  .C .slider-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; margin-bottom:3rem; }
+  .C .swiper{ overflow:visible; }
+  .C .swiper-slide{ width:min(36rem, 82vw); }
+  .C .card{ height:100%; background:var(--white); border-radius:1rem; padding:2.5rem; display:flex; flex-direction:column; gap:1.75rem; }
+  .C .text-size-quote{ font-size:1.375rem; line-height:135%; }
+  .C .card-foot{ margin-top:auto; padding-top:1.5rem; border-top:.5px solid var(--lpurple); display:flex; justify-content:space-between; align-items:center; gap:1.5rem; }
+  .C .heading-style-h5{ font-size:1.125rem; }
+  @media(max-width:767px){ .C .card{ padding:1.5rem; } .C .text-size-quote{ font-size:1.125rem; } .C .card-foot{ flex-direction:column; align-items:flex-start; } }
+</style>
+</head>
+<body>
+
+<!-- A -->
+<section class="section A" data-layout="A">
+  <div class="container-large">
+    <div class="proto-bar">Proto A · deux colonnes · auteur et navigation à gauche</div>
+    <div class="layout">
+      <div class="side">
+        <div>
+          <div class="text-size-label">Testimonials</div>
+          <h2 class="heading-style-h2">What our partners are saying</h2>
+        </div>
+        <div class="side-who" data-who></div>
+        <div class="nav"><button class="arrow is-left" data-prev aria-label="Previous quote"></button><button class="arrow is-right" data-next aria-label="Next quote"></button><div class="count" data-count></div></div>
+      </div>
+      <div class="swiper"><div class="swiper-wrapper" data-list></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- B -->
+<section class="section B" data-layout="B">
+  <div class="container-large">
+    <div class="proto-bar">Proto B · centré</div>
+    <div class="head"><div class="text-size-label">Testimonials</div><h2 class="heading-style-h2">What our partners are saying</h2></div>
+    <div class="swiper"><div class="swiper-wrapper" data-list></div></div>
+    <div class="nav"><button class="arrow is-left" data-prev aria-label="Previous quote"></button><div class="count" data-count></div><button class="arrow is-right" data-next aria-label="Next quote"></button></div>
+  </div>
+</section>
+
+<!-- C -->
+<section class="section C" data-layout="C">
+  <div class="container-large">
+    <div class="proto-bar">Proto C · cartes qui défilent</div>
+    <div class="slider-top">
+      <div><div class="text-size-label">Testimonials</div><h2 class="heading-style-h2">What our partners are saying</h2></div>
+      <div class="nav"><div class="count" data-count></div><button class="arrow is-left" data-prev aria-label="Previous quote"></button><button class="arrow is-right" data-next aria-label="Next quote"></button></div>
+    </div>
+    <div class="swiper"><div class="swiper-wrapper" data-list></div></div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script>
+const LOGO = 'https://cdn.prod.website-files.com/6820540753e51f1e535f0046/';
+const Q = [
+  { area:'Rheumatology (Osteoarthritis)', name:'Oren Hershkovitz, Ph.D.', role:'CEO, Enlivex', logo:'6905206280fee86e273cb97f_Enlivex%20Logo.svg',
+    text:'This was an amazing collaboration between Enlivex and PhaseV leading to the identification of a higher-responder group to our drug Allocetra in Knee osteoarthritis patients. Amazing team, smart, innovative, dedicated, responsive and pleasant.' },
+  { area:'Immunology (Confidential Program)', name:'Stu Bailey, D.Phil.', role:'SVP Head of Clinical Measurement Sciences, EMD Serono', logo:'6820540753e51f1e535f00f6_EMD%20Serono.avif',
+    text:'We worked with PhaseV on one of our recent trials to identify clinically meaningful subgroups using Response Optimizer. Their expertise helped us identify a promising subpopulation that otherwise would not have been detected. They collaborated with our internal teams to ensure the findings drove real value for our development plan.' },
+  { area:'Oncology (Confidential Solid Tumor Program)', name:'VP, Clinical Operations', role:'Big Pharma Company',
+    text:"Leveraging PhaseV's ClinOps Optimizer was a game-changer for us. We identified top-performing sites with proven recruitment success while also achieving geographic and demographic diversity across our trial footprint." },
+  { area:'Metabolic Disease (Confidential Program)', name:'SVP, Strategy & Portfolio Management', role:'Big Pharma Company',
+    text:"PhaseV's Portfolio Optimizer helped us uncover and validate new indications to pursue for, guiding our lifecycle management strategy with data-driven confidence." },
+  { area:'Kidney Disease', name:'VP of Biometrics', role:'Big Pharma Company',
+    text:"PhaseV's Portfolio Optimizer allowed us to draw clear, data-driven connections between biomarkers and clinical outcomes. This deeper understanding of therapeutic relevance has been critical in shaping our development strategy and informing key decisions for future studies, including those with combination arms." },
+  { area:'Neurology (ALS)', name:'NeuroSense', role:'', logo:'6820540753e51f1e535f0067_Neurosense.avif',
+    text:'Through our initial collaboration with PhaseV, we gained an even greater understanding of the effect of PrimeC across multiple patient subgroups. We will apply these insights to optimize the design of our Phase 3 study... We plan to continue to collaborate with PhaseV as we develop our Phase 3 trial.' },
+  { area:'Metabolic Disease (Diabetes)', name:'Dr. Miriam Kidron', role:'CSO, Oramed', logo:'6820540753e51f1e535f0062_oramed.avif',
+    text:'PhaseV played a vital role in the analysis of our Phase 3 trial in the US, ORA-D-013-1, for the treatment of type 2 diabetes. The analysis found subpopulations of patients that responded very well to oral insulin.' },
+  { area:'Gastrointestinal Diseases', name:'Pierre Gaudreault', role:'CEO, Alimentiv', logo:'6820540753e51f1e535f0064_alimentiv.avif',
+    text:"Combining our GI expertise with PhaseV's advanced machine learning capabilities for trial simulation, design, and execution… accelerate success for our sponsors and help address the growing burden of GI diseases more effectively." },
+  { area:'Oncology (Solid Tumors)', name:'Michael Pröschel', role:'CEO, iOMEDICO', logo:'6820540753e51f1e535f0066_iomedico.avif',
+    text:"The addition of prospectively collected clinical-grade real world data to phase 2 results… in conjunction with PhaseV's proven technology is a critical step forward in improving phase 3 oncology trials, helping to bring new therapies to market." },
+];
+const MARK = '<div class="mark"><svg viewBox="0 0 55 55" fill="none"><path d="M0 0V24.4445C0 31.989 1.88615 38.5528 5.65844 44.1358C9.27984 49.7188 14.1084 53.3402 20.144 55V45.2675C17.1262 44.513 14.6365 42.2497 12.6749 38.4774C10.5624 34.5542 9.50618 30.1783 9.50618 25.3498V23.9918H19.0123V0H0ZM34.856 0V24.4445C34.856 31.989 36.7421 38.5528 40.5144 44.1358C44.1358 49.7188 48.9643 53.3402 55 55V45.2675C51.9822 44.513 49.4925 42.2497 47.5309 38.4774C45.4184 34.5542 44.3621 30.1783 44.3621 25.3498V23.9918H53.8683V0H34.856Z" fill="#684A9E"/></svg></div>';
+const ARROW = '<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="22" fill="currentColor"/><path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/></svg>';
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const who = q => `<div class="who"><h3 class="heading-style-h5">${esc(q.name)}</h3>${q.role ? `<div class="text-size-medium text-color-gray">${esc(q.role)}</div>` : ''}<div class="text-size-medium text-color-lpurple">${esc(q.area)}</div></div>`;
+const logo = q => q.logo ? `<img class="logo" src="${LOGO + q.logo}" alt="">` : '';
+const quote = q => `<p class="text-size-quote">“${esc(q.text)}”</p>`;
+
+const SLIDE = {
+  A: q => `<div class="swiper-slide"><div class="slide">${MARK}<div>${quote(q)}<div class="who-inline">${who(q)}</div></div></div></div>`,
+  B: q => `<div class="swiper-slide"><div class="slide">${MARK}${quote(q)}<div class="foot">${who(q)}${logo(q)}</div></div></div>`,
+  C: q => `<div class="swiper-slide"><div class="card">${MARK}${quote(q)}<div class="card-foot">${who(q)}${logo(q)}</div></div></div>`,
+};
+const pad = n => String(n).padStart(2, '0');
+
+document.querySelectorAll('[data-layout]').forEach(sec => {
+  const L = sec.dataset.layout;
+  sec.querySelector('[data-list]').innerHTML = Q.map(SLIDE[L]).join('');
+  sec.querySelectorAll('.arrow').forEach(b => b.innerHTML = ARROW);
+  const sw = new Swiper(sec.querySelector('.swiper'), Object.assign(
+    { grabCursor:true, watchOverflow:true, spaceBetween:20, breakpoints:{ 768:{ spaceBetween:40 } },
+      navigation:{ prevEl:sec.querySelector('[data-prev]'), nextEl:sec.querySelector('[data-next]'), disabledClass:'is-disabled' } },
+    L === 'C' ? { slidesPerView:'auto', breakpoints:{ 768:{ spaceBetween:24 } } } : { slidesPerView:1, slidesPerGroup:1, autoHeight: L === 'A' }));
+  const count = sec.querySelector('[data-count]'), side = sec.querySelector('[data-who]');
+  const sync = () => {
+    count.textContent = pad(sw.activeIndex + 1) + ' / ' + pad(Q.length);
+    if (side) { const q = Q[sw.activeIndex]; side.innerHTML = who(q) + logo(q); }
+  };
+  sw.on('slideChange', sync); sync();
+});
+</script>
+</body>
+</html>

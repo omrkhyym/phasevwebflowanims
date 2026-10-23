@@ -8,7 +8,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 | Page | ID Webflow | Entrée | Tag du loader | Points de montage |
 |---|---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.4.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module) |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.9.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof), `clinops-workflow` (div `margin-top margin-large` dans le `container-large` du bloc « The ClinOps workflow ») |
@@ -23,6 +23,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 |---|---|
 | `src/hero-homepage.js` | Hero de la Home (WebGL2), CSS injecté via `:has()` |
 | `src/gantt.js` | Gantt de la Home |
+| `src/evidence-bars.js` | Barres du cas Evidence de la Home : largeur depuis `data-value` / `data-max`, entrée animée à l'écran |
 | `src/platform-hub.js` | Hub plateforme de la Home |
 | `src/company-hero-lines.js` | Line field du hero Company (pistes façon swimmer plot, loupe au pointeur) |
 | `src/company-careers.js` | Populations qui fusionnent, bloc Build with us de Company |
@@ -58,6 +59,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.9.0` | voir le tag | Barres du cas Evidence de la Home (`evidence-bars`) ; seul `dist/main.js` change |
 | `v0.8.0` | `9f43e3b` | Bande « The ClinOps workflow » (`clinops-workflow`) ; seul `dist/clinops.js` change |
 | `v0.7.0` | `3767f0e` | Bloc Proof de ClinOps (`clinops-proof`) ; seul `dist/clinops.js` change |
 | `v0.6.0` | `2bc93ac` | Bloc « plateforme connectée » (`platform-connect`) sur les cinq pages produit ; chunk partagé renommé `platform-connect-<hash>.mjs` |
@@ -72,6 +74,9 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Pages produit, bloc « plateforme connectée » : image placeholder `.animation-2` supprimée sur Trial, ClinOps, Response et Portfolio ; sur AI Conductor, `.entry-grid` et ses six `.conductor-card` supprimées (décision de Romain), remplacées par un `.animation-wrapper` (classes conservées dans le système).
 - Trial Optimizer, Success story : image placeholder `.animation-2` supprimée.
 - ClinOps, bloc « The ClinOps workflow » : div `data-pv="clinops-workflow"` ajouté dans `container-large` `3a4f72bf…cdd`, après `section-top` ; combo `margin-top margin-large` créé (48 / 40 / 24 px).
+- Home, Evidence : ancien `slider-top` et ancienne slide masqués ; nouvel en-tête `section-top _2col is-bottom` et slide `ev-case` ; barres pilotées par `data-pv="evidence-bars"`.
+- Home, citations : slider Swiper de 9 cartes (`data-swiper="news"`) ; ancien `quotes-wrapper` masqué ; section sans `is-padding` / `is-pin` ni attributs `data-quotes` ; script d'accordéon et CSS `[data-quote]` retirés du code de page.
+- Company, Scientific Advisory Board : 6 membres (3 créés, 3 mis à jour, 5 archivés) ; `leadership-image` en 4/5 ; écart entre photos doublé (Swiper `spaceBetween: 40`, `leadership-grid` column-gap 2.5rem).
 - Company, « PhaseV at a glance » : `grid-company` et `grid-company-s` masqués, remplacés par `glance-grid` (6 chiffres avec icônes) ; h2 et texte ajoutés dans le `section-top`.
 - Cinq pages produit : instance du composant `inner-nav` (navigation secondaire sticky) supprimée de la section des blocs `is-feature` ; ces blocs sont en `container-large` (au lieu de `container-medium`), le premier en `is-feature is-white` (au lieu de `_1st`).
 - ClinOps, bloc Proof : image placeholder `.animation-2` `99086e1f…` supprimée, div `data-pv="clinops-proof"` dans le wrapper `1cf29878…`.
@@ -81,6 +86,29 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Footer : composant `footer-bottom` partagé par `section_footer` et `only-footer` ; anciens blocs `footer-bottom` masqués dans `only-footer`, ligne légale en double masquée dans `section_footer` ; 404 sur `only-footer`, footer détaché masqué.
 
 ## Journal
+
+### 2026-10-23
+
+- **Home, bloc Evidence** refait (proto V1 de `protos/phasev-home-evidence-proto.html` : une carte, deux moitiés égales ; le proto simule aussi 3 cas pour le futur slider). Décision de Romain : un seul cas au lancement, Swiper gardé pour la suite.
+  - En-tête : nouveau `section-top _2col is-bottom` (label + h2 à gauche ; intro + flèches `slider-arrows` sombres déplacées à droite) ; ancien `slider-top` masqué.
+  - Cas : nouvelle slide `swiper-slide full` > `ev-case` (moitié récit : produit, type, titre « Recommended sites recruited 53% faster. », texte, lien « Read the case » masqué tant qu'Evidence est en brouillon ; moitié données : +53 %, barres 0.43 / 0.28, paire 349 ≈ 357). Ancienne slide sortie du `swiper-wrapper` et masquée (une slide masquée compterait encore pour Swiper).
+  - Classes créées (préfixe `ev-case`, les `evidence-*` existent déjà pour la page Evidence) : `ev-case`, `ev-case_half` (+ combo `is-data`), `ev-case_meta`, `ev-case_small`, `ev-case_title`, `ev-case_link`, `ev-case_kpi`, `ev-case_kpi-n`, `ev-case_kpi-t`, `ev-case_bars`, `ev-case_bars-head`, `ev-case_bar` (+ `is-main`), `ev-case_track`, `ev-case_fill` (+ `is-main`), `ev-case_pair`, `ev-case_pair-n`, `ev-case_op`.
+  - Repo : module `src/evidence-bars.js` monté depuis `main.js` sur `[data-pv="evidence-bars"]` (le bloc des barres) ; chaque remplissage porte `data-value` / `data-max`, le module fixe la largeur et anime l'entrée à l'écran (décalage 0,12 s, reduced motion = état final).
+  - Script Swiper de la Home : les flèches sont masquées quand le slider est verrouillé (`isLocked`, événements `lock` / `unlock`) ; vaut pour tous les sliders de la page.
+  - Testé en `?dev` par Romain. **Release `v0.9.0`** (seul `dist/main.js` change), loader de la Home passé de `v0.4.0` à `v0.9.0`.
+
+- **Home, citations** : l'accordéon épinglé (ScrollTrigger + GSAP, 3 citations identiques de remplissage) remplacé par un slider Swiper de cartes, décision de Romain (proto C de `protos/phasev-home-quotes-proto.html`). Textes : les 9 témoignages de la section « What our partners are saying » de phasevtrials.com, repris en entier ; logos Enlivex, EMD Serono, NeuroSense, Oramed, Alimentiv, iOMEDICO uploadés en assets (`logo-*.svg|avif`), guillemet en asset `quote-mark.svg` (source `protos/icons/`).
+  - Structure : `slider-top` (label « Testimonials », h2 `text-size-display` « What our partners are saying », composant `slider-arrows` base) + `swiper-div` `data-swiper="news"` (`swiper` > `swiper-wrapper` > 9 × `swiper-slide is-quote` > `quote-card`) + `slider-top_right mobile-only` avec un second `slider-arrows`, comme Latest news. Slides statiques, éditables dans le Designer. Aucun nouveau JS : le script Swiper existant de la Home (type `news`) pilote le slider.
+  - Classes créées (accord de Romain) : combo `swiper-slide is-quote` (hauteur auto, 36rem / 30rem / 85 %), `quote-card`, `quote-card_mark`, `quote-card_text`, `quote-card_foot`, `quote-card_logo` (silhouette navy). Textes en classes existantes (`quote-head`, `heading-style-h5 text-color-navy`, `text-size-medium text-color-gray`, `text-size-medium text-color-lpurple`).
+  - Section : attributs `data-quotes` et `data-quotes-pin` retirés ; classes ramenées à `section_layout is-lightpurple` (sans `is-padding`, qui centrait en flex) et `padding-global padding-section-custom1` (sans `is-pin`, 100vh) ; ancien `quotes-wrapper` masqué.
+  - Code de page de la Home : script d'accordéon retiré du footer, correctifs CSS mobile `[data-quote]` retirés du head ; loader `v0.4.0`, carte de décision et script Swiper inchangés. Home DEV non touchée.
+
+- **Company, Scientific Advisory Board** : contenu remplacé selon `medias/people/SAB-content.md` (non versionné). Bloc gardé tel quel (slider Swiper, composant `leadership-card` variante « dark ») : décision de Romain, on n'affiche que le nom avec titres et le poste actuel. Proto de référence `protos/phasev-company-sab-protos.html` (deux dispositions, nom + poste seulement).
+  - CMS « Scientific Advisory Boards » : Klaus Beck, MD, PhD, PhD (deux doctorats, confirmé par Romain), William F. Doyle, Avi Kulkarni, PhD créés ; Howard Trachtman, Murray Urowitz, Sofia Villar mis à jour (portrait et poste actuel dans `position`, qui valait « Scientific Advisory Board ») ; ordre 1 à 6 selon le fichier ; David Perry, Jennifer Hill, Marcia Levenstein, Melanie Ivarsson, Jerald Schindler archivés (pas supprimés).
+  - Six portraits 928 × 1152 uploadés en assets (`sab-<nom>.jpeg`).
+  - `leadership-image` : `aspect-ratio` 1/1 → 4/5, à la demande de Romain, pour toutes les cartes (Leadership, son slider mobile, SAB). Les photos de Leadership sont en 551 × 803, recadrage sans perte de visage.
+  - Les trois nouveaux membres n'ont pas de lien LinkedIn (champ vide, non affiché par la carte).
+  - Écart entre les photos doublé partout, à la demande de Romain : `spaceBetween` 20 → 40 dans le script Swiper du code de page de Company (sliders SAB et Leadership mobile ; le reste du bloc inchangé, loader `v0.2.0` compris) ; `leadership-grid` column-gap 1.25rem → 2.5rem.
 
 ### 2026-10-22
 
@@ -226,4 +254,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Pages produit sans `inner-nav` : à valider en Preview sur les cinq pages (largeur de `feature-grid` avec les vidéos en `container-large`). Ensuite, décider du sort du composant `inner-nav` (plus aucune instance), de `._1st` et du CSS `data-sticky-nav-offset`.
 - ClinOps, rythme vertical : padding-bottom irréguliers (40 px sous The PhaseV difference, 145 px sous le workflow, 80 px sous les blocs feature) ; `padding-section-custom2` ne se réduit qu'en mobile.
 - Company, « PhaseV at a glance » : h2 et texte d'intro proposés par Claude, à valider ; chiffres à confirmer par PhaseV (l'ancien site disait 45+ clients) ; vérifier en Preview le compteur et l'alignement icône / chiffre ; supprimer l'ancien contenu masqué après validation.
+- Company, SAB : vérifier en Preview le cadrage 4:5 des portraits (Leadership et SAB) ; les entrées CMS seront en ligne à la publication du site.
+- Home, citations : vérifier en Preview (cartes, flèches desktop et mobile, logos) ; NeuroSense sans auteur nommé ; citations tronquées en « … » dans l'original (NeuroSense, Alimentiv, iOMEDICO) ; supprimer l'ancien `quotes-wrapper` et peut-être le composant `quote` après validation.
+- Home, Evidence : +53 % (brief ClinOps) contre 0.43 / 0.28 = +54 %, à faire trancher par PhaseV ; titre du cas proposé par Claude ; lien « Read the case » à réactiver avec la page Evidence.
 - Evidence en brouillon : les fiches `/evidence/<étude>` restent publiées via le template.

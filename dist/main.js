@@ -185,8 +185,8 @@ function b() {
 		}
 	}
 	let r = [], i = .84 / 70, a = Array(70).fill(0);
-	for (let e = 0; e < L; e++) {
-		let t = .03 + .1 * y(.004 + .992 * (e + .5) / L), n = Math.max(0, Math.min(69, Math.floor((t + .42) / i)));
+	for (let e = 0; e < I; e++) {
+		let t = .03 + .1 * y(.004 + .992 * (e + .5) / I), n = Math.max(0, Math.min(69, Math.floor((t + .42) / i)));
 		r.push([
 			-.42 + (n + .5) * i,
 			-.294 + a[n] * .0088,
@@ -198,7 +198,7 @@ function b() {
 	for (let e = 0; e < 58; e++) o.push([
 		s,
 		.36 - .72 / 57 * e,
-		I,
+		F,
 		0
 	]);
 	for (let t = 0; t < 11; t++) {
@@ -219,7 +219,7 @@ function b() {
 			]);
 		}
 	}
-	let c = [], l = [...Array(56)].map((e, t) => 1 / (1 + Math.exp(-((t + .5) / 56 - .5) / .1))), u = l.reduce((e, t) => e + t, 0), d = l.map((e) => Math.floor(e * L / u)), f = L - d.reduce((e, t) => e + t, 0);
+	let c = [], l = [...Array(56)].map((e, t) => 1 / (1 + Math.exp(-((t + .5) / 56 - .5) / .1))), u = l.reduce((e, t) => e + t, 0), d = l.map((e) => Math.floor(e * I / u)), f = I - d.reduce((e, t) => e + t, 0);
 	for (let e = 55; f > 0; e--, f--) d[e]++;
 	d.forEach((e, t) => {
 		let n = t / 55 * 2 - 1;
@@ -239,7 +239,7 @@ function b() {
 	], h = [
 		M,
 		P,
-		F,
+		ee,
 		N,
 		j
 	], g = [
@@ -307,7 +307,7 @@ function x(e) {
 	let r = matchMedia("(prefers-reduced-motion: reduce)").matches, i = b(), a = 0, o = 0;
 	for (let e of i) for (let t of e) a = Math.max(a, Math.abs(t[0]) * 2), o = Math.max(o, Math.abs(t[1]) * 2);
 	a = Math.max(a, 1e-6), o = Math.max(o, 1e-6);
-	let s = v(99), c = Float32Array.from({ length: L }, () => s()), l = Float32Array.from({ length: L }, () => (s() - .5) * .7), u = Uint8Array.from({ length: L }, () => Math.floor(s() * 10)), d = e.closest(".section_header") || document.body, f = d.querySelector("h1"), p = f ? getComputedStyle(f).fontFamily : "Aspekta, Arial, sans-serif";
+	let s = v(99), c = Float32Array.from({ length: I }, () => s()), l = Float32Array.from({ length: I }, () => (s() - .5) * .7), u = Uint8Array.from({ length: I }, () => Math.floor(s() * 10)), d = e.closest(".section_header") || document.body, f = d.querySelector("h1"), p = f ? getComputedStyle(f).fontFamily : "Aspekta, Arial, sans-serif";
 	function m(e, t) {
 		let r = n.createShader(e);
 		if (n.shaderSource(r, t), n.compileShader(r), !n.getShaderParameter(r, n.COMPILE_STATUS)) throw Error(n.getShaderInfoLog(r));
@@ -318,7 +318,7 @@ function x(e) {
 		if (n.attachShader(r, m(n.VERTEX_SHADER, e)), n.attachShader(r, m(n.FRAGMENT_SHADER, t)), n.linkProgram(r), !n.getProgramParameter(r, n.LINK_STATUS)) throw Error(n.getProgramInfoLog(r));
 		return r;
 	}
-	let g = h(ae, oe), y = h(se, ce), x = (e, t) => n.getUniformLocation(e, t), S = {
+	let g = h(ie, ae), y = h(oe, se), x = (e, t) => n.getUniformLocation(e, t), S = {
 		res: x(g, "u_res"),
 		c: x(g, "u_c"),
 		S: x(g, "u_S"),
@@ -330,7 +330,7 @@ function x(e) {
 		res: x(y, "u_res"),
 		time: x(y, "u_time"),
 		dpr: x(y, "u_dpr")
-	}, w = new Float32Array(A.pal.flat()), k = 2 * L, j = new Float32Array(k * 7), M = n.createVertexArray();
+	}, w = new Float32Array(A.pal.flat()), k = 2 * I, j = new Float32Array(k * 7), M = n.createVertexArray();
 	n.bindVertexArray(M), n.bindBuffer(n.ARRAY_BUFFER, n.createBuffer()), n.bufferData(n.ARRAY_BUFFER, new Float32Array([
 		-1,
 		-1,
@@ -352,23 +352,23 @@ function x(e) {
 		-1,
 		3
 	]), n.STATIC_DRAW), n.enableVertexAttribArray(0), n.vertexAttribPointer(0, 2, n.FLOAT, !1, 0, 0);
-	let F = n.createTexture();
-	function I() {
+	let ee = n.createTexture();
+	function F() {
 		let e = document.createElement("canvas");
 		e.width = 960, e.height = 96;
 		let t = e.getContext("2d");
 		t.fillStyle = "#fff", t.font = `500 70px ${p}`, t.textAlign = "center", t.textBaseline = "middle";
 		for (let e = 0; e < 10; e++) t.fillText(String(e), e * 96 + 48, 52);
-		n.activeTexture(n.TEXTURE1), n.bindTexture(n.TEXTURE_2D, F), n.texImage2D(n.TEXTURE_2D, 0, n.RGBA, n.RGBA, n.UNSIGNED_BYTE, e), n.generateMipmap(n.TEXTURE_2D), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MIN_FILTER, n.LINEAR_MIPMAP_LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MAG_FILTER, n.LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_S, n.CLAMP_TO_EDGE), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_T, n.CLAMP_TO_EDGE);
+		n.activeTexture(n.TEXTURE1), n.bindTexture(n.TEXTURE_2D, ee), n.texImage2D(n.TEXTURE_2D, 0, n.RGBA, n.RGBA, n.UNSIGNED_BYTE, e), n.generateMipmap(n.TEXTURE_2D), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MIN_FILTER, n.LINEAR_MIPMAP_LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MAG_FILTER, n.LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_S, n.CLAMP_TO_EDGE), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_T, n.CLAMP_TO_EDGE);
 	}
-	I();
-	let z = n.createFramebuffer(), B = n.createTexture(), V = 1, H = 1;
-	function U() {
-		V = Math.min(window.devicePixelRatio || 1, 2);
+	F();
+	let ce = n.createFramebuffer(), le = n.createTexture(), B = 1, V = 1;
+	function H() {
+		B = Math.min(window.devicePixelRatio || 1, 2);
 		let i = e.getBoundingClientRect();
-		t.width = Math.max(1, Math.round(i.width * V)), t.height = Math.max(1, Math.round(i.height * V)), n.activeTexture(n.TEXTURE2), n.bindTexture(n.TEXTURE_2D, B), n.texImage2D(n.TEXTURE_2D, 0, n.RGBA, t.width, t.height, 0, n.RGBA, n.UNSIGNED_BYTE, null), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MIN_FILTER, n.LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MAG_FILTER, n.LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_S, n.CLAMP_TO_EDGE), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_T, n.CLAMP_TO_EDGE), n.bindFramebuffer(n.FRAMEBUFFER, z), n.framebufferTexture2D(n.FRAMEBUFFER, n.COLOR_ATTACHMENT0, n.TEXTURE_2D, B, 0), r && J(7.5);
+		t.width = Math.max(1, Math.round(i.width * B)), t.height = Math.max(1, Math.round(i.height * B)), n.activeTexture(n.TEXTURE2), n.bindTexture(n.TEXTURE_2D, le), n.texImage2D(n.TEXTURE_2D, 0, n.RGBA, t.width, t.height, 0, n.RGBA, n.UNSIGNED_BYTE, null), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MIN_FILTER, n.LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_MAG_FILTER, n.LINEAR), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_S, n.CLAMP_TO_EDGE), n.texParameteri(n.TEXTURE_2D, n.TEXTURE_WRAP_T, n.CLAMP_TO_EDGE), n.bindFramebuffer(n.FRAMEBUFFER, ce), n.framebufferTexture2D(n.FRAMEBUFFER, n.COLOR_ATTACHMENT0, n.TEXTURE_2D, le, 0), r && q(7.5);
 	}
-	let W = {
+	let U = {
 		x: 0,
 		y: 0,
 		a: 0,
@@ -378,56 +378,56 @@ function x(e) {
 	};
 	d.addEventListener("pointermove", (t) => {
 		let n = e.getBoundingClientRect(), r = Math.min(n.width, n.height);
-		W.tx = (t.clientX - n.left - n.width / 2) / r, W.ty = -(t.clientY - n.top - n.height / 2) / r, W.in = !0;
-	}), d.addEventListener("pointerleave", () => W.in = !1);
-	let G = 0;
-	function K(e, t, n, r, i, a) {
-		if (G >= k || i <= .003) return;
-		let o = G++ * 7;
-		j[o] = e, j[o + 1] = t, j[o + 2] = Math.max(n * H, .7 * V), j[o + 3] = r, j[o + 4] = i, j[o + 5] = a;
+		U.tx = (t.clientX - n.left - n.width / 2) / r, U.ty = -(t.clientY - n.top - n.height / 2) / r, U.in = !0;
+	}), d.addEventListener("pointerleave", () => U.in = !1);
+	let W = 0;
+	function G(e, t, n, r, i, a) {
+		if (W >= k || i <= .003) return;
+		let o = W++ * 7;
+		j[o] = e, j[o + 1] = t, j[o + 2] = Math.max(n * V, .7 * B), j[o + 3] = r, j[o + 4] = i, j[o + 5] = a;
 	}
-	function le(e) {
-		let t = Math.floor(e / R) % 5, n = e - Math.floor(e / R) * R, a = i[(t + 5 - 1) % 5], o = i[t], s = .0038 * A.rMul;
-		G = 0;
-		let d = r ? 0 : W.x * W.a, f = r ? 0 : W.y * W.a;
-		if (!r) for (let e = 0; e < 4; e++) u[Math.floor(Math.random() * L)] = Math.floor(Math.random() * 10);
-		for (let t = 0; t < L; t++) {
+	function ue(e) {
+		let t = Math.floor(e / L) % 5, n = e - Math.floor(e / L) * L, a = i[(t + 5 - 1) % 5], o = i[t], s = .0038 * A.rMul;
+		W = 0;
+		let d = r ? 0 : U.x * U.a, f = r ? 0 : U.y * U.a;
+		if (!r) for (let e = 0; e < 4; e++) u[Math.floor(Math.random() * I)] = Math.floor(Math.random() * 10);
+		for (let t = 0; t < I; t++) {
 			if (t & 1) continue;
 			let r = a[t], i = o[t], p = .5 * T((i[0] + .45) / .9) + .2 * c[t], m = O(E(n, p, p + 1.1)), h = i[0] - r[0], g = i[1] - r[1], _ = l[t] * Math.sin(Math.PI * m), v = D(r[0], i[0], m) - g * _ + .0015 * Math.sin(e * 1.3 + t), y = D(r[1], i[1], m) + h * _ + .0015 * Math.cos(e * 1.1 + t * 1.7), b = s, x = D(r[3] || 0, i[3] || 0, m);
-			v += x * (te * d + ne * Math.sin(e * .31)), y += x * (te * f + ne * .6 * Math.cos(e * .24)), b *= 1 + re * x;
-			let S = .95 * (1 - ie * (1 - (x * .5 + .5)));
-			if (y += .0012 * Math.sin(e * 2.2 + t * .7), W.a > .001) {
-				let e = v - W.x, t = y - W.y;
-				b *= 1 + 1.2 * W.a * Math.exp(-(e * e + t * t) / .004);
+			v += x * (R * d + z * Math.sin(e * .31)), y += x * (R * f + z * .6 * Math.cos(e * .24)), b *= 1 + ne * x;
+			let S = .95 * (1 - re * (1 - (x * .5 + .5)));
+			if (y += .0012 * Math.sin(e * 2.2 + t * .7), U.a > .001) {
+				let e = v - U.x, t = y - U.y;
+				b *= 1 + 1.2 * U.a * Math.exp(-(e * e + t * t) / .004);
 			}
-			r[2] === i[2] || m >= 1 ? K(v, y, b, i[2], S, u[t]) : m <= 0 ? K(v, y, b, r[2], S, u[t]) : (K(v, y, b, r[2], S * (1 - m), u[t]), K(v, y, b, i[2], S * m, u[t]));
+			r[2] === i[2] || m >= 1 ? G(v, y, b, i[2], S, u[t]) : m <= 0 ? G(v, y, b, r[2], S, u[t]) : (G(v, y, b, r[2], S * (1 - m), u[t]), G(v, y, b, i[2], S * m, u[t]));
 		}
 	}
-	let q = !1;
-	function J(e) {
-		if (q) return;
+	let K = !1;
+	function q(e) {
+		if (K) return;
 		let r = t.width, i = t.height;
-		H = Math.min(r / (a * ee), i / (o * ee)), le(e), n.bindFramebuffer(n.FRAMEBUFFER, z), n.viewport(0, 0, r, i), n.clearColor(0, 0, 0, 0), n.clear(n.COLOR_BUFFER_BIT), n.useProgram(g), n.bindVertexArray(M), n.uniform2f(S.res, r, i), n.uniform2f(S.c, r / 2, i / 2), n.uniform1f(S.S, H), n.uniform3fv(S.pal, w), n.uniform1i(S.atlas, 1), n.uniform1i(S.glyph, A.glyph), n.enable(n.BLEND), n.blendFunc(n.ONE, n.ONE_MINUS_SRC_ALPHA), n.bindBuffer(n.ARRAY_BUFFER, N), n.bufferSubData(n.ARRAY_BUFFER, 0, j, 0, G * 7), n.drawArraysInstanced(n.TRIANGLE_STRIP, 0, 4, G), n.bindFramebuffer(n.FRAMEBUFFER, null), n.viewport(0, 0, r, i), n.clearColor(0, 0, 0, 0), n.clear(n.COLOR_BUFFER_BIT), n.useProgram(y), n.bindVertexArray(P), n.uniform1i(C.tex, 2), n.uniform2f(C.res, r, i), n.uniform1f(C.time, e), n.uniform1f(C.dpr, V), n.drawArrays(n.TRIANGLES, 0, 3);
+		V = Math.min(r / (a * te), i / (o * te)), ue(e), n.bindFramebuffer(n.FRAMEBUFFER, ce), n.viewport(0, 0, r, i), n.clearColor(0, 0, 0, 0), n.clear(n.COLOR_BUFFER_BIT), n.useProgram(g), n.bindVertexArray(M), n.uniform2f(S.res, r, i), n.uniform2f(S.c, r / 2, i / 2), n.uniform1f(S.S, V), n.uniform3fv(S.pal, w), n.uniform1i(S.atlas, 1), n.uniform1i(S.glyph, A.glyph), n.enable(n.BLEND), n.blendFunc(n.ONE, n.ONE_MINUS_SRC_ALPHA), n.bindBuffer(n.ARRAY_BUFFER, N), n.bufferSubData(n.ARRAY_BUFFER, 0, j, 0, W * 7), n.drawArraysInstanced(n.TRIANGLE_STRIP, 0, 4, W), n.bindFramebuffer(n.FRAMEBUFFER, null), n.viewport(0, 0, r, i), n.clearColor(0, 0, 0, 0), n.clear(n.COLOR_BUFFER_BIT), n.useProgram(y), n.bindVertexArray(P), n.uniform1i(C.tex, 2), n.uniform2f(C.res, r, i), n.uniform1f(C.time, e), n.uniform1f(C.dpr, B), n.drawArrays(n.TRIANGLES, 0, 3);
 	}
-	let Y = 0, X = 0, Z = 0;
-	function Q(e) {
-		Y = requestAnimationFrame(Q);
-		let t = Math.max(0, Math.min((e - Z) / 1e3, .05));
-		Z = e, W.x += (W.tx - W.x) * .08, W.y += (W.ty - W.y) * .08, W.a += (+!!W.in - W.a) * .06, X += t, J(X);
+	let J = 0, Y = 0, X = 0;
+	function Z(e) {
+		J = requestAnimationFrame(Z);
+		let t = Math.max(0, Math.min((e - X) / 1e3, .05));
+		X = e, U.x += (U.tx - U.x) * .08, U.y += (U.ty - U.y) * .08, U.a += (+!!U.in - U.a) * .06, Y += t, q(Y);
 	}
-	function ue() {
-		Y || r || q || (Z = performance.now(), Y = requestAnimationFrame(Q));
+	function Q() {
+		J || r || K || (X = performance.now(), J = requestAnimationFrame(Z));
 	}
 	function $() {
-		cancelAnimationFrame(Y), Y = 0;
+		cancelAnimationFrame(J), J = 0;
 	}
 	t.addEventListener("webglcontextlost", (e) => {
-		e.preventDefault(), q = !0, $();
-	}), new ResizeObserver(U).observe(e), U(), document.fonts && document.fonts.ready.then(() => {
-		I(), r && J(7.5);
-	}), r ? J(7.5) : new IntersectionObserver(([e]) => e.isIntersecting ? ue() : $()).observe(e);
+		e.preventDefault(), K = !0, $();
+	}), new ResizeObserver(H).observe(e), H(), document.fonts && document.fonts.ready.then(() => {
+		F(), r && q(7.5);
+	}), r ? q(7.5) : new IntersectionObserver(([e]) => e.isIntersecting ? Q() : $()).observe(e);
 }
-var S, C, w, T, E, D, O, k, A, j, M, N, P, F, I, L, R, ee, te, ne, re, ie, ae, oe, se, ce, z = e((() => {
+var S, C, w, T, E, D, O, k, A, j, M, N, P, ee, F, I, L, te, R, z, ne, re, ie, ae, oe, se, ce = e((() => {
 	S = "[data-pv=\"hero-homepage\"]", C = `
 .header_image-wrapper:has(${S}){
   background:none!important; border:0!important; border-radius:0!important; box-shadow:none!important;
@@ -464,50 +464,50 @@ ${S} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block;
 			3,
 			5
 		].map((t) => parseInt(e.slice(t, t + 2), 16) / 255))
-	}, j = 0, M = 1, N = 2, P = 3, F = 4, I = 6, L = 1400, R = 4, ee = .92, te = .028, ne = .01, re = .24, ie = .45, ae = "#version 300 es\nlayout(location=0) in vec2 q;\nlayout(location=1) in vec4 a;\nlayout(location=2) in vec2 b;\nuniform vec2 u_res,u_c; uniform float u_S;\nout vec2 vq; flat out float vr,vc,va,vd;\nvoid main(){ vec2 c=u_c+a.xy*u_S; float h=a.z+1.; vq=q*h; vr=a.z; vc=a.w; va=b.x; vd=b.y;\n  gl_Position=vec4((c+q*h)/u_res*2.-1.,0.,1.); }", oe = "#version 300 es\nprecision highp float;\nin vec2 vq; flat in float vr,vc,va,vd;\nuniform vec3 u_pal[8]; uniform sampler2D u_atlas; uniform int u_glyph;\nout vec4 o;\nvoid main(){ float cov;\n  if(u_glyph==1){ vec2 uv=vq/(vr+1.)*.5+.5; cov=texture(u_atlas,vec2((vd+uv.x)/10.,1.-uv.y)).a; }\n  else cov=clamp(vr-length(vq)+.5,0.,1.);\n  float al=cov*va; if(al<=.002) discard;\n  o=vec4(u_pal[int(vc+.5)]*al,al); }", se = "#version 300 es\nlayout(location=0) in vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }", ce = "#version 300 es\nprecision highp float;\nuniform sampler2D u_tex; uniform vec2 u_res; uniform float u_time,u_dpr;\nout vec4 o;\nfloat hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }\nvec4 T(vec2 uv){ return texture(u_tex,uv); }\nvec3 glow(vec2 uv,float rad){ vec3 s=vec3(0.);\n  for(int i=0;i<12;i++){ float a=float(i)*.5236+.26; vec2 d=vec2(cos(a),sin(a))*rad/u_res; s+=T(uv+d).rgb+.6*T(uv+d*2.3).rgb; }\n  return s/12.; }\nvoid main(){\n  vec2 fc=gl_FragCoord.xy, uv=fc/u_res;\n  vec2 c=uv*2.-1., cc=c*(1.+.025*dot(c,c)), s=cc*.5+.5;\n  float ab=1.2*u_dpr/u_res.x;\n  vec3 p=vec3(T(s+vec2(ab,0.)).r, T(s).g, T(s-vec2(ab,0.)).b);\n  vec3 col=p + glow(s,2.5*u_dpr)*.6 + glow(s,8.*u_dpr)*.3;\n  col*=.84+.16*sin(fc.y*3.14159/(1.5*u_dpr));\n  col+=(hash(fc+fract(u_time)*100.)-.5)*.025*step(.02,max(col.r,max(col.g,col.b)));\n  col*=.985+.015*sin(u_time*7.);\n  col=max(col,0.);\n  float al=clamp(max(col.r,max(col.g,col.b))*1.25,0.,1.);\n  o=vec4(col*al, al);\n}";
+	}, j = 0, M = 1, N = 2, P = 3, ee = 4, F = 6, I = 1400, L = 4, te = .92, R = .028, z = .01, ne = .24, re = .45, ie = "#version 300 es\nlayout(location=0) in vec2 q;\nlayout(location=1) in vec4 a;\nlayout(location=2) in vec2 b;\nuniform vec2 u_res,u_c; uniform float u_S;\nout vec2 vq; flat out float vr,vc,va,vd;\nvoid main(){ vec2 c=u_c+a.xy*u_S; float h=a.z+1.; vq=q*h; vr=a.z; vc=a.w; va=b.x; vd=b.y;\n  gl_Position=vec4((c+q*h)/u_res*2.-1.,0.,1.); }", ae = "#version 300 es\nprecision highp float;\nin vec2 vq; flat in float vr,vc,va,vd;\nuniform vec3 u_pal[8]; uniform sampler2D u_atlas; uniform int u_glyph;\nout vec4 o;\nvoid main(){ float cov;\n  if(u_glyph==1){ vec2 uv=vq/(vr+1.)*.5+.5; cov=texture(u_atlas,vec2((vd+uv.x)/10.,1.-uv.y)).a; }\n  else cov=clamp(vr-length(vq)+.5,0.,1.);\n  float al=cov*va; if(al<=.002) discard;\n  o=vec4(u_pal[int(vc+.5)]*al,al); }", oe = "#version 300 es\nlayout(location=0) in vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }", se = "#version 300 es\nprecision highp float;\nuniform sampler2D u_tex; uniform vec2 u_res; uniform float u_time,u_dpr;\nout vec4 o;\nfloat hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }\nvec4 T(vec2 uv){ return texture(u_tex,uv); }\nvec3 glow(vec2 uv,float rad){ vec3 s=vec3(0.);\n  for(int i=0;i<12;i++){ float a=float(i)*.5236+.26; vec2 d=vec2(cos(a),sin(a))*rad/u_res; s+=T(uv+d).rgb+.6*T(uv+d*2.3).rgb; }\n  return s/12.; }\nvoid main(){\n  vec2 fc=gl_FragCoord.xy, uv=fc/u_res;\n  vec2 c=uv*2.-1., cc=c*(1.+.025*dot(c,c)), s=cc*.5+.5;\n  float ab=1.2*u_dpr/u_res.x;\n  vec3 p=vec3(T(s+vec2(ab,0.)).r, T(s).g, T(s-vec2(ab,0.)).b);\n  vec3 col=p + glow(s,2.5*u_dpr)*.6 + glow(s,8.*u_dpr)*.3;\n  col*=.84+.16*sin(fc.y*3.14159/(1.5*u_dpr));\n  col+=(hash(fc+fract(u_time)*100.)-.5)*.025*step(.02,max(col.r,max(col.g,col.b)));\n  col*=.985+.015*sin(u_time*7.);\n  col=max(col,0.);\n  float al=clamp(max(col.r,max(col.g,col.b))*1.25,0.,1.);\n  o=vec4(col*al, al);\n}";
 }));
 //#endregion
 //#region src/platform-hub.js
-function B() {
+function le() {
 	if (document.getElementById("pv-hub-css")) return;
 	let e = document.createElement("style");
-	e.id = "pv-hub-css", e.textContent = le, document.head.appendChild(e);
+	e.id = "pv-hub-css", e.textContent = ue, document.head.appendChild(e);
 }
-function V(e) {
+function B(e) {
 	return () => {
 		e |= 0, e = e + 1831565813 | 0;
 		let t = Math.imul(e ^ e >>> 15, 1 | e);
 		return t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t, ((t ^ t >>> 14) >>> 0) / 4294967296;
 	};
 }
-function H(e) {
-	let t = V(21 + ue.indexOf(e)), n = () => Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(J * t()), r = [];
-	if (e === "frontier") for (let e = 0; e < q; e++) {
+function V(e) {
+	let t = B(21 + Q.indexOf(e)), n = () => Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(q * t()), r = [];
+	if (e === "frontier") for (let e = 0; e < K; e++) {
 		let e = t(), n = t(), i = -.3 + .52 * e ** .55 - n ** 1.25 * .58, a = n < .035 && e > .12;
 		r.push([
 			-.42 + e * .84,
 			Math.max(-.36, Math.min(.34, i)),
-			a ? Y : X,
+			a ? J : Y,
 			a ? 1 : n * 2 - 1
 		]);
 	}
-	else if (e === "split") for (let e = 0; e < q; e++) {
-		let n = e % 100 < 42, i = n ? -.22 : .22, a = t() * J, o = t() ** .62 * (n ? .2 : .23);
+	else if (e === "split") for (let e = 0; e < K; e++) {
+		let n = e % 100 < 42, i = n ? -.22 : .22, a = t() * q, o = t() ** .62 * (n ? .2 : .23);
 		r.push([
 			Math.cos(a) * o * 1.55,
 			i + Math.sin(a) * o * .9,
-			n ? Y : X,
+			n ? J : Y,
 			n ? 1 : t() * 2 - 1
 		]);
 	}
 	else if (e === "enroll") {
-		let e = Math.round(q * .34), t = Math.round(q * .34);
+		let e = Math.round(K * .34), t = Math.round(K * .34);
 		for (let t = 0; t < e; t++) {
 			let e = t / 339;
 			r.push([
 				-.42 + e * .84,
 				.3 - .52 / (1 + Math.exp(-(e - .46) / .155)),
-				Y,
+				J,
 				1
 			]);
 		}
@@ -516,7 +516,7 @@ function H(e) {
 			r.push([
 				-.42 + t * .84,
 				.3 - .4 / (1 + Math.exp(-(t - .58) / .185)),
-				X,
+				Y,
 				.1
 			]);
 		}
@@ -525,44 +525,44 @@ function H(e) {
 			for (let e = 0; e < 25; e++) r.push([
 				-.42 + (t + e / 25 * (1 / 13)) * .84,
 				n,
-				Z,
+				X,
 				-.7
 			]);
 		}
 	} else if (e === "fan") {
-		let e = Math.ceil(q / 26);
+		let e = Math.ceil(K / 26);
 		for (let i = 0; i < 26; i++) {
-			let a = i === 0 ? 0 : n(), o = 2 + t() * 4, s = t() * J, c = i / 25 * 2 - 1;
+			let a = i === 0 ? 0 : n(), o = 2 + t() * 4, s = t() * q, c = i / 25 * 2 - 1;
 			for (let t = 0; t < e; t++) {
 				let e = t / 38, n = e * (.15 * a + .1 * Math.sin(o * e + s));
 				r.push([
 					-.43 + e * .86,
 					Math.max(-.34, Math.min(.34, .18 * e - .07 + n)),
-					i === 0 ? Y : X,
+					i === 0 ? J : Y,
 					i === 0 ? 1 : c
 				]);
 			}
 		}
 	} else {
-		let e = Math.round(q * .17), t = Math.round(q * .46);
+		let e = Math.round(K * .17), t = Math.round(K * .46);
 		for (let t = 0; t < e; t++) {
 			let n = .062 * Math.sqrt((t + .5) / e), i = t * 2.39996;
 			r.push([
 				Math.cos(i) * n,
 				Math.sin(i) * n,
-				Y,
+				J,
 				1
 			]);
 		}
 		let n = Math.round(t / 6);
 		for (let e = 0; e < 6; e++) {
-			let t = -Math.PI / 2 + J / 6 * e, i = Math.cos(t) * .33, a = Math.sin(t) * .33;
+			let t = -Math.PI / 2 + q / 6 * e, i = Math.cos(t) * .33, a = Math.sin(t) * .33;
 			for (let e = 0; e < n; e++) {
 				let t = .16 + e / n * .84;
 				r.push([
 					i * t,
 					a * t,
-					X,
+					Y,
 					1 - t * 1.4
 				]);
 			}
@@ -571,26 +571,26 @@ function H(e) {
 				r.push([
 					i + Math.cos(o) * n,
 					a + Math.sin(o) * n,
-					e % 2 ? Z : Q,
+					e % 2 ? X : Z,
 					-.2
 				]);
 			}
 		}
 	}
-	for (; r.length < q;) r.push(r[r.length - 1] || [
+	for (; r.length < K;) r.push(r[r.length - 1] || [
 		0,
 		0,
-		X,
+		Y,
 		0
 	]);
-	return r.length = q, W(r).sort((e, t) => e[0] - t[0] || e[1] - t[1]);
+	return r.length = K, U(r).sort((e, t) => e[0] - t[0] || e[1] - t[1]);
 }
-function U(e, t) {
+function H(e, t) {
 	let n = [...e].sort((e, t) => e - t);
 	return n[Math.max(0, Math.min(n.length - 1, Math.round(t * (n.length - 1))))];
 }
-function W(e) {
-	let t = e.map((e) => e[0]), n = e.map((e) => e[1]), r = U(t, pe), i = U(t, .99), a = U(n, pe), o = U(n, .99), s = Math.min(de / Math.max(i - r, 1e-6), fe / Math.max(o - a, 1e-6)), c = (r + i) / 2, l = (a + o) / 2;
+function U(e) {
+	let t = e.map((e) => e[0]), n = e.map((e) => e[1]), r = H(t, pe), i = H(t, .99), a = H(n, pe), o = H(n, .99), s = Math.min(de / Math.max(i - r, 1e-6), fe / Math.max(o - a, 1e-6)), c = (r + i) / 2, l = (a + o) / 2;
 	return e.map((e) => [
 		(e[0] - c) * s,
 		(e[1] - l) * s,
@@ -598,11 +598,11 @@ function W(e) {
 		e[3]
 	]);
 }
-function G(e) {
+function W(e) {
 	if (e.dataset.pvReady) return;
 	let t = e.closest("section") || document, n = t.querySelector("[data-pv=\"platform-tabs\"]"), r = t.querySelector("#dm-panels"), i = r ? [...r.querySelectorAll(".dm-panel[data-panel]")] : [];
 	if (!n || !i.length) return;
-	e.dataset.pvReady = "1", B();
+	e.dataset.pvReady = "1", le();
 	let a = matchMedia("(prefers-reduced-motion: reduce)").matches, o = (e, t) => (e.querySelector(t)?.textContent || "").trim(), s = i.map((e, t) => {
 		let n = e.getAttribute("data-panel"), r = document.createElement("button");
 		r.type = "button", r.className = "pv-tab", r.id = "pv-tab-" + n, r.setAttribute("role", "tab"), r.setAttribute("aria-selected", "false"), r.tabIndex = -1;
@@ -631,10 +631,10 @@ function G(e) {
 	});
 	let c = document.createElement("canvas");
 	c.setAttribute("aria-hidden", "true"), e.appendChild(c);
-	let l = c.getContext("2d"), u = {}, d = (e) => u[e] || (u[e] = H(e)), f, p, m = 1, h = 0, g = 0, _ = 0, v = 0, y = 0, b = "";
+	let l = c.getContext("2d"), u = {}, d = (e) => u[e] || (u[e] = V(e)), f, p, m = 1, h = 0, g = 0, _ = 0, v = 0, y = 0, b = "";
 	function x() {
-		let e = $(m), t = Array(q);
-		for (let n = 0; n < q; n++) {
+		let e = $(m), t = Array(K);
+		for (let n = 0; n < K; n++) {
 			let r = f[n], i = p[n];
 			t[n] = [
 				r[0] + (i[0] - r[0]) * e,
@@ -656,8 +656,8 @@ function G(e) {
 	function w() {
 		l.clearRect(0, 0, g, _);
 		let e = $(m), t = Math.min(g, _) * 1.18, n = g / 2, r = _ / 2, i = a ? 0 : Math.sin(h * .4) * .009, o = b === "conductor" && m >= 1 && !a;
-		for (let a = 0; a < q; a++) {
-			let s = f[a], c = p[a], u = s[3] + (c[3] - s[3]) * e, d = s[0] + (c[0] - s[0]) * e + (v * .024 + i) * u, m = s[1] + (c[1] - s[1]) * e + y * .018 * u, g = e < .5 ? s[2] : c[2], _ = (u + 1) / 2, b = .95 + _ * .95, x = g === Y ? .96 : .3 + _ * .36;
+		for (let a = 0; a < K; a++) {
+			let s = f[a], c = p[a], u = s[3] + (c[3] - s[3]) * e, d = s[0] + (c[0] - s[0]) * e + (v * .024 + i) * u, m = s[1] + (c[1] - s[1]) * e + y * .018 * u, g = e < .5 ? s[2] : c[2], _ = (u + 1) / 2, b = .95 + _ * .95, x = g === J ? .96 : .3 + _ * .36;
 			if (o) {
 				let e = Math.hypot(d, m);
 				if (e < .075) {
@@ -668,7 +668,7 @@ function G(e) {
 					b *= 1 + r * .9, x = Math.min(1, x + r * .55);
 				}
 			}
-			l.beginPath(), l.arc(n + d * t, r + m * t, b, 0, J), l.fillStyle = `rgba(${g[0]},${g[1]},${g[2]},${x.toFixed(3)})`, l.fill();
+			l.beginPath(), l.arc(n + d * t, r + m * t, b, 0, q), l.fillStyle = `rgba(${g[0]},${g[1]},${g[2]},${x.toFixed(3)})`, l.fill();
 		}
 	}
 	let T = -1;
@@ -676,7 +676,7 @@ function G(e) {
 		e !== T && (T = e, s.forEach((t, n) => {
 			let r = n === e;
 			t.tab.setAttribute("aria-selected", r ? "true" : "false"), t.tab.tabIndex = r ? 0 : -1, t.panel.classList.toggle("is-active", r);
-		}), S(K[s[e].key] || "fan", t));
+		}), S(G[s[e].key] || "fan", t));
 	}
 	let D = 0, O = !1, k = 0;
 	function A(e) {
@@ -695,38 +695,60 @@ function G(e) {
 		v = ((e.clientX - t.left) / t.width - .5) * 2, y = ((e.clientY - t.top) / t.height - .5) * 2;
 	}), new ResizeObserver(C).observe(c), C(), E(Math.max(0, i.findIndex((e) => e.classList.contains("is-active"))), !0), a || new IntersectionObserver(([e]) => e.isIntersecting ? j() : M()).observe(e);
 }
-var K, le, q, J, Y, X, Z, Q, ue, $, de, fe, pe, me = e((() => {
-	K = {
+var G, ue, K, q, J, Y, X, Z, Q, $, de, fe, pe, me = e((() => {
+	G = {
 		pursue: "frontier",
 		benefits: "split",
 		run: "enroll",
 		design: "fan",
 		connect: "conductor"
-	}, le = "\n[data-pv=\"platform-tabs\"]{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr));\n  border-top:1px solid #2A2450; margin:18px 0 52px; }\n@media (max-width:1040px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(3,minmax(0,1fr)); } }\n@media (max-width:640px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(2,minmax(0,1fr)); } }\n.pv-tab{ appearance:none; text-align:left; cursor:pointer; width:100%; padding:20px 18px 20px 0;\n  border:0; border-top:1px solid transparent; margin-top:-1px; border-radius:0; background:transparent;\n  color:inherit; font:inherit; transition:border-color .3s ease; }\n.pv-tab_q{ display:block; font-size:11px; line-height:1.4; letter-spacing:.08em; text-transform:uppercase;\n  color:#8F8CB5; margin-bottom:8px; min-height:2.8em; transition:color .3s ease; }\n.pv-tab_n{ display:block; font-size:16px; letter-spacing:-.01em; color:#8B87B4; transition:color .3s ease; }\n.pv-tab:hover .pv-tab_n{ color:#F4F4F4; }\n.pv-tab[aria-selected=\"true\"]{ border-top-color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_q{ color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_n{ color:#F4F4F4; }\n.pv-tab:focus-visible{ outline:2px solid #E2C70A; outline-offset:-2px; }\n\n[data-pv=\"platform-hub\"]{ position:relative; min-height:440px; }\n[data-pv=\"platform-hub\"] canvas{ position:absolute; inset:-6% -14%; width:128%; height:112%; pointer-events:none; }\n@media (max-width:900px){ [data-pv=\"platform-hub\"]{ min-height:320px; } }\n\n/* les panneaux non actifs restent cachés même si le CSS de la page change */\n#dm-panels .dm-panel:not(.is-active){ display:none; }\n#dm-panels .dm-panel.is-active{ animation:pvPanelIn .35s ease both; }\n@keyframes pvPanelIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }\n@media (prefers-reduced-motion:reduce){ #dm-panels .dm-panel.is-active{ animation:none; } .pv-tab, .pv-tab *{ transition:none; } }", q = 1e3, J = Math.PI * 2, Y = [
+	}, ue = "\n[data-pv=\"platform-tabs\"]{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr));\n  border-top:1px solid #2A2450; margin:18px 0 52px; }\n@media (max-width:1040px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(3,minmax(0,1fr)); } }\n@media (max-width:640px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(2,minmax(0,1fr)); } }\n.pv-tab{ appearance:none; text-align:left; cursor:pointer; width:100%; padding:20px 18px 20px 0;\n  border:0; border-top:1px solid transparent; margin-top:-1px; border-radius:0; background:transparent;\n  color:inherit; font:inherit; transition:border-color .3s ease; }\n.pv-tab_q{ display:block; font-size:11px; line-height:1.4; letter-spacing:.08em; text-transform:uppercase;\n  color:#8F8CB5; margin-bottom:8px; min-height:2.8em; transition:color .3s ease; }\n.pv-tab_n{ display:block; font-size:16px; letter-spacing:-.01em; color:#8B87B4; transition:color .3s ease; }\n.pv-tab:hover .pv-tab_n{ color:#F4F4F4; }\n.pv-tab[aria-selected=\"true\"]{ border-top-color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_q{ color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_n{ color:#F4F4F4; }\n.pv-tab:focus-visible{ outline:2px solid #E2C70A; outline-offset:-2px; }\n\n[data-pv=\"platform-hub\"]{ position:relative; min-height:440px; }\n[data-pv=\"platform-hub\"] canvas{ position:absolute; inset:-6% -14%; width:128%; height:112%; pointer-events:none; }\n@media (max-width:900px){ [data-pv=\"platform-hub\"]{ min-height:320px; } }\n\n/* les panneaux non actifs restent cachés même si le CSS de la page change */\n#dm-panels .dm-panel:not(.is-active){ display:none; }\n#dm-panels .dm-panel.is-active{ animation:pvPanelIn .35s ease both; }\n@keyframes pvPanelIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }\n@media (prefers-reduced-motion:reduce){ #dm-panels .dm-panel.is-active{ animation:none; } .pv-tab, .pv-tab *{ transition:none; } }", K = 1e3, q = Math.PI * 2, J = [
 		226,
 		199,
 		10
-	], X = [
+	], Y = [
 		146,
 		138,
 		205
-	], Z = [
+	], X = [
 		120,
 		168,
 		224
-	], Q = [
+	], Z = [
 		127,
 		232,
 		207
-	], ue = [
+	], Q = [
 		"frontier",
 		"split",
 		"enroll",
 		"fan",
 		"conductor"
 	], $ = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, de = .88, fe = .68, pe = .01;
-})), he = /* @__PURE__ */ t((() => {
-	g(), z(), me(), document.querySelectorAll("[data-pv=\"gantt\"]").forEach(n), document.querySelectorAll("[data-pv=\"hero-homepage\"]").forEach(x), document.querySelectorAll("[data-pv=\"platform-hub\"]").forEach(G);
 }));
 //#endregion
-export default he();
+//#region src/evidence-bars.js
+function he(e) {
+	if (e.dataset.pvReady) return;
+	e.dataset.pvReady = "1";
+	let t = [...e.querySelectorAll("[data-value]")];
+	if (!t.length) return () => {};
+	let n = matchMedia("(prefers-reduced-motion: reduce)").matches;
+	if (t.forEach((e, t) => {
+		let r = parseFloat(e.dataset.value), i = parseFloat(e.dataset.max) || 1, a = Number.isFinite(r) ? Math.max(0, Math.min(1, r / i)) : 0;
+		e.style.width = (a * 100).toFixed(2) + "%", e.style.transformOrigin = "left center", !n && (e.style.transform = "scaleX(0)", e.style.transition = `transform 1.1s cubic-bezier(.65,0,.35,1) ${t * .12}s`);
+	}), n) return () => {};
+	let r = () => t.forEach((e) => {
+		e.style.transform = "scaleX(1)";
+	}), i = new IntersectionObserver((e) => {
+		e.some((e) => e.isIntersecting) && (r(), i.disconnect());
+	}, { threshold: .6 });
+	return i.observe(e), function() {
+		i.disconnect();
+	};
+}
+var ge = e((() => {})), _e = /* @__PURE__ */ t((() => {
+	g(), ce(), me(), ge(), document.querySelectorAll("[data-pv=\"gantt\"]").forEach(n), document.querySelectorAll("[data-pv=\"hero-homepage\"]").forEach(x), document.querySelectorAll("[data-pv=\"platform-hub\"]").forEach(W), document.querySelectorAll("[data-pv=\"evidence-bars\"]").forEach(he);
+}));
+//#endregion
+export default _e();

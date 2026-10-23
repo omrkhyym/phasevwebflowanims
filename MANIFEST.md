@@ -10,7 +10,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 |---|---|---|---|---|
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.10.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
-| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
+| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof), `clinops-workflow` (div `margin-top margin-large` dans le `container-large` du bloc « The ClinOps workflow ») |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.6.0` | `response-hero-bg`, `response-hero-slot`, `platform-connect` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` | `trial-hero-bg`, `trial-hero-slot`, `success-design-space` (div dans `.animation-wrapper` du bloc Success story), `platform-connect` |
@@ -59,7 +59,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
-| `v0.10.0` | voir le tag | Gantt de la Home : libellé « FINAL PROTOCOL » ; seul `dist/main.js` change |
+| `v0.11.0` | `7a7e2ab` | `site.js` (line field v2 + fond flottant) ; `company.js` sans hero |
+| `v0.10.0` | `eb2f795` | Gantt de la Home : libellé « FINAL PROTOCOL » ; seul `dist/main.js` change |
 | `v0.9.0` | `ad90520` | Barres du cas Evidence de la Home (`evidence-bars`) ; seul `dist/main.js` change |
 | `v0.8.0` | `9f43e3b` | Bande « The ClinOps workflow » (`clinops-workflow`) ; seul `dist/clinops.js` change |
 | `v0.7.0` | `3767f0e` | Bloc Proof de ClinOps (`clinops-proof`) ; seul `dist/clinops.js` change |
@@ -89,6 +90,11 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-10-23
+
+- **Line field v2 + fond flottant** (brief `brief-line-field-v2.md`, proto `protos/phasev-line-textures-proto7.html`) : nouvelle entrée `site.js` (fond flottant sur chaque `[data-bg]`, line field à 6 textures portées à l'identique) ; registre `LINE-FIELD.md`. **Release `v0.11.0`** (`7a7e2ab`).
+  - Webflow : script `window.LineField` du footer global remplacé par le loader `site.js` (`v0.11.0`, `?dev`) ; sauvegarde dans `protos/legacy/`. Attributs posés selon `LINE-FIELD.md`, tous les `data-line-seed` retirés. Hero Company : `data-pv="company-hero"` retiré, `swimmer` ; `company.js` ne monte plus `company-hero-lines` (fichier gardé), loader Company `v0.2.0` → `v0.11.0`. Footers : `swimmer` sur `footer-band` des deux composants, composant `footer-lanes` masqué.
+  - Écarts au brief : pas de seed (décision de Romain) ; les couches injectées passent devant la règle de `hero-stage` (sélecteur renforcé) ; fallback CSS prêt dans `webflow/global-styles-data-bg.css` avec `overflow:clip` seulement sans `.pv-live` (sinon le hero Home serait rogné), **non collé** dans l'embed `global styles` : le JS remplace déjà l'ancien dégradé, l'ancienne règle reste le fallback.
+  - Tests locaux (pages publiées + nouveau code) : fonds sans bord, hero ClinOps au-dessus du fond, fallback sans JS propre, reduced motion figé, mobile OK, calm zones vérifiées par bloc, textures dessinées (mesure pixels). Rendu animé fin (waterfall, km), perfs et fuites à vérifier par Romain dans un vrai navigateur.
 
 - **Home, « The Problem » (gantt)** : libellé « PROTOCOL FINAL » → « FINAL PROTOCOL » dans `src/gantt.js` (texte en dur dans `TASKS`), à la demande de Romain. **Release `v0.10.0`**, loader de la Home passé de `v0.9.0` à `v0.10.0`.
 - **Home, « The PhaseV Platform »** : ordre des questions changé, à la demande de Romain : Portfolio → Trial → ClinOps → Response → AI Conductor (avant : Portfolio, Response, ClinOps, Trial, AI Conductor). Fait dans Webflow en réordonnant les instances `dm-panel` de `#dm-panels` : `platform-hub` construit les onglets dans l'ordre du DOM, aucune release. Chaque panneau garde son `target`, donc sa forme de nuage. Home DEV non touchée.
@@ -261,4 +267,5 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Company, SAB : vérifier en Preview le cadrage 4:5 des portraits (Leadership et SAB) ; les entrées CMS seront en ligne à la publication du site.
 - Home, citations : vérifier en Preview (cartes, flèches desktop et mobile, logos) ; NeuroSense sans auteur nommé ; citations tronquées en « … » dans l'original (NeuroSense, Alimentiv, iOMEDICO) ; supprimer l'ancien `quotes-wrapper` et peut-être le composant `quote` après validation.
 - Home, Evidence : +53 % (brief ClinOps) contre 0.43 / 0.28 = +54 %, à faire trancher par PhaseV ; titre du cas proposé par Claude ; lien « Read the case » à réactiver avec la page Evidence.
+- Line field v2 : vérifier en navigateur (rendu des textures fines, perfs, fuites) ; coller ou non le fallback animé dans l'embed `global styles` ; display names Navigator non posés.
 - Evidence en brouillon : les fiches `/evidence/<étude>` restent publiées via le template.

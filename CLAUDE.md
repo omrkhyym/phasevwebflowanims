@@ -11,6 +11,7 @@ Avant toute modification (fichier, git, Webflow) : décris en quelques lignes ce
 ## Architecture
 
 ```
+site.js            entrée commune, footer global du site : fond flottant + line field (voir LINE-FIELD.md) → dist/site.js
 main.js            entrée de la page Home (et Home DEV)   → dist/main.js
 company.js         entrée de la page Company              → dist/company.js
 clinops.js         entrée de la page ClinOps Optimizer    → dist/clinops.js
@@ -100,7 +101,7 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 |---|---|---|---|
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.10.0` |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` (page de test) |
-| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.2.0` |
+| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.6.0` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` |
@@ -141,7 +142,7 @@ Règles :
 - Jaune `#E2C70A` **réservé au moment de décision**, jamais décoratif.
 - Secondaires : mauve `#928ACD`, bleu `#78A8E0`, turquoise `#7FE8CF`.
 - Rouge hors charte (connoté sécurité patient), à faire valider.
-- La charte est flat : pas de grain, de texture ou de rétro sans validation.
+- La charte est flat : pas de grain, de texture ou de rétro sans validation. Exception validée : fond flottant et grain de `site.js` (line field v2).
 
 ## Standards de code
 

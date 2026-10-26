@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conductor Site CTA</title>
+<style>
+  /* Bloc « site produit » de la page AI Conductor : renvoie vers ai-conductor.phasevtrials.com.
+     Charte : Aspekta, navy #141238, gradient violet, mauve #928ACD. Le jaune reste réservé au CTA (moment de décision). */
+  @font-face{ font-family:Aspekta; src:url("https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a75fb545c817a6953af180d_AspektaVF.woff2") format("woff2"); font-weight:100 900; }
+  :root{ --navy:#141238; --mauve:#928ACD; --yellow:#E2C70A; --line:#e3e1ef; --gray:#626262; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Aspekta,Arial,sans-serif; color:var(--navy); background:#fff; }
+  .switch{ position:sticky; top:0; z-index:9; display:flex; gap:.5rem; padding:.75rem 1rem; background:#fff; border-bottom:1px solid var(--line); font-size:.875rem; }
+  .switch button{ font:inherit; padding:.4rem .9rem; border:1px solid var(--line); border-radius:99px; background:#fff; color:var(--navy); cursor:pointer; }
+  .switch button.on{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .v{ display:none; } .v.on{ display:block; }
+  .section{ padding:7.5rem 2.5rem; }
+  .container{ max-width:90rem; margin:0 auto; }
+  .dark{ color:#fff; background:radial-gradient(60% 70% at 15% 10%, rgba(146,138,205,.35), transparent 70%), radial-gradient(50% 60% at 90% 90%, rgba(120,168,224,.18), transparent 70%), var(--navy); }
+  .label{ font-size:.875rem; letter-spacing:1.15px; text-transform:uppercase; color:var(--gray); }
+  .dark .label{ color:rgba(255,255,255,.7); }
+  h2{ font-size:clamp(2.25rem,4vw,3.5rem); font-weight:600; line-height:1.02; letter-spacing:-.02em; margin:0; }
+  .lead{ font-size:1.125rem; line-height:1.5; margin:0; max-width:30rem; color:var(--gray); }
+  .dark .lead{ color:rgba(255,255,255,.72); }
+  .btn{ display:inline-flex; align-items:center; gap:.6rem; padding:1rem 1.6rem; border-radius:99px; background:var(--yellow); color:var(--navy); font-weight:500; text-decoration:none; transition:transform .2s; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn svg{ width:.9rem; height:.9rem; }
+  .url{ font-size:.875rem; color:rgba(255,255,255,.55); letter-spacing:.02em; }
+  .url.dk{ color:var(--gray); }
+
+  /* fenêtre navigateur stylisée qui présente le site produit */
+  .browser{ border-radius:1.25rem; overflow:hidden; background:#1d1a4a; border:1px solid rgba(255,255,255,.12); box-shadow:0 40px 100px rgba(5,4,25,.5); }
+  .bar{ display:flex; align-items:center; gap:.5rem; padding:.8rem 1rem; border-bottom:1px solid rgba(255,255,255,.08); }
+  .bar i{ width:.6rem; height:.6rem; border-radius:50%; background:rgba(255,255,255,.18); }
+  .bar span{ margin-left:.75rem; flex:1; font-size:.75rem; color:rgba(255,255,255,.55); background:rgba(255,255,255,.06); border-radius:99px; padding:.35rem .9rem; }
+  .screen{ position:relative; aspect-ratio:16/10; padding:2.5rem; display:flex; flex-direction:column; justify-content:flex-end; gap:.75rem;
+    background:radial-gradient(70% 80% at 80% 20%, rgba(146,138,205,.45), transparent 70%), linear-gradient(160deg,#211d5c,#141238); }
+  .screen b{ font-size:2rem; font-weight:600; color:#fff; }
+  .screen p{ margin:0; max-width:24rem; color:rgba(255,255,255,.7); font-size:.95rem; line-height:1.45; }
+  .screen .tag{ position:absolute; top:1.5rem; left:2.5rem; font-size:.75rem; letter-spacing:1px; text-transform:uppercase; color:var(--mauve); }
+  .shot{ display:block; width:100%; aspect-ratio:2529/1338; object-fit:cover; }
+  /* lignes de l'orchestration : simple décor flat */
+  .screen svg.lines{ position:absolute; inset:0; width:100%; height:100%; opacity:.5; }
+
+  /* A : split, texte à gauche, fenêtre navigateur à droite */
+  .a .grid{ display:grid; grid-template-columns:1fr 1.1fr; gap:5rem; align-items:center; }
+  .a .copy{ display:flex; flex-direction:column; gap:1.75rem; align-items:flex-start; }
+
+  /* B : bandeau plein, centré, très éditorial */
+  .b .inner{ max-width:52rem; margin:0 auto; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.75rem; }
+  .b .points{ display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; }
+  .b .points span{ padding:.5rem 1rem; border:1px solid rgba(255,255,255,.2); border-radius:99px; font-size:.875rem; color:rgba(255,255,255,.8); }
+
+  /* C : carte sombre sur section blanche, toute la carte cliquable */
+  .c .card{ display:grid; grid-template-columns:1.2fr 1fr; gap:3rem; align-items:center; padding:3.5rem; border-radius:1.75rem; text-decoration:none; transition:transform .3s; }
+  .c .card:hover{ transform:translateY(-4px); }
+  .c .copy{ display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start; }
+
+  @media(max-width:991px){
+    .section{ padding:5rem 1rem; }
+    .a .grid, .c .card{ grid-template-columns:1fr; gap:3rem; }
+    .c .card{ padding:2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="switch">
+  <button class="on" data-v="a">A · Split + aperçu</button>
+  <button data-v="b">B · Bandeau centré</button>
+  <button data-v="c">C · Carte sur blanc</button>
+</div>
+
+<template id="browser">
+  <div class="browser">
+    <div class="bar"><i></i><i></i><i></i><span>ai-conductor.phasevtrials.com</span></div>
+    <!-- capture réelle du header du site produit (à uploader en asset Webflow à l'intégration) -->
+    <img class="shot" src="file:///C:/Users/romai/AppData/Local/Temp/claude/c--PROJECTS-PhaseV-anims/9a87783f-a7f5-49ea-96cf-4ec50f1620f9/images/3.png" alt="AI Conductor product site">
+  </div>
+</template>
+<template id="arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5 4h7v7"/></svg></template>
+
+<section class="v on" id="a">
+  <div class="section dark a"><div class="container"><div class="grid">
+    <div class="copy">
+      <div class="label">Explore the product</div>
+      <h2>See AI Conductor in action</h2>
+      <p class="lead">Discover how AI Conductor orchestrates clinical development, from protocol decision to submission-ready package, with human review at every step.</p>
+      <a class="btn" href="http://ai-conductor.phasevtrials.com/" target="_blank" rel="noopener">Visit the AI Conductor site <span class="slot-arrow"></span></a>
+      <div class="url">ai-conductor.phasevtrials.com</div>
+    </div>
+    <div class="slot-browser"></div>
+  </div></div></div>
+</section>
+
+<section class="v" id="b">
+  <div class="section dark b"><div class="inner">
+    <div class="label">Explore the product</div>
+    <h2>See AI Conductor in action</h2>
+    <p class="lead">Discover how AI Conductor orchestrates clinical development, from protocol decision to submission-ready package.</p>
+    <div class="points"><span>Protocol decision</span><span>Study execution</span><span>Submission-ready package</span><span>Human review at every step</span></div>
+    <a class="btn" href="http://ai-conductor.phasevtrials.com/" target="_blank" rel="noopener">Visit the AI Conductor site <span class="slot-arrow"></span></a>
+  </div></div>
+</section>
+
+<section class="v" id="c">
+  <div class="section c"><div class="container">
+    <a class="card dark" href="http://ai-conductor.phasevtrials.com/" target="_blank" rel="noopener">
+      <div class="copy">
+        <div class="label">Explore the product</div>
+        <h2>See AI Conductor in action</h2>
+        <p class="lead">The dedicated site for AI Conductor: product tour, announcement and Q&amp;A.</p>
+        <span class="btn">Visit the AI Conductor site <span class="slot-arrow"></span></span>
+      </div>
+      <div class="slot-browser"></div>
+    </a>
+  </div></div>
+</section>
+
+<script>
+  const fill = (cls, id) => document.querySelectorAll(cls).forEach(s => s.replaceWith(document.getElementById(id).content.cloneNode(true)));
+  fill('.slot-browser', 'browser'); fill('.slot-arrow', 'arrow');
+  document.querySelectorAll('.switch button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.switch button, .v').forEach(e => e.classList.remove('on'));
+    b.classList.add('on'); document.getElementById(b.dataset.v).classList.add('on'); scrollTo(0, 0);
+  }));
+</script>
+</body>
+</html>

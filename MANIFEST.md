@@ -89,7 +89,25 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Journal
 
+### 2026-10-26
+
+- **AI Conductor, bloc site produit (version A du proto `protos/phasev-conductor-site-cta-protos.html`)** : nouvelle section après le hero (la page n'avait que le hero et le footer). `section_layout is-gradient` + `data-bg`, `padding-section-main`, `container-large`, `grid-2 gap-8,5` (2 colonnes, 1 sous 767 px). Gauche : label « Explore the product », h2 `text-size-display text-color-alternate` « See AI Conductor in action », intro `text-size-large text-color-alternate`, composant `button` (variante Yellow) « Visit the AI Conductor site » → https://ai-conductor.phasevtrials.com/ (nouvel onglet, `noopener`). Droite : image `ai-conductor-site-browser.webp` (capture du header du site produit dans une fenêtre navigateur composée, coins arrondis transparents), source dans `protos/assets/`. Aucune classe créée.
+
 ### 2026-10-25
+
+- **Composant `slider-arrows`, variante « Light » (fonds sombres)** : rond en blanc translucide (`color: rgba(255,255,255,.14)`, le rond du SVG est en `currentColor`), survol à `.3` au lieu du jaune ; flèche blanche du SVG inchangée. Variante de base (fonds blancs) intacte. Touche Resources (header) et Home (Evidence).
+
+- **Resources, slider du header** : flèches remplacées par le composant `slider-arrows` variante « Light » (celle du bloc Evidence de la Home), insérée dans `featured-slider` ; anciennes flèches (`slider-arrows-wrapper is-new`, embeds `arrow-new`) masquées. Script Swiper du footer de la page : les flèches sont cherchées dans le slider (`root.querySelectorAll('[data-swiper-prev]')`) au lieu de `[data-swiper-prev="feature"]`, reste inchangé.
+- **Footer** : `footer-band-copy` max-width 58ch → 45rem ; `footer-statement-soft` en `display:block` (saut de ligne avant « Connected development. »).
+
+- **Nouvelle page Privacy Policy** (`/privacy-policy`, id `6adeca19d6b537b34d376d47`) : dupliquée de Contact (navbar, `only-footer` avec bandeau CTA remis par défaut), formulaire retiré. En-tête sombre (label « Legal », h1 « Privacy Policy », date), puis section blanche `padding-section-main` > `container-large` > `max-width-large` avec le texte intégral de phasevtrials.com/privacy-policy (16 sections, copié tel quel) en éléments natifs dans 3 blocs `post-rtf`. Lien « Privacy Policy » du composant `footer-bottom` relié à la page. Head de la page (vide à la duplication) : CSS de typographie légale limité à cette page (h2 1.5rem, paragraphes et listes espacés, liens soulignés).
+- **`footer-bottom`** : « Back to top » pointe vers `#top` (au lieu de `#`, neutralisé par Webflow).
+
+- **Composant `footer-bottom`, ligne légale** (© / Terms / Privacy / Back to top) : passée en taille small via une combo `text-size-small` posée sur les 4 éléments (`text-size-medium text-color-neutralw [is-link] text-size-small`, font-size = variable de `text-size-small`). Une combo existante vide remplie, une créée. Partagé par tous les footers.
+
+- **Combo `section-top 2col is-bottom`** : en desktop, `display:block` (titre et intro collés) remplacé par une colonne flex avec 2rem d'écart, comme en tablette. Touche Investors et At a glance sur Company, et toute autre section qui utilise cette combo.
+
+- **Company, titres de section** : Leadership, Scientific Advisory Board et Investors passent de `heading-style-h2` à `text-size-display`, comme At a glance et Build with us. SAB garde le jaune via une nouvelle combo `text-size-display text-color-yellow`.
 
 - **Composant `only-footer`** : nouvelle prop booléenne « Show CTA band » (vrai par défaut) liée à la visibilité de `footer-band` (bandeau Better decisions / Request a demo). Désactivée sur Contact, puisque le CTA renvoie vers cette page. Autres instances inchangées.
 

@@ -89,7 +89,19 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Journal
 
+### 2026-10-25
+
+- **Composant `only-footer`** : nouvelle prop booléenne « Show CTA band » (vrai par défaut) liée à la visibilité de `footer-band` (bandeau Better decisions / Request a demo). Désactivée sur Contact, puisque le CTA renvoie vers cette page. Autres instances inchangées.
+
+- **Contact, nouvelle mise en page (version B du proto `protos/phasev-contact-protos.html`)** : section `is-white` → `is-gradient` + `data-bg="purple-gradient"` ; `contact-form-div` en 2 colonnes (1fr / 1.15fr, gap 5rem, 1 colonne sous 991 px) ; combo `form-wrapper is-contact` en carte blanche (radius 1.5rem, padding 3rem, ombre) ; `form_text-field is-contact` en filets `#e3e1ef`, radius .75rem ; label « Contact » ajouté ; bouton « Submit » → « Send message ». CSS ajouté à la fin du head de la page (code existant conservé) : intro en blanc, colonne collante en desktop, cases produits en pastilles. Formulaire et noms de champs inchangés (Webflow natif, submissions vérifiées).
+
 ### 2026-10-23
+
+- **Home, rythme vertical** : `padding-global padding-section-main` sur les 7 sections de contenu (à la place de `custom1` et `large`, section masquée `hide` comprise). Hero inchangé (`padding-section-home_header`).
+
+- **Company, rythme vertical** : nouvelle classe combo `padding-global padding-section-main` (7.5rem haut et bas, 5rem en tablette, 4rem en mobile), validée par Romain. Posée sur les 6 sections de contenu (About us, At a glance, Leadership, SAB, Investors, Build with us) à la place de `xxlarge`, `medium` et `large`. Hero inchangé (`padding-section-company-hero`). Test sur Company seulement.
+
+- **Company, Build with us** : texture du line field `waterfall` → `matrix` (choix de Romain), registre `LINE-FIELD.md` à jour.
 
 - **Company, Investors** (ex « Enrollment Simulation ») : bloc investisseurs comme sur l'ancien site /about, proto `protos/phasev-company-investors-proto.html`. Six logos (Accel, Insight Partners, Exor Ventures, Viola Ventures, LionBird, Getty) repris de l'ancien site, rognés et passés en navy `#141238` (texte d'Exor évidé), uploadés en assets `investor-*.png`. CMS Partnerships : les 3 « Backed by » provisoires remplacés par Accel, Insight, Exor, 3 entrées créées. En-tête sur le modèle « at a glance » (`section-top 2col is-bottom`, label « Investors », h2 « Backed by leading investors » en `heading-style-h2`, intro à droite). Classes existantes modifiées : `backed-by-grid` 6 colonnes (3 en tablette, 2 en mobile), `partnership-logo` en `contain` avec padding. `collaborators-wrapper` masqué (7 logos provisoires).
 
@@ -271,4 +283,5 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Home, Evidence : +53 % (brief ClinOps) contre 0.43 / 0.28 = +54 %, à faire trancher par PhaseV ; titre du cas proposé par Claude ; lien « Read the case » à réactiver avec la page Evidence.
 - Line field v2 : vérifier en navigateur (rendu des textures fines, perfs, fuites) ; coller ou non le fallback animé dans l'embed `global styles` ; display names Navigator non posés.
 - Company, Investors : vérifier en Preview (taille des logos dans les cartes, tablette et mobile) ; intro proposée par Claude ; « Selected collaborators and partners » masqué en attendant de vrais logos, les 7 entrées CMS provisoires restent.
+- Rythme vertical : `padding-section-main` validé sur Company (règle dans `CLAUDE.md`), posé sur la Home (à vérifier en Preview) ; autres pages à migrer à leur refonte.
 - Evidence en brouillon : les fiches `/evidence/<étude>` restent publiées via le template.

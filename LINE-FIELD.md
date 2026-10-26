@@ -36,7 +36,7 @@ Fond flottant : automatique sur toute section `[data-bg='purple-gradient']`, ave
 | Company | Hero | `e7b68fd5…450d` | `swimmer` |
 | Company | At a glance | `8b40e18b…ff0d` | `volcano` |
 | Company | Scientific Advisory Board | `fea454fc…6dd3` | `km` |
-| Company | Careers intro | `84e23397…27ee` | `waterfall` |
+| Company | Careers intro (Build with us) | `84e23397…27ee` | `matrix` |
 | Resources | Header | `e7b68fd5…450d` | `matrix` |
 | Resources (template) | Header | `8c9af07a…5433` | `matrix` |
 | Evidence | Header | `e7b68fd5…450d` | `forest` |

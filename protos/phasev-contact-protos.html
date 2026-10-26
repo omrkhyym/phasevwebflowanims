@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Contact Layouts</title>
+<style>
+  /* Protos de mise en page Contact. Mêmes champs que le formulaire Webflow (Contact Form).
+     Charte : Aspekta, navy #141238, gradient violet, label gris uppercase, filets #e3e1ef. */
+  @font-face{ font-family:Aspekta; src:url("https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a75fb545c817a6953af180d_AspektaVF.woff2") format("woff2"); font-weight:100 900; }
+  :root{ --navy:#141238; --mauve:#928ACD; --line:#e3e1ef; --gray:#626262; --soft:#f6f5fb; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Aspekta,Arial,sans-serif; color:var(--navy); background:#fff; }
+  .switch{ position:sticky; top:0; z-index:9; display:flex; gap:.5rem; padding:.75rem 1rem; background:#fff; border-bottom:1px solid var(--line); font-size:.875rem; }
+  .switch button{ font:inherit; padding:.4rem .9rem; border:1px solid var(--line); border-radius:99px; background:#fff; color:var(--navy); cursor:pointer; }
+  .switch button.on{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .v{ display:none; } .v.on{ display:block; }
+  .label{ font-size:.875rem; letter-spacing:1.15px; text-transform:uppercase; color:var(--gray); }
+  h1{ font-size:3.5rem; font-weight:600; line-height:105%; margin:0; letter-spacing:-.01em; }
+  .lead{ font-size:1.125rem; line-height:150%; color:var(--gray); margin:0; max-width:30rem; }
+  .dark{ color:#fff; background:radial-gradient(60% 70% at 15% 10%, rgba(146,138,205,.35), transparent 70%), radial-gradient(50% 60% at 90% 90%, rgba(120,168,224,.18), transparent 70%), var(--navy); }
+  .dark .label, .dark .lead{ color:rgba(255,255,255,.7); }
+
+  /* formulaire commun */
+  form{ display:flex; flex-direction:column; gap:1.5rem; }
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .f{ display:flex; flex-direction:column; gap:.5rem; }
+  .f > span{ font-size:.875rem; font-weight:500; }
+  input[type=text], input[type=email], textarea{ font:inherit; font-size:1rem; padding:.9rem 1rem; border:1px solid var(--line); border-radius:.75rem; background:#fff; color:var(--navy); outline:none; transition:border-color .2s; }
+  input:focus, textarea:focus{ border-color:var(--navy); }
+  textarea{ min-height:8rem; resize:vertical; }
+  .chips{ display:flex; flex-wrap:wrap; gap:.5rem; }
+  .chips label{ cursor:pointer; }
+  .chips input{ position:absolute; opacity:0; pointer-events:none; }
+  .chips span{ display:inline-block; padding:.55rem 1rem; border:1px solid var(--line); border-radius:99px; font-size:.875rem; transition:all .2s; }
+  .chips input:checked + span{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  .legal{ font-size:.8125rem; line-height:150%; color:var(--gray); margin:0; }
+  .submit{ align-self:flex-start; font:inherit; font-weight:500; padding:1rem 2rem; border:0; border-radius:99px; background:var(--navy); color:#fff; cursor:pointer; }
+  .steps{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1.25rem; }
+  .steps li{ display:grid; grid-template-columns:2rem 1fr; gap:1rem; font-size:1rem; line-height:145%; }
+  .steps b{ display:block; font-weight:600; margin-bottom:.15rem; }
+  .steps .n{ width:2rem; height:2rem; border-radius:50%; border:1px solid currentColor; display:grid; place-items:center; font-size:.8125rem; opacity:.8; }
+  .mail{ font-size:1rem; color:inherit; }
+
+  /* A : split, panneau sombre à gauche, formulaire blanc à droite */
+  .a{ display:grid; grid-template-columns:5fr 7fr; min-height:100vh; }
+  .a .side{ padding:9rem 4rem 4rem; display:flex; flex-direction:column; gap:2rem; }
+  .a .side .bottom{ margin-top:auto; display:flex; flex-direction:column; gap:2.5rem; }
+  .a .main{ padding:9rem 5rem 5rem; max-width:52rem; }
+
+  /* B : fond sombre plein, carte formulaire blanche qui flotte */
+  .b{ padding:10rem 2.5rem 7.5rem; }
+  .b .wrap{ max-width:80rem; margin:0 auto; display:grid; grid-template-columns:1fr 1.15fr; gap:5rem; align-items:start; }
+  .b .intro{ display:flex; flex-direction:column; gap:1.75rem; position:sticky; top:8rem; }
+  .b .card{ background:#fff; color:var(--navy); border-radius:1.5rem; padding:3rem; box-shadow:0 30px 80px rgba(10,8,40,.35); }
+
+  /* C : colonne centrée sur fond blanc, étapes en bandeau dessous */
+  .c{ padding:10rem 1.5rem 0; }
+  .c .head{ max-width:44rem; margin:0 auto 4rem; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
+  .c .head .lead{ max-width:34rem; }
+  .c .card{ max-width:44rem; margin:0 auto; padding:3rem; border:1px solid var(--line); border-radius:1.5rem; background:var(--soft); }
+  .c .card input, .c .card textarea, .c .card .chips span{ background:#fff; }
+  .strip{ margin-top:7.5rem; padding:5rem 1.5rem; }
+  .strip .steps{ max-width:80rem; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:3rem; }
+
+  @media(max-width:991px){
+    h1{ font-size:2.75rem; }
+    .a{ grid-template-columns:1fr; } .a .side{ padding:7rem 1.5rem 3rem; } .a .main{ padding:3rem 1.5rem 4rem; }
+    .b{ padding:7rem 1rem 4rem; } .b .wrap{ grid-template-columns:1fr; gap:3rem; } .b .intro{ position:static; } .b .card{ padding:2rem 1.25rem; }
+    .strip .steps{ grid-template-columns:1fr; gap:1.5rem; }
+  }
+  @media(max-width:479px){ .row{ grid-template-columns:1fr; } .c .card{ padding:1.75rem 1.25rem; } h1{ font-size:2.25rem; } }
+</style>
+</head>
+<body>
+<div class="switch">
+  <button class="on" data-v="a">A · Split</button>
+  <button data-v="b">B · Carte sur fond sombre</button>
+  <button data-v="c">C · Centré</button>
+</div>
+
+<template id="form">
+  <form onsubmit="return false">
+    <div class="row">
+      <label class="f"><span>First name*</span><input type="text" required></label>
+      <label class="f"><span>Last name*</span><input type="text" required></label>
+    </div>
+    <label class="f"><span>Business email*</span><input type="email" required></label>
+    <div class="f"><span>What are you interested in?*</span>
+      <div class="chips">
+        <label><input type="checkbox"><span>Trial Optimizer</span></label>
+        <label><input type="checkbox"><span>Portfolio Optimizer</span></label>
+        <label><input type="checkbox"><span>ClinOps Optimizer</span></label>
+        <label><input type="checkbox"><span>Response Optimizer</span></label>
+        <label><input type="checkbox"><span>PhaseV AI Conductor</span></label>
+        <label><input type="checkbox"><span>The whole platform</span></label>
+        <label><input type="checkbox"><span>Other</span></label>
+      </div>
+    </div>
+    <label class="f"><span>What challenges are you hoping to address?</span><textarea placeholder="Indication, phase, portfolio question…"></textarea></label>
+    <p class="legal">By submitting your details you agree to our Privacy Policy. You may opt out of our mailing list at any time.</p>
+    <button class="submit">Send message</button>
+  </form>
+</template>
+
+<template id="steps">
+  <ol class="steps">
+    <li><span class="n">1</span><div><b>We read your request</b>A member of the team reviews your context.</div></li>
+    <li><span class="n">2</span><div><b>We get back to you</b>Within two business days, to set up a call.</div></li>
+    <li><span class="n">3</span><div><b>A tailored demo</b>On your indication, study or portfolio question.</div></li>
+  </ol>
+</template>
+
+<!-- A -->
+<section class="v on" id="a">
+  <div class="a">
+    <aside class="side dark">
+      <div class="label">Contact</div>
+      <h1>Let’s talk</h1>
+      <p class="lead">Tell us about your study, portfolio, or question. We’ll follow up to set up a conversation or demo.</p>
+      <div class="bottom"><div class="slot-steps"></div><a class="mail" href="#">info@phasevtrials.com</a></div>
+    </aside>
+    <div class="main"><div class="slot-form"></div></div>
+  </div>
+</section>
+
+<!-- B -->
+<section class="v" id="b">
+  <div class="b dark">
+    <div class="wrap">
+      <div class="intro">
+        <div class="label">Contact</div>
+        <h1>Let’s talk</h1>
+        <p class="lead">Tell us about your study, portfolio, or question. We’ll follow up to set up a conversation or demo.</p>
+      </div>
+      <div class="card"><div class="slot-form"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<section class="v" id="c">
+  <div class="c">
+    <div class="head">
+      <div class="label">Contact</div>
+      <h1>Let’s talk</h1>
+      <p class="lead">Tell us about your study, portfolio, or question. We’ll follow up to set up a conversation or demo.</p>
+    </div>
+    <div class="card"><div class="slot-form"></div></div>
+  </div>
+  <div class="strip dark"><div class="slot-steps"></div></div>
+</section>
+
+<script>
+  const fill = (cls, id) => document.querySelectorAll(cls).forEach(s => s.append(document.getElementById(id).content.cloneNode(true)));
+  fill('.slot-form', 'form'); fill('.slot-steps', 'steps');
+  document.querySelectorAll('.switch button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.switch button, .v').forEach(e => e.classList.remove('on'));
+    b.classList.add('on'); document.getElementById(b.dataset.v).classList.add('on'); scrollTo(0, 0);
+  }));
+</script>
+</body>
+</html>

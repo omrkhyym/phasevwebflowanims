@@ -134,6 +134,7 @@ Règles :
 - Ne crée pas de classes, ne modifie pas le système de classes ni les composants. Le remodelage du site n'est pas dans le périmètre.
 - Le code global du site (Lenis, LineField, navbar, boutons SplitText, compteurs) n'est pas à toi : n'y touche pas sans qu'on te le demande.
 - Les scripts d'embed ne tournent pas dans le canvas du Designer : la vérification se fait en Preview ou sur `webflow.io`.
+- Rythme vertical (référence : Company) : toute section de contenu prend `padding-global padding-section-main` (7.5rem, 5rem en tablette, 4rem en mobile) ; seul le hero garde sa propre classe. Les autres pages migrent au moment de leur refonte, pas avant.
 - Une partie du style est dans l’embed du composant global styles (data-bg, .build-card, .animation-2, la navbar, les boutons) : vérifie là avant de conclure qu’un style n’existe pas.
 
 ## Charte

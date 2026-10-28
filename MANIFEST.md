@@ -8,7 +8,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 | Page | ID Webflow | Entrée | Tag du loader | Points de montage |
 |---|---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.10.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.12.0` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof), `clinops-workflow` (div `margin-top margin-large` dans le `container-large` du bloc « The ClinOps workflow ») |
@@ -59,6 +59,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.12.0` | `01cd4ff` | Hero de la Home : particules au lieu des chiffres, sans effet TV, bloc 4:3 sous le texte sous 991 px ; seul `dist/main.js` change |
 | `v0.11.0` | `7a7e2ab` | `site.js` (line field v2 + fond flottant) ; `company.js` sans hero |
 | `v0.10.0` | `eb2f795` | Gantt de la Home : libellé « FINAL PROTOCOL » ; seul `dist/main.js` change |
 | `v0.9.0` | `ad90520` | Barres du cas Evidence de la Home (`evidence-bars`) ; seul `dist/main.js` change |
@@ -91,10 +92,14 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-10-28
 
+- **Home, hero mobile encore agrandi (≤ 991 px, local, non releasé)** : le cadre commun était 43 % plus large que les courbes à cause du pied gauche clairsemé de la courbe en escalier. En mode bloc seulement, cadre calculé sur 99,5 % des points de chaque état (`FIT_WM` / `FIT_HM`) et bloc carré (1:1 au lieu de 4:3) : +37 % sur toutes les formes. Points coupés au bord du bloc, validé par Romain : 18 sur 4200 (pied de l’escalier), 20 (extrémités de l’axe du forest), 13 (bouts des courbes), 0 pour la cloche et l’amas. Desktop inchangé.
+- **Home, hero : tailles des formes harmonisées (local, non releasé)**, desktop et mobile. Agrandissement uniforme (même facteur en largeur et en hauteur, via `HSCALE` / `WSCALE`) : cloche ×1.2, forest ×1.33 (son maximum), amas ×1.3. Courbes, courbe en escalier et cadre commun inchangés (cadre vérifié identique à `v0.12.0`). Taille rapportée aux courbes : cloche 51 → 74 %, forest 39 → 68 %, amas 43 → 72 %, escalier 89 %. Un premier essai (cadre recalculé, cloche et forest étirés, amas écarté) a été annulé : il déformait les formes et agrandissait les courbes.
+- **Home, hero mobile plus grand (≤ 991 px, local, non releasé)** : le bloc passe en pleine largeur d’écran (`width:100vw; margin-left:calc(50% - 50vw)`), la section rogne le débordement horizontal (`overflow-x:clip`, sinon la barre de scroll verticale crée un scroll horizontal en navigateur desktop étroit), et le cadrage se resserre (`FIT_PAD_M = 1` au lieu de `.92`). Environ +20 % à 390 px. Desktop inchangé.
+- **Home, release `v0.12.0`** (commit `01cd4ff`) : hero en particules, sans effet TV, bloc sous le texte en mobile (voir les entrées ci-dessous). Loader du footer de la Home passé de `v0.10.0` à `v0.12.0`, reste du code de page inchangé (carte de décision, Swiper). Non publié : à publier et vérifier par Romain. Home DEV non touchée.
 - **Home, header : copie locale pour la refonte** (`protos/phasev-home-header-proto.html`). Header de la Home publiée copié tel quel (section `section_header`, sans navbar, à la demande de Romain), avec le CSS Webflow publié en lien et l'embed global styles recopié. Le proto importe les vrais modules (`/site.js`, `/src/hero-homepage.js`) : à ouvrir via `npm run dev` sur `http://localhost:5173/protos/phasev-home-header-proto.html`. Rien de changé en ligne.
 - Constat à la copie : le header publié n'a plus `data-line-field` (seulement `data-bg="purple-gradient"`), et le div `hero-homepage` est dans un embed frère de `header_content`, pas dans `header_image-wrapper`. Pas de boutons dans le hero.
-- **Home, hero (`src/hero-homepage.js`, local, non releasé)** : chiffres remplacés par des particules (disques antialiasés) et effet TV supprimé (passe 2 : courbure, aberration chromatique, halo, scanlines, bruit, scintillement), à la demande de Romain. Retirés avec : atlas de chiffres, tirage `DIG`, police du `h1`, framebuffer intermédiaire. Les particules se dessinent directement sur le canvas transparent. Formes, morphing, parallaxe et profondeur inchangés. Puis particules réduites et plus nombreuses : `rMul` 2.6 → .6, tous les points dessinés (avant : un sur deux), et facteur de densité `D = 3` dans `buildStates` (4200 points ; nombres de points multipliés par `D`, pas d'empilement divisés par `D` pour garder les proportions de chaque forme).
-- **Home, hero mobile (≤ 991 px, local, non releasé)** : l'anim était posée sur le texte (bloc en absolu, CSS prévu pour `header_image-wrapper` qui n'existe plus). Elle passe dans le flux, en bloc 4:3 pleine largeur sous le texte (`margin-top:2rem`), sans débordement horizontal (fin des 112vw / 124vw). Le CSS publié fixe `section_header` à `100svh` et la grille à `100%` : via `:has()`, sous 991 px, la section passe en `height:auto; min-height:100svh` centrée en flex colonne, `header_component` et `header_content` en `height:auto`. Desktop inchangé. Règles `header_image-wrapper` mortes laissées en place.
+- **Home, hero (`src/hero-homepage.js`)** : chiffres remplacés par des particules (disques antialiasés) et effet TV supprimé (passe 2 : courbure, aberration chromatique, halo, scanlines, bruit, scintillement), à la demande de Romain. Retirés avec : atlas de chiffres, tirage `DIG`, police du `h1`, framebuffer intermédiaire. Les particules se dessinent directement sur le canvas transparent. Formes, morphing, parallaxe et profondeur inchangés. Puis particules réduites et plus nombreuses : `rMul` 2.6 → .6, tous les points dessinés (avant : un sur deux), et facteur de densité `D = 3` dans `buildStates` (4200 points ; nombres de points multipliés par `D`, pas d'empilement divisés par `D` pour garder les proportions de chaque forme).
+- **Home, hero mobile (≤ 991 px)** : l'anim était posée sur le texte (bloc en absolu, CSS prévu pour `header_image-wrapper` qui n'existe plus). Elle passe dans le flux, en bloc 4:3 pleine largeur sous le texte (`margin-top:2rem`), sans débordement horizontal (fin des 112vw / 124vw). Le CSS publié fixe `section_header` à `100svh` et la grille à `100%` : via `:has()`, sous 991 px, la section passe en `height:auto; min-height:100svh` centrée en flex colonne, `header_component` et `header_content` en `height:auto`. Desktop inchangé. Règles `header_image-wrapper` mortes laissées en place.
 
 ### 2026-10-26
 
@@ -289,7 +294,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 - Home : pas de titre SEO ni de meta description.
 - Home DEV : à passer en brouillon pour qu'elle ne soit plus publiée à `/home-dev`.
-- Home, header : refonte en cours dans `protos/phasev-home-header-proto.html`, à reporter en ligne une fois validée.
+- Home, hero `v0.12.0` : à publier, puis vérifier sur un vrai mobile (bloc sous le texte, espacement 2rem) et les cinq formes avec 4200 points.
 - `platform-tabs` : point de montage sans module.
 - Brief ClinOps : opacité côté texte, Amériques sous le texte.
 - Brief Response : lisibilité de la séparation des deux bras.

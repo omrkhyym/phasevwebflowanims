@@ -21,9 +21,10 @@ ${SEL} canvas{ position:absolute; inset:0; width:100%; height:100%; display:bloc
 @media (max-width:991px){
   .header_image-wrapper:has(${SEL}){ min-height:22rem; }
   /* le header publié fait 100svh et sa grille 100% : on libère la hauteur pour que le bloc tienne sous le texte */
-  .section_header:has(${SEL}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; }
+  .section_header:has(${SEL}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow-x:clip; }
   .header_component:has(${SEL}), .header_component:has(${SEL}) .header_content{ height:auto; }
-  ${SEL}{ position:relative; top:auto; bottom:auto; right:auto; width:100%; aspect-ratio:4/3; margin-top:2rem; }
+  /* pleine largeur d'écran : sort des marges de padding-global sans scroll horizontal */
+  ${SEL}{ position:relative; top:auto; bottom:auto; right:auto; width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:1/1; margin-top:2rem; }
 }
 @media (max-width:479px){
   .header_image-wrapper:has(${SEL}){ min-height:17rem; }
@@ -100,10 +101,12 @@ function buildStates() {
 
   /* Normalisation : chaque graphe recadré dans une boîte commune, scale uniforme,
      bornes au quantile 1/99 pour qu'un point isolé ne fasse pas rétrécir l'ensemble.
-     HSCALE / WSCALE ajustent ensuite chaque état ; H = W préserve les proportions. */
+     HSCALE / WSCALE ajustent ensuite chaque état ; H = W préserve les proportions.
+     Cloche ×1.2, forest ×1.33 (son maximum dans le cadre des courbes), amas ×1.3 :
+     agrandissement uniforme pour les rapprocher de la taille des courbes, qui ne bougent pas. */
   const BOX_W = .86, BOX_H = .62, Q = .01;
-  const HSCALE = [1.12, .78, .78, .78, .72];
-  const WSCALE = [1, 1, 1, 1, .72];
+  const HSCALE = [1.12, .78 * 1.2, .78 * 1.33, .78, .72 * 1.3];
+  const WSCALE = [1, 1.2, 1.33, 1, .72 * 1.3];
   const quant = (arr, q) => { const s = [...arr].sort((a, b) => a - b); return s[Math.max(0, Math.min(s.length - 1, Math.round(q * (s.length - 1))))]; };
   return RAW.map((st, si) => {
     const xs = st.map(p => p[0]), ys = st.map(p => p[1]);
@@ -116,8 +119,9 @@ function buildStates() {
   });
 }
 
-/* FIT_PAD : réglage de taille globale. 1 = l'état le plus grand touche les bords. */
-const FIT_PAD = 0.92;
+/* FIT_PAD : réglage de taille globale. 1 = l'état le plus grand touche les bords.
+   FIT_PAD_M : idem en mode bloc (≤ 991 px), cadrage plus serré. */
+const FIT_PAD = 0.92, FIT_PAD_M = 1;
 /* Profondeur : PARA parallaxe souris, DRIFT oscillation autonome (mobile),
    DSIZE modulation du rayon, DDIM assombrissement du lointain */
 const PARA = .028, DRIFT = .010, DSIZE = .24, DDIM = .45;
@@ -153,10 +157,16 @@ export function initHero(root) {
   if (!gl) return;
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const block = matchMedia('(max-width:991px)');
   const STATES = buildStates();
   let FIT_W = 0, FIT_H = 0;
   for (const st of STATES) for (const p of st) { FIT_W = Math.max(FIT_W, Math.abs(p[0]) * 2); FIT_H = Math.max(FIT_H, Math.abs(p[1]) * 2); }
   FIT_W = Math.max(FIT_W, 1e-6); FIT_H = Math.max(FIT_H, 1e-6);
+  /* Cadre du mode bloc : 99,5 % des points de chaque état. Le pied gauche, très clairsemé,
+     de la courbe en escalier sort du bloc (environ 20 points coupés) et les formes y gagnent ~37 %. */
+  let FIT_WM = 0, FIT_HM = 0;
+  const q995 = v => v.sort((a, b) => a - b)[Math.floor(v.length * .995)];
+  for (const st of STATES) { FIT_WM = Math.max(FIT_WM, q995(st.map(p => Math.abs(p[0]))) * 2); FIT_HM = Math.max(FIT_HM, q995(st.map(p => Math.abs(p[1]))) * 2); }
   const R0 = rng(99), RN = Float32Array.from({ length: N }, () => R0()), BU = Float32Array.from({ length: N }, () => (R0() - .5) * .7);
   const header = root.closest('.section_header') || document.body;
 
@@ -224,7 +234,9 @@ export function initHero(root) {
     if (lost) return;
     const W = canvas.width, H = canvas.height;
     // fit-to-contain, en portrait comme en paysage
-    SP = Math.min(W / (FIT_W * FIT_PAD), H / (FIT_H * FIT_PAD));
+    SP = block.matches
+      ? Math.min(W / (FIT_WM * FIT_PAD_M), H / (FIT_HM * FIT_PAD_M))
+      : Math.min(W / (FIT_W * FIT_PAD), H / (FIT_H * FIT_PAD));
     fill(t);
     gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(PP); gl.bindVertexArray(pvao);

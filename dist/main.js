@@ -269,16 +269,16 @@ function b() {
 		p
 	], b = .01, x = [
 		1.12,
+		.78 * 1.2,
+		1.0374,
 		.78,
-		.78,
-		.78,
-		.72
+		.72 * 1.3
 	], S = [
 		1,
+		1.2,
+		1.33,
 		1,
-		1,
-		1,
-		.72
+		.72 * 1.3
 	], C = (e, t) => {
 		let n = [...e].sort((e, t) => e - t);
 		return n[Math.max(0, Math.min(n.length - 1, Math.round(t * (n.length - 1))))];
@@ -304,27 +304,29 @@ function x(e) {
 		premultipliedAlpha: !0
 	});
 	if (!n) return;
-	let r = matchMedia("(prefers-reduced-motion: reduce)").matches, i = b(), a = 0, o = 0;
-	for (let e of i) for (let t of e) a = Math.max(a, Math.abs(t[0]) * 2), o = Math.max(o, Math.abs(t[1]) * 2);
-	a = Math.max(a, 1e-6), o = Math.max(o, 1e-6);
-	let s = v(99), c = Float32Array.from({ length: R }, () => s()), l = Float32Array.from({ length: R }, () => (s() - .5) * .7), u = e.closest(".section_header") || document.body;
-	function d(e, t) {
+	let r = matchMedia("(prefers-reduced-motion: reduce)").matches, i = matchMedia("(max-width:991px)"), a = b(), o = 0, s = 0;
+	for (let e of a) for (let t of e) o = Math.max(o, Math.abs(t[0]) * 2), s = Math.max(s, Math.abs(t[1]) * 2);
+	o = Math.max(o, 1e-6), s = Math.max(s, 1e-6);
+	let c = 0, l = 0, u = (e) => e.sort((e, t) => e - t)[Math.floor(e.length * .995)];
+	for (let e of a) c = Math.max(c, u(e.map((e) => Math.abs(e[0]))) * 2), l = Math.max(l, u(e.map((e) => Math.abs(e[1]))) * 2);
+	let d = v(99), f = Float32Array.from({ length: R }, () => d()), p = Float32Array.from({ length: R }, () => (d() - .5) * .7), m = e.closest(".section_header") || document.body;
+	function h(e, t) {
 		let r = n.createShader(e);
 		if (n.shaderSource(r, t), n.compileShader(r), !n.getShaderParameter(r, n.COMPILE_STATUS)) throw Error(n.getShaderInfoLog(r));
 		return r;
 	}
-	function f(e, t) {
+	function g(e, t) {
 		let r = n.createProgram();
-		if (n.attachShader(r, d(n.VERTEX_SHADER, e)), n.attachShader(r, d(n.FRAGMENT_SHADER, t)), n.linkProgram(r), !n.getProgramParameter(r, n.LINK_STATUS)) throw Error(n.getProgramInfoLog(r));
+		if (n.attachShader(r, h(n.VERTEX_SHADER, e)), n.attachShader(r, h(n.FRAGMENT_SHADER, t)), n.linkProgram(r), !n.getProgramParameter(r, n.LINK_STATUS)) throw Error(n.getProgramInfoLog(r));
 		return r;
 	}
-	let p = f(ne, re), m = (e, t) => n.getUniformLocation(e, t), h = {
-		res: m(p, "u_res"),
-		c: m(p, "u_c"),
-		S: m(p, "u_S"),
-		pal: m(p, "u_pal[0]")
-	}, g = new Float32Array(A.pal.flat()), y = 2 * R, x = new Float32Array(y * 7), S = n.createVertexArray();
-	n.bindVertexArray(S), n.bindBuffer(n.ARRAY_BUFFER, n.createBuffer()), n.bufferData(n.ARRAY_BUFFER, new Float32Array([
+	let y = g(ie, ae), x = (e, t) => n.getUniformLocation(e, t), S = {
+		res: x(y, "u_res"),
+		c: x(y, "u_c"),
+		S: x(y, "u_S"),
+		pal: x(y, "u_pal[0]")
+	}, C = new Float32Array(A.pal.flat()), w = 2 * R, k = new Float32Array(w * 7), j = n.createVertexArray();
+	n.bindVertexArray(j), n.bindBuffer(n.ARRAY_BUFFER, n.createBuffer()), n.bufferData(n.ARRAY_BUFFER, new Float32Array([
 		-1,
 		-1,
 		1,
@@ -334,15 +336,15 @@ function x(e) {
 		1,
 		1
 	]), n.STATIC_DRAW), n.enableVertexAttribArray(0), n.vertexAttribPointer(0, 2, n.FLOAT, !1, 0, 0);
-	let C = n.createBuffer();
-	n.bindBuffer(n.ARRAY_BUFFER, C), n.bufferData(n.ARRAY_BUFFER, x.byteLength, n.DYNAMIC_DRAW), n.enableVertexAttribArray(1), n.vertexAttribPointer(1, 4, n.FLOAT, !1, 28, 0), n.vertexAttribDivisor(1, 1), n.enableVertexAttribArray(2), n.vertexAttribPointer(2, 2, n.FLOAT, !1, 28, 16), n.vertexAttribDivisor(2, 1);
-	let w = 1, k = 1;
-	function j() {
-		w = Math.min(window.devicePixelRatio || 1, 2);
+	let M = n.createBuffer();
+	n.bindBuffer(n.ARRAY_BUFFER, M), n.bufferData(n.ARRAY_BUFFER, k.byteLength, n.DYNAMIC_DRAW), n.enableVertexAttribArray(1), n.vertexAttribPointer(1, 4, n.FLOAT, !1, 28, 0), n.vertexAttribDivisor(1, 1), n.enableVertexAttribArray(2), n.vertexAttribPointer(2, 2, n.FLOAT, !1, 28, 16), n.vertexAttribDivisor(2, 1);
+	let N = 1, P = 1;
+	function F() {
+		N = Math.min(window.devicePixelRatio || 1, 2);
 		let n = e.getBoundingClientRect();
-		t.width = Math.max(1, Math.round(n.width * w)), t.height = Math.max(1, Math.round(n.height * w)), r && L(7.5);
+		t.width = Math.max(1, Math.round(n.width * N)), t.height = Math.max(1, Math.round(n.height * N)), r && W(7.5);
 	}
-	let M = {
+	let I = {
 		x: 0,
 		y: 0,
 		a: 0,
@@ -350,54 +352,54 @@ function x(e) {
 		ty: 0,
 		in: !1
 	};
-	u.addEventListener("pointermove", (t) => {
+	m.addEventListener("pointermove", (t) => {
 		let n = e.getBoundingClientRect(), r = Math.min(n.width, n.height);
-		M.tx = (t.clientX - n.left - n.width / 2) / r, M.ty = -(t.clientY - n.top - n.height / 2) / r, M.in = !0;
-	}), u.addEventListener("pointerleave", () => M.in = !1);
-	let N = 0;
-	function P(e, t, n, r, i) {
-		if (N >= y || i <= .003) return;
-		let a = N++ * 7;
-		x[a] = e, x[a + 1] = t, x[a + 2] = Math.max(n * k, .7 * w), x[a + 3] = r, x[a + 4] = i;
+		I.tx = (t.clientX - n.left - n.width / 2) / r, I.ty = -(t.clientY - n.top - n.height / 2) / r, I.in = !0;
+	}), m.addEventListener("pointerleave", () => I.in = !1);
+	let L = 0;
+	function H(e, t, n, r, i) {
+		if (L >= w || i <= .003) return;
+		let a = L++ * 7;
+		k[a] = e, k[a + 1] = t, k[a + 2] = Math.max(n * P, .7 * N), k[a + 3] = r, k[a + 4] = i;
 	}
-	function F(e) {
-		let t = Math.floor(e / z) % 5, n = e - Math.floor(e / z) * z, a = i[(t + 5 - 1) % 5], o = i[t], s = .0038 * A.rMul;
-		N = 0;
-		let u = r ? 0 : M.x * M.a, d = r ? 0 : M.y * M.a;
+	function oe(e) {
+		let t = Math.floor(e / z) % 5, n = e - Math.floor(e / z) * z, i = a[(t + 5 - 1) % 5], o = a[t], s = .0038 * A.rMul;
+		L = 0;
+		let c = r ? 0 : I.x * I.a, l = r ? 0 : I.y * I.a;
 		for (let t = 0; t < R; t++) {
-			let r = a[t], i = o[t], f = .5 * T((i[0] + .45) / .9) + .2 * c[t], p = O(E(n, f, f + 1.1)), m = i[0] - r[0], h = i[1] - r[1], g = l[t] * Math.sin(Math.PI * p), _ = D(r[0], i[0], p) - h * g + .0015 * Math.sin(e * 1.3 + t), v = D(r[1], i[1], p) + m * g + .0015 * Math.cos(e * 1.1 + t * 1.7), y = s, b = D(r[3] || 0, i[3] || 0, p);
-			_ += b * (V * u + H * Math.sin(e * .31)), v += b * (V * d + H * .6 * Math.cos(e * .24)), y *= 1 + ee * b;
-			let x = .95 * (1 - te * (1 - (b * .5 + .5)));
-			if (v += .0012 * Math.sin(e * 2.2 + t * .7), M.a > .001) {
-				let e = _ - M.x, t = v - M.y;
-				y *= 1 + 1.2 * M.a * Math.exp(-(e * e + t * t) / .004);
+			let r = i[t], a = o[t], u = .5 * T((a[0] + .45) / .9) + .2 * f[t], d = O(E(n, u, u + 1.1)), m = a[0] - r[0], h = a[1] - r[1], g = p[t] * Math.sin(Math.PI * d), _ = D(r[0], a[0], d) - h * g + .0015 * Math.sin(e * 1.3 + t), v = D(r[1], a[1], d) + m * g + .0015 * Math.cos(e * 1.1 + t * 1.7), y = s, b = D(r[3] || 0, a[3] || 0, d);
+			_ += b * (te * c + V * Math.sin(e * .31)), v += b * (te * l + V * .6 * Math.cos(e * .24)), y *= 1 + ne * b;
+			let x = .95 * (1 - re * (1 - (b * .5 + .5)));
+			if (v += .0012 * Math.sin(e * 2.2 + t * .7), I.a > .001) {
+				let e = _ - I.x, t = v - I.y;
+				y *= 1 + 1.2 * I.a * Math.exp(-(e * e + t * t) / .004);
 			}
-			r[2] === i[2] || p >= 1 ? P(_, v, y, i[2], x) : p <= 0 ? P(_, v, y, r[2], x) : (P(_, v, y, r[2], x * (1 - p)), P(_, v, y, i[2], x * p));
+			r[2] === a[2] || d >= 1 ? H(_, v, y, a[2], x) : d <= 0 ? H(_, v, y, r[2], x) : (H(_, v, y, r[2], x * (1 - d)), H(_, v, y, a[2], x * d));
 		}
 	}
-	let I = !1;
-	function L(e) {
-		if (I) return;
-		let r = t.width, i = t.height;
-		k = Math.min(r / (a * B), i / (o * B)), F(e), n.viewport(0, 0, r, i), n.clearColor(0, 0, 0, 0), n.clear(n.COLOR_BUFFER_BIT), n.useProgram(p), n.bindVertexArray(S), n.uniform2f(h.res, r, i), n.uniform2f(h.c, r / 2, i / 2), n.uniform1f(h.S, k), n.uniform3fv(h.pal, g), n.enable(n.BLEND), n.blendFunc(n.ONE, n.ONE_MINUS_SRC_ALPHA), n.bindBuffer(n.ARRAY_BUFFER, C), n.bufferSubData(n.ARRAY_BUFFER, 0, x, 0, N * 7), n.drawArraysInstanced(n.TRIANGLE_STRIP, 0, 4, N);
+	let U = !1;
+	function W(e) {
+		if (U) return;
+		let r = t.width, a = t.height;
+		P = i.matches ? Math.min(r / (c * ee), a / (l * ee)) : Math.min(r / (o * B), a / (s * B)), oe(e), n.viewport(0, 0, r, a), n.clearColor(0, 0, 0, 0), n.clear(n.COLOR_BUFFER_BIT), n.useProgram(y), n.bindVertexArray(j), n.uniform2f(S.res, r, a), n.uniform2f(S.c, r / 2, a / 2), n.uniform1f(S.S, P), n.uniform3fv(S.pal, C), n.enable(n.BLEND), n.blendFunc(n.ONE, n.ONE_MINUS_SRC_ALPHA), n.bindBuffer(n.ARRAY_BUFFER, M), n.bufferSubData(n.ARRAY_BUFFER, 0, k, 0, L * 7), n.drawArraysInstanced(n.TRIANGLE_STRIP, 0, 4, L);
 	}
-	let U = 0, W = 0, G = 0;
-	function K(e) {
-		U = requestAnimationFrame(K);
-		let t = Math.max(0, Math.min((e - G) / 1e3, .05));
-		G = e, M.x += (M.tx - M.x) * .08, M.y += (M.ty - M.y) * .08, M.a += (+!!M.in - M.a) * .06, W += t, L(W);
+	let G = 0, K = 0, q = 0;
+	function J(e) {
+		G = requestAnimationFrame(J);
+		let t = Math.max(0, Math.min((e - q) / 1e3, .05));
+		q = e, I.x += (I.tx - I.x) * .08, I.y += (I.ty - I.y) * .08, I.a += (+!!I.in - I.a) * .06, K += t, W(K);
 	}
-	function q() {
-		U || r || I || (G = performance.now(), U = requestAnimationFrame(K));
+	function Y() {
+		G || r || U || (q = performance.now(), G = requestAnimationFrame(J));
 	}
-	function J() {
-		cancelAnimationFrame(U), U = 0;
+	function X() {
+		cancelAnimationFrame(G), G = 0;
 	}
 	t.addEventListener("webglcontextlost", (e) => {
-		e.preventDefault(), I = !0, J();
-	}), new ResizeObserver(j).observe(e), j(), r ? L(7.5) : new IntersectionObserver(([e]) => e.isIntersecting ? q() : J()).observe(e);
+		e.preventDefault(), U = !0, X();
+	}), new ResizeObserver(F).observe(e), F(), r ? W(7.5) : new IntersectionObserver(([e]) => e.isIntersecting ? Y() : X()).observe(e);
 }
-var S, C, w, T, E, D, O, k, A, j, M, N, P, F, I, L, R, z, B, V, H, ee, te, ne, re, U = e((() => {
+var S, C, w, T, E, D, O, k, A, j, M, N, P, F, I, L, R, z, B, ee, te, V, ne, re, ie, ae, H = e((() => {
 	S = "[data-pv=\"hero-homepage\"]", C = `
 .header_image-wrapper:has(${S}){
   background:none!important; border:0!important; border-radius:0!important; box-shadow:none!important;
@@ -413,9 +415,10 @@ ${S} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block;
 @media (max-width:991px){
   .header_image-wrapper:has(${S}){ min-height:22rem; }
   /* le header publié fait 100svh et sa grille 100% : on libère la hauteur pour que le bloc tienne sous le texte */
-  .section_header:has(${S}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; }
+  .section_header:has(${S}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow-x:clip; }
   .header_component:has(${S}), .header_component:has(${S}) .header_content{ height:auto; }
-  ${S}{ position:relative; top:auto; bottom:auto; right:auto; width:100%; aspect-ratio:4/3; margin-top:2rem; }
+  /* pleine largeur d'écran : sort des marges de padding-global sans scroll horizontal */
+  ${S}{ position:relative; top:auto; bottom:auto; right:auto; width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:1/1; margin-top:2rem; }
 }
 @media (max-width:479px){
   .header_image-wrapper:has(${S}){ min-height:17rem; }
@@ -435,50 +438,50 @@ ${S} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block;
 			3,
 			5
 		].map((t) => parseInt(e.slice(t, t + 2), 16) / 255))
-	}, j = 0, M = 1, N = 2, P = 3, F = 4, I = 6, L = 3, R = 1400 * L, z = 4, B = .92, V = .028, H = .01, ee = .24, te = .45, ne = "#version 300 es\nlayout(location=0) in vec2 q;\nlayout(location=1) in vec4 a;\nlayout(location=2) in vec2 b;\nuniform vec2 u_res,u_c; uniform float u_S;\nout vec2 vq; flat out float vr,vc,va;\nvoid main(){ vec2 c=u_c+a.xy*u_S; float h=a.z+1.; vq=q*h; vr=a.z; vc=a.w; va=b.x;\n  gl_Position=vec4((c+q*h)/u_res*2.-1.,0.,1.); }", re = "#version 300 es\nprecision highp float;\nin vec2 vq; flat in float vr,vc,va;\nuniform vec3 u_pal[8];\nout vec4 o;\nvoid main(){ float cov=clamp(vr-length(vq)+.5,0.,1.);\n  float al=cov*va; if(al<=.002) discard;\n  o=vec4(u_pal[int(vc+.5)]*al,al); }";
+	}, j = 0, M = 1, N = 2, P = 3, F = 4, I = 6, L = 3, R = 1400 * L, z = 4, B = .92, ee = 1, te = .028, V = .01, ne = .24, re = .45, ie = "#version 300 es\nlayout(location=0) in vec2 q;\nlayout(location=1) in vec4 a;\nlayout(location=2) in vec2 b;\nuniform vec2 u_res,u_c; uniform float u_S;\nout vec2 vq; flat out float vr,vc,va;\nvoid main(){ vec2 c=u_c+a.xy*u_S; float h=a.z+1.; vq=q*h; vr=a.z; vc=a.w; va=b.x;\n  gl_Position=vec4((c+q*h)/u_res*2.-1.,0.,1.); }", ae = "#version 300 es\nprecision highp float;\nin vec2 vq; flat in float vr,vc,va;\nuniform vec3 u_pal[8];\nout vec4 o;\nvoid main(){ float cov=clamp(vr-length(vq)+.5,0.,1.);\n  float al=cov*va; if(al<=.002) discard;\n  o=vec4(u_pal[int(vc+.5)]*al,al); }";
 }));
 //#endregion
 //#region src/platform-hub.js
-function W() {
+function oe() {
 	if (document.getElementById("pv-hub-css")) return;
 	let e = document.createElement("style");
-	e.id = "pv-hub-css", e.textContent = oe, document.head.appendChild(e);
+	e.id = "pv-hub-css", e.textContent = Y, document.head.appendChild(e);
 }
-function G(e) {
+function U(e) {
 	return () => {
 		e |= 0, e = e + 1831565813 | 0;
 		let t = Math.imul(e ^ e >>> 15, 1 | e);
 		return t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t, ((t ^ t >>> 14) >>> 0) / 4294967296;
 	};
 }
-function K(e) {
-	let t = G(21 + ce.indexOf(e)), n = () => Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(X * t()), r = [];
-	if (e === "frontier") for (let e = 0; e < Y; e++) {
+function W(e) {
+	let t = U(21 + le.indexOf(e)), n = () => Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(Z * t()), r = [];
+	if (e === "frontier") for (let e = 0; e < X; e++) {
 		let e = t(), n = t(), i = -.3 + .52 * e ** .55 - n ** 1.25 * .58, a = n < .035 && e > .12;
 		r.push([
 			-.42 + e * .84,
 			Math.max(-.36, Math.min(.34, i)),
-			a ? Z : Q,
+			a ? Q : $,
 			a ? 1 : n * 2 - 1
 		]);
 	}
-	else if (e === "split") for (let e = 0; e < Y; e++) {
-		let n = e % 100 < 42, i = n ? -.22 : .22, a = t() * X, o = t() ** .62 * (n ? .2 : .23);
+	else if (e === "split") for (let e = 0; e < X; e++) {
+		let n = e % 100 < 42, i = n ? -.22 : .22, a = t() * Z, o = t() ** .62 * (n ? .2 : .23);
 		r.push([
 			Math.cos(a) * o * 1.55,
 			i + Math.sin(a) * o * .9,
-			n ? Z : Q,
+			n ? Q : $,
 			n ? 1 : t() * 2 - 1
 		]);
 	}
 	else if (e === "enroll") {
-		let e = Math.round(Y * .34), t = Math.round(Y * .34);
+		let e = Math.round(X * .34), t = Math.round(X * .34);
 		for (let t = 0; t < e; t++) {
 			let e = t / 339;
 			r.push([
 				-.42 + e * .84,
 				.3 - .52 / (1 + Math.exp(-(e - .46) / .155)),
-				Z,
+				Q,
 				1
 			]);
 		}
@@ -487,7 +490,7 @@ function K(e) {
 			r.push([
 				-.42 + t * .84,
 				.3 - .4 / (1 + Math.exp(-(t - .58) / .185)),
-				Q,
+				$,
 				.1
 			]);
 		}
@@ -496,44 +499,44 @@ function K(e) {
 			for (let e = 0; e < 25; e++) r.push([
 				-.42 + (t + e / 25 * (1 / 13)) * .84,
 				n,
-				$,
+				se,
 				-.7
 			]);
 		}
 	} else if (e === "fan") {
-		let e = Math.ceil(Y / 26);
+		let e = Math.ceil(X / 26);
 		for (let i = 0; i < 26; i++) {
-			let a = i === 0 ? 0 : n(), o = 2 + t() * 4, s = t() * X, c = i / 25 * 2 - 1;
+			let a = i === 0 ? 0 : n(), o = 2 + t() * 4, s = t() * Z, c = i / 25 * 2 - 1;
 			for (let t = 0; t < e; t++) {
 				let e = t / 38, n = e * (.15 * a + .1 * Math.sin(o * e + s));
 				r.push([
 					-.43 + e * .86,
 					Math.max(-.34, Math.min(.34, .18 * e - .07 + n)),
-					i === 0 ? Z : Q,
+					i === 0 ? Q : $,
 					i === 0 ? 1 : c
 				]);
 			}
 		}
 	} else {
-		let e = Math.round(Y * .17), t = Math.round(Y * .46);
+		let e = Math.round(X * .17), t = Math.round(X * .46);
 		for (let t = 0; t < e; t++) {
 			let n = .062 * Math.sqrt((t + .5) / e), i = t * 2.39996;
 			r.push([
 				Math.cos(i) * n,
 				Math.sin(i) * n,
-				Z,
+				Q,
 				1
 			]);
 		}
 		let n = Math.round(t / 6);
 		for (let e = 0; e < 6; e++) {
-			let t = -Math.PI / 2 + X / 6 * e, i = Math.cos(t) * .33, a = Math.sin(t) * .33;
+			let t = -Math.PI / 2 + Z / 6 * e, i = Math.cos(t) * .33, a = Math.sin(t) * .33;
 			for (let e = 0; e < n; e++) {
 				let t = .16 + e / n * .84;
 				r.push([
 					i * t,
 					a * t,
-					Q,
+					$,
 					1 - t * 1.4
 				]);
 			}
@@ -542,26 +545,26 @@ function K(e) {
 				r.push([
 					i + Math.cos(o) * n,
 					a + Math.sin(o) * n,
-					e % 2 ? $ : se,
+					e % 2 ? se : ce,
 					-.2
 				]);
 			}
 		}
 	}
-	for (; r.length < Y;) r.push(r[r.length - 1] || [
+	for (; r.length < X;) r.push(r[r.length - 1] || [
 		0,
 		0,
-		Q,
+		$,
 		0
 	]);
-	return r.length = Y, J(r).sort((e, t) => e[0] - t[0] || e[1] - t[1]);
+	return r.length = X, K(r).sort((e, t) => e[0] - t[0] || e[1] - t[1]);
 }
-function q(e, t) {
+function G(e, t) {
 	let n = [...e].sort((e, t) => e - t);
 	return n[Math.max(0, Math.min(n.length - 1, Math.round(t * (n.length - 1))))];
 }
-function J(e) {
-	let t = e.map((e) => e[0]), n = e.map((e) => e[1]), r = q(t, fe), i = q(t, .99), a = q(n, fe), o = q(n, .99), s = Math.min(ue / Math.max(i - r, 1e-6), de / Math.max(o - a, 1e-6)), c = (r + i) / 2, l = (a + o) / 2;
+function K(e) {
+	let t = e.map((e) => e[0]), n = e.map((e) => e[1]), r = G(t, pe), i = G(t, .99), a = G(n, pe), o = G(n, .99), s = Math.min(de / Math.max(i - r, 1e-6), fe / Math.max(o - a, 1e-6)), c = (r + i) / 2, l = (a + o) / 2;
 	return e.map((e) => [
 		(e[0] - c) * s,
 		(e[1] - l) * s,
@@ -569,11 +572,11 @@ function J(e) {
 		e[3]
 	]);
 }
-function ie(e) {
+function q(e) {
 	if (e.dataset.pvReady) return;
 	let t = e.closest("section") || document, n = t.querySelector("[data-pv=\"platform-tabs\"]"), r = t.querySelector("#dm-panels"), i = r ? [...r.querySelectorAll(".dm-panel[data-panel]")] : [];
 	if (!n || !i.length) return;
-	e.dataset.pvReady = "1", W();
+	e.dataset.pvReady = "1", oe();
 	let a = matchMedia("(prefers-reduced-motion: reduce)").matches, o = (e, t) => (e.querySelector(t)?.textContent || "").trim(), s = i.map((e, t) => {
 		let n = e.getAttribute("data-panel"), r = document.createElement("button");
 		r.type = "button", r.className = "pv-tab", r.id = "pv-tab-" + n, r.setAttribute("role", "tab"), r.setAttribute("aria-selected", "false"), r.tabIndex = -1;
@@ -602,10 +605,10 @@ function ie(e) {
 	});
 	let c = document.createElement("canvas");
 	c.setAttribute("aria-hidden", "true"), e.appendChild(c);
-	let l = c.getContext("2d"), u = {}, d = (e) => u[e] || (u[e] = K(e)), f, p, m = 1, h = 0, g = 0, _ = 0, v = 0, y = 0, b = "";
+	let l = c.getContext("2d"), u = {}, d = (e) => u[e] || (u[e] = W(e)), f, p, m = 1, h = 0, g = 0, _ = 0, v = 0, y = 0, b = "";
 	function x() {
-		let e = le(m), t = Array(Y);
-		for (let n = 0; n < Y; n++) {
+		let e = ue(m), t = Array(X);
+		for (let n = 0; n < X; n++) {
 			let r = f[n], i = p[n];
 			t[n] = [
 				r[0] + (i[0] - r[0]) * e,
@@ -626,9 +629,9 @@ function ie(e) {
 	}
 	function w() {
 		l.clearRect(0, 0, g, _);
-		let e = le(m), t = Math.min(g, _) * 1.18, n = g / 2, r = _ / 2, i = a ? 0 : Math.sin(h * .4) * .009, o = b === "conductor" && m >= 1 && !a;
-		for (let a = 0; a < Y; a++) {
-			let s = f[a], c = p[a], u = s[3] + (c[3] - s[3]) * e, d = s[0] + (c[0] - s[0]) * e + (v * .024 + i) * u, m = s[1] + (c[1] - s[1]) * e + y * .018 * u, g = e < .5 ? s[2] : c[2], _ = (u + 1) / 2, b = .95 + _ * .95, x = g === Z ? .96 : .3 + _ * .36;
+		let e = ue(m), t = Math.min(g, _) * 1.18, n = g / 2, r = _ / 2, i = a ? 0 : Math.sin(h * .4) * .009, o = b === "conductor" && m >= 1 && !a;
+		for (let a = 0; a < X; a++) {
+			let s = f[a], c = p[a], u = s[3] + (c[3] - s[3]) * e, d = s[0] + (c[0] - s[0]) * e + (v * .024 + i) * u, m = s[1] + (c[1] - s[1]) * e + y * .018 * u, g = e < .5 ? s[2] : c[2], _ = (u + 1) / 2, b = .95 + _ * .95, x = g === Q ? .96 : .3 + _ * .36;
 			if (o) {
 				let e = Math.hypot(d, m);
 				if (e < .075) {
@@ -639,7 +642,7 @@ function ie(e) {
 					b *= 1 + r * .9, x = Math.min(1, x + r * .55);
 				}
 			}
-			l.beginPath(), l.arc(n + d * t, r + m * t, b, 0, X), l.fillStyle = `rgba(${g[0]},${g[1]},${g[2]},${x.toFixed(3)})`, l.fill();
+			l.beginPath(), l.arc(n + d * t, r + m * t, b, 0, Z), l.fillStyle = `rgba(${g[0]},${g[1]},${g[2]},${x.toFixed(3)})`, l.fill();
 		}
 	}
 	let T = -1;
@@ -647,7 +650,7 @@ function ie(e) {
 		e !== T && (T = e, s.forEach((t, n) => {
 			let r = n === e;
 			t.tab.setAttribute("aria-selected", r ? "true" : "false"), t.tab.tabIndex = r ? 0 : -1, t.panel.classList.toggle("is-active", r);
-		}), S(ae[s[e].key] || "fan", t));
+		}), S(J[s[e].key] || "fan", t));
 	}
 	let D = 0, O = !1, k = 0;
 	function A(e) {
@@ -666,40 +669,40 @@ function ie(e) {
 		v = ((e.clientX - t.left) / t.width - .5) * 2, y = ((e.clientY - t.top) / t.height - .5) * 2;
 	}), new ResizeObserver(C).observe(c), C(), E(Math.max(0, i.findIndex((e) => e.classList.contains("is-active"))), !0), a || new IntersectionObserver(([e]) => e.isIntersecting ? j() : M()).observe(e);
 }
-var ae, oe, Y, X, Z, Q, $, se, ce, le, ue, de, fe, pe = e((() => {
-	ae = {
+var J, Y, X, Z, Q, $, se, ce, le, ue, de, fe, pe, me = e((() => {
+	J = {
 		pursue: "frontier",
 		benefits: "split",
 		run: "enroll",
 		design: "fan",
 		connect: "conductor"
-	}, oe = "\n[data-pv=\"platform-tabs\"]{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr));\n  border-top:1px solid #2A2450; margin:18px 0 52px; }\n@media (max-width:1040px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(3,minmax(0,1fr)); } }\n@media (max-width:640px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(2,minmax(0,1fr)); } }\n.pv-tab{ appearance:none; text-align:left; cursor:pointer; width:100%; padding:20px 18px 20px 0;\n  border:0; border-top:1px solid transparent; margin-top:-1px; border-radius:0; background:transparent;\n  color:inherit; font:inherit; transition:border-color .3s ease; }\n.pv-tab_q{ display:block; font-size:11px; line-height:1.4; letter-spacing:.08em; text-transform:uppercase;\n  color:#8F8CB5; margin-bottom:8px; min-height:2.8em; transition:color .3s ease; }\n.pv-tab_n{ display:block; font-size:16px; letter-spacing:-.01em; color:#8B87B4; transition:color .3s ease; }\n.pv-tab:hover .pv-tab_n{ color:#F4F4F4; }\n.pv-tab[aria-selected=\"true\"]{ border-top-color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_q{ color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_n{ color:#F4F4F4; }\n.pv-tab:focus-visible{ outline:2px solid #E2C70A; outline-offset:-2px; }\n\n[data-pv=\"platform-hub\"]{ position:relative; min-height:440px; }\n[data-pv=\"platform-hub\"] canvas{ position:absolute; inset:-6% -14%; width:128%; height:112%; pointer-events:none; }\n@media (max-width:900px){ [data-pv=\"platform-hub\"]{ min-height:320px; } }\n\n/* les panneaux non actifs restent cachés même si le CSS de la page change */\n#dm-panels .dm-panel:not(.is-active){ display:none; }\n#dm-panels .dm-panel.is-active{ animation:pvPanelIn .35s ease both; }\n@keyframes pvPanelIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }\n@media (prefers-reduced-motion:reduce){ #dm-panels .dm-panel.is-active{ animation:none; } .pv-tab, .pv-tab *{ transition:none; } }", Y = 1e3, X = Math.PI * 2, Z = [
+	}, Y = "\n[data-pv=\"platform-tabs\"]{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr));\n  border-top:1px solid #2A2450; margin:18px 0 52px; }\n@media (max-width:1040px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(3,minmax(0,1fr)); } }\n@media (max-width:640px){ [data-pv=\"platform-tabs\"]{ grid-template-columns:repeat(2,minmax(0,1fr)); } }\n.pv-tab{ appearance:none; text-align:left; cursor:pointer; width:100%; padding:20px 18px 20px 0;\n  border:0; border-top:1px solid transparent; margin-top:-1px; border-radius:0; background:transparent;\n  color:inherit; font:inherit; transition:border-color .3s ease; }\n.pv-tab_q{ display:block; font-size:11px; line-height:1.4; letter-spacing:.08em; text-transform:uppercase;\n  color:#8F8CB5; margin-bottom:8px; min-height:2.8em; transition:color .3s ease; }\n.pv-tab_n{ display:block; font-size:16px; letter-spacing:-.01em; color:#8B87B4; transition:color .3s ease; }\n.pv-tab:hover .pv-tab_n{ color:#F4F4F4; }\n.pv-tab[aria-selected=\"true\"]{ border-top-color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_q{ color:#E2C70A; }\n.pv-tab[aria-selected=\"true\"] .pv-tab_n{ color:#F4F4F4; }\n.pv-tab:focus-visible{ outline:2px solid #E2C70A; outline-offset:-2px; }\n\n[data-pv=\"platform-hub\"]{ position:relative; min-height:440px; }\n[data-pv=\"platform-hub\"] canvas{ position:absolute; inset:-6% -14%; width:128%; height:112%; pointer-events:none; }\n@media (max-width:900px){ [data-pv=\"platform-hub\"]{ min-height:320px; } }\n\n/* les panneaux non actifs restent cachés même si le CSS de la page change */\n#dm-panels .dm-panel:not(.is-active){ display:none; }\n#dm-panels .dm-panel.is-active{ animation:pvPanelIn .35s ease both; }\n@keyframes pvPanelIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }\n@media (prefers-reduced-motion:reduce){ #dm-panels .dm-panel.is-active{ animation:none; } .pv-tab, .pv-tab *{ transition:none; } }", X = 1e3, Z = Math.PI * 2, Q = [
 		226,
 		199,
 		10
-	], Q = [
+	], $ = [
 		146,
 		138,
 		205
-	], $ = [
+	], se = [
 		120,
 		168,
 		224
-	], se = [
+	], ce = [
 		127,
 		232,
 		207
-	], ce = [
+	], le = [
 		"frontier",
 		"split",
 		"enroll",
 		"fan",
 		"conductor"
-	], le = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, ue = .88, de = .68, fe = .01;
+	], ue = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, de = .88, fe = .68, pe = .01;
 }));
 //#endregion
 //#region src/evidence-bars.js
-function me(e) {
+function he(e) {
 	if (e.dataset.pvReady) return;
 	e.dataset.pvReady = "1";
 	let t = [...e.querySelectorAll("[data-value]")];
@@ -718,8 +721,8 @@ function me(e) {
 		i.disconnect();
 	};
 }
-var he = e((() => {})), ge = /* @__PURE__ */ t((() => {
-	g(), U(), pe(), he(), document.querySelectorAll("[data-pv=\"gantt\"]").forEach(n), document.querySelectorAll("[data-pv=\"hero-homepage\"]").forEach(x), document.querySelectorAll("[data-pv=\"platform-hub\"]").forEach(ie), document.querySelectorAll("[data-pv=\"evidence-bars\"]").forEach(me);
+var ge = e((() => {})), _e = /* @__PURE__ */ t((() => {
+	g(), H(), me(), ge(), document.querySelectorAll("[data-pv=\"gantt\"]").forEach(n), document.querySelectorAll("[data-pv=\"hero-homepage\"]").forEach(x), document.querySelectorAll("[data-pv=\"platform-hub\"]").forEach(q), document.querySelectorAll("[data-pv=\"evidence-bars\"]").forEach(he);
 }));
 //#endregion
-export default ge();
+export default _e();

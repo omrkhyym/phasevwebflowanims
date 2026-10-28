@@ -89,8 +89,17 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Journal
 
+### 2026-10-28
+
+- **Home, header : copie locale pour la refonte** (`protos/phasev-home-header-proto.html`). Header de la Home publiée copié tel quel (section `section_header`, sans navbar, à la demande de Romain), avec le CSS Webflow publié en lien et l'embed global styles recopié. Le proto importe les vrais modules (`/site.js`, `/src/hero-homepage.js`) : à ouvrir via `npm run dev` sur `http://localhost:5173/protos/phasev-home-header-proto.html`. Rien de changé en ligne.
+- Constat à la copie : le header publié n'a plus `data-line-field` (seulement `data-bg="purple-gradient"`), et le div `hero-homepage` est dans un embed frère de `header_content`, pas dans `header_image-wrapper`. Pas de boutons dans le hero.
+- **Home, hero (`src/hero-homepage.js`, local, non releasé)** : chiffres remplacés par des particules (disques antialiasés) et effet TV supprimé (passe 2 : courbure, aberration chromatique, halo, scanlines, bruit, scintillement), à la demande de Romain. Retirés avec : atlas de chiffres, tirage `DIG`, police du `h1`, framebuffer intermédiaire. Les particules se dessinent directement sur le canvas transparent. Formes, morphing, parallaxe et profondeur inchangés. Puis particules réduites et plus nombreuses : `rMul` 2.6 → .6, tous les points dessinés (avant : un sur deux), et facteur de densité `D = 3` dans `buildStates` (4200 points ; nombres de points multipliés par `D`, pas d'empilement divisés par `D` pour garder les proportions de chaque forme).
+- **Home, hero mobile (≤ 991 px, local, non releasé)** : l'anim était posée sur le texte (bloc en absolu, CSS prévu pour `header_image-wrapper` qui n'existe plus). Elle passe dans le flux, en bloc 4:3 pleine largeur sous le texte (`margin-top:2rem`), sans débordement horizontal (fin des 112vw / 124vw). Le CSS publié fixe `section_header` à `100svh` et la grille à `100%` : via `:has()`, sous 991 px, la section passe en `height:auto; min-height:100svh` centrée en flex colonne, `header_component` et `header_content` en `height:auto`. Desktop inchangé. Règles `header_image-wrapper` mortes laissées en place.
+
 ### 2026-10-26
 
+- **Archive du site en ligne** : clone statique de https://www.phasevtrials.com dans `OLD_SITE/` (55 pages, 354 fichiers, 53 Mo), exclu de git via `.gitignore`. Sert à garder le contenu au cas où le site disparaît. Seuls le domaine et ses fichiers sur le CDN Webflow sont téléchargés ; les sites externes et https://ai-conductor.phasevtrials.com/ sont exclus (liens laissés en absolu). Rapport dans `OLD_SITE/_clone-report.txt`. HTML nettoyé pour une ouverture en `file://` : attributs `integrity` et `crossorigin` retirés (ils bloquaient CSS et JS), script traceur Webflow retiré, URL `//…` passées en `https://`.
+- **AI Conductor, bloc site produit** : passé en fond blanc (`section_layout is-white`, `data-bg` retiré), textes en couleurs par défaut (label gris, h2 navy, intro `text-size-large`).
 - **AI Conductor, bloc site produit (version A du proto `protos/phasev-conductor-site-cta-protos.html`)** : nouvelle section après le hero (la page n'avait que le hero et le footer). `section_layout is-gradient` + `data-bg`, `padding-section-main`, `container-large`, `grid-2 gap-8,5` (2 colonnes, 1 sous 767 px). Gauche : label « Explore the product », h2 `text-size-display text-color-alternate` « See AI Conductor in action », intro `text-size-large text-color-alternate`, composant `button` (variante Yellow) « Visit the AI Conductor site » → https://ai-conductor.phasevtrials.com/ (nouvel onglet, `noopener`). Droite : image `ai-conductor-site-browser.webp` (capture du header du site produit dans une fenêtre navigateur composée, coins arrondis transparents), source dans `protos/assets/`. Aucune classe créée.
 
 ### 2026-10-25
@@ -280,7 +289,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 - Home : pas de titre SEO ni de meta description.
 - Home DEV : à passer en brouillon pour qu'elle ne soit plus publiée à `/home-dev`.
-- Home : `data-line-field` encore présent sur le header du hero, en plus de `hero-homepage`.
+- Home, header : refonte en cours dans `protos/phasev-home-header-proto.html`, à reporter en ligne une fois validée.
 - `platform-tabs` : point de montage sans module.
 - Brief ClinOps : opacité côté texte, Amériques sous le texte.
 - Brief Response : lisibilité de la séparation des deux bras.

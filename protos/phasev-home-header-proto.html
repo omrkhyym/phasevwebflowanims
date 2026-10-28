@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Home Header</title>
+<!-- Copie locale du header de la Home publiée (www.phasevtrials.com, 2026-10-28), sans navbar.
+     A ouvrir via le serveur Vite : npm run dev, puis http://localhost:5173/protos/phasev-home-header-proto.html
+     Le hero et le fond chargent les vrais modules de src/ : toute modification s y voit ici sans build. -->
+<link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/css/phasev-2026.webflow.shared.3b550e164.css" rel="stylesheet" type="text/css">
+<style>
+/* Embed du composant global styles, copié tel quel */
+html {
+    font-size: calc(0.625rem + 0.41666666666666663vw);
+  }
+  @media screen and (max-width: 1920px) {
+    html {
+      font-size: calc(0.625rem + 0.41666666666666674vw);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+    }
+  }
+  @media screen and (max-width: 479px) {
+    html {
+      font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+    }
+  }
+
+  /* Make text look crisper and more legible in all browsers */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus state style for keyboard navigation for the focusable elements */
+  *[tabindex]:focus-visible,
+  input[type='file']:focus-visible {
+    outline: 0.125rem solid #4d65ff;
+    outline-offset: 0.125rem;
+  }
+
+  /* Get rid of top margin on first element in any rich text element */
+  .w-richtext > :not(div):first-child,
+  .w-richtext > div:first-child > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Get rid of bottom margin on last element in any rich text element */
+  .w-richtext > :last-child,
+  .w-richtext ol li:last-child,
+  .w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Prevent all click and hover interaction with an element */
+  .pointer-events-off {
+    pointer-events: none;
+  }
+
+  /* Enables all click and hover interaction with an element */
+  .pointer-events-on {
+    pointer-events: auto;
+  }
+
+  /* Create a class of .div-square which maintains a 1:1 dimension of a div */
+  .div-square::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  /* Make sure containers never lose their center alignment */
+  .container-medium,
+  .container-small,
+  .container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  /* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+  /*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+
+  /* Apply "..." after 3 lines of text */
+  .text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 2 lines of text */
+  .text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Adds inline flex display */
+  .display-inlineflex {
+    display: inline-flex;
+  }
+
+  /* These classes are never overwritten */
+  .hide {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 991px) {
+    .hide,
+    .hide-tablet {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .hide-mobile {
+      display: none !important;
+    }
+  }
+
+  .margin-0 {
+    margin: 0rem !important;
+  }
+
+  .padding-0 {
+    padding: 0rem !important;
+  }
+
+  .spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+  }
+
+  .margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+  * {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance !important;
+  }
+  [data-bg='purple-gradient'] {
+    background: radial-gradient(157.44% 98.4% at 84% 18%, rgba(126, 91, 178, 0.46) 0%, rgba(126, 91, 178, 0) 28%), radial-gradient(162.26% 101.42% at 14% 86%, rgba(65, 34, 125, 0.48) 0%, rgba(65, 34, 125, 0) 34%), #141238;
+  }
+  .header_image-wrapper {
+    background: linear-gradient(157deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+  }
+  .animation-2 {
+    opacity: 0.5;
+    background: radial-gradient(70.71% 70.71% at 50% 50%, rgba(79, 45, 131, 0.13) 3.93%, rgba(79, 45, 131, 0) 4.71%);
+  }
+  .tab-graph-line.is-gradient {
+    background: linear-gradient(90deg, #67439a 0%, #f3d400 100%);
+  }
+  [data-swiper='news'] .swiper {
+    overflow: visible;
+  }
+  .navbar_component {
+    will-change: transform; /* smoother hide/show */
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  /* your scrolled color state */
+  .navbar_component.is-scrolled {
+    background-color: #141238; /* whatever your scrolled look is */
+    /* color, box-shadow, backdrop-filter, etc. */
+  }
+  /* ---- Structural: text-swap mask button ---- */
+  .button {
+    --btn-lh: 1.4; /* leading buffer: hides ink bleed at the clip seam */
+    --btn-nudge: -0.05em; /* optional optical centering, usually leave at 0 */
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    /* keep your own padding / background / border-radius / color / font-size */
+  }
+  .button .btn-inner {
+    position: relative;
+    overflow: hidden; /* the real clip */
+    display: block;
+    transform: translateY(var(--btn-nudge));
+  }
+  .button .btn-row {
+    display: block;
+    line-height: var(--btn-lh);
+    white-space: nowrap;
+  }
+  .button .btn-row.is-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .button .word {
+    display: inline-block;
+    white-space: nowrap; /* keeps spaces intact */
+  }
+  .button .char {
+    display: inline-block;
+    line-height: var(--btn-lh);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .button .char {
+      transform: none !important;
+    }
+  }
+  :root {
+    --nav-h: 72px; /* fallback; JS overwrites with the real height */
+  }
+
+  /* your sticky element — add the data hook in Designer */
+  [data-sticky-nav-offset] {
+    position: sticky;
+    top: var(--nav-h); /* default: below nav */
+    transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1); /* ~matches nav slide */
+  }
+
+  /* nav hidden → let it stick flush to the very top */
+  html.nav-hidden [data-sticky-nav-offset] {
+    top: 0;
+  }
+  * {
+    scrollbar-color: #f3d400 #141238; /* thumb  track */
+    scrollbar-width: thin; /* auto | thin | none */
+  }
+  .build-card {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%), var(--Primary-Dark-Navy, #141238);
+  }
+  .filter_list-wrapper,
+  .filter_list {
+    display: contents;
+  }
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 56, 0.8); /* optional tint, keep low-alpha */
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      visibility 0.35s ease;
+    z-index: 1; /* below the menu card */
+  }
+
+  /* make sure the menu card paints on top of the backdrop */
+  .navbar_container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .evidence_card{
+    box-shadow: 0 15px 44px 0 rgba(18, 13, 53, 0.08);
+  }
+  .evidence-filter{
+    box-shadow: 0 16px 44px 0 rgba(18, 13, 53, 0.10);
+  }
+.filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3rem;
+  margin: 0;
+  padding: 0 3rem 0 1rem; /* 16px left; right leaves room for arrow */
+  border: 1px solid #626262;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M7 12 0 0h14z' fill='%626262'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center; /* 16px from right edge */
+  background-size: 0.875rem 0.75rem;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-select::-ms-expand { display: none; }
+
+.filter-select:hover { border-color: #111827; }
+
+.filter-select:focus-visible {
+  outline: none;
+  border-color: #3b0764;
+  box-shadow: 0 0 0 3px rgba(59, 7, 100, 0.15);
+}
+
+/* Placeholder look while "All" (empty value) is selected */
+.filter-select:has(option[value=""]:checked) { color: #9ca3af; }
+
+.filter-select option { color: #111827; }
+[data-cases="groups"] { transition: opacity 0.3s ease; }
+[data-cases="groups"]:not(.is-ready) { opacity: 0; }
+</style>
+<style>
+/* Proto seulement : espace sous le hero pour tester le scroll */
+.pv-proto-after{ min-height:100vh; background:#f8f8f8; }
+</style>
+</head>
+<body>
+<header data-bg="purple-gradient" class="section_header"><div class="padding-global padding-section-home_header"><div class="container-large"><div class="header_component"><div class="w-layout-grid header_content"><div id="w-node-_023caa4c-f7c6-2feb-51f3-f6860ac0a837-487ffd48" class="header_content-left"><div class="margin-bottom margin-medium gap-24"><h1 class="text-size-display text-color-alternate">Better decisions<br/><span class="text-color-yellow">Connected development</span></h1><div class="text-size-large">PhaseV brings advanced statistical, causal, and simulation methods, and AI-assisted workflows into one clinical development platform, so teams can reduce avoidable risk, rework and delays</div></div></div></div><div class="w-embed"><div data-pv="hero-homepage"></div></div></div></div></div></header>
+<div class="pv-proto-after"></div>
+<script type="module">
+  import "/site.js";
+  import { initHero } from "/src/hero-homepage.js";
+  document.querySelectorAll('[data-pv="hero-homepage"]').forEach(initHero);
+</script>
+</body>
+</html>

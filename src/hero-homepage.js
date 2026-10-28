@@ -17,14 +17,16 @@ const CSS = `
 /* l'anim fait 2/3 de la page, ancrée à droite, et passe sous la colonne texte */
 ${SEL}{ position:absolute; top:-10%; bottom:-10%; right:0%; width:55vw; z-index:0; pointer-events:none; }
 ${SEL} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-/* grille empilée : le débordement 66vw n'a plus de sens, on centre */
+/* grille empilée : l'anim repasse dans le flux, en bloc 4:3 sous le texte */
 @media (max-width:991px){
   .header_image-wrapper:has(${SEL}){ min-height:22rem; }
-  ${SEL}{ width:112vw; right:auto; left:50%; transform:translateX(-50%); top:-4%; bottom:-4%; }
+  /* le header publié fait 100svh et sa grille 100% : on libère la hauteur pour que le bloc tienne sous le texte */
+  .section_header:has(${SEL}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; }
+  .header_component:has(${SEL}), .header_component:has(${SEL}) .header_content{ height:auto; }
+  ${SEL}{ position:relative; top:auto; bottom:auto; right:auto; width:100%; aspect-ratio:4/3; margin-top:2rem; }
 }
 @media (max-width:479px){
   .header_image-wrapper:has(${SEL}){ min-height:17rem; }
-  ${SEL}{ width:124vw; }
 }`;
 
 function injectCSS() {
@@ -53,46 +55,47 @@ function probit(p) {
   q = p - .5; r = q * q; return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
 }
 
-/* ---------- style CRT ---------- */
+/* ---------- style ---------- */
 const STYLE = {
-  glyph: 1, rMul: 2.6,
+  rMul: .6,
   pal: ['#E2C70A', '#c8f3ff', '#93a9ff', '#5fb4e6', '#7fe8cf', '#1c3a4a', '#5f8fa6', '#000000']
     .map(h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255))
 };
 const Y = 0, M = 1, VI = 2, BL = 3, GR = 4, GRY = 6;
 
 /* ============================================================
-   MORPHING · 1400 particules, 5 états
+   MORPHING · 1400 × D particules, 5 états
    Ordre : fan (Trial), bell (Portfolio), forest (Causal), KM (Enrollment), cluster (Response)
    ============================================================ */
-const N = 1400, DUR = 4;
+/* D : densité. Chaque forme garde ses proportions, seuls les pas d’empilement sont divisés par D. */
+const D = 3, N = 1400 * D, DUR = 4;
 
 function buildStates() {
   const R = rng(21);
   const fan = [], opt = u => .14 * u + .05 * Math.sin(u * Math.PI * 1.3);
   for (let i = 0; i < 28; i++) {
     const b = i === 0 ? 0 : gauss(R), a1 = R() - .5, f1 = 2 + R() * 4, p1 = R() * TAU, z = i / 27 * 2 - 1;
-    for (let j = 0; j < 50; j++) { const u = j / 49, dev = u * (.19 * b + .09 * a1 * Math.sin(f1 * u + p1)); fan.push([-.42 + u * .84, Math.max(-.46, Math.min(.46, opt(u) + dev)), i === 0 ? Y : M, i === 0 ? 1 : z]); }
+    for (let j = 0; j < 50 * D; j++) { const u = j / (50 * D - 1), dev = u * (.19 * b + .09 * a1 * Math.sin(f1 * u + p1)); fan.push([-.42 + u * .84, Math.max(-.46, Math.min(.46, opt(u) + dev)), i === 0 ? Y : M, i === 0 ? 1 : z]); }
   }
   const bell = [], K = 70, cw = .84 / K, cnt = new Array(K).fill(0), mu = .03, sd = .1, kmu = Math.floor((mu + .42) / cw);
   for (let i = 0; i < N; i++) {
     const x = mu + sd * probit(.004 + .992 * (i + .5) / N), k = Math.max(0, Math.min(K - 1, Math.floor((x + .42) / cw)));
-    bell.push([-.42 + (k + .5) * cw, -.3 + .006 + cnt[k] * .0088, k === kmu ? Y : M, k / (K - 1) * 2 - 1]); cnt[k]++;
+    bell.push([-.42 + (k + .5) * cw, -.3 + .006 + cnt[k] * .0088 / D, k === kmu ? Y : M, k / (K - 1) * 2 - 1]); cnt[k]++;
   }
   const forest = [], x0 = -.1;
-  for (let j = 0; j < 58; j++) forest.push([x0, .36 - j * (.72 / 57), GRY, 0]);
+  for (let j = 0; j < 58 * D; j++) forest.push([x0, .36 - j * (.72 / (58 * D - 1)), GRY, 0]);
   for (let r = 0; r < 11; r++) {
     const pooled = r === 10, y = pooled ? -.34 : .3 - r * .056, e = pooled ? x0 + .12 : x0 + (R() - .25) * .26, h = pooled ? .04 : .04 + R() * .08, col = pooled ? Y : M,
       z = pooled ? 1 : r / 9 * 2 - 1;
-    for (let j = 0; j < 80; j++) forest.push([e - h + 2 * h * j / 79, y, col, z]);
-    for (let j = 0; j < 42; j++) { const rr = .016 * Math.sqrt((j + .5) / 42), a = j * 2.39996; forest.push([e + Math.cos(a) * rr, y + Math.sin(a) * rr, col, z]); }
+    for (let j = 0; j < 80 * D; j++) forest.push([e - h + 2 * h * j / (80 * D - 1), y, col, z]);
+    for (let j = 0; j < 42 * D; j++) { const rr = .016 * Math.sqrt((j + .5) / (42 * D)), a = j * 2.39996; forest.push([e + Math.cos(a) * rr, y + Math.sin(a) * rr, col, z]); }
   }
   const sc = [], K2 = 56, cw2 = .84 / K2, L = [...Array(K2)].map((_, k) => 1 / (1 + Math.exp(-((k + .5) / K2 - .5) / .1)));
   const sumL = L.reduce((a, b) => a + b, 0), cn = L.map(l => Math.floor(l * N / sumL)); let rem = N - cn.reduce((a, b) => a + b, 0);
   for (let k = K2 - 1; rem > 0; k--, rem--) cn[k]++;
-  cn.forEach((n, k) => { const z = k / (K2 - 1) * 2 - 1; for (let j = 0; j < n; j++) sc.push([-.42 + (k + .5) * cw2, -.3 + .006 + j * .0105, j === n - 1 ? Y : BL, z]); });
-  const cl = [], sizes = [420, 330, 280, 230, 140], cols = [M, BL, GR, VI, Y], C = [[-.2, .14], [.18, .2], [-.08, -.2], [.25, -.12], [.06, .01]];
-  sizes.forEach((n, g) => { const Rg = Math.sqrt(n) * .0062, z = g / 4 * 2 - 1; for (let j = 0; j < n; j++) { const rr = Rg * Math.sqrt((j + .5) / n), a = j * 2.39996; cl.push([C[g][0] + Math.cos(a) * rr, C[g][1] + Math.sin(a) * rr, cols[g], z]); } });
+  cn.forEach((n, k) => { const z = k / (K2 - 1) * 2 - 1; for (let j = 0; j < n; j++) sc.push([-.42 + (k + .5) * cw2, -.3 + .006 + j * .0105 / D, j === n - 1 ? Y : BL, z]); });
+  const cl = [], sizes = [420, 330, 280, 230, 140].map(n => n * D), cols = [M, BL, GR, VI, Y], C = [[-.2, .14], [.18, .2], [-.08, -.2], [.25, -.12], [.06, .01]];
+  sizes.forEach((n, g) => { const Rg = Math.sqrt(n / D) * .0062, z = g / 4 * 2 - 1; for (let j = 0; j < n; j++) { const rr = Rg * Math.sqrt((j + .5) / n), a = j * 2.39996; cl.push([C[g][0] + Math.cos(a) * rr, C[g][1] + Math.sin(a) * rr, cols[g], z]); } });
   const RAW = [fan, bell, forest, sc, cl];
 
   /* Normalisation : chaque graphe recadré dans une boîte commune, scale uniforme,
@@ -125,45 +128,18 @@ layout(location=0) in vec2 q;
 layout(location=1) in vec4 a;
 layout(location=2) in vec2 b;
 uniform vec2 u_res,u_c; uniform float u_S;
-out vec2 vq; flat out float vr,vc,va,vd;
-void main(){ vec2 c=u_c+a.xy*u_S; float h=a.z+1.; vq=q*h; vr=a.z; vc=a.w; va=b.x; vd=b.y;
+out vec2 vq; flat out float vr,vc,va;
+void main(){ vec2 c=u_c+a.xy*u_S; float h=a.z+1.; vq=q*h; vr=a.z; vc=a.w; va=b.x;
   gl_Position=vec4((c+q*h)/u_res*2.-1.,0.,1.); }`;
+/* Disque antialiasé, sortie prémultipliée sur canvas transparent */
 const PFS = `#version 300 es
 precision highp float;
-in vec2 vq; flat in float vr,vc,va,vd;
-uniform vec3 u_pal[8]; uniform sampler2D u_atlas; uniform int u_glyph;
+in vec2 vq; flat in float vr,vc,va;
+uniform vec3 u_pal[8];
 out vec4 o;
-void main(){ float cov;
-  if(u_glyph==1){ vec2 uv=vq/(vr+1.)*.5+.5; cov=texture(u_atlas,vec2((vd+uv.x)/10.,1.-uv.y)).a; }
-  else cov=clamp(vr-length(vq)+.5,0.,1.);
+void main(){ float cov=clamp(vr-length(vq)+.5,0.,1.);
   float al=cov*va; if(al<=.002) discard;
   o=vec4(u_pal[int(vc+.5)]*al,al); }`;
-const QVS = `#version 300 es
-layout(location=0) in vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }`;
-/* Passe 2 : pas de fond opaque, pas de masque, pas de vignette.
-   Sortie prémultipliée, l'alpha suit la lumière des chiffres. */
-const QFS = `#version 300 es
-precision highp float;
-uniform sampler2D u_tex; uniform vec2 u_res; uniform float u_time,u_dpr;
-out vec4 o;
-float hash(vec2 p){ p=fract(p*vec2(123.34,456.21)); p+=dot(p,p+45.32); return fract(p.x*p.y); }
-vec4 T(vec2 uv){ return texture(u_tex,uv); }
-vec3 glow(vec2 uv,float rad){ vec3 s=vec3(0.);
-  for(int i=0;i<12;i++){ float a=float(i)*.5236+.26; vec2 d=vec2(cos(a),sin(a))*rad/u_res; s+=T(uv+d).rgb+.6*T(uv+d*2.3).rgb; }
-  return s/12.; }
-void main(){
-  vec2 fc=gl_FragCoord.xy, uv=fc/u_res;
-  vec2 c=uv*2.-1., cc=c*(1.+.025*dot(c,c)), s=cc*.5+.5;
-  float ab=1.2*u_dpr/u_res.x;
-  vec3 p=vec3(T(s+vec2(ab,0.)).r, T(s).g, T(s-vec2(ab,0.)).b);
-  vec3 col=p + glow(s,2.5*u_dpr)*.6 + glow(s,8.*u_dpr)*.3;
-  col*=.84+.16*sin(fc.y*3.14159/(1.5*u_dpr));
-  col+=(hash(fc+fract(u_time)*100.)-.5)*.025*step(.02,max(col.r,max(col.g,col.b)));
-  col*=.985+.015*sin(u_time*7.);
-  col=max(col,0.);
-  float al=clamp(max(col.r,max(col.g,col.b))*1.25,0.,1.);
-  o=vec4(col*al, al);
-}`;
 
 export function initHero(root) {
   if (root.dataset.pvReady) return;
@@ -182,22 +158,16 @@ export function initHero(root) {
   for (const st of STATES) for (const p of st) { FIT_W = Math.max(FIT_W, Math.abs(p[0]) * 2); FIT_H = Math.max(FIT_H, Math.abs(p[1]) * 2); }
   FIT_W = Math.max(FIT_W, 1e-6); FIT_H = Math.max(FIT_H, 1e-6);
   const R0 = rng(99), RN = Float32Array.from({ length: N }, () => R0()), BU = Float32Array.from({ length: N }, () => (R0() - .5) * .7);
-  const DIG = Uint8Array.from({ length: N }, () => Math.floor(R0() * 10));
-
-  /* Typo des chiffres : celle du titre du hero, pour suivre le site */
   const header = root.closest('.section_header') || document.body;
-  const h1 = header.querySelector('h1');
-  const FAMILY = h1 ? getComputedStyle(h1).fontFamily : 'Aspekta, Arial, sans-serif';
 
   function sh(t, src) { const s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
   function program(vs, fs) {
     const p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p);
     if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p)); return p;
   }
-  const PP = program(PVS, PFS), QP = program(QVS, QFS);
+  const PP = program(PVS, PFS);
   const ul = (p, n) => gl.getUniformLocation(p, n);
-  const PU = { res: ul(PP, 'u_res'), c: ul(PP, 'u_c'), S: ul(PP, 'u_S'), pal: ul(PP, 'u_pal[0]'), atlas: ul(PP, 'u_atlas'), glyph: ul(PP, 'u_glyph') };
-  const QU = { tex: ul(QP, 'u_tex'), res: ul(QP, 'u_res'), time: ul(QP, 'u_time'), dpr: ul(QP, 'u_dpr') };
+  const PU = { res: ul(PP, 'u_res'), c: ul(PP, 'u_c'), S: ul(PP, 'u_S'), pal: ul(PP, 'u_pal[0]') };
   const PAL = new Float32Array(STYLE.pal.flat());
 
   // VAO particules
@@ -208,35 +178,11 @@ export function initHero(root) {
   const ib = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, ib); gl.bufferData(gl.ARRAY_BUFFER, inst.byteLength, gl.DYNAMIC_DRAW);
   gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 4, gl.FLOAT, false, 28, 0); gl.vertexAttribDivisor(1, 1);
   gl.enableVertexAttribArray(2); gl.vertexAttribPointer(2, 2, gl.FLOAT, false, 28, 16); gl.vertexAttribDivisor(2, 1);
-  // VAO plein cadre
-  const qvao = gl.createVertexArray(); gl.bindVertexArray(qvao);
-  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-  gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
-  // Atlas des chiffres (unité 1). Chaque chiffre centré dans sa cellule : la chasse de la police n'a pas d'effet.
-  const atlas = gl.createTexture();
-  function makeAtlas() {
-    const cv = document.createElement('canvas'); cv.width = 960; cv.height = 96; const x = cv.getContext('2d');
-    x.fillStyle = '#fff'; x.font = `500 70px ${FAMILY}`; x.textAlign = 'center'; x.textBaseline = 'middle';
-    for (let d = 0; d < 10; d++) x.fillText(String(d), d * 96 + 48, 52);
-    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, atlas);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, cv); gl.generateMipmap(gl.TEXTURE_2D);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  }
-  makeAtlas();
-
-  // FBO (unité 2)
-  const fbo = gl.createFramebuffer(), ftex = gl.createTexture();
   let dpr = 1, SP = 1;
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2); const r = root.getBoundingClientRect();
     canvas.width = Math.max(1, Math.round(r.width * dpr)); canvas.height = Math.max(1, Math.round(r.height * dpr));
-    gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, ftex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.width, canvas.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, ftex, 0);
     if (reduced) render(7.5);
   }
 
@@ -250,15 +196,13 @@ export function initHero(root) {
   header.addEventListener('pointerleave', () => mouse.in = false);
 
   let cnt = 0;
-  function put(x, y, r, c, a, d) { if (cnt >= MAX || a <= .003) return; const k = cnt++ * 7; inst[k] = x; inst[k + 1] = y; inst[k + 2] = Math.max(r * SP, .7 * dpr); inst[k + 3] = c; inst[k + 4] = a; inst[k + 5] = d; }
+  function put(x, y, r, c, a) { if (cnt >= MAX || a <= .003) return; const k = cnt++ * 7; inst[k] = x; inst[k + 1] = y; inst[k + 2] = Math.max(r * SP, .7 * dpr); inst[k + 3] = c; inst[k + 4] = a; }
 
   function fill(t) {
     const n = 5, s = Math.floor(t / DUR) % n, u = t - Math.floor(t / DUR) * DUR, A = STATES[(s + n - 1) % n], B = STATES[s], base = .0038 * STYLE.rMul;
     cnt = 0;
     const px = reduced ? 0 : mouse.x * mouse.a, py = reduced ? 0 : mouse.y * mouse.a;
-    if (!reduced) for (let k = 0; k < 4; k++) DIG[Math.floor(Math.random() * N)] = Math.floor(Math.random() * 10);
     for (let i = 0; i < N; i++) {
-      if (i & 1) continue;   // 1 chiffre sur 2 : lisibilité
       const a = A[i], b = B[i], d = .5 * clamp01((b[0] + .45) / .9) + .2 * RN[i], e = inOutCubic(seg01(u, d, d + 1.1));
       const dx = b[0] - a[0], dy = b[1] - a[1], bl = BU[i] * Math.sin(Math.PI * e);
       let x = lerp(a[0], b[0], e) - dy * bl + .0015 * Math.sin(t * 1.3 + i), y = lerp(a[1], b[1], e) + dx * bl + .0015 * Math.cos(t * 1.1 + i * 1.7), r = base;
@@ -270,8 +214,8 @@ export function initHero(root) {
       const al = .95 * (1 - DDIM * (1 - (z * .5 + .5)));
       y += .0012 * Math.sin(t * 2.2 + i * .7);
       if (mouse.a > .001) { const mx = x - mouse.x, my = y - mouse.y; r *= 1 + 1.2 * mouse.a * Math.exp(-(mx * mx + my * my) / .004); }
-      if (a[2] === b[2] || e >= 1) put(x, y, r, b[2], al, DIG[i]); else if (e <= 0) put(x, y, r, a[2], al, DIG[i]);
-      else { put(x, y, r, a[2], al * (1 - e), DIG[i]); put(x, y, r, b[2], al * e, DIG[i]); }
+      if (a[2] === b[2] || e >= 1) put(x, y, r, b[2], al); else if (e <= 0) put(x, y, r, a[2], al);
+      else { put(x, y, r, a[2], al * (1 - e)); put(x, y, r, b[2], al * e); }
     }
   }
 
@@ -282,20 +226,13 @@ export function initHero(root) {
     // fit-to-contain, en portrait comme en paysage
     SP = Math.min(W / (FIT_W * FIT_PAD), H / (FIT_H * FIT_PAD));
     fill(t);
-    // passe 1 → FBO
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.viewport(0, 0, W, H); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     gl.useProgram(PP); gl.bindVertexArray(pvao);
     gl.uniform2f(PU.res, W, H); gl.uniform2f(PU.c, W / 2, H / 2); gl.uniform1f(PU.S, SP);
-    gl.uniform3fv(PU.pal, PAL); gl.uniform1i(PU.atlas, 1); gl.uniform1i(PU.glyph, STYLE.glyph);
+    gl.uniform3fv(PU.pal, PAL);
     gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.bindBuffer(gl.ARRAY_BUFFER, ib); gl.bufferSubData(gl.ARRAY_BUFFER, 0, inst, 0, cnt * 7);
     gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, cnt);
-    // passe 2 → écran, transparent et prémultiplié
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, W, H);
-    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(QP); gl.bindVertexArray(qvao);
-    gl.uniform1i(QU.tex, 2); gl.uniform2f(QU.res, W, H); gl.uniform1f(QU.time, t); gl.uniform1f(QU.dpr, dpr);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 
   /* ---------- boucle : tourne seulement quand le hero est à l'écran ---------- */
@@ -315,9 +252,6 @@ export function initHero(root) {
 
   new ResizeObserver(resize).observe(root);
   resize();
-
-  // l'atlas est refait quand la police du site est chargée, sinon les chiffres restent en Arial
-  if (document.fonts) document.fonts.ready.then(() => { makeAtlas(); if (reduced) render(7.5); });
 
   if (reduced) render(7.5);
   else new IntersectionObserver(([e]) => e.isIntersecting ? start() : stop()).observe(root);

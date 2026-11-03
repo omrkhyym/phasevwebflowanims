@@ -16,6 +16,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` | `trial-hero-bg`, `trial-hero-slot`, `success-design-space` (div dans `.animation-wrapper` du bloc Success story), `platform-connect` |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` | `portfolio-hero-bg`, `portfolio-hero-slot`, `platform-connect` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` | `conductor-hero-bg`, `conductor-hero-slot`, `platform-connect` (dans un `.animation-wrapper` créé à la place de l'`.entry-grid`) |
+| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.13.0` | `bonv-hero-bg` (premier enfant du header), `bonv-hero-slot` (dernier enfant de la grille) |
 
 ### Modules
 
@@ -33,6 +34,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/trial-hero-bg.js` | Courbes de puissance avec balayage |
 | `src/portfolio-hero-bg.js` | Diagramme en tornade |
 | `src/conductor-hero-bg.js` | Chaîne documentaire de six pages |
+| `src/bonv-hero-bg.js` | Réponse écrite en streaming sur six lignes de points, dernier mot en jaune à la décision |
 | `src/platform-connect.js` | Bloc « plateforme connectée » des cinq pages produit : particules, cinq amas, flux entre produits (proto `protos/phasev-platform-particles-proto.html`). Produit central via `data-current`, noms surchargeables par `data-name-<clé>` |
 | `src/clinops-workflow.js` | Bande « The ClinOps workflow » : une population de particules, patients puis sites puis plan d'enrôlement, quatre étapes et reforecast (proto `protos/phasev-clinops-workflow-proto.html`) |
 | `src/clinops-proof.js` | Bloc Proof de ClinOps : levée d'aveugle, 357 sites, moyennes 0.43 / 0.28, accolade +53 % (proto `protos/phasev-clinops-proof-proto.html`). Chiffres en attributs : `data-sites`, `data-rec`, `data-other`, `data-gain` |
@@ -48,7 +50,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Sans slot sur la page, l'animation reste en fond à toutes les tailles.
 - En mode bloc : pleine opacité, sans parallaxe.
 - Sur tablette, la colonne de texte `header_content-left` est réglée en « Order : Last » dans le Designer, donc le bloc s'affiche au-dessus du texte. C'est un réglage d'élément, invisible dans l'API, qu'on retrouve dans le CSS publié.
-- Le build produit un chunk partagé, à commiter avec `dist/`. Depuis `v0.6.0`, `hero-stage` et `platform-connect` servent aux cinq mêmes entrées et Vite les réunit dans `dist/platform-connect-<hash>.mjs` (avant : `dist/hero-stage-<hash>.mjs`).
+- Le build produit des chunks partagés, à commiter avec `dist/`. Depuis `v0.13.0`, `hero-stage` sert aux six pages produit et `platform-connect` aux cinq premières (pas BonV) : Vite produit `dist/hero-stage-<hash>.mjs` et `dist/platform-connect-<hash>.mjs`. De `v0.6.0` à `v0.12.1`, les deux étaient réunis dans `dist/platform-connect-<hash>.mjs`. Les pages restent sur leur tag : un redécoupage ne les touche qu'à leur prochaine release.
 
 ### Releases
 
@@ -59,6 +61,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.13.0` | `3311425` | Entrée BonV (`bonv.js`, `bonv-hero-bg`) ; chunks redécoupés en `hero-stage-DpBC6yvy.mjs` et `platform-connect-Dh9cewVn.mjs`, imports des cinq autres pages produit mis à jour (sans effet en ligne tant que leur tag ne change pas) |
 | `v0.12.1` | `49d49a2` | Hero de la Home : formes harmonisées (cloche, forest, amas agrandis), mobile pleine largeur, bloc carré, cadre mobile à 99,5 % ; seul `dist/main.js` change |
 | `v0.12.0` | `01cd4ff` | Hero de la Home : particules au lieu des chiffres, sans effet TV, bloc 4:3 sous le texte sous 991 px ; seul `dist/main.js` change |
 | `v0.11.0` | `7a7e2ab` | `site.js` (line field v2 + fond flottant) ; `company.js` sans hero |
@@ -73,6 +76,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - `data-line-field` retiré du header du hero sur Company, ClinOps, Response, Trial, Portfolio et AI Conductor. Il n'est plus sur la Home non plus (constat du 28/10).
 - Classe `section_header`, tablette (≤ 991 px) : `height: auto`, `min-height: 100svh`, flex colonne centré. Desktop : `height: 100svh` d'origine.
 - Combo `section_header.is-company`, tablette : `min-height: 100svh` (avant : `auto`).
+- Navbar, bouton menu, tablette : traits `menu-icon_line-*` à `.1rem` (avant `.2rem`), marges du trait du milieu à `.4rem` (avant `.375rem`).
 - Company :
   - ancien bloc About us (`grid-2 gap-1,5 reverse`) masqué, remplacé par `section-top` + `grid-3 gap-1,5` avec trois textes `text-size-quote text-weight-light` ;
   - embed du bloc Build with us : code remplacé par `<!-- pv -->`, l'attribut `data-pv="company-careers"` est posé sur l'embed lui-même.
@@ -95,7 +99,9 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-11-02
 
-- **BonV, module du hero (local, non releasé)** : `src/bonv-hero-bg.js` sur le socle `hero-stage`, en Canvas 2D comme les cinq autres pages produit (décision de Romain : alignement sur les pages produit, pas sur le WebGL de la Home). Rendu du proto validé : disques antialiasés en cache par couleur quantifiée, dessinés avec `drawImage`. Densité réduite à la demande de Romain (`DENS` 55 points par unité, environ 3 500 points au lieu de 7 000). Nouvelle entrée `bonv.js` et clé `bonv` dans `vite.config.js`. Page de test : `protos/phasev-bonv-header-proto.html` (header publié + `/bonv.js` via Vite).
+- **Navbar globale, bouton menu (≤ 991 px)** : traits jugés trop épais et croix décalée à l'ouverture. Cause : traits à `.2rem` (environ 3 px sur iPhone, la taille racine est en vw) et écart réel entre traits de `.575rem` (marge `.375rem` + trait `.2rem`), alors que l'interaction « Navbar 2 menu [Open] » (a-13) déplace le haut et le bas de `.5rem` : les traits se croisaient avec environ 2 px de décalage. Classes `menu-icon_line-top`, `menu-icon_line-middle`, `menu-icon_line-bottom`, breakpoint tablette : hauteur `.2rem` → `.1rem` ; `menu-icon_line-middle` : marges haut et bas `.375rem` → `.4rem`, pour un écart de `.5rem` pile. Interaction, largeur et couleur inchangées. Toutes les pages ; Contact a sa propre interaction (a-120, 8 px), écart résiduel d'environ 0,5 px. Validé par Romain. Non publié.
+- **BonV, release `v0.13.0`** (commit `3311425`) : loader standard posé dans le footer de la page BonV (vide avant), `@v0.13.0`. URL jsDelivr de `bonv.js` et du chunk `hero-stage-DpBC6yvy.mjs` vérifiées (200). `CLAUDE.md` mis à jour (architecture, config Vite, tableau des pages, Home en `v0.12.1`). Non publié.
+- **BonV, module du hero** : `src/bonv-hero-bg.js` sur le socle `hero-stage`, en Canvas 2D comme les cinq autres pages produit (décision de Romain : alignement sur les pages produit, pas sur le WebGL de la Home). Rendu du proto validé : disques antialiasés en cache par couleur quantifiée, dessinés avec `drawImage`. Densité réduite à la demande de Romain (`DENS` 55 points par unité, environ 3 500 points au lieu de 7 000). Nouvelle entrée `bonv.js` et clé `bonv` dans `vite.config.js`. Page de test : `protos/phasev-bonv-header-proto.html` (header publié + `/bonv.js` via Vite).
 - **BonV, proto du hero** (`protos/phasev-bonv-hero-proto.html`) : idée « B streaming v3 » de Romain (réponse écrite en streaming sur six lignes de particules, dernier mot en jaune), refaite dans la technique et le style du site : WebGL2 et disques antialiasés comme le hero de la Home, couleurs du site (mauve, bleu), jaune seulement à la décision (le dernier mot passe au jaune après l'écriture, le reste s'efface un peu), curseur clair au lieu de jaune. Deux modes des heros produit (fond à droite au-dessus de 991 px, bloc 4:3 en dessous), header BonV publié recopié. Page BonV : `6ae8c9c3671fb0d99ba262dc`, montages `bonv-hero-bg` et `bonv-hero-slot` déjà posés, colonne texte en « Order : Last » en tablette, pas encore de loader. Intégration à décider (le socle `hero-stage` est en Canvas 2D).
 
 ### 2026-10-28
@@ -305,6 +311,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 - Home : pas de titre SEO ni de meta description.
 - Home DEV : à passer en brouillon pour qu'elle ne soit plus publiée à `/home-dev`.
+- BonV, hero `v0.13.0` : à publier, puis vérifier la fluidité (Canvas 2D, environ 3 500 points) et le mode bloc sur mobile.
 - `section_header` tablette (height auto + min-height 100svh) : à publier, puis vérifier sur iPhone les pages produit, Company (au moins un écran) et Resources (hauteur du contenu).
 - Home, hero `v0.12.1` : à publier, puis vérifier sur un vrai mobile (bloc carré sous le texte, espacement 2rem, points coupés aux bords) et les cinq formes.
 - `platform-tabs` : point de montage sans module.

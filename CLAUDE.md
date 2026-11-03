@@ -19,9 +19,10 @@ response.js        entrée de la page Response Optimizer   → dist/response.js
 trial.js           entrée de la page Trial Optimizer      → dist/trial.js
 portfolio.js       entrée de la page Portfolio Optimizer  → dist/portfolio.js
 conductor.js       entrée de la page AI Conductor         → dist/conductor.js
+bonv.js            entrée de la page BonV                 → dist/bonv.js
 src/<bloc>.js      un module par bloc animé
-src/hero-stage.js  socle partagé des heros produit        ┐ chunk partagé des 5 pages produit
-src/platform-connect.js  bloc « plateforme connectée »    ┘ → dist/platform-connect-<hash>.mjs
+src/hero-stage.js  socle partagé des heros produit        → dist/hero-stage-<hash>.mjs (6 pages produit)
+src/platform-connect.js  bloc « plateforme connectée »    → dist/platform-connect-<hash>.mjs (5 pages produit, pas BonV)
 protos/            prototypes validés, pour référence (non buildés)
 dist/              build, COMMITÉ (servi par jsDelivr)
 ```
@@ -53,7 +54,7 @@ Exceptions en place :
 
 ### Heros produit à deux modes (`src/hero-stage.js`)
 
-Convention des heros ClinOps, Response, Trial, Portfolio et AI Conductor. Toute nouvelle page produit la suit.
+Convention des heros ClinOps, Response, Trial, Portfolio, AI Conductor et BonV. Toute nouvelle page produit la suit.
 
 - Deux divs vides, sans classe, dans Webflow :
   - `<div data-pv="<nom>-hero-bg"></div>`, premier enfant du header du hero : fond plein cadre au-dessus de 991 px ;
@@ -71,7 +72,7 @@ build: {
     entry: {
       main: 'main.js', company: 'company.js',
       clinops: 'clinops.js', response: 'response.js', trial: 'trial.js',
-      portfolio: 'portfolio.js', conductor: 'conductor.js',
+      portfolio: 'portfolio.js', conductor: 'conductor.js', bonv: 'bonv.js',
     },
     formats: ['es'],
     fileName: (format, name) => `${name}.js`,
@@ -99,7 +100,7 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 
 | Page | ID | Entrée | Tag |
 |---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.10.0` |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.12.1` |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` (page de test) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` |
@@ -107,6 +108,7 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` |
+| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.13.0` |
 
 Les tags changent à chaque release : `MANIFEST.md` fait foi pour l'état courant.
 

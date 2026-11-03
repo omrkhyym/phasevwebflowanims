@@ -1,10 +1,11 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
-import { a as n, l as r, n as i, o as a, r as o, s, t as c, u as l } from "./platform-connect-Bf2sdhRo.mjs";
+import { a as n, c as r, i, r as a, s as o, t as s } from "./hero-stage-DpBC6yvy.mjs";
+import { n as c, t as l } from "./platform-connect-Dh9cewVn.mjs";
 //#region src/clinops-hero-bg.js
 function u(e) {
 	if (!e || e.dataset.pvInit) return;
-	let t = r(11), i = d.length / 2, a = new Float32Array(i), c = new Float32Array(i), u = new Float32Array(i);
-	for (let e = 0; e < i; e++) a[e] = d[2 * e] / 3600, c[e] = d[2 * e + 1] / 3600;
+	let t = o(11), i = d.length / 2, c = new Float32Array(i), l = new Float32Array(i), u = new Float32Array(i);
+	for (let e = 0; e < i; e++) c[e] = d[2 * e] / 3600, l[e] = d[2 * e + 1] / 3600;
 	let y = f.map(([e, t]) => ({
 		px: (e + 180) / 360,
 		py: (74 - t) / 360
@@ -12,7 +13,7 @@ function u(e) {
 	y.forEach((e) => {
 		e.near = [];
 		for (let t = 0; t < i; t++) {
-			let n = Math.hypot(a[t] - e.px, c[t] - e.py);
+			let n = Math.hypot(c[t] - e.px, l[t] - e.py);
 			n < v && e.near.push(t, n);
 		}
 	});
@@ -25,7 +26,7 @@ function u(e) {
 				at: t() * 2.2,
 				keep: n < _,
 				rad: .018 + t() * .03,
-				ph: t() * o
+				ph: t() * s
 			}))
 		};
 	}
@@ -34,50 +35,50 @@ function u(e) {
 		n ? (S = e * 1.04, C = (e - S) / 2, w = (t - p * S) / 2) : (S = Math.max(e * 1.04, t / p), C = (e - S) / 2, w = (t - p * S) / 2 + t * .05);
 	}
 	function E(e, t) {
-		let { ctx: r, W: s, H: d, mouse: f } = e;
-		for (r.clearRect(0, 0, s, d); !b.length || t >= b[b.length - 1].start + m;) b.push(x(b.length ? b[b.length - 1].start + m : 0));
+		let { ctx: n, W: o, H: d, mouse: f } = e;
+		for (n.clearRect(0, 0, o, d); !b.length || t >= b[b.length - 1].start + m;) b.push(x(b.length ? b[b.length - 1].start + m : 0));
 		for (; b.length && t > b[0].start + h + 1;) b.shift();
 		let p = -f.x * 14, g = -f.y * 10, _ = (e) => C + e * S + p, v = (e) => w + e * S + g, y = (t) => e.fade(t);
 		u.fill(0);
 		let T = [];
-		for (let e of b) for (let r of e.sites) {
-			let i = t - e.start - r.at;
+		for (let e of b) for (let n of e.sites) {
+			let i = t - e.start - n.at;
 			if (i < 0) continue;
-			let a = n(l(i, 0, 1.4)), s = a * (r.keep ? 1 - n(l(i, 10 - r.at, h - r.at)) : 1 - n(l(i, 3.6 - r.at + 1, 4.8 - r.at + 1)));
-			if (s <= .002) continue;
-			let c = r.keep ? n(l(i, 3.6 - r.at + 1, 4.4 - r.at + 1)) : 0, d = r.rad * (.6 + .4 * a) * (r.keep ? 1 : .8), f = r.s.near;
+			let o = a(r(i, 0, 1.4)), c = o * (n.keep ? 1 - a(r(i, 10 - n.at, h - n.at)) : 1 - a(r(i, 3.6 - n.at + 1, 4.8 - n.at + 1)));
+			if (c <= .002) continue;
+			let l = n.keep ? a(r(i, 3.6 - n.at + 1, 4.4 - n.at + 1)) : 0, d = n.rad * (.6 + .4 * o) * (n.keep ? 1 : .8), f = n.s.near;
 			for (let e = 0; e < f.length; e += 2) {
-				let n = f[e + 1];
-				if (n > d) continue;
-				let i = (1 - n / d) ** 1.6 * (.78 + .22 * Math.sin(o * (n / d * 1.4) - t * 1.6 + r.ph));
-				u[f[e]] = Math.max(u[f[e]], i * s * (.55 + .45 * c));
+				let r = f[e + 1];
+				if (r > d) continue;
+				let i = (1 - r / d) ** 1.6 * (.78 + .22 * Math.sin(s * (r / d * 1.4) - t * 1.6 + n.ph));
+				u[f[e]] = Math.max(u[f[e]], i * c * (.55 + .45 * l));
 			}
 			T.push({
-				c: r,
-				k: s,
-				sel: c
+				c: n,
+				k: c,
+				sel: l
 			});
 		}
 		let E = Math.max(1.2, S * .0016);
-		r.fillStyle = "#928ACD";
+		n.fillStyle = "#928ACD";
 		for (let e = 0; e < i; e++) {
-			let t = _(a[e]), n = v(c[e]);
-			t < -4 || t > s + 4 || n < -4 || n > d + 4 || (r.globalAlpha = .17 * y(t), r.fillRect(t - E / 2, n - E / 2, E, E));
+			let t = _(c[e]), r = v(l[e]);
+			t < -4 || t > o + 4 || r < -4 || r > d + 4 || (n.globalAlpha = .17 * y(t), n.fillRect(t - E / 2, r - E / 2, E, E));
 		}
-		r.fillStyle = "#C7E0F4";
+		n.fillStyle = "#C7E0F4";
 		for (let e = 0; e < i; e++) {
 			let t = u[e];
 			if (t < .01) continue;
-			let n = _(a[e]), i = v(c[e]);
-			r.globalAlpha = Math.min(1, t * .85) * y(n), r.fillRect(n - E / 2, i - E / 2, E, E);
+			let r = _(c[e]), i = v(l[e]);
+			n.globalAlpha = Math.min(1, t * .85) * y(r), n.fillRect(r - E / 2, i - E / 2, E, E);
 		}
-		for (let { c: e, k: n, sel: i } of T) {
-			let a = _(e.s.px), s = v(e.s.py), c = y(a), l = .5 + .5 * Math.sin(t * 2.2 + e.ph);
-			r.globalAlpha = n * (1 - i) * c, r.fillStyle = "#F4F4F4", r.beginPath(), r.arc(a, s, 2.2 + .6 * l, 0, o), r.fill(), i > 0 && (r.globalAlpha = n * i * c, r.fillStyle = "#E2C70A", r.beginPath(), r.arc(a, s, 2.6, 0, o), r.fill(), r.strokeStyle = "#E2C70A", r.lineWidth = 1, r.globalAlpha = n * i * c * (.35 + .35 * l), r.beginPath(), r.arc(a, s, 7 + 3 * l, 0, o), r.stroke());
+		for (let { c: e, k: r, sel: i } of T) {
+			let a = _(e.s.px), o = v(e.s.py), c = y(a), l = .5 + .5 * Math.sin(t * 2.2 + e.ph);
+			n.globalAlpha = r * (1 - i) * c, n.fillStyle = "#F4F4F4", n.beginPath(), n.arc(a, o, 2.2 + .6 * l, 0, s), n.fill(), i > 0 && (n.globalAlpha = r * i * c, n.fillStyle = "#E2C70A", n.beginPath(), n.arc(a, o, 2.6, 0, s), n.fill(), n.strokeStyle = "#E2C70A", n.lineWidth = 1, n.globalAlpha = r * i * c * (.35 + .35 * l), n.beginPath(), n.arc(a, o, 7 + 3 * l, 0, s), n.stroke());
 		}
-		r.globalAlpha = 1;
+		n.globalAlpha = 1;
 	}
-	return s(e, {
+	return n(e, {
 		name: "clinops",
 		draw: E,
 		still: 5.5,
@@ -85,7 +86,7 @@ function u(e) {
 	});
 }
 var d, f, p, m, h, g, _, v, y = e((() => {
-	a(), d = [
+	i(), d = [
 		561,
 		0,
 		578,
@@ -10761,7 +10762,7 @@ var z, B, V, H, U, W, G, ee, te, ne, K, re, q, ie, J, ae, oe, Y, X, se, Z, Q, $,
 		return n + (1 + .12 * t - n) * (1 - Math.exp(-r * 2.6)) / (1 - Math.exp(-2.6));
 	}, ae = 14, oe = 9, Y = 20, X = Array.from({ length: 42 }, () => []), se = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), Z = (e, t, n) => se((e - t) / (n - t)), Q = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, $ = (e, t, n) => e + (t - e) * n, ce = "[data-pv=\"clinops-workflow\"]{position:relative;width:100%;aspect-ratio:16/5.4}\n@media (max-width:700px){[data-pv=\"clinops-workflow\"]{aspect-ratio:4/3.4}}";
 })), ue = /* @__PURE__ */ t((() => {
-	y(), i(), P(), le(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => c(e)), document.querySelectorAll("[data-pv=\"clinops-proof\"]").forEach((e) => C(e)), document.querySelectorAll("[data-pv=\"clinops-workflow\"]").forEach((e) => R(e));
+	y(), c(), P(), le(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => l(e)), document.querySelectorAll("[data-pv=\"clinops-proof\"]").forEach((e) => C(e)), document.querySelectorAll("[data-pv=\"clinops-workflow\"]").forEach((e) => R(e));
 }));
 //#endregion
 export default ue();

@@ -1,38 +1,39 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
-import { a as n, c as r, n as i, o as a, r as o, s, t as c, u as l } from "./platform-connect-Bf2sdhRo.mjs";
+import { a as n, c as r, i, o as a, r as o, t as s } from "./hero-stage-DpBC6yvy.mjs";
+import { n as c, t as l } from "./platform-connect-Dh9cewVn.mjs";
 //#region src/trial-hero-bg.js
 function u(e) {
 	if (!e || e.dataset.pvInit) return;
 	function t(e, t) {
-		let { ctx: i, W: a, H: s, mouse: c, reduce: u } = e, d = u ? t : t % w, f = (t) => e.fade(t);
-		i.clearRect(0, 0, a, s);
-		let p = -c.x * 12, T = -c.y * 8, E = (e) => a * (.04 + .92 * e) + p, D = (e) => s * (.86 - .66 * e) + T, O = 1 - n(l(d, C, 12.8)), k = l(d, x, 6.800000000000001), A = n(k), j = d > x && d < 7.4 ? 1 - l(d, 6.800000000000001, 7.4) : 0, M = n(l(d, S, 8.4)), N = Math.max(1.3, Math.min(a, s) * .0019);
+		let { ctx: n, W: i, H: c, mouse: l, reduce: u } = e, d = u ? t : t % w, f = (t) => e.fade(t);
+		n.clearRect(0, 0, i, c);
+		let p = -l.x * 12, T = -l.y * 8, E = (e) => i * (.04 + .92 * e) + p, D = (e) => c * (.86 - .66 * e) + T, O = 1 - o(r(d, C, 12.8)), k = r(d, x, 6.800000000000001), A = o(k), j = d > x && d < 7.4 ? 1 - r(d, 6.800000000000001, 7.4) : 0, M = o(r(d, S, 8.4)), N = Math.max(1.3, Math.min(i, c) * .0019);
 		if (j > 0) {
 			let e = E(A);
-			i.save(), i.setLineDash([3, 5]), i.strokeStyle = r(m, .35 * j * f(e)), i.lineWidth = 1, i.beginPath(), i.moveTo(e, D(1.08)), i.lineTo(e, D(-.04)), i.stroke(), i.restore();
+			n.save(), n.setLineDash([3, 5]), n.strokeStyle = a(m, .35 * j * f(e)), n.lineWidth = 1, n.beginPath(), n.moveTo(e, D(1.08)), n.lineTo(e, D(-.04)), n.stroke(), n.restore();
 		}
 		g.forEach((e, t) => {
-			let a = t === _;
+			let i = t === _;
 			for (let t = 0; t < v; t++) {
-				let s = t / 239, c = E(s), u = D(y(e, s)), p = f(c), m = n(l(d, b + s * 1.2, b + s * 1.2 + .5)) * O;
+				let c = t / 239, l = E(c), u = D(y(e, c)), p = f(l), m = o(r(d, b + c * 1.2, b + c * 1.2 + .5)) * O;
 				if (m <= 0) continue;
-				let g = j * Math.exp(-(((s - A) / .045) ** 2)), _ = a ? n(l(d, S + s * .9, S + s * .9 + .4)) : 0, v = a ? 1 : 1 - .55 * M, x = m * p * (.28 + .6 * g) * v * (1 - _);
-				x > .003 && (i.fillStyle = r(e.c, x), i.beginPath(), i.arc(c, u, N * (1 + .5 * g), 0, o), i.fill()), _ > 0 && (i.fillStyle = r(h, m * p * .85 * _), i.beginPath(), i.arc(c, u, N * 1.1, 0, o), i.fill());
+				let g = j * Math.exp(-(((c - A) / .045) ** 2)), _ = i ? o(r(d, S + c * .9, S + c * .9 + .4)) : 0, v = i ? 1 : 1 - .55 * M, x = m * p * (.28 + .6 * g) * v * (1 - _);
+				x > .003 && (n.fillStyle = a(e.c, x), n.beginPath(), n.arc(l, u, N * (1 + .5 * g), 0, s), n.fill()), _ > 0 && (n.fillStyle = a(h, m * p * .85 * _), n.beginPath(), n.arc(l, u, N * 1.1, 0, s), n.fill());
 			}
 			if (j > 0) {
-				let t = E(A), n = D(y(e, A));
-				i.strokeStyle = r(e.c, .7 * j * f(t)), i.lineWidth = 1, i.beginPath(), i.arc(t, n, 5, 0, o), i.stroke();
+				let t = E(A), r = D(y(e, A));
+				n.strokeStyle = a(e.c, .7 * j * f(t)), n.lineWidth = 1, n.beginPath(), n.arc(t, r, 5, 0, s), n.stroke();
 			}
 		});
 	}
-	return s(e, {
+	return n(e, {
 		name: "trial",
 		draw: t,
 		still: T
 	});
 }
 var d, f, p, m, h, g, _, v, y, b, x, S, C, w, T, E = e((() => {
-	a(), d = [
+	i(), d = [
 		146,
 		138,
 		205
@@ -198,7 +199,7 @@ var A, j, M, N, P, F, I, L, R, z, B, V, H, U = e((() => {
 		return r;
 	})();
 })), W = /* @__PURE__ */ t((() => {
-	E(), U(), i(), document.querySelectorAll("[data-pv=\"trial-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"success-design-space\"]").forEach((e) => k(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => c(e));
+	E(), U(), c(), document.querySelectorAll("[data-pv=\"trial-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"success-design-space\"]").forEach((e) => k(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => l(e));
 }));
 //#endregion
 export default W();

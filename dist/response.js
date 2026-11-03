@@ -1,39 +1,40 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
-import { a as n, d as r, l as i, n as a, o, r as s, s as c, t as l, u } from "./platform-connect-Bf2sdhRo.mjs";
+import { a as n, c as r, i, l as a, r as o, s, t as c } from "./hero-stage-DpBC6yvy.mjs";
+import { n as l, t as u } from "./platform-connect-Dh9cewVn.mjs";
 //#region src/response-hero-bg.js
 function d(e) {
 	if (!e || e.dataset.pvInit) return;
-	let t = i(5), a = () => Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(s * t()), o = (e) => .14 + .48 * e, l = (e) => .26 * r(.5, .88, e), d = [];
+	let t = s(5), i = () => Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(c * t()), l = (e) => .14 + .48 * e, u = (e) => .26 * a(.5, .88, e), d = [];
 	for (let e = 0; e < v; e++) {
-		let n = t(), r = e & 1, i = a() * .035;
+		let n = t(), r = e & 1, a = i() * .035;
 		d.push({
 			u: n,
 			arm: r,
-			ph: t() * s,
+			ph: t() * c,
 			x0: t(),
-			y0: .48 + a() * .15,
-			y1: o(n) + i,
-			y2: o(n) + i + r * l(n),
-			win: r === 1 && l(n) > .09
+			y0: .48 + i() * .15,
+			y1: l(n) + a,
+			y2: l(n) + a + r * u(n),
+			win: r === 1 && u(n) > .09
 		});
 	}
 	function S(e, t) {
-		let { ctx: r, W: i, H: a, mouse: o } = e, c = t % _;
-		r.clearRect(0, 0, i, a);
-		let l = -o.x * 12, v = -o.y * 8, S = (e) => i * (.04 + .92 * e) + l, C = (e) => a * (.92 - .78 * e) + v, w = n(u(c, g, 13)), T = n(u(c, h, 6.9)) * (1 - w), E = n(u(c, f, 1.2)), D = Math.max(1.3, Math.min(i, a) * .0019);
+		let { ctx: n, W: i, H: a, mouse: s } = e, l = t % _;
+		n.clearRect(0, 0, i, a);
+		let u = -s.x * 12, v = -s.y * 8, S = (e) => i * (.04 + .92 * e) + u, C = (e) => a * (.92 - .78 * e) + v, w = o(r(l, g, 13)), T = o(r(l, h, 6.9)) * (1 - w), E = o(r(l, f, 1.2)), D = Math.max(1.3, Math.min(i, a) * .0019);
 		for (let t of d) {
-			let i = n(u(c, p + t.u * 1.4, p + t.u * 1.4 + 1.4)) * (1 - w), a = n(u(c, m + t.u * .6, m + t.u * .6 + 1.1)) * (1 - w), o = (1 - i) * .012 + .003, l = t.x0 + (t.u - t.x0) * i + o * Math.sin(c * .9 + t.ph), d = t.y0 + (t.y1 - t.y0) * i + (t.y2 - t.y1) * a + o * Math.cos(c * .8 + t.ph * 1.3), f = S(l), h = C(d), g = e.fade(f), _ = t.arm ? b : y, v = E * g * (.34 + .12 * i);
-			r.fillStyle = `rgba(${_[0]},${_[1]},${_[2]},${v.toFixed(3)})`, r.beginPath(), r.arc(f, h, D, 0, s), r.fill(), t.win && T > 0 && (r.fillStyle = `rgba(${x[0]},${x[1]},${x[2]},${(T * g * .9).toFixed(3)})`, r.beginPath(), r.arc(f, h, D * 1.15, 0, s), r.fill());
+			let i = o(r(l, p + t.u * 1.4, p + t.u * 1.4 + 1.4)) * (1 - w), a = o(r(l, m + t.u * .6, m + t.u * .6 + 1.1)) * (1 - w), s = (1 - i) * .012 + .003, u = t.x0 + (t.u - t.x0) * i + s * Math.sin(l * .9 + t.ph), d = t.y0 + (t.y1 - t.y0) * i + (t.y2 - t.y1) * a + s * Math.cos(l * .8 + t.ph * 1.3), f = S(u), h = C(d), g = e.fade(f), _ = t.arm ? b : y, v = E * g * (.34 + .12 * i);
+			n.fillStyle = `rgba(${_[0]},${_[1]},${_[2]},${v.toFixed(3)})`, n.beginPath(), n.arc(f, h, D, 0, c), n.fill(), t.win && T > 0 && (n.fillStyle = `rgba(${x[0]},${x[1]},${x[2]},${(T * g * .9).toFixed(3)})`, n.beginPath(), n.arc(f, h, D * 1.15, 0, c), n.fill());
 		}
 	}
-	return c(e, {
+	return n(e, {
 		name: "response",
 		draw: S,
 		still: 9
 	});
 }
 var f, p, m, h, g, _, v, y, b, x, S = e((() => {
-	o(), f = 0, p = 1.6, m = 4.6, h = 6, g = 11, _ = 13.4, v = 1400, y = [
+	i(), f = 0, p = 1.6, m = 4.6, h = 6, g = 11, _ = 13.4, v = 1400, y = [
 		146,
 		138,
 		205
@@ -47,7 +48,7 @@ var f, p, m, h, g, _, v, y, b, x, S = e((() => {
 		10
 	];
 })), C = /* @__PURE__ */ t((() => {
-	S(), a(), document.querySelectorAll("[data-pv=\"response-hero-bg\"]").forEach((e) => d(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => l(e));
+	S(), l(), document.querySelectorAll("[data-pv=\"response-hero-bg\"]").forEach((e) => d(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => u(e));
 }));
 //#endregion
 export default C();

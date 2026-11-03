@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV BonV Hero</title>
+<!-- Proto du hero BonV. Header copié de la page BonV publiée (www.phasevtrials.com/bonv, 2026-11-02), CSS Webflow publié en lien.
+     Animation autonome, sans dépendance au repo : s ouvre directement ou via Vite. ?t=8 fige l instant. -->
+<link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/css/phasev-2026.webflow.shared.6def7dff7.css" rel="stylesheet" type="text/css">
+<style>
+/* Embed du composant global styles, copié tel quel */
+html {
+    font-size: calc(0.625rem + 0.41666666666666663vw);
+  }
+  @media screen and (max-width: 1920px) {
+    html {
+      font-size: calc(0.625rem + 0.41666666666666674vw);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+    }
+  }
+  @media screen and (max-width: 479px) {
+    html {
+      font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+    }
+  }
+
+  /* Make text look crisper and more legible in all browsers */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus state style for keyboard navigation for the focusable elements */
+  *[tabindex]:focus-visible,
+  input[type='file']:focus-visible {
+    outline: 0.125rem solid #4d65ff;
+    outline-offset: 0.125rem;
+  }
+
+  /* Get rid of top margin on first element in any rich text element */
+  .w-richtext > :not(div):first-child,
+  .w-richtext > div:first-child > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Get rid of bottom margin on last element in any rich text element */
+  .w-richtext > :last-child,
+  .w-richtext ol li:last-child,
+  .w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Prevent all click and hover interaction with an element */
+  .pointer-events-off {
+    pointer-events: none;
+  }
+
+  /* Enables all click and hover interaction with an element */
+  .pointer-events-on {
+    pointer-events: auto;
+  }
+
+  /* Create a class of .div-square which maintains a 1:1 dimension of a div */
+  .div-square::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  /* Make sure containers never lose their center alignment */
+  .container-medium,
+  .container-small,
+  .container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  /* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+  /*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+
+  /* Apply "..." after 3 lines of text */
+  .text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 2 lines of text */
+  .text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Adds inline flex display */
+  .display-inlineflex {
+    display: inline-flex;
+  }
+
+  /* These classes are never overwritten */
+  .hide {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 991px) {
+    .hide,
+    .hide-tablet {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .hide-mobile {
+      display: none !important;
+    }
+  }
+
+  .margin-0 {
+    margin: 0rem !important;
+  }
+
+  .padding-0 {
+    padding: 0rem !important;
+  }
+
+  .spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+  }
+
+  .margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+  * {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance !important;
+  }
+  [data-bg='purple-gradient'] {
+    background: radial-gradient(157.44% 98.4% at 84% 18%, rgba(126, 91, 178, 0.46) 0%, rgba(126, 91, 178, 0) 28%), radial-gradient(162.26% 101.42% at 14% 86%, rgba(65, 34, 125, 0.48) 0%, rgba(65, 34, 125, 0) 34%), #141238;
+  }
+  .header_image-wrapper {
+    background: linear-gradient(157deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+  }
+  .animation-2 {
+    opacity: 0.5;
+    background: radial-gradient(70.71% 70.71% at 50% 50%, rgba(79, 45, 131, 0.13) 3.93%, rgba(79, 45, 131, 0) 4.71%);
+  }
+  .tab-graph-line.is-gradient {
+    background: linear-gradient(90deg, #67439a 0%, #f3d400 100%);
+  }
+  [data-swiper='news'] .swiper {
+    overflow: visible;
+  }
+  .navbar_component {
+    will-change: transform; /* smoother hide/show */
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  /* your scrolled color state */
+  .navbar_component.is-scrolled {
+    background-color: #141238; /* whatever your scrolled look is */
+    /* color, box-shadow, backdrop-filter, etc. */
+  }
+  /* ---- Structural: text-swap mask button ---- */
+  .button {
+    --btn-lh: 1.4; /* leading buffer: hides ink bleed at the clip seam */
+    --btn-nudge: -0.05em; /* optional optical centering, usually leave at 0 */
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    /* keep your own padding / background / border-radius / color / font-size */
+  }
+  .button .btn-inner {
+    position: relative;
+    overflow: hidden; /* the real clip */
+    display: block;
+    transform: translateY(var(--btn-nudge));
+  }
+  .button .btn-row {
+    display: block;
+    line-height: var(--btn-lh);
+    white-space: nowrap;
+  }
+  .button .btn-row.is-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .button .word {
+    display: inline-block;
+    white-space: nowrap; /* keeps spaces intact */
+  }
+  .button .char {
+    display: inline-block;
+    line-height: var(--btn-lh);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .button .char {
+      transform: none !important;
+    }
+  }
+  :root {
+    --nav-h: 72px; /* fallback; JS overwrites with the real height */
+  }
+
+  /* your sticky element — add the data hook in Designer */
+  [data-sticky-nav-offset] {
+    position: sticky;
+    top: var(--nav-h); /* default: below nav */
+    transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1); /* ~matches nav slide */
+  }
+
+  /* nav hidden → let it stick flush to the very top */
+  html.nav-hidden [data-sticky-nav-offset] {
+    top: 0;
+  }
+  * {
+    scrollbar-color: #f3d400 #141238; /* thumb  track */
+    scrollbar-width: thin; /* auto | thin | none */
+  }
+  .build-card {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%), var(--Primary-Dark-Navy, #141238);
+  }
+  .filter_list-wrapper,
+  .filter_list {
+    display: contents;
+  }
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 56, 0.8); /* optional tint, keep low-alpha */
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      visibility 0.35s ease;
+    z-index: 1; /* below the menu card */
+  }
+
+  /* make sure the menu card paints on top of the backdrop */
+  .navbar_container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .evidence_card{
+    box-shadow: 0 15px 44px 0 rgba(18, 13, 53, 0.08);
+  }
+  .evidence-filter{
+    box-shadow: 0 16px 44px 0 rgba(18, 13, 53, 0.10);
+  }
+.filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3rem;
+  margin: 0;
+  padding: 0 3rem 0 1rem; /* 16px left; right leaves room for arrow */
+  border: 1px solid #626262;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M7 12 0 0h14z' fill='%626262'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center; /* 16px from right edge */
+  background-size: 0.875rem 0.75rem;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-select::-ms-expand { display: none; }
+
+.filter-select:hover { border-color: #111827; }
+
+.filter-select:focus-visible {
+  outline: none;
+  border-color: #3b0764;
+  box-shadow: 0 0 0 3px rgba(59, 7, 100, 0.15);
+}
+
+/* Placeholder look while "All" (empty value) is selected */
+.filter-select:has(option[value=""]:checked) { color: #9ca3af; }
+
+.filter-select option { color: #111827; }
+[data-cases="groups"] { transition: opacity 0.3s ease; }
+[data-cases="groups"]:not(.is-ready) { opacity: 0; }
+</style>
+<style>
+/* Proto seulement : espace sous le hero pour tester le scroll */
+.pv-proto-after{ min-height:100vh; background:#f8f8f8; }
+</style>
+</head>
+<body>
+<header data-bg="purple-gradient" class="section_header"><div data-pv="bonv-hero-bg"></div><div class="padding-global padding-section-home_header"><div class="container-large"><div class="header_component"><div class="w-layout-grid header_content"><div id="w-node-_2fd2bd32-c3d8-e437-5e6d-d952b6372e73-9ba262dc" class="header_content-left"><div class="margin-bottom margin-medium gap-24"><h1 class="text-size-display text-color-alternate">Meet BonV:<br/><span class="text-color-yellow">Ask. Connect. Decide.</span></h1><div class="text-size-large">BonV is PhaseV’s agentic layer for clinical development. Ask a question in plain language, and BonV connects the right PhaseV capabilities and your own tools into one explainable workflow, with your experts approving every step.</div></div><div class="button-group gap-24"><a data-wf--button--variant="yellow" href="/contact" class="button w-button">Request a demo</a><a data-wf--button--variant="transparent" href="#bonv-video" class="button w-variant-a4343b71-de97-ab07-2e4d-8afb553ce387 w-button">Watch the video</a></div></div><div data-pv="bonv-hero-slot"></div></div></div></div></div></header>
+<div class="pv-proto-after"></div>
+<script>
+/* Hero BonV : une réponse s'écrit en streaming sur six lignes de particules (WebGL2, pipeline du hero de la Home).
+   Chaque mot arrive au curseur, s'écrit clair puis se pose en mauve ou bleu.
+   Fin d'écriture : le dernier mot passe au jaune (la décision), le reste s'efface un peu, puis fondu et boucle.
+   Deux modes comme les heros produit : fond à droite du texte au-dessus de 991 px, bloc 4:3 au-dessus du texte en dessous.
+   ?t=8 fige l'instant, pour le réglage. */
+(() => {
+const NAME = 'bonv', SEL = `[data-pv="${NAME}-hero-bg"]`, SLOT = `[data-pv="${NAME}-hero-slot"]`;
+const root = document.querySelector(SEL); if (!root) return;
+const header = root.parentElement, slot = header.querySelector(SLOT);
+
+/* CSS du socle hero-stage, repris tel quel */
+const css = document.createElement('style');
+css.textContent = `
+:has(> ${SEL}){ position:relative; overflow:hidden; }
+:has(> ${SEL}) > :not(${SEL}){ position:relative; z-index:1; }
+${SEL}{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+${SEL} canvas, ${SLOT} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+${SLOT}{ display:none; }
+@media (max-width:991px){
+  :has(> ${SEL}):has(${SLOT}) > ${SEL}{ display:none; }
+  ${SLOT}{ display:block; position:relative; width:100%; aspect-ratio:4/3; pointer-events:none; }
+}`;
+document.head.appendChild(css);
+
+/* ---------- utils ---------- */
+function rng(s) { return () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const TAU = Math.PI * 2, clamp01 = x => Math.max(0, Math.min(1, x));
+const inOutCubic = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const seg = (t, a, b) => clamp01((t - a) / (b - a));
+
+/* ---------- texte simulé : 6 lignes de mots, en unités (1 = interligne) ---------- */
+const COLS = 13, ROWS = 6, PITCH = 1, THICK = .1, DENS = 110;   // DENS : points par unité de longueur
+const R = rng(7), words = [];
+for (let row = 0; row < ROWS; row++) {
+  const maxW = row === ROWS - 1 ? 6.2 : COLS - R() * 1.8; let x = 0;
+  while (x < maxW) { const w = Math.min(.45 + R() * R() * 2.3, maxW - x); if (w < .35) break; words.push({ x, w, row, t: 0 }); x += w + .27; }
+}
+/* Chronologie (s) : écriture, décision, tenue, fondu */
+const T0 = .7, TYPE = 5.4, DEC = T0 + TYPE + .6, DEC_D = .8, OUT = 9.4, OUT_D = 1.2, LOOP = 11, STILL = 8.2;
+let tc = 0; words.forEach(w => { w.t = tc; tc += .09 + w.w * .05; });
+words.forEach(w => w.t = T0 + w.t / tc * TYPE);
+
+/* Instances : pos(2) arrivée(2) t kind yel seed z = 9 floats */
+const inst = [];
+words.forEach((w, wi) => {
+  const n = Math.round(w.w * DENS), yel = wi === words.length - 1 ? 1 : 0, z = w.row / (ROWS - 1) * 2 - 1;
+  for (let i = 0; i < n; i++) inst.push(w.x + R() * w.w, w.row * PITCH + (R() - .5) * THICK, .25 + R() * .9, (R() - .5) * .16, w.t, 0, yel, R(), z);
+});
+for (let i = 0; i < 110; i++) inst.push((R() - .5) * .045, (R() - .5) * .6, 0, 0, 0, 1, 0, R(), 0);   // curseur
+const N = inst.length / 9, H_ = (ROWS - 1) * PITCH;
+
+/* ---------- WebGL2 ---------- */
+const cv = document.createElement('canvas'); cv.setAttribute('aria-hidden', 'true');
+const gl = cv.getContext('webgl2', { alpha: true, antialias: false, premultipliedAlpha: true }); if (!gl) return;
+const VS = `#version 300 es
+layout(location=0) in vec2 q;
+layout(location=1) in vec2 a_p; layout(location=2) in vec2 a_o; layout(location=3) in vec4 a_m; layout(location=4) in float a_z;
+uniform vec2 u_res, u_caret, u_mouse; uniform vec3 u_g; uniform float u_c, u_t, u_blink, u_fade, u_dec, u_r, u_side, u_para;
+out vec2 vq; out vec3 vcol; flat out float vr, va;
+const vec3 MAU=vec3(.573,.541,.804), BLU=vec3(.471,.659,.878), YEL=vec3(.886,.780,.039), PALE=vec3(.93,.92,1.);
+float ease(float x){ return x<.5?4.*x*x*x:1.-pow(-2.*x+2.,3.)/2.; }
+void main(){
+  float t=a_m.x, kind=a_m.y, yel=a_m.z, s=a_m.w; vec2 p; float al; vec3 col;
+  if(kind<.5){
+    float e=ease(clamp((u_c-t-s*.1)/.42,0.,1.));
+    p=a_p+a_o*(1.-e); p.y+=sin(u_t*.5+s*70.)*.004;
+    float age=smoothstep(.1,1.5,u_c-t);
+    col=mix(PALE,mix(MAU,BLU,s*.5+fract(a_p.x*.13)*.5),age);
+    al=e*mix(.95,.6,age);
+    if(yel>.5){ col=mix(col,YEL,u_dec); al=e*mix(al,.98,u_dec); }
+    else al*=1.-.4*u_dec;
+  } else { p=u_caret+a_p; col=PALE; al=u_blink*.9; }
+  vec2 px=u_g.xy+p*u_g.z+a_z*u_para*u_mouse;
+  al*=u_fade*mix(1.,.22+.78*smoothstep(u_res.x*.22,u_res.x*.62,px.x),u_side);
+  float r=u_r*(.8+.4*s); vr=r; va=al; vcol=col; vq=q*(r+1.);
+  gl_Position=vec4((px+vq)/u_res*vec2(2.,-2.)+vec2(-1.,1.),0.,1.);
+}`;
+const FS = `#version 300 es
+precision highp float;
+in vec2 vq; in vec3 vcol; flat in float vr, va; out vec4 o;
+void main(){ float a=clamp(vr-length(vq)+.5,0.,1.)*va; if(a<=.002) discard; o=vec4(vcol*a,a); }`;
+function sh(t, s) { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; }
+const P = gl.createProgram(); gl.attachShader(P, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(P, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(P);
+if (!gl.getProgramParameter(P, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(P));
+gl.useProgram(P);
+gl.bindVertexArray(gl.createVertexArray());
+gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(inst), gl.STATIC_DRAW);
+[[1, 2, 0], [2, 2, 2], [3, 4, 4], [4, 1, 8]].forEach(([loc, n, off]) => { gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, n, gl.FLOAT, false, 36, off * 4); gl.vertexAttribDivisor(loc, 1); });
+const U = {}; ['u_res', 'u_caret', 'u_mouse', 'u_g', 'u_c', 'u_t', 'u_blink', 'u_fade', 'u_dec', 'u_r', 'u_side', 'u_para'].forEach(n => U[n] = gl.getUniformLocation(P, n));
+gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); gl.clearColor(0, 0, 0, 0);
+
+/* ---------- mise en page : fond (desktop) ou bloc (≤ 991 px) ---------- */
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, mqFlow = matchMedia('(max-width: 991px)');
+const frozen = new URLSearchParams(location.search).get('t');
+let host = null, flow = false, W = 1, H = 1, dpr = 1;
+function fit() {
+  if (!host) return;
+  const r = host.getBoundingClientRect(); if (!r.width || !r.height) return;
+  dpr = Math.min(devicePixelRatio || 1, 2); W = Math.round(r.width * dpr); H = Math.round(r.height * dpr);
+  cv.width = W; cv.height = H; gl.viewport(0, 0, W, H);
+  gl.uniform2f(U.u_res, W, H);
+  /* fond : lignes sur 42 % de la largeur, à droite du texte ; bloc : 88 % de la largeur, centrées */
+  const s = flow ? W * .88 / COLS : W * .42 / COLS, x0 = flow ? W * .06 : W * .53;
+  gl.uniform3f(U.u_g, x0, H * .5 - H_ / 2 * s, s);
+  gl.uniform1f(U.u_r, Math.max(.75 * dpr, s * .028));
+  gl.uniform1f(U.u_side, flow ? 0 : 1);
+  gl.uniform1f(U.u_para, flow || reduced ? 0 : 14 * dpr);
+  if (reduced || frozen !== null) render(frozen !== null ? +frozen : STILL);
+}
+const ro = new ResizeObserver(fit);
+let visible = false;
+const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
+function place() {
+  const next = mqFlow.matches && slot ? slot : root;
+  if (next === host) return;
+  host = next; flow = host === slot; host.appendChild(cv);
+  ro.disconnect(); ro.observe(host); io.disconnect(); io.observe(host); fit();
+}
+mqFlow.addEventListener('change', place);
+
+/* souris écoutée sur le header, canvas en pointer-events:none */
+const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+header.addEventListener('pointermove', e => { const r = header.getBoundingClientRect(); mouse.tx = (e.clientX - r.left) / r.width - .5; mouse.ty = (e.clientY - r.top) / r.height - .5; }, { passive: true });
+
+function render(t) {
+  const k = t % LOOP;
+  let cx = -.14, cy = 0; for (const w of words) { if (w.t > k) break; cx = w.x + w.w + .13; cy = w.row * PITCH; }
+  const typing = k > T0 && k < T0 + TYPE;
+  gl.uniform1f(U.u_c, k); gl.uniform1f(U.u_t, t);
+  gl.uniform2f(U.u_caret, cx, cy);
+  gl.uniform1f(U.u_blink, typing ? 1 : (.5 + .5 * Math.cos(k * TAU * .9)) * (1 - seg(k, DEC, DEC + DEC_D)));
+  gl.uniform1f(U.u_dec, inOutCubic(seg(k, DEC, DEC + DEC_D)));
+  gl.uniform1f(U.u_fade, 1 - inOutCubic(seg(k, OUT, OUT + OUT_D)));
+  gl.uniform2f(U.u_mouse, mouse.x, mouse.y);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, N);
+}
+
+let clock = 0, last = performance.now();
+function frame(now) {
+  requestAnimationFrame(frame);
+  const dt = Math.min((now - last) / 1000, .05); last = now;
+  if (!visible || document.hidden || reduced || frozen !== null) return;
+  mouse.x += (mouse.tx - mouse.x) * .05; mouse.y += (mouse.ty - mouse.y) * .05;
+  clock += dt; render(clock);
+}
+place();
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

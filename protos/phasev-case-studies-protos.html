@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhaseV Case Studies</title>
+<style>
+  /* Proto des pages Case Studies (bibliothèque + fiche), calé sur le site publié :
+     header Resources (featured-slider, featured-label-div, arrow-new Light ; retenu par Romain, option A),
+     filtres Resources (fs_radio_field + filter-select), cartes Resources (post_image, post_date, heading-style-h4),
+     header d'article Resources pour la fiche.
+     Tokens : Aspekta ; navy #141238 ; jaune #e1c721 ; bouton #f3d400 ; blanc #f8f8f8 ; #f4f1f8 ; gris #626262 ; violet foncé #5e2670.
+     Texte : copy exacte de « PhaseV Case Study Library », sauf les lignes marquées data-proposed. */
+  @font-face{ font-family:Aspekta; src:url("https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a75fb545c817a6953af180d_AspektaVF.woff2") format("woff2"); font-weight:100 900; font-display:swap; }
+  :root{
+    --navy:#141238; --yellow:#e1c721; --btn:#f3d400; --btn-h:#ead864;
+    --white:#f8f8f8; --lp:#f4f1f8; --gray:#626262; --dpurple:#5e2670; --mauve:#928acd;
+    --soft:#ffffffa3; --rule-d:#ffffff1c; --panel:#ffffff0d; --line:#e3e1ef;
+    --gut:2.5rem; --sec:7.5rem;
+  }
+  @media(max-width:991px){ :root{ --gut:1.5rem; --sec:5rem; } }
+  @media(max-width:767px){ :root{ --gut:1rem; --sec:4rem; } }
+  *{ box-sizing:border-box; }
+  body{ margin:0; font-family:Aspekta,Arial,sans-serif; color:var(--navy); background:var(--white); -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  img{ display:block; max-width:100%; }
+  .wrap{ max-width:min(100%,90rem); margin:0 auto; padding:0 var(--gut); }
+  .label{ font-size:.875rem; letter-spacing:1.15px; text-transform:uppercase; line-height:130%; color:var(--gray); }
+  .label.is-y{ color:var(--yellow); }
+  .label.is-p{ color:var(--dpurple); }
+  .label.is-w{ color:var(--white); }
+
+  /* ---------- barre du proto (hors maquette) ---------- */
+  .chrome{ position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:.625rem 1.25rem; flex-wrap:wrap;
+    padding:.625rem var(--gut); background:#0d0c26f2; backdrop-filter:blur(8px); color:#fff; font-size:.8125rem; border-bottom:1px solid #ffffff14; }
+  .chrome b{ font-weight:600; letter-spacing:1.15px; text-transform:uppercase; font-size:.75rem; color:#ffffff80; margin-right:.25rem; }
+  .chrome .grp{ display:flex; gap:.375rem; flex-wrap:wrap; align-items:center; }
+  .chrome .grp[hidden]{ display:none; }
+  .chrome .grp i{ font-style:normal; color:#ffffff80; margin-right:.25rem; }
+  .chrome button{ font:inherit; color:#fff; background:transparent; border:1px solid #ffffff2e; border-radius:999px; padding:.375rem .875rem; cursor:pointer; transition:background .15s; }
+  .chrome button:hover{ background:#ffffff14; }
+  .chrome button.on{ background:#fff; color:var(--navy); border-color:#fff; }
+  .chrome .sep{ width:1px; height:1.25rem; background:#ffffff26; }
+  .chrome label{ display:flex; align-items:center; gap:.4rem; cursor:pointer; color:#ffffffb3; margin-left:auto; }
+  body.show-proposed [data-proposed]{ outline:1px dashed var(--yellow); outline-offset:4px; }
+  .view{ display:none; } .view.on{ display:block; }
+
+  /* ---------- navbar (maquette du composant nav du site) ---------- */
+  .mnav{ position:absolute; z-index:5; left:0; right:0; top:0; }
+  .mnav .wrap{ display:flex; align-items:center; justify-content:space-between; height:5.25rem; }
+  .mnav .logo{ width:8.75rem; color:var(--white); display:block; }
+  .mnav .links{ display:flex; align-items:center; gap:2.25rem; font-size:1rem; color:var(--white); }
+  .mnav .links span i{ font-style:normal; color:var(--yellow); margin-left:.5rem; }
+  .mnav .burger{ display:none; width:2.75rem; height:2.75rem; border-radius:999px; border:.5px solid #ffffff6b; position:relative; }
+  .mnav .burger::before,.mnav .burger::after{ content:''; position:absolute; left:30%; right:30%; height:1.5px; background:#fff; top:42%; }
+  .mnav .burger::after{ top:56%; }
+  @media(max-width:991px){ .mnav .links > span{ display:none; } .mnav .links{ gap:.75rem; } .mnav .burger{ display:block; } }
+  @media(max-width:479px){ .mnav .links .btn{ display:none; } .mnav .logo{ width:7.5rem; } }
+
+  /* ---------- sections ---------- */
+  .dark{ position:relative; isolation:isolate; overflow:clip; color:var(--white); background:#141238; }
+  .dark::before,.dark::after{ content:''; position:absolute; z-index:-1; pointer-events:none; }
+  .dark::before{ left:42%; top:-48%; width:95%; height:120%; background:radial-gradient(closest-side, rgba(126,91,178,.50), rgba(126,91,178,.18) 55%, rgba(126,91,178,0)); animation:pv-d1 46s ease-in-out infinite; }
+  .dark::after{ left:-36%; top:10%; width:114%; height:143%;
+    background:radial-gradient(closest-side, rgba(146,138,205,.12), rgba(146,138,205,0)) 100% 0% / 52.6% 49% no-repeat,
+               radial-gradient(closest-side, rgba(65,34,125,.58), rgba(65,34,125,.2) 55%, rgba(65,34,125,0)) 0% 100% / 87.7% 80.4% no-repeat;
+    animation:pv-d2 58s ease-in-out infinite; }
+  @keyframes pv-d1{ 0%,100%{ transform:none; } 33%{ transform:translate(-9%,7%) rotate(14deg) scale(1.12,.9); } 66%{ transform:translate(5%,12%) rotate(-8deg) scale(.92,1.08); } }
+  @keyframes pv-d2{ 0%,100%{ transform:none; } 40%{ transform:translate(11%,-8%) rotate(-12deg) scale(.9,1.12); } 75%{ transform:translate(4%,-14%) rotate(9deg) scale(1.1,.94); } }
+  @media (prefers-reduced-motion:reduce){ .dark::before,.dark::after{ animation:none; } }
+  .sec{ padding:var(--sec) 0; }
+  .is-white{ background:var(--white); }
+  .is-lp{ background:var(--lp); }
+  .h1{ font-size:3rem; font-weight:600; line-height:110%; letter-spacing:-.5px; margin:0; text-wrap:balance; }
+  .h-display{ font-size:3.5rem; font-weight:600; line-height:100%; letter-spacing:-1.28px; margin:0; }
+  .h2{ font-size:2.25rem; font-weight:600; line-height:110%; letter-spacing:-.5px; margin:0; text-wrap:balance; }
+  .h4{ font-size:1.5rem; font-weight:700; line-height:120%; margin:0; }
+  .lead{ font-size:1.125rem; line-height:140%; margin:0; color:var(--gray); }
+  .dark .lead{ color:var(--white); }
+  @media(max-width:991px){ .h-display{ font-size:2.75rem; } .h1{ font-size:2.5rem; } .h2{ font-size:1.875rem; } }
+  @media(max-width:767px){ .h-display{ font-size:2.375rem; } .h1{ font-size:2rem; } .h2{ font-size:1.625rem; } .h4{ font-size:1.25rem; } }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.625rem; min-height:2.5rem; padding:.5rem 1.4rem; border-radius:999px;
+    font:inherit; font-size:1rem; text-decoration:none; cursor:pointer; border:0; transition:background .2s, color .2s, border-color .2s; white-space:nowrap; }
+  .btn.is-y{ background:var(--btn); color:var(--navy); } .btn.is-y:hover{ background:var(--btn-h); }
+  .btn.is-ghost{ background:transparent; color:var(--white); border:1px solid #ffffff6b; } .btn.is-ghost:hover{ background:#ffffff1f; }
+
+  /* ================= LIBRARY : header A (comme Resources) ================= */
+  .hdr{ min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding:8.5rem 0 4.5rem; }
+  .hdr[hidden]{ display:none; }
+  .hdr > .wrap{ width:100%; }
+  .feat{ display:flex; flex-direction:column; align-items:center; gap:2.5rem; }
+  .feat-stage{ display:grid; width:100%; }
+  .slide{ grid-area:1 / 1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:4rem; align-items:center;
+    opacity:0; visibility:hidden; transform:translateX(12px); transition:opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1), visibility 0s .45s; }
+  .slide.on{ opacity:1; visibility:visible; transform:none; transition:opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1), visibility 0s; }
+  @media (prefers-reduced-motion:reduce){ .slide, .slide.on{ transition:none; transform:none; } }
+  .slide .txt{ display:flex; flex-direction:column; align-items:flex-start; gap:1.5rem; max-width:34.6875rem; }
+  .slide .labels{ display:flex; flex-wrap:wrap; gap:.25rem 1rem; }
+  .slide .kpi-s{ display:flex; align-items:baseline; gap:.875rem; }
+  .slide .kpi-s .n{ font-size:2.5rem; font-weight:600; line-height:1; letter-spacing:-1px; color:var(--yellow); font-variant-numeric:tabular-nums; }
+  .slide .kpi-s .x{ font-size:1rem; color:var(--white); }
+  .slide .img{ border-radius:1rem; overflow:hidden; aspect-ratio:535/301; background:#ffffff0d; }
+  .slide .img img{ width:100%; height:100%; object-fit:cover; }
+  .arrows{ display:flex; gap:1rem; }
+  .arrow-new{ width:3.562rem; height:3rem; color:var(--white); background:#ffffff0f; border:.5px solid #ffffff6b; border-radius:999px; padding:0 1.35rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; transition:all .2s; }
+  .arrow-new:hover{ background:var(--yellow); color:var(--navy); }
+  .arrow-new.is-disabled{ opacity:.1; cursor:default; } .arrow-new.is-disabled:hover{ background:#ffffff0f; color:var(--white); }
+  .arrow-new svg{ width:100%; display:block; } .arrow-new.is-right svg{ transform:scaleX(-1); }
+  @media(max-width:991px){ .hdr{ min-height:0; padding:8rem 0 3.5rem; } .slide{ grid-template-columns:1fr; gap:2rem; } .slide .img{ order:-1; } .slide .txt{ max-width:none; } }
+
+  /* ================= LIBRARY : filtres + cartes (comme Resources) ================= */
+  .lib-list{ padding:5rem 0 var(--sec); }
+  .filters{ display:flex; justify-content:space-between; align-items:center; gap:1rem 2rem; margin-bottom:4rem; flex-wrap:wrap; }
+  .pills{ display:flex; gap:.25rem; flex-wrap:wrap; }
+  .pill{ font:inherit; font-size:1rem; color:var(--navy); background:transparent; border:0; border-radius:999px; min-height:3rem; padding:.5625rem 1.5rem;
+    cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .pill:hover, .pill.on{ background:var(--navy); color:var(--white); }
+  .filter-select{ -webkit-appearance:none; appearance:none; width:20.3125rem; height:3rem; margin:0; padding:0 3rem 0 1rem; border:1px solid var(--gray); border-radius:.5rem;
+    background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M7 12 0 0h14z' fill='%23626262'/%3E%3C/svg%3E") no-repeat right 1rem center / .875rem .75rem;
+    color:#4b5563; font:inherit; font-size:1rem; cursor:pointer; transition:border-color .2s; }
+  .filter-select:hover{ border-color:#111827; }
+  .filter-select:focus-visible{ outline:none; border-color:var(--navy); box-shadow:0 0 0 3px #14123826; }
+  @media(max-width:991px){ .filters{ margin-bottom:3rem; } .pill{ min-height:2.5rem; padding:.25rem 1.125rem; } .filter-select{ width:100%; } }
+
+  .cards{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:3.5rem 3rem; }
+  @media(max-width:991px){ .cards{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:3rem 1.5rem; } }
+  @media(max-width:640px){ .cards{ grid-template-columns:1fr; gap:2.75rem; } }
+  .card{ display:flex; flex-direction:column; gap:.9375rem; text-decoration:none; color:var(--navy); cursor:pointer; }
+  .card .img{ aspect-ratio:535/301; border-radius:1rem; overflow:hidden; background:#e9e6f2; }
+  .card .img img{ width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+  .card:hover .img img{ transform:scale(1.03); }
+  .card .tags{ display:flex; flex-wrap:wrap; gap:.25rem 1rem; }
+  .card .t{ margin:0; text-wrap:pretty; }
+  .card .d{ font-size:1rem; line-height:140%; margin:0; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .card .stat{ font-size:1rem; line-height:140%; color:var(--gray); }
+  .card .stat b{ color:var(--navy); font-weight:700; margin-right:.375rem; }
+  @media (prefers-reduced-motion:reduce){ .card .img img{ transition:none; } .card:hover .img img{ transform:none; } }
+  .card.enter{ animation:cardIn .45s cubic-bezier(.2,.7,.2,1) both; animation-delay:calc(var(--i,0) * 35ms); }
+  @keyframes cardIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .card.enter{ animation:none; } }
+  .empty{ padding:4rem 0; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1rem; }
+  .empty[hidden]{ display:none; }
+  .empty button{ font:inherit; font-size:1rem; color:var(--navy); background:none; border:0; border-bottom:1px solid #14123866; cursor:pointer; padding:0 0 .125rem; }
+
+  /* bandeau CTA */
+  .cta{ padding:6.5rem 0; }
+  .cta .wrap{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2rem 4rem; align-items:end; }
+  .cta .left{ display:flex; flex-direction:column; gap:1.25rem; max-width:40rem; }
+  .cta .btns{ display:flex; gap:.75rem; flex-wrap:wrap; }
+  @media(max-width:767px){ .cta{ padding:4.5rem 0; } .cta .wrap{ grid-template-columns:1fr; } }
+
+  /* ================= CASE STUDY ================= */
+  /* header calé sur celui des articles Resources : labels blancs, titre, image arrondie à droite */
+  .cs-hero{ padding:10.5rem 0 5.5rem; }
+  .cs-hero .grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:4.5rem; align-items:center; }
+  .cs-hero .left{ display:flex; flex-direction:column; gap:1.5rem; }
+  .metaline{ display:flex; flex-wrap:wrap; gap:.25rem 1rem; }
+  .cs-hero .lead{ max-width:34rem; }
+  .kpi{ display:flex; align-items:baseline; gap:1.125rem; flex-wrap:wrap; padding-top:1.5rem; margin-top:.5rem; border-top:1px solid var(--rule-d); }
+  .kpi[hidden]{ display:none; }
+  .kpi .n{ font-size:3.5rem; font-weight:600; line-height:.9; letter-spacing:-1.5px; color:var(--yellow); font-variant-numeric:tabular-nums; }
+  .kpi .x{ font-size:1.125rem; line-height:140%; max-width:16rem; }
+  .cs-hero .img{ border-radius:1rem; overflow:hidden; aspect-ratio:16/9; background:#ffffff0d; }
+  .cs-hero .img img{ width:100%; height:100%; object-fit:cover; }
+  @media(max-width:991px){ .cs-hero{ padding:8rem 0 4rem; } .cs-hero .grid{ grid-template-columns:1fr; gap:2.5rem; } }
+  @media(max-width:767px){ .kpi .n{ font-size:2.75rem; } }
+
+  /* At a glance */
+  .glance{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:2rem 4rem; align-items:start; }
+  .glance .head{ display:flex; flex-direction:column; gap:1.25rem; position:sticky; top:calc(var(--chrome,3rem) + 2rem); }
+  .tbl{ background:#fff; border-radius:1rem; box-shadow:0 15px 44px #120d3514; overflow:hidden; }
+  .tbl table{ width:100%; border-collapse:collapse; font-size:1rem; line-height:140%; }
+  .tbl th, .tbl td{ text-align:left; vertical-align:top; padding:1.125rem 1.5rem; }
+  .tbl thead th{ font-size:.8125rem; letter-spacing:1.15px; text-transform:uppercase; font-weight:400; color:var(--gray); padding-top:1.25rem; padding-bottom:1rem; border-bottom:1px solid var(--line); }
+  .tbl tbody tr + tr td{ border-top:1px solid var(--line); }
+  .tbl tbody td:first-child{ color:var(--gray); }
+  .tbl td.em, .tbl th.em{ background:#f4f1f8; }
+  .tbl td.em{ font-weight:600; color:var(--navy); }
+  .tbl thead th.em{ color:var(--dpurple); }
+  .tbl .note{ font-size:.875rem; color:var(--gray); padding:1rem 1.5rem 1.25rem; border-top:1px solid var(--line); margin:0; }
+  @media(max-width:991px){ .glance{ grid-template-columns:1fr; } .glance .head{ position:static; } }
+  @media(max-width:640px){
+    .tbl th, .tbl td{ padding:.875rem 1rem; }
+    .tbl.cols-3 thead{ display:none; }
+    .tbl.cols-3 tr{ display:grid; grid-template-columns:1fr 1fr; }
+    .tbl.cols-3 td:first-child{ grid-column:1 / -1; padding-bottom:0; font-size:.875rem; letter-spacing:1.15px; text-transform:uppercase; }
+    .tbl.cols-3 td[data-h]::before{ content:attr(data-h); display:block; font-size:.75rem; letter-spacing:1px; text-transform:uppercase; color:var(--gray); font-weight:400; margin-bottom:.25rem; }
+    .tbl.cols-3 tbody tr + tr td{ border-top:0; } .tbl.cols-3 tbody tr + tr{ border-top:1px solid var(--line); }
+  }
+
+  /* récit : intitulé collant à gauche, rich text à droite */
+  .chap{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:1.5rem 4rem; padding:3.5rem 0; }
+  .chap + .chap{ border-top:1px solid var(--line); }
+  .chap:first-child{ padding-top:0; } .chap:last-child{ padding-bottom:0; }
+  .chap .head{ position:sticky; top:calc(var(--chrome,3rem) + 2rem); align-self:start; display:flex; align-items:baseline; gap:1rem; }
+  .chap .num{ font-size:.875rem; letter-spacing:1.15px; color:var(--mauve); font-variant-numeric:tabular-nums; }
+  @media(max-width:991px){ .chap{ grid-template-columns:1fr; padding:2.5rem 0; } .chap .head{ position:static; } }
+
+  .rich{ font-size:1.125rem; line-height:160%; color:#2b2a48; max-width:44rem; }
+  .rich > :first-child{ margin-top:0; } .rich > :last-child{ margin-bottom:0; }
+  .rich p{ margin:0 0 1.25rem; }
+  .rich strong{ color:var(--navy); font-weight:600; }
+  .rich ul, .rich ol{ margin:0 0 1.25rem; padding:0; list-style:none; display:flex; flex-direction:column; gap:1rem; }
+  .rich ul li{ position:relative; padding-left:1.75rem; }
+  .rich ul li::before{ content:''; position:absolute; left:.25rem; top:.7em; width:.5rem; height:.5rem; border-radius:50%; background:var(--mauve); }
+  .rich ol{ counter-reset:s; gap:1.5rem; }
+  .rich ol li{ counter-increment:s; position:relative; padding-left:3.25rem; }
+  .rich ol li::before{ content:counter(s, decimal-leading-zero); position:absolute; left:0; top:.1rem; width:2.25rem; height:2.25rem; border-radius:50%; border:1px solid #14123833;
+    display:grid; place-items:center; font-size:.8125rem; letter-spacing:.5px; color:var(--navy); font-variant-numeric:tabular-nums; }
+  .rich ol li strong:first-child{ display:block; margin-bottom:.25rem; }
+  .rich.is-results ul{ gap:0; }
+  .rich.is-results ul li{ padding:1.125rem 0 1.125rem 2.5rem; border-top:1px solid var(--line); font-size:1.25rem; line-height:145%; color:var(--navy); }
+  .rich.is-results ul li:last-child{ border-bottom:1px solid var(--line); }
+  .rich.is-results ul li::before{ left:0; top:1.5rem; width:1.25rem; height:1.25rem; border-radius:50%; background:var(--navy)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 6.2l2 2L9 4' fill='none' stroke='%23f8f8f8' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/.75rem no-repeat; }
+  @media(max-width:767px){ .rich{ font-size:1rem; } .rich.is-results ul li{ font-size:1.0625rem; } }
+
+  /* Why it matters : la liste du rich text devient une grille de cartes à icône */
+  .why{ display:flex; flex-direction:column; gap:3.5rem; }
+  .why .head{ display:flex; flex-direction:column; gap:1.25rem; max-width:40rem; }
+  .rich.is-why{ max-width:none; }
+  .rich.is-why ul{ display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1.25rem; margin:0; }
+  .rich.is-why ul li{ display:flex; flex-direction:column; padding:2.25rem 2rem 2.5rem; border-radius:1rem; background:var(--panel); border:1px solid var(--rule-d);
+    color:var(--soft); font-size:1rem; line-height:155%; transition:background .3s, border-color .3s; }
+  .rich.is-why ul li:hover{ background:#ffffff14; border-color:#ffffff33; }
+  .rich.is-why ul li::before{ display:none; }
+  .rich.is-why .ico{ width:3.5rem; height:3.5rem; margin-bottom:2.25rem; flex:none; }
+  .rich.is-why .ico svg{ width:100%; height:100%; display:block; }
+  .rich.is-why ul li strong{ display:block; color:var(--white); font-size:1.25rem; line-height:125%; margin-bottom:.75rem; padding-top:1.5rem; border-top:1px solid var(--rule-d); }
+  @media (prefers-reduced-motion:reduce){ .rich.is-why ul li{ transition:none; } }
+  @media(max-width:767px){ .rich.is-why ul li{ padding:1.75rem 1.5rem 2rem; } .rich.is-why .ico{ width:3rem; height:3rem; margin-bottom:1.75rem; } }
+
+  /* FAQ en accordéon */
+  .faq{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:2rem 4rem; }
+  .faq .head{ display:flex; flex-direction:column; gap:1.25rem; }
+  .acc{ border-top:1px solid #14123826; }
+  .acc details{ border-bottom:1px solid #14123826; }
+  .acc summary{ list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:2rem; padding:1.5rem 0; font-size:1.25rem; font-weight:600; line-height:130%; }
+  .acc summary::-webkit-details-marker{ display:none; }
+  .acc .pm{ flex:none; position:relative; width:2.5rem; height:2.5rem; border-radius:999px; border:1px solid #14123833; transition:background .2s, border-color .2s; }
+  .acc .pm::before,.acc .pm::after{ content:''; position:absolute; left:50%; top:50%; width:.875rem; height:1.5px; background:currentColor; transform:translate(-50%,-50%); transition:transform .3s cubic-bezier(.2,.7,.2,1); }
+  .acc .pm::after{ transform:translate(-50%,-50%) rotate(90deg); }
+  .acc details[open] .pm{ background:var(--navy); color:var(--white); border-color:var(--navy); }
+  .acc details[open] .pm::after{ transform:translate(-50%,-50%) rotate(0); }
+  .acc summary:hover .pm{ border-color:var(--navy); }
+  .acc .ans{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1); }
+  .acc details[open] .ans{ grid-template-rows:1fr; }
+  .acc .ans > div{ overflow:hidden; }
+  .acc .ans p{ margin:0; padding:0 4rem 1.75rem 0; font-size:1.0625rem; line-height:160%; color:#2b2a48; }
+  @media (prefers-reduced-motion:reduce){ .acc .ans, .acc .pm::before, .acc .pm::after{ transition:none; } }
+  @media(max-width:991px){ .faq{ grid-template-columns:1fr; } .acc summary{ font-size:1.0625rem; } .acc .ans p{ padding-right:0; } }
+
+  .source{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:1rem 4rem; padding-top:3rem; margin-top:4.5rem; border-top:1px solid var(--line); }
+  .source[hidden]{ display:none; }
+  .source .txt{ display:flex; flex-direction:column; gap:.75rem; font-size:.9375rem; line-height:155%; color:var(--gray); max-width:44rem; }
+  .source .txt p{ margin:0; }
+  .source .txt a{ color:var(--navy); }
+  @media(max-width:991px){ .source{ grid-template-columns:1fr; margin-top:3rem; } }
+
+  .related .top{ display:flex; justify-content:space-between; align-items:end; gap:2rem; margin-bottom:3rem; flex-wrap:wrap; }
+  .related .top a{ font-size:1rem; text-decoration:none; border-bottom:1px solid #14123866; padding-bottom:.25rem; }
+  .toast{ position:fixed; left:50%; bottom:1.5rem; transform:translate(-50%,1rem); opacity:0; z-index:60; background:var(--navy); color:#fff; padding:.875rem 1.25rem; border-radius:999px; font-size:.875rem; transition:opacity .25s, transform .25s; pointer-events:none; }
+  .toast.on{ opacity:1; transform:translate(-50%,0); }
+</style>
+</head>
+<body>
+
+<div class="chrome" id="chrome">
+  <b>Proto</b>
+  <div class="grp" id="viewSw"><button data-view="library" class="on">Library</button><button data-view="case">Case study</button></div>
+  <span class="sep"></span>
+  <div class="grp" id="caseSw" hidden></div>
+  <label><input type="checkbox" id="propSw"> Copy proposée</label>
+</div>
+
+<template id="navTpl">
+  <nav class="mnav"><div class="wrap">
+    <a class="logo" href="#" aria-label="PhaseV"><svg width="100%" height="100%" viewBox="0 0 167 32" fill="none"><path d="M149.429 0.0746441C158.247 -0.771797 166.083 5.67781 166.926 14.4772C167.769 23.2766 161.301 31.0908 152.481 31.9271C143.669 32.7627 135.845 26.3151 135.003 17.5228C134.16 8.73054 140.618 0.920387 149.429 0.0746441Z" fill="#E2C709"/><path d="M142.014 8.33008L146.63 8.32999C148.164 11.6632 149.472 15.1348 150.982 18.4634C152.237 15.2525 153.968 11.5531 155.354 8.33203L159.874 8.33953C159.002 10.2009 158.116 12.0555 157.217 13.9031L153.5 21.6823C153.097 22.533 151.623 25.8068 151.104 26.4087L150.911 26.4044C150.443 26.124 150.2 25.2808 149.953 24.7863C149.188 23.2571 148.443 21.7185 147.718 20.1706C145.837 16.2142 143.935 12.2673 142.014 8.33008Z" fill="currentcolor"/><path d="M94.0463 0.940079C96.5617 0.779309 99.871 1.51809 102.228 2.39682C102.293 4.22674 102.229 6.33163 102.251 8.19704C100.149 7.10529 97.8258 6.50384 95.4581 6.43792C93.9908 6.4024 92.0054 6.63303 90.9145 7.6817C90.4254 8.14449 90.1463 8.78555 90.1404 9.45803C90.1224 11.9072 94.0027 13.1385 95.8712 13.8963C100.209 15.6562 104.119 17.6186 103.961 23.0405C103.762 29.8536 97.8335 31.4304 92.2034 31.3262C88.9949 31.1582 87.2801 30.7295 84.3225 29.6985V23.6452C87.1315 24.8896 89.997 25.9371 93.1389 25.7349C94.5388 25.6448 96.5498 25.2879 97.446 24.1647C97.7738 23.754 97.8617 23.3421 97.8224 22.8154C97.6022 19.9139 92.6609 19.0308 90.4246 17.9436C89.041 17.3682 87.8127 16.7063 86.6425 15.7593C83.3255 13.0758 83.0592 7.4767 85.8128 4.29196C87.9015 1.8756 90.9547 1.18253 94.0463 0.940079Z" fill="currentcolor"/><path d="M0 1.4331C2.56613 1.3531 5.18076 1.45829 7.75178 1.41152C10.7503 1.35697 13.8531 1.52393 16.5077 3.07453C18.4545 4.19803 19.8611 6.06157 20.4059 8.23869C21.042 10.6825 20.8216 13.8695 19.4851 16.0372C17.7564 18.841 15.6609 19.6057 12.7106 20.371C12.2234 18.6475 11.7214 16.9281 11.2045 15.2131C15.0244 14.2093 15.4363 9.20091 12.4336 7.29955C10.6573 6.44661 8.20494 6.63201 6.25053 6.66591C6.37575 13.2779 6.16415 19.9579 6.25557 26.5747C6.274 27.9041 6.19863 29.2945 6.30379 30.6145C4.65044 30.5112 1.71707 30.5942 0.00521528 30.6145L0 1.4331Z" fill="currentcolor"/><path d="M64.7245 1.09927C65.1422 1.30151 69.2336 10.1447 69.7688 11.2619L79.1709 30.7978L72.5918 30.8126L67.5828 19.3834C66.746 17.4785 65.7842 15.107 64.8674 13.2764L64.7675 13.3089C64.0168 14.7118 62.806 17.7259 62.1053 19.3206L57.0823 30.8073L50.4879 30.8028C50.8156 30.2748 51.5939 28.5394 51.884 27.9252L54.5646 22.2896L64.7245 1.09927Z" fill="currentcolor"/><path d="M26.3563 1.43262C28.4444 1.41386 30.5326 1.40629 32.6208 1.40991L32.6157 13.248L36.2422 13.2235C36.2212 14.8858 36.2077 16.6812 36.2396 18.3372C35.1204 18.2659 33.7534 18.3109 32.6151 18.3201L32.6157 26.8374C32.6152 27.8848 32.5632 29.6182 32.6712 30.6022C30.6474 30.5566 28.3905 30.5961 26.3614 30.6126L26.3563 1.43262Z" fill="currentcolor"/><path d="M39.3371 1.41539L45.6488 1.41022L45.6412 18.5328C45.641 22.5353 45.5903 26.6446 45.6557 30.6324C44.3574 30.4934 40.788 30.6053 39.3317 30.6189L39.3371 1.41539Z" fill="currentcolor"/><path d="M128.778 25.31L128.838 25.3372C128.981 25.7564 128.903 29.7834 128.907 30.6147C126.983 30.5163 124.378 30.6004 122.387 30.6001L109.608 30.6064C109.392 30.3769 109.49 26.0047 109.492 25.339C115.893 25.2415 122.366 25.3878 128.778 25.31Z" fill="currentcolor"/><path d="M109.481 1.43457C115.795 1.29595 122.542 1.42845 128.893 1.40858L128.902 6.66753C128.031 6.6097 126.955 6.62273 126.076 6.63908C120.578 6.74137 114.975 6.48689 109.488 6.66353L109.481 1.43457Z" fill="currentcolor"/><path d="M109.479 13.268C115.752 13.0853 122.561 13.2649 128.89 13.2169L128.892 18.3498C128.268 18.2663 126.696 18.2998 126.031 18.3L120.653 18.3039L113.491 18.3019C112.342 18.3017 110.594 18.2533 109.49 18.3446L109.479 13.268Z" fill="currentcolor"/></svg></a>
+    <div class="links"><span>Platform<i>+</i></span><span>Company</span><span>Resources</span><span>Careers</span><a class="btn is-y" href="#">Book a Demo</a><span class="burger" aria-hidden="true"></span></div>
+  </div></nav>
+</template>
+
+<!-- ================= LIBRARY ================= -->
+<div class="view on" id="v-library">
+  <header class="dark hdr" id="hdrA" data-nav>
+    <div class="wrap feat">
+      <div class="feat-stage" id="featStage"></div>
+      <div class="arrows"><button class="arrow-new is-left" id="featPrev" aria-label="Previous case study"></button><button class="arrow-new is-right" id="featNext" aria-label="Next case study"></button></div>
+    </div>
+  </header>
+
+  <section class="is-white lib-list">
+    <div class="wrap">
+      <div class="filters">
+        <div class="pills" id="fProduct" role="radiogroup" aria-label="Product"></div>
+        <select class="filter-select" id="fArea" aria-label="Therapeutic area"></select>
+      </div>
+      <div class="cards" id="cards"></div>
+      <div class="empty" id="empty" hidden>
+        <h3 class="h4" data-proposed>No case study matches these filters yet.</h3>
+        <button data-reset>Show all case studies</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark cta">
+    <div class="wrap">
+      <div class="left"><div class="label is-y">Want results like these?</div><h2 class="h2">Book a demo or email info@phasevtrials.com.</h2></div>
+      <div class="btns"><a class="btn is-y" href="#">Request a demo</a><a class="btn is-ghost" href="mailto:info@phasevtrials.com">Email us</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= CASE STUDY ================= -->
+<div class="view" id="v-case">
+  <header class="dark cs-hero" data-nav>
+    <div class="wrap grid">
+      <div class="left">
+        <div class="metaline" id="csMeta"></div>
+        <h1 class="h1" id="csTitle"></h1>
+        <p class="lead" id="csIntro"></p>
+        <div class="kpi" id="csKpi"><span class="n" id="csKpiN"></span><span class="x" id="csKpiX"></span></div>
+      </div>
+      <div class="img"><img id="csImg" alt=""></div>
+    </div>
+  </header>
+
+  <section class="is-lp sec">
+    <div class="wrap glance">
+      <div class="head"><div class="label is-p">At a glance</div><h2 class="h2" id="csShort"></h2></div>
+      <div id="csTable"></div>
+    </div>
+  </section>
+
+  <section class="is-white sec">
+    <div class="wrap">
+      <div class="chap"><div class="head"><span class="num">01</span><h2 class="h4">The challenge</h2></div><div class="rich" id="csChallenge"></div></div>
+      <div class="chap"><div class="head"><span class="num">02</span><h2 class="h4">What we did</h2></div><div class="rich" id="csDid"></div></div>
+      <div class="chap"><div class="head"><span class="num">03</span><h2 class="h4">The results</h2></div><div class="rich is-results" id="csResults"></div></div>
+    </div>
+  </section>
+
+  <section class="dark sec">
+    <div class="wrap why">
+      <div class="head"><div class="label is-y">Why it matters</div><h2 class="h2" data-proposed>What it changes, team by team.</h2></div>
+      <div class="rich is-why" id="csWhy"></div>
+    </div>
+  </section>
+
+  <section class="is-white sec">
+    <div class="wrap">
+      <div class="faq">
+        <div class="head"><div class="label is-p">FAQ</div><h2 class="h2" data-proposed>Questions, answered.</h2></div>
+        <div class="acc" id="csFaq"></div>
+      </div>
+      <div class="source" id="csSource"><div class="label">Source</div><div class="txt" id="csSourceTxt"></div></div>
+    </div>
+  </section>
+
+  <section class="is-lp sec related">
+    <div class="wrap">
+      <div class="top"><h2 class="h2" id="relTitle" data-proposed></h2><a href="#" id="relAll">All case studies <span>→</span></a></div>
+      <div class="cards" id="relCards"></div>
+    </div>
+  </section>
+
+  <section class="dark cta">
+    <div class="wrap">
+      <div class="left"><div class="label is-y">Want results like these?</div><h2 class="h2">Book a demo or email info@phasevtrials.com.</h2></div>
+      <div class="btns"><a class="btn is-y" href="#">Request a demo</a><a class="btn is-ghost" href="mailto:info@phasevtrials.com">Email us</a></div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- collections (miroir des futures collections CMS) ---------- */
+const PRODUCTS = [
+  { slug:'clinops',   name:'ClinOps Optimizer' },
+  { slug:'trial',     name:'Trial Optimizer' },
+  { slug:'response',  name:'Response Optimizer' },
+  { slug:'portfolio', name:'Portfolio Optimizer' },
+];
+const AREAS = ['Oncology','Pulmonology','Hematology','Nephrology','Immunology','Infectious Disease','Neurology','Metabolic','Rare Disease'];
+const IMG = n => '../medias/DOCS/CASE%20STUDIES/case-study-images/' + n + '.jpg';
+/* cas mis en avant dans le header A (champ « Featured » du CMS) */
+const FEATURED = ['clinops-1-nsclc','trial-3-denali','clinops-3-sickle-cell'];
+
+/* ---------- les 21 cartes (champs de carte du document client) ---------- */
+const CASES = [
+  { id:'clinops-1-nsclc', p:['clinops','trial'], a:['Oncology'], type:'Site Strategy', phase:'Clinical Trials', short:'Phase 3 NSCLC',
+    t:'How Smarter Site Selection Saved a Phase 3 Lung Cancer Trial 9 Months and $30M',
+    d:'A Phase 3 lung cancer trial was set to miss its 24-month goal. Smarter sites and design cut 9 months, 33 sites and 95 patients.', s:['$30M','estimated cost saved'] },
+  { id:'clinops-2-copd', p:['clinops'], a:['Pulmonology'], type:'Site Strategy', phase:'Clinical Trials', short:'Two Global Phase 3 COPD Trials',
+    t:'How Causal ML Site Selection Nearly Halved Enrollment Time in Two Global COPD Trials',
+    d:'Two global Phase 3 COPD trials faced up to 3.8 years of enrollment. A causal ML site list cut the estimate to 1.95 years with 25 fewer sites.', s:['1.95','years to enroll, down from 3.8'] },
+  { id:'clinops-3-sickle-cell', p:['clinops'], a:['Hematology'], type:'Site Strategy', phase:'Clinical Trials', short:'Phase 3 Sickle Cell Disease',
+    t:'How Causal Site Selection Hit a Sickle Cell Trial Target With 46 Fewer Sites',
+    d:'A global sickle cell trial needed 332 patients. PhaseV’s causal model hit the target with 61 sites, 46 fewer than a 107-site scenario.', s:['46','fewer sites, same enrollment target'] },
+  { id:'clinops-4-igan', p:['clinops'], a:['Nephrology'], type:'Site Strategy', phase:'Clinical Trials', short:'Phase 2 IgA Nephropathy',
+    t:'How a Phase 2 IgA Nephropathy Trial Got a Stronger, More Transparent Site List',
+    d:'PhaseV scored every site on a Phase 2 IgA nephropathy list and recommended a 60-site cut, with the top 5 sites per region flagged.', s:['60','sites in the recommended list'] },
+  { id:'clinops-5-vitiligo', p:['clinops'], a:['Immunology'], type:'Site Strategy', phase:'Clinical Trials', short:'Vitiligo',
+    t:'How PhaseV Approaches Site Selection for Vitiligo Clinical Trials',
+    d:'How PhaseV finds eligible patients, diverse skin types and uncommitted investigators for vitiligo trials in a crowded field.', s:null },
+  { id:'trial-1-infectious-disease', p:['trial'], a:['Infectious Disease'], type:'Trial Design Optimization', phase:'Clinical Trials', short:'Phase 3 Infectious Disease',
+    t:'How AI-Optimized Adaptive Design Cut a Phase 3 Infectious Disease Trial by 6 Months',
+    d:'Simulating millions of designs found a Phase 3 adaptive trial that is 25% shorter with 9% fewer patients, saving $6.05M at about 90% power.', s:['25%','shorter trial'] },
+  { id:'trial-2-rheumatic', p:['trial'], a:['Immunology'], type:'Trial Design Optimization', phase:'Clinical Trials', short:'Phase 2 Rheumatic Disease',
+    t:'How Adaptive Enrichment Gave a Phase 2 Rheumatic Disease Trial 25% More Statistical Power',
+    d:'Simulation designed a Phase 2 rheumatic disease trial that focuses enrollment on likely responders, with a 25% gain in statistical power.', s:['25%','more statistical power'] },
+  { id:'trial-3-denali', p:['trial'], a:['Neurology'], type:'Trial Design Optimization', phase:'Clinical Trials', short:'Early-Phase Dose Selection',
+    t:'How Denali Therapeutics and PhaseV Raised the Odds of Picking the Best Dose From 64% to 76%',
+    d:'Simulation and optimization raised the chance of picking the best dose from 64.3% to 76.3% at the same sample size, in work with Denali.', s:['76%','chance of picking the best dose'] },
+  { id:'trial-4-n-of-1-aso', p:['trial'], a:['Neurology'], type:'Regulatory Strategy', phase:'Clinical Trials', short:'N-of-1 ASO Trials',
+    t:'How a Bayesian Framework Made Individualized ASO Trials Regulator-Ready',
+    d:'A Bayesian framework and statistical analysis plan for single-patient ASO trials, with support for FDA and MHRA engagement.', s:null },
+  { id:'trial-5-mash-phase23', p:['trial'], a:['Metabolic'], type:'Trial Design Optimization', phase:'Clinical Trials', short:'Phase 2/3 MASH',
+    t:'How a Causal Disease Model Cut a MASH Phase 2/3 Trial’s Sample Size by 70%',
+    d:'A causal liver-disease model refined who can enroll in a MASH Phase 2/3 trial, cutting required sample size by 70% and recruitment time by 28%.', s:['70%','smaller required sample size'] },
+  { id:'trial-6-seamless-phase23', p:['trial'], a:[], type:'Trial Design Optimization', phase:'Clinical Trials', short:'Seamless Phase 2/3 Dose Selection',
+    t:'How Optimization Cut a Seamless Phase 2/3 Trial’s Sample Size by Up to 33%',
+    d:'Optimizing a seamless Phase 2/3 dose-selection design cut the required sample size to 353 patients, 33% below the fixed design’s 526.', s:['33%','smaller sample size than a fixed design'] },
+  { id:'response-1-oramed', p:['response'], a:['Metabolic'], type:'Responder & Subgroup ID', phase:'Clinical Trials', short:'Phase III Oral Insulin, Type 2 Diabetes',
+    t:'Rescuing a Failed Phase III Trial: Finding the Patients Who Respond to Oral Insulin',
+    d:'After a Phase III oral insulin trial missed its endpoint, causal ML found the responder subgroups. Oramed re-initiated a Phase III trial.', s:null },
+  { id:'response-2-als', p:['response'], a:['Neurology'], type:'Responder & Subgroup ID', phase:'Clinical Trials', short:'ALS',
+    t:'How Finding the Right ALS Patients Led to a Smaller, Higher-Probability Phase 3 Trial',
+    d:'A progression model and a high-efficacy subgroup informed a Phase 3 ALS design with a smaller sample size and a higher probability of success.', s:null },
+  { id:'response-3-sle', p:['response'], a:['Immunology'], type:'Prognostic Modeling', phase:'Clinical Trials', short:'Lupus Prognostic Model',
+    t:'How a Lupus Prognostic Model Cut Variance 15% and Shrank the Next Trial',
+    d:'A lupus prognostic model cut variance by about 15%, equivalent to 92 fewer participants, and informed the client’s next trial design.', s:['~15%','variance reduction'] },
+  { id:'portfolio-1-metabolic-ma', p:['portfolio'], a:['Metabolic'], type:'Portfolio & Lifecycle Strategy', phase:'Development Strategy', short:'Pipeline Acquisition',
+    t:'How a Top-5 Pharma Company Valued a Biotech Pipeline in 8 Weeks',
+    d:'A top-five pharma ranked a target biotech’s indications on causal evidence, market and feasibility in 8 weeks, saving over $1M in external spend.', s:['8 wks','to deliver insights'] },
+  { id:'portfolio-2-mash', p:['portfolio'], a:['Metabolic'], type:'Portfolio & Lifecycle Strategy', phase:'Development Strategy', short:'MASH Indication Expansion',
+    t:'How a Causal Model Gave a Pharma Partner Clearer Go/No-Go Decisions in MASH',
+    d:'A causal liver-damage model delivered asset-specific probability of success for two MASH opportunities and clearer go/no-go decisions.', s:null },
+  { id:'portfolio-3-asthma-copd', p:['portfolio'], a:['Pulmonology'], type:'Portfolio & Lifecycle Strategy', phase:'Development Strategy', short:'Trispecific Candidates in Asthma and COPD',
+    t:'How a Causal Immune Model Helped a Top Pharma Prioritize Candidates in Asthma and COPD',
+    d:'A causal immune model ranked trispecific candidates and patient subgroups in asthma and COPD, shaping asset and indication strategy.', s:null },
+  { id:'portfolio-4-obesity', p:['portfolio'], a:['Metabolic'], type:'Portfolio & Lifecycle Strategy', phase:'Development Strategy', short:'Obesity Weight-Loss Thresholds',
+    t:'What Causal Analysis Revealed About Weight Loss and Obesity-Related Disease',
+    d:'Causal analysis showed benefit appears only at very high weight loss and split weight-driven from direct drug effects.', s:null },
+  { id:'portfolio-5-immuno-oncology', p:['portfolio'], a:['Oncology'], type:'Portfolio & Lifecycle Strategy', phase:'Development Strategy', short:'HLA-G:ILT2 Immuno-Oncology',
+    t:'How a Causal Model Found a Lead Indication a Control-Free Trial Didn’t Test',
+    d:'A causal model separated drug benefit from prognosis in a 150-patient trial with no control arm, and ranked indications the trial never tested.', s:null },
+  { id:'portfolio-6-pd-l1', p:['portfolio'], a:['Oncology'], type:'Portfolio & Lifecycle Strategy', phase:'Development Strategy', short:'PD-L1 Combination Targets',
+    t:'How Causal Simulation Tests New Drug Combinations Before a Trial Starts',
+    d:'A causal PD-L1 model simulated a new combination target: raising CCL4 lifted response probability 8% (95% credible interval 2% to 16%).', s:['+8%','response probability'] },
+  { id:'portfolio-7-hunter-mps-ii', p:['portfolio'], a:['Rare Disease'], type:'Regulatory Strategy', phase:'Clinical Trials', short:'Hunter Syndrome / MPS II',
+    t:'How Causal Models Helped Build the Evidence for a New Hunter Syndrome Treatment',
+    d:'Causal disease models built the evidence for MPS II surrogate endpoints, supporting the first new FDA-approved MPS II treatment in nearly 20 years.', s:null },
+];
+
+/* ---------- fiches complètes : 5 cas qui couvrent les variantes du document ----------
+   glance : écrit en lignes « a | b | c » (1re ligne = en-têtes) pour la lisibilité du proto ; toGlanceFields le range dans les champs CMS. */
+const DETAIL = {
+  'clinops-1-nsclc': {
+    why:'deux produits · tableau 2 colonnes · étapes numérotées',
+    intro:'A large pharmaceutical company planned a Phase 3 non-small cell lung cancer (NSCLC) trial across the U.S. and Europe. PhaseV found that the original plan would take 33 months to enroll instead of 24. Combining ClinOps Optimizer site selection with Trial Optimizer design refinement, PhaseV projected 9 months saved, 33 fewer sites, 95 fewer patients and an estimated $30M in savings.',
+    glance:`Metric | Result
+Projected time savings | 9 months
+Sites required | 33 fewer
+Subjects required | 95 fewer
+Estimated cost savings | $30M (from better sites)
+Countries added | 3`,
+    challenge:`<p>The sponsor needed 1,000 patients in 24 months, all matching a specific patient profile. PhaseV’s baseline enrollment prediction showed only about 670 patients by month 24, and 33 months to reach 1,000. A site list built on past reputation and habit would have missed the goal, pushing out timelines and raising costs.</p>`,
+    did:`<ol>
+<li><strong>Maximized the eligible patient pool.</strong> Trial Optimizer refined the planned adaptive design and tested how adjusting inclusion/exclusion (I/E) criteria, the rules for who can join, would change the number of eligible patients and enrollment potential. It also found room to reduce sample size.</li>
+<li><strong>Optimized the site network.</strong> ClinOps Optimizer scored sites on competing trials, site novelty (new to the sponsor), emerging centers, investigator and site experience, and past performance. It added 15 new-to-client sites, excluded 12 because of competing trials and held 3 in reserve (one investigator on sabbatical).</li>
+<li><strong>Tracked performance in real time.</strong> A Site Analytics Dashboard gave the team live site performance data so they could correct course early.</li>
+</ol>`,
+    results:`<ul><li>9 months of projected time savings</li><li>33 fewer sites and 95 fewer subjects required</li><li>3 additional countries added to the plan</li><li>An estimated $30M in cost savings from better sites</li></ul>`,
+    whyItMatters:`<ul>
+<li><strong>Executives and finance:</strong> Fewer sites and patients means lower cost, and the 9 months saved brings the launch forward.</li>
+<li><strong>Clinical operations:</strong> A ranked site list, with sites to avoid and backups ready, and a dashboard to catch problems early.</li>
+<li><strong>Biostatisticians and clinical scientists:</strong> I/E criteria and sample size tested by simulation before they are locked.</li>
+<li><strong>Patients:</strong> Fewer patients enrolled and a faster path to a potential new treatment.</li>
+</ul>`,
+    faq:`<h3>What is clinical trial site selection?</h3><p>Choosing which hospitals and clinics will enroll patients. The right sites recruit faster and more reliably.</p>
+<h3>How can a trial need fewer sites and still enroll on time?</h3><p>Sites differ widely in productivity. Choosing sites with the right patients and less competition makes each one count for more.</p>
+<h3>What are inclusion/exclusion criteria, and why do they affect timelines?</h3><p>They are the rules for who can join. Stricter rules shrink the eligible pool and slow enrollment.</p>`,
+    source:`<p>Based on real client work, with details adapted and anonymized for confidentiality.</p>`,
+  },
+  'clinops-3-sickle-cell': {
+    why:'tableau 3 colonnes · listes à intertitres en gras · pas de note de source',
+    intro:'A top biotech company planned a global Phase 3 sickle cell disease (SCD) trial needing 332 patients over 35 months. PhaseV’s causal site selection engine recommended 61 sites concentrated where disease burden is highest. In projections, the 61-site list reached the target with 46 fewer sites than a 107-site scenario, with per-site enrollment efficiency 78% higher.',
+    glance:`Metric | Conservative scenario | Optimistic scenario
+Sites | 107 | 61 (46 fewer)
+Projected enrollment vs. 332 target | 333 | 343 (3% above target)
+Patients per site per month | 0.09 | 0.16 (78% higher)`,
+    challenge:`<p>Sickle cell disease is a serious inherited blood disorder. Its painful crises are called vaso-occlusive crises (VOCs). Patients are concentrated in specific regions of the world, not where trial sites are traditionally placed, and a standard sponsor playbook leans toward U.S. and European sites.</p><p>The protocol needed patients with 2–10 VOCs in the prior 12 months, including at least 40 adolescents out of 332, and sites had to document VOCs reliably.</p>`,
+    did:`<p>PhaseV’s causal engine optimized for predicted recruitment, accounting for true disease prevalence and site-level patient flow rather than country defaults.</p>
+<ul>
+<li><strong>Where it pointed:</strong> Sites in India, the Gulf and Egypt, where disease burden is highest, with a deliberately limited U.S. footprint.</li>
+<li><strong>What it excluded:</strong> Sub-Saharan Africa, despite high prevalence. Confounders from earlier-generation trials (malaria prophylaxis, hydroxyurea access and baseline VOC frequency) created interpretability risk.</li>
+<li><strong>Disease-specific weighting:</strong> Sites with adult and pediatric SCD programs, strong VOC documentation, patient navigation and transfusion coordination, low historical dropout, and manageable competition from gene therapy and disease-modifying trials.</li>
+<li><strong>Validation:</strong> Probabilistic enrollment ranges with confidence intervals, a balanced mix of established and new sites (25 sites with 3–10 matching trials, 11 with 11 or more) and five-axis site scoring, so no single signal decides.</li>
+</ul>`,
+    results:`<ul><li>61 recommended sites vs. 107, with the same enrollment target met</li><li>Per-site enrollment efficiency up 78% (0.16 vs. 0.09 patients per month)</li><li>Lower activation, monitoring and per-patient cost from avoiding redundant sites</li><li>A predictable cohort: 44 of 61 sites projected in the 0.1–0.2 patients-per-month band</li></ul>`,
+    whyItMatters:`<ul>
+<li><strong>Executives and finance:</strong> Fewer sites to activate and monitor for the same enrollment.</li>
+<li><strong>Clinical operations:</strong> A tight, predictable site cohort with confidence ranges instead of single-point guesses.</li>
+<li><strong>Medical and clinical scientists:</strong> Site weighting reflects sickle cell specifics such as VOC documentation, adolescent enrollment and competing gene therapy programs.</li>
+<li><strong>Patients:</strong> Trials run where the disease burden is, which can improve access and representation.</li>
+</ul>`,
+    faq:`<h3>How do you find sites for a rare disease trial?</h3><p>Model where eligible patients actually are and how they reach care, rather than relying on where past trials ran.</p>
+<h3>Why can fewer sites be better?</h3><p>Each added site brings activation, training and monitoring costs. If the target is already reachable, extra sites add cost without adding enrollment.</p>
+<h3>Why were some high-prevalence regions excluded?</h3><p>Confounders from earlier-generation trials created interpretability risk.</p>`,
+    source:'',
+  },
+  'clinops-5-vitiligo': {
+    why:'pas de stat · tableau « défi / réponse » · 3 profils seulement',
+    intro:'Vitiligo trials face a small pool of experienced investigators, subjective scoring and heavy competition since JAK inhibitors changed the field. PhaseV ClinOps Optimizer finds sites with eligible patients and diverse skin types, links eligibility strictness to enrollment, and maps investigators not committed to competing trials.',
+    glance:`Challenge | PhaseV’s response
+Narrow eligible population | Find where eligible patients are diagnosed
+Skin type (FST) representation | Prioritize sites with eligible volume and diverse skin types
+Subjective scoring | Favor experienced dermatology centers
+Competing trials | Map uncommitted investigators, plan contingencies`,
+    challenge:`<p>Vitiligo is an autoimmune condition that causes loss of skin color and carries a heavy psychosocial burden. Trials typically require non-segmental vitiligo with defined disease activity and representation across Fitzpatrick skin types (FST). Pediatric cohorts add review-board and consent complexity.</p><p>Eligibility (VIDA) and endpoint (VASI) scoring are partly subjective, so raters at different sites may score differently. Several sponsors compete for the same few experienced investigators.</p>`,
+    did:`<ul>
+<li><strong>Site selection:</strong> Located where eligible patients are diagnosed and analyzed skin type requirements across studies.</li>
+<li><strong>Feasibility analytics:</strong> Tied enrollment performance to eligibility stringency to tune VIDA thresholds, and favored experienced dermatology centers to reduce rater variability.</li>
+<li><strong>Site intelligence:</strong> Mapped investigators not committed to competing trials and used feasibility modeling for contingency planning.</li>
+</ul>`,
+    results:`<ul><li>Sites prioritized for both eligible patient volume and diverse skin type populations</li><li>VIDA eligibility thresholds tuned against enrollment performance</li><li>Experienced dermatology centers prioritized to reduce inter-rater variability in VASI scoring</li><li>Proactive contingency plans built around investigators free of competing trials</li><li>Per-site enrollment efficiency gains in vitiligo similar to the 78% gain seen in sickle cell disease</li></ul>`,
+    whyItMatters:`<ul>
+<li><strong>Executives:</strong> Lower risk of enrollment delays in a crowded field.</li>
+<li><strong>Clinical operations:</strong> Early visibility into which investigators are free, and backup options.</li>
+<li><strong>Clinical scientists:</strong> Cleaner endpoint data from experienced raters and a diverse, representative population.</li>
+</ul>`,
+    faq:`<h3>Why is vitiligo hard to recruit for?</h3><p>A narrow eligible population, skin type requirements and multiple concurrent trials.</p>
+<h3>What is inter-rater variability?</h3><p>Different evaluators scoring the same condition differently, which adds noise to results.</p>
+<h3>Why does skin type representation matter?</h3><p>Trials should reflect the patients who will use the treatment.</p>`,
+    source:'',
+  },
+  'trial-3-denali': {
+    why:'sponsor nommé · note sous le tableau · source et lecture liée',
+    intro:'In an illustrative example developed with Denali Therapeutics, PhaseV Trial Optimizer tested a dose-selection trial design in simulation before enrollment, then tuned its decision thresholds and how patients are split across trial stages. The chance of selecting the best dose rose from 64.3% to 76.3%, a gain of 12 percentage points, with average sample size essentially unchanged at about 102 participants.',
+    glance:`Metric | Original design | Optimized design
+Chance of selecting the best dose | 64.3% | 76.3% (+12 percentage points)
+Average sample size | About 102 participants | About 102 participants (essentially unchanged)
+When tested | Before the first patient enrolled | Before the first patient enrolled`,
+    glanceNote:'Illustrative example from simulation. Results will vary by study.',
+    challenge:`<p>The dose a sponsor picks early shapes the pivotal trial design, the safety profile regulators and prescribers will see, and how much time and capital the program spends. The call is rarely easy. The most effective dose may also be the most toxic, and the safest may not work well enough.</p><p>Yet the study that makes this call is often designed around a few expected scenarios and past experience. Now it can be tested first.</p>`,
+    did:`<ol>
+<li><strong>Defined “best dose” up front.</strong> Denali’s target product profile became a scoring system (a clinical utility function) that weighs each dose’s benefit against its risk.</li>
+<li><strong>Stress-tested the design.</strong> Simulation ran the trial many times across favorable, ambiguous and unfavorable scenarios, including the case where no dose is good enough.</li>
+<li><strong>Optimized within real limits.</strong> A stochastic optimization algorithm tuned decision thresholds and patient allocation together, holding sample size and duration in check.</li>
+<li><strong>Tested custom rules.</strong> Bring-your-own-code and an embedded AI assistant, which turns plain-language descriptions into validated code, let the team try study-specific selection logic.</li>
+<li><strong>Compared fixed, adaptive and Bayesian designs on equal terms.</strong> Bayesian designs, which wait for stronger evidence before choosing, scored higher on average dose quality (0.78 and 0.81 vs. 0.64 for the original, out of a maximum of 0.98).</li>
+</ol>`,
+    results:`<ul><li>The chance of picking the best dose rose 12 percentage points through design choices alone</li><li>Average sample size stayed at about 102 participants</li><li>Weak points in the selection rules surfaced while the protocol could still change</li><li>The team came away with a repeatable method for future studies</li></ul>`,
+    whyItMatters:`<ul>
+<li><strong>Executives:</strong> Better odds on the program’s most consequential early decision, without enrolling more patients.</li>
+<li><strong>Clinical operations:</strong> See what a design costs in patients and time before the first patient is enrolled.</li>
+<li><strong>Biostatisticians:</strong> Custom decision rules and competing designs, tested and optimized in one place.</li>
+<li><strong>Regulatory and governance teams:</strong> Competing designs are compared on the same assumptions, so the choice is easy to explain and defend.</li>
+</ul>`,
+    faq:`<h3>Are these results from a real trial?</h3><p>No. They come from an illustrative simulation developed with Denali, and results will vary by study.</p>
+<h3>How can the same sample size give better odds?</h3><p>Through design choices alone, such as decision thresholds and how patients are allocated across trial stages.</p>
+<h3>What should teams ask of any dose-selection design?</h3><p>Five questions: What does “best dose” mean for this program? Which dose-response scenarios must the design handle? Can it choose no dose when none meets the bar? Which constraints are fixed? How sensitive is the outcome to the decision rule?</p>`,
+    source:`<p>Joint PhaseV and Denali Therapeutics poster, presented at the 2026 Bay Area Biotech-Pharma Statistics Workshop (BBSW).</p><p>Related reading: <a href="#">“Better Odds of Picking the Right Dose at the Same Sample Size,” PhaseV blog, November 9, 2026.</a></p>`,
+  },
+  'trial-6-seamless-phase23': {
+    why:'sans aire thérapeutique · tableau court · source publication',
+    intro:'For a trial choosing between two candidate doses, PhaseV Trial Optimizer compared a fixed design, an adaptive design and an optimized adaptive design. The adaptive design needed 450 patients against 526 for the fixed design, and optimization brought that down to 353, up to 33% fewer than the fixed design.',
+    glance:`Design | Sample size
+Fixed | 526
+Adaptive | 450
+Optimized | 353 (up to 33% fewer than fixed)`,
+    challenge:`<p>The trial had two possible doses to choose between, and its primary outcome takes a long time to measure. A seamless Phase 2/3 design allows an informed dose decision while maintaining efficiency, but it comes with many settings to tune, such as decision thresholds and timing.</p>`,
+    did:`<ol>
+<li><strong>Used a seamless design</strong> so the choice between the two doses is made within the trial.</li>
+<li><strong>Used an early biomarker.</strong> Because the primary outcome comes late, a selected biomarker at 24 weeks served as a surrogate for dose selection.</li>
+<li><strong>Optimized the many settings</strong> with a model-based, iterative, stochastic optimization algorithm. It explores more designs nearby through simulation, builds a local model of the objective and the constraints, optimizes using those models, then updates its starting point and repeats.</li>
+</ol>`,
+    results:`<ul><li>The adaptive design reduced sample size considerably compared with a fixed design (450 vs. 526)</li><li>Optimization added further improvement, reaching 353, up to 33% fewer than the fixed design</li><li>Objectives, constraints and scenarios can be changed, so optimization can yield different solutions to compare</li></ul>`,
+    whyItMatters:`<ul>
+<li><strong>Executives and finance:</strong> A smaller trial means lower cost and faster completion for the same dose decision.</li>
+<li><strong>Clinical operations:</strong> Fewer patients to recruit.</li>
+<li><strong>Biostatisticians:</strong> A systematic search replaces hand-tuning of many interacting design settings.</li>
+</ul>`,
+    faq:`<h3>What is a seamless Phase 2/3 design?</h3><p>A single trial that combines dose selection and confirmation, so the program does not pause between phases.</p>
+<h3>What is a surrogate biomarker?</h3><p>A measurement taken early that stands in for an outcome that takes longer to observe.</p>
+<h3>What is stochastic optimization?</h3><p>A way of searching a large set of design options through repeated simulation to find the best one.</p>`,
+    source:`<p>PhaseV, “Model the Disease. Optimize the Trial.,” Bay Area Biotech-Pharma Statistics Workshop (BBSW), November 2026.</p>`,
+  },
+};
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const prod = slug => PRODUCTS.find(p => p.slug === slug);
+const byId = id => CASES.find(x => x.id === id);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ARROW_L = '<svg viewBox="0 0 12 12" fill="none"><path d="M4.7 2.3L1 6m0 0l3.7 3.7M1 6h10" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+let toastT;
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2400); }
+const setChrome = () => document.documentElement.style.setProperty('--chrome', $('#chrome').offsetHeight + 'px');
+new ResizeObserver(setChrome).observe($('#chrome'));
+document.querySelectorAll('[data-nav]').forEach(h => h.prepend($('#navTpl').content.cloneNode(true)));
+
+/* carte : structure des cartes Resources (image, labels violets, titre h4, description) + chiffre clé discret */
+function cardHTML(c, i){
+  const tags = c.p.map(s => `<span class="label is-p">${esc(prod(s).name)}</span>`).join('') + c.a.map(a => `<span class="label is-p">${esc(a)}</span>`).join('');
+  const stat = c.s ? `<div class="stat"><b>${esc(c.s[0])}</b>${esc(c.s[1])}</div>` : '';
+  return `<a class="card enter" style="--i:${i}" href="#/case-studies/${c.id}" data-case="${c.id}">
+    <div class="img"><img src="${IMG(c.id)}" alt="" loading="lazy"></div>
+    <div class="tags">${tags}</div>
+    <h3 class="h4 t">${esc(c.t)}</h3>
+    <p class="d">${esc(c.d)}</p>
+    ${stat}
+  </a>`;
+}
+
+/* ---------- LIBRARY : header A, cas mis en avant ---------- */
+let feat = 0;
+function buildFeatured(){
+  $('#featStage').innerHTML = FEATURED.map((id, i) => { const c = byId(id);
+    const labels = c.p.map(s => `<span class="label is-w">${esc(prod(s).name)}</span>`).join('') + c.a.map(a => `<span class="label is-w">${esc(a)}</span>`).join('');
+    return `<div class="slide${i ? '' : ' on'}" aria-hidden="${i ? 'true' : 'false'}">
+      <div class="txt">
+        <div class="labels">${labels}</div>
+        <h2 class="h1">${esc(c.t)}</h2>
+        <p class="lead">${esc(c.d)}</p>
+        ${c.s ? `<div class="kpi-s"><span class="n">${esc(c.s[0])}</span><span class="x">${esc(c.s[1])}</span></div>` : ''}
+        <a class="btn is-ghost" href="#/case-studies/${c.id}" data-open="${c.id}">Read the case</a>
+      </div>
+      <div class="img"><img src="${IMG(c.id)}" alt=""></div>
+    </div>`; }).join('');
+  $('#featPrev').innerHTML = ARROW_L; $('#featNext').innerHTML = ARROW_L;
+  $('#featPrev').addEventListener('click', () => goFeat(feat - 1));
+  $('#featNext').addEventListener('click', () => goFeat(feat + 1));
+  goFeat(0);
+}
+function goFeat(n){
+  feat = Math.max(0, Math.min(FEATURED.length - 1, n));
+  document.querySelectorAll('#featStage .slide').forEach((s, i) => { s.classList.toggle('on', i === feat); s.setAttribute('aria-hidden', i === feat ? 'false' : 'true'); });
+  $('#featPrev').classList.toggle('is-disabled', feat === 0);
+  $('#featNext').classList.toggle('is-disabled', feat === FEATURED.length - 1);
+}
+
+/* ---------- LIBRARY : filtres Product (pilules) + Therapeutic area (liste) ---------- */
+const state = { product:'', area:'' };
+function readURL(){ const u = new URLSearchParams(location.search); state.product = u.get('product') || ''; state.area = u.get('area') || ''; }
+function writeURL(){ const u = new URLSearchParams(location.search); state.product ? u.set('product', state.product) : u.delete('product'); state.area ? u.set('area', state.area) : u.delete('area');
+  history.replaceState(null, '', location.pathname + (u.toString() ? '?' + u : '') + location.hash); }
+function buildFilters(){
+  $('#fProduct').innerHTML = [{slug:'', name:'All'}, ...PRODUCTS].map(p => `<button class="pill" role="radio" data-p="${p.slug}">${esc(p.name)}</button>`).join('');
+  $('#fArea').innerHTML = `<option value="">All therapeutic areas</option>` + AREAS.map(a => `<option value="${esc(a)}">${esc(a)}</option>`).join('');
+  $('#fProduct').addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (!b) return; state.product = b.dataset.p; renderLibrary(); });
+  $('#fArea').addEventListener('change', e => { state.area = e.target.value; renderLibrary(); });
+  document.querySelectorAll('[data-reset]').forEach(b => b.addEventListener('click', () => { state.product = ''; state.area = ''; renderLibrary(); }));
+}
+function renderLibrary(){
+  document.querySelectorAll('#fProduct .pill').forEach(b => { const on = b.dataset.p === state.product; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); });
+  $('#fArea').value = state.area;
+  const list = CASES.filter(c => (!state.product || c.p.includes(state.product)) && (!state.area || c.a.includes(state.area)));
+  $('#cards').innerHTML = list.map(cardHTML).join('');
+  $('#empty').hidden = list.length > 0;
+  writeURL();
+}
+
+/* ---------- CASE STUDY ---------- */
+/* At a glance : groupe de champs CMS fixes (validé par Romain, plus simple à éditer qu'une syntaxe).
+   Column 1-3 = en-têtes ; Row 1-6 = Label / Value / Value 2 ; Note. Les données du proto sont écrites en lignes « a | b | c »
+   pour rester lisibles ; toGlanceFields les range dans ces champs, et le rendu ne lit que les champs, comme le futur template. */
+const GLANCE_ROWS = 6;
+function toGlanceFields(src, note){
+  const lines = src.trim().split('\n').map(r => r.split('|').map(x => x.trim()));
+  const head = lines.shift(), f = { 'glance-note': note || '' };
+  [0,1,2].forEach(j => f['glance-col-' + (j + 1)] = head[j] || '');
+  for (let i = 0; i < GLANCE_ROWS; i++){ const r = lines[i] || [];
+    f[`glance-row-${i + 1}-label`] = r[0] || ''; f[`glance-row-${i + 1}-value`] = r[1] || ''; f[`glance-row-${i + 1}-value-2`] = r[2] || ''; }
+  return f;
+}
+function glanceTable(f){
+  const three = !!f['glance-col-3'];                              // colonne 3 vide : tableau à 2 colonnes
+  const head = [f['glance-col-1'], f['glance-col-2'], three ? f['glance-col-3'] : null].filter(x => x !== null);
+  const cols = head.length;
+  const em = j => j === cols - 1;                                 // la dernière colonne porte le résultat : mise en avant
+  const th = head.map((h, j) => `<th class="${em(j) ? 'em' : ''}">${esc(h)}</th>`).join('');
+  let tb = '';
+  for (let i = 1; i <= GLANCE_ROWS; i++){
+    const label = f[`glance-row-${i}-label`]; if (!label) continue;   // ligne vide : masquée (visibilité conditionnelle)
+    const cells = [label, f[`glance-row-${i}-value`], three ? f[`glance-row-${i}-value-2`] : null].filter(x => x !== null);
+    tb += `<tr>${cells.map((v, j) => `<td class="${em(j) && j ? 'em' : ''}" ${j ? `data-h="${esc(head[j])}"` : ''}>${esc(v)}</td>`).join('')}</tr>`;
+  }
+  const note = f['glance-note'];
+  return `<div class="tbl cols-${cols}"><table><thead><tr>${th}</tr></thead><tbody>${tb}</tbody></table>${note ? `<p class="note">${esc(note)}</p>` : ''}</div>`;
+}
+function faqAccordion(html){
+  const tmp = document.createElement('div'); tmp.innerHTML = html;
+  let out = '', q = null;
+  [...tmp.children].forEach(el => {
+    if (el.tagName === 'H3'){ q = el.textContent; }
+    else if (q){ out += `<details><summary>${esc(q)}<span class="pm" aria-hidden="true"></span></summary><div class="ans"><div>${el.outerHTML}</div></div></details>`; q = null; }
+  });
+  return out;
+}
+/* Why it matters : icône choisie d'après l'intitulé du profil (style des icônes « glance » de Company), deux-points retirés.
+   L'ordre compte : « Biostatisticians and clinical scientists » doit tomber sur les stats avant les sciences. */
+const TEAM_ICONS = [
+  [/patient/i, '<circle cx="40" cy="24" r="11"/><path d="M17 68c0-13 10.3-22 23-22s23 9 23 22"/>'],
+  [/regulat|governance/i, '<path d="M40 10l24 9v18c0 16-10 27-24 33-14-6-24-17-24-33V19z"/><path d="M30 40l7 7 14-14"/>'],
+  [/biostat|analyst/i, '<path d="M10 66h60"/><path d="M10 60C21 60 27 20 40 20S59 60 70 60"/><path d="M27 66V50M40 66V36M53 66V50"/>'],
+  [/operation/i, '<path d="M28 14h24v9H28z"/><path d="M24 18h-4a4 4 0 0 0-4 4v42a4 4 0 0 0 4 4h40a4 4 0 0 0 4-4V22a4 4 0 0 0-4-4h-4"/><path d="M29 46l8 8 15-15"/>'],
+  [/executive|finance|investor|founder/i, '<path d="M12 66h56"/><path d="M20 56V46M34 56V38M48 56V42M62 56V28"/><path d="M18 34l16-12 12 8 18-16"/><path d="M56 14h8v8"/>'],
+  [/r&d|\bbd\b|leader/i, '<circle cx="40" cy="40" r="26"/><circle cx="40" cy="40" r="14"/><circle cx="40" cy="40" r="3"/>'],
+  [/scien|medical|development/i, '<path d="M31 12h18"/><path d="M35 12v19L18 61a4 4 0 0 0 3.5 6h37a4 4 0 0 0 3.5-6L45 31V12"/><path d="M25 50h30"/>'],
+];
+const ICON_DEFAULT = '<circle cx="40" cy="40" r="26"/><circle cx="40" cy="40" r="14"/><circle cx="40" cy="40" r="3"/>';
+function enhanceWhy(root){
+  root.querySelectorAll('li').forEach(li => {
+    const s = li.querySelector('strong'); if (!s) return;
+    s.textContent = s.textContent.replace(/\s*:\s*$/, '');
+    const hit = TEAM_ICONS.find(([re]) => re.test(s.textContent));
+    const ico = document.createElement('span'); ico.className = 'ico'; ico.setAttribute('aria-hidden', 'true');
+    ico.innerHTML = `<svg viewBox="0 0 80 80" fill="none" stroke="#E1C721" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">${hit ? hit[1] : ICON_DEFAULT}</svg>`;
+    li.prepend(ico);
+  });
+}
+function renderCase(id){
+  const c = byId(id), d = DETAIL[id];
+  if (!c || !d) return;
+  const p0 = prod(c.p[0]);
+  $('#csMeta').innerHTML = [...c.p.map(s => prod(s).name), ...c.a, c.type, c.phase].map(x => `<span class="label is-w">${esc(x)}</span>`).join('');
+  $('#csTitle').textContent = c.t;
+  $('#csIntro').textContent = d.intro;
+  $('#csKpi').hidden = !c.s;
+  if (c.s){ $('#csKpiN').textContent = c.s[0]; $('#csKpiX').textContent = c.s[1]; }
+  $('#csImg').src = IMG(c.id);
+  $('#csShort').textContent = c.short;
+  $('#csTable').innerHTML = glanceTable(toGlanceFields(d.glance, d.glanceNote));
+  $('#csChallenge').innerHTML = d.challenge;
+  $('#csDid').innerHTML = d.did;
+  $('#csResults').innerHTML = d.results;
+  $('#csWhy').innerHTML = d.whyItMatters; enhanceWhy($('#csWhy'));
+  $('#csFaq').innerHTML = faqAccordion(d.faq);
+  $('#csSource').hidden = !d.source;
+  $('#csSourceTxt').innerHTML = d.source;
+  $('#relTitle').textContent = 'More ' + p0.name + ' case studies';
+  $('#relCards').innerHTML = CASES.filter(x => x.id !== id && x.p.includes(c.p[0])).slice(0, 3).map(cardHTML).join('');
+  document.querySelectorAll('#caseSw button').forEach(b => b.classList.toggle('on', b.dataset.case === id));
+  document.title = c.t + ' | PhaseV';
+}
+
+/* ---------- navigation du proto ---------- */
+let current = 'clinops-1-nsclc';
+function show(view, id){
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('on', v.id === 'v-' + view));
+  document.querySelectorAll('#viewSw button').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+  $('#caseSw').hidden = view !== 'case';
+  if (view === 'case') renderCase(id || current); else document.title = 'PhaseV Case Studies';
+  scrollTo(0, 0);
+}
+function openCase(id){ if (DETAIL[id]){ current = id; show('case', id); } else toast('Fiche complète non montée dans le proto : voir les 5 cas de la barre « Case study »'); }
+$('#caseSw').innerHTML = Object.keys(DETAIL).map(id => `<button data-case="${id}" title="${esc(DETAIL[id].why)}">${esc(byId(id).short)}</button>`).join('');
+$('#caseSw').addEventListener('click', e => { const b = e.target.closest('[data-case]'); if (!b) return; current = b.dataset.case; renderCase(current); scrollTo(0, 0); toast(DETAIL[current].why); });
+$('#viewSw').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b) show(b.dataset.view); });
+document.addEventListener('click', e => {
+  const card = e.target.closest('.card[data-case]');
+  if (card){ e.preventDefault(); openCase(card.dataset.case); return; }
+  const open = e.target.closest('[data-open]');
+  if (open){ e.preventDefault(); openCase(open.dataset.open); return; }
+  if (e.target.closest('#relAll')){ e.preventDefault(); state.product = byId(current).p[0]; state.area = ''; show('library'); renderLibrary(); }
+  if (e.target.closest('.mnav a, .cta a:not([href^="mailto"])')) e.preventDefault();
+});
+$('#propSw').addEventListener('change', e => document.body.classList.toggle('show-proposed', e.target.checked));
+
+readURL(); buildFeatured(); buildFilters(); renderLibrary();
+if (location.hash.startsWith('#/case-studies/')){ const id = location.hash.split('/').pop(); if (DETAIL[id]){ current = id; show('case', id); } }
+</script>
+</body>
+</html>

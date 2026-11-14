@@ -1,0 +1,106 @@
+﻿
+<!-- ============ PROTO : FAQ en accordéon (préfigure src/faq.js) ============ -->
+<script>
+/* Contrat Webflow : un div [data-pv="faq"] contient un .section-top (intitulé) et un [data-faq-list]
+   de [data-faq-item] = un h3 (question) suivi d'un bloc texte (réponse). Tout le texte reste dans Webflow.
+   Le module pose le CSS, transforme chaque question en bouton et chaque réponse en panneau repliable.
+   Sans JS : questions et réponses restent toutes lisibles. */
+(function () {
+  const CSS = `
+  [data-pv="faq"]{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:2.5rem 4rem; align-items:start; }
+  [data-pv="faq"] > .section-top{ position:sticky; top:8rem; }
+  [data-faq-list]{ border-top:1px solid #14123826; }
+  [data-faq-item]{ border-bottom:1px solid #14123826; }
+  [data-faq-item] > h3{ margin:0; }
+  .pv-faq-q{ all:unset; box-sizing:border-box; width:100%; display:flex; justify-content:space-between; align-items:center; gap:2rem;
+    padding:1.5rem 0; cursor:pointer; font-size:1.25rem; font-weight:600; line-height:130%; color:#141238; }
+  .pv-faq-q:focus-visible{ outline:2px solid #141238; outline-offset:4px; border-radius:4px; }
+  .pv-faq-pm{ flex:none; position:relative; width:2.5rem; height:2.5rem; border-radius:999px; border:1px solid #14123833; transition:background .2s, border-color .2s, color .2s; }
+  .pv-faq-pm::before, .pv-faq-pm::after{ content:''; position:absolute; left:50%; top:50%; width:.875rem; height:1.5px; background:currentColor; transform:translate(-50%,-50%); transition:transform .3s cubic-bezier(.2,.7,.2,1); }
+  .pv-faq-pm::after{ transform:translate(-50%,-50%) rotate(90deg); }
+  .pv-faq-q:hover .pv-faq-pm{ border-color:#141238; }
+  [data-faq-item][data-open] .pv-faq-pm{ background:#141238; color:#f8f8f8; border-color:#141238; }
+  [data-faq-item][data-open] .pv-faq-pm::after{ transform:translate(-50%,-50%) rotate(0); }
+  .pv-faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1); }
+  [data-faq-item][data-open] .pv-faq-a{ grid-template-rows:1fr; }
+  .pv-faq-a > div{ overflow:hidden; }
+  .pv-faq-a > div > *{ margin:0; padding:0 4rem 1.75rem 0; font-size:1.0625rem; line-height:160%; color:#2b2a48; }
+  @media (prefers-reduced-motion:reduce){ .pv-faq-a, .pv-faq-pm::before, .pv-faq-pm::after{ transition:none; } }
+  @media (max-width:991px){ [data-pv="faq"]{ grid-template-columns:1fr; } [data-pv="faq"] > .section-top{ position:static; }
+    .pv-faq-q{ font-size:1.0625rem; } .pv-faq-a > div > *{ padding-right:0; } }`;
+  let n = 0;
+  function initFaq(root) {
+    if (root.dataset.pvInit) return;
+    root.dataset.pvInit = '1';
+    if (!document.getElementById('pv-faq-css')) {
+      const st = document.createElement('style'); st.id = 'pv-faq-css'; st.textContent = CSS; document.head.appendChild(st);
+    }
+    root.querySelectorAll('[data-faq-item]').forEach(item => {
+      const q = item.querySelector('h2,h3,h4,h5,h6'), a = q && q.nextElementSibling;
+      if (!a) return;
+      const id = 'pv-faq-' + (++n);
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'pv-faq-q';
+      btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', id);
+      const label = document.createElement('span');
+      label.append(...q.childNodes);
+      const pm = document.createElement('span'); pm.className = 'pv-faq-pm'; pm.setAttribute('aria-hidden', 'true');
+      btn.append(label, pm); q.append(btn);
+      const panel = document.createElement('div'), inner = document.createElement('div');
+      panel.className = 'pv-faq-a'; panel.id = id; panel.setAttribute('role', 'region'); panel.inert = true;
+      a.before(panel); inner.append(a); panel.append(inner);
+      item._pvSet = open => {
+        btn.setAttribute('aria-expanded', String(open));
+        item.toggleAttribute('data-open', open);
+        panel.inert = !open;
+      };
+      btn.addEventListener('click', () => {
+        const open = btn.getAttribute('aria-expanded') !== 'true';
+        // une seule question ouverte à la fois
+        if (open) root.querySelectorAll('[data-faq-item][data-open]').forEach(o => o._pvSet(false));
+        item._pvSet(open);
+      });
+    });
+  }
+  document.querySelectorAll('[data-pv="faq"]').forEach(initFaq);
+})();
+</script>
+
+<!-- ============ PROTO : barre de lecture (hors maquette) ============ -->
+<style>
+  .w-webflow-badge{ display:none !important; }
+  /* proto : gris neutre à la place du violet clair (#f4f1f8) du site */
+  :root{ --pv-cream:#ececec; }
+  .is-lightpurple, .is-purple{ background-color:var(--pv-cream) !important; }
+  .pv-proto{ position:fixed; left:1rem; bottom:1rem; z-index:9999; display:flex; gap:.375rem; align-items:center; padding:.375rem .375rem .375rem 1rem;
+    background:#0d0c26f2; color:#fff; border-radius:999px; font:500 .8125rem/1 Aspekta,Arial,sans-serif; box-shadow:0 10px 30px #0006; }
+  .pv-proto b{ font-weight:600; letter-spacing:1.15px; text-transform:uppercase; font-size:.6875rem; color:#ffffff80; margin-right:.375rem; }
+  .pv-proto button{ font:inherit; color:#fff; background:transparent; border:1px solid #ffffff2e; border-radius:999px; padding:.5rem .875rem; cursor:pointer; }
+  .pv-proto button[aria-pressed="true"]{ background:#e1c721; color:#141238; border-color:#e1c721; }
+  body.show-new [data-new]{ outline:2px dashed #e1c721; outline-offset:4px; }
+  body.show-new [data-new-block]{ box-shadow:inset 0 0 0 3px #e1c721; }
+  body.show-proposed [data-proposed]{ outline:2px dashed #928acd; outline-offset:4px; }
+</style>
+<div class="pv-proto" data-lenis-prevent>
+  <b>Proto Trial</b>
+  <button type="button" data-cls="show-new" aria-pressed="false">Copy nouvelle</button>
+  <button type="button" data-cls="show-proposed" aria-pressed="false">Copy proposée</button>
+  <button type="button" id="ssSwitch">Success story : C</button>
+</div>
+<script>
+  document.querySelectorAll('.pv-proto button[data-cls]').forEach(b => b.addEventListener('click', () => {
+    const on = document.body.classList.toggle(b.dataset.cls);
+    b.setAttribute('aria-pressed', String(on));
+  }));
+  /* bascule A → C → D */
+  (function () {
+    const btn = document.getElementById('ssSwitch'), order = ['A', 'C', 'D'];
+    let cur = 'C';
+    btn.addEventListener('click', () => {
+      cur = order[(order.indexOf(cur) + 1) % order.length];
+      document.querySelectorAll('[data-ss-variant]').forEach(s => s.toggleAttribute('data-on', s.dataset.ssVariant === cur));
+      btn.textContent = 'Success story : ' + cur;
+      window.dispatchEvent(new Event('resize'));
+    });
+  })();
+</script>

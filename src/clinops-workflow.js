@@ -1,4 +1,4 @@
-/* Bloc "The ClinOps workflow" de ClinOps Optimizer (proto : protos/phasev-clinops-workflow-proto.html).
+/* Bloc "The ClinOps workflow" de ClinOps Optimizer (proto : protos/clinops/phasev-clinops-workflow-proto.html).
    Monté dans <div data-pv="clinops-workflow"></div>, bande pleine largeur sous l'en-tête.
    Label, titre et paragraphe restent dans Webflow. La marge haute est une classe Webflow. */
 

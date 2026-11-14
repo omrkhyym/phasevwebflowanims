@@ -78,7 +78,7 @@ const SAB = [
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
 const card = ([n, r, f]) => `
   <div class="leadership-card">
-    <img class="leadership-image" src="../medias/people/${encodeURIComponent(f)}" alt="" loading="lazy">
+    <img class="leadership-image" src="../../medias/people/${encodeURIComponent(f)}" alt="" loading="lazy">
     <div class="leadership-text-div"><h3 class="name">${esc(n)}</h3><div class="role">${esc(r)}</div></div>
   </div>`;
 document.querySelectorAll('[data-list]').forEach(el => el.innerHTML = SAB.map(card).join(''));

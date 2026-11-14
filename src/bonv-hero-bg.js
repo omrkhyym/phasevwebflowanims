@@ -4,7 +4,7 @@
    - <div data-pv="bonv-hero-slot"></div>, dernier enfant de la grille header_content : bloc 4:3 à 991 px et moins.
    Une réponse s'écrit sur six lignes de points : chaque mot arrive au curseur, s'écrit clair puis se pose en mauve ou bleu.
    Fin d'écriture : le dernier mot passe au jaune (la décision), le reste s'efface un peu, puis fondu et boucle.
-   Rendu validé dans protos/phasev-bonv-hero-proto.html. Titre, texte et boutons restent dans Webflow. */
+   Rendu validé dans protos/bonv/phasev-bonv-hero-proto.html. Titre, texte et boutons restent dans Webflow. */
 
 import { mountHeroStage, cl, seg, ease, smooth, rng, TAU } from './hero-stage.js';
 

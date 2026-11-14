@@ -1,7 +1,7 @@
 /* Case Studies : bibliothèque (/case-studies) et fiche (template CMS /case-studies/<slug>).
    Le contenu vient du CMS (collection Case Studies) ; le module ne porte que la logique et le style des blocs propres
    à ces pages (filtres, tableau At a glance, accordéon, cartes Why it matters), ciblés par attributs data-cs-*,
-   sans classe Webflow créée. Proto validé : protos/phasev-case-studies-protos.html. */
+   sans classe Webflow créée. Proto validé : protos/case-studies/phasev-case-studies-protos.html. */
 
 const CSS_ID = 'pv-case-studies-css';
 const CSS = `

@@ -1,4 +1,4 @@
-/* Bloc "Proof" de ClinOps Optimizer : la levée d'aveugle (proto : protos/phasev-clinops-proof-proto.html).
+/* Bloc "Proof" de ClinOps Optimizer : la levée d'aveugle (proto : protos/clinops/phasev-clinops-proof-proto.html).
    Monté dans <div data-pv="clinops-proof"></div>, colonne droite du bloc. La colonne gauche reste dans Webflow.
    Chiffres réels en attributs optionnels du montage, modifiables sans rebuild :
    data-sites (357), data-rec (0.43), data-other (0.28), data-gain (53, le chiffre officiel affiché dans l'accolade). */

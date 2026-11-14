@@ -1,0 +1,100 @@
+
+<!-- ============ PROTO : présentations du workflow (texte + vidéo) ============ -->
+<style>
+  /* Tout est ciblé par [data-wf] sur la section qui contient les 4 blocs : aucune classe Webflow touchée.
+     Numéros d'étape posés en CSS, le libellé reste celui de Webflow. */
+  [data-wf] #setup    { --n:"01"; }
+  [data-wf] #explore  { --n:"02"; }
+  [data-wf] #simulate { --n:"03"; }
+  [data-wf] #optimize { --n:"04"; }
+  [data-wf]:not([data-wf="0"]) .is-feature .text-size-label{ display:inline-flex; align-items:center; gap:.75rem; }
+  [data-wf]:not([data-wf="0"]) .is-feature .text-size-label::before{ content:var(--n); display:inline-grid; place-items:center;
+    min-width:2.25rem; height:2.25rem; padding:0 .5rem; border-radius:999px; background:#141238; color:#fff; font-size:.75rem; letter-spacing:.05em; }
+  [data-wf]:not([data-wf="0"]) .is-feature h2.heading-style-h1{ font-size:clamp(1.75rem,2.6vw,2.625rem); line-height:112%; letter-spacing:-.01em; }
+  [data-wf]:not([data-wf="0"]) .video-animation video{ border-radius:.875rem; box-shadow:0 1px 0 #ffffff inset, 0 30px 60px -24px #14123855, 0 8px 20px -10px #14123833; }
+
+  /* ---------- A : Stage. Fond blanc continu, vidéo posée sur une scène grise ---------- */
+  [data-wf="A"] .padding-global.is-feature{ background:var(--neutral-white) !important; }
+  [data-wf="A"] .feature-grid{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:3rem 5rem; align-items:center; }
+  [data-wf="A"] .feature-grid > .video-animation:first-child{ order:0; }
+  [data-wf="A"] #explore .feature-grid, [data-wf="A"] #optimize .feature-grid{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); }
+  [data-wf="A"] .video-animation{ position:relative; padding:clamp(1.5rem,3.5vw,3.5rem); border-radius:1.75rem; background:#ececec; overflow:hidden; }
+  [data-wf="A"] .video-animation::before{ content:''; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(60% 70% at 85% 0%, #928acd33, transparent 70%), radial-gradient(50% 60% at 0% 100%, #78a8e026, transparent 70%); }
+  [data-wf="A"] .video-animation video{ position:relative; }
+
+    box-shadow:0 -1px 0 #14123812, 0 -20px 50px -30px #14123840; }
+
+  /* ---------- C : Scrollytelling. Textes qui défilent, vidéo collante qui change d'étape ---------- */
+  [data-wf="C"] .padding-global.is-feature{ background:var(--neutral-white) !important; }
+  [data-wf="C"] .pv-wf-c{ display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:5rem; padding:0 2.5rem; max-width:90rem; margin:0 auto; }
+  [data-wf="C"] .pv-wf-steps .is-feature{ min-height:85vh; display:flex; align-items:center; padding:0 !important; }
+  [data-wf="C"] .pv-wf-steps .feature-grid{ display:block; }
+  [data-wf="C"] .pv-wf-steps .is-feature, [data-wf="C"] .pv-wf-steps .is-feature *{ background:transparent !important; box-shadow:none !important; }
+  [data-wf="C"] .pv-wf-steps .is-feature .text-size-label::before{ background:#141238 !important; }
+  [data-wf="C"] .pv-wf-steps .is-feature.is-purple{ color:inherit; }
+  [data-wf="C"] .pv-wf-steps .section-top{ transition:opacity .4s; opacity:.28; }
+  [data-wf="C"] .pv-wf-steps .is-active .section-top{ opacity:1; }
+  [data-wf="C"] .pv-wf-stage{ position:sticky; align-self:start; top:calc(50vh - min(19rem, 24vw)); margin:15vh 0;
+    padding:clamp(1.25rem,3vw,3rem); border-radius:1.75rem; background:#ececec; display:grid; }
+  [data-wf="C"] .pv-wf-stage > .video-animation{ grid-area:1/1; opacity:0; transform:translateY(12px) scale(.985); transition:opacity .5s, transform .6s cubic-bezier(.2,.7,.2,1); }
+  [data-wf="C"] .pv-wf-stage > .video-animation.is-active{ opacity:1; transform:none; }
+  [data-wf="C"] .pv-wf-dots{ position:absolute; left:50%; bottom:-2.25rem; transform:translateX(-50%); display:flex; gap:.5rem; }
+  [data-wf="C"] .pv-wf-dots i{ width:.5rem; height:.5rem; border-radius:999px; background:#14123833; transition:width .3s, background .3s; }
+  [data-wf="C"] .pv-wf-dots i.is-active{ width:1.75rem; background:#141238; }
+
+  @media (prefers-reduced-motion:reduce){ [data-wf] *{ transition:none !important; } }
+  @media (max-width:991px){
+    [data-wf="A"] .feature-grid, [data-wf="A"] #explore .feature-grid, [data-wf="A"] #optimize .feature-grid{ display:flex; flex-direction:column; }
+  }
+</style>
+<script>
+(function () {
+  const sec = document.getElementById('setup')?.parentElement;
+  if (!sec) return;
+  let undoC = null, io = null;
+
+  // C : on regroupe les textes à gauche et les vidéos dans une scène collante à droite (réversible)
+  function mountC() {
+    const feats = [...sec.querySelectorAll(':scope > .is-feature')];
+    const vids = feats.map(f => f.querySelector('.video-animation'));
+    const marks = vids.map(v => { const m = document.createComment('v'); v.before(m); return m; });
+    const wrap = document.createElement('div'); wrap.className = 'pv-wf-c';
+    const steps = document.createElement('div'); steps.className = 'pv-wf-steps';
+    const stage = document.createElement('div'); stage.className = 'pv-wf-stage';
+    const dots = document.createElement('div'); dots.className = 'pv-wf-dots';
+    feats[0].before(wrap); wrap.append(steps, stage);
+    feats.forEach(f => steps.append(f));
+    vids.forEach(v => { stage.append(v); dots.append(document.createElement('i')); });
+    stage.append(dots);
+    const set = i => {
+      feats.forEach((f, k) => f.classList.toggle('is-active', k === i));
+      vids.forEach((v, k) => v.classList.toggle('is-active', k === i));
+      [...dots.children].forEach((d, k) => d.classList.toggle('is-active', k === i));
+    };
+    set(0);
+    io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(feats.indexOf(e.target)); }), { rootMargin: '-45% 0px -45% 0px' });
+    feats.forEach(f => io.observe(f));
+    undoC = () => {
+      io.disconnect(); io = null;
+      vids.forEach((v, k) => { v.classList.remove('is-active'); marks[k].replaceWith(v); });
+      feats.forEach(f => { f.classList.remove('is-active'); wrap.before(f); });
+      wrap.remove(); undoC = null;
+    };
+  }
+
+  const order = ['A', 'C'], names = { A: 'A Stage', C: 'C Scroll' };
+  let cur = 'A';
+  function apply(v) {
+    if (undoC) undoC();
+    sec.dataset.wf = v;
+    if (v === 'C') mountC();
+    btn.textContent = 'Workflow : ' + names[v];
+    window.lenis?.resize?.(); window.ScrollTrigger?.refresh?.();
+  }
+  const btn = document.createElement('button'); btn.type = 'button';
+  document.querySelector('.pv-proto').append(btn);
+  btn.addEventListener('click', () => apply(order[(order.indexOf(cur = order[(order.indexOf(cur) + 1) % order.length]))]));
+  apply(cur);
+})();
+</script>

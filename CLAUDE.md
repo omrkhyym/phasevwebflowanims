@@ -23,7 +23,7 @@ bonv.js            entrée de la page BonV                 → dist/bonv.js
 src/<bloc>.js      un module par bloc animé
 src/hero-stage.js  socle partagé des heros produit        → dist/hero-stage-<hash>.mjs (6 pages produit)
 src/platform-connect.js  bloc « plateforme connectée »    → dist/platform-connect-<hash>.mjs (5 pages produit, pas BonV)
-protos/            prototypes validés, pour référence (non buildés)
+protos/<page>/     prototypes, un dossier par page (non buildés) ; index et statuts dans protos/README.md, à tenir à jour
 dist/              build, COMMITÉ (servi par jsDelivr)
 ```
 

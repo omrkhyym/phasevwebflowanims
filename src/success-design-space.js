@@ -1,4 +1,4 @@
-/* Success story Trial Optimizer : l'espace des designs (proto 1, protos/phasev-success-story-protos.html).
+/* Success story Trial Optimizer : l'espace des designs (proto 1, protos/trial/phasev-success-story-protos.html).
    Monté dans <div data-pv="success-design-space"></div>, colonne droite du bloc.
    Label, chiffre, paragraphe et boutons restent dans Webflow. */
 

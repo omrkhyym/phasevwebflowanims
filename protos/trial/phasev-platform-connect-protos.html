@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROTO · Platform connect</title>
+<style>
+  /* Proto autonome : pistes visuelles pour le bloc « Standalone or connected » (Trial).
+     Piste retenue pour travail : cartes (ronde 2). Ronde vintage archivée dans protos/_archive/. */
+  :root{ --ink:#141238; --mau:#928acd; --bg:#f8f8f8; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:Aspekta, "Inter", "Helvetica Neue", Arial, sans-serif; }
+  .sec{ max-width:90rem; margin:0 auto; padding:7.5rem 2.5rem; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:4rem; align-items:center; }
+  .stage{ position:relative; width:100%; aspect-ratio:1.2/1; }
+  .stage canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .label{ font-size:.875rem; font-weight:600; letter-spacing:1.15px; text-transform:uppercase; color:#5e2670; }
+  h2{ font-size:clamp(2rem,3.4vw,3.5rem); line-height:110%; margin:1rem 0 1.5rem; font-weight:600; letter-spacing:-.01em; }
+  p{ font-size:1.25rem; line-height:150%; color:#2b2a48; margin:0; max-width:34rem; }
+  .bar{ position:fixed; left:1rem; bottom:1rem; z-index:9; display:flex; gap:.375rem; align-items:center; padding:.375rem .375rem .375rem 1rem;
+    background:#0d0c26f2; color:#fff; border-radius:999px; font:500 .8125rem/1 Aspekta,Arial,sans-serif; box-shadow:0 10px 30px #0006; }
+  .bar b{ font-size:.6875rem; letter-spacing:1.15px; text-transform:uppercase; color:#ffffff80; margin-right:.375rem; }
+  .bar button{ font:inherit; color:#fff; background:transparent; border:1px solid #ffffff2e; border-radius:999px; padding:.5rem .875rem; cursor:pointer; }
+  @media(max-width:991px){ .sec{ grid-template-columns:1fr; padding:4rem 1rem; } }
+</style>
+</head>
+<body>
+<section class="sec">
+  <div class="stage" id="stage"><canvas id="cv"></canvas></div>
+  <div>
+    <div class="label">Standalone or connected</div>
+    <h2>Complete on its own. Stronger when connected</h2>
+    <p>When connected to the broader PhaseV platform, reviewed insights can enter the scenario space, design decisions can inform operational planning in ClinOps Optimizer, and approved parameters can return to the protocol, SAP, and other connected documents for expert review.</p>
+  </div>
+</section>
+
+<div class="bar">
+  <b>Platform connect · Cartes</b>
+  <button type="button" data-v="replay">Rejouer</button>
+</div>
+
+<script>
+(function () {
+  const INK = '20,18,56', MAU = '146,138,205';
+  const NAMES = ['TRIAL OPTIMIZER', 'PORTFOLIO OPTIMIZER', 'RESPONSE OPTIMIZER', 'CLINOPS OPTIMIZER', 'AI CONDUCTOR'];
+  // une couleur secondaire de la charte par produit voisin (mauve, bleu, turquoise, violet)
+  const COL = [MAU, '146,138,205', '120,168,224', '127,232,207', '104,74,158'];
+  // 0 = produit de la page ; échanges [de, vers], un à la fois
+  const EV = [[1, 0], [0, 3], [2, 0], [0, 4], [3, 0], [0, 1], [4, 0], [0, 2]];
+  const GAP = 2.6, INTRO = 1.8;
+
+  const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const seg = (t, a, b) => cl((t - a) / (b - a));
+  const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
+  const back = v => { const c = 1.6; return 1 + (c + 1) * Math.pow(v - 1, 3) + c * Math.pow(v - 1, 2); };
+
+  const stage = document.getElementById('stage'), cv = document.getElementById('cv'), x = cv.getContext('2d');
+  const FAMILY = getComputedStyle(document.body).fontFamily;
+  let W = 0, H = 0;
+
+  function font(w, s) { x.font = `${w} ${s}px ${FAMILY}`; if ('letterSpacing' in x) x.letterSpacing = (s * .08).toFixed(2) + 'px'; }
+  function rr(bx, by, bw, bh, r) { x.beginPath(); x.roundRect ? x.roundRect(bx, by, bw, bh, r) : x.rect(bx, by, bw, bh); }
+  // échange courant après l'intro : [de, vers], phase 0..1 (null pendant l'intro)
+  function current(t) {
+    if (t < INTRO) return [null, 0];
+    const L = EV.length * GAP, u = ((t - INTRO) % L) / GAP, i = Math.floor(u);
+    return [EV[i], u - i];
+  }
+
+  /* pictogrammes : miniatures des motifs des heros produit et du hub de la Home, en points comme sur le site.
+     pr (0..1) rejoue le motif pendant l'échange ; l'élément mis en avant est en navy (blanc sur la carte Trial),
+     le jaune restant réservé au moment de décision. */
+  const hash = n => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
+  function glyph(k, cx, cy, s, dark, pr, t) {
+    const base = dark ? 'rgba(255,255,255,.42)' : `rgba(${MAU},.95)`, hi = dark ? '#ffffff' : '#141238';
+    const dot = (X, Y, r, c) => { x.beginPath(); x.arc(X, Y, r, 0, 6.283); x.fillStyle = c; x.fill(); };
+    const L = cx - s / 2, T = cy - s / 2, d = Math.max(.8, s * .045);
+    if (k === 0) { // Trial : éventail de simulations, une trajectoire retenue qui se trace
+      for (let j = 1; j < 6; j++) {
+        const b = (hash(j) - .5) * 2, f = 2 + hash(j + 9) * 4;
+        for (let q = 0; q <= 12; q++) { const u = q / 12; dot(L + u * s, cy + s * .3 - u * s * .45 + u * s * (.32 * b + .08 * Math.sin(f * u * 3)), d * .8, base); }
+      }
+      x.beginPath(); for (let q = 0; q <= 30 * pr; q++) { const u = q / 30, X = L + u * s, Y = cy + s * .3 - u * s * .45; q ? x.lineTo(X, Y) : x.moveTo(X, Y); }
+      x.strokeStyle = hi; x.lineWidth = Math.max(1.5, s * .07); x.lineCap = 'round'; x.stroke();
+    } else if (k === 1) { // Portfolio : tornade, les barres s'étendent ; les deux drivers majeurs en avant
+      const W_ = [1, .78, .6, .44, .3], bh = s * .12, gap = s * .085;
+      W_.forEach((w, j) => {
+        const ww = s * w * (.25 + .75 * ease(cl(pr * 1.4 - j * .1))), y = T + s * .04 + j * (bh + gap);
+        rr(cx - ww / 2, y, ww, bh, bh / 2); x.fillStyle = j < 2 ? hi : base; x.fill();
+      });
+    } else if (k === 2) { // Response : nuage de patients qui se sépare ; les répondeurs en avant
+      const g = s * .06 * ease(pr);
+      for (let j = 0; j < 26; j++) {
+        const resp = j < 11, a = hash(j + 3) * 6.283, r = Math.sqrt(hash(j + 40)) * (resp ? .2 : .24);
+        dot(cx + Math.cos(a) * r * s * 1.5, cy + (resp ? -.13 : .13) * s + (resp ? -g : g) + Math.sin(a) * r * s * .75, d, resp ? hi : base);
+      }
+    } else if (k === 3) { // ClinOps : carte en points, des sites s'allument avec leur bassin
+      const n = 7, st = s / (n - 1);
+      for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) {
+        const X = L + a * st, Y = T + b * st, u = a / (n - 1) - .5, v = b / (n - 1) - .5;
+        if (Math.hypot(u * 1.1 + .05 * Math.sin(b * 2), v * 1.4) < .5 + .08 * hash(a * 7 + b)) dot(X, Y, d * .8, base);
+      }
+      [[.3, .35], [.62, .55], [.45, .78]].forEach(([u, v], j) => {
+        const on = cl(pr * 3 - j), X = L + u * s, Y = T + v * s;
+        if (on > 0) { x.beginPath(); x.arc(X, Y, s * (.08 + .1 * on), 0, 6.283); x.strokeStyle = dark ? `rgba(255,255,255,${.5 * (1 - on) + .15})` : `rgba(${INK},${.4 * (1 - on) + .12})`; x.lineWidth = 1; x.stroke(); }
+        dot(X, Y, d * 1.7, on > 0 ? hi : base);
+      });
+    } else { // AI Conductor : chaîne de documents, une impulsion réécrit la ligne liée de chaque page
+      for (let p = 0; p < 3; p++) {
+        const px = L + p * s * .2, py = T + p * s * .14, pw = s * .6, ph = s * .72;
+        rr(px, py, pw, ph, s * .06); x.fillStyle = dark ? '#141238' : '#fff'; x.fill();
+        x.strokeStyle = base; x.lineWidth = 1; x.stroke();
+        for (let l = 0; l < 4; l++) {
+          const live = l === 2 && pr * 3 > p;
+          x.fillStyle = live ? hi : (dark ? 'rgba(255,255,255,.22)' : `rgba(${MAU},.45)`);
+          x.fillRect(px + pw * .16, py + ph * (.2 + l * .18), pw * (l === 3 ? .4 : .68), Math.max(1.2, s * .045));
+        }
+      }
+    }
+  }
+
+  /* pictogrammes de la ronde précédente (non utilisés) */
+  function icon(k, cx, cy, s, col) {
+    x.strokeStyle = col; x.fillStyle = col; x.lineWidth = Math.max(1.25, s * .08); x.lineCap = 'round'; x.lineJoin = 'round';
+    x.beginPath();
+    if (k === 0) { // courbes de puissance
+      for (let j = 0; j < 3; j++) { const o = (j - 1) * s * .28; x.moveTo(cx - s / 2, cy + s / 2 + o * .2); x.bezierCurveTo(cx - s * .1, cy + s / 2, cx, cy - s / 2 - o, cx + s / 2, cy - s / 2 - o * .5); }
+      x.stroke();
+    } else if (k === 1) { // barres de portefeuille
+      [.45, .8, .6, 1].forEach((h, j) => x.rect(cx - s / 2 + j * s * .28, cy + s / 2 - s * h, s * .16, s * h)); x.fill();
+    } else if (k === 2) { // courbe de réponse
+      x.moveTo(cx - s / 2, cy + s / 2); x.bezierCurveTo(cx - s * .05, cy + s / 2, cx - s * .05, cy - s / 2, cx + s / 2, cy - s / 2); x.stroke();
+      x.beginPath(); x.arc(cx + s * .02, cy, s * .1, 0, 6.283); x.fill();
+    } else if (k === 3) { // sites
+      for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) { const X = cx - s * .35 + a * s * .35, Y = cy - s * .35 + b * s * .35, r = (a + b) % 2 ? s * .06 : s * .1; x.moveTo(X + r, Y); x.arc(X, Y, r, 0, 6.283); }
+      x.fill();
+    } else { // graphe d'agents
+      const P = [[0, -.42], [-.4, .3], [.4, .3]];
+      P.forEach(([u, v]) => { x.moveTo(cx, cy); x.lineTo(cx + u * s, cy + v * s); }); x.stroke();
+      x.beginPath(); P.concat([[0, 0]]).forEach(([u, v]) => { x.moveTo(cx + u * s + s * .11, cy + v * s); x.arc(cx + u * s, cy + v * s, s * .11, 0, 6.283); }); x.fill();
+    }
+  }
+
+  /* ================= CARTES ================= */
+  const SPOT1 = [[.5, .5], [.19, .14], [.81, .14], [.19, .86], [.81, .86]];
+  function vwire(a, b) { // fil en S vertical
+    const my = (a[1] + b[1]) / 2;
+    return u => { const q = 1 - u; return [q*q*q*a[0] + 3*q*q*u*a[0] + 3*q*u*u*b[0] + u*u*u*b[0], q*q*q*a[1] + 3*q*q*u*my + 3*q*u*u*my + u*u*u*b[1]]; };
+  }
+  function path(f, u0, u1, n = 48) { x.beginPath(); for (let k = 0; k <= n; k++) { const [X, Y] = f(u0 + (u1 - u0) * k / n); k ? x.lineTo(X, Y) : x.moveTo(X, Y); } }
+
+  function drawCards(t) {
+    const m = Math.min(W, H), fs = W < 420 ? 9 : 11;
+    const [ev, ph] = current(t), from = ev ? ev[0] : -1, to = ev ? ev[1] : -1, sat = ev ? (from || to) : -1;
+    const act = ev ? Math.min(seg(ph, 0, .1), 1 - seg(ph, .88, 1)) : 0;
+    const arrive = ev ? seg(ph, .6, .72) * (1 - seg(ph, .78, 1)) : 0;
+
+    // trame de points très légère, pour poser un « plan de travail »
+    const step = m / 20;
+    x.fillStyle = `rgba(${INK},.07)`;
+    for (let gy = step / 2; gy < H; gy += step) for (let gx = step / 2; gx < W; gx += step) { x.beginPath(); x.arc(gx, gy, .9, 0, 6.283); x.fill(); }
+
+    const cw = [m * .44, m * .33, m * .33, m * .33, m * .33], ch = [m * .27, m * .15, m * .15, m * .15, m * .15];
+    // apparition en cascade puis flottement léger ; la carte active se soulève
+    const P = SPOT1.map(([u, v], i) => {
+      const k = back(seg(t, .05 + i * .1, .65 + i * .1));
+      const lift = (i === sat ? act : 0) * m * .012 + (i === to ? arrive * m * .006 : 0);
+      return [u * W, v * H + (1 - k) * m * .05 + Math.sin(t * .7 + i * 1.9) * m * .005 - lift, k];
+    });
+    const port = i => [P[i][0], P[i][1] + (SPOT1[i][1] < .5 ? 1 : -1) * ch[i] / 2];
+    const port0 = i => [P[0][0] + (SPOT1[i][0] < .5 ? -1 : 1) * cw[0] * .3, P[0][1] + (SPOT1[i][1] < .5 ? -1 : 1) * ch[0] / 2];
+
+    // fils : pointillé qui défile au repos, plein et coloré quand il porte un échange
+    const wireIn = ease(seg(t, .6, 1.5));
+    for (let i = 1; i < 5; i++) {
+      const f = vwire(port(i), port0(i)), on = i === sat ? act : 0;
+      path(f, 0, wireIn);
+      x.setLineDash([2, 5]); x.lineDashOffset = -t * 10; x.strokeStyle = `rgba(${INK},.28)`; x.lineWidth = 1; x.stroke();
+      x.setLineDash([]);
+      if (on > 0) {
+        const a = port(i), b = port0(i), g = x.createLinearGradient(a[0], a[1], b[0], b[1]);
+        g.addColorStop(0, `rgba(${COL[i]},${on})`); g.addColorStop(1, `rgba(${MAU},${on})`);
+        path(f, 0, 1); x.strokeStyle = g; x.lineWidth = 2; x.stroke();
+      }
+      // connecteurs aux deux bouts
+      [port(i), port0(i)].forEach(([X, Y]) => {
+        x.beginPath(); x.arc(X, Y, 4, 0, 6.283); x.fillStyle = '#fff'; x.fill();
+        x.strokeStyle = on > 0 ? `rgba(${MAU},${.5 + on * .5})` : `rgba(${INK},.3)`; x.lineWidth = 1.25; x.stroke();
+      });
+    }
+
+    // paquets de données : petites capsules lumineuses avec traînée
+    if (ev) {
+      const f = vwire(port(sat), port0(sat)), dir = from === 0 ? -1 : 1, c = COL[sat];
+      for (let n = 0; n < 6; n++) {
+        const u = seg(ph, .1 + n * .05, .62 + n * .05); if (u <= 0 || u >= 1) continue;
+        const e = ease(u), uu = dir > 0 ? e : 1 - e;
+        const t0 = cl(uu - dir * .09);
+        path(f, Math.min(t0, uu), Math.max(t0, uu), 12);
+        const [ax, ay] = f(t0), [bx, by] = f(uu), g = x.createLinearGradient(ax, ay, bx, by);
+        g.addColorStop(0, `rgba(${c},0)`); g.addColorStop(1, `rgba(${c},.9)`);
+        x.strokeStyle = g; x.lineWidth = n ? 2.5 : 3.5; x.stroke();
+        x.save(); x.shadowColor = `rgba(${c},.9)`; x.shadowBlur = 12;
+        x.beginPath(); x.arc(bx, by, n ? 2.8 : 4, 0, 6.283); x.fillStyle = '#fff'; x.fill();
+        x.lineWidth = 2; x.strokeStyle = `rgba(${c},1)`; x.stroke(); x.restore();
+      }
+    }
+
+    // cartes
+    for (let i = 0; i < 5; i++) {
+      const [cx, cy, k] = P[i]; if (k <= 0) continue;
+      const w = cw[i], h = ch[i], r = m * .028, dark = i === 0, on = i === sat ? act : 0, glow = i === to ? arrive : 0;
+      x.globalAlpha = cl(k);
+      // ombre portée, plus forte quand la carte est soulevée
+      x.save(); x.shadowColor = `rgba(${INK},${.10 + on * .08})`; x.shadowBlur = 26 + on * 14; x.shadowOffsetY = 10 + on * 6;
+      rr(cx - w / 2, cy - h / 2, w, h, r); x.fillStyle = dark ? '#141238' : '#fff'; x.fill(); x.restore();
+      if (dark) { // halo mauve dans la carte centrale
+        x.save(); rr(cx - w / 2, cy - h / 2, w, h, r); x.clip();
+        const g = x.createRadialGradient(cx - w * .3, cy - h * .6, 0, cx - w * .3, cy - h * .6, w * .8);
+        g.addColorStop(0, `rgba(${MAU},${.45 + glow * .3})`); g.addColorStop(1, `rgba(${MAU},0)`);
+        x.fillStyle = g; x.fillRect(cx - w / 2, cy - h / 2, w, h); x.restore();
+      }
+      rr(cx - w / 2, cy - h / 2, w, h, r);
+      x.strokeStyle = dark ? `rgba(255,255,255,${.12 + glow * .5})` : glow || on ? `rgba(${COL[i]},${.5 + Math.max(glow, on) * .5})` : `rgba(${INK},.08)`;
+      x.lineWidth = 1 + Math.max(glow, on) * 1.5; x.stroke();
+      // onde d'arrivée autour de la carte cible
+      if (glow > 0 && i === to) {
+        const e = seg(ph, .6, .9), d = e * m * .04;
+        rr(cx - w / 2 - d, cy - h / 2 - d, w + d * 2, h + d * 2, r + d);
+        x.strokeStyle = `rgba(${MAU},${(1 - e) * .6})`; x.lineWidth = 1.5; x.stroke();
+      }
+
+      const pad = h * (dark ? .18 : .2), s = dark ? h * .22 : h * .34;
+      // tuile du motif produit, teintée de la couleur du produit
+      const tx = cx - w / 2 + pad, ty = dark ? cy - h / 2 + pad : cy - s * .85;
+      rr(tx, ty, s * 1.7, s * 1.7, s * .4);
+      x.fillStyle = dark ? 'rgba(255,255,255,.08)' : `rgba(${COL[i]},${.16 + on * .14})`; x.fill();
+      // le motif se rejoue quand la carte envoie ou reçoit
+      const pr = dark ? (to === 0 ? ease(seg(ph, .62, .95)) : 1) : (i === sat ? ease(seg(ph, .05, .6)) : 1);
+      glyph(i, tx + s * .85, ty + s * .85, s * 1.1, dark, pr, t);
+      // nom sur deux lignes
+      const [a, b] = NAMES[i].split(/ (?=OPTIMIZER|CONDUCTOR)/);
+      font(dark ? 700 : 600, dark ? fs + 2 : fs); x.fillStyle = dark ? '#fff' : '#141238'; x.textBaseline = 'middle';
+      const nx = tx + s * 1.7 + pad * .7, ny = ty + s * .85;
+      if (b) { x.fillText(a, nx, ny - fs * .72); x.globalAlpha = cl(k) * .55; x.fillText(b, nx, ny + fs * .78); x.globalAlpha = cl(k); } else x.fillText(a, nx, ny);
+      x.textBaseline = 'alphabetic';
+      // voyant d'état : il clignote pendant l'échange
+      const dx = cx + w / 2 - pad * .9, dy = cy - h / 2 + pad * .9, blink = on ? .5 + .5 * Math.sin(t * 14) : 0;
+      x.beginPath(); x.arc(dx, dy, 3.2, 0, 6.283);
+      x.fillStyle = on || (dark && ev) ? `rgba(${dark ? '127,232,207' : COL[i]},${.6 + blink * .4})` : `rgba(${dark ? '255,255,255' : INK},.18)`; x.fill();
+      if (dark) {
+        // mini graphe dans la carte centrale : trois scénarios, la courbe retenue se redessine à chaque réception
+        const gx = cx - w / 2 + pad, gw = w - pad * 2, gy = cy + h / 2 - pad * .9, gh = h * .34;
+        x.strokeStyle = 'rgba(255,255,255,.12)'; x.lineWidth = 1;
+        x.beginPath(); x.moveTo(gx, gy); x.lineTo(gx + gw, gy); x.stroke();
+        const curve = (j, u) => gy - gh * (1 - Math.exp(-u * (2.2 + j * 1.1))) * (.7 + j * .12);
+        for (let j = 0; j < 3; j++) {
+          const end = j === 2 ? (to === 0 ? .25 + .75 * seg(ph, .62, .95) : 1) : 1;
+          x.beginPath(); for (let q = 0; q <= 30; q++) { const u = q / 30 * end; q ? x.lineTo(gx + u * gw, curve(j, u)) : x.moveTo(gx, curve(j, 0)); }
+          x.strokeStyle = j === 2 ? `rgba(${MAU},1)` : 'rgba(255,255,255,.22)'; x.lineWidth = j === 2 ? 2 : 1.25; x.stroke();
+        }
+      } else {
+        // lignes de contenu factices, façon interface
+        const lx = cx - w / 2 + pad, ly = cy + h / 2 - pad * .75;
+        [.55, .3].forEach((L, j) => { rr(lx + j * w * .6, ly - 2, (w - pad * 2) * L, 4, 2); x.fillStyle = `rgba(${INK},.07)`; x.fill(); });
+      }
+      x.globalAlpha = 1;
+    }
+  }
+
+  /* ---------------- boucle ---------------- */
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let clock = 0, last = performance.now(), raf = 0;
+  function fit() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = stage.clientWidth; H = stage.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    render();
+  }
+  function render() { x.clearRect(0, 0, W, H); drawCards(reduced ? INTRO + GAP * .55 : clock); }
+  function frame(now) { raf = requestAnimationFrame(frame); clock += Math.min((now - last) / 1000, .05); last = now; render(); }
+  new ResizeObserver(fit).observe(stage);
+  if (!reduced) new IntersectionObserver(([e]) => { if (e.isIntersecting && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); } else if (!e.isIntersecting) { cancelAnimationFrame(raf); raf = 0; } }).observe(stage);
+
+  document.querySelector('[data-v="replay"]').addEventListener('click', () => { clock = 0; render(); });
+})();
+</script>
+</body>
+</html>

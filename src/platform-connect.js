@@ -1,4 +1,4 @@
-/* Bloc "plateforme connectée" des cinq pages produit (proto : protos/phasev-platform-particles-proto.html).
+/* Bloc "plateforme connectée" des cinq pages produit (proto : protos/site/phasev-platform-particles-proto.html).
    Monté dans <div data-pv="platform-connect" data-current="trial"></div>, à la place du placeholder.
    Label, titre et paragraphe restent dans Webflow. Les noms des produits peuvent être
    surchargés sur le montage : data-name-clinops="CLINOPS OPTIMIZER", etc. */

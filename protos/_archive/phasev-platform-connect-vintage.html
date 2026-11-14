@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROTO · Platform connect</title>
+<style>
+  /* Proto autonome : pistes visuelles pour le bloc « Standalone or connected » (Trial).
+     Ronde 3 : direction « vintage sans cliché ». Pas de papier, pas de sépia, pas de grain :
+     le vintage passe par le dessin (graphisme suisse des années 60, planche technique). */
+  :root{ --ink:#141238; --mau:#928acd; --bg:#f8f8f8; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:Aspekta, "Inter", "Helvetica Neue", Arial, sans-serif; }
+  .sec{ max-width:90rem; margin:0 auto; padding:7.5rem 2.5rem; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:4rem; align-items:center; }
+  .stage{ position:relative; width:100%; aspect-ratio:1.2/1; }
+  .stage canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  .label{ font-size:.875rem; font-weight:600; letter-spacing:1.15px; text-transform:uppercase; color:#5e2670; }
+  h2{ font-size:clamp(2rem,3.4vw,3.5rem); line-height:110%; margin:1rem 0 1.5rem; font-weight:600; letter-spacing:-.01em; }
+  p{ font-size:1.25rem; line-height:150%; color:#2b2a48; margin:0; max-width:34rem; }
+  .bar{ position:fixed; left:1rem; bottom:1rem; z-index:9; display:flex; gap:.375rem; align-items:center; padding:.375rem .375rem .375rem 1rem;
+    background:#0d0c26f2; color:#fff; border-radius:999px; font:500 .8125rem/1 Aspekta,Arial,sans-serif; box-shadow:0 10px 30px #0006; }
+  .bar b{ font-size:.6875rem; letter-spacing:1.15px; text-transform:uppercase; color:#ffffff80; margin-right:.375rem; }
+  .bar button{ font:inherit; color:#fff; background:transparent; border:1px solid #ffffff2e; border-radius:999px; padding:.5rem .875rem; cursor:pointer; }
+  .bar button[aria-pressed="true"]{ background:#fff; color:var(--ink); border-color:#fff; }
+  @media(max-width:991px){ .sec{ grid-template-columns:1fr; padding:4rem 1rem; } }
+</style>
+</head>
+<body>
+<section class="sec">
+  <div class="stage" id="stage"><canvas id="cv"></canvas></div>
+  <div>
+    <div class="label">Standalone or connected</div>
+    <h2>Complete on its own. Stronger when connected</h2>
+    <p>When connected to the broader PhaseV platform, reviewed insights can enter the scenario space, design decisions can inform operational planning in ClinOps Optimizer, and approved parameters can return to the protocol, SAP, and other connected documents for expert review.</p>
+  </div>
+</section>
+
+<div class="bar">
+  <b>Platform connect</b>
+  <button type="button" data-v="swiss" aria-pressed="true">A Surimpression</button>
+  <button type="button" data-v="plate" aria-pressed="false">B Planche</button>
+  <button type="button" data-v="replay">Rejouer</button>
+</div>
+
+<script>
+(function () {
+  const INK = '20,18,56', MAU = '146,138,205';
+  const NAMES = ['TRIAL OPTIMIZER', 'PORTFOLIO OPTIMIZER', 'RESPONSE OPTIMIZER', 'CLINOPS OPTIMIZER', 'AI CONDUCTOR'];
+  // secondaires de la charte, posés en aplats qui se multiplient comme des encres
+  const COL = ['#141238', '#928acd', '#78a8e0', '#7fe8cf', '#684a9e'];
+  // 0 = produit de la page ; échanges [de, vers], un à la fois
+  const EV = [[1, 0], [0, 3], [2, 0], [0, 4], [3, 0], [0, 1], [4, 0], [0, 2]];
+  const GAP = 2.8, INTRO = 1.6;
+
+  const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const seg = (t, a, b) => cl((t - a) / (b - a));
+  const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
+  // avance mécanique en crans, comme un compteur
+  const steps = (v, n) => { const k = cl(v) * n, i = Math.min(Math.floor(k), n - 1); return (i + ease(k - i)) / n; };
+
+  const stage = document.getElementById('stage'), cv = document.getElementById('cv'), x = cv.getContext('2d');
+  const FAMILY = getComputedStyle(document.body).fontFamily;
+  let W = 0, H = 0, mode = 'swiss';
+
+  function font(w, s, ls = .1) { x.font = `${w} ${s}px ${FAMILY}`; if ('letterSpacing' in x) x.letterSpacing = (s * ls).toFixed(2) + 'px'; }
+  function current(t) {
+    if (t < INTRO) return [null, 0, 0];
+    const n = (t - INTRO) / GAP, i = Math.floor(n);
+    return [EV[i % EV.length], n - i, i];
+  }
+  // polyligne : longueur totale et point à une fraction u
+  function poly(P) {
+    const L = [0]; for (let i = 1; i < P.length; i++) L.push(L[i - 1] + Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]));
+    const T = L[L.length - 1];
+    const at = u => { const d = cl(u) * T; let i = 1; while (i < P.length - 1 && L[i] < d) i++; const k = (d - L[i - 1]) / (L[i] - L[i - 1] || 1); return [P[i - 1][0] + (P[i][0] - P[i - 1][0]) * k, P[i - 1][1] + (P[i][1] - P[i - 1][1]) * k]; };
+    const stroke = (u0, u1) => { x.beginPath(); const a = at(u0); x.moveTo(a[0], a[1]); const d0 = u0 * T, d1 = u1 * T; for (let i = 1; i < P.length - 1; i++) if (L[i] > d0 && L[i] < d1) x.lineTo(P[i][0], P[i][1]); const b = at(u1); x.lineTo(b[0], b[1]); };
+    return { at, stroke };
+  }
+  const SPOT = [[.5, .47], [.15, .17], [.85, .17], [.15, .77], [.85, .77]];
+
+  /* ================= A : SURIMPRESSION ================
+     Affiche suisse des années 60 : aplats géométriques qui se superposent en multiply,
+     rails à angle droit, avance en crans, chiffres et filets fins. */
+  function shape(i, X, Y, r, rot) {
+    x.save(); x.translate(X, Y); x.rotate(rot); x.beginPath();
+    if (i === 0) x.arc(0, 0, r, 0, 6.283);
+    else if (i === 1) { x.moveTo(-r, 0); x.arc(0, 0, r, Math.PI, 0); x.closePath(); }            // demi-disque
+    else if (i === 2) { x.moveTo(-r * .7, r * .7); x.arc(-r * .7, r * .7, r * 1.4, -Math.PI / 2, 0); x.closePath(); } // quart de disque
+    else if (i === 3) { x.roundRect ? x.roundRect(-r * .8, -r * .8, r * 1.6, r * 1.6, r * .18) : x.rect(-r * .8, -r * .8, r * 1.6, r * 1.6); } // carré
+    else { x.moveTo(0, -r); x.lineTo(r * .95, r * .75); x.lineTo(-r * .95, r * .75); x.closePath(); } // triangle
+    x.restore();
+  }
+  function quarterTurns(i, t) {
+    // un quart de tour à chaque échange où le produit est impliqué, en cran
+    const n = Math.max(0, (t - INTRO) / GAP); let q = 0;
+    const full = Math.floor(n);
+    for (let e = 0; e < full; e++) { const [a, b] = EV[e % EV.length]; if (a === i || b === i) q++; }
+    const [a, b] = EV[full % EV.length];
+    if (a === i || b === i) q += ease(seg(n - full, .66, .86));
+    return q;
+  }
+  function drawSwiss(t) {
+    const m = Math.min(W, H), fs = W < 420 ? 9 : 11, R0 = m * .17, RS = m * .085;
+    const [ev, ph] = current(t), from = ev ? ev[0] : -1, to = ev ? ev[1] : -1, sat = ev ? (from || to) : -1;
+    const P = SPOT.map(([u, v]) => [u * W, v * H]), [cx, cy] = P[0];
+
+    // tracés de construction : cercles concentriques très fins
+    x.strokeStyle = `rgba(${INK},.07)`; x.lineWidth = 1;
+    [1.6, 2.4, 3.3].forEach((k, j) => { x.beginPath(); x.arc(cx, cy, R0 * k * ease(seg(t, j * .1, .9 + j * .1)), 0, 6.283); x.stroke(); });
+
+    // rails à angle droit, du cœur vers chaque produit
+    const rails = [null];
+    for (let i = 1; i < 5; i++) {
+      const sx = Math.sign(P[i][0] - cx), sy = Math.sign(P[i][1] - cy);
+      rails.push(poly([[cx + sx * R0 * .45, cy + sy * R0 * .89], [cx + sx * R0 * .45, P[i][1]], [P[i][0] - sx * RS * 1.15, P[i][1]]]));
+    }
+    const rw = m * .014;
+    x.lineCap = 'butt'; x.lineJoin = 'miter';
+    for (let i = 1; i < 5; i++) {
+      rails[i].stroke(0, ease(seg(t, .4, 1.3))); x.strokeStyle = `rgba(${INK},.1)`; x.lineWidth = rw; x.stroke();
+    }
+    // l'échange : le rail se remplit à la couleur du produit, un bloc navy avance en crans
+    if (ev) {
+      const r = rails[sat], dir = from === 0 ? -1 : 1, u = steps(seg(ph, .05, .7), 4), fade = 1 - seg(ph, .8, 1);
+      const head = dir > 0 ? 1 - u : u;  // les rails partent du cœur : u = 0 au cœur
+      x.globalCompositeOperation = 'multiply'; x.globalAlpha = fade;
+      if (dir > 0) r.stroke(head, 1); else r.stroke(0, head);
+      x.strokeStyle = COL[sat]; x.lineWidth = rw; x.stroke();
+      x.globalCompositeOperation = 'source-over';
+      const [X, Y] = r.at(head), b = rw * 1.9;
+      x.fillStyle = '#141238'; x.fillRect(X - b / 2, Y - b / 2, b, b);
+      x.globalAlpha = 1;
+    }
+
+    // aplats : chaque forme est posée en multiply, avec un contour décalé d'un cheveu (léger défaut de calage)
+    x.globalCompositeOperation = 'multiply';
+    // cœur : disque navy et disque mauve qui tourne autour en éclipse lente
+    const k0 = ease(seg(t, 0, .8)), orb = t * .35;
+    x.fillStyle = COL[1]; x.globalAlpha = .9;
+    x.beginPath(); x.arc(cx + Math.cos(orb) * R0 * .32, cy + Math.sin(orb) * R0 * .32, R0 * .78 * k0, 0, 6.283); x.fill();
+    x.fillStyle = COL[0]; x.globalAlpha = 1;
+    const pulse = to === 0 ? seg(ph, .66, .74) * (1 - seg(ph, .74, .95)) : 0;
+    x.beginPath(); x.arc(cx, cy, R0 * k0 * (1 + pulse * .04), 0, 6.283); x.fill();
+    for (let i = 1; i < 5; i++) {
+      const k = ease(seg(t, .3 + i * .12, .9 + i * .12)), rot = quarterTurns(i, t) * Math.PI / 2;
+      x.fillStyle = COL[i]; x.globalAlpha = i === sat ? 1 : .88;
+      shape(i, P[i][0], P[i][1], RS * k, rot); x.fill();
+      // seconde encre : petit disque navy décalé, il signale l'activité
+      if (i === sat) { x.globalAlpha = Math.min(seg(ph, 0, .1), 1 - seg(ph, .85, 1)); x.fillStyle = COL[0]; x.beginPath(); x.arc(P[i][0] + RS * .55, P[i][1] - RS * .55, RS * .22, 0, 6.283); x.fill(); }
+    }
+    x.globalAlpha = 1; x.globalCompositeOperation = 'source-over';
+    x.strokeStyle = `rgba(${INK},.55)`; x.lineWidth = 1;
+    for (let i = 1; i < 5; i++) { shape(i, P[i][0] + 1.5, P[i][1] + 1.5, RS * ease(seg(t, .3 + i * .12, .9 + i * .12)), quarterTurns(i, t) * Math.PI / 2); x.stroke(); }
+
+    // légendes : numéro, filet, nom ; pas de pastille
+    x.textBaseline = 'alphabetic'; x.globalAlpha = ease(seg(t, .9, 1.5));
+    for (let i = 0; i < 5; i++) {
+      const [X, Y] = P[i], left = i && X < cx, on = i === sat || (i === 0 && ev);
+      const ty = i === 0 ? Y + R0 + fs * 2.6 : Y + RS * 1.35 + fs * 1.6, tx = i === 0 ? X : left ? X - RS : X + RS;
+      x.textAlign = i === 0 ? 'center' : left ? 'left' : 'right';
+      font(500, fs * .9); x.fillStyle = `rgba(${INK},.5)`; x.fillText('0' + (i + 1), tx, ty - fs * 1.35);
+      font(i === 0 ? 700 : 600, i === 0 ? fs + 1 : fs); x.fillStyle = '#141238'; x.fillText(NAMES[i], tx, ty);
+      // filet sous le nom, il se remplit pendant l'échange
+      const w = x.measureText(NAMES[i]).width, x0 = x.textAlign === 'center' ? tx - w / 2 : left ? tx : tx - w;
+      x.fillStyle = `rgba(${INK},.15)`; x.fillRect(x0, ty + fs * .55, w, 1);
+      if (on && i) { x.fillStyle = COL[i] === '#7fe8cf' ? '#141238' : COL[i]; x.fillRect(x0, ty + fs * .55, w * Math.min(seg(ph, 0, .7), 1 - seg(ph, .85, 1)), 2); }
+    }
+    x.textAlign = 'left'; x.globalAlpha = 1;
+  }
+
+  /* ================= B : PLANCHE ================
+     Planche technique : trait seul à graisses variées, hachures pour distinguer les produits,
+     appels numérotés et légende, une seule encre de couleur pour le signal. */
+  function hatch(kind, X, Y, r, shift) {
+    x.save(); x.beginPath(); x.arc(X, Y, r, 0, 6.283); x.clip();
+    x.strokeStyle = `rgba(${INK},.55)`; x.fillStyle = `rgba(${INK},.6)`; x.lineWidth = 1;
+    const s = Math.max(3.5, r / 7);
+    if (kind === 0) { for (let d = -2 * r; d < 2 * r; d += s) { x.beginPath(); x.moveTo(X + d + shift, Y - r); x.lineTo(X + d + shift + 2 * r, Y + r); x.stroke(); } }
+    else if (kind === 1) { for (let a = -r; a < r; a += s * 1.1) for (let b = -r; b < r; b += s * 1.1) { x.beginPath(); x.arc(X + a + ((b / s | 0) % 2) * s * .55, Y + b, .9, 0, 6.283); x.fill(); } }
+    else if (kind === 2) { for (let d = -r; d < r; d += s) { x.beginPath(); x.moveTo(X - r, Y + d); x.lineTo(X + r, Y + d); x.stroke(); } }
+    else if (kind === 3) { for (let d = -2 * r; d < 2 * r; d += s * 1.4) { x.beginPath(); x.moveTo(X + d, Y - r); x.lineTo(X + d + 2 * r, Y + r); x.moveTo(X + d, Y + r); x.lineTo(X + d + 2 * r, Y - r); x.stroke(); } }
+    else { for (let q = r; q > 0; q -= s) { x.beginPath(); x.arc(X, Y, q, 0, 6.283); x.stroke(); } }
+    x.restore();
+  }
+  function arrow(X, Y, ang, s) {
+    x.beginPath(); x.moveTo(X, Y); x.lineTo(X - Math.cos(ang - .4) * s, Y - Math.sin(ang - .4) * s); x.lineTo(X - Math.cos(ang + .4) * s, Y - Math.sin(ang + .4) * s); x.closePath(); x.fill();
+  }
+  function drawPlate(t) {
+    const m = Math.min(W, H), fs = W < 420 ? 9 : 10.5, R0 = m * .13, RS = m * .07;
+    const [ev, ph] = current(t), from = ev ? ev[0] : -1, to = ev ? ev[1] : -1, sat = ev ? (from || to) : -1;
+    const P = SPOT.map(([u, v]) => [u * W, (v - .05) * H]), [cx, cy] = P[0];
+    const k = i => ease(seg(t, i * .12, .7 + i * .12));
+
+    // liaisons : traits fins avec talons, comme des cotes
+    for (let i = 1; i < 5; i++) {
+      const [X, Y] = P[i], ang = Math.atan2(Y - cy, X - cx), c = Math.cos(ang), s = Math.sin(ang);
+      const a = [cx + c * (R0 + 8), cy + s * (R0 + 8)], b = [X - c * (RS + 8), Y - s * (RS + 8)], kk = ease(seg(t, .5, 1.3));
+      x.strokeStyle = `rgba(${INK},.4)`; x.lineWidth = 1; x.setLineDash([]);
+      x.beginPath(); x.moveTo(a[0], a[1]); x.lineTo(a[0] + (b[0] - a[0]) * kk, a[1] + (b[1] - a[1]) * kk); x.stroke();
+      [a, b].forEach(([px, py]) => { x.beginPath(); x.moveTo(px - s * 5, py + c * 5); x.lineTo(px + s * 5, py - c * 5); x.stroke(); });
+      // signal : une seule encre, mauve, tracée avec sa flèche
+      if (i === sat) {
+        const u = ease(seg(ph, .05, .65)), fade = 1 - seg(ph, .82, 1), A = from === 0 ? a : b, B = from === 0 ? b : a;
+        const off = 5, nx = -s * off, ny = c * off; // décalé du trait, comme un double trait de flux
+        const hx = A[0] + (B[0] - A[0]) * u + nx, hy = A[1] + (B[1] - A[1]) * u + ny;
+        x.strokeStyle = `rgba(${MAU},${fade})`; x.fillStyle = `rgba(${MAU},${fade})`; x.lineWidth = 2;
+        x.beginPath(); x.moveTo(A[0] + nx, A[1] + ny); x.lineTo(hx, hy); x.stroke();
+        if (u > .02) arrow(hx, hy, Math.atan2(B[1] - A[1], B[0] - A[0]), 9);
+      }
+    }
+
+    // cœur : cercle hachuré, cadran gradué qui tourne lentement
+    const kc = k(0), shift = (t * 6) % Math.max(3.5, R0 / 7);
+    hatch(0, cx, cy, R0 * kc, shift);
+    x.strokeStyle = '#141238'; x.lineWidth = 2; x.beginPath(); x.arc(cx, cy, R0 * kc, 0, 6.283); x.stroke();
+    x.lineWidth = 1;
+    for (let q = 0; q < 72; q++) {
+      const a = q / 72 * 6.283 + t * .05, r1 = R0 * 1.12 * kc, r2 = r1 + (q % 6 ? 3 : 7);
+      x.beginPath(); x.moveTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1); x.lineTo(cx + Math.cos(a) * r2, cy + Math.sin(a) * r2); x.strokeStyle = `rgba(${INK},${q % 6 ? .3 : .7})`; x.stroke();
+    }
+    const hit0 = to === 0 ? seg(ph, .6, .7) * (1 - seg(ph, .75, 1)) : 0;
+    if (hit0) { x.beginPath(); x.arc(cx, cy, R0 * (1.3 + hit0 * .1), 0, 6.283); x.strokeStyle = `rgba(${MAU},${hit0})`; x.lineWidth = 2; x.stroke(); }
+
+    // produits voisins : un motif de trame chacun
+    for (let i = 1; i < 5; i++) {
+      const [X, Y] = P[i], r = RS * k(i), hit = i === to ? seg(ph, .6, .7) * (1 - seg(ph, .75, 1)) : 0;
+      hatch(i, X, Y, r, 0);
+      if (hit) { x.globalCompositeOperation = 'multiply'; x.beginPath(); x.arc(X, Y, r, 0, 6.283); x.fillStyle = `rgba(${MAU},${hit * .8})`; x.fill(); x.globalCompositeOperation = 'source-over'; }
+      x.strokeStyle = '#141238'; x.lineWidth = 1.5; x.beginPath(); x.arc(X, Y, r, 0, 6.283); x.stroke();
+    }
+
+    // appels numérotés
+    const call = (n, X, Y, on) => {
+      x.beginPath(); x.arc(X, Y, fs * .95, 0, 6.283);
+      x.fillStyle = on ? '#141238' : '#f8f8f8'; x.fill(); x.strokeStyle = '#141238'; x.lineWidth = 1; x.stroke();
+      font(600, fs * .85, 0); x.fillStyle = on ? '#fff' : '#141238'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(n, X, Y + .5);
+      x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+    };
+    const lab = ease(seg(t, .9, 1.5)); x.globalAlpha = lab;
+    for (let i = 0; i < 5; i++) {
+      const [X, Y] = P[i], r = i ? RS : R0 * 1.12 + 8, a = i ? Math.atan2(Y - cy, X - cx) - .9 * Math.sign(X - cx) * Math.sign(Y - cy) : -2.3;
+      const ex = X + Math.cos(a) * (r + fs * 2.2), ey = Y + Math.sin(a) * (r + fs * 2.2);
+      x.strokeStyle = `rgba(${INK},.5)`; x.lineWidth = 1; x.beginPath(); x.moveTo(X + Math.cos(a) * r, Y + Math.sin(a) * r); x.lineTo(ex, ey); x.stroke();
+      call(i + 1, ex, ey, i === sat || (i === 0 && !!ev));
+    }
+    // légende en pied de planche
+    const ly = H - fs * 4.6, cols = W < 420 ? 2 : 3, cw = (W - 4) / cols;
+    x.fillStyle = `rgba(${INK},.25)`; x.fillRect(2, ly - fs * 1.8, W - 4, 1);
+    NAMES.forEach((nm, i) => {
+      const gx = 2 + (i % cols) * cw + fs, gy = ly + Math.floor(i / cols) * fs * 2.4;
+      call(i + 1, gx, gy - fs * .35, i === sat || (i === 0 && !!ev));
+      font(i === 0 ? 700 : 500, fs); x.fillStyle = '#141238'; x.fillText(nm, gx + fs * 1.7, gy);
+    });
+    x.globalAlpha = 1;
+  }
+
+  /* ---------------- boucle ---------------- */
+  const DRAW = { swiss: drawSwiss, plate: drawPlate };
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let clock = 0, last = performance.now(), raf = 0;
+  function fit() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = stage.clientWidth; H = stage.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    render();
+  }
+  function render() { x.clearRect(0, 0, W, H); DRAW[mode](reduced ? INTRO + GAP * .5 : clock); }
+  function frame(now) { raf = requestAnimationFrame(frame); clock += Math.min((now - last) / 1000, .05); last = now; render(); }
+  new ResizeObserver(fit).observe(stage);
+  if (!reduced) new IntersectionObserver(([e]) => { if (e.isIntersecting && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); } else if (!e.isIntersecting) { cancelAnimationFrame(raf); raf = 0; } }).observe(stage);
+
+  document.querySelectorAll('.bar button').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.v !== 'replay') {
+      mode = b.dataset.v;
+      document.querySelectorAll('.bar button:not([data-v="replay"])').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+    }
+    clock = 0; render();
+  }));
+})();
+</script>
+</body>
+</html>

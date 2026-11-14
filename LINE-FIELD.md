@@ -2,7 +2,7 @@
 
 Source de vérité pour l'attribution des textures. Toute modification d'attribution passe par ce fichier.
 Code : `site.js` (chargé depuis le footer de code global du site) → `src/line-field/` et `src/floating-bg.js`.
-Référence visuelle : `protos/phasev-line-textures-proto7.html`.
+Référence visuelle : `protos/site/phasev-line-textures-proto7.html`.
 
 ## Attributs
 

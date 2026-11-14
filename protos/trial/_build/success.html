@@ -1,0 +1,128 @@
+<style>
+  /* Success story : CSS ciblé par attribut (sera injecté par le module, aucune classe Webflow créée) */
+  [data-ss-variant]:not([data-on]){ display:none; }
+  [data-ss] h2.text-size-display{ font-size:clamp(1.875rem,2.5vw,2.5rem); line-height:110%; }
+  [data-ss] .section-top{ margin:0; }
+  [data-ss] .ss-ctx{ display:inline-flex; align-items:center; gap:.625rem; padding:.5rem .875rem; border-radius:999px; background:var(--pv-cream); color:#5e2670; }
+  [data-ss] .ss-ctx::before{ content:''; width:.5rem; height:.5rem; border-radius:50%; background:#928acd; }
+  [data-ss] .ss-kpi{ display:flex; flex-direction:column; gap:.5rem; padding:1.5rem 1.375rem; border-radius:1rem; background:var(--pv-cream); }
+  [data-ss] .ss-kpi .v, [data-ss] .ss-row .v{ font-size:1.75rem; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#141238; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  [data-ss] .v small{ font-size:1rem; font-weight:500; color:#626262; letter-spacing:0; }
+  [data-ss] .ss-kpi .c, [data-ss] .ss-row .c{ font-size:.9375rem; line-height:1.4; color:#626262; }
+  [data-ss] .ss-body{ margin:0; color:#2b2a48; font-size:1.0625rem; line-height:155%; max-width:34rem; }
+  [data-ss] .ss-actions{ display:flex; align-items:center; gap:1rem 2rem; flex-wrap:wrap; }
+  [data-ss] .ss-link{ color:#141238; text-decoration:none; border-bottom:1px solid #14123866; padding-bottom:.2rem; transition:border-color .2s; }
+  [data-ss] .ss-link:hover{ border-color:#141238; }
+  [data-ss] .ss-big .number-span{ font-size:clamp(3.5rem,5.5vw,5rem); line-height:.9; letter-spacing:-.04em; font-weight:600; color:#141238; }
+  [data-ss] .ss-big .c{ font-size:1.125rem; font-weight:500; color:#141238; margin-top:.5rem; }
+  /* le résultat en carte jaune : seul aplat jaune du bloc, écho du design retenu dans l'animation */
+  [data-ss]{ --ss-card:#7e5bb2; --pv-cream:var(--neutral-white); }
+  [data-ss] .ss-big{ display:flex; flex-direction:column; justify-content:flex-end; padding:1.75rem 1.75rem 1.5rem; border-radius:1rem; background:var(--ss-card); }
+  [data-ss] .ss-big .number-span, [data-ss] .ss-big .c{ color:#fff; }
+  [data-ss="A"] .ss-big{ align-self:flex-start; }
+  /* l'animation prend sa hauteur de sa largeur (W / 1.15) : on borne la largeur */
+  [data-ss] .ss-anim{ min-width:0; padding:1.25rem; border-radius:1.25rem; background:var(--pv-cream); }
+  /* lignes de chiffres séparées par des filets */
+  [data-ss] .ss-rows{ display:flex; flex-direction:column; border-top:1px solid #1412381f; }
+  [data-ss] .ss-row{ display:grid; grid-template-columns:9.5rem minmax(0,1fr); align-items:baseline; gap:1.25rem; padding:.875rem 0; border-bottom:1px solid #1412381f; }
+
+  /* A : chiffre héros + 3 tuiles à gauche, animation à droite */
+  [data-ss="A"]{ display:flex; flex-direction:column; gap:3rem; }
+  [data-ss="A"] .ss-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,30rem); gap:3rem 5rem; align-items:center; }
+  [data-ss="A"] .ss-left{ display:flex; flex-direction:column; gap:1.75rem; }
+  [data-ss="A"] .ss-kpis{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.75rem; }
+  [data-ss="A"] .ss-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:1.5rem 4rem; flex-wrap:wrap; }
+
+  /* C : tout en une rangée ; texte compact à gauche, animation encadrée à droite */
+  [data-ss="C"]{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,30rem); gap:3rem 5rem; align-items:center; }
+  [data-ss="C"] .ss-left{ display:flex; flex-direction:column; gap:1.75rem; }
+  [data-ss="C"] .ss-labels{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; align-items:center; }
+  [data-ss="C"] .ss-figs{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:1.5rem 3rem; align-items:center; }
+
+  /* D : titre et actions en tête ; trois colonnes : chiffre héros, chiffres, animation */
+  [data-ss="D"]{ display:flex; flex-direction:column; gap:3rem; }
+  [data-ss="D"] .ss-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:1.5rem 4rem; flex-wrap:wrap; padding-bottom:2rem; border-bottom:1px solid #1412381f; }
+  [data-ss="D"] .ss-head .section-top{ max-width:40rem; }
+  [data-ss="D"] .ss-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,26rem); gap:3rem 4rem; align-items:center; }
+  [data-ss="D"] .ss-col{ display:flex; flex-direction:column; gap:1.5rem; }
+  [data-ss="D"] .ss-row{ grid-template-columns:1fr; gap:.25rem; padding:1rem 0; }
+
+  @media(max-width:991px){
+    [data-ss="A"] .ss-grid, [data-ss="C"], [data-ss="D"] .ss-grid{ grid-template-columns:1fr; }
+    [data-ss] .ss-anim{ max-width:34rem; width:100%; }
+    [data-ss="C"] .ss-figs{ grid-template-columns:1fr; }
+  }
+  @media(max-width:600px){
+    [data-ss="A"] .ss-kpis{ grid-template-columns:1fr; }
+    [data-ss] .ss-row{ grid-template-columns:1fr; gap:.25rem; }
+  }
+</style>
+
+<!-- ===== Variante A ===== -->
+<section class="section_layout is-lightpurple" data-ss-variant="A" data-new-block><div class="padding-global padding-section-main"><div class="container-large"><div data-ss="A">
+  <div class="ss-head">
+    <div class="section-top left-align"><div class="text-size-label">Success story</div><h2 class="text-size-display">A Phase 3 design refined for speed, cost, and statistical performance.</h2></div>
+    <div class="text-size-label ss-ctx">Anonymized Phase 3 infectious disease trial</div>
+  </div>
+  <div class="ss-grid">
+    <div class="ss-left">
+      <div class="ss-big"><div class="number-span is-proof">$6M+</div><div class="c">conservative direct cost savings</div></div>
+      <div class="ss-kpis">
+        <div class="ss-kpi"><div class="v">630 → 575</div><div class="c" data-proposed>Modeled enrollment</div></div>
+        <div class="ss-kpi"><div class="v">6 <small>months</small></div><div class="c" data-proposed>Shorter modeled trial duration</div></div>
+        <div class="ss-kpi"><div class="v">90%+</div><div class="c">power, with a 2.5% Type I error</div></div>
+      </div>
+      <p class="ss-body" data-proposed>By simulating millions of candidate designs and applying its stochastic optimization algorithm, PhaseV identified an adaptive protocol that maintained the target operating characteristics.</p>
+      <div class="ss-actions">
+        <a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/case-studies/phase-3-infectious-disease-trial-optimization" class="button w-button">View details</a>
+        <a class="ss-link text-size-large" href="https://phasev-2026.webflow.io/case-studies">Explore the case study library →</a>
+      </div>
+    </div>
+    <div class="ss-anim"><div data-pv="success-design-space"></div></div>
+  </div>
+</div></div></div></section>
+
+
+<!-- ===== Variante C : une rangée ===== -->
+<section class="section_layout is-lightpurple" data-ss-variant="C" data-on data-new-block><div class="padding-global padding-section-main"><div class="container-large"><div data-ss="C">
+  <div class="ss-left">
+    <div class="ss-labels"><div class="text-size-label">Success story</div><div class="text-size-label ss-ctx">Anonymized Phase 3 infectious disease trial</div></div>
+    <h2 class="text-size-display">A Phase 3 design refined for speed, cost, and statistical performance.</h2>
+    <div class="ss-figs">
+      <div class="ss-big"><div class="number-span is-proof">$6M+</div><div class="c">conservative direct<br>cost savings</div></div>
+      <div class="ss-rows">
+        <div class="ss-row"><div class="v">630 → 575</div><div class="c" data-proposed>modeled enrollment</div></div>
+        <div class="ss-row"><div class="v">6 <small>months</small></div><div class="c" data-proposed>shorter modeled duration</div></div>
+        <div class="ss-row"><div class="v">90%+</div><div class="c">power, 2.5% Type I error</div></div>
+      </div>
+    </div>
+    <div class="ss-actions">
+      <a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/case-studies/phase-3-infectious-disease-trial-optimization" class="button w-button">View details</a>
+      <a class="ss-link text-size-large" href="https://phasev-2026.webflow.io/case-studies">Explore the case study library →</a>
+    </div>
+  </div>
+  <div class="ss-anim"><div data-pv="success-design-space"></div></div>
+</div></div></div></section>
+
+<!-- ===== Variante D : trois colonnes ===== -->
+<section class="section_layout is-lightpurple" data-ss-variant="D" data-new-block><div class="padding-global padding-section-main"><div class="container-large"><div data-ss="D">
+  <div class="ss-head">
+    <div class="section-top left-align"><div class="text-size-label">Success story · Anonymized Phase 3 infectious disease trial</div><h2 class="text-size-display">A Phase 3 design refined for speed, cost, and statistical performance.</h2></div>
+    <div class="ss-actions">
+      <a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/case-studies/phase-3-infectious-disease-trial-optimization" class="button w-button">View details</a>
+      <a class="ss-link text-size-large" href="https://phasev-2026.webflow.io/case-studies">Explore the case study library →</a>
+    </div>
+  </div>
+  <div class="ss-grid">
+    <div class="ss-col">
+      <div class="ss-big"><div class="number-span is-proof">$6M+</div><div class="c">conservative direct cost savings</div></div>
+      <p class="ss-body" data-proposed>By simulating millions of candidate designs and applying its stochastic optimization algorithm, PhaseV identified an adaptive protocol that maintained the target operating characteristics.</p>
+    </div>
+    <div class="ss-rows">
+      <div class="ss-row"><div class="v">630 → 575</div><div class="c" data-proposed>modeled enrollment</div></div>
+      <div class="ss-row"><div class="v">6 <small>months</small></div><div class="c" data-proposed>shorter modeled trial duration</div></div>
+      <div class="ss-row"><div class="v">90%+</div><div class="c">power, with a 2.5% Type I error</div></div>
+    </div>
+    <div class="ss-anim"><div data-pv="success-design-space"></div></div>
+  </div>
+</div></div></div></section>

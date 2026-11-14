@@ -1,5 +1,5 @@
 /* À coller dans l'embed du composant « global styles », à la place de l'ancienne règle [data-bg='purple-gradient']
-   (sauvegardée dans protos/legacy/data-bg-global-styles.css). Repris du proto 7 (protos/phasev-line-textures-proto7.html).
+   (sauvegardée dans protos/_archive/legacy/data-bg-global-styles.css). Repris du proto 7 (protos/site/phasev-line-textures-proto7.html).
 
    C'est le FALLBACK : il ne sert que si site.js ne charge pas. Dès que le JS tourne, il pose .pv-live sur la section,
    ce qui coupe les pseudo-éléments au profit des nappes injectées.

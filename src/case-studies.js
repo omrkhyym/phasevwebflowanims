@@ -129,6 +129,16 @@ const isEmpty = el => !el || el.classList.contains('w-dyn-bind-empty') || !txt(e
 const slugify = s => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Liens des cartes : l'API Webflow ne sait pas faire pointer un lien vers la fiche CMS en cours (il sort
+   « detail_case-studies »). Chaque carte porte son slug en attribut ; le module écrit le vrai lien. */
+function fixLinks(scope) {
+  scope.querySelectorAll('[data-cs-slug]').forEach(holder => {
+    const slug = holder.getAttribute('data-cs-slug');
+    if (!slug) return;
+    holder.querySelectorAll('[data-cs-link], a').forEach(a => a.setAttribute('href', '/case-studies/' + slug));
+  });
+}
+
 /* masque les blocs « chiffre clé » sans valeur */
 function hideEmptyStats(scope) {
   scope.querySelectorAll('[data-cs-stat]').forEach(el => { if (isEmpty(el.querySelector('[data-cs-stat-n]'))) el.setAttribute('data-cs-hidden', ''); });
@@ -141,12 +151,7 @@ export function initCaseStudiesFeatured(root) {
   root.dataset.pvInit = '1';
   injectCSS();
   hideEmptyStats(root);
-  // le bouton (composant du site) ne peut pas pointer vers une fiche CMS : le slug est porté par son conteneur
-  root.querySelectorAll('[data-cs-slug]').forEach(w => {
-    const slug = w.getAttribute('data-cs-slug');
-    const a = w.querySelector('a');
-    if (slug && a) a.setAttribute('href', '/case-studies/' + slug);
-  });
+  fixLinks(root);   // le bouton « Read the case » : le slug est porté par son conteneur
   return () => {};
 }
 
@@ -156,6 +161,7 @@ export function initCaseStudiesLibrary(root) {
   root.dataset.pvInit = '1';
   injectCSS();
   hideEmptyStats(root);
+  fixLinks(root);
 
   const names = kind => [...root.querySelectorAll(`[data-cs-source="${kind}"] [data-cs-name]`)].map(txt).filter(Boolean);
   const products = names('product');
@@ -302,6 +308,7 @@ export function initCaseStudy(root) {
   root.dataset.pvInit = '1';
   injectCSS();
   hideEmptyStats(root);
+  fixLinks(root);
   buildGlance(root);
   buildWhy(root);
   buildFaq(root);

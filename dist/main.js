@@ -1,40 +1,41 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
+import { c as n, d as r, i, l as a, m as o, n as s, o as c, p as l, r as u, s as d, t as f, u as p } from "./bonv-draw-D7G52O51.mjs";
 //#region src/hero-sequence/engine.js
-function n(e) {
+function m(e) {
 	let t = e.getContext("webgl2", {
 		alpha: !0,
 		antialias: !1,
 		premultipliedAlpha: !0
 	});
 	if (!t) throw Error("WebGL2 indisponible");
-	let n = new Float32Array(i * 2), r = new Float32Array(i * 4), c = new Uint32Array(i), l = 11, u = () => (l = l * 16807 % 2147483647) / 2147483647;
-	for (let e = 0; e < i; e++) c[e] = e;
+	let n = new Float32Array(g * 2), r = new Float32Array(g * 4), i = new Uint32Array(g), a = 11, o = () => (a = a * 16807 % 2147483647) / 2147483647;
+	for (let e = 0; e < g; e++) i[e] = e;
 	for (let e = 131071; e > 0; e--) {
-		let t = Math.floor(u() * (e + 1));
-		[c[e], c[t]] = [c[t], c[e]];
+		let t = Math.floor(o() * (e + 1));
+		[i[e], i[t]] = [i[t], i[e]];
 	}
-	for (let e = 0; e < i; e++) {
-		let t = c[e], i = t % 512, a = Math.floor(t / 512);
-		n[e * 2] = -1 + 2 * i / 511, n[e * 2 + 1] = -1 + 2 * a / 255;
-		for (let t = 0; t < 4; t++) r[e * 4 + t] = u();
+	for (let e = 0; e < g; e++) {
+		let t = i[e], a = t % 512, s = Math.floor(t / 512);
+		n[e * 2] = -1 + 2 * a / 511, n[e * 2 + 1] = -1 + 2 * s / 255;
+		for (let t = 0; t < 4; t++) r[e * 4 + t] = o();
 	}
-	let d = t.createVertexArray();
-	t.bindVertexArray(d), t.bindBuffer(t.ARRAY_BUFFER, t.createBuffer()), t.bufferData(t.ARRAY_BUFFER, n, t.STATIC_DRAW), t.enableVertexAttribArray(0), t.vertexAttribPointer(0, 2, t.FLOAT, !1, 0, 0), t.bindBuffer(t.ARRAY_BUFFER, t.createBuffer()), t.bufferData(t.ARRAY_BUFFER, r, t.STATIC_DRAW), t.enableVertexAttribArray(1), t.vertexAttribPointer(1, 4, t.FLOAT, !1, 0, 0);
-	function f(e, n) {
+	let s = t.createVertexArray();
+	t.bindVertexArray(s), t.bindBuffer(t.ARRAY_BUFFER, t.createBuffer()), t.bufferData(t.ARRAY_BUFFER, n, t.STATIC_DRAW), t.enableVertexAttribArray(0), t.vertexAttribPointer(0, 2, t.FLOAT, !1, 0, 0), t.bindBuffer(t.ARRAY_BUFFER, t.createBuffer()), t.bufferData(t.ARRAY_BUFFER, r, t.STATIC_DRAW), t.enableVertexAttribArray(1), t.vertexAttribPointer(1, 4, t.FLOAT, !1, 0, 0);
+	function c(e, n) {
 		let r = t.createShader(e);
 		if (t.shaderSource(r, n), t.compileShader(r), !t.getShaderParameter(r, t.COMPILE_STATUS)) throw Error(t.getShaderInfoLog(r));
 		return r;
 	}
-	let p = null, m = {}, h = [], g = {}, _ = /* @__PURE__ */ new Map();
-	function v(e) {
-		let n = _.get(e.id);
+	let l = null, u = {}, d = [], f = {}, p = /* @__PURE__ */ new Map();
+	function m(e) {
+		let n = p.get(e.id);
 		if (n) {
-			({prog: p, loc: m, sceneKeys: h, fixedVals: g} = n);
+			({prog: l, loc: u, sceneKeys: d, fixedVals: f} = n);
 			return;
 		}
-		let r = e.fixed || {}, i = [...Object.keys(e.params), ...Object.keys(r)].map((e) => `uniform float u_${e};`).join("\n"), c = t.createProgram();
-		if (t.attachShader(c, f(t.VERTEX_SHADER, a + i + "\n" + e.glsl + o)), t.attachShader(c, f(t.FRAGMENT_SHADER, s)), t.linkProgram(c), !t.getProgramParameter(c, t.LINK_STATUS)) throw Error(t.getProgramInfoLog(c));
-		p = c, h = Object.keys(e.params), m = {}, g = r, [
+		let r = e.fixed || {}, i = [...Object.keys(e.params), ...Object.keys(r)].map((e) => `uniform float u_${e};`).join("\n"), a = t.createProgram();
+		if (t.attachShader(a, c(t.VERTEX_SHADER, _ + i + "\n" + e.glsl + v)), t.attachShader(a, c(t.FRAGMENT_SHADER, y)), t.linkProgram(a), !t.getProgramParameter(a, t.LINK_STATUS)) throw Error(t.getProgramInfoLog(a));
+		l = a, d = Object.keys(e.params), u = {}, f = r, [
 			"t",
 			"scale",
 			"cam",
@@ -46,32 +47,32 @@ function n(e) {
 			"shift",
 			"rot",
 			"res",
-			...h,
+			...d,
 			...Object.keys(r)
 		].forEach((e) => {
-			m[e] = t.getUniformLocation(c, "u_" + e);
-		}), _.set(e.id, {
-			prog: p,
-			loc: m,
-			sceneKeys: h,
-			fixedVals: g
+			u[e] = t.getUniformLocation(a, "u_" + e);
+		}), p.set(e.id, {
+			prog: l,
+			loc: u,
+			sceneKeys: d,
+			fixedVals: f
 		});
 	}
-	let y = 1, b = 1, x = 1;
+	let h = 1, b = 1, x = 1;
 	function S() {
-		x = Math.min(devicePixelRatio || 1, 2), y = Math.max(1, Math.round(e.clientWidth * x)), b = Math.max(1, Math.round(e.clientHeight * x)), e.width = y, e.height = b;
+		x = Math.min(devicePixelRatio || 1, 2), h = Math.max(1, Math.round(e.clientWidth * x)), b = Math.max(1, Math.round(e.clientHeight * x)), e.width = h, e.height = b;
 	}
 	function C(e, n, r) {
-		t.viewport(0, 0, y, b), t.clearColor(0, 0, 0, 0), t.clear(t.COLOR_BUFFER_BIT), p && (t.useProgram(p), t.bindVertexArray(d), t.uniform1f(m.t, e), t.uniform1f(m.scale, Math.min(y, b * 1.6) * .9 * n.zoom), t.uniform1f(m.cam, n.cam), t.uniform1f(m.dpr, x), t.uniform1f(m.dof, n.dof), t.uniform1f(m.focus, n.focus), t.uniform1f(m.size, n.size), t.uniform1f(m.bright, n.bright), t.uniform1f(m.shift, n.shift || 0), t.uniform2f(m.rot, n.yaw, n.pitch), t.uniform2f(m.res, y, b), h.forEach((e) => t.uniform1f(m[e], n[e])), Object.entries(g).forEach(([e, n]) => t.uniform1f(m[e], n)), t.enable(t.BLEND), t.blendFunc(t.ONE, t.ONE), t.drawArrays(t.POINTS, 0, Math.min(i, Math.max(1, Math.round(r)))));
+		t.viewport(0, 0, h, b), t.clearColor(0, 0, 0, 0), t.clear(t.COLOR_BUFFER_BIT), l && (t.useProgram(l), t.bindVertexArray(s), t.uniform1f(u.t, e), t.uniform1f(u.scale, Math.min(h, b * 1.6) * .9 * n.zoom), t.uniform1f(u.cam, n.cam), t.uniform1f(u.dpr, x), t.uniform1f(u.dof, n.dof), t.uniform1f(u.focus, n.focus), t.uniform1f(u.size, n.size), t.uniform1f(u.bright, n.bright), t.uniform1f(u.shift, n.shift || 0), t.uniform2f(u.rot, n.yaw, n.pitch), t.uniform2f(u.res, h, b), d.forEach((e) => t.uniform1f(u[e], n[e])), Object.entries(f).forEach(([e, n]) => t.uniform1f(u[e], n)), t.enable(t.BLEND), t.blendFunc(t.ONE, t.ONE), t.drawArrays(t.POINTS, 0, Math.min(g, Math.max(1, Math.round(r)))));
 	}
 	return {
-		useScene: v,
+		useScene: m,
 		resize: S,
 		render: C
 	};
 }
-var r, i, a, o, s, c = e((() => {
-	r = {
+var h, g, _, v, y, b = e((() => {
+	h = {
 		cam: {
 			label: "Distance caméra",
 			min: 1.2,
@@ -135,9 +136,9 @@ var r, i, a, o, s, c = e((() => {
 			step: .01,
 			value: 0
 		}
-	}, i = 131072, a = "#version 300 es\nlayout(location=0) in vec2 a_g;   // position sur une grille régulière (pour les scènes de plan)\nlayout(location=1) in vec4 a_r;   // aléas\nuniform float u_t, u_scale, u_cam, u_dpr, u_dof, u_focus, u_size, u_bright, u_shift;   // shift : décalage horizontal de l'image (0 centré)\nuniform vec2 u_rot, u_res;\nout float v_a; out float v_b; out float v_s; out vec2 v_d; out vec3 v_c;\nfloat S_out=0.;   // une scène peut le poser : étire le point en traînée, dans le sens de la fuite depuis le centre\nconst float PI=3.14159265, TAU=6.2831853;\nconst vec3 MAU=vec3(.663,.624,.847), BLU=vec3(.471,.659,.878), TEA=vec3(.498,.910,.812), WHI=vec3(.957);\nfloat ez(float k){ return k<.5?4.*k*k*k:1.-pow(-2.*k+2.,3.)/2.; }\nvec3 rotY(vec3 p, float a){ float c=cos(a), s=sin(a); return vec3(c*p.x+s*p.z, p.y, -s*p.x+c*p.z); }\nvec3 rotX(vec3 p, float a){ float c=cos(a), s=sin(a); return vec3(p.x, c*p.y-s*p.z, s*p.y+c*p.z); }\nvec3 sphereDir(vec4 r){ float ct=r.y*2.-1., sn=sqrt(1.-ct*ct), ph=r.z*TAU; return vec3(sn*cos(ph),ct,sn*sin(ph)); }\n", o = "\nvoid main(){\n  vec3 P; float A; vec3 C;\n  scene(a_g, a_r, u_t, P, A, C);\n  float cy=cos(u_rot.x), sy=sin(u_rot.x); P=vec3(cy*P.x+sy*P.z,P.y,-sy*P.x+cy*P.z);\n  float cp=cos(u_rot.y), sp=sin(u_rot.y); P=vec3(P.x,cp*P.y+sp*P.z,cp*P.z-sp*P.y);\n  float zr=u_cam+P.z, z=max(zr,.3); vec2 s=P.xy/z*u_scale;\n  gl_Position=vec4(s.x/u_res.x*2.+u_shift, s.y/u_res.y*2., 0., 1.);\n  // profondeur de champ : net près du centre de la scène, disques doux devant et derrière (l'énergie du point est conservée)\n  float near=clamp(2.25-z*.62,.08,1.);\n  float base=(1.+2.4*near)*u_size, blur=clamp(abs(P.z)-u_focus,0.,1.6)*u_dof;\n  float sz=min(base+14.*blur*blur,80.);\n  v_b=clamp(blur*1.8,0.,1.);\n  v_s=clamp(S_out,0.,2.); v_d=normalize(s+1e-4);\n  gl_PointSize=u_dpr*sz*(1.+2.*v_s);\n  v_a=A*u_bright*near*pow(base/sz,1.25)*smoothstep(.35,.7,zr);\n  v_c=C;\n}", s = "#version 300 es\nprecision highp float;\nin float v_a; in float v_b; in float v_s; in vec2 v_d; in vec3 v_c; out vec4 o;\nvoid main(){\n  vec2 q=gl_PointCoord-.5; q.y=-q.y;\n  vec2 ql=vec2(dot(q,v_d), dot(q,vec2(-v_d.y,v_d.x))); ql.y*=1.+4.*v_s;\n  float d=length(ql);\n  float sharp=smoothstep(.5,.15,d), bokeh=smoothstep(.5,.38,d)*(.7+.3*smoothstep(.1,.45,d));\n  float a=mix(sharp,bokeh,v_b)*v_a; if(a<.002) discard;\n  o=vec4(v_c*a,a);\n}";
-})), l, u = e((() => {
-	l = {
+	}, g = 131072, _ = "#version 300 es\nlayout(location=0) in vec2 a_g;   // position sur une grille régulière (pour les scènes de plan)\nlayout(location=1) in vec4 a_r;   // aléas\nuniform float u_t, u_scale, u_cam, u_dpr, u_dof, u_focus, u_size, u_bright, u_shift;   // shift : décalage horizontal de l'image (0 centré)\nuniform vec2 u_rot, u_res;\nout float v_a; out float v_b; out float v_s; out vec2 v_d; out vec3 v_c;\nfloat S_out=0.;   // une scène peut le poser : étire le point en traînée, dans le sens de la fuite depuis le centre\nconst float PI=3.14159265, TAU=6.2831853;\nconst vec3 MAU=vec3(.663,.624,.847), BLU=vec3(.471,.659,.878), TEA=vec3(.498,.910,.812), WHI=vec3(.957);\nfloat ez(float k){ return k<.5?4.*k*k*k:1.-pow(-2.*k+2.,3.)/2.; }\nvec3 rotY(vec3 p, float a){ float c=cos(a), s=sin(a); return vec3(c*p.x+s*p.z, p.y, -s*p.x+c*p.z); }\nvec3 rotX(vec3 p, float a){ float c=cos(a), s=sin(a); return vec3(p.x, c*p.y-s*p.z, s*p.y+c*p.z); }\nvec3 sphereDir(vec4 r){ float ct=r.y*2.-1., sn=sqrt(1.-ct*ct), ph=r.z*TAU; return vec3(sn*cos(ph),ct,sn*sin(ph)); }\n", v = "\nvoid main(){\n  vec3 P; float A; vec3 C;\n  scene(a_g, a_r, u_t, P, A, C);\n  float cy=cos(u_rot.x), sy=sin(u_rot.x); P=vec3(cy*P.x+sy*P.z,P.y,-sy*P.x+cy*P.z);\n  float cp=cos(u_rot.y), sp=sin(u_rot.y); P=vec3(P.x,cp*P.y+sp*P.z,cp*P.z-sp*P.y);\n  float zr=u_cam+P.z, z=max(zr,.3); vec2 s=P.xy/z*u_scale;\n  gl_Position=vec4(s.x/u_res.x*2.+u_shift, s.y/u_res.y*2., 0., 1.);\n  // profondeur de champ : net près du centre de la scène, disques doux devant et derrière (l'énergie du point est conservée)\n  float near=clamp(2.25-z*.62,.08,1.);\n  float base=(1.+2.4*near)*u_size, blur=clamp(abs(P.z)-u_focus,0.,1.6)*u_dof;\n  float sz=min(base+14.*blur*blur,80.);\n  v_b=clamp(blur*1.8,0.,1.);\n  v_s=clamp(S_out,0.,2.); v_d=normalize(s+1e-4);\n  gl_PointSize=u_dpr*sz*(1.+2.*v_s);\n  v_a=A*u_bright*near*pow(base/sz,1.25)*smoothstep(.35,.7,zr);\n  v_c=C;\n}", y = "#version 300 es\nprecision highp float;\nin float v_a; in float v_b; in float v_s; in vec2 v_d; in vec3 v_c; out vec4 o;\nvoid main(){\n  vec2 q=gl_PointCoord-.5; q.y=-q.y;\n  vec2 ql=vec2(dot(q,v_d), dot(q,vec2(-v_d.y,v_d.x))); ql.y*=1.+4.*v_s;\n  float d=length(ql);\n  float sharp=smoothstep(.5,.15,d), bokeh=smoothstep(.5,.38,d)*(.7+.3*smoothstep(.1,.45,d));\n  float a=mix(sharp,bokeh,v_b)*v_a; if(a<.002) discard;\n  o=vec4(v_c*a,a);\n}";
+})), x, S = e((() => {
+	x = {
 		id: "blob",
 		frozen: !0,
 		name: "1. Blob",
@@ -308,11 +309,11 @@ var r, i, a, o, s, c = e((() => {
 		},
 		glsl: "\nfloat bn(vec3 p, float t){\n  return .5*sin(dot(p,vec3(1.7,2.3,-1.1))*1.9+t*.9)+.35*sin(dot(p,vec3(-2.6,.9,1.8))*2.3-t*1.2)\n        +.25*sin(dot(p,vec3(1.2,-3.1,2.4))*2.9+t*1.6)+.15*sin(dot(p,vec3(3.7,1.4,-2.9))*3.7-t*2.1);\n}\n// le noyau : une part fixe des particules (même tirage dans toutes les scènes qui reprennent le blob)\nbool isCore(vec4 r){ return fract(r.y*17.3+r.z*7.1) < u_coreShare; }\nvoid scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){\n  vec3 dir=sphereDir(r);\n  float ts=t*u_speed;\n  vec3 wd=dir+u_warp*vec3(sin(ts*.7+dir.y*3.),sin(ts*.6+dir.z*3.),sin(ts*.8+dir.x*3.));\n  // répartition dans le volume : 1 - volume = exposant (0 → plein, 1 → tout en surface) ; l'épaisseur du bord ajoute un aléa\n  float k=pow(fract(r.w*5.13), max(1.-u_volume, .02));\n  k=mix(k, 1.-u_shell*fract(r.x*9.7), step(.001,u_shell));\n  float grow=ez(clamp(t/u_ramp,0.,1.));\n  // le noyau : une sphère parfaite, jamais déformée ; elle grandit avec le blob au départ, puis reste ronde\n  if(isCore(r)){\n    float rc=u_radius*u_coreR*mix(u_r0,1.,grow)*(1.-u_coreThick*fract(r.x*5.7));\n    P=rotY(dir*rc, t*u_coreSpin);\n    A=u_alpha*u_coreBright; C=WHI;\n    return;\n  }\n  float rad=u_radius*mix(u_r0,1.,grow)*(1.+u_deform*grow*bn(wd*u_freq,ts))*k;   // petit et lisse au départ, puis il grandit et se déforme\n  P=rotX(rotY(dir*rad, t*u_spin), .3*sin(t*.13));\n  A=u_alpha;\n  vec3 c=mix(WHI, MAU, smoothstep(.3,1.2,rad/u_radius)*u_tint);\n  C=mix(c, BLU, u_blue*fract(r.z*3.3));\n}"
 	};
-})), d, f, p, m, h, g, _, v, y = e((() => {
-	u(), d = l.duration, f = Object.fromEntries(Object.entries(l.params).map(([e, t]) => [e, t.value])), p = (e) => {
+})), C, w, T, E, D, O, k, A, j = e((() => {
+	S(), C = x.duration, w = Object.fromEntries(Object.entries(x.params).map(([e, t]) => [e, t.value])), T = (e) => {
 		let t = Number.isInteger(e) ? e.toFixed(1) : String(e);
 		return e < 0 ? "(" + t + ")" : t;
-	}, m = l.glsl.replace("void scene(", "void blobScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in l.params ? p(l.params[t].value) : e), h = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, g = (e, t, n) => Math.max(0, Math.min(1, (e - t) / (n - t))), _ = (e, t, n) => e + (t - e) * n, v = {
+	}, E = x.glsl.replace("void scene(", "void blobScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in x.params ? T(x.params[t].value) : e), D = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, O = (e, t, n) => Math.max(0, Math.min(1, (e - t) / (n - t))), k = (e, t, n) => e + (t - e) * n, A = {
 		id: "plane",
 		name: "2. Délitement, plan",
 		locked: [
@@ -327,12 +328,12 @@ var r, i, a, o, s, c = e((() => {
 			"shift"
 		],
 		duration: 8,
-		startsAt: d,
+		startsAt: C,
 		camera: {
-			...l.camera,
-			...l.cameraAt(d, {
-				...l.camera,
-				...f
+			...x.camera,
+			...x.cameraAt(C, {
+				...x.camera,
+				...w
 			})
 		},
 		params: {
@@ -341,7 +342,7 @@ var r, i, a, o, s, c = e((() => {
 				min: 2e3,
 				max: 131072,
 				step: 1e3,
-				value: f.count
+				value: w.count
 			},
 			shedAt: {
 				label: "Délitement : début (s)",
@@ -506,15 +507,15 @@ var r, i, a, o, s, c = e((() => {
 			}
 		},
 		cameraAt(e, t) {
-			let n = h(g(e, t.shedAt, t.shedAt + t.camDur));
+			let n = D(O(e, t.shedAt, t.shedAt + t.camDur));
 			return {
-				cam: _(t.cam, t.camTo, n),
-				pitch: _(t.pitch, t.pitchTo, n),
-				yaw: _(t.yaw, t.yawTo, n)
+				cam: k(t.cam, t.camTo, n),
+				pitch: k(t.pitch, t.pitchTo, n),
+				yaw: k(t.yaw, t.yawTo, n)
 			};
 		},
 		glsl: `
-${m}
+${E}
 void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
   // la place du point sur le plan : grille régulière (selon son rang) ou semis (sa position aléatoire)
   float n=max(u_count,4.), cols=floor(sqrt(n/u_ratio)), rows=max(floor(n/cols),2.);
@@ -538,8 +539,8 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
   float s=mix(fract(r.y*3.1), clamp(length(q)/1.41,0.,1.), u_order);
   float td=u_shedAt+s*u_shedDur;
   vec3 Bp; float Ba; vec3 Bc;
-  if(t<td){ blobScene(g, r, ${p(d)}+t, Bp, Ba, Bc); P=Bp; A=Ba; C=Bc; return; }
-  blobScene(g, r, ${p(d)}+td, Bp, Ba, Bc);   // l'endroit où il s'est détaché
+  if(t<td){ blobScene(g, r, ${T(C)}+t, Bp, Ba, Bc); P=Bp; A=Ba; C=Bc; return; }
+  blobScene(g, r, ${T(C)}+td, Bp, Ba, Bc);   // l'endroit où il s'est détaché
   float u=clamp((t-td)/u_fall,0.,1.), arc=sin(PI*u);
   float kh=1.-pow(1.-u, 2.+u_soft*3.), kv=ez(u);           // s'écarte d'abord à l'horizontale, puis descend et se pose en douceur
   P=vec3(mix(Bp.x,target.x,kh), mix(Bp.y,target.y,kv)+u_lift*arc, mix(Bp.z,target.z,kh));
@@ -547,11 +548,11 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
   A=mix(Ba,Ta,u); C=mix(Bc,Tc,u);
 }`
 	};
-})), b, x, S, C, w, T, E, D, O = e((() => {
-	y(), b = v.duration, x = Object.fromEntries(Object.entries(v.params).map(([e, t]) => [e, t.value])), S = (e) => {
+})), M, N, P, ee, te, ne, F, I, re = e((() => {
+	j(), M = A.duration, N = Object.fromEntries(Object.entries(A.params).map(([e, t]) => [e, t.value])), P = (e) => {
 		let t = Number.isInteger(e) ? e.toFixed(1) : String(e);
 		return e < 0 ? "(" + t + ")" : t;
-	}, C = v.glsl.replace("void scene(", "void planeScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in v.params && t !== "count" ? S(v.params[t].value) : e), w = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, T = (e, t, n) => Math.max(0, Math.min(1, (e - t) / (n - t))), E = (e, t, n) => e + (t - e) * n, D = {
+	}, ee = A.glsl.replace("void scene(", "void planeScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in A.params && t !== "count" ? P(A.params[t].value) : e), te = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, ne = (e, t, n) => Math.max(0, Math.min(1, (e - t) / (n - t))), F = (e, t, n) => e + (t - e) * n, I = {
 		id: "land",
 		frozen: !0,
 		name: "3. Dézoom, montagnes, orbite",
@@ -567,12 +568,12 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
 			"shift"
 		],
 		duration: 9.25,
-		startsAt: b,
+		startsAt: M,
 		camera: {
-			...v.camera,
-			cam: x.camTo,
-			pitch: x.pitchTo,
-			yaw: x.yawTo
+			...A.camera,
+			cam: N.camTo,
+			pitch: N.pitchTo,
+			yaw: N.yawTo
 		},
 		params: {
 			count: {
@@ -580,7 +581,7 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
 				min: 2e3,
 				max: 131072,
 				step: 1e3,
-				value: v.params.count.value
+				value: A.params.count.value
 			},
 			dzAt: {
 				label: "Dézoom : début (s)",
@@ -829,18 +830,18 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
 			}
 		},
 		cameraAt(e, t) {
-			let n = w(T(e, t.dzAt, t.dzAt + t.dzDur)), r = t.dzDur, i = (e - t.dzAt) / r, a = i <= 0 ? t.yaw : i >= 1 ? t.yawEnd + t.yawOut * (e - t.dzAt - r) : (2 * i ** 3 - 3 * i ** 2 + 1) * t.yaw + (-2 * i ** 3 + 3 * i ** 2) * t.yawEnd + (i ** 3 - i ** 2) * r * t.yawOut, o = Math.max(0, e - t.dzAt - r), s = Math.min(1, o / t.rampIn), c = s * s * (3 - 2 * s);
+			let n = te(ne(e, t.dzAt, t.dzAt + t.dzDur)), r = t.dzDur, i = (e - t.dzAt) / r, a = i <= 0 ? t.yaw : i >= 1 ? t.yawEnd + t.yawOut * (e - t.dzAt - r) : (2 * i ** 3 - 3 * i ** 2 + 1) * t.yaw + (-2 * i ** 3 + 3 * i ** 2) * t.yawEnd + (i ** 3 - i ** 2) * r * t.yawOut, o = Math.max(0, e - t.dzAt - r), s = Math.min(1, o / t.rampIn), c = s * s * (3 - 2 * s);
 			return {
-				cam: E(t.cam, t.camEnd, n) + t.camAmp * c * Math.sin(2 * Math.PI * o / t.camPeriod),
-				pitch: E(t.pitch, t.pitchEnd, n) + t.pitchAmp * c * Math.sin(2 * Math.PI * o / t.pitchPeriod),
+				cam: F(t.cam, t.camEnd, n) + t.camAmp * c * Math.sin(2 * Math.PI * o / t.camPeriod),
+				pitch: F(t.pitch, t.pitchEnd, n) + t.pitchAmp * c * Math.sin(2 * Math.PI * o / t.pitchPeriod),
 				yaw: a,
-				zoom: E(t.zoom, t.zoomEnd, n),
-				size: E(t.size, t.sizeEnd, n),
-				shift: E(t.shift, t.shiftEnd, n)
+				zoom: F(t.zoom, t.zoomEnd, n),
+				size: F(t.size, t.sizeEnd, n),
+				shift: F(t.shift, t.shiftEnd, n)
 			};
 		},
 		glsl: `
-${C}
+${ee}
 float hs(float n){ return fract(sin(n*127.1+u_seed*311.7)*43758.5453); }
 // les montagnes, dans les coordonnées du plan (-1..1) ; chacune a sa hauteur, sa largeur, son allongement et sa montée
 float peak(vec2 d, float sig, float p){ return exp(-pow(length(d)/sig, p)); }
@@ -877,13 +878,13 @@ float mountains(vec2 q, float t){
 }
 void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
   vec3 Pp; float Ap; vec3 Cp;
-  planeScene(g, r, ${S(b)}+t, Pp, Ap, Cp);
+  planeScene(g, r, ${P(M)}+t, Pp, Ap, Cp);
   float e=ez(clamp((t-u_dzAt)/u_dzDur,0.,1.));
-  float sc=mix(1., u_landW/${S(x.width)}, e);                       // le plan rétrécit jusqu'à la taille du paysage
-  float wv=(Pp.y-${S(x.height)})*mix(1., u_waveKeep, e);           // les vagues s'apaisent
+  float sc=mix(1., u_landW/${P(N.width)}, e);                       // le plan rétrécit jusqu'à la taille du paysage
+  float wv=(Pp.y-${P(N.height)})*mix(1., u_waveKeep, e);           // les vagues s'apaisent
   float H=mountains(g, t);
   float hn=H/max(u_mHeight,.01);
-  P=vec3(Pp.x*sc, ${S(x.height)}+wv*sc+H, Pp.z*sc);
+  P=vec3(Pp.x*sc, ${P(N.height)}+wv*sc+H, Pp.z*sc);
   A=Ap*(1.+u_peakGlow*hn);
   C=mix(Cp, TEA, u_crestCol*smoothstep(.25,.6,hn)); C=mix(C, WHI, u_crestCol*.7*smoothstep(.65,1.,hn));
   // orbite : un reflet fin traverse le paysage et allume les crêtes ; il monte depuis zéro après le dézoom
@@ -894,20 +895,20 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
   A*=1.+glw; C=mix(C, WHI, clamp(glw*.6,0.,1.));
 }`
 	};
-})), k, A, j, ee, te, ne, re, M, ie, N, ae, oe, P, F, se = e((() => {
-	O(), u(), c(), k = (e) => {
+})), L, ie, R, ae, oe, se, ce, z, le, B, ue, de, V, H, fe = e((() => {
+	re(), S(), b(), L = (e) => {
 		let t = Number.isInteger(e) ? e.toFixed(1) : String(e);
 		return e < 0 ? "(" + t + ")" : t;
-	}, A = D.glsl.replace("void scene(", "void landScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in D.params && t !== "count" && t !== "seed" ? k(D.params[t].value) : e), j = 5, ee = -.15, te = .45, ne = (e) => ({
-		...Object.fromEntries(Object.entries(r).map(([t, n]) => [t, t in e.camera ? e.camera[t] : n.value])),
+	}, ie = I.glsl.replace("void scene(", "void landScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in I.params && t !== "count" && t !== "seed" ? L(I.params[t].value) : e), R = 5, ae = -.15, oe = .45, se = (e) => ({
+		...Object.fromEntries(Object.entries(h).map(([t, n]) => [t, t in e.camera ? e.camera[t] : n.value])),
 		...Object.fromEntries(Object.entries(e.params).map(([e, t]) => [e, t.value]))
-	}), re = ne(D), M = {
-		...re,
-		...D.cameraAt(D.duration, re)
-	}, ie = ne(l), N = {
-		...ie,
-		...l.cameraAt(0, ie)
-	}, ae = D.params.yawOut.value, oe = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, P = (e, t, n) => e + (t - e) * n, F = {
+	}), ce = se(I), z = {
+		...ce,
+		...I.cameraAt(I.duration, ce)
+	}, le = se(x), B = {
+		...le,
+		...x.cameraAt(0, le)
+	}, ue = I.params.yawOut.value, de = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, V = (e, t, n) => e + (t - e) * n, H = {
 		id: "evap",
 		frozen: !0,
 		name: "4. Retour au blob",
@@ -922,19 +923,19 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
 			"focus",
 			"shift"
 		],
-		duration: j,
-		startsAt: D.duration,
-		fixed: { seed: D.params.seed.value },
+		duration: R,
+		startsAt: I.duration,
+		fixed: { seed: I.params.seed.value },
 		camera: {
-			cam: M.cam,
-			pitch: M.pitch,
-			yaw: M.yaw,
-			zoom: M.zoom,
-			size: M.size,
-			bright: M.bright,
-			dof: M.dof,
-			focus: M.focus,
-			shift: M.shift
+			cam: z.cam,
+			pitch: z.pitch,
+			yaw: z.yaw,
+			zoom: z.zoom,
+			size: z.size,
+			bright: z.bright,
+			dof: z.dof,
+			focus: z.focus,
+			shift: z.shift
 		},
 		params: {
 			count: {
@@ -942,7 +943,7 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
 				min: 2e3,
 				max: 131072,
 				step: 1e3,
-				value: D.params.count.value
+				value: I.params.count.value
 			},
 			start: {
 				label: "Évaporation : début (s)",
@@ -1009,35 +1010,35 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
 			}
 		},
 		cameraAt(e, t) {
-			let n = t.camAt, r = Math.max(.1, Math.min(t.camDur, j - n));
+			let n = t.camAt, r = Math.max(.1, Math.min(t.camDur, R - n));
 			if (e < n) return {
-				yaw: M.yaw + ae * e,
-				shift: M.shift
+				yaw: z.yaw + ue * e,
+				shift: z.shift
 			};
-			let i = Math.min(1, (e - n) / r), a = oe(i);
+			let i = Math.min(1, (e - n) / r), a = de(i);
 			return {
-				yaw: M.yaw + ae * n + ae * r * (Math.min(i, 1) - Math.min(i, 1) ** 2 / 2),
-				pitch: P(M.pitch, N.pitch, a),
-				cam: P(M.cam, N.cam, a),
-				zoom: P(M.zoom, N.zoom, a),
-				size: P(M.size, N.size, a),
-				bright: P(M.bright, N.bright, a),
-				dof: P(M.dof, N.dof, a),
-				focus: P(M.focus, N.focus, a),
-				shift: P(M.shift, N.shift, a)
+				yaw: z.yaw + ue * n + ue * r * (Math.min(i, 1) - Math.min(i, 1) ** 2 / 2),
+				pitch: V(z.pitch, B.pitch, a),
+				cam: V(z.cam, B.cam, a),
+				zoom: V(z.zoom, B.zoom, a),
+				size: V(z.size, B.size, a),
+				bright: V(z.bright, B.bright, a),
+				dof: V(z.dof, B.dof, a),
+				focus: V(z.focus, B.focus, a),
+				shift: V(z.shift, B.shift, a)
 			};
 		},
 		glsl: `
-${A}
+${ie}
 // reçoit le paysage déjà calculé (Op, Oa, Oc) : la séquence complète le calcule une seule fois
 void evapMix(vec2 g, vec4 r, float t, vec3 Op, float Oa, vec3 Oc, out vec3 P, out float A, out vec3 C){
   // la cible : le blob, qui rejoint pile sa première image à la fin de la scène
   vec3 Bp; float Ba; vec3 Bc;
-  blobScene(g, r, t-${k(j)}, Bp, Ba, Bc);
-  float hn=clamp((Op.y-(${k(ee)}))/${k(te)},0.,1.);
+  blobScene(g, r, t-${L(R)}, Bp, Ba, Bc);
+  float hn=clamp((Op.y-(${L(ae)}))/${L(oe)},0.,1.);
   float s=mix(fract(r.x*7.7), 1.-hn, u_order);                       // les sommets partent les premiers
   float k=ez(clamp((t-u_start-s*u_stagger)/u_dur,0.,1.));
-  k=mix(k, 1., smoothstep(${k(4.75)}, ${k(j)}, t));   // tout est posé à la dernière image
+  k=mix(k, 1., smoothstep(${L(4.75)}, ${L(R)}, t));   // tout est posé à la dernière image
   float arc=sin(PI*k);
   P=mix(Op,Bp,k)+vec3(0.,u_lift*arc,0.);
   P=rotY(P, u_swirl*arc*(.5+r.z));
@@ -1046,472 +1047,232 @@ void evapMix(vec2 g, vec4 r, float t, vec3 Op, float Oa, vec3 Oc, out vec3 P, ou
 }
 void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
   vec3 Op; float Oa; vec3 Oc;
-  landScene(g, r, ${k(D.duration)}+t, Op, Oa, Oc);
+  landScene(g, r, ${L(I.duration)}+t, Op, Oa, Oc);
   evapMix(g, r, t, Op, Oa, Oc, P, A, C);
 }`
 	};
-})), I, ce, le, ue, de, fe, pe, me = e((() => {
-	u(), y(), O(), se(), I = (e) => {
+})), U, pe, me, he, ge, _e, ve, ye = e((() => {
+	S(), j(), re(), fe(), U = (e) => {
 		let t = Number.isInteger(e) ? e.toFixed(1) : String(e);
 		return e < 0 ? "(" + t + ")" : t;
-	}, ce = l.duration, le = ce + v.duration, ue = le + D.duration, de = ue + F.duration, fe = F.glsl.replace("void scene(", "void evapScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in F.params && t !== "count" ? I(F.params[t].value) : e), pe = {
+	}, pe = x.duration, me = pe + A.duration, he = me + I.duration, ge = he + H.duration, _e = H.glsl.replace("void scene(", "void evapScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in H.params && t !== "count" ? U(H.params[t].value) : e), ve = {
 		id: "sequence",
 		name: "Séquence (un seul programme)",
 		inSequence: !1,
-		duration: de,
-		camera: { ...l.camera },
+		duration: ge,
+		camera: { ...x.camera },
 		params: { count: {
 			label: "Densité (particules)",
 			min: 2e3,
 			max: 131072,
 			step: 1e3,
-			value: l.params.count.value
+			value: x.params.count.value
 		} },
-		fixed: { ...F.fixed },
+		fixed: { ...H.fixed },
 		glsl: `
-${fe}
+${_e}
 void scene(vec2 g, vec4 r, float T, out vec3 P, out float A, out vec3 C){
-  if(T<${I(ce)}){ blobScene(g, r, T, P, A, C); return; }
-  if(T<${I(le)}){ planeScene(g, r, T-${I(ce)}, P, A, C); return; }
+  if(T<${U(pe)}){ blobScene(g, r, T, P, A, C); return; }
+  if(T<${U(me)}){ planeScene(g, r, T-${U(pe)}, P, A, C); return; }
   // le paysage : calculé une seule fois, ici, pour la fin des montagnes comme pour le retour au blob
   vec3 Lp; float La; vec3 Lc;
-  landScene(g, r, T-${I(le)}, Lp, La, Lc);
-  if(T<${I(ue)}){ P=Lp; A=La; C=Lc; return; }
-  evapMix(g, r, T-${I(ue)}, Lp, La, Lc, P, A, C);
+  landScene(g, r, T-${U(me)}, Lp, La, Lc);
+  if(T<${U(he)}){ P=Lp; A=La; C=Lc; return; }
+  evapMix(g, r, T-${U(he)}, Lp, La, Lc, P, A, C);
 }`
 	};
 }));
 //#endregion
 //#region src/hero-sequence/index.js
-function he(e) {
+function be(e) {
 	if (e.dataset.pvReady) return;
 	if (e.dataset.pvReady = "1", !document.getElementById("pv-hero-seq-css")) {
 		let e = document.createElement("style");
-		e.id = "pv-hero-seq-css", e.textContent = ge, document.head.appendChild(e);
+		e.id = "pv-hero-seq-css", e.textContent = xe, document.head.appendChild(e);
 	}
 	let t = document.createElement("canvas");
 	t.setAttribute("aria-hidden", "true"), e.appendChild(t);
-	let r;
+	let n;
 	try {
-		r = n(t), r.useScene(pe);
+		n = m(t), n.useScene(ve);
 	} catch {
 		t.remove(), delete e.dataset.pvReady;
 		return;
 	}
-	let i = matchMedia("(prefers-reduced-motion: reduce)").matches, a = !1;
-	function o(e) {
-		let t = R.find((t) => e < t.at + t.end) || R[R.length - 1], n = Math.min(e - t.at, t.end), i = t.sc.cameraAt ? {
+	let r = matchMedia("(prefers-reduced-motion: reduce)").matches, i = !1;
+	function a(e) {
+		let t = G.find((t) => e < t.at + t.end) || G[G.length - 1], r = Math.min(e - t.at, t.end), a = t.sc.cameraAt ? {
 			...t.v,
-			...t.sc.cameraAt(n, t.v)
-		} : t.v, o = a ? {
-			...i,
+			...t.sc.cameraAt(r, t.v)
+		} : t.v, o = i ? {
+			...a,
 			shift: 0
-		} : i;
-		r.render(e, o, t.v.count * (a ? .5 : 1));
+		} : a;
+		n.render(e, o, t.v.count * (i ? .5 : 1));
 	}
-	function s() {
-		a = e.getBoundingClientRect().width < 900, r.resize(), i && o(ye);
+	function o() {
+		i = e.getBoundingClientRect().width < 900, n.resize(), r && a(we);
 	}
-	let c = 0, l = 0, u = 0;
-	function d(e) {
-		c = requestAnimationFrame(d), l += Math.min((e - u) / 1e3, .05), u = e, o(l % ve);
+	let s = 0, c = 0, l = 0;
+	function u(e) {
+		s = requestAnimationFrame(u), c += Math.min((e - l) / 1e3, .05), l = e, a(c % Ce);
+	}
+	function d() {
+		s || r || (l = performance.now(), s = requestAnimationFrame(u));
 	}
 	function f() {
-		c || i || (u = performance.now(), c = requestAnimationFrame(d));
-	}
-	function p() {
-		cancelAnimationFrame(c), c = 0;
+		cancelAnimationFrame(s), s = 0;
 	}
 	t.addEventListener("webglcontextlost", (e) => {
-		e.preventDefault(), p();
+		e.preventDefault(), f();
 	});
-	let m = new ResizeObserver(s);
-	m.observe(e), s();
+	let p = new ResizeObserver(o);
+	p.observe(e), o();
 	let h = null;
-	return i || (h = new IntersectionObserver(([e]) => e.isIntersecting ? f() : p()), h.observe(e)), { destroy() {
-		p(), m.disconnect(), h && h.disconnect(), t.remove(), delete e.dataset.pvReady;
+	return r || (h = new IntersectionObserver(([e]) => e.isIntersecting ? d() : f()), h.observe(e)), { destroy() {
+		f(), p.disconnect(), h && h.disconnect(), t.remove(), delete e.dataset.pvReady;
 	} };
 }
-var L, ge, _e, R, ve, ye, be = e((() => {
-	c(), u(), y(), O(), se(), me(), L = "[data-pv=\"hero-sequence\"]", ge = `
-.header_image-wrapper:has(${L}){ background:none!important; border:0!important; box-shadow:none!important; position:relative; overflow:visible!important; min-height:30rem; }
-.header_component:has(${L}), .header_content:has(${L}){ position:relative; }
-.header_content:has(${L}) .header_content-left{ position:relative; z-index:2; }
+var W, xe, Se, G, Ce, we, Te = e((() => {
+	b(), S(), j(), re(), fe(), ye(), W = "[data-pv=\"hero-sequence\"]", xe = `
+.header_image-wrapper:has(${W}){ background:none!important; border:0!important; box-shadow:none!important; position:relative; overflow:visible!important; min-height:30rem; }
+.header_component:has(${W}), .header_content:has(${W}){ position:relative; }
+.header_content:has(${W}) .header_content-left{ position:relative; z-index:2; }
 /* très grand, ancré à droite, passe sous la colonne de texte ; s'estompe côté texte */
-${L}{ position:absolute; top:-16%; bottom:-16%; right:-6%; width:95vw; z-index:0; pointer-events:none;
+${W}{ position:absolute; top:-16%; bottom:-16%; right:-6%; width:95vw; z-index:0; pointer-events:none;
   -webkit-mask-image:linear-gradient(90deg, transparent 2%, rgba(0,0,0,.4) 24%, #000 46%); mask-image:linear-gradient(90deg, transparent 2%, rgba(0,0,0,.4) 24%, #000 46%); }
-${L} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+${W} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
 @media (max-width:991px){
-  .section_header:has(${L}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow-x:clip; }
-  .header_component:has(${L}), .header_component:has(${L}) .header_content{ height:auto; }
-  ${L}{ position:relative; top:auto; bottom:auto; right:auto; width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:1/1; margin-top:1rem; -webkit-mask-image:none; mask-image:none; }
-}`, _e = (e) => ({
-		...Object.fromEntries(Object.entries(r).map(([t, n]) => [t, e.camera && t in e.camera ? e.camera[t] : n.value])),
+  .section_header:has(${W}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow-x:clip; }
+  .header_component:has(${W}), .header_component:has(${W}) .header_content{ height:auto; }
+  ${W}{ position:relative; top:auto; bottom:auto; right:auto; width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:1/1; margin-top:1rem; -webkit-mask-image:none; mask-image:none; }
+}`, Se = (e) => ({
+		...Object.fromEntries(Object.entries(h).map(([t, n]) => [t, e.camera && t in e.camera ? e.camera[t] : n.value])),
 		...Object.fromEntries(Object.entries(e.params).map(([e, t]) => [e, t.value]))
-	}), R = [];
+	}), G = [];
 	{
 		let e = 0;
 		[
-			l,
-			v,
-			D,
-			F
+			x,
+			A,
+			I,
+			H
 		].forEach((t) => {
-			R.push({
+			G.push({
 				sc: t,
 				at: e,
 				end: t.duration,
-				v: _e(t)
+				v: Se(t)
 			}), e += t.duration;
 		});
 	}
-	ve = pe.duration, ye = R[2].at + 7.5;
-}));
-//#endregion
-//#region src/bonv-draw.js
-function xe(e) {
-	let t = e | 0;
-	return () => {
-		t = t + 1831565813 | 0;
-		let e = Math.imul(t ^ t >>> 15, 1 | t);
-		return e = e + Math.imul(e ^ e >>> 7, 61 | e) ^ e, ((e ^ e >>> 14) >>> 0) / 4294967296;
-	};
-}
-function Se(e) {
-	let t = parseInt(e.slice(1), 16);
-	return [
-		t >> 16 & 255,
-		t >> 8 & 255,
-		t & 255
-	];
-}
-function z(e, t) {
-	let n = Se(e);
-	return `rgba(${n[0]},${n[1]},${n[2]},${U(t)})`;
-}
-function Ce(e, t) {
-	if (e.dataset.pvInit) return null;
-	e.dataset.pvInit = "1";
-	let n = e.closest("section") || document.body, r = (e) => getComputedStyle(n.querySelector(e) || document.body).fontFamily, i = r(".text-size-large"), a = r(".text-size-label");
-	e.style.position = "relative";
-	let o = document.createElement("canvas");
-	o.setAttribute("aria-hidden", "true"), o.style.cssText = "position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;transition:opacity .5s ease;", e.appendChild(o);
-	let s = o.getContext("2d"), c = "letterSpacing" in s, l = {
-		x: s,
-		W: 0,
-		H: 0,
-		S: 1
-	};
-	l.font = (e, t, n) => {
-		s.font = `${e} ${t}px ${n ? a : i}`, c && (s.letterSpacing = n ? (t * .12).toFixed(2) + "px" : "0px");
-	}, l.text = (e, t, n, r, i, a, o, c = "left", u = !1) => {
-		o <= 0 || !e || (l.font(r, i, u), s.textAlign = c, s.textBaseline = "alphabetic", s.fillStyle = z(a, o), s.fillText(e, t, n));
-	}, l.tw = (e, t, n, r) => (l.font(t, n, r), s.measureText(e).width), l.wrap = (e, t, n, r, i) => {
-		l.font(t, n, i);
-		let a = [], o = "";
-		for (let t of e.split(" ")) {
-			let e = o ? o + " " + t : t;
-			s.measureText(e).width > r && o ? (a.push(o), o = t) : o = e;
-		}
-		return o && a.push(o), a;
-	}, l.dot = (e, t, n, r, i) => {
-		i <= 0 || n <= 0 || (s.fillStyle = z(r, i), s.beginPath(), s.arc(e, t, n, 0, H), s.fill());
-	}, l.line = (e, t, n, r, i, a, o = 1) => {
-		a <= 0 || (s.strokeStyle = z(i, a), s.lineWidth = o, s.beginPath(), s.moveTo(e, t), s.lineTo(n, r), s.stroke());
-	}, l.poly = (e, t, n, r) => {
-		if (!(e.length < 2 || n <= 0)) {
-			s.strokeStyle = z(t, n), s.lineWidth = r, s.lineCap = "round", s.lineJoin = "round", s.beginPath(), s.moveTo(e[0][0], e[0][1]);
-			for (let t = 1; t < e.length; t++) s.lineTo(e[t][0], e[t][1]);
-			s.stroke();
-		}
-	}, l.qpts = (e, t, n, r, i = 24) => {
-		let a = (e[0] + t[0]) / 2, o = (e[1] + t[1]) / 2, s = t[0] - e[0], c = a - (t[1] - e[1]) * n, l = o + s * n, u = [], d = Math.max(2, Math.ceil(i * r));
-		for (let n = 0; n <= d; n++) {
-			let i = r * n / d, a = 1 - i;
-			u.push([a * a * e[0] + 2 * a * i * c + i * i * t[0], a * a * e[1] + 2 * a * i * l + i * i * t[1]]);
-		}
-		return u;
-	}, l.elbow = (e, t, n, r = 1, i = 8 * l.S) => {
-		let a = [
-			e,
-			[n, e[1]],
-			[n, t[1]],
-			t
-		], o = [e];
-		for (let e = 1; e < 3; e++) {
-			let t = a[e], n = a[e - 1], r = a[e + 1], s = Math.hypot(t[0] - n[0], t[1] - n[1]) || 1, c = Math.hypot(r[0] - t[0], r[1] - t[1]) || 1, l = Math.min(i, s / 2, c / 2), u = [t[0] + (n[0] - t[0]) / s * l, t[1] + (n[1] - t[1]) / s * l], d = [t[0] + (r[0] - t[0]) / c * l, t[1] + (r[1] - t[1]) / c * l];
-			o.push(u);
-			for (let e = 1; e <= 6; e++) {
-				let n = e / 6, r = 1 - n;
-				o.push([r * r * u[0] + 2 * r * n * t[0] + n * n * d[0], r * r * u[1] + 2 * r * n * t[1] + n * n * d[1]]);
-			}
-		}
-		o.push(t);
-		let s = [0];
-		for (let e = 1; e < o.length; e++) s.push(s[e - 1] + Math.hypot(o[e][0] - o[e - 1][0], o[e][1] - o[e - 1][1]));
-		let c = s[s.length - 1] * U(r), u = [], d = 1;
-		for (let e = 0; e <= 40; e++) {
-			let t = c * e / 40;
-			for (; d < o.length - 1 && s[d] < t;) d++;
-			let n = (t - s[d - 1]) / (s[d] - s[d - 1] || 1);
-			u.push([K(o[d - 1][0], o[d][0], n), K(o[d - 1][1], o[d][1], n)]);
-		}
-		return u;
-	}, l.trim = (e, t, n, r) => {
-		let i = t[0] - e[0], a = t[1] - e[1], o = Math.hypot(i, a) || 1, s = i / o, c = a / o;
-		return [[e[0] + s * n, e[1] + c * n], [t[0] - s * r, t[1] - c * r]];
-	}, l.rr = (e, t, n, r, i, a = i) => {
-		i = Math.max(0, Math.min(i, n / 2, r / 2)), a = Math.max(0, Math.min(a, n / 2, r / 2)), s.beginPath(), s.moveTo(e + a, t), s.arcTo(e + n, t, e + n, t + r, i), s.arcTo(e + n, t + r, e, t + r, i), s.arcTo(e, t + r, e, t, i), s.arcTo(e, t, e + n, t, a), s.closePath();
-	}, l.glass = (e, t, n, r, i, a, o) => {
-		if (a <= 0) return;
-		s.save(), s.globalAlpha = a, l.rr(e, t, n, r, i, o);
-		let c = s.createLinearGradient(e, t, e + n * .9, t + r);
-		c.addColorStop(0, "rgba(150,110,200,.18)"), c.addColorStop(.5, "rgba(90,60,150,.15)"), c.addColorStop(1, "rgba(40,24,80,.34)"), s.fillStyle = c, s.fill();
-		let u = s.createLinearGradient(e, t, e + n, t + r);
-		u.addColorStop(0, "rgba(244,244,244,.3)"), u.addColorStop(.4, "rgba(244,244,244,.07)"), u.addColorStop(.75, "rgba(244,244,244,.03)"), u.addColorStop(1, "rgba(214,170,240,.14)"), s.strokeStyle = u, s.lineWidth = 1, s.stroke(), s.restore();
-	}, l.flow = (e, t, n, r, i, a) => {
-		if (n <= 0 || e.length < 2) return;
-		let o = l.S;
-		if (s.save(), s.setLineDash([1, 7 * o]), s.lineDashOffset = -r * 28 * o, l.poly(e, t, n, 2 * o), s.restore(), i <= 0) return;
-		let c = e.length - 1, u = (r + a * .53) / 1.5 % 1;
-		for (let r = 0; r < 5; r++) {
-			let a = u - r * .02;
-			if (a < 0 || a > 1) continue;
-			let s = e[Math.min(c, Math.floor(G(a) * c))];
-			l.dot(s[0], s[1], (3 - r * .5) * o, r ? t : B, i * Math.min(1, n * 1.6) * (1 - r / 5) * Math.min(1, Math.sin(Math.PI * a) * 3));
-		}
-	}, l.icon = (e, t, n, r, i, a = B) => {
-		if (i <= 0) return;
-		let o = r / 48;
-		s.save(), s.translate(t, n), s.scale(o, o), s.translate(-24, -24), s.lineWidth = 1.5 / o, s.lineCap = "round", s.lineJoin = "round", Me[e].forEach(([e, t]) => {
-			s.strokeStyle = z(a, i * t), s.stroke(e);
-		}), s.restore();
-	}, l.db = (e, t, n, r, i = B) => {
-		if (r <= 0) return;
-		let a = n / 2, o = n * .18, c = t - n * .42, l = t + n * .42;
-		s.strokeStyle = z(i, r), s.lineWidth = 1.2, s.beginPath(), s.ellipse(e, c, a, o, 0, 0, H), s.stroke(), s.beginPath(), s.moveTo(e - a, c), s.lineTo(e - a, l), s.ellipse(e, l, a, o, 0, Math.PI, 0, !0), s.lineTo(e + a, c), s.stroke(), s.beginPath(), s.ellipse(e, t, a, o, 0, 0, Math.PI), s.stroke();
-	}, l.vMark = (e, t, n, r, i = 0, a = 0, o = 1, c = !0) => {
-		if (!(o <= 0)) {
-			if (c) {
-				let s = n * 1.47, c = r * .22, u = Math.max(18, Math.round(H * s / Math.max(6, n * .16))), d = Math.max(1, n * .034), f = r * 3.6, p = .55 + .45 * Math.sin(r * 13) * Math.sin(r * 7.3 + 1);
-				for (let m = 0; m < u; m++) {
-					let h = c + m / u * H, g = ((h - f) % H + Math.PI * 3) % H - Math.PI, _ = Math.exp(-((g / .42) ** 2)) * i, v = .5 + .5 * Math.sin(h * 3 + r * 9) * Math.sin(h * 5 - r * 7 + 1.3), y = a * p * v, b = s + n * (.06 * _ + .18 * y), x = d * (1 + 1.2 * _ + 1.3 * y), S = .72 + .28 * Math.cos(h + Math.PI * .75);
-					l.dot(e + Math.cos(h) * b, t + Math.sin(h) * b, x, Te, o * Math.min(1, (.8 + .2 * _ + .2 * y) * S));
-				}
-			}
-			l.dot(e, t, n, Te, o), s.fillStyle = z(B, o), s.beginPath(), Ae.forEach(([r, i], a) => {
-				let o = e + r * n, c = t + i * n;
-				a ? s.lineTo(o, c) : s.moveTo(o, c);
-			}), s.closePath(), s.fill();
-		}
-	}, l.avatar = (e, t, n, r, i, a) => {
-		a <= 0 || (l.dot(e, t, n, r, a), l.text((i || "?").charAt(0).toUpperCase(), e, t + n * .36, 600, Math.round(n * 1.02), Ee, a, "center"));
-	}, l.ring = (e, t, n, r, i, a) => {
-		a <= 0 || (l.dot(e, t, n, De, .85 * a), s.strokeStyle = z(B, .14 * a), s.lineWidth = 1, s.beginPath(), s.arc(e, t, n, 0, H), s.stroke(), i > 0 && (s.strokeStyle = z(r, a), s.lineWidth = 1.5, s.lineCap = "round", s.beginPath(), s.arc(e, t, n, -Math.PI / 2, -Math.PI / 2 + H * i), s.stroke()));
-	}, l.button = (e, t, n, r, i, a, o) => {
-		let c = l.tw(e, 500, i) + 32 * l.S;
-		if (o <= 0) return c;
-		let u = 1 - .05 * a;
-		return s.save(), s.translate(t + c / 2, n + r / 2), s.scale(u, u), s.translate(-(t + c / 2), -(n + r / 2)), s.globalAlpha = o, l.rr(t, n, c, r, r / 2), s.fillStyle = B, s.fill(), s.globalAlpha = 1, l.text(e, t + c / 2, n + r / 2 + i * .34, 500, i, Ee, o, "center"), s.restore(), c;
-	}, l.approve = (e, t, n, r, i) => {
-		if (i <= 0 || (r < 1 && (s.save(), s.setLineDash([1, 4 * l.S]), s.lineCap = "round", s.strokeStyle = z(we, .8 * i * (1 - r)), s.lineWidth = 1.5, s.beginPath(), s.arc(e, t, n, 0, H), s.stroke(), s.restore()), r <= 0)) return;
-		s.strokeStyle = z(Te, i), s.lineWidth = 1.5, s.lineCap = "round", s.beginPath(), s.arc(e, t, n, -Math.PI / 2, -Math.PI / 2 + H * ke(r)), s.stroke();
-		let a = W(r, .5, 1);
-		if (a > 0) {
-			let r = [
-				[e - n * .42, t + n * .02],
-				[e - n * .1, t + n * .32],
-				[e + n * .45, t - n * .3]
-			], o = a < .4 ? [r[0], [K(r[0][0], r[1][0], a / .4), K(r[0][1], r[1][1], a / .4)]] : [
-				r[0],
-				r[1],
-				[K(r[1][0], r[2][0], (a - .4) / .6), K(r[1][1], r[2][1], (a - .4) / .6)]
-			];
-			l.poly(o, Te, i, 1.5);
-		}
-	}, l.chip = (e, t, n, r, i, a, o, c, u = 0, d) => {
-		if (o <= 0) return;
-		let f = l.S, p = t - r / 2, m = n - i / 2;
-		l.glass(p, m, r, i, Math.min(12 * f, i / 2), o), c && u > 0 && (l.rr(p, m, r, i, Math.min(12 * f, i / 2)), s.strokeStyle = z(c, o * u), s.lineWidth = 1.5, s.stroke());
-		let h = Math.min(i * .55, 20 * f);
-		a === "db" ? l.db(p + 10 * f + h / 2, n, h * .7, .85 * o) : a && l.icon(a, p + 10 * f + h / 2, n, h, .85 * o), l.text(e, p + (a ? 16 * f + h : 12 * f), n + (d || Math.max(8, 9 * f)) * .36, 400, d || Math.max(8, 9 * f), B, o, "left", !0);
-	}, l.typing = (e, t, n, r) => {
-		for (let i = 0; i < 3; i++) l.dot(e + i * 8 * l.S, t, 2.2 * l.S, B, n * (.35 + .65 * Math.max(0, Math.sin(r * 7 - i * .7))));
-	};
-	let u = matchMedia("(prefers-reduced-motion: reduce)").matches, d = !1, f = !1, p = 0, m = 0, h = 0, g = 0;
-	function _() {
-		let n = e.clientWidth;
-		if (!n) return;
-		l.W = n, l.H = Math.round(n * t.aspect(n)), e.style.height = l.H + "px";
-		let r = Math.min(devicePixelRatio || 1, 2);
-		o.width = Math.round(n * r), o.height = Math.round(l.H * r), s.setTransform(r, 0, 0, r, 0, 0), t.layout(l), f = !0, d && v(u ? t.still : p);
-	}
-	function v(e) {
-		f && (s.clearRect(0, 0, l.W, l.H), t.draw(l, e));
-	}
-	function y(e) {
-		m = requestAnimationFrame(y), p += Math.min((e - h) / 1e3, .05), h = e, p > t.loop && (p = 0), o.style.opacity = p > t.fade ? 0 : 1, v(p);
-	}
-	function b() {
-		m || u || (p = 0, o.style.opacity = 1, h = performance.now(), m = requestAnimationFrame(y));
-	}
-	function x() {
-		cancelAnimationFrame(m), m = 0;
-	}
-	let S = new ResizeObserver(() => {
-		e.clientWidth !== g && (g = e.clientWidth, _());
-	});
-	S.observe(e);
-	let C = null;
-	return (document.fonts ? Promise.race([Promise.all([document.fonts.load(`400 12px ${i}`), document.fonts.load(`400 12px ${a}`)]), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
-		d = !0, _(), !u && (C = new IntersectionObserver(([e]) => e.isIntersecting ? b() : x(), { threshold: .3 }), C.observe(e));
-	}), { destroy() {
-		x(), S.disconnect(), C && C.disconnect(), o.remove(), e.style.height = "", delete e.dataset.pvInit;
-	} };
-}
-var B, we, Te, Ee, De, Oe, V, H, U, W, ke, G, K, Ae, je, Me, Ne = e((() => {
-	B = "#F4F4F4", we = "#8C86B0", Te = "#E2C70A", Ee = "#17103A", De = "#0D0926", Oe = "#7FE8CF", V = [
-		"#86C6D0",
-		"#A99FD8",
-		"#D6A394",
-		"#92CBAE",
-		"#C9C4EF",
-		"#78A8E0"
-	], H = Math.PI * 2, U = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), W = (e, t, n) => U((e - t) / (n - t)), ke = (e) => 1 - (1 - e) ** 5, G = (e) => e < .5 ? 16 * e ** 5 : 1 - (-2 * e + 2) ** 5 / 2, K = (e, t, n) => e + (t - e) * n, Ae = [
-		[.2749, -.4797],
-		[-4e-4, .1548],
-		[-.2181, -.3639],
-		[-.271, -.4797],
-		[-.5574, -.4797],
-		[-.017, .6489],
-		[.0186, .6489],
-		[.5574, -.4797]
-	], je = {
-		km: [["M7 9 V41 H43", .4], ["M7 12 H15 V20 H24 V27 H33 V33 H43", 1]],
-		app: [[[
-			10,
-			21,
-			32
-		].flatMap((e) => [
-			10,
-			21,
-			32
-		].map((t) => `M${t} ${e} h9 v9 h-9 Z`)).join(""), .75]],
-		doc: [
-			["M13 7 H29 L35 14 V41 H13 Z", 1],
-			["M29 7 V14 H35", .55],
-			["M19 22 H30 M19 28 H30 M19 34 H26", .7]
-		],
-		trend: [["M7 7 V41 H43", .4], ["M11 34 L19 25 L25 29 L32 16 L39 20", 1]],
-		net: [["M24 24 L12 13 M24 24 L38 15 M24 24 L14 36 M24 24 L36 35", .5], ["M27.4 24a3.4 3.4 0 1 0-6.8 0a3.4 3.4 0 1 0 6.8 0M14.4 13a2.4 2.4 0 1 0-4.8 0a2.4 2.4 0 1 0 4.8 0M40.4 15a2.4 2.4 0 1 0-4.8 0a2.4 2.4 0 1 0 4.8 0M16.4 36a2.4 2.4 0 1 0-4.8 0a2.4 2.4 0 1 0 4.8 0M38.4 35a2.4 2.4 0 1 0-4.8 0a2.4 2.4 0 1 0 4.8 0", 1]]
-	}, Me = {};
-	for (let e in je) Me[e] = je[e].map(([e, t]) => [new Path2D(e), t]);
+	Ce = ve.duration, we = G[2].at + 7.5;
 }));
 //#endregion
 //#region src/gantt-glossy.js
-function Pe(e) {
+function Ee(e) {
 	if (e.dataset.pvReady) return;
 	e.dataset.pvReady = "1";
 	let t = document.createElement("canvas");
 	t.style.cssText = "display:block;width:100%;", t.setAttribute("role", "img"), t.setAttribute("aria-label", "Study timeline: one eligibility change pushes submission back by 18 weeks as each tool recalculates on its own schedule."), e.appendChild(t);
-	let n = t.getContext("2d"), r = e.closest("section") || document.body, i = (e) => getComputedStyle(r.querySelector(e) || document.body).fontFamily, a = i(".text-size-large"), o = i(".text-size-label"), s = "letterSpacing" in n;
-	function c(e, t, r) {
-		n.font = `${e} ${t}px ${r ? o : a}`, s && (n.letterSpacing = r ? (t * .12).toFixed(2) + "px" : "0px");
+	let n = t.getContext("2d"), r = e.closest("section") || document.body, i = (e) => getComputedStyle(r.querySelector(e) || document.body).fontFamily, a = i(".text-size-large"), s = i(".text-size-label"), c = "letterSpacing" in n;
+	function l(e, t, r) {
+		n.font = `${e} ${t}px ${r ? s : a}`, c && (n.letterSpacing = r ? (t * .12).toFixed(2) + "px" : "0px");
 	}
-	function l(e, t, r, i, a, o, s = 1, l = "left", u = !1) {
-		s <= 0 || (c(i, a, u), n.textAlign = l, n.globalAlpha = s, n.fillStyle = o, n.fillText(e, t, r), n.globalAlpha = 1, n.textAlign = "left");
+	function u(e, t, r, i, a, o, s = 1, c = "left", u = !1) {
+		s <= 0 || (l(i, a, u), n.textAlign = c, n.globalAlpha = s, n.fillStyle = o, n.fillText(e, t, r), n.globalAlpha = 1, n.textAlign = "left");
 	}
-	function u(e, t, r, i) {
-		return c(t, r, i), n.measureText(e).width;
+	function f(e, t, r, i) {
+		return l(t, r, i), n.measureText(e).width;
 	}
-	function d(e, t, r, i, a) {
+	function p(e, t, r, i, a) {
 		n.beginPath(), n.roundRect ? n.roundRect(e, t, r, i, Math.min(a, r / 2, i / 2)) : n.rect(e, t, r, i);
 	}
-	function f(e, t, r, i, a, o, s = 1) {
+	function m(e, t, r, i, a, o, s = 1) {
 		n.globalAlpha = o, n.strokeStyle = a, n.lineWidth = s, n.beginPath(), n.moveTo(e, t), n.lineTo(r, i), n.stroke(), n.globalAlpha = 1;
 	}
-	let p = 0, m = 0, h = 1, g = !1;
-	function _() {
-		g = p < 640, h = U(p / 1100, .7, 1.15);
-		let e = 64 * h, t = (g ? 40 : 54) * h, n = g ? 118 * h : 230 * h, r = 24 * h;
+	let h = 0, g = 0, _ = 1, v = !1;
+	function y() {
+		v = h < 640, _ = d(h / 1100, .7, 1.15);
+		let e = 64 * _, t = (v ? 40 : 54) * _, n = v ? 118 * _ : 230 * _, r = 24 * _;
 		return {
 			top: e,
 			rowH: t,
 			padL: n,
 			padR: r,
-			w: p - n - r,
-			BH: (g ? 12 : 16) * h,
-			gridTop: e + 14 * h,
-			bottom: e + 14 * h + t * Re.length
+			w: h - n - r,
+			BH: (v ? 12 : 16) * _,
+			gridTop: e + 14 * _,
+			bottom: e + 14 * _ + t * ke.length
 		};
 	}
-	function v() {
-		let e = _();
-		return Math.round(e.bottom + 92 * h);
+	function b() {
+		let e = y();
+		return Math.round(e.bottom + 92 * _);
 	}
-	function y(e) {
-		n.clearRect(0, 0, p, m);
-		let { top: t, rowH: r, padL: i, w: a, BH: o, gridTop: s, bottom: c } = _(), v = q.slip / Ie, y = (e) => i + e * a, b = Math.max(12, (g ? 12 : 15) * h), x = Math.max(8.5, 10 * h);
+	function x(e) {
+		n.clearRect(0, 0, h, g);
+		let { top: t, rowH: r, padL: i, w: a, BH: s, gridTop: c, bottom: l } = y(), d = K.slip / De, b = (e) => i + e * a, x = Math.max(12, (v ? 12 : 15) * _), S = Math.max(8.5, 10 * _);
 		for (let e = 0; e <= 8; e++) {
-			let n = e / 8, r = Math.round(Ie * n), i = y(n);
-			f(i, s - 6 * h, i, c, J, e === 0 ? .18 : .07), (!g || e % 2 == 0) && l("W" + r, i, t - 6 * h, 400, x, Fe, 1, e === 0 ? "left" : e === 8 ? "right" : "center", !0);
+			let n = e / 8, r = Math.round(De * n), i = b(n);
+			m(i, c - 6 * _, i, l, q, e === 0 ? .18 : .07), (!v || e % 2 == 0) && u("W" + r, i, t - 6 * _, 400, S, J, 1, e === 0 ? "left" : e === 8 ? "right" : "center", !0);
 		}
-		l("STUDY TIMELINE", 0, t - 6 * h, 400, x, Fe, 1, "left", !0);
-		let S = Ve(W(e, .7, 1.7)), C = !1;
-		Re.forEach((t, i) => {
-			let c = s + i * r + r / 2, u = t.tool * q.lag, p = i === 0 ? S : Ve(W(e, 1.6 + u, 2.6 + u));
-			i > 0 && p < 1 && S >= 1 && (C = !0);
-			let m = t.a * X + (i === 0 ? 0 : v * p), _ = t.b * X + v * (i === 0 ? S : p);
-			if (i && f(0, c - r / 2, y(1), c - r / 2, J, .06), l(t.n, 0, c + (g ? 4 : -1) * h, 400, b, p > 0 || i === 0 ? J : Fe), g || l(Le[t.tool].n, 0, c + 15 * h, 400, x * .9, Le[t.tool].c, .85, "left", !0), n.save(), n.setLineDash([2, 3]), d(y(t.a * X) + .5, c - o / 2 + .5, (t.b - t.a) * X * a - 1, o - 1, o / 2), n.strokeStyle = "rgba(244,244,244,.28)", n.lineWidth = 1, n.stroke(), n.restore(), i > 0 && S >= 1 && p < 1) {
-				let e = y(t.a * X + v), r = y(m);
-				n.save(), n.setLineDash([3, 3]), d(r, c - o / 2 - 3 * h, e - r + (_ - m) * a, o + 6 * h, (o + 6 * h) / 2), n.strokeStyle = Y, n.globalAlpha = .8, n.lineWidth = 1, n.stroke(), n.restore(), n.globalAlpha = 1, l("STALE", y(_) + 10 * h, c + x * .36, 400, x, Y, .9, "left", !0);
+		u("STUDY TIMELINE", 0, t - 6 * _, 400, S, J, 1, "left", !0);
+		let C = Me(o(e, .7, 1.7)), w = !1;
+		ke.forEach((t, i) => {
+			let l = c + i * r + r / 2, f = t.tool * K.lag, h = i === 0 ? C : Me(o(e, 1.6 + f, 2.6 + f));
+			i > 0 && h < 1 && C >= 1 && (w = !0);
+			let g = t.a * X + (i === 0 ? 0 : d * h), y = t.b * X + d * (i === 0 ? C : h);
+			if (i && m(0, l - r / 2, b(1), l - r / 2, q, .06), u(t.n, 0, l + (v ? 4 : -1) * _, 400, x, h > 0 || i === 0 ? q : J), v || u(Oe[t.tool].n, 0, l + 15 * _, 400, S * .9, Oe[t.tool].c, .85, "left", !0), n.save(), n.setLineDash([2, 3]), p(b(t.a * X) + .5, l - s / 2 + .5, (t.b - t.a) * X * a - 1, s - 1, s / 2), n.strokeStyle = "rgba(244,244,244,.28)", n.lineWidth = 1, n.stroke(), n.restore(), i > 0 && C >= 1 && h < 1) {
+				let e = b(t.a * X + d), r = b(g);
+				n.save(), n.setLineDash([3, 3]), p(r, l - s / 2 - 3 * _, e - r + (y - g) * a, s + 6 * _, (s + 6 * _) / 2), n.strokeStyle = Y, n.globalAlpha = .8, n.lineWidth = 1, n.stroke(), n.restore(), n.globalAlpha = 1, u("STALE", b(y) + 10 * _, l + S * .36, 400, S, Y, .9, "left", !0);
 			}
-			d(y(m), c - o / 2, (_ - m) * a, o, o / 2), n.globalAlpha = .92, n.fillStyle = Le[t.tool].c, n.fill(), n.globalAlpha = 1;
+			p(b(g), l - s / 2, (y - g) * a, s, s / 2), n.globalAlpha = .92, n.fillStyle = Oe[t.tool].c, n.fill(), n.globalAlpha = 1;
 		});
-		let w = Re[Re.length - 1], T = Ve(W(e, 1.6 + w.tool * q.lag, 2.6 + w.tool * q.lag)), E = y(w.b * X), D = y(w.b * X + v * T), O = s - 6 * h, k = c + 8 * h;
-		if (n.save(), n.setLineDash([3, 4]), f(E, O, E, k, J, .5), n.restore(), l("PLANNED", E, k + 18 * h, 400, x, Fe, 1, "center", !0), T > .03) {
-			n.save(), n.beginPath(), n.rect(E, O, D - E, k - O), n.clip();
-			for (let e = E - 80; e < D + 80; e += 7 * h) f(e, O, e - 70 * h, k, Y, .14);
-			n.restore(), f(D, O, D, k, Y, 1, 1.5);
-			let e = "SUBMISSION  +" + Math.round(q.slip * T) + " WEEKS", t = u(e, 500, x * 1.05, !0) + 22 * h, r = 24 * h, i = Math.min(D + 10 * h, p - t - 2), a = k + 6 * h;
-			n.globalAlpha = T, d(i, a, t, r, r / 2), n.fillStyle = "rgba(214,163,148,.16)", n.fill(), n.strokeStyle = Y, n.lineWidth = 1, n.stroke(), n.globalAlpha = 1, l(e, i + 11 * h, a + r / 2 + x * .38, 500, x * 1.05, Y, T, "left", !0);
+		let T = ke[ke.length - 1], E = Me(o(e, 1.6 + T.tool * K.lag, 2.6 + T.tool * K.lag)), D = b(T.b * X), O = b(T.b * X + d * E), k = c - 6 * _, A = l + 8 * _;
+		if (n.save(), n.setLineDash([3, 4]), m(D, k, D, A, q, .5), n.restore(), u("PLANNED", D, A + 18 * _, 400, S, J, 1, "center", !0), E > .03) {
+			n.save(), n.beginPath(), n.rect(D, k, O - D, A - k), n.clip();
+			for (let e = D - 80; e < O + 80; e += 7 * _) m(e, k, e - 70 * _, A, Y, .14);
+			n.restore(), m(O, k, O, A, Y, 1, 1.5);
+			let e = "SUBMISSION  +" + Math.round(K.slip * E) + " WEEKS", t = f(e, 500, S * 1.05, !0) + 22 * _, r = 24 * _, i = Math.min(O + 10 * _, h - t - 2), a = A + 6 * _;
+			n.globalAlpha = E, p(i, a, t, r, r / 2), n.fillStyle = "rgba(214,163,148,.16)", n.fill(), n.strokeStyle = Y, n.lineWidth = 1, n.stroke(), n.globalAlpha = 1, u(e, i + 11 * _, a + r / 2 + S * .38, 500, S * 1.05, Y, E, "left", !0);
 		}
-		let A = S < 1 ? "ONE ELIGIBILITY CRITERION CHANGES" : C ? "THREE TOOLS HAVE NOT RECALCULATED YET" : "EVERY DOWNSTREAM DATE HAS MOVED", j = S < 1 ? J : C ? Y : J, ee = k + 58 * h;
-		n.globalAlpha = 1, n.fillStyle = j, n.beginPath(), n.arc(5 * h, ee - x * .35, 3.5 * h, 0, Math.PI * 2), n.fill(), l(A, 18 * h, ee, 400, x, j, .9, "left", !0);
+		let j = C < 1 ? "ONE ELIGIBILITY CRITERION CHANGES" : w ? "THREE TOOLS HAVE NOT RECALCULATED YET" : "EVERY DOWNSTREAM DATE HAS MOVED", M = C < 1 ? q : w ? Y : q, N = A + 58 * _;
+		n.globalAlpha = 1, n.fillStyle = M, n.beginPath(), n.arc(5 * _, N - S * .35, 3.5 * _, 0, Math.PI * 2), n.fill(), u(j, 18 * _, N, 400, S, M, .9, "left", !0);
 	}
-	let b = matchMedia("(prefers-reduced-motion: reduce)").matches, x = 0, S = 0, C = 0, w = !1, T = 0;
-	function E() {
-		if (p = t.clientWidth, !p) return;
-		m = v(), t.style.height = m + "px";
-		let e = Math.min(devicePixelRatio || 1, 2);
-		t.width = Math.round(p * e), t.height = Math.round(m * e), n.setTransform(e, 0, 0, e, 0, 0), w && y(b ? ze : C);
-	}
-	function D(e) {
-		x = requestAnimationFrame(D), C += Math.min((e - S) / 1e3, .05), S = e, C > Be && (C = 0), y(C);
-	}
+	let S = matchMedia("(prefers-reduced-motion: reduce)").matches, C = 0, w = 0, T = 0, E = !1, D = 0;
 	function O() {
-		x || b || (C = 0, S = performance.now(), x = requestAnimationFrame(D));
+		if (h = t.clientWidth, !h) return;
+		g = b(), t.style.height = g + "px";
+		let e = Math.min(devicePixelRatio || 1, 2);
+		t.width = Math.round(h * e), t.height = Math.round(g * e), n.setTransform(e, 0, 0, e, 0, 0), E && x(S ? Ae : T);
 	}
-	function k() {
-		cancelAnimationFrame(x), x = 0;
+	function k(e) {
+		C = requestAnimationFrame(k), T += Math.min((e - w) / 1e3, .05), w = e, T > je && (T = 0), x(T);
 	}
-	let A = new ResizeObserver(() => {
-		t.clientWidth !== T && (T = t.clientWidth, E());
+	function A() {
+		C || S || (T = 0, w = performance.now(), C = requestAnimationFrame(k));
+	}
+	function j() {
+		cancelAnimationFrame(C), C = 0;
+	}
+	let M = new ResizeObserver(() => {
+		t.clientWidth !== D && (D = t.clientWidth, O());
 	});
-	A.observe(e);
-	let j = null;
-	return (document.fonts ? Promise.race([Promise.all([document.fonts.load(`400 12px ${a}`), document.fonts.load(`400 12px ${o}`)]), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
-		w = !0, E(), !b && (j = new IntersectionObserver(([e]) => e.isIntersecting ? O() : k(), { threshold: .25 }), j.observe(e));
+	M.observe(e);
+	let N = null;
+	return (document.fonts ? Promise.race([Promise.all([document.fonts.load(`400 12px ${a}`), document.fonts.load(`400 12px ${s}`)]), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
+		E = !0, O(), !S && (N = new IntersectionObserver(([e]) => e.isIntersecting ? A() : j(), { threshold: .25 }), N.observe(e));
 	}), { destroy() {
-		k(), A.disconnect(), j && j.disconnect(), t.remove(), delete e.dataset.pvReady;
+		j(), M.disconnect(), N && N.disconnect(), t.remove(), delete e.dataset.pvReady;
 	} };
 }
-var q, J, Fe, Y, Ie, X, Le, Re, ze, Be, Ve, He = e((() => {
-	Ne(), q = {
+var K, q, J, Y, De, X, Oe, ke, Ae, je, Me, Ne = e((() => {
+	n(), K = {
 		slip: 18,
 		lag: 1.15,
 		hold: 2.8
-	}, J = "#F4F4F4", Fe = "rgba(244,244,244,.42)", Y = "#D6A394", Ie = 104, X = .72, Le = [
+	}, q = "#F4F4F4", J = "rgba(244,244,244,.42)", Y = "#D6A394", De = 104, X = .72, Oe = [
 		{
 			n: "PROTOCOL",
 			c: "#C9C4EF"
@@ -1528,7 +1289,7 @@ var q, J, Fe, Y, Ie, X, Le, Re, ze, Be, Ve, He = e((() => {
 			n: "eTMF",
 			c: "#7FE8CF"
 		}
-	], Re = [
+	], ke = [
 		{
 			n: "Final protocol",
 			a: 0,
@@ -1565,43 +1326,43 @@ var q, J, Fe, Y, Ie, X, Le, Re, ze, Be, Ve, He = e((() => {
 			b: .95,
 			tool: 3
 		}
-	], ze = 2.6 + Le.length * q.lag, Be = ze + q.hold, Ve = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
+	], Ae = 2.6 + Oe.length * K.lag, je = Ae + K.hold, Me = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
 }));
 //#endregion
 //#region src/mini-scene.js
-function Ue(e) {
-	let t = qe[e.dataset.scene] || qe.rank, n = We[(+e.dataset.col || 0) % We.length];
-	return Ce(e, {
+function Pe(e) {
+	let t = Re[e.dataset.scene] || Re.rank, n = Fe[(+e.dataset.col || 0) % Fe.length];
+	return c(e, {
 		aspect: () => .62,
 		loop: Z.loop,
 		fade: Z.fade,
 		still: Z.p1 + .5,
 		layout: (e) => {
-			e.S = U(e.W / 400, .7, 1.2);
+			e.S = d(e.W / 400, .7, 1.2);
 		},
 		draw: (e, r) => {
-			e.x.lineCap = "round", e.x.lineJoin = "round", t(e, e.W, e.H, W(r, Z.p0, Z.p1), n);
+			e.x.lineCap = "round", e.x.lineJoin = "round", t(e, e.W, e.H, o(r, Z.p0, Z.p1), n);
 		}
 	});
 }
-var We, Z, Q, Ge, Ke, $, qe, Je = e((() => {
-	Ne(), We = [
-		V[0],
-		V[1],
-		V[2],
-		V[3],
-		V[5]
+var Fe, Z, Q, Ie, Le, $, Re, ze = e((() => {
+	n(), Fe = [
+		f[0],
+		f[1],
+		f[2],
+		f[3],
+		f[5]
 	], Z = {
 		p0: .4,
 		p1: 4.4,
 		fade: 6.4,
 		loop: 7
-	}, Q = xe(7), Ge = Array.from({ length: 40 }, (e, t) => ({
+	}, Q = l(7), Ie = Array.from({ length: 40 }, (e, t) => ({
 		x: t % 8 / 7 - .5 + (Q() - .5) * .06,
 		y: Math.floor(t / 8) / 4 - .5 + (Q() - .5) * .08,
 		rec: Q() < .38,
 		d: Q()
-	})), Ke = Array.from({ length: 46 }, () => ({
+	})), Le = Array.from({ length: 46 }, () => ({
 		x: Q() - .5,
 		y: (Q() - .5) * .8,
 		resp: Q() < .42,
@@ -1612,52 +1373,52 @@ var We, Z, Q, Ge, Ke, $, qe, Je = e((() => {
 		.32,
 		.7,
 		.58
-	], qe = {
-		rank(e, t, n, r, i) {
-			let a = $.map((e, t) => t).sort((e, t) => $[t] - $[e]), o = G(W(r, .2, .65)), s = n / 6.2, c = t * .14;
-			$.forEach((l, u) => {
-				let d = K(u, a.indexOf(u), o), f = a.indexOf(u) === 0 && o > .95, p = n * .2 + d * s;
-				e.line(c, p, t * .86, p, B, .1, 4 * e.S), e.line(c, p, c + t * .72 * l * ke(W(r, 0, .25)), p, f ? i : B, f ? 1 : .6, 5.5 * e.S), f && e.dot(c + t * .72 * l, p, 6 * e.S, i, 1);
+	], Re = {
+		rank(e, t, n, s, c) {
+			let l = $.map((e, t) => t).sort((e, t) => $[t] - $[e]), u = a(o(s, .2, .65)), d = n / 6.2, f = t * .14;
+			$.forEach((a, m) => {
+				let h = p(m, l.indexOf(m), u), g = l.indexOf(m) === 0 && u > .95, _ = n * .2 + h * d;
+				e.line(f, _, t * .86, _, i, .1, 4 * e.S), e.line(f, _, f + t * .72 * a * r(o(s, 0, .25)), _, g ? c : i, g ? 1 : .6, 5.5 * e.S), g && e.dot(f + t * .72 * a, _, 6 * e.S, c, 1);
 			});
 		},
-		curve(e, t, n, r, i) {
-			let a = t * .14, o = t * .88, s = n * .2, c = n * .8;
-			e.line(a, c, o, c, B, .3, 1.5 * e.S), e.line(a, s, a, c, B, .3, 1.5 * e.S);
-			let l = G(W(r, 0, .5)), u = (e) => [K(a, o, e), c - (c - s) * (.06 + .86 * (1 - (1 - e) ** 2.4))], d = [];
-			for (let e = 0; e <= Math.ceil(36 * l); e++) d.push(u(Math.min(e / 36, l)));
-			e.poly(d, B, .95, 3.2 * e.S);
-			let f = G(W(r, .55, .9));
-			if (f > 0) {
-				let t = u(K(.15, .5, f));
-				e.x.save(), e.x.setLineDash([3 * e.S, 4 * e.S]), e.line(t[0], t[1], t[0], c, B, .45, 1.5 * e.S), e.line(a, t[1], t[0], t[1], B, .45, 1.5 * e.S), e.x.restore(), e.dot(t[0], t[1], 5.5 * e.S, i, 1), e.x.strokeStyle = i, e.x.globalAlpha = .7, e.x.lineWidth = 2 * e.S, e.x.beginPath(), e.x.arc(t[0], t[1], 11 * e.S, 0, H), e.x.stroke(), e.x.globalAlpha = 1;
+		curve(e, t, n, r, c) {
+			let l = t * .14, u = t * .88, d = n * .2, f = n * .8;
+			e.line(l, f, u, f, i, .3, 1.5 * e.S), e.line(l, d, l, f, i, .3, 1.5 * e.S);
+			let m = a(o(r, 0, .5)), h = (e) => [p(l, u, e), f - (f - d) * (.06 + .86 * (1 - (1 - e) ** 2.4))], g = [];
+			for (let e = 0; e <= Math.ceil(36 * m); e++) g.push(h(Math.min(e / 36, m)));
+			e.poly(g, i, .95, 3.2 * e.S);
+			let _ = a(o(r, .55, .9));
+			if (_ > 0) {
+				let t = h(p(.15, .5, _));
+				e.x.save(), e.x.setLineDash([3 * e.S, 4 * e.S]), e.line(t[0], t[1], t[0], f, i, .45, 1.5 * e.S), e.line(l, t[1], t[0], t[1], i, .45, 1.5 * e.S), e.x.restore(), e.dot(t[0], t[1], 5.5 * e.S, c, 1), e.x.strokeStyle = c, e.x.globalAlpha = .7, e.x.lineWidth = 2 * e.S, e.x.beginPath(), e.x.arc(t[0], t[1], 11 * e.S, 0, s), e.x.stroke(), e.x.globalAlpha = 1;
 			}
 		},
-		sites(e, t, n, r, i) {
-			Ge.forEach((a) => {
-				let o = a.rec ? ke(W(r, .1 + a.d * .55, .25 + a.d * .55)) : 0;
-				e.dot(t / 2 + a.x * t * .74, n / 2 + a.y * n * .62, (3 + 2.2 * o) * e.S, o > 0 ? i : B, o > 0 ? .5 + .5 * o : .32);
+		sites(e, t, n, a, s) {
+			Ie.forEach((c) => {
+				let l = c.rec ? r(o(a, .1 + c.d * .55, .25 + c.d * .55)) : 0;
+				e.dot(t / 2 + c.x * t * .74, n / 2 + c.y * n * .62, (3 + 2.2 * l) * e.S, l > 0 ? s : i, l > 0 ? .5 + .5 * l : .32);
 			});
 		},
-		split(e, t, n, r, i) {
-			let a = G(W(r, .15, .7));
-			a > .6 && e.line(t / 2, n * .16, t / 2, n * .84, B, .32 * W(a, .6, 1), 1.5 * e.S), Ke.forEach((r) => {
-				let o = (r.resp ? -.2 : .2) + r.x * .32, s = K(r.x * .8, o, a);
-				e.dot(t / 2 + s * t * .8, n / 2 + r.y * n * .7, 3.6 * e.S, r.resp && a > .3 ? i : B, r.resp ? .5 + .5 * a : .36);
+		split(e, t, n, r, s) {
+			let c = a(o(r, .15, .7));
+			c > .6 && e.line(t / 2, n * .16, t / 2, n * .84, i, .32 * o(c, .6, 1), 1.5 * e.S), Le.forEach((r) => {
+				let a = (r.resp ? -.2 : .2) + r.x * .32, o = p(r.x * .8, a, c);
+				e.dot(t / 2 + o * t * .8, n / 2 + r.y * n * .7, 3.6 * e.S, r.resp && c > .3 ? s : i, r.resp ? .5 + .5 * c : .36);
 			});
 		},
-		doc(e, t, n, r, i) {
-			let a = t * .16, o = n / 8.5;
-			for (let s = 0; s < 6; s++) {
-				let c = n * .22 + s * o, l = ke(W(r, .04 + s * .07, .2 + s * .07)), u = t * (s === 0 ? .4 : s % 3 == 2 ? .46 : .58);
-				e.line(a, c, a + u * l, c, B, s === 0 ? .9 : .5, (s === 0 ? 5.5 : 3.5) * e.S);
-				let d = W(r, .55 + s * .06, .66 + s * .06);
-				if (d > 0) {
+		doc(e, t, n, a, s) {
+			let c = t * .16, l = n / 8.5;
+			for (let d = 0; d < 6; d++) {
+				let f = n * .22 + d * l, p = r(o(a, .04 + d * .07, .2 + d * .07)), m = t * (d === 0 ? .4 : d % 3 == 2 ? .46 : .58);
+				e.line(c, f, c + m * p, f, i, d === 0 ? .9 : .5, (d === 0 ? 5.5 : 3.5) * e.S);
+				let h = o(a, .55 + d * .06, .66 + d * .06);
+				if (h > 0) {
 					let n = t * .84;
 					e.poly([
-						[n - 6 * e.S, c],
-						[n - 2 * e.S, c + 4 * e.S],
-						[n + 6 * e.S, c - 5 * e.S]
-					].slice(0, d > .5 ? 3 : 2), s === 5 ? i : Oe, d, 2.6 * e.S);
+						[n - 6 * e.S, f],
+						[n - 2 * e.S, f + 4 * e.S],
+						[n + 6 * e.S, f - 5 * e.S]
+					].slice(0, h > .5 ? 3 : 2), d === 5 ? s : u, h, 2.6 * e.S);
 				}
 			}
 		}
@@ -1665,7 +1426,7 @@ var We, Z, Q, Ge, Ke, $, qe, Je = e((() => {
 }));
 //#endregion
 //#region src/testimonials.js
-function Ye(e) {
+function Be(e) {
 	if (!e || e.dataset.pvInit) return null;
 	e.dataset.pvInit = "1";
 	let t = [...e.querySelectorAll(".tm-tab")], n = [...e.querySelectorAll(".tm-quote")];
@@ -1687,7 +1448,7 @@ function Ye(e) {
 		});
 	}
 	function m(e) {
-		s = requestAnimationFrame(m), !c || l ? o = e - u * Xe : (u = Math.min(1, (e - o) / Xe), f(a, u), u >= 1 && p(a + 1));
+		s = requestAnimationFrame(m), !c || l ? o = e - u * Ve : (u = Math.min(1, (e - o) / Ve), f(a, u), u >= 1 && p(a + 1));
 	}
 	let h = (e) => {
 		let n = t.indexOf(e.target.closest(".tm-tab"));
@@ -1705,15 +1466,15 @@ function Ye(e) {
 	d.addEventListener("click", h), d.addEventListener("keydown", g), e.addEventListener("pointerenter", _, { passive: !0 }), e.addEventListener("pointerleave", v, { passive: !0 }), e.addEventListener("focusin", _), e.addEventListener("focusout", v), p(0);
 	let y = null;
 	return i || (y = new IntersectionObserver(([e]) => {
-		c = e.isIntersecting, c && !s ? (o = performance.now() - u * Xe, s = requestAnimationFrame(m)) : c || (cancelAnimationFrame(s), s = 0);
+		c = e.isIntersecting, c && !s ? (o = performance.now() - u * Ve, s = requestAnimationFrame(m)) : c || (cancelAnimationFrame(s), s = 0);
 	}, { threshold: .4 }), y.observe(e)), function() {
 		cancelAnimationFrame(s), y && y.disconnect(), d.removeEventListener("click", h), d.removeEventListener("keydown", g), e.removeEventListener("pointerenter", _), e.removeEventListener("pointerleave", v), e.removeEventListener("focusin", _), e.removeEventListener("focusout", v), delete e.dataset.pvInit;
 	};
 }
-var Xe, Ze = e((() => {
-	Xe = 8e3;
-})), Qe = /* @__PURE__ */ t((() => {
-	be(), He(), Je(), Ze(), document.querySelectorAll("[data-pv=\"hero-sequence\"]").forEach(he), document.querySelectorAll("[data-pv=\"gantt-glossy\"]").forEach(Pe), document.querySelectorAll("[data-pv=\"mini-scene\"]").forEach(Ue), document.querySelectorAll("[data-pv=\"testimonials\"]").forEach(Ye);
+var Ve, He = e((() => {
+	Ve = 8e3;
+})), Ue = /* @__PURE__ */ t((() => {
+	Te(), Ne(), ze(), He(), document.querySelectorAll("[data-pv=\"hero-sequence\"]").forEach(be), document.querySelectorAll("[data-pv=\"gantt-glossy\"]").forEach(Ee), document.querySelectorAll("[data-pv=\"mini-scene\"]").forEach(Pe), document.querySelectorAll("[data-pv=\"testimonials\"]").forEach(Be);
 }));
 //#endregion
-export default Qe();
+export default Ue();

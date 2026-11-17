@@ -10,7 +10,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 |---|---|---|---|---|
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.19.0` | refonte : `hero-sequence` (div natif dans `header_component`, après la grille), `gantt-glossy` (dans `.stage-wide` de The problem), `mini-scene` (cinq cartes `.pcard` du slider plateforme), `testimonials` (`.tm`) ; anciens points (`hero-homepage`, `gantt`, `platform-hub`, `evidence-bars`) dans des blocs masqués |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
-| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
+| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.20.0` | refonte : `about-orbits` (premier enfant du header du hero, line field retiré), `careers-affine` (attribut sur l'embed de Build with us, dans `.animation-wrapper.is-dark`) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.17.0` | `clinops-hero-bg`, `clinops-hero-slot` ; refonte : `clinops-proof-glossy` (dans `.ss-anim` du bloc Proof, chiffres en attributs `data-sites`, `data-rec`, `data-other`, `data-gain`), `platform-connect-v2`, `faq` |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.16.0` | `response-hero-bg`, `response-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux vidéo, `data-mode` precision et split), `platform-connect-v2`, `faq` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.15.1` | `trial-hero-bg`, `trial-hero-slot` ; refonte : `design-space-glossy` (dans `.ss-anim` de la success story), `platform-connect-v2` (dans `.animation-wrapper` du bloc plateforme), `faq` (sur `.faq-wrap`) |
@@ -46,6 +46,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/gantt-glossy.js`, `src/bonv-draw.js` | Refonte, The problem : Gantt d'origine restylé en sombre ; `bonv-draw.js` = socle de dessin partagé (aussi utilisé par `mini-scene`) |
 | `src/mini-scene.js` | Refonte, Home : mini-scène animée en tête de chaque carte produit (`data-scene` rank, curve, sites, split, doc ; `data-col`) |
 | `src/testimonials.js` | Refonte, Home : témoignages en onglets (bascule `is-active` sur `.tm-quote` / `.tm-tab`, trait `.tm-bar`, défilement 8 s à l'écran, pause au survol) |
+| `src/about-orbits.js` | Refonte, hero About : anneaux et V en plexus (copie du kit) |
+| `src/careers-affine.js` | Refonte, Build with us : trois disciplines qui fusionnent, style BonV (copie de `_kit/careers.js`) ; `bonv-draw.js` devient un chunk partagé |
 | `src/case-studies.js` | Case Studies : filtres Product et Therapeutic area (pilules `fs_radio_field`, liste `filter-select`, paramètres d'URL `?product=` et `?area=`), lien et chiffre clé des cas mis en avant, tableau At a glance (lignes et colonne 3 vides masquées), récit, cartes Why it matters avec icône, FAQ en accordéon, source facultative, 3 études liées sans l'étude en cours. CSS injecté, ciblé par attributs `data-cs-*` (proto `protos/case-studies/phasev-case-studies-protos.html`) |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/trial/phasev-success-story-protos.html`) |
 
@@ -70,6 +72,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.20.0` | (voir journal) | Refonte, Company : `company.js` monte `about-orbits` et `careers-affine` (plus `company-careers`) ; `bonv-draw` en chunk partagé `bonv-draw-D7G52O51.mjs`, `dist/main.js` régénéré (Home reste en `v0.19.0`) |
 | `v0.19.0` | (voir journal) | Refonte, Home : `main.js` monte `hero-sequence`, `gantt-glossy`, `mini-scene` et `testimonials` ; ne monte plus `hero-homepage`, `gantt`, `platform-hub`, `evidence-bars` (Home DEV reste en `v0.2.0`) |
 | `v0.18.0` | (voir journal) | Refonte, Portfolio : `portfolio.js` monte les graphes animés (`viz`) et le bloc plateforme en cartes, plus la plateforme v1 ; `src/viz.js` devient un chunk partagé `viz-CS9SStLT.mjs` (`dist/response.js` régénéré pour l'importer, Response reste en `v0.16.0`) |
 | `v0.17.0` | (voir journal) | Refonte, ClinOps : `clinops.js` monte `clinops-proof-glossy` et le bloc plateforme en cartes, ne monte plus les anciens blocs ; `dist/response.js` et `dist/trial.js` régénérés (ordre des imports seulement, pages non concernées) |
@@ -115,6 +118,14 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **Company (About) restylée en natif** (proto `company-affine`) :
+  - Hero : line field retiré, div `about-orbits`, texte à gauche (combos `section_header.is-company`, `header_content-left.max-width-670`, `padding-global.padding-section-company-hero` modifiés), titre et texte en `is-hero`.
+  - About us : en-tête centré « PhaseV / About us » (copie proposée et validée), ancien label masqué, colonnes `grid-3.is-about` et `text-size-quote.text-weight-light.is-col` (filet au-dessus).
+  - At a glance : fond light, cartes `glance-stat.is-card` dans `glance-grid.is-cards`, `glance-stat_head.is-card` ; `glance-icon` en disque ; icônes jaunes remplacées par des copies mauves (`glance-*-mauve.svg`) ; `number-span.is-company` en encre, `company-subtitle` restylé.
+  - Leadership : `surface-dark` + fond animé ; SAB : light, titre en encre, flèches rondes du site (classes `arrow`, code de l'embed remplacé). Composant `leadership-card` : classe restylée en verre blanc, variante Dark en verre sombre ; textes passés sur `person-name` et `person-role` (nouvelles classes). Leadership en Dark, SAB en White.
+  - Incident corrigé : des styles posés sur la variante de base du composant sont tombés sur les combos globaux `text-size-large.text-color-gray` et `text-size-label.text-color-purple` ; remis aux valeurs du CSS publié.
+  - Investors : en-tête sur une colonne, `backed-by-grid` en 3 colonnes avec filets (fond de grille + écart 1 px), `partnership-logo` sans tuile. Build with us : light, pastilles `dm-panel_list-item` blanches en mono, panneau `animation-wrapper.is-dark` avec fond animé, montage `careers-affine`.
+  - Release `v0.20.0`, loader passé de `v0.11.0` à `v0.20.0`.
 - **Home refaite en natif** (proto `home-affine`) : nouveaux blocs insérés à côté des anciens, anciens masqués (pas supprimés) jusqu'au nettoyage.
   - Hero : div `hero-sequence` après la grille `header_content` ; embed de l'ancien hero masqué. Texte inchangé.
   - The problem : en-tête centré (`is-intro`), panneau sombre `stage-wide` (nouvelle classe, fond entre-deux, `data-af-bg` pour le fond animé) avec `gantt-glossy` dans `stage-wide-in`.

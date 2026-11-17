@@ -114,6 +114,172 @@ const CSS = `
 /* fiche : études liées */
 [data-cs-related-head]{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
 [data-cs-all]{color:#141238;text-decoration:none;border-bottom:1px solid #14123866;padding-bottom:.25rem}
+/* ===== refonte (2026-11-17) : style affiné du proto (protos/refonte-produits/_kit/affine.css, bloc Case Studies),
+   sections sombres repérées par la classe native .surface-dark ===== */
+:root{--af-mono:'Roboto Mono',ui-monospace,Consolas,monospace;--af-violet:#684a9e;--af-glass:linear-gradient(155deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.7) 55%,rgba(255,255,255,.55) 100%);--af-edge:linear-gradient(150deg,rgba(20,18,56,.18) 0%,rgba(20,18,56,.06) 40%,rgba(20,18,56,.04) 75%,rgba(104,74,158,.2) 100%);--af-glass-dark:radial-gradient(120% 60% at 15% 0%,rgba(255,255,255,.06),rgba(255,255,255,0) 60%),linear-gradient(155deg,rgba(150,110,200,.2) 0%,rgba(90,60,150,.16) 50%,rgba(40,24,80,.34) 100%);--af-glass-rose:radial-gradient(120% 60% at 15% 0%,rgba(255,255,255,.12),rgba(255,255,255,0) 60%),linear-gradient(155deg,rgba(214,160,230,.42) 0%,rgba(160,110,200,.3) 50%,rgba(104,74,158,.36) 100%);--af-edge-dark:linear-gradient(150deg,rgba(248,248,248,.32) 0%,rgba(248,248,248,.07) 40%,rgba(248,248,248,.03) 75%,rgba(214,170,240,.14) 100%)}
+
+/* ===================== Case Studies (bibliothèque et fiche) =====================
+   Les blocs CMS du module case-studies.js (attributs data-cs-*), en style affiné, sans nouvelle classe.
+   Sélecteurs préfixés « html body » : ils passent devant le CSS que le module injecte après la page. */
+
+/* cartes des études liées (fiche, section sombre) : la carte case study validée, en verre sombre, image 16:9 en tête */
+html body .surface-dark [data-cs-card]{ position:relative; isolation:isolate; display:flex; flex-direction:column; height:100%; border-radius:1.5rem; overflow:hidden; border:0;
+  color:#f8f8f8; background:var(--af-glass-dark); -webkit-backdrop-filter:blur(40px) saturate(120%); backdrop-filter:blur(40px) saturate(120%);
+  transition:transform .4s cubic-bezier(.22,1,.36,1), background .4s cubic-bezier(.22,1,.36,1); }
+html body .surface-dark [data-cs-card]::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:2; background:var(--af-edge-dark);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+html body .surface-dark [data-cs-card]:hover{ transform:translateY(-4px); background:var(--af-glass-rose); }
+html body .surface-dark [data-cs-card] .post_image{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:0; margin:0; }
+html body .surface-dark [data-cs-card] .post_body{ display:flex; flex-direction:column; gap:1.25rem; flex:1; padding:2rem 2.25rem 2.5rem; background:none; }
+html body .surface-dark [data-cs-card] [data-cs-tag]{ font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--_colors---primary--yellow, #e1c721); }
+html body .surface-dark [data-cs-card] h3{ margin:0; font-weight:300; font-size:clamp(1.375rem, 1.1rem + .7vw, 1.75rem); line-height:1.25; letter-spacing:-.015em; color:#f8f8f8; }
+html body .surface-dark [data-cs-card] .post_description{ font-size:1rem; line-height:1.6; color:rgba(248,248,248,.7); }
+html body .surface-dark [data-cs-card] [data-cs-stat]{ display:flex; align-items:baseline; gap:.75rem; margin-top:auto; padding-top:1.25rem; border-top:1px solid rgba(248,248,248,.14); font-size:.9375rem; line-height:1.4; color:rgba(248,248,248,.75); }
+html body .surface-dark [data-cs-card] [data-cs-stat] b{ margin:0; font-weight:300; font-size:2.5rem; line-height:1; letter-spacing:-.03em; color:#f8f8f8; }
+
+/* bibliothèque (fond blanc) : 4 cartes par ligne ; la carte claire des pages produit (gris léger en dégradé, bord fin), image 16:9 en tête */
+html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:2.5rem 1.5rem; }
+/* 4 sur grand écran (1440 px et plus), 3 sur écran moyen, 2 sur petit écran ou tablette, 1 sur téléphone */
+@media (max-width:1439px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+@media (max-width:991px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:599px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:1fr; } }
+html body [data-pv="case-studies"] .resource-item, html body [data-cs-related] .resource-item{ width:auto; max-width:none; }
+html body [data-pv="case-studies"] [data-cs-card], html body [data-cs-related] [data-cs-card]{ position:relative; isolation:isolate; display:flex; flex-direction:column; height:100%; border-radius:1.25rem; overflow:hidden; border:0; box-shadow:none;
+  background:linear-gradient(155deg, #f6f6f9 0%, #eeedf4 100%); transition:transform .4s cubic-bezier(.22,1,.36,1); }
+html body [data-pv="case-studies"] [data-cs-card]::before, html body [data-cs-related] [data-cs-card]::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:2; background:var(--af-edge);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+html body [data-pv="case-studies"] [data-cs-card]:hover, html body [data-cs-related] [data-cs-card]:hover{ transform:translateY(-4px); }
+html body [data-pv="case-studies"] [data-cs-card] .post_image, html body [data-cs-related] [data-cs-card] .post_image{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:0; margin:0; }
+html body [data-pv="case-studies"] [data-cs-card] .post_body, html body [data-cs-related] [data-cs-card] .post_body{ display:flex; flex-direction:column; gap:1rem; flex:1; padding:1.5rem 1.5rem 1.75rem; background:none; }
+html body [data-pv="case-studies"] [data-cs-card] [data-cs-tag], html body [data-cs-related] [data-cs-card] [data-cs-tag]{ font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.6875rem; letter-spacing:.12em; text-transform:uppercase; color:var(--af-violet, #5b4fb0); }
+html body [data-pv="case-studies"] [data-cs-card] h3, html body [data-cs-related] [data-cs-card] h3{ margin:0; font-weight:400; font-size:1.25rem; line-height:1.3; letter-spacing:-.01em; color:#141238; }
+html body [data-pv="case-studies"] [data-cs-card] .post_description, html body [data-cs-related] [data-cs-card] .post_description{ font-size:.9375rem; line-height:1.55; color:#4a4868; }
+html body [data-pv="case-studies"] [data-cs-card] [data-cs-stat], html body [data-cs-related] [data-cs-card] [data-cs-stat]{ display:flex; align-items:baseline; flex-wrap:wrap; gap:.25rem .625rem; margin-top:auto; padding-top:1rem; border-top:1px solid rgba(20,18,56,.1); font-size:.875rem; line-height:1.4; color:#4a4868; }
+html body [data-pv="case-studies"] [data-cs-card] [data-cs-stat] b, html body [data-cs-related] [data-cs-card] [data-cs-stat] b{ margin:0; font-weight:300; font-size:2rem; line-height:1; letter-spacing:-.03em; color:#141238; }
+@media (prefers-reduced-motion:reduce){ html body [data-cs-card]{ transition:none; } html body [data-cs-card]:hover{ transform:none; } }
+
+/* filtres de la bibliothèque (fond blanc) : barre segmentée. Une seule barre gris clair ; l'active est une pastille blanche
+   au bord fin, qui glisse d'une catégorie à l'autre (repère .cs-pill-ind posé par affine.js). Libellés en mono capitales.
+   La liste Therapeutic area est une pastille assortie. Sans le repère (JS absent), l'active prend directement le fond blanc. */
+html body .cs-filters{ align-items:center; }
+html body .cs-pills{ position:relative; isolation:isolate; display:inline-flex; flex-wrap:nowrap; gap:0; max-width:100%; padding:.3125rem; border-radius:999px;
+  background:#f1f0f6; box-shadow:inset 0 0 0 1px rgba(20,18,56,.05); overflow-x:auto; scrollbar-width:none; }
+html body .cs-pills::-webkit-scrollbar{ display:none; }
+html body .cs-pills .fs_radio_field{ position:relative; z-index:1; flex:none; padding:.625rem 1.125rem; border:0; border-radius:999px; background:transparent;
+  font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:#6b6890; transition:color .3s; }
+html body .cs-pills .fs_radio_field:hover{ color:#141238; }
+html body .cs-pills .fs_radio_field.is-list-active{ background:#fff; color:#141238; box-shadow:0 0 0 1px rgba(20,18,56,.08); }
+html body .cs-pills.has-ind .fs_radio_field.is-list-active{ background:transparent; box-shadow:none; }
+html body .cs-pill-ind{ position:absolute; z-index:0; top:.3125rem; bottom:.3125rem; left:0; width:0; border-radius:999px; background:#fff; box-shadow:0 0 0 1px rgba(20,18,56,.08);
+  transition:transform .45s cubic-bezier(.22,1,.36,1), width .45s cubic-bezier(.22,1,.36,1); pointer-events:none; }
+html body .cs-filters .filter-select{ height:auto; padding:.9375rem 2.75rem .9375rem 1.375rem; border:0; border-radius:999px; background:#f1f0f6 no-repeat right 1.25rem center / .625rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141238' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  box-shadow:inset 0 0 0 1px rgba(20,18,56,.05); -webkit-appearance:none; appearance:none;
+  font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:#141238; cursor:pointer; }
+@media (prefers-reduced-motion:reduce){ html body .cs-pill-ind{ transition:none; } }
+
+/* chiffre clé des heros (bibliothèque et fiche) : grand, léger, blanc */
+html body [data-cs-kpi-n]{ font-weight:300; font-size:clamp(3rem, 2rem + 3vw, 4.5rem); letter-spacing:-.03em; color:#f8f8f8; }
+html body [data-cs-kpi-t]{ color:rgba(248,248,248,.7); }
+
+/* At a glance (fond light) : tableau en verre clair, en-têtes en mono, colonne optimisée en mauve léger */
+html body [data-cs-table]{ position:relative; isolation:isolate; background:var(--af-glass); box-shadow:none; border-radius:1.5rem; }
+html body [data-cs-table]::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; background:var(--af-edge);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+html body [data-cs-row]+[data-cs-row], html body [data-cs-note]{ border-top-color:rgba(20,18,56,.08); }
+html body [data-cs-row="head"] [data-cs-cell]{ font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.75rem; letter-spacing:.12em; color:#6b6890; }
+html body [data-cs-cell].cs-em{ background:rgba(146,138,205,.1); font-weight:500; }
+html body [data-cs-row="head"] [data-cs-cell].cs-em{ color:#5b4fb0; font-weight:400; }
+html body [data-cs-note]{ font-size:.8125rem; }
+
+/* récit : numéros de chapitre en repères ronds (anneau doux de 1 px), titres légers, listes au tiret violet */
+html body [data-cs-chap-head]{ align-items:center; }
+html body [data-cs-num]{ display:grid; place-items:center; flex:none; width:2.75rem; height:2.75rem; border-radius:50%; border:1px solid rgba(146,138,205,.4);
+  font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.8125rem; letter-spacing:.06em; color:#141238; }
+html body [data-cs-chap-head] h2{ font-weight:400; letter-spacing:-.01em; }
+html body [data-cs-rich] strong{ font-weight:500; }
+html body [data-cs-rich] ul li::before{ top:.8em; left:0; width:1rem; height:1.5px; border-radius:0; background:#928acd; }
+html body [data-cs-rich] ol li::before{ border-color:rgba(146,138,205,.4); font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.75rem; }
+html body [data-cs-rich="results"] ul li{ font-weight:300; font-size:1.375rem; }
+html body [data-cs-rich="results"] ul li::before{ top:1.55rem; width:1.25rem; height:1.25rem; border-radius:50%; border:1px solid rgba(146,138,205,.5);
+  background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 6.2l2 2L9 4' fill='none' stroke='%23928acd' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/.75rem no-repeat; }
+
+/* Why it matters (sombre animé) : cartes en verre sombre, bord dégradé fin */
+html body [data-cs-why] li{ position:relative; isolation:isolate; border:0; border-radius:1.5rem; background:var(--af-glass-dark); color:rgba(248,248,248,.7);
+  -webkit-backdrop-filter:blur(40px) saturate(120%); backdrop-filter:blur(40px) saturate(120%); }
+html body [data-cs-why] li::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; background:var(--af-edge-dark);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+html body [data-cs-why] li:hover{ background:var(--af-glass-rose); }
+html body [data-cs-why] li strong{ font-weight:400; border-top-color:rgba(248,248,248,.14); }
+
+/* FAQ et source : poids légers, anneau doux */
+html body .cs-acc summary{ font-weight:400; letter-spacing:-.005em; }
+html body .cs-pm{ border-color:rgba(146,138,205,.4); }
+html body .cs-acc, html body .cs-acc details, html body [data-cs-source]{ border-color:rgba(20,18,56,.1); }
+html body .cs-ans p{ color:#4a4868; }
+
+/* études liées (sombre animé) : lien « tout voir » en blanc */
+html body .surface-dark [data-cs-all]{ color:#f8f8f8; border-bottom-color:rgba(248,248,248,.4); }
+
+/* Case Studies, catégories au-dessus du titre (hero et cartes de la bibliothèque) : séparées par une barre verticale fine */
+html body .featured-label-div{ display:flex; flex-wrap:wrap; align-items:center; gap:.25rem .75rem; }
+html body .featured-label-div > .text-size-label + .text-size-label::before,
+html body [data-cs-tags] [data-cs-tag]::before{ content:''; display:inline-block; width:1px; height:.9em; margin-right:.75rem; vertical-align:-.1em; background:currentColor; opacity:.35; }
+html body [data-cs-tags], html body [data-cs-tags] [data-cs-tags-list] .w-dyn-items{ gap:.25rem .75rem; }
+/* pas de barre avant la toute première catégorie (y compris quand la liste des produits est vide) */
+html body [data-cs-tags] > [data-cs-tags-list]:first-child .w-dyn-item:first-child [data-cs-tag]::before,
+html body [data-cs-tags] > [data-cs-tags-list]:has(.w-dyn-empty) + [data-cs-tags-list] .w-dyn-item:first-child [data-cs-tag]::before{ display:none; }
+
+/* Case Studies, hero de la bibliothèque (slider) : sans le chiffre clé, description sur 3 lignes au plus ; le bouton reste visible */
+html body [data-swiper="feature"] [data-cs-kpi]{ display:none !important; }
+html body [data-swiper="feature"] .section-top.is-featured .text-size-large{ display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+
+/* Case Studies, bibliothèque : filtres plus près du hero et des cartes. Écart hero → filtres : 8rem à l'origine
+   (bas du hero 3rem + haut de la section 5rem), ramené à 3rem ; filtres → cartes : 4rem → 1.25rem */
+html body .section_header:has([data-swiper="feature"]) .padding-section-home_header{ padding-bottom:1.5rem; }
+html body .padding-section-large:has(> [data-pv="case-studies"]){ padding-top:1.5rem; }
+html body [data-pv="case-studies"] .cs-filters{ margin-bottom:1.25rem; }
+@media (max-width:991px){ html body .padding-section-large:has(> [data-pv="case-studies"]){ padding-top:1.25rem; } html body [data-pv="case-studies"] .cs-filters{ margin-bottom:1rem; } }
+
+/* Case Studies, cartes de la bibliothèque : sans le chiffre clé ; image collée aux bords de la carte, en haut (les coins suivent l'arrondi de la carte) */
+html body [data-pv="case-studies"] [data-cs-card] [data-cs-stat], html body [data-cs-related] [data-cs-card] [data-cs-stat]{ display:none !important; }
+html body [data-pv="case-studies"] [data-cs-card], html body [data-cs-related] [data-cs-card]{ padding:0 !important; }
+html body [data-pv="case-studies"] [data-cs-card] [data-cs-link="image"], html body [data-cs-related] [data-cs-card] [data-cs-link="image"]{ display:block; margin:0; padding:0; line-height:0; }
+html body [data-pv="case-studies"] [data-cs-card] .post_image, html body [data-cs-related] [data-cs-card] .post_image{ width:100% !important; max-width:none; margin:0 !important; border-radius:0 !important; }
+
+/* Case Studies, bibliothèque (retour de Romain) : 3 cartes par ligne, écart plus large (celui des cartes case study validées), texte moins serré.
+   3 sur écran moyen et grand, 2 sur tablette, 1 sur téléphone. */
+html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:repeat(3, minmax(0,1fr)); gap:3rem; }
+@media (max-width:1439px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+@media (max-width:991px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:2.5rem 2rem; } }
+@media (max-width:599px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:1fr; gap:2rem; } }
+html body [data-pv="case-studies"] [data-cs-card] .post_body, html body [data-cs-related] [data-cs-card] .post_body{ gap:1.25rem; padding:2rem 2rem 2.25rem; }
+html body [data-pv="case-studies"] [data-cs-card] h3, html body [data-cs-related] [data-cs-card] h3{ font-weight:300; font-size:clamp(1.375rem, 1.15rem + .55vw, 1.625rem); line-height:1.25; letter-spacing:-.015em; }
+html body [data-pv="case-studies"] [data-cs-card] .post_description, html body [data-cs-related] [data-cs-card] .post_description{ font-size:1rem; line-height:1.6; }
+@media (max-width:767px){ html body [data-pv="case-studies"] [data-cs-card] .post_body, html body [data-cs-related] [data-cs-card] .post_body{ padding:1.75rem 1.5rem 2rem; } }
+
+
+/* Case Studies, fiche : études liées sur fond light ; le lien « tout voir » en encre */
+html body [data-cs-related] [data-cs-all]{ color:#141238; border-bottom-color:rgba(20,18,56,.35); }
+
+/* Règle globale des cartes (comme rp-card) : la carte se détache du fond de sa section.
+   Section blanche → carte gris clair ; section light → carte blanche (verre clair) ; section sombre → verre sombre. */
+html body .section_layout.is-light [data-cs-card]{ background:var(--af-glass); }
+
+/* Case Studies, heros (bibliothèque et fiche) : alignés sur les heros produit validés.
+   Titre en Roboto medium, même taille ; texte léger ; catégories en mono, claires ; image dans un cadre arrondi au bord fin */
+html body .section_header.is-resources .heading-style-h1{ font-weight:500; font-size:clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); line-height:1.06; letter-spacing:-.02em; color:#f8f8f8; }
+/* catégories du hero (fond sombre) en jaune, dans les deux heros (règle des surtitres sur fond sombre) */
+html body .section_header.is-resources .featured-label-div .text-size-label,
+html body .section_header.is-resources .featured-label-div [data-cs-tag]{ color:var(--_colors---primary--yellow, #e1c721); }
+/* décalage de la première catégorie : une liste CMS vide (produits ou aires) restait dans la ligne et ajoutait un écart avant elle */
+html body .featured-label-div [data-cs-tags-list]:not(:has([data-cs-tag])){ display:none; }
+html body .section_header.is-resources .section-top.is-featured{ gap:1.5rem; }
+html body .section_header.is-resources .featured-card{ column-gap:4rem; }
+html body .section_header.is-resources .featured-image{ display:block; width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:1.5rem;
+  box-shadow:0 0 0 .5px rgba(248,248,248,.22); }
+@media (max-width:991px){ html body .section_header.is-resources .featured-card{ column-gap:1.5rem; } html body .section_header.is-resources .featured-image{ border-radius:1.25rem; } }
+
 `;
 
 function injectCSS() {
@@ -182,6 +348,16 @@ export function initCaseStudiesLibrary(root) {
   const select = mount.querySelector('select');
   pills.innerHTML = ['All', ...products].map((n, i) =>
     `<button type="button" class="fs_radio_field" role="radio" data-p="${i ? slugify(n) : ''}">${n}</button>`).join('');
+  // pastille blanche qui glisse d'une catégorie à l'autre (refonte)
+  const ind = document.createElement('span');
+  ind.className = 'cs-pill-ind'; ind.setAttribute('aria-hidden', 'true');
+  pills.prepend(ind); pills.classList.add('has-ind');
+  const placeInd = () => {
+    const on = pills.querySelector('.fs_radio_field.is-list-active');
+    if (!on) { ind.style.width = '0'; return; }
+    ind.style.transform = `translateX(${on.offsetLeft}px)`; ind.style.width = on.offsetWidth + 'px';
+  };
+  const roInd = new ResizeObserver(placeInd); roInd.observe(pills);
   select.innerHTML = `<option value="">All therapeutic areas</option>` + areas.map(n => `<option value="${slugify(n)}">${n}</option>`).join('');
 
   const empty = document.createElement('div');
@@ -201,6 +377,7 @@ export function initCaseStudiesLibrary(root) {
       b.classList.toggle('is-list-active', on);
       b.setAttribute('aria-checked', on);
     });
+    placeInd();
     select.value = state.area;
     let shown = 0;
     cards.forEach(c => {
@@ -227,6 +404,7 @@ export function initCaseStudiesLibrary(root) {
 
   return function destroy() {
     pills.removeEventListener('click', onPill);
+    roInd.disconnect(); ind.remove();
     select.removeEventListener('change', onSelect);
     empty.remove();
   };

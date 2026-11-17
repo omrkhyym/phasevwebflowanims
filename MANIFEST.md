@@ -18,8 +18,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.18.0` | `portfolio-hero-bg`, `portfolio-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux de Build conviction, `data-mode` rank et dist, et un dans `.ss-anim` du bloc Evidence, rank), `platform-connect-v2`, `faq` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` | `conductor-hero-bg`, `conductor-hero-slot`, `platform-connect` (dans un `.animation-wrapper` créé à la place de l'`.entry-grid`) |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.13.0` | `bonv-hero-bg` (premier enfant du header), `bonv-hero-slot` (dernier enfant de la grille) |
-| Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.14.1` | `case-studies` (attribut sur le `container-large` de la section des cartes), slider `[data-swiper="feature"]` du header |
-| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.14.1` | `case-study` (attribut sur `main-wrapper`) |
+| Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.21.0` | `case-studies` (attribut sur le `container-large` de la section des cartes), slider `[data-swiper="feature"]` du header |
+| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.21.0` | `case-study` (attribut sur `main-wrapper`) |
 
 ### Modules
 
@@ -72,6 +72,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.21.0` | (voir journal) | Refonte, Case Studies : CSS du proto (bloc Case Studies d'`affine.css`) ajouté au module `src/case-studies.js`, sections sombres repérées par `.surface-dark` ; pastille glissante des filtres |
 | `v0.20.0` | (voir journal) | Refonte, Company : `company.js` monte `about-orbits` et `careers-affine` (plus `company-careers`) ; `bonv-draw` en chunk partagé `bonv-draw-D7G52O51.mjs`, `dist/main.js` régénéré (Home reste en `v0.19.0`) |
 | `v0.19.0` | (voir journal) | Refonte, Home : `main.js` monte `hero-sequence`, `gantt-glossy`, `mini-scene` et `testimonials` ; ne monte plus `hero-homepage`, `gantt`, `platform-hub`, `evidence-bars` (Home DEV reste en `v0.2.0`) |
 | `v0.18.0` | (voir journal) | Refonte, Portfolio : `portfolio.js` monte les graphes animés (`viz`) et le bloc plateforme en cartes, plus la plateforme v1 ; `src/viz.js` devient un chunk partagé `viz-CS9SStLT.mjs` (`dist/response.js` régénéré pour l'importer, Response reste en `v0.16.0`) |
@@ -118,6 +119,10 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **Case Studies (bibliothèque et template) en style affiné** (protos `cs-affine`, `cs-study-affine`). Décision de Romain : sur ces pages pilotées par le CMS, le style reste dans le module (le client n'édite que le contenu).
+  - Module `src/case-studies.js` : CSS du proto ajouté (cartes 3 par ligne, image en tête, sans chiffre clé ; filtres en barre segmentée avec pastille glissante `.cs-pill-ind` ; tableau At a glance en verre clair ; Why it matters en verre sombre ; heros alignés sur les heros produit), variables `--af-*` définies dans le module.
+  - Webflow, template : libellés de section (texte par défaut « This is some text inside of a div block. » en ligne jusque-là) remplacés par At a glance, Why it matters, FAQ, Source ; At a glance et études liées en `is-light`, Why it matters en `surface-dark` + `data-af-bg` ; hero sans line field, avec `data-af-bg` (c'est un div, pas un header). Bibliothèque : line field retiré du hero.
+  - Release `v0.21.0`, loaders de la bibliothèque et du template passés de `v0.14.1` à `v0.21.0`.
 - **Company (About) restylée en natif** (proto `company-affine`) :
   - Hero : line field retiré, div `about-orbits`, texte à gauche (combos `section_header.is-company`, `header_content-left.max-width-670`, `padding-global.padding-section-company-hero` modifiés), titre et texte en `is-hero`.
   - About us : en-tête centré « PhaseV / About us » (copie proposée et validée), ancien label masqué, colonnes `grid-3.is-about` et `text-size-quote.text-weight-light.is-col` (filet au-dessus).
@@ -126,6 +131,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
   - Incident corrigé : des styles posés sur la variante de base du composant sont tombés sur les combos globaux `text-size-large.text-color-gray` et `text-size-label.text-color-purple` ; remis aux valeurs du CSS publié.
   - Investors : en-tête sur une colonne, `backed-by-grid` en 3 colonnes avec filets (fond de grille + écart 1 px), `partnership-logo` sans tuile. Build with us : light, pastilles `dm-panel_list-item` blanches en mono, panneau `animation-wrapper.is-dark` avec fond animé, montage `careers-affine`.
   - Release `v0.20.0`, loader passé de `v0.11.0` à `v0.20.0`.
+  - Correctifs après revue de Romain : `animation-wrapper.is-dark` en `display:block` (le flex centré de `animation-wrapper` réduisait l'embed `careers-affine` à 0 px) ; paragraphe du hero limité à 30rem (nouveau combo `text-size-large.is-hero.is-narrow`).
 - **Home refaite en natif** (proto `home-affine`) : nouveaux blocs insérés à côté des anciens, anciens masqués (pas supprimés) jusqu'au nettoyage.
   - Hero : div `hero-sequence` après la grille `header_content` ; embed de l'ancien hero masqué. Texte inchangé.
   - The problem : en-tête centré (`is-intro`), panneau sombre `stage-wide` (nouvelle classe, fond entre-deux, `data-af-bg` pour le fond animé) avec `gantt-glossy` dans `stage-wide-in`.

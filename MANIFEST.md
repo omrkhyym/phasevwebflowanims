@@ -119,6 +119,12 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **Footer unifié** (proto `footer_affine`), sans JS. Deux composants coexistent (`only-footer` sur 9 pages, `section_footer` sur 13, bandeau par page) ; ils affichent maintenant le même footer :
+  - Bandeau unique « Bring us the question in front of your team », texte, bouton jaune « Discuss your program » vers Contact (nouvelles classes `footer-cta-title`, `footer-cta-text`). Dans `section_footer`, le libellé, le titre, le texte et le slot de boutons propres à chaque page sont masqués (pas supprimés) ; dans `only-footer`, l'ancien énoncé et le petit logo sont masqués. Bandeau sans line field ; animation `footer-lanes` masquée par son style (`display:none`, la suppression a été refusée).
+  - `footer-bottom` (partagé) : Platform dans l'ordre Portfolio, Trial, ClinOps, Response, AI Conductor, BonV ; Company : About, Case Studies (nouveau, lien de page), Resources, Careers (nouveau, Greenhouse, nouvel onglet), Contact ; grand logo en contour 1 px sous la ligne légale (nouvelle classe `footer-mark`, SVG natif).
+  - Styles : `footer-band`, `footer-band-copy`, `footer-bottom`, `footer-grid4` (4 / 2 colonnes), `footer-col`, `footer-links`, `footer-item_link` (gris clair, blanc au survol), `footer-legal`, `footer-legal-links`, `padding-section-footer` (bas à 0, le logo est coupé par le bas de page).
+- **Contact en version B** (proto `contact-affine`), sans JS : section `surface-dark` + fond animé, repère `data-af-contact` ; label en jaune ; intro recréée avec un retour à la ligne après « question. » (l'ancienne supprimée) ; ligne de coordonnées ajoutée sous la carte (`data-af-contact-info` : e-mail, LinkedIn, Boston, Tel Aviv).
+  - Code de page : head remplacé par le style validé (carte de verre sombre, champs, cases dessinées, coordonnées) ; retirés : l'ancien style « version B » (pastilles), le CSS Swiper et un `<script>` qui contenait du CSS (erreur de console), le script Swiper du footer (pas de slider sur la page).
 - **Case Studies (bibliothèque et template) en style affiné** (protos `cs-affine`, `cs-study-affine`). Décision de Romain : sur ces pages pilotées par le CMS, le style reste dans le module (le client n'édite que le contenu).
   - Module `src/case-studies.js` : CSS du proto ajouté (cartes 3 par ligne, image en tête, sans chiffre clé ; filtres en barre segmentée avec pastille glissante `.cs-pill-ind` ; tableau At a glance en verre clair ; Why it matters en verre sombre ; heros alignés sur les heros produit), variables `--af-*` définies dans le module.
   - Webflow, template : libellés de section (texte par défaut « This is some text inside of a div block. » en ligne jusque-là) remplacés par At a glance, Why it matters, FAQ, Source ; At a glance et études liées en `is-light`, Why it matters en `surface-dark` + `data-af-bg` ; hero sans line field, avec `data-af-bg` (c'est un div, pas un header). Bibliothèque : line field retiré du hero.
@@ -430,6 +436,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
+- **Footer, demandé par Romain** : supprimer le composant `section_footer`, qui ne sert plus (remplacer ses instances par `only-footer` sur chaque page, puis supprimer le composant) ; retirer les éléments masqués de `only-footer`.
 - Home : restyle des cartes Latest news (`swiper-item`, partagé avec Resources) ; ancre `#phasev-platform` à déplacer si un lien l'utilise ; code de page mort (carte de décision `dm-*`, CSS et script) à retirer au nettoyage.
 - Portfolio, contenu client : lien du bouton « Explore an example analysis » (`#`) ; FAQ, textes à fournir : métrique de validation des modèles, fourchette de délai standard, GDPR/HIPAA si vérifié, texte de confidentialité pour les deals ; bandeau de footer propre à Portfolio (proto) à traiter avec le footer unifié.
 - Home : pas de titre SEO ni de meta description.

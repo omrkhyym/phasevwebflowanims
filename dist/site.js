@@ -502,8 +502,171 @@ var L, R = e((() => {
 		waterfall: M,
 		volcano: P
 	};
-})), z = /* @__PURE__ */ t((() => {
-	s(), R(), o(), I();
 }));
 //#endregion
-export default z();
+//#region src/dark-bg.js
+function z(e) {
+	let t = (e) => {
+		let t = parseInt(e.slice(1), 16);
+		return [
+			t >> 16 & 255,
+			t >> 8 & 255,
+			t & 255
+		].map((e) => e.toFixed(1)).join(",");
+	};
+	return U.replace("%INK0%", t(e.ink0)).replace("%INK2%", t(e.ink2)).replace("%INDIGO%", t(e.indigo)).replace("%BLUE%", t(e.blue)).replace("%VIOLET%", t(e.violet)).replace("%SOFT%", t(e.soft));
+}
+function B(e, t) {
+	t = Object.assign({
+		speed: 1,
+		scrollParallax: !0,
+		grain: .07,
+		blur: 1 / 12,
+		palette: W.bonv
+	}, t || {});
+	let n = z(t.palette), r = !e;
+	e ||= document.body;
+	let i = document.createElement("div");
+	i.setAttribute("aria-hidden", "true"), i.style.cssText = (r ? "position:fixed;inset:0;z-index:-1;" : "position:absolute;inset:0;z-index:0;") + "overflow:hidden;pointer-events:none;background:" + t.palette.ink0 + ";";
+	let a = document.createElement("canvas"), o = document.createElement("div");
+	o.style.cssText = "position:absolute;inset:0;mix-blend-mode:soft-light;opacity:" + t.grain + ";background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='256' height='256' filter='url(%23n)'/></svg>\");", i.appendChild(a), i.appendChild(o), !r && getComputedStyle(e).position === "static" && (e.style.position = "relative"), e.insertBefore(i, e.firstChild);
+	let s = null, c, l, u;
+	try {
+		if (s = a.getContext("webgl", {
+			antialias: !1,
+			premultipliedAlpha: !1,
+			preserveDrawingBuffer: !1
+		}), s) {
+			let e = (e, t) => {
+				let n = s.createShader(e);
+				if (s.shaderSource(n, t), s.compileShader(n), !s.getShaderParameter(n, s.COMPILE_STATUS)) throw Error(s.getShaderInfoLog(n));
+				return n;
+			}, t = s.createProgram();
+			if (s.attachShader(t, e(s.VERTEX_SHADER, H)), s.attachShader(t, e(s.FRAGMENT_SHADER, n)), s.linkProgram(t), !s.getProgramParameter(t, s.LINK_STATUS)) throw Error(s.getProgramInfoLog(t));
+			s.useProgram(t);
+			let r = s.createBuffer();
+			s.bindBuffer(s.ARRAY_BUFFER, r), s.bufferData(s.ARRAY_BUFFER, new Float32Array([
+				-1,
+				-1,
+				3,
+				-1,
+				-1,
+				3
+			]), s.STATIC_DRAW);
+			let i = s.getAttribLocation(t, "p");
+			s.enableVertexAttribArray(i), s.vertexAttribPointer(i, 2, s.FLOAT, !1, 0, 0), c = s.getUniformLocation(t, "uRes"), l = s.getUniformLocation(t, "uT"), u = s.getUniformLocation(t, "uOff");
+		}
+	} catch (e) {
+		console.warn("BonV background: WebGL off, CSS fallback.", e), s = null;
+	}
+	if (!s) return a.remove(), i.style.background = G, { destroy() {
+		i.remove();
+	} };
+	function d() {
+		let e = i.clientWidth || innerWidth, n = i.clientHeight || innerHeight, r = Math.max(8, Math.round(e / 16)), o = Math.max(8, Math.round(n / 16));
+		(a.width !== r || a.height !== o) && (a.width = r, a.height = o);
+		let s = Math.round(e * t.blur), c = s * 2;
+		a.style.cssText = `position:absolute;left:${-c}px;top:${-c}px;width:${e + 2 * c}px;height:${n + 2 * c}px;filter:blur(${s}px);`;
+	}
+	d(), addEventListener("resize", d);
+	let f = matchMedia("(prefers-reduced-motion: reduce)"), p = 0, m = performance.now(), h = 0;
+	function g(e) {
+		let n = (e - m) / 1e3 * t.speed + 20, r = t.scrollParallax ? Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight)) : 0;
+		s.viewport(0, 0, a.width, a.height), s.uniform2f(c, a.width, a.height), s.uniform1f(l, n), s.uniform2f(u, 0, r * .35), s.drawArrays(s.TRIANGLES, 0, 3);
+	}
+	function _(e) {
+		p = requestAnimationFrame(_), !(e - h < 33) && (h = e, g(e));
+	}
+	let v = !0, y = null;
+	function b() {
+		cancelAnimationFrame(p), f.matches || document.hidden || !v ? g(performance.now()) : p = requestAnimationFrame(_);
+	}
+	return document.addEventListener("visibilitychange", b), f.addEventListener && f.addEventListener("change", b), t.scrollParallax && f.matches && addEventListener("scroll", () => g(performance.now()), { passive: !0 }), !r && "IntersectionObserver" in window && (y = new IntersectionObserver(([e]) => {
+		v = e.isIntersecting, b();
+	}), y.observe(e)), b(), { destroy() {
+		cancelAnimationFrame(p), y && y.disconnect(), i.remove();
+	} };
+}
+function V(e) {
+	if (!e || e.dataset.pvBg) return null;
+	e.dataset.pvBg = "1";
+	let t = B(e, {
+		palette: W.mid,
+		scrollParallax: !1
+	}), n = e.firstElementChild;
+	return n && (n.style.zIndex = "-1", n.style.opacity = ".6", n.classList.add("pv-dark-layer")), e.style.isolation = "isolate", function() {
+		t && t.destroy(), delete e.dataset.pvBg;
+	};
+}
+var H, U, W, G, K = e((() => {
+	H = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}", U = "precision highp float;\nuniform vec2 uRes;uniform float uT;uniform vec2 uOff;\nvec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}\nvec2 mod289(vec2 x){return x-floor(x*(1./289.))*289.;}\nvec3 permute(vec3 x){return mod289(((x*34.)+1.)*x);}\nfloat snoise(vec2 v){const vec4 C=vec4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);\nvec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);\nvec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod289(i);\nvec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));\nvec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);m=m*m;m=m*m;\nvec3 x=2.*fract(p*C.www)-1.;vec3 h=abs(x)-.5;vec3 ox=floor(x+.5);vec3 a0=x-ox;\nm*=1.79284291400159-.85373472095314*(a0*a0+h*h);\nvec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.*dot(m,g);}\nfloat fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<2;i++){s+=a*snoise(p);p=p*1.8+vec2(1.7,9.2);a*=.4;}return s;}\nvec3 hex(float r,float g,float b){return vec3(r,g,b)/255.;}\nvoid main(){\nvec2 uv=gl_FragCoord.xy/uRes;uv.y=1.-uv.y;\nfloat asp=uRes.x/uRes.y;\nvec2 p=uv*vec2(asp,1.)*.32+uOff;\nfloat t=uT*.07;\nvec2 q=vec2(fbm(p*1.05+vec2(0.,t)),fbm(p*1.05+vec2(5.2,1.3)-t*.8));\nvec2 r=vec2(fbm(p*1.1+1.3*q+vec2(1.7,9.2)+t*.6),fbm(p*1.1+1.3*q+vec2(8.3,2.8)-t*.5));\nfloat n=fbm(p+1.4*r);\nvec3 ink0=hex(%INK0%),ink2=hex(%INK2%),indigo=hex(%INDIGO%),blue=hex(%BLUE%),violet=hex(%VIOLET%),soft=hex(%SOFT%);\nvec3 col=mix(ink0,ink2,smoothstep(-.45,.45,n));\ncol=mix(col,indigo,smoothstep(.0,.7,r.x+.2*n)*.45);\ncol=mix(col,violet,smoothstep(.05,.6,q.y+.25*r.y)*.38*(1.-.55*uv.x));\nvec2 L=vec2(.86+.05*sin(t*2.3),.1+.06*cos(t*1.7))-uOff*vec2(1.2,.9);\nfloat lr=length((uv-L)*vec2(asp,1.))+.35*n;\ncol=mix(col,blue,smoothstep(1.05,.1,lr)*.55);\ncol+=soft*smoothstep(.45,.0,lr)*.16;\nfloat v=length((uv-vec2(.55,.46))*vec2(1.25,1.));\ncol*=mix(1.,.3,smoothstep(.38,1.05,v));\ngl_FragColor=vec4(col,1.);\n}", W = {
+		bonv: {
+			ink0: "#06041A",
+			ink2: "#17103A",
+			indigo: "#242C80",
+			blue: "#3D5BE0",
+			violet: "#5B44B8",
+			soft: "#7C93F2"
+		},
+		violet: {
+			ink0: "#141238",
+			ink2: "#24154A",
+			indigo: "#5E2670",
+			blue: "#7E5BB2",
+			violet: "#684A9E",
+			soft: "#928ACD"
+		},
+		mid: {
+			ink0: "#0D0B29",
+			ink2: "#1D1342",
+			indigo: "#412978",
+			blue: "#5E5BC9",
+			violet: "#6247AB",
+			soft: "#878FE0"
+		}
+	}, G = "radial-gradient(60% 55% at 88% 6%, rgba(61,91,224,.45), rgba(61,91,224,0) 70%),radial-gradient(55% 60% at 22% 70%, rgba(91,68,184,.22), rgba(91,68,184,0) 70%),radial-gradient(80% 80% at 55% 46%, #17103A, #06041A 85%)";
+}));
+//#endregion
+//#region src/faq.js
+function q(e) {
+	if (!e || e.dataset.pvInit) return null;
+	if (e.dataset.pvInit = "1", !document.getElementById("pv-faq-css")) {
+		let e = document.createElement("style");
+		e.id = "pv-faq-css", e.textContent = J, document.head.appendChild(e);
+	}
+	let t = [...e.querySelectorAll(".faq-item")], n = [], r = (e, t) => {
+		e.classList.toggle("is-open", t), e._q.setAttribute("aria-expanded", t ? "true" : "false"), e._a.inert = !t;
+	};
+	return t.forEach((e) => {
+		let i = e.querySelector(".faq-q"), a = e.querySelector(".faq-a");
+		if (!i || !a) return;
+		let o = "pv-faq-" + ++Y;
+		e._q = i, e._a = a, i.setAttribute("role", "button"), i.tabIndex = 0, i.setAttribute("aria-controls", o), a.id = o, a.setAttribute("role", "region");
+		let s = document.createElement("div");
+		for (s.className = "pv-faq-in"; a.firstChild;) s.appendChild(a.firstChild);
+		a.appendChild(s);
+		let c = document.createElement("span");
+		c.className = "pv-faq-pm", c.setAttribute("aria-hidden", "true"), i.appendChild(c);
+		let l = () => {
+			let n = !e.classList.contains("is-open");
+			n && t.forEach((t) => t !== e && t._q && r(t, !1)), r(e, n);
+		}, u = (e) => {
+			(e.key === "Enter" || e.key === " ") && (e.preventDefault(), l());
+		};
+		i.addEventListener("click", l), i.addEventListener("keydown", u), n.push(() => {
+			for (i.removeEventListener("click", l), i.removeEventListener("keydown", u), c.remove(); s.firstChild;) a.appendChild(s.firstChild);
+			s.remove();
+		}), r(e, !1);
+	}), e.classList.add("pv-faq-on"), function() {
+		n.forEach((e) => e()), t.forEach((e) => {
+			e.classList.remove("is-open"), e._a && (e._a.inert = !1);
+		}), e.classList.remove("pv-faq-on"), delete e.dataset.pvInit;
+	};
+}
+var J, Y, X = e((() => {
+	J = "\n[data-pv=\"faq\"].pv-faq-on .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}\n[data-pv=\"faq\"].pv-faq-on .faq-a > .pv-faq-in{min-height:0;overflow:hidden}\n[data-pv=\"faq\"].pv-faq-on .faq-item.is-open .faq-a{grid-template-rows:1fr}\n[data-pv=\"faq\"] .faq-q{display:flex;justify-content:space-between;align-items:center;gap:1.5rem}\n[data-pv=\"faq\"] .faq-q:focus-visible{outline:2px solid #141238;outline-offset:4px;border-radius:4px}\n.pv-faq-pm{flex:none;position:relative;width:2.5rem;height:2.5rem;border-radius:999px;border:1px solid rgba(20,18,56,.2);transition:background-color .2s,border-color .2s,color .2s}\n.pv-faq-pm::before,.pv-faq-pm::after{content:'';position:absolute;left:50%;top:50%;width:.875rem;height:1.5px;background:currentColor;transform:translate(-50%,-50%);transition:transform .3s}\n.pv-faq-pm::after{transform:translate(-50%,-50%) rotate(90deg)}\n[data-pv=\"faq\"] .faq-q:hover .pv-faq-pm{border-color:#141238}\n[data-pv=\"faq\"] .faq-item.is-open .pv-faq-pm{background:#141238;color:#f8f8f8;border-color:#141238}\n[data-pv=\"faq\"] .faq-item.is-open .pv-faq-pm::after{transform:translate(-50%,-50%) rotate(0)}\n@media (prefers-reduced-motion:reduce){[data-pv=\"faq\"] .faq-a,.pv-faq-pm,.pv-faq-pm::before,.pv-faq-pm::after{transition:none}}", Y = 0;
+})), Z = /* @__PURE__ */ t((() => {
+	s(), R(), K(), X(), o(), I(), document.querySelectorAll("header.section_header, [data-af-bg], .feature-grid > .video-animation").forEach(V), document.querySelectorAll("[data-pv=\"faq\"]").forEach(q);
+}));
+//#endregion
+export default Z();

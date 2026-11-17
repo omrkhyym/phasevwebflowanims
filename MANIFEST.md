@@ -15,7 +15,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.16.0` | `response-hero-bg`, `response-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux vidéo, `data-mode` precision et split), `platform-connect-v2`, `faq` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.15.1` | `trial-hero-bg`, `trial-hero-slot` ; refonte : `design-space-glossy` (dans `.ss-anim` de la success story), `platform-connect-v2` (dans `.animation-wrapper` du bloc plateforme), `faq` (sur `.faq-wrap`) |
 | Toutes (code global) | site | `site.js` | `v0.15.1` | fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` |
-| Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` | `portfolio-hero-bg`, `portfolio-hero-slot`, `platform-connect` |
+| Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.18.0` | `portfolio-hero-bg`, `portfolio-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux de Build conviction, `data-mode` rank et dist, et un dans `.ss-anim` du bloc Evidence, rank), `platform-connect-v2`, `faq` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` | `conductor-hero-bg`, `conductor-hero-slot`, `platform-connect` (dans un `.animation-wrapper` créé à la place de l'`.entry-grid`) |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.13.0` | `bonv-hero-bg` (premier enfant du header), `bonv-hero-slot` (dernier enfant de la grille) |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.14.1` | `case-studies` (attribut sur le `container-large` de la section des cartes), slider `[data-swiper="feature"]` du header |
@@ -66,6 +66,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.18.0` | (voir journal) | Refonte, Portfolio : `portfolio.js` monte les graphes animés (`viz`) et le bloc plateforme en cartes, plus la plateforme v1 ; `src/viz.js` devient un chunk partagé `viz-CS9SStLT.mjs` (`dist/response.js` régénéré pour l'importer, Response reste en `v0.16.0`) |
 | `v0.17.0` | (voir journal) | Refonte, ClinOps : `clinops.js` monte `clinops-proof-glossy` et le bloc plateforme en cartes, ne monte plus les anciens blocs ; `dist/response.js` et `dist/trial.js` régénérés (ordre des imports seulement, pages non concernées) |
 | `v0.16.0` | (voir journal) | Refonte, Response : `response.js` ajoute les graphes animés (`src/viz.js`, `data-pv="viz"` + `data-mode`) et le bloc plateforme en cartes ; nouveau chunk partagé `platform-connect-cards-C5Y4IjAO.mjs` (Trial et Response) ; `dist/trial.js` l'importe désormais (sans effet en ligne tant que Trial reste en `v0.15.1`) |
 | `v0.15.1` | (voir journal) | Refonte, pilote Trial : `site.js` charge le fond sombre animé (`src/dark-bg.js`, palette « mid » à 60 %, sur `header.section_header`, `[data-af-bg]` et `.feature-grid > .video-animation`) et la FAQ native (`src/faq.js`, sur `[data-pv="faq"]`) ; `trial.js` ajoute la success story sombre (`src/design-space-glossy.js`, `data-pv="design-space-glossy"`) et le bloc plateforme en cartes (`src/platform-connect-cards.js`, `data-pv="platform-connect-v2"`) ; seuls `dist/site.js` et `dist/trial.js` changent |
@@ -109,6 +110,12 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **Portfolio Optimizer refait en natif** (page trouvée vide, hero seul ; reconstruite d'après le proto `portfolio-affine`) :
+  - Hero : nouveau titre (« Prioritize the path. / Calibrate the bet. », recréé pour avoir le retour à la ligne, l'ancien supprimé), paragraphe du document, bouton jaune « Discuss an opportunity » (lien inchangé, absolu vers phasevtrials.com/contact), second bouton violet « Explore an example analysis » avec lien `#` (cible à fournir).
+  - The challenge : 3 `why-card` « On light » (icônes de la page, déjà mauves). Build conviction : 2 lignes numérotées avec graphes animés rank et dist, note en petit (nouvelle classe `rp-note`). How we approach it : 3 `difference-card` numérotées avec liste.
+  - Frise « How an engagement looks » sur fond blanc : combos `is-light` sur `rp-step`, `rp-step-k`, `rp-step-num`, `rp-step-title`, `rp-step-text`, `rp-step-line` ; dernière étape `rp-step.is-end` (fond sombre entre-deux) avec `data-af-bg` pour le fond animé.
+  - Evidence : success story sombre (classement animé, bouton View details vers le cas), 3 cartes case studies, bouton vers `/case-studies?product=portfolio-optimizer`. FAQ (8) : les 4 placeholders entre crochets du document client retirés. Plateforme `data-current="portfolio"`.
+  - Release `v0.18.0`, loader passé de `v0.6.0` à `v0.18.0` (script d'onglets laissé, mort, pour le nettoyage).
 - **ClinOps Optimizer refait en natif** (page trouvée vide dans le Designer et sur webflow.io, hero et footer seuls ; reconstruite d'après le proto `clinops-affine`) :
   - Hero : label « ClinOps Optimizer », titre « Find the right sites. / Forecast your enrollment. », paragraphe du document, ligne de preuve (`text-size-medium text-color-nwhite`) ; combos `is-hero`.
   - Why ClinOps (fond light, en-tête centré, 5 cartes) : classe existante `difference-card` restylée en verre blanc (rayon 1.5rem, padding 2rem / 1.5rem en mobile), nouvelle classe `difference-num` (pastille, police `font-mono`).
@@ -393,6 +400,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
+- Portfolio, contenu client : lien du bouton « Explore an example analysis » (`#`) ; FAQ, textes à fournir : métrique de validation des modèles, fourchette de délai standard, GDPR/HIPAA si vérifié, texte de confidentialité pour les deals ; bandeau de footer propre à Portfolio (proto) à traiter avec le footer unifié.
 - Home : pas de titre SEO ni de meta description.
 - Home DEV : à passer en brouillon pour qu'elle ne soit plus publiée à `/home-dev`.
 - Menus : lien BonV du menu Platform en URL `/bonv` (pas en type page), à repasser en lien de page dans le Designer si on veut qu'il suive un changement de slug ; pas d'état actif sur la page BonV.

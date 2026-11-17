@@ -8,18 +8,20 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 | Page | ID Webflow | Entrée | Tag du loader | Points de montage |
 |---|---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.19.0` | refonte : `hero-sequence` (div natif dans `header_component`, après la grille), `gantt-glossy` (dans `.stage-wide` de The problem), `mini-scene` (cinq cartes `.pcard` du slider plateforme), `testimonials` (`.tm`) ; anciens points (`hero-homepage`, `gantt`, `platform-hub`, `evidence-bars`) dans des blocs masqués |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.22.0` | refonte : `hero-sequence` (div natif dans `header_component`, après la grille), `gantt-glossy` (dans `.stage-wide` de The problem), `mini-scene` (cinq cartes `.pcard` du slider plateforme), `testimonials` (`.tm`) ; anciens points (`hero-homepage`, `gantt`, `platform-hub`, `evidence-bars`) dans des blocs masqués |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.20.0` | refonte : `about-orbits` (premier enfant du header du hero, line field retiré), `careers-affine` (attribut sur l'embed de Build with us, dans `.animation-wrapper.is-dark`) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.17.0` | `clinops-hero-bg`, `clinops-hero-slot` ; refonte : `clinops-proof-glossy` (dans `.ss-anim` du bloc Proof, chiffres en attributs `data-sites`, `data-rec`, `data-other`, `data-gain`), `platform-connect-v2`, `faq` |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.16.0` | `response-hero-bg`, `response-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux vidéo, `data-mode` precision et split), `platform-connect-v2`, `faq` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.15.1` | `trial-hero-bg`, `trial-hero-slot` ; refonte : `design-space-glossy` (dans `.ss-anim` de la success story), `platform-connect-v2` (dans `.animation-wrapper` du bloc plateforme), `faq` (sur `.faq-wrap`) |
-| Toutes (code global) | site | `site.js` | `v0.15.1` | fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` |
+| Toutes (code global) | site | `site.js` | `v0.23.0` | fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` ; navigation en île sur `[data-pv="nav"]` (composant `nav-island`) |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.18.0` | `portfolio-hero-bg`, `portfolio-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux de Build conviction, `data-mode` rank et dist, et un dans `.ss-anim` du bloc Evidence, rank), `platform-connect-v2`, `faq` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` | `conductor-hero-bg`, `conductor-hero-slot`, `platform-connect` (dans un `.animation-wrapper` créé à la place de l'`.entry-grid`) |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.13.0` | `bonv-hero-bg` (premier enfant du header), `bonv-hero-slot` (dernier enfant de la grille) |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.21.0` | `case-studies` (attribut sur le `container-large` de la section des cartes), slider `[data-swiper="feature"]` du header |
 | Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.21.0` | `case-study` (attribut sur `main-wrapper`) |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.22.0` | `data-af-lib` (container de la liste et des filtres Finsweet) |
+| Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.22.0` | `data-af-article` (container du texte de l'article) |
 
 ### Modules
 
@@ -48,6 +50,9 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/testimonials.js` | Refonte, Home : témoignages en onglets (bascule `is-active` sur `.tm-quote` / `.tm-tab`, trait `.tm-bar`, défilement 8 s à l'écran, pause au survol) |
 | `src/about-orbits.js` | Refonte, hero About : anneaux et V en plexus (copie du kit) |
 | `src/careers-affine.js` | Refonte, Build with us : trois disciplines qui fusionnent, style BonV (copie de `_kit/careers.js`) ; `bonv-draw.js` devient un chunk partagé |
+| `src/resources.js` | Refonte, Resources : CSS du proto (liste, filtres Finsweet en barre segmentée avec pastille glissante, cartes, mise en page de l'article, heros) ; masque les paragraphes vides des articles |
+| `src/news-cards.js` | Refonte, Home : cartes Latest news (`swiper-item`) restylées, CSS seulement |
+| `src/nav.js` | Refonte : comportement de la navigation en île (fond au scroll, masquage en descendant, pastille de survol, panneau Platform avec aperçus animés, menu plein écran rempli depuis la barre, `--nav-h` et `nav-hidden`) ; structure native dans le composant `nav-island` |
 | `src/case-studies.js` | Case Studies : filtres Product et Therapeutic area (pilules `fs_radio_field`, liste `filter-select`, paramètres d'URL `?product=` et `?area=`), lien et chiffre clé des cas mis en avant, tableau At a glance (lignes et colonne 3 vides masquées), récit, cartes Why it matters avec icône, FAQ en accordéon, source facultative, 3 études liées sans l'étude en cours. CSS injecté, ciblé par attributs `data-cs-*` (proto `protos/case-studies/phasev-case-studies-protos.html`) |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/trial/phasev-success-story-protos.html`) |
 
@@ -72,6 +77,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.23.0` | `6f86c22` | Refonte, navigation : `site.js` monte `src/nav.js` ; `mini-scene` devient un chunk partagé (`dist/main.js` régénéré, Home reste en `v0.22.0`) |
+| `v0.22.0` | `943bf13` | Refonte, Resources : nouvelle entrée `resources.js` (bibliothèque et article) ; Home : `main.js` ajoute `news-cards` (Latest news) |
 | `v0.21.0` | (voir journal) | Refonte, Case Studies : CSS du proto (bloc Case Studies d'`affine.css`) ajouté au module `src/case-studies.js`, sections sombres repérées par `.surface-dark` ; pastille glissante des filtres |
 | `v0.20.0` | (voir journal) | Refonte, Company : `company.js` monte `about-orbits` et `careers-affine` (plus `company-careers`) ; `bonv-draw` en chunk partagé `bonv-draw-D7G52O51.mjs`, `dist/main.js` régénéré (Home reste en `v0.19.0`) |
 | `v0.19.0` | (voir journal) | Refonte, Home : `main.js` monte `hero-sequence`, `gantt-glossy`, `mini-scene` et `testimonials` ; ne monte plus `hero-homepage`, `gantt`, `platform-hub`, `evidence-bars` (Home DEV reste en `v0.2.0`) |
@@ -119,6 +126,13 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **Navigation en île, native** (proto `_kit/nav-island.js`, validé) : nouveau composant `nav-island` (groupe global), construit sur la Home puis posé en tête du `page-wrapper` de Home, Company, ClinOps, Response, Trial, Portfolio, AI Conductor, BonV, Case Studies (liste et template), Resources (liste et template), Contact, Privacy Policy, 404.
+  - Structure éditable : logo, Platform (bouton), Case Studies, Resources, About, Careers (nouvel onglet), bouton « Book a Demo » (composant button vers Contact) ; panneau Platform avec les 6 produits (`data-scene`, `data-col`, `data-group`, question en mono) et zone d'aperçu ; conteneur du menu mobile (`.pvn-s`) rempli par le module. Classes `pvn-*` (mise en page de base dans Webflow), états et transitions dans `src/nav.js`.
+  - Ancienne nav : classe `navbar_component` en `display:none` (composant `nav` et ses instances conservés). Le script global de l'ancienne nav (code du site) tourne encore à vide : à retirer au nettoyage.
+  - Release `v0.23.0`, loader global `site.js` passé de `v0.15.1` à `v0.23.0`.
+- **Resources (bibliothèque et article) en style affiné** (protos `res-affine`, `res-article-affine`), style dans le module comme Case Studies (décision de Romain). Nouvelle entrée `resources.js` (clé ajoutée dans `vite.config.js`).
+  - Webflow : line field retiré des deux heros ; repères `data-af-lib` (container de la liste) et `data-af-article` (container du texte). Loader ajouté au footer des deux pages (le slider du hero de la liste est conservé tel quel).
+  - Home : cartes Latest news restylées (`src/news-cards.js`). Release `v0.22.0` ; loader de la Home passé de `v0.19.0` à `v0.22.0`.
 - **Footer unifié** (proto `footer_affine`), sans JS. Deux composants coexistent (`only-footer` sur 9 pages, `section_footer` sur 13, bandeau par page) ; ils affichent maintenant le même footer :
   - Bandeau unique « Bring us the question in front of your team », texte, bouton jaune « Discuss your program » vers Contact (nouvelles classes `footer-cta-title`, `footer-cta-text`). Dans `section_footer`, le libellé, le titre, le texte et le slot de boutons propres à chaque page sont masqués (pas supprimés) ; dans `only-footer`, l'ancien énoncé et le petit logo sont masqués. Bandeau sans line field ; animation `footer-lanes` masquée par son style (`display:none`, la suppression a été refusée).
   - `footer-bottom` (partagé) : Platform dans l'ordre Portfolio, Trial, ClinOps, Response, AI Conductor, BonV ; Company : About, Case Studies (nouveau, lien de page), Resources, Careers (nouveau, Greenhouse, nouvel onglet), Contact ; grand logo en contour 1 px sous la ligne légale (nouvelle classe `footer-mark`, SVG natif).
@@ -436,8 +450,9 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
+- Nav : retirer au nettoyage le composant `nav` (et ses 22 instances), `nav-dropdown`, `nav_link`, et dans le code global du site les scripts de l'ancienne nav (masquage GSAP, `syncNav`).
 - **Footer, demandé par Romain** : supprimer le composant `section_footer`, qui ne sert plus (remplacer ses instances par `only-footer` sur chaque page, puis supprimer le composant) ; retirer les éléments masqués de `only-footer`.
-- Home : restyle des cartes Latest news (`swiper-item`, partagé avec Resources) ; ancre `#phasev-platform` à déplacer si un lien l'utilise ; code de page mort (carte de décision `dm-*`, CSS et script) à retirer au nettoyage.
+- Home : ancre `#phasev-platform` à déplacer si un lien l'utilise ; code de page mort (carte de décision `dm-*`, CSS et script) à retirer au nettoyage.
 - Portfolio, contenu client : lien du bouton « Explore an example analysis » (`#`) ; FAQ, textes à fournir : métrique de validation des modèles, fourchette de délai standard, GDPR/HIPAA si vérifié, texte de confidentialité pour les deals ; bandeau de footer propre à Portfolio (proto) à traiter avec le footer unifié.
 - Home : pas de titre SEO ni de meta description.
 - Home DEV : à passer en brouillon pour qu'elle ne soit plus publiée à `/home-dev`.

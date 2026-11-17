@@ -1,9 +1,8 @@
 import { initClinopsHeroBg } from './src/clinops-hero-bg.js';
-import { initPlatformConnect } from './src/platform-connect.js';
-import { initClinopsProof } from './src/clinops-proof.js';
-import { initClinopsWorkflow } from './src/clinops-workflow.js';
+import { initClinopsProofGlossy } from './src/clinops-proof-glossy.js';
+import { initPlatformConnect as initPlatformConnectCards } from './src/platform-connect-cards.js';
 
+// refonte (2026-11-17) : la page a été reconstruite ; les anciens blocs (workflow, proof clair, plateforme v1) n'y sont plus
 document.querySelectorAll('[data-pv="clinops-hero-bg"]').forEach((el) => initClinopsHeroBg(el));
-document.querySelectorAll('[data-pv="platform-connect"]').forEach((el) => initPlatformConnect(el));
-document.querySelectorAll('[data-pv="clinops-proof"]').forEach((el) => initClinopsProof(el));
-document.querySelectorAll('[data-pv="clinops-workflow"]').forEach((el) => initClinopsWorkflow(el));
+document.querySelectorAll('[data-pv="clinops-proof-glossy"]').forEach((el) => initClinopsProofGlossy(el));
+document.querySelectorAll('[data-pv="platform-connect-v2"]').forEach((el) => initPlatformConnectCards(el));

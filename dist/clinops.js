@@ -1,6 +1,6 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
 import { a as n, c as r, i, r as a, s as o, t as s } from "./hero-stage-DpBC6yvy.mjs";
-import { n as c, t as l } from "./platform-connect-Dh9cewVn.mjs";
+import { n as c, t as l } from "./platform-connect-cards-C5Y4IjAO.mjs";
 //#region src/clinops-hero-bg.js
 function u(e) {
 	if (!e || e.dataset.pvInit) return;
@@ -10392,7 +10392,7 @@ var d, f, p, m, h, g, _, v, y = e((() => {
 	], p = .361, m = 9, h = 12, g = 13, _ = 5, v = .05;
 }));
 //#endregion
-//#region src/clinops-proof.js
+//#region src/clinops-proof-glossy.js
 function b(e) {
 	return () => {
 		e |= 0, e = e + 1831565813 | 0;
@@ -10403,7 +10403,7 @@ function b(e) {
 function x(e, t, n) {
 	let r = b(9), i = () => Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(6.2832 * r()), a = [];
 	for (let t = 0; t < e; t++) {
-		let e = r() < A, n = .55;
+		let e = r() < M, n = .55;
 		a.push({
 			i: t,
 			rec: e,
@@ -10418,39 +10418,32 @@ function x(e, t, n) {
 	}
 	return a;
 }
-function S(e, t, n) {
-	if (!e) return n;
-	let r = getComputedStyle(e)[t], i = r && r.match(/rgba?\(([^)]+)\)/);
-	if (!i) return n;
-	let a = i[1].split(",")[3];
-	return a !== void 0 && parseFloat(a) === 0 ? n : r;
-}
-function C(e) {
+function S(e) {
 	if (e.dataset.pvReady) return;
 	e.dataset.pvReady = "1";
 	let t = (t, n) => {
 		let r = parseFloat(e.dataset[t]);
 		return Number.isFinite(r) && r > 0 ? r : n;
-	}, n = Math.round(t("sites", 357)), r = t("rec", .43), i = t("other", .28), a = Math.round(t("gain", 53)), o = Math.ceil(n / k), s = x(n, r, i), c = r.toFixed(2), l = i.toFixed(2);
+	}, n = Math.round(t("sites", 357)), r = t("rec", .43), i = t("other", .28), a = Math.round(t("gain", 53)), o = Math.ceil(n / j), s = x(n, r, i), c = r.toFixed(2), l = i.toFixed(2);
 	e.style.cssText += "position:relative;width:100%;aspect-ratio:1/1;";
 	let u = document.createElement("canvas");
 	u.style.cssText = "position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .5s ease;", u.setAttribute("role", "img"), u.setAttribute("aria-label", `Blinded retrospective: sites recommended by PhaseV recruited ${c} patients per site per month versus ${l} for non-recommended sites, ${a}% faster.`), e.appendChild(u);
-	let d = u.getContext("2d"), f = e.closest("section") || document.body, p = document.querySelector(".text-size-label"), m = getComputedStyle(p || document.body), h = m.fontFamily, g = p && m.letterSpacing !== "normal" ? (parseFloat(m.letterSpacing) || 0) / (parseFloat(m.fontSize) || 16) : 0, _ = "letterSpacing" in d, v = S(f.querySelector(".text-color-green") || document.querySelector(".text-color-green"), "color", "#087f6a"), y = S(f, "backgroundColor", "#ffffff");
-	function b(e, t) {
-		d.font = `${e} ${t}px ${h}`, _ && (d.letterSpacing = (g * t).toFixed(2) + "px");
+	let d = u.getContext("2d"), f = (e.closest("section") || document.body).querySelector(".text-size-label") || document.querySelector(".text-size-label"), p = getComputedStyle(f || document.body), m = p.fontFamily, h = f && p.letterSpacing !== "normal" ? (parseFloat(p.letterSpacing) || 0) / (parseFloat(p.fontSize) || 16) : 0, g = "letterSpacing" in d, _ = D;
+	function v(e, t) {
+		d.font = `${e} ${t}px ${m}`, g && (d.letterSpacing = (h * t).toFixed(2) + "px");
 	}
-	function C(e, t, n, r, i, a, o = 1, s = "left", c = !1) {
+	function y(e, t, n, r, i, a, o = 1, s = "left", c = !1) {
 		if (o <= 0) return;
-		b(r, i);
+		v(r, i);
 		let l = d.measureText(e).width, u = s === "left" ? t : s === "right" ? t - l : t - l / 2;
-		c && (d.globalAlpha = o * .92, d.fillStyle = y, d.fillRect(u - 4, n - 12, l + 8, 16)), d.globalAlpha = o, d.fillStyle = a, d.textAlign = "left", d.fillText(e, u, n), d.globalAlpha = 1;
+		c && (d.globalAlpha = o * .82, d.fillStyle = "#141238", d.fillRect(u - 4, n - 12, l + 8, 16)), d.globalAlpha = o, d.fillStyle = a, d.textAlign = "left", d.fillText(e, u, n), d.globalAlpha = 1;
 	}
-	let A = 0, j = 0;
-	function P(e) {
-		d.clearRect(0, 0, A, j);
-		let t = A < 420 ? 9 : 10, u = Math.max(40, A * .09), f = A - 8, p = A < 480 ? 54 : 40, m = j - 44, h = (e) => m - e * (m - p), g = (f - u) * .34, _ = u + (f - u) * .27, y = u + (f - u) * .75, x = Math.min(A * .78 / k, j * .55 / o), S = A / 2 - x * 20 / 2, O = j * .48 - x * (o - 1) / 2, P = M(e, D.reveal, D.reveal + .6);
-		if (P > 0) {
-			b(400, t), d.textAlign = "right";
+	let b = 0, S = 0;
+	function M(e) {
+		d.clearRect(0, 0, b, S);
+		let t = b < 420 ? 9 : 10, u = Math.max(40, b * .09), f = b - 8, p = b < 480 ? 54 : 40, m = S - 44, h = (e) => m - e * (m - p), g = (f - u) * .34, x = u + (f - u) * .27, D = u + (f - u) * .75, A = Math.min(b * .78 / j, S * .55 / o), M = b / 2 - A * 20 / 2, N = S * .48 - A * (o - 1) / 2, I = P(e, k.reveal, k.reveal + .6);
+		if (I > 0) {
+			v(400, t), d.textAlign = "right";
 			for (let e of [
 				0,
 				.2,
@@ -10459,56 +10452,57 @@ function C(e) {
 				.8
 			]) {
 				let t = Math.round(h(e)) + .5;
-				d.globalAlpha = P, d.fillStyle = T, d.fillText(e.toFixed(1), u - 8, t + 3), d.strokeStyle = E, d.lineWidth = 1, d.beginPath(), d.moveTo(u, t), d.lineTo(f, t), d.stroke();
+				d.globalAlpha = I, d.fillStyle = w, d.fillText(e.toFixed(1), u - 8, t + 3), d.strokeStyle = T, d.lineWidth = 1, d.beginPath(), d.moveTo(u, t), d.lineTo(f, t), d.stroke();
 			}
-			d.globalAlpha = 1, d.textAlign = "left", C("PATIENTS / SITE / MONTH", 0, p - 14, 500, t, T, P), C("RECOMMENDED", _, m + 22, 700, t, v, P, "center"), C("NOT RECOMMENDED", y, m + 22, 500, t, T, P, "center");
+			d.globalAlpha = 1, d.textAlign = "left", y("PATIENTS / SITE / MONTH", 0, p - 14, 400, t, w, I), y("RECOMMENDED", x, m + 22, 500, t, _, I, "center"), y("NOT RECOMMENDED", D, m + 22, 400, t, w, I, "center");
 		}
+		d.save(), d.globalCompositeOperation = "lighter";
 		for (let t of s) {
-			let n = S + t.i % k * x, r = O + Math.floor(t.i / k) * x, i = N(M(e, D.reveal + t.d * 1.1, D.reveal + 1.2 + t.d * 1.1)), a = (t.rec ? _ : y) + t.jx * g, o = h(t.v), s = n + (a - n) * i, c = r + (o - r) * i, l = t.rec ? M(e, D.pick + t.d * 1.2, D.pick + .25 + t.d * 1.2) : 0, u = t.rec ? 1 : 1 - .35 * M(e, D.means, D.means + .6);
-			d.globalAlpha = (l > 0 ? .35 + .65 * l : .35) * u, d.fillStyle = l > 0 ? v : w, d.beginPath(), d.arc(s, c, l > 0 ? 2.4 + .6 * l : 2.4, 0, 6.2832), d.fill();
+			let n = M + t.i % j * A, r = N + Math.floor(t.i / j) * A, i = F(P(e, k.reveal + t.d * 1.1, k.reveal + 1.2 + t.d * 1.1)), a = (t.rec ? x : D) + t.jx * g, o = h(t.v), s = n + (a - n) * i, c = r + (o - r) * i, l = t.rec ? P(e, k.pick + t.d * 1.2, k.pick + .25 + t.d * 1.2) : 0, u = t.rec ? 1 : 1 - .35 * P(e, k.means, k.means + .6);
+			d.globalAlpha = (l > 0 ? .3 + .55 * l : .28) * u, d.fillStyle = l > 0 ? _ : C, d.beginPath(), d.arc(s, c, l > 0 ? 2.4 + .6 * l : 2.4, 0, 6.2832), d.fill();
 		}
-		d.globalAlpha = 1;
-		let F = N(M(e, D.means, D.means + .6)), I = N(M(e, D.means + .3, D.means + .9)), L = h(r), R = h(i), z = _ - g * .62, B = y - g * .62;
-		if (I > 0 && (d.strokeStyle = w, d.lineWidth = 1.5, d.globalAlpha = .7, d.beginPath(), d.moveTo(B, R), d.lineTo(B + g * 1.24 * I, R), d.stroke(), d.globalAlpha = 1), F > 0) {
-			d.strokeStyle = v, d.lineWidth = 2, d.beginPath(), d.moveTo(z, L), d.lineTo(z + g * 1.24 * F, L), d.stroke();
-			let t = N(M(e, D.gap, D.gap + .6));
-			t > 0 && (d.save(), d.setLineDash([3, 4]), d.globalAlpha = .8, d.lineWidth = 1.25, d.beginPath(), d.moveTo(z + g * 1.24, L), d.lineTo(z + g * 1.24 + (B + g * 1.24 - z - g * 1.24) * t, L), d.stroke(), d.restore());
+		d.restore(), d.globalAlpha = 1;
+		let L = F(P(e, k.means, k.means + .6)), R = F(P(e, k.means + .3, k.means + .9)), z = h(r), B = h(i), V = x - g * .62, H = D - g * .62;
+		if (R > 0 && (d.strokeStyle = E, d.lineWidth = 1.25, d.globalAlpha = .55, d.beginPath(), d.moveTo(H, B), d.lineTo(H + g * 1.24 * R, B), d.stroke(), d.globalAlpha = 1), L > 0) {
+			d.strokeStyle = _, d.lineWidth = 2, d.beginPath(), d.moveTo(V, z), d.lineTo(V + g * 1.24 * L, z), d.stroke();
+			let t = F(P(e, k.gap, k.gap + .6));
+			t > 0 && (d.save(), d.setLineDash([3, 4]), d.globalAlpha = .8, d.lineWidth = 1.25, d.beginPath(), d.moveTo(V + g * 1.24, z), d.lineTo(V + g * 1.24 + (H + g * 1.24 - V - g * 1.24) * t, z), d.stroke(), d.restore());
 		}
-		C(c, z, L - 8, 700, t + 1, v, M(e, D.means + .4, D.means + .8), "left", !0), C(l, B + g * 1.24, R - 8, 700, t + 1, w, M(e, D.means + .7, D.means + 1.1), "right", !0);
-		let V = N(M(e, D.gap + .4, D.gap + 1)), H = B - 10;
-		V > 0 && (d.strokeStyle = v, d.lineWidth = 1.5, d.globalAlpha = V, d.beginPath(), d.moveTo(H + 5, L), d.lineTo(H, L), d.lineTo(H, L + (R - L) * V), d.lineTo(H + 5, L + (R - L) * V), d.stroke(), d.globalAlpha = 1), C("+" + a + "%", H - 8, (L + R) / 2 + 5, 700, t + 4, v, M(e, D.gap + .8, D.gap + 1.2), "right", !0);
-		let U = [
+		y(c, V, z - 8, 500, t + 1, _, P(e, k.means + .4, k.means + .8), "left", !0), y(l, H + g * 1.24, B - 8, 500, t + 1, E, P(e, k.means + .7, k.means + 1.1), "right", !0);
+		let U = F(P(e, k.gap + .4, k.gap + 1)), W = H - 10;
+		U > 0 && (d.strokeStyle = O, d.lineWidth = 1.25, d.globalAlpha = U, d.beginPath(), d.moveTo(W + 5, z), d.lineTo(W, z), d.lineTo(W, z + (B - z) * U), d.lineTo(W + 5, z + (B - z) * U), d.stroke(), d.globalAlpha = 1), y("+" + a + "%", W - 8, (z + B) / 2 + 5, 500, t + 4, O, P(e, k.gap + .8, k.gap + 1.2), "right", !0);
+		let G = [
 			[
 				n + " SITES · OUTCOMES BLINDED",
 				0,
-				D.pick,
-				T
+				k.pick,
+				w
 			],
 			[
 				"PHASEV RECOMMENDS",
-				D.pick,
-				D.reveal,
-				v
+				k.pick,
+				k.reveal,
+				_
 			],
 			[
 				"WHAT ACTUALLY HAPPENED",
-				D.reveal,
+				k.reveal,
 				99,
-				w
+				E
 			]
 		];
-		for (let [n, r, i, a] of U) C(n, A, 14, 700, t, a, Math.min(M(e, r, r + .3), 1 - M(e, i - .3, i)), "right");
+		for (let [n, r, i, a] of G) y(n, b, 14, 500, t, a, Math.min(P(e, r, r + .3), 1 - P(e, i - .3, i)), "right");
 	}
-	let F = matchMedia("(prefers-reduced-motion: reduce)").matches, I = !1, L = 0, R = 0, z = 0;
+	let N = matchMedia("(prefers-reduced-motion: reduce)").matches, I = !1, L = 0, R = 0, z = 0;
 	function B() {
 		let t = Math.min(devicePixelRatio || 1, 2);
-		A = e.clientWidth, j = e.clientHeight, u.width = Math.round(A * t), u.height = Math.round(j * t), d.setTransform(t, 0, 0, t, 0, 0), I && P(F ? O : L);
+		b = e.clientWidth, S = e.clientHeight, u.width = Math.round(b * t), u.height = Math.round(S * t), d.setTransform(t, 0, 0, t, 0, 0), I && M(N ? A : L);
 	}
 	function V(e) {
-		R = requestAnimationFrame(V), L += Math.min((e - z) / 1e3, .05), z = e, L > D.loop && (L = 0), u.style.opacity = L > D.out ? 0 : 1, P(L);
+		R = requestAnimationFrame(V), L += Math.min((e - z) / 1e3, .05), z = e, L > k.loop && (L = 0), u.style.opacity = L > k.out ? 0 : 1, M(L);
 	}
 	function H() {
-		R || F || (L = 0, u.style.opacity = 1, z = performance.now(), R = requestAnimationFrame(V));
+		R || N || (L = 0, u.style.opacity = 1, z = performance.now(), R = requestAnimationFrame(V));
 	}
 	function U() {
 		cancelAnimationFrame(R), R = 0;
@@ -10516,14 +10510,14 @@ function C(e) {
 	let W = new ResizeObserver(B);
 	W.observe(e);
 	let G = null;
-	return (document.fonts ? Promise.race([document.fonts.load(`500 10px ${h}`), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
-		I = !0, B(), !F && (G = new IntersectionObserver(([e]) => e.isIntersecting ? H() : U(), { threshold: .35 }), G.observe(e));
+	return (document.fonts ? Promise.race([document.fonts.load(`500 10px ${m}`), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
+		I = !0, B(), !N && (G = new IntersectionObserver(([e]) => e.isIntersecting ? H() : U(), { threshold: .35 }), G.observe(e));
 	}), { destroy() {
 		U(), W.disconnect(), G && G.disconnect(), u.remove(), delete e.dataset.pvReady;
 	} };
 }
-var w, T, E, D, O, k, A, j, M, N, P = e((() => {
-	w = "#141238", T = "#7d7b9c", E = "#e3e1ef", D = {
+var C, w, T, E, D, O, k, A, j, M, N, P, F, I = e((() => {
+	C = "#C9C4EF", w = "rgba(244,244,244,.62)", T = "rgba(244,244,244,.08)", E = "#F4F4F4", D = "#7FE8CF", O = "#E2C70A", k = {
 		grid: 0,
 		pick: 1.4,
 		reveal: 3.2,
@@ -10531,238 +10525,9 @@ var w, T, E, D, O, k, A, j, M, N, P = e((() => {
 		gap: 6.8,
 		out: 11.2,
 		loop: 12
-	}, O = 9, k = 21, A = .4, j = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), M = (e, t, n) => j((e - t) / (n - t)), N = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
+	}, A = 9, j = 21, M = .4, N = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), P = (e, t, n) => N((e - t) / (n - t)), F = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
+})), L = /* @__PURE__ */ t((() => {
+	y(), I(), c(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"clinops-proof-glossy\"]").forEach((e) => S(e)), document.querySelectorAll("[data-pv=\"platform-connect-v2\"]").forEach((e) => l(e));
 }));
 //#endregion
-//#region src/clinops-workflow.js
-function F(e) {
-	return () => {
-		e |= 0, e = e + 1831565813 | 0;
-		let t = Math.imul(e ^ e >>> 15, 1 | e);
-		return t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t, ((t ^ t >>> 14) >>> 0) / 4294967296;
-	};
-}
-function I(e) {
-	let t = F(17), n = () => {
-		let e;
-		do
-			e = Math.sqrt(-2 * Math.log(t() + 1e-9)) * Math.cos(6.2832 * t());
-		while (Math.abs(e) > 2.4);
-		return e;
-	}, r = [...Array(ae)].map((e, n) => Math.exp(-n * .15) * (.75 + .5 * t())).sort((e, t) => t - e), i = r.reduce((e, t) => e + t, 0), a = [...Array(ne)].map((e, t) => t === 0 ? 0 : n()), o = [];
-	for (let a = 0; a < e; a++) {
-		let e = t(), a = e < .22 ? 0 : e < .4 ? 1 : e < .55 ? 2 : -1, s = -1;
-		if (a < 0) {
-			let e = t() * i;
-			for (s = 0; e > r[s] && s < 13;) e -= r[s], s++;
-		}
-		o.push({
-			wave: a,
-			site: s,
-			ax: n(),
-			ay: n(),
-			bx: n(),
-			by: n(),
-			sx: n(),
-			sy: n(),
-			d: t(),
-			k: Math.floor(t() * ne),
-			u: t(),
-			j: t() - .5,
-			s: 1.2 + t() * .9,
-			ink: t() < .35
-		});
-	}
-	return {
-		P: o,
-		w: r,
-		CG: a
-	};
-}
-function L() {
-	if (document.getElementById("pv-clinops-workflow-css")) return;
-	let e = document.createElement("style");
-	e.id = "pv-clinops-workflow-css", e.textContent = ce, document.head.appendChild(e);
-}
-function R(e) {
-	if (e.dataset.pvReady) return;
-	e.dataset.pvReady = "1", L();
-	let t = document.createElement("canvas");
-	t.style.cssText = "position:absolute;inset:0;width:100%;height:100%;display:block;", t.setAttribute("role", "img"), t.setAttribute("aria-label", "ClinOps workflow: the patient pool narrows through feasibility, becomes a ranked site footprint, then an enrollment forecast that updates as actual study data arrive."), e.appendChild(t);
-	let n = t.getContext("2d"), r = e.closest("section") || document.body, i = r.querySelector(".text-size-label") || document.querySelector(".text-size-label"), a = getComputedStyle(i || document.body), o = a.fontFamily, s = i && a.letterSpacing !== "normal" ? (parseFloat(a.letterSpacing) || 0) / (parseFloat(a.fontSize) || 16) : 0, c = "letterSpacing" in n;
-	getComputedStyle(r).backgroundColor;
-	function l(e, t) {
-		n.font = `${e} ${t}px ${o}`, c && (n.letterSpacing = (s * t).toFixed(2) + "px");
-	}
-	function u(e, t, r, i, a, o, s = 1, c = "left") {
-		s <= 0 || (l(i, a), n.textAlign = c, n.globalAlpha = s, n.fillStyle = o, n.fillText(e, t, r), n.globalAlpha = 1, n.textAlign = "left");
-	}
-	let d = 0, f = 0, p = null;
-	function m(e) {
-		n.clearRect(0, 0, d, f);
-		let t = d < 500 ? 9 : 10, r = d < 500 ? 30 : 44, i = d - 8, a = f - 46, o = d / 2, s = (26 + a) / 2, c = (e) => r + e * (i - r), m = (e) => a - e * (a - 26) * .86, { P: h, w: g, CG: _ } = p, v = g[0], y = (e) => r + (e + .5) / ae * (i - r), b = s + 6, x = Q(Z(e, G.pick + .4, G.pick + 1)) * (1 - Z(e, G.fan - .4, G.fan));
-		if (x > 0) {
-			let e = y(0) - 14, r = y(8) + 14, i = b + (a - 26) * .32;
-			n.strokeStyle = V, n.lineWidth = 3, n.globalAlpha = x, n.beginPath(), n.moveTo(e, i), n.lineTo($(e, r, x), i), n.stroke(), n.globalAlpha = 1, u("SELECTED FOOTPRINT", e, i + 16, 700, t, W, x);
-		}
-		let S = Z(e, G.fan - .2, G.fan + .4) * (1 - Z(e, G.out - .2, G.out));
-		if (S > 0) {
-			n.globalAlpha = S * .5, n.strokeStyle = W, n.lineWidth = 1, n.beginPath(), n.moveTo(r + .5, 26), n.lineTo(r + .5, a + .5), n.lineTo(i, a + .5), n.stroke(), n.globalAlpha = 1, u("ENROLLED", r, 16, 500, t, H, S), u("TIME", i, a + 16, 500, t, H, S, "right");
-			let o = Z(e, G.fan + 1.4, G.fan + 1.9) * (1 - Z(e, G.out - .2, G.out));
-			o > 0 && (n.save(), n.setLineDash([4, 4]), n.strokeStyle = W, n.globalAlpha = .6 * o, n.beginPath(), n.moveTo(r, m(1)), n.lineTo(i, m(1)), n.stroke(), n.beginPath(), n.moveTo(c(re), 26), n.lineTo(c(re), a), n.stroke(), n.restore(), u("TARGET", r + 6, m(1) - 6, 500, t, W, o), u("MILESTONE", c(re) + 6, a - 6, 500, t, W, o));
-			let s = Z(e, G.act, G.act + .4) * (1 - Z(e, G.out - .2, G.out));
-			s > 0 && (n.strokeStyle = W, n.lineWidth = 1.25, n.globalAlpha = s, n.beginPath(), n.moveTo(c(K), 26), n.lineTo(c(K), a), n.stroke(), n.globalAlpha = 1, u("TODAY · ACTUAL DATA", c(K) - 6, 36, 700, t, W, s, "right"));
-		}
-		for (let t of h) {
-			let n = o + t.ax * (i - r) * .13, l = s + t.ay * (a - 26) * .2, u = o + t.bx * (i - r) * .05, f = s + t.by * (a - 26) * .13, p = n, h = l, x = 0, S = B, C = Q(Z(e, 0, .8 + t.d * .4));
-			if (t.wave >= 0) {
-				let r = Q(Z(e, G.waves[t.wave] + t.d * .3, G.waves[t.wave] + .5 + t.d * .3));
-				p = n, h = l + r * 18, x = C * (.55 - .45 * r) * (1 - Z(e, G.pool, G.sites)), S = t.ink ? z : B;
-			} else {
-				let r = Q(Z(e, G.pool + t.d * .4, G.pool + .9 + t.d * .4));
-				p = $(n, u, r), h = $(l, f, r), x = C * .7, S = r > .5 || t.ink ? z : B;
-				let i = Q(Z(e, G.sites + t.d * .6, G.sites + 1.2 + t.d * .6)), a = (6 + 12 * Math.sqrt(g[t.site] / v)) * (d < 500 ? .6 : 1), o = y(t.site) + t.sx * a * .55, s = b + t.sy * a * .55;
-				p = $(p, o, i), h = $(h, s, i);
-				let w = t.site < oe, T = Z(e, G.pick + t.site * .05, G.pick + .4 + t.site * .05);
-				i > .5 && (S = w ? z : B, x = w ? .8 : .75 - .45 * T);
-				let E = Q(Z(e, G.fan + t.u * 1.2, G.fan + .8 + t.u * 1.2));
-				if (w) {
-					let n = _[t.k], r = c(t.u), i = m(q(t.u, n)) + t.j * 2;
-					if (p = $(p, r, E), h = $(h, i, E), E > .5 && (S = t.k === 0 ? z : B, x = t.k === 0 ? .9 : .6), t.u < K) {
-						let n = Q(Z(e, G.act + t.u * 2.6, G.act + .5 + t.u * 2.6));
-						p = $(p, c(t.u), n), h = $(h, m(ie(t.u)) + t.j * 1.5, n), n > .5 && (S = z, x = .9);
-					} else {
-						let n = Q(Z(e, G.refc + (t.u - K) * 1.6, G.refc + .9 + (t.u - K) * 1.6));
-						h = $(h, m(J(t.u, _[t.k])) + t.j * 2, n);
-					}
-				} else x *= 1 - Z(e, G.fan, G.fan + .6);
-			}
-			x *= 1 - Z(e, G.out, G.out + .5), !(x <= .01) && X[(S === z ? 0 : 21) + Math.round(x * Y)].push(p - t.s / 2, h - t.s / 2, t.s);
-		}
-		for (let e = 0; e < X.length; e++) {
-			let t = X[e];
-			if (!t.length) continue;
-			let r = e <= Y ? z : B, i = (e <= Y ? e : e - Y - 1) / Y;
-			n.fillStyle = `rgba(${r[0]},${r[1]},${r[2]},${i})`;
-			for (let e = 0; e < t.length; e += 3) n.fillRect(t[e], t[e + 1], t[e + 2], t[e + 2]);
-			t.length = 0;
-		}
-		let C = c(.62), w = m(q(.62, 0)) - 10, T = m(J(.9, 0)) + 20;
-		l(500, t);
-		let E = n.measureText("PLAN").width;
-		l(700, t);
-		let D = n.measureText("UPDATED FORECAST").width;
-		if (c(.9) - D < C + E + 6 && Math.abs(T - w) < t + 4) {
-			let e = se((c(.9) - D - r) / (i - r), K, 1);
-			T = Math.max(T + t + 8, m(J(e, 0)) + t + 6);
-		}
-		let O = Z(e, G.refc, G.refc + .6) * (1 - Z(e, G.out - .2, G.out));
-		if (O > 0) {
-			n.save(), n.setLineDash([2, 4]), n.strokeStyle = W, n.globalAlpha = .45 * O, n.lineWidth = 1.25, n.beginPath();
-			for (let e = 0; e <= 80; e++) {
-				let t = K + .55 * e / 80;
-				e ? n.lineTo(c(t), m(q(t, 0))) : n.moveTo(c(t), m(q(t, 0)));
-			}
-			n.stroke(), n.restore(), u("PLAN", C, w, 500, t, H, O);
-		}
-		let k = Q(Z(e, G.upd, G.upd + .9)) * (1 - Z(e, G.out - .2, G.out));
-		if (k > 0) {
-			let r = () => {
-				n.beginPath();
-				for (let e = 0; e <= 80; e++) {
-					let t = K + .55 * k * e / 80;
-					e ? n.lineTo(c(t), m(J(t, 0))) : n.moveTo(c(t), m(J(t, 0)));
-				}
-			};
-			r(), n.strokeStyle = W, n.lineWidth = 4.5, n.stroke(), r(), n.strokeStyle = V, n.lineWidth = 2.5, n.stroke(), u("UPDATED FORECAST", c(.9), T, 700, t, W, Z(e, G.upd + .7, G.upd + 1.1), "right");
-		}
-		[
-			"ELIGIBILITY CRITERIA",
-			"SCREEN FAILURE",
-			"COMPETING TRIALS"
-		].forEach((n, i) => {
-			let a = G.waves[i];
-			u("− " + n, r, 26 + i * 16, 500, t, H, Z(e, a, a + .3) * (1 - Z(e, G.sites - .3, G.sites)));
-		}), u("ACCESSIBLE PATIENTS", o, s + (a - 26) * .13 * 2.6 + 14, 700, t, W, Z(e, G.pool + .8, G.pool + 1.2) * (1 - Z(e, G.sites, G.sites + .4)), "center"), u("SITES RANKED BY PROTOCOL FIT · RECRUITMENT · OPERATIONS", r, 26, 500, t, H, Z(e, G.sites + .8, G.sites + 1.2) * (1 - Z(e, G.fan - .4, G.fan)));
-		let A = 0;
-		ee.forEach(([, t], n) => {
-			e >= t && (A = n);
-		});
-		let j = (i - r) / 4, M = f - 8;
-		n.strokeStyle = U, n.lineWidth = 1, n.beginPath(), n.moveTo(r, M - 16.5), n.lineTo(i, M - 16.5), n.stroke();
-		let N = se(e / G.out);
-		n.strokeStyle = W, n.lineWidth = 1.5, n.beginPath(), n.moveTo(r, M - 16.5), n.lineTo(r + (i - r) * N, M - 16.5), n.stroke();
-		let P = d < 500 ? 8 : t, F = ee.map(([e], t) => (d < 500 ? "" : "0" + (t + 1) + " · ") + e), I = F.map((e, t) => r + j * t);
-		if (d < 500) {
-			let e = F.map((e, t) => (l(t === A ? 700 : 500, P), n.measureText(e).width)), t = (i - r - e.reduce((e, t) => e + t, 0)) / (F.length - 1), a = r;
-			I = e.map((e) => {
-				let n = a;
-				return a += e + t, n;
-			});
-		}
-		F.forEach((e, t) => {
-			let n = t === A;
-			u(e, I[t], M, n ? 700 : 500, P, n ? W : H, n ? 1 : .8);
-		});
-	}
-	let h = matchMedia("(prefers-reduced-motion: reduce)").matches, g = !1, _ = 0, v = 0, y = 0;
-	function b() {
-		let r = Math.min(devicePixelRatio || 1, 2), i = e.clientWidth, a = i >= 500;
-		(!p || a !== d >= 500) && (p = I(a ? 2600 : 1500)), d = i, f = e.clientHeight, t.width = Math.round(d * r), t.height = Math.round(f * r), n.setTransform(r, 0, 0, r, 0, 0), g && m(h ? te : _);
-	}
-	function x(e) {
-		v = requestAnimationFrame(x), _ += Math.min((e - y) / 1e3, .05), y = e, _ > G.loop && (_ = 0), m(_);
-	}
-	function S() {
-		v || h || (_ = 0, y = performance.now(), v = requestAnimationFrame(x));
-	}
-	function C() {
-		cancelAnimationFrame(v), v = 0;
-	}
-	let w = new ResizeObserver(b);
-	w.observe(e);
-	let T = null;
-	return (document.fonts ? Promise.race([document.fonts.load(`500 10px ${o}`), new Promise((e) => setTimeout(e, 3e3))]) : Promise.resolve()).then(() => {
-		g = !0, b(), !h && (T = new IntersectionObserver(([e]) => e.isIntersecting ? S() : C(), { threshold: .35 }), T.observe(e));
-	}), { destroy() {
-		C(), w.disconnect(), T && T.disconnect(), t.remove(), delete e.dataset.pvReady;
-	} };
-}
-var z, B, V, H, U, W, G, ee, te, ne, K, re, q, ie, J, ae, oe, Y, X, se, Z, Q, $, ce, le = e((() => {
-	z = [
-		20,
-		18,
-		56
-	], B = [
-		146,
-		138,
-		205
-	], V = "#E2C70A", H = "#7d7b9c", U = "#d3d0e8", W = "#141238", G = {
-		waves: [
-			1,
-			1.7,
-			2.4
-		],
-		pool: 3,
-		sites: 4.2,
-		pick: 6,
-		fan: 8,
-		act: 12,
-		refc: 13.6,
-		upd: 15,
-		out: 17,
-		loop: 18
-	}, ee = [
-		["FEASIBILITY", 0],
-		["SITE STRATEGY", 4.1],
-		["ENROLLMENT", 7.9],
-		["REFORECASTING", 11.9]
-	], te = 16, ne = 12, K = .45, re = .78, q = (e, t) => (1 + .16 * t) / (1 + Math.exp(-(e - .42) / .1)) - (1 + .16 * t) / (1 + Math.exp(.42 / .1)), ie = (e) => q(e, 0) * .8, J = (e, t) => {
-		let n = ie(K), r = (e - K) / .55;
-		return n + (1 + .12 * t - n) * (1 - Math.exp(-r * 2.6)) / (1 - Math.exp(-2.6));
-	}, ae = 14, oe = 9, Y = 20, X = Array.from({ length: 42 }, () => []), se = (e, t = 0, n = 1) => Math.max(t, Math.min(n, e)), Z = (e, t, n) => se((e - t) / (n - t)), Q = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2, $ = (e, t, n) => e + (t - e) * n, ce = "[data-pv=\"clinops-workflow\"]{position:relative;width:100%;aspect-ratio:16/5.4}\n@media (max-width:700px){[data-pv=\"clinops-workflow\"]{aspect-ratio:4/3.4}}";
-})), ue = /* @__PURE__ */ t((() => {
-	y(), c(), P(), le(), document.querySelectorAll("[data-pv=\"clinops-hero-bg\"]").forEach((e) => u(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => l(e)), document.querySelectorAll("[data-pv=\"clinops-proof\"]").forEach((e) => C(e)), document.querySelectorAll("[data-pv=\"clinops-workflow\"]").forEach((e) => R(e));
-}));
-//#endregion
-export default ue();
+export default L();

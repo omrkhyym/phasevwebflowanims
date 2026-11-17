@@ -11,7 +11,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.12.1` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
-| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` | `clinops-hero-bg`, `clinops-hero-slot`, `platform-connect`, `clinops-proof` (div dans le `.animation-wrapper` `1cf29878…` du bloc Proof), `clinops-workflow` (div `margin-top margin-large` dans le `container-large` du bloc « The ClinOps workflow ») |
+| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.17.0` | `clinops-hero-bg`, `clinops-hero-slot` ; refonte : `clinops-proof-glossy` (dans `.ss-anim` du bloc Proof, chiffres en attributs `data-sites`, `data-rec`, `data-other`, `data-gain`), `platform-connect-v2`, `faq` |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.16.0` | `response-hero-bg`, `response-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux vidéo, `data-mode` precision et split), `platform-connect-v2`, `faq` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.15.1` | `trial-hero-bg`, `trial-hero-slot` ; refonte : `design-space-glossy` (dans `.ss-anim` de la success story), `platform-connect-v2` (dans `.animation-wrapper` du bloc plateforme), `faq` (sur `.faq-wrap`) |
 | Toutes (code global) | site | `site.js` | `v0.15.1` | fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` |
@@ -41,6 +41,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/platform-connect.js` | Bloc « plateforme connectée » des cinq pages produit : particules, cinq amas, flux entre produits (proto `protos/site/phasev-platform-particles-proto.html`). Produit central via `data-current`, noms surchargeables par `data-name-<clé>` |
 | `src/clinops-workflow.js` | Bande « The ClinOps workflow » : une population de particules, patients puis sites puis plan d'enrôlement, quatre étapes et reforecast (proto `protos/clinops/phasev-clinops-workflow-proto.html`) |
 | `src/clinops-proof.js` | Bloc Proof de ClinOps : levée d'aveugle, 357 sites, moyennes 0.43 / 0.28, accolade +53 % (proto `protos/clinops/phasev-clinops-proof-proto.html`). Chiffres en attributs : `data-sites`, `data-rec`, `data-other`, `data-gain` |
+| `src/clinops-proof-glossy.js` | Refonte : bloc Proof de ClinOps sur fond sombre (copie du kit `protos/refonte-produits/_kit/clinops-proof-glossy.js`), mêmes attributs que `clinops-proof`. `clinops.js` ne monte plus `clinops-proof`, `clinops-workflow` ni `platform-connect` v1 (blocs absents de la page) |
 | `src/case-studies.js` | Case Studies : filtres Product et Therapeutic area (pilules `fs_radio_field`, liste `filter-select`, paramètres d'URL `?product=` et `?area=`), lien et chiffre clé des cas mis en avant, tableau At a glance (lignes et colonne 3 vides masquées), récit, cartes Why it matters avec icône, FAQ en accordéon, source facultative, 3 études liées sans l'étude en cours. CSS injecté, ciblé par attributs `data-cs-*` (proto `protos/case-studies/phasev-case-studies-protos.html`) |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/trial/phasev-success-story-protos.html`) |
 
@@ -65,6 +66,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.17.0` | (voir journal) | Refonte, ClinOps : `clinops.js` monte `clinops-proof-glossy` et le bloc plateforme en cartes, ne monte plus les anciens blocs ; `dist/response.js` et `dist/trial.js` régénérés (ordre des imports seulement, pages non concernées) |
 | `v0.16.0` | (voir journal) | Refonte, Response : `response.js` ajoute les graphes animés (`src/viz.js`, `data-pv="viz"` + `data-mode`) et le bloc plateforme en cartes ; nouveau chunk partagé `platform-connect-cards-C5Y4IjAO.mjs` (Trial et Response) ; `dist/trial.js` l'importe désormais (sans effet en ligne tant que Trial reste en `v0.15.1`) |
 | `v0.15.1` | (voir journal) | Refonte, pilote Trial : `site.js` charge le fond sombre animé (`src/dark-bg.js`, palette « mid » à 60 %, sur `header.section_header`, `[data-af-bg]` et `.feature-grid > .video-animation`) et la FAQ native (`src/faq.js`, sur `[data-pv="faq"]`) ; `trial.js` ajoute la success story sombre (`src/design-space-glossy.js`, `data-pv="design-space-glossy"`) et le bloc plateforme en cartes (`src/platform-connect-cards.js`, `data-pv="platform-connect-v2"`) ; seuls `dist/site.js` et `dist/trial.js` changent |
 | `v0.15.0` | `c14b7be` | **Tag créé par erreur, à ne pas utiliser** : pointe sur le commit des protos, `dist/` identique à `v0.14.1` |
@@ -107,6 +109,12 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **ClinOps Optimizer refait en natif** (page trouvée vide dans le Designer et sur webflow.io, hero et footer seuls ; reconstruite d'après le proto `clinops-affine`) :
+  - Hero : label « ClinOps Optimizer », titre « Find the right sites. / Forecast your enrollment. », paragraphe du document, ligne de preuve (`text-size-medium text-color-nwhite`) ; combos `is-hero`.
+  - Why ClinOps (fond light, en-tête centré, 5 cartes) : classe existante `difference-card` restylée en verre blanc (rayon 1.5rem, padding 2rem / 1.5rem en mobile), nouvelle classe `difference-num` (pastille, police `font-mono`).
+  - How it works : 4 étapes avec vidéos, structure de Trial, numéros 01 à 04 ajoutés (comme Trial et Response). How the forecast works : 3 `why-card` « On light », icônes d'origine jaunes recolorées en mauve `#684A9E` (assets `clinops-data.svg`, `clinops-modeling.svg`, `clinops-transparency.svg`, sources dans `protos/_shared/icons/`).
+  - Proof : success story sombre (classes `ss-*`), animation `clinops-proof-glossy`, sans bouton View details (cas non publié) ; 3 cartes case studies statiques (`cs-*`) dans `cs-wrap is-more` (nouveau combo, marge 7.5 / 5 / 4rem) avec titre `cs-more-title` (nouvelle classe), bouton violet vers `/case-studies?product=clinops-optimizer`. FAQ (6) puis plateforme (`data-current="clinops"`).
+  - Release `v0.17.0`, loader de ClinOps passé de `v0.8.0` à `v0.17.0`.
 - **Intégration de la refonte, pilote sur Trial Optimizer** (méthode : `protos/refonte-produits/STRATEGIE-WEBFLOW.md` ; sauvegarde « avant refonte » faite par Romain ; publication sur le seul webflow.io jusqu'à la mise en ligne).
   - Polices Roboto et Roboto Mono (variables, 100 à 900 / 700) téléversées sur le site ; variable `font-primary` → Roboto (deux modes), nouvelle variable `font-mono`.
   - Socle, classes existantes modifiées pour tout le site : `text-size-label` (mono, .75rem, .12em), `text-size-display` (300, clamp 2.5 → 3.75rem), `heading-style-h1` (300, clamp 2 → 2.875rem), `heading-style-h4` (500, 1.375rem), `text-size-large` et `text-size-medium` (interligne 1.6), `button` (500), `section_layout.is-white` et `is-feature.is-white` / `is-purple` en blanc pur, `section_layout.is-lightpurple` en `#ececec` ; combos `text-size-display.is-hero` et `text-size-large.is-hero` (heros produit) ; nouvelles classes `surface-dark` (fond sombre unique), `ss-*` (success story), `faq-*`, `step-num`, `video-screen`, combo `section_layout.is-light`.
@@ -392,6 +400,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - `section_header` tablette (height auto + min-height 100svh) : à publier, puis vérifier sur iPhone les pages produit, Company (au moins un écran) et Resources (hauteur du contenu).
 - Home, hero `v0.12.1` : à publier, puis vérifier sur un vrai mobile (bloc carré sous le texte, espacement 2rem, points coupés aux bords) et les cinq formes.
 - `platform-tabs` : point de montage sans module.
+- Nettoyage de fin de refonte (code des pages) : ancien script d'onglets GSAP et son CSS encore dans le footer de Response (plus d'onglets sur la page depuis la refonte), même copie sur Portfolio et AI Conductor, à retirer quand ces pages sont refaites ; ancien point de montage `response-hero-bg` et `platform-connect` v1 à vérifier dans `response.js`.
 - Brief ClinOps : opacité côté texte, Amériques sous le texte.
 - Brief Response : lisibilité de la séparation des deux bras.
 - Brief Trial : lisibilité des croisements entre courbes.

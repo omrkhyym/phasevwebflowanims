@@ -1,7 +1,7 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
 import { a as n, c as r, i, o as a, r as o, t as s } from "./hero-stage-DpBC6yvy.mjs";
-import { n as c, t as l } from "./platform-connect-Dh9cewVn.mjs";
-import { n as u, t as d } from "./platform-connect-cards-C5Y4IjAO.mjs";
+import { n as c, t as l } from "./platform-connect-cards-C5Y4IjAO.mjs";
+import { n as u, t as d } from "./platform-connect-Dh9cewVn.mjs";
 //#region src/trial-hero-bg.js
 function f(e) {
 	if (!e || e.dataset.pvInit) return;
@@ -320,7 +320,7 @@ var W, G, ie, K, ae, q, oe, J, Y, X, Z, Q, $, se = e((() => {
 		return n;
 	})();
 })), ce = /* @__PURE__ */ t((() => {
-	O(), te(), c(), se(), u(), document.querySelectorAll("[data-pv=\"trial-hero-bg\"]").forEach((e) => f(e)), document.querySelectorAll("[data-pv=\"success-design-space\"]").forEach((e) => j(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => l(e)), document.querySelectorAll("[data-pv=\"design-space-glossy\"]").forEach((e) => re(e)), document.querySelectorAll("[data-pv=\"platform-connect-v2\"]").forEach((e) => d(e));
+	O(), te(), u(), se(), c(), document.querySelectorAll("[data-pv=\"trial-hero-bg\"]").forEach((e) => f(e)), document.querySelectorAll("[data-pv=\"success-design-space\"]").forEach((e) => j(e)), document.querySelectorAll("[data-pv=\"platform-connect\"]").forEach((e) => d(e)), document.querySelectorAll("[data-pv=\"design-space-glossy\"]").forEach((e) => re(e)), document.querySelectorAll("[data-pv=\"platform-connect-v2\"]").forEach((e) => l(e));
 }));
 //#endregion
 export default ce();

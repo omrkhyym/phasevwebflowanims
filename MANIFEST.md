@@ -8,7 +8,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 | Page | ID Webflow | Entrée | Tag du loader | Points de montage |
 |---|---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.12.1` | `hero-homepage` et `gantt` (dans des embeds HTML), `platform-hub` (div), `platform-tabs` (div sans module), `evidence-bars` (bloc des barres de la carte `ev-case`) |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.19.0` | refonte : `hero-sequence` (div natif dans `header_component`, après la grille), `gantt-glossy` (dans `.stage-wide` de The problem), `mini-scene` (cinq cartes `.pcard` du slider plateforme), `testimonials` (`.tm`) ; anciens points (`hero-homepage`, `gantt`, `platform-hub`, `evidence-bars`) dans des blocs masqués |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` | `company-hero` (attribut sur le header du hero), `company-careers` (attribut sur l'embed du bloc Build with us) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.17.0` | `clinops-hero-bg`, `clinops-hero-slot` ; refonte : `clinops-proof-glossy` (dans `.ss-anim` du bloc Proof, chiffres en attributs `data-sites`, `data-rec`, `data-other`, `data-gain`), `platform-connect-v2`, `faq` |
@@ -42,6 +42,10 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/clinops-workflow.js` | Bande « The ClinOps workflow » : une population de particules, patients puis sites puis plan d'enrôlement, quatre étapes et reforecast (proto `protos/clinops/phasev-clinops-workflow-proto.html`) |
 | `src/clinops-proof.js` | Bloc Proof de ClinOps : levée d'aveugle, 357 sites, moyennes 0.43 / 0.28, accolade +53 % (proto `protos/clinops/phasev-clinops-proof-proto.html`). Chiffres en attributs : `data-sites`, `data-rec`, `data-other`, `data-gain` |
 | `src/clinops-proof-glossy.js` | Refonte : bloc Proof de ClinOps sur fond sombre (copie du kit `protos/refonte-produits/_kit/clinops-proof-glossy.js`), mêmes attributs que `clinops-proof`. `clinops.js` ne monte plus `clinops-proof`, `clinops-workflow` ni `platform-connect` v1 (blocs absents de la page) |
+| `src/hero-sequence/` | Refonte, hero de la Home : séquence WebGL2 de l'atelier `hero-lab` (moteur `engine.js`, scènes blob, plane, land, evap, sequence), CSS injecté via `:has()` |
+| `src/gantt-glossy.js`, `src/bonv-draw.js` | Refonte, The problem : Gantt d'origine restylé en sombre ; `bonv-draw.js` = socle de dessin partagé (aussi utilisé par `mini-scene`) |
+| `src/mini-scene.js` | Refonte, Home : mini-scène animée en tête de chaque carte produit (`data-scene` rank, curve, sites, split, doc ; `data-col`) |
+| `src/testimonials.js` | Refonte, Home : témoignages en onglets (bascule `is-active` sur `.tm-quote` / `.tm-tab`, trait `.tm-bar`, défilement 8 s à l'écran, pause au survol) |
 | `src/case-studies.js` | Case Studies : filtres Product et Therapeutic area (pilules `fs_radio_field`, liste `filter-select`, paramètres d'URL `?product=` et `?area=`), lien et chiffre clé des cas mis en avant, tableau At a glance (lignes et colonne 3 vides masquées), récit, cartes Why it matters avec icône, FAQ en accordéon, source facultative, 3 études liées sans l'étude en cours. CSS injecté, ciblé par attributs `data-cs-*` (proto `protos/case-studies/phasev-case-studies-protos.html`) |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/trial/phasev-success-story-protos.html`) |
 
@@ -66,6 +70,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.19.0` | (voir journal) | Refonte, Home : `main.js` monte `hero-sequence`, `gantt-glossy`, `mini-scene` et `testimonials` ; ne monte plus `hero-homepage`, `gantt`, `platform-hub`, `evidence-bars` (Home DEV reste en `v0.2.0`) |
 | `v0.18.0` | (voir journal) | Refonte, Portfolio : `portfolio.js` monte les graphes animés (`viz`) et le bloc plateforme en cartes, plus la plateforme v1 ; `src/viz.js` devient un chunk partagé `viz-CS9SStLT.mjs` (`dist/response.js` régénéré pour l'importer, Response reste en `v0.16.0`) |
 | `v0.17.0` | (voir journal) | Refonte, ClinOps : `clinops.js` monte `clinops-proof-glossy` et le bloc plateforme en cartes, ne monte plus les anciens blocs ; `dist/response.js` et `dist/trial.js` régénérés (ordre des imports seulement, pages non concernées) |
 | `v0.16.0` | (voir journal) | Refonte, Response : `response.js` ajoute les graphes animés (`src/viz.js`, `data-pv="viz"` + `data-mode`) et le bloc plateforme en cartes ; nouveau chunk partagé `platform-connect-cards-C5Y4IjAO.mjs` (Trial et Response) ; `dist/trial.js` l'importe désormais (sans effet en ligne tant que Trial reste en `v0.15.1`) |
@@ -110,6 +115,14 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **Home refaite en natif** (proto `home-affine`) : nouveaux blocs insérés à côté des anciens, anciens masqués (pas supprimés) jusqu'au nettoyage.
+  - Hero : div `hero-sequence` après la grille `header_content` ; embed de l'ancien hero masqué. Texte inchangé.
+  - The problem : en-tête centré (`is-intro`), panneau sombre `stage-wide` (nouvelle classe, fond entre-deux, `data-af-bg` pour le fond animé) avec `gantt-glossy` dans `stage-wide-in`.
+  - The PhaseV platform : section `surface-dark`, slider Swiper existant (`data-swiper="news"`) de cinq cartes `pcard` (nouvelles classes `pcard`, `pcard-viz`, `pcard-body`, `pcard-title`, `pcard-desc` ; combos `swiper-slide.is-product`, `swiper-div.is-platform`), flèches `slider-arrows` variante claire. L'ancre `#phasev-platform` reste sur l'ancienne section masquée.
+  - Why PhaseV : en-tête `section-top left-align`, grille `grid-3 is-cards`. Evidence : section sombre, 3 cartes `cs-*`, bouton violet vers `/case-studies`.
+  - Testimonials : section light, classes natives `tm-*` (citations superposées, onglets logos ou fonction, combos `is-active`), logos reliés aux assets existants.
+  - Latest news non restylé (classe `swiper-item` partagée avec Resources : à traiter avec Resources).
+  - Release `v0.19.0`, loader de la Home passé de `v0.12.1` à `v0.19.0`.
 - **Portfolio Optimizer refait en natif** (page trouvée vide, hero seul ; reconstruite d'après le proto `portfolio-affine`) :
   - Hero : nouveau titre (« Prioritize the path. / Calibrate the bet. », recréé pour avoir le retour à la ligne, l'ancien supprimé), paragraphe du document, bouton jaune « Discuss an opportunity » (lien inchangé, absolu vers phasevtrials.com/contact), second bouton violet « Explore an example analysis » avec lien `#` (cible à fournir).
   - The challenge : 3 `why-card` « On light » (icônes de la page, déjà mauves). Build conviction : 2 lignes numérotées avec graphes animés rank et dist, note en petit (nouvelle classe `rp-note`). How we approach it : 3 `difference-card` numérotées avec liste.
@@ -400,6 +413,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
+- Home : restyle des cartes Latest news (`swiper-item`, partagé avec Resources) ; ancre `#phasev-platform` à déplacer si un lien l'utilise ; code de page mort (carte de décision `dm-*`, CSS et script) à retirer au nettoyage.
 - Portfolio, contenu client : lien du bouton « Explore an example analysis » (`#`) ; FAQ, textes à fournir : métrique de validation des modèles, fourchette de délai standard, GDPR/HIPAA si vérifié, texte de confidentialité pour les deals ; bandeau de footer propre à Portfolio (proto) à traiter avec le footer unifié.
 - Home : pas de titre SEO ni de meta description.
 - Home DEV : à passer en brouillon pour qu'elle ne soit plus publiée à `/home-dev`.

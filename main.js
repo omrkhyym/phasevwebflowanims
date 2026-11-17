@@ -1,9 +1,11 @@
-import { initGantt } from './src/gantt.js';
-import { initHero } from './src/hero-homepage.js';
-import { initPlatformHub } from './src/platform-hub.js';
-import { initEvidenceBars } from './src/evidence-bars.js';
+import { initHeroSequence } from './src/hero-sequence/index.js';
+import { initGanttGlossy } from './src/gantt-glossy.js';
+import { initMiniScene } from './src/mini-scene.js';
+import { initTestimonials } from './src/testimonials.js';
 
-document.querySelectorAll('[data-pv="gantt"]').forEach(initGantt);
-document.querySelectorAll('[data-pv="hero-homepage"]').forEach(initHero);
-document.querySelectorAll('[data-pv="platform-hub"]').forEach(initPlatformHub);
-document.querySelectorAll('[data-pv="evidence-bars"]').forEach(initEvidenceBars);
+// refonte (2026-11-17) : hero en séquence WebGL, Gantt restylé dans le panneau sombre, mini-scènes des cartes produit,
+// témoignages en onglets. Les anciens blocs (hero-homepage, gantt, platform-hub, evidence-bars) sont masqués dans Webflow.
+document.querySelectorAll('[data-pv="hero-sequence"]').forEach(initHeroSequence);
+document.querySelectorAll('[data-pv="gantt-glossy"]').forEach(initGanttGlossy);
+document.querySelectorAll('[data-pv="mini-scene"]').forEach(initMiniScene);
+document.querySelectorAll('[data-pv="testimonials"]').forEach(initTestimonials);

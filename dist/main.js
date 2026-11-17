@@ -1473,8 +1473,18 @@ function Be(e) {
 }
 var Ve, He = e((() => {
 	Ve = 8e3;
-})), Ue = /* @__PURE__ */ t((() => {
-	Te(), Ne(), ze(), He(), document.querySelectorAll("[data-pv=\"hero-sequence\"]").forEach(be), document.querySelectorAll("[data-pv=\"gantt-glossy\"]").forEach(Ee), document.querySelectorAll("[data-pv=\"mini-scene\"]").forEach(Pe), document.querySelectorAll("[data-pv=\"testimonials\"]").forEach(Be);
 }));
 //#endregion
-export default Ue();
+//#region src/news-cards.js
+function Ue() {
+	if (document.getElementById(We) || !document.querySelector(".swiper-item")) return;
+	let e = document.createElement("style");
+	e.id = We, e.textContent = Ge, document.head.appendChild(e);
+}
+var We, Ge, Ke = e((() => {
+	We = "pv-news-cards-css", Ge = "\n:root{--af-mono:'Roboto Mono',ui-monospace,Consolas,monospace;--af-edge:linear-gradient(150deg,rgba(20,18,56,.18) 0%,rgba(20,18,56,.06) 40%,rgba(20,18,56,.04) 75%,rgba(104,74,158,.2) 100%)}\n/* Latest news : carte d'article au style des cartes case studies (verre clair, image arrondie, label mono) */\n.section_layout .swiper-item{ position:relative; isolation:isolate; display:flex; flex-direction:column; gap:1.25rem; height:100%; padding:1rem 1rem 1.5rem; border-radius:1.5rem; background:linear-gradient(155deg, #f6f6f9 0%, #eeedf4 100%); }\n.section_layout .swiper-item::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:1; background:var(--af-edge);\n  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }\n.section_layout .swiper-item img{ border-radius:1rem; }\n.section_layout .swiper-item .post_body{ padding:0 .5rem; }\n.section_layout .swiper-item .post_date{ font-family:var(--af-mono); font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; }\n/* Latest news (et tout slider d'articles) : cartes moins larges, toutes de la même hauteur ; image 2:1, titre plus petit, 3 lignes max */\n.section_layout .swiper-slide:has(> .swiper-item){ max-width:24rem; height:auto; }\n.section_layout .swiper-item .post_image{ aspect-ratio:2 / 1; margin-bottom:0; }\n.section_layout .swiper-item .heading-style-h4{ font-size:1.25rem; line-height:1.35; font-weight:500; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }\n";
+})), qe = /* @__PURE__ */ t((() => {
+	Te(), Ne(), ze(), He(), Ke(), document.querySelectorAll("[data-pv=\"hero-sequence\"]").forEach(be), document.querySelectorAll("[data-pv=\"gantt-glossy\"]").forEach(Ee), document.querySelectorAll("[data-pv=\"mini-scene\"]").forEach(Pe), document.querySelectorAll("[data-pv=\"testimonials\"]").forEach(Be), Ue();
+}));
+//#endregion
+export default qe();

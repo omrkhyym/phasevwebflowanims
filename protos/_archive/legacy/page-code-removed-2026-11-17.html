@@ -1,0 +1,264 @@
+<!-- Sauvegarde 2026-11-17 : code de page retiré au nettoyage de fin de refonte (étape 4, code mort).
+     - Home : carte de décision dm-* (CSS du head + script du footer), plus aucun élément #dm-map / .dm-* sur la page.
+     - Portfolio, Response, AI Conductor : onglets GSAP [data-tabs] (CSS du head + script du footer), plus aucun onglet sur ces pages.
+       Le script était identique sur les trois pages.
+     - Resources : second chargement de Swiper (v12 dans le footer, v11 déjà chargé dans le head) ; console.log du slider.
+     - Home : console.log du slider. -->
+
+<!-- ===== Home, head ===== -->
+<style>
+  .dm-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .dm-card {
+    cursor: pointer;
+    outline: none;
+  }
+  .dm-card rect {
+    transition:
+      fill 0.25s ease,
+      fill-opacity 0.25s ease,
+      stroke 0.25s ease,
+      stroke-opacity 0.25s ease;
+  }
+
+  .dm-card.dm-corner > rect:nth-of-type(1) {
+    fill: #18113f;
+    fill-opacity: 0.92;
+  }
+  .dm-card.dm-corner > rect:nth-of-type(2) {
+    stroke: #fff;
+    stroke-opacity: 0.18;
+  }
+  .dm-card.dm-corner:not(.is-active):hover > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 0.5;
+  }
+  .dm-card.dm-corner.is-active > rect:nth-of-type(1) {
+    fill: #41246f;
+    fill-opacity: 0.95;
+  }
+  .dm-card.dm-corner.is-active > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 1;
+  }
+  .dm-card.dm-wide.is-active > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 1;
+  }
+  .dm-card.dm-wide:not(.is-active):hover > rect:nth-of-type(2) {
+    stroke-opacity: 0.85;
+  }
+
+  /* Visibility. If a panel uses flex/grid, change block to match. */
+  .dm-panel {
+    display: none;
+  }
+  .dm-panel.is-active {
+    display: flex;
+  }
+  /* Make the injected SVG scale to its container at every breakpoint */
+  #dm-map,
+  .dm-map {
+    width: 100%;
+    max-width: 670px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #dm-map svg,
+  .dm-map svg {
+    width: 100% !important; /* beats the SVG's built-in width="670" */
+    height: auto !important; /* keeps aspect ratio, no distortion */
+    max-width: 100%;
+    display: block;
+  }
+</style>
+
+<!-- ===== Home, footer ===== -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var MAP_URL = 'https://wunderdogs.b-cdn.net/PhaseV/decision-map.svg'; // <-- your hosted URL
+    var DEFAULT = 'pursue';
+    var host = document.getElementById('dm-map');
+    if (!host) return;
+
+    fetch(MAP_URL)
+      .then(function (r) {
+        return r.text();
+      })
+      .then(function (svg) {
+        host.innerHTML = svg;
+        init(host.querySelector('svg'));
+      });
+
+    function init(map) {
+      if (!map) return;
+      var panels = document.getElementById('dm-panels');
+      var cards = [].slice.call(map.querySelectorAll('.dm-card'));
+      var pEls = panels ? [].slice.call(panels.querySelectorAll('.dm-panel')) : [];
+
+      function select(name) {
+        cards.forEach(function (c) {
+          c.classList.toggle('is-active', c.getAttribute('data-panel') === name);
+        });
+        pEls.forEach(function (p) {
+          p.classList.toggle('is-active', p.getAttribute('data-panel') === name);
+        });
+      }
+      map.addEventListener('click', function (e) {
+        var c = e.target.closest('.dm-card');
+        if (c) select(c.getAttribute('data-panel'));
+      });
+      map.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var c = e.target.closest('.dm-card');
+        if (c) {
+          e.preventDefault();
+          select(c.getAttribute('data-panel'));
+        }
+      });
+      select(DEFAULT);
+    }
+  });
+</script>
+
+<!-- ===== Portfolio, Response, AI Conductor : head ===== -->
+<style>
+  .tabs_content {
+    position: relative;
+  }
+
+  .tab_pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .tab_pane.is-active {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .tab_link {
+    cursor: pointer;
+    user-select: none;
+  }
+</style>
+
+<!-- ===== Portfolio, Response, AI Conductor : footer ===== -->
+<script>
+(function () {
+  if (!window.gsap) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DUR   = reduce ? 0 : 0.45;
+  var EASE  = 'power2.out';
+  var SHIFT = reduce ? 0 : 12;
+
+  document.querySelectorAll('[data-tabs]').forEach(function (root) {
+    var id = root.getAttribute('data-tabs');
+
+    // menu can live outside the wrapper: match on the data-tabs value
+    var externalMenu = id ? document.querySelector('[data-tabs-menu="' + id + '"]') : null;
+    var links = Array.prototype.slice.call((externalMenu || root).querySelectorAll('[data-tab-link]'));
+    var panes = Array.prototype.slice.call(root.querySelectorAll('[data-tab-pane]'));
+    if (!links.length || links.length !== panes.length) return;
+
+    var content  = panes[0].parentElement;
+    var tablist  = externalMenu || links[0].parentElement;
+    var animating = false;
+
+    var current = panes.findIndex(function (p) { return p.classList.contains('is-active'); });
+    if (current < 0) current = 0;
+
+    tablist.setAttribute('role', 'tablist');
+    var key = id || 'tabs';
+    links.forEach(function (link, i) {
+      var pane = panes[i];
+      if (!link.id) link.id = key + '-tab-' + i;
+      if (!pane.id) pane.id = key + '-panel-' + i;
+      link.setAttribute('role', 'tab');
+      link.setAttribute('aria-controls', pane.id);
+      pane.setAttribute('role', 'tabpanel');
+      pane.setAttribute('aria-labelledby', link.id);
+    });
+
+    function setLinkState(i) {
+      links.forEach(function (l, idx) {
+        var on = idx === i;
+        l.classList.toggle('is-active', on);
+        l.setAttribute('aria-selected', on ? 'true' : 'false');
+        l.setAttribute('tabindex', on ? '0' : '-1');
+      });
+    }
+
+    panes.forEach(function (pane, i) {
+      if (i === current) {
+        gsap.set(pane, { position: 'relative', autoAlpha: 1, y: 0 });
+        pane.classList.add('is-active');
+      } else {
+        gsap.set(pane, { position: 'absolute', top: 0, left: 0, width: '100%', autoAlpha: 0 });
+        pane.classList.remove('is-active');
+      }
+    });
+    gsap.set(content, { position: 'relative' });
+    setLinkState(current);
+
+    function switchTo(next) {
+      if (next === current || animating || next < 0 || next >= panes.length) return;
+      animating = true;
+
+      var oldPane = panes[current];
+      var newPane = panes[next];
+      var startH = content.offsetHeight;
+
+      gsap.set(newPane, { position: 'absolute', top: 0, left: 0, width: '100%', autoAlpha: 0, y: SHIFT });
+      var endH = newPane.offsetHeight;
+
+      gsap.set(content, { height: startH });
+      setLinkState(next);
+
+      gsap.timeline({
+        defaults: { duration: DUR, ease: EASE },
+        onComplete: function () {
+          gsap.set(oldPane, { position: 'absolute', top: 0, left: 0, width: '100%', autoAlpha: 0, y: 0 });
+          oldPane.classList.remove('is-active');
+          gsap.set(newPane, { position: 'relative', clearProps: 'transform,top,left,width' });
+          newPane.classList.add('is-active');
+          gsap.set(content, { clearProps: 'height' });
+          current = next;
+          animating = false;
+        }
+      })
+      .to(oldPane, { autoAlpha: 0, y: -SHIFT }, 0)
+      .to(newPane, { autoAlpha: 1, y: 0 }, 0)
+      .to(content, { height: endH }, 0);
+    }
+
+    links.forEach(function (link, i) {
+      link.addEventListener('click', function () { switchTo(i); });
+      link.addEventListener('keydown', function (e) {
+        var idx = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') idx = (i + 1) % links.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') idx = (i - 1 + links.length) % links.length;
+        else if (e.key === 'Home') idx = 0;
+        else if (e.key === 'End') idx = links.length - 1;
+        else if (e.key === 'Enter' || e.key === ' ') idx = i;
+        if (idx === null) return;
+        e.preventDefault();
+        links[idx].focus();
+        switchTo(idx);
+      });
+    });
+  });
+})();
+</script>
+
+<!-- ===== Resources, footer : second chargement de Swiper ===== -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>

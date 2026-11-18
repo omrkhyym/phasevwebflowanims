@@ -7,6 +7,7 @@ import { initLineFields } from './src/line-field/index.js';
 import { initDarkBg } from './src/dark-bg.js';
 import { initFaq } from './src/faq.js';
 import { initNav } from './src/nav.js';
+import { initSlider } from './src/sliders.js';
 
 initFloatingBg();
 initLineFields();
@@ -14,3 +15,5 @@ document.querySelectorAll('header.section_header, [data-af-bg], .feature-grid > 
 document.querySelectorAll('[data-pv="faq"]').forEach(initFaq);
 // navigation en île : composant Webflow « nav-island » (refonte, 2026-11-17)
 document.querySelectorAll('[data-pv="nav"]').forEach(initNav);
+// sliders : un seul système pour tous les [data-swiper] (nettoyage, 2026-11-17)
+document.querySelectorAll('[data-swiper]').forEach(initSlider);

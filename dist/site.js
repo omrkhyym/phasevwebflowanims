@@ -280,12 +280,12 @@ function M(e) {
 		}
 	};
 }
-var N = e((() => {
+var ee = e((() => {
 	k();
 }));
 //#endregion
 //#region src/line-field/textures/km.js
-function P(e) {
+function N(e) {
 	let t = [];
 	function n(e, t, n) {
 		e.y0 = e.base + w(-8, 8), e.D = w(40, 150);
@@ -355,12 +355,12 @@ function P(e) {
 		}
 	};
 }
-var F = e((() => {
+var P = e((() => {
 	k();
 }));
 //#endregion
 //#region src/line-field/textures/forest.js
-function I(e) {
+function F(e) {
 	let t = [], n = [];
 	function r(e, t) {
 		e.fe = e.e, e.fh = e.h, e.te = D() * .15 + .04, e.th = w(.035, .15), e.t0 = t, e.next = t + w(7, 16);
@@ -409,12 +409,12 @@ function I(e) {
 		}
 	};
 }
-var L = e((() => {
+var I = e((() => {
 	k();
 }));
 //#endregion
 //#region src/line-field/textures/waterfall.js
-function R(e) {
+function L(e) {
 	let t = 0, n = [], r = 0, i = 0, a = 0;
 	function o(e) {
 		n = [];
@@ -444,12 +444,12 @@ function R(e) {
 		}
 	};
 }
-var z = e((() => {
+var R = e((() => {
 	k();
 }));
 //#endregion
 //#region src/line-field/textures/volcano.js
-function B(e) {
+function z(e) {
 	let t = 3.2, n = [], r = [], i = 0, a = null, o = null;
 	function s() {
 		let e = [];
@@ -481,33 +481,33 @@ function B(e) {
 		}
 	};
 }
-var V = e((() => {
+var B = e((() => {
 	k();
 }));
 //#endregion
 //#region src/line-field/index.js
-function H(e = document) {
-	let t = [...e.querySelectorAll("[data-line-field]")].filter((e) => !e.dataset.pvLine), n = (e) => (e.dataset.lineField || "").trim().toLowerCase(), r = new Set(t.map(n).filter((e) => U[e])), i = Object.keys(U).filter((e) => !r.has(e));
-	i.length || (i = Object.keys(U));
+function V(e = document) {
+	let t = [...e.querySelectorAll("[data-line-field]")].filter((e) => !e.dataset.pvLine), n = (e) => (e.dataset.lineField || "").trim().toLowerCase(), r = new Set(t.map(n).filter((e) => H[e])), i = Object.keys(H).filter((e) => !r.has(e));
+	i.length || (i = Object.keys(H));
 	let a = 0;
 	return t.map((e) => {
 		let t = n(e);
-		return U[t] || (t && t !== "random" && console.warn(`[line-field] texture inconnue « ${t} », tirage à la place`, e), t = i[a++ % i.length]), e.dataset.pvLine = t, g(e, U[t]);
+		return H[t] || (t && t !== "random" && console.warn(`[line-field] texture inconnue « ${t} », tirage à la place`, e), t = i[a++ % i.length]), e.dataset.pvLine = t, g(e, H[t]);
 	});
 }
-var U, ee = e((() => {
-	S(), j(), N(), F(), L(), z(), V(), U = {
+var H, te = e((() => {
+	S(), j(), ee(), P(), I(), R(), B(), H = {
 		swimmer: A,
 		matrix: M,
-		km: P,
-		forest: I,
-		waterfall: R,
-		volcano: B
+		km: N,
+		forest: F,
+		waterfall: L,
+		volcano: z
 	};
 }));
 //#endregion
 //#region src/dark-bg.js
-function te(e) {
+function ne(e) {
 	let t = (e) => {
 		let t = parseInt(e.slice(1), 16);
 		return [
@@ -516,17 +516,17 @@ function te(e) {
 			t & 255
 		].map((e) => e.toFixed(1)).join(",");
 	};
-	return G.replace("%INK0%", t(e.ink0)).replace("%INK2%", t(e.ink2)).replace("%INDIGO%", t(e.indigo)).replace("%BLUE%", t(e.blue)).replace("%VIOLET%", t(e.violet)).replace("%SOFT%", t(e.soft));
+	return W.replace("%INK0%", t(e.ink0)).replace("%INK2%", t(e.ink2)).replace("%INDIGO%", t(e.indigo)).replace("%BLUE%", t(e.blue)).replace("%VIOLET%", t(e.violet)).replace("%SOFT%", t(e.soft));
 }
-function ne(e, t) {
+function re(e, t) {
 	t = Object.assign({
 		speed: 1,
 		scrollParallax: !0,
 		grain: .07,
 		blur: 1 / 12,
-		palette: K.bonv
+		palette: G.bonv
 	}, t || {});
-	let n = te(t.palette), r = !e;
+	let n = ne(t.palette), r = !e;
 	e ||= document.body;
 	let i = document.createElement("div");
 	i.setAttribute("aria-hidden", "true"), i.style.cssText = (r ? "position:fixed;inset:0;z-index:-1;" : "position:absolute;inset:0;z-index:0;") + "overflow:hidden;pointer-events:none;background:" + t.palette.ink0 + ";";
@@ -544,7 +544,7 @@ function ne(e, t) {
 				if (s.shaderSource(n, t), s.compileShader(n), !s.getShaderParameter(n, s.COMPILE_STATUS)) throw Error(s.getShaderInfoLog(n));
 				return n;
 			}, t = s.createProgram();
-			if (s.attachShader(t, e(s.VERTEX_SHADER, W)), s.attachShader(t, e(s.FRAGMENT_SHADER, n)), s.linkProgram(t), !s.getProgramParameter(t, s.LINK_STATUS)) throw Error(s.getProgramInfoLog(t));
+			if (s.attachShader(t, e(s.VERTEX_SHADER, U)), s.attachShader(t, e(s.FRAGMENT_SHADER, n)), s.linkProgram(t), !s.getProgramParameter(t, s.LINK_STATUS)) throw Error(s.getProgramInfoLog(t));
 			s.useProgram(t);
 			let r = s.createBuffer();
 			s.bindBuffer(s.ARRAY_BUFFER, r), s.bufferData(s.ARRAY_BUFFER, new Float32Array([
@@ -561,7 +561,7 @@ function ne(e, t) {
 	} catch (e) {
 		console.warn("BonV background: WebGL off, CSS fallback.", e), s = null;
 	}
-	if (!s) return a.remove(), i.style.background = q, { destroy() {
+	if (!s) return a.remove(), i.style.background = K, { destroy() {
 		i.remove();
 	} };
 	function d() {
@@ -589,19 +589,19 @@ function ne(e, t) {
 		cancelAnimationFrame(p), y && y.disconnect(), i.remove();
 	} };
 }
-function re(e) {
+function ie(e) {
 	if (!e || e.dataset.pvBg) return null;
 	e.dataset.pvBg = "1";
-	let t = ne(e, {
-		palette: K.mid,
+	let t = re(e, {
+		palette: G.mid,
 		scrollParallax: !1
 	}), n = e.firstElementChild;
 	return n && (n.style.zIndex = "-1", n.style.opacity = ".6", n.classList.add("pv-dark-layer")), e.style.isolation = "isolate", function() {
 		t && t.destroy(), delete e.dataset.pvBg;
 	};
 }
-var W, G, K, q, ie = e((() => {
-	W = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}", G = "precision highp float;\nuniform vec2 uRes;uniform float uT;uniform vec2 uOff;\nvec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}\nvec2 mod289(vec2 x){return x-floor(x*(1./289.))*289.;}\nvec3 permute(vec3 x){return mod289(((x*34.)+1.)*x);}\nfloat snoise(vec2 v){const vec4 C=vec4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);\nvec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);\nvec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod289(i);\nvec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));\nvec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);m=m*m;m=m*m;\nvec3 x=2.*fract(p*C.www)-1.;vec3 h=abs(x)-.5;vec3 ox=floor(x+.5);vec3 a0=x-ox;\nm*=1.79284291400159-.85373472095314*(a0*a0+h*h);\nvec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.*dot(m,g);}\nfloat fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<2;i++){s+=a*snoise(p);p=p*1.8+vec2(1.7,9.2);a*=.4;}return s;}\nvec3 hex(float r,float g,float b){return vec3(r,g,b)/255.;}\nvoid main(){\nvec2 uv=gl_FragCoord.xy/uRes;uv.y=1.-uv.y;\nfloat asp=uRes.x/uRes.y;\nvec2 p=uv*vec2(asp,1.)*.32+uOff;\nfloat t=uT*.07;\nvec2 q=vec2(fbm(p*1.05+vec2(0.,t)),fbm(p*1.05+vec2(5.2,1.3)-t*.8));\nvec2 r=vec2(fbm(p*1.1+1.3*q+vec2(1.7,9.2)+t*.6),fbm(p*1.1+1.3*q+vec2(8.3,2.8)-t*.5));\nfloat n=fbm(p+1.4*r);\nvec3 ink0=hex(%INK0%),ink2=hex(%INK2%),indigo=hex(%INDIGO%),blue=hex(%BLUE%),violet=hex(%VIOLET%),soft=hex(%SOFT%);\nvec3 col=mix(ink0,ink2,smoothstep(-.45,.45,n));\ncol=mix(col,indigo,smoothstep(.0,.7,r.x+.2*n)*.45);\ncol=mix(col,violet,smoothstep(.05,.6,q.y+.25*r.y)*.38*(1.-.55*uv.x));\nvec2 L=vec2(.86+.05*sin(t*2.3),.1+.06*cos(t*1.7))-uOff*vec2(1.2,.9);\nfloat lr=length((uv-L)*vec2(asp,1.))+.35*n;\ncol=mix(col,blue,smoothstep(1.05,.1,lr)*.55);\ncol+=soft*smoothstep(.45,.0,lr)*.16;\nfloat v=length((uv-vec2(.55,.46))*vec2(1.25,1.));\ncol*=mix(1.,.3,smoothstep(.38,1.05,v));\ngl_FragColor=vec4(col,1.);\n}", K = {
+var U, W, G, K, ae = e((() => {
+	U = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}", W = "precision highp float;\nuniform vec2 uRes;uniform float uT;uniform vec2 uOff;\nvec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}\nvec2 mod289(vec2 x){return x-floor(x*(1./289.))*289.;}\nvec3 permute(vec3 x){return mod289(((x*34.)+1.)*x);}\nfloat snoise(vec2 v){const vec4 C=vec4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);\nvec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);\nvec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod289(i);\nvec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));\nvec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);m=m*m;m=m*m;\nvec3 x=2.*fract(p*C.www)-1.;vec3 h=abs(x)-.5;vec3 ox=floor(x+.5);vec3 a0=x-ox;\nm*=1.79284291400159-.85373472095314*(a0*a0+h*h);\nvec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.*dot(m,g);}\nfloat fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<2;i++){s+=a*snoise(p);p=p*1.8+vec2(1.7,9.2);a*=.4;}return s;}\nvec3 hex(float r,float g,float b){return vec3(r,g,b)/255.;}\nvoid main(){\nvec2 uv=gl_FragCoord.xy/uRes;uv.y=1.-uv.y;\nfloat asp=uRes.x/uRes.y;\nvec2 p=uv*vec2(asp,1.)*.32+uOff;\nfloat t=uT*.07;\nvec2 q=vec2(fbm(p*1.05+vec2(0.,t)),fbm(p*1.05+vec2(5.2,1.3)-t*.8));\nvec2 r=vec2(fbm(p*1.1+1.3*q+vec2(1.7,9.2)+t*.6),fbm(p*1.1+1.3*q+vec2(8.3,2.8)-t*.5));\nfloat n=fbm(p+1.4*r);\nvec3 ink0=hex(%INK0%),ink2=hex(%INK2%),indigo=hex(%INDIGO%),blue=hex(%BLUE%),violet=hex(%VIOLET%),soft=hex(%SOFT%);\nvec3 col=mix(ink0,ink2,smoothstep(-.45,.45,n));\ncol=mix(col,indigo,smoothstep(.0,.7,r.x+.2*n)*.45);\ncol=mix(col,violet,smoothstep(.05,.6,q.y+.25*r.y)*.38*(1.-.55*uv.x));\nvec2 L=vec2(.86+.05*sin(t*2.3),.1+.06*cos(t*1.7))-uOff*vec2(1.2,.9);\nfloat lr=length((uv-L)*vec2(asp,1.))+.35*n;\ncol=mix(col,blue,smoothstep(1.05,.1,lr)*.55);\ncol+=soft*smoothstep(.45,.0,lr)*.16;\nfloat v=length((uv-vec2(.55,.46))*vec2(1.25,1.));\ncol*=mix(1.,.3,smoothstep(.38,1.05,v));\ngl_FragColor=vec4(col,1.);\n}", G = {
 		bonv: {
 			ink0: "#06041A",
 			ink2: "#17103A",
@@ -626,15 +626,15 @@ var W, G, K, q, ie = e((() => {
 			violet: "#6247AB",
 			soft: "#878FE0"
 		}
-	}, q = "radial-gradient(60% 55% at 88% 6%, rgba(61,91,224,.45), rgba(61,91,224,0) 70%),radial-gradient(55% 60% at 22% 70%, rgba(91,68,184,.22), rgba(91,68,184,0) 70%),radial-gradient(80% 80% at 55% 46%, #17103A, #06041A 85%)";
+	}, K = "radial-gradient(60% 55% at 88% 6%, rgba(61,91,224,.45), rgba(61,91,224,0) 70%),radial-gradient(55% 60% at 22% 70%, rgba(91,68,184,.22), rgba(91,68,184,0) 70%),radial-gradient(80% 80% at 55% 46%, #17103A, #06041A 85%)";
 }));
 //#endregion
 //#region src/faq.js
-function ae(e) {
+function oe(e) {
 	if (!e || e.dataset.pvInit) return null;
 	if (e.dataset.pvInit = "1", !document.getElementById("pv-faq-css")) {
 		let e = document.createElement("style");
-		e.id = "pv-faq-css", e.textContent = J, document.head.appendChild(e);
+		e.id = "pv-faq-css", e.textContent = q, document.head.appendChild(e);
 	}
 	let t = [...e.querySelectorAll(".faq-item")], n = [], r = (e, t) => {
 		e.classList.toggle("is-open", t), e._q.setAttribute("aria-expanded", t ? "true" : "false"), e._a.inert = !t;
@@ -642,7 +642,7 @@ function ae(e) {
 	return t.forEach((e) => {
 		let i = e.querySelector(".faq-q"), a = e.querySelector(".faq-a");
 		if (!i || !a) return;
-		let o = "pv-faq-" + ++Y;
+		let o = "pv-faq-" + ++J;
 		e._q = i, e._a = a, i.setAttribute("role", "button"), i.tabIndex = 0, i.setAttribute("aria-controls", o), a.id = o, a.setAttribute("role", "region");
 		let s = document.createElement("div");
 		for (s.className = "pv-faq-in"; a.firstChild;) s.appendChild(a.firstChild);
@@ -665,17 +665,17 @@ function ae(e) {
 		}), e.classList.remove("pv-faq-on"), delete e.dataset.pvInit;
 	};
 }
-var J, Y, oe = e((() => {
-	J = "\n[data-pv=\"faq\"].pv-faq-on .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}\n[data-pv=\"faq\"].pv-faq-on .faq-a > .pv-faq-in{min-height:0;overflow:hidden}\n[data-pv=\"faq\"].pv-faq-on .faq-item.is-open .faq-a{grid-template-rows:1fr}\n[data-pv=\"faq\"] .faq-q{display:flex;justify-content:space-between;align-items:center;gap:1.5rem}\n[data-pv=\"faq\"] .faq-q:focus-visible{outline:2px solid #141238;outline-offset:4px;border-radius:4px}\n.pv-faq-pm{flex:none;position:relative;width:2.5rem;height:2.5rem;border-radius:999px;border:1px solid rgba(20,18,56,.2);transition:background-color .2s,border-color .2s,color .2s}\n.pv-faq-pm::before,.pv-faq-pm::after{content:'';position:absolute;left:50%;top:50%;width:.875rem;height:1.5px;background:currentColor;transform:translate(-50%,-50%);transition:transform .3s}\n.pv-faq-pm::after{transform:translate(-50%,-50%) rotate(90deg)}\n[data-pv=\"faq\"] .faq-q:hover .pv-faq-pm{border-color:#141238}\n[data-pv=\"faq\"] .faq-item.is-open .pv-faq-pm{background:#141238;color:#f8f8f8;border-color:#141238}\n[data-pv=\"faq\"] .faq-item.is-open .pv-faq-pm::after{transform:translate(-50%,-50%) rotate(0)}\n@media (prefers-reduced-motion:reduce){[data-pv=\"faq\"] .faq-a,.pv-faq-pm,.pv-faq-pm::before,.pv-faq-pm::after{transition:none}}", Y = 0;
+var q, J, se = e((() => {
+	q = "\n[data-pv=\"faq\"].pv-faq-on .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.7,.2,1)}\n[data-pv=\"faq\"].pv-faq-on .faq-a > .pv-faq-in{min-height:0;overflow:hidden}\n[data-pv=\"faq\"].pv-faq-on .faq-item.is-open .faq-a{grid-template-rows:1fr}\n[data-pv=\"faq\"] .faq-q{display:flex;justify-content:space-between;align-items:center;gap:1.5rem}\n[data-pv=\"faq\"] .faq-q:focus-visible{outline:2px solid #141238;outline-offset:4px;border-radius:4px}\n.pv-faq-pm{flex:none;position:relative;width:2.5rem;height:2.5rem;border-radius:999px;border:1px solid rgba(20,18,56,.2);transition:background-color .2s,border-color .2s,color .2s}\n.pv-faq-pm::before,.pv-faq-pm::after{content:'';position:absolute;left:50%;top:50%;width:.875rem;height:1.5px;background:currentColor;transform:translate(-50%,-50%);transition:transform .3s}\n.pv-faq-pm::after{transform:translate(-50%,-50%) rotate(90deg)}\n[data-pv=\"faq\"] .faq-q:hover .pv-faq-pm{border-color:#141238}\n[data-pv=\"faq\"] .faq-item.is-open .pv-faq-pm{background:#141238;color:#f8f8f8;border-color:#141238}\n[data-pv=\"faq\"] .faq-item.is-open .pv-faq-pm::after{transform:translate(-50%,-50%) rotate(0)}\n@media (prefers-reduced-motion:reduce){[data-pv=\"faq\"] .faq-a,.pv-faq-pm,.pv-faq-pm::before,.pv-faq-pm::after{transition:none}}", J = 0;
 }));
 //#endregion
 //#region src/nav.js
-function se() {
+function ce() {
 	if (document.getElementById("pv-nav-css")) return;
 	let e = document.createElement("style");
-	e.id = "pv-nav-css", e.textContent = ue, document.head.appendChild(e);
+	e.id = "pv-nav-css", e.textContent = fe, document.head.appendChild(e);
 }
-function ce(e) {
+function le(e) {
 	return r(e, {
 		aspect: () => .62,
 		loop: 1e6,
@@ -689,23 +689,23 @@ function ce(e) {
 		}
 	});
 }
-function X(e) {
+function ue(e) {
 	e && (e.removeAttribute("type"), e.removeAttribute("href"), e.setAttribute("role", "button"), e.tabIndex = 0, e.addEventListener("keydown", (t) => {
 		(t.key === "Enter" || t.key === " ") && (t.preventDefault(), e.click());
 	}));
 }
-function le(e) {
+function de(e) {
 	if (!e || e.dataset.pvInit) return null;
-	e.dataset.pvInit = "1", se();
+	e.dataset.pvInit = "1", ce();
 	let t = matchMedia("(max-width: 991px)"), n = e.querySelector(".pvn-in"), r = e.querySelector(".pvn-links"), i = e.querySelector(".pvn-hl"), a = e.querySelector(".pvn-toggle"), o = e.querySelector(".pvn-burger"), c = [...e.querySelectorAll(".pvn-item")], l = e.querySelector(".pvn-stage"), u = e.querySelector(".pvn-prev"), d = e.querySelector(".pvn-prev-n"), f = e.querySelector(".pvn-s"), p = [], m = (e, t, n, r) => {
 		e && (e.addEventListener(t, n, r), p.push(() => e.removeEventListener(t, n, r)));
 	};
-	X(a), X(o), a && a.setAttribute("aria-expanded", "false");
-	let h = (e) => e.dataset.col !== void 0 && e.dataset.col !== "" ? Z[+e.dataset.col % Z.length] : "#F4F4F4";
+	ue(a), ue(o), a && a.setAttribute("aria-expanded", "false");
+	let h = (e) => e.dataset.col !== void 0 && e.dataset.col !== "" ? Y[+e.dataset.col % Y.length] : "#F4F4F4";
 	if (c.forEach((e) => {
-		e.style.setProperty("--c", h(e)), $(e) && e.setAttribute("aria-current", "page");
+		e.style.setProperty("--c", h(e)), Z(e) && e.setAttribute("aria-current", "page");
 	}), e.querySelectorAll(".pvn-links a.pvn-link").forEach((e) => {
-		$(e) && e.setAttribute("aria-current", "page");
+		Z(e) && e.setAttribute("aria-current", "page");
 	}), f && !f.children.length) {
 		let t = document.createElement("div");
 		t.className = "pvn-s-label", t.textContent = (a ? a.textContent : "Platform").trim(), f.appendChild(t);
@@ -761,7 +761,7 @@ function le(e) {
 	};
 	r && (r.querySelectorAll(".pvn-link").forEach((e) => {
 		m(e, "pointerenter", () => {
-			x(e), e !== a && P(!1);
+			x(e), e !== a && N(!1);
 		}, { passive: !0 }), m(e, "focus", () => x(e)), m(e, "blur", () => setTimeout(C, 0));
 	}), m(r, "pointerenter", () => {
 		y = !0;
@@ -774,7 +774,7 @@ function le(e) {
 		w = e, c.forEach((t, n) => t.classList.toggle("is-active", n === e)), u && (u.href = t.href), d && (d.textContent = (t.querySelector(".pvn-item-n") || t).textContent.trim());
 		let n = document.createElement("div");
 		n.className = "pvn-scene", t.dataset.scene && (n.dataset.scene = t.dataset.scene, n.dataset.col = t.dataset.col), l.appendChild(n);
-		let r = t.dataset.scene ? s(n) : ce(n);
+		let r = t.dataset.scene ? s(n) : le(n);
 		requestAnimationFrame(() => n.classList.add("is-on"));
 		let i = E, a = T;
 		i && (i.classList.remove("is-on"), setTimeout(() => {
@@ -782,63 +782,63 @@ function le(e) {
 		}, 450)), E = n, T = r;
 	}, O = () => {
 		T && T.destroy(), E && E.remove(), T = E = null, w = -1, c.forEach((e) => e.classList.remove("is-active"));
-	}, k = 0, A = 0, j = 0, M = 0, N = () => Math.max(0, c.findIndex((e) => e.getAttribute("aria-current") === "page"));
-	function P(t, n) {
-		clearTimeout(k), clearTimeout(A), !a || b === t ? t && n && c[w] && c[w].focus() : (b = t, e.classList.toggle("is-open", t), a.setAttribute("aria-expanded", t), clearTimeout(j), t ? (M = performance.now(), D(w < 0 ? N() : w), x(a), n && c[w] && c[w].focus()) : (j = setTimeout(O, 450), C()));
+	}, k = 0, A = 0, j = 0, M = 0, ee = () => Math.max(0, c.findIndex((e) => e.getAttribute("aria-current") === "page"));
+	function N(t, n) {
+		clearTimeout(k), clearTimeout(A), !a || b === t ? t && n && c[w] && c[w].focus() : (b = t, e.classList.toggle("is-open", t), a.setAttribute("aria-expanded", t), clearTimeout(j), t ? (M = performance.now(), D(w < 0 ? ee() : w), x(a), n && c[w] && c[w].focus()) : (j = setTimeout(O, 450), C()));
 	}
 	a && (m(a, "pointerenter", (e) => {
-		e.pointerType === "mouse" && (clearTimeout(A), k = setTimeout(() => P(!0), 80));
+		e.pointerType === "mouse" && (clearTimeout(A), k = setTimeout(() => N(!0), 80));
 	}, { passive: !0 }), m(a, "pointerleave", () => clearTimeout(k), { passive: !0 }), m(a, "click", (e) => {
-		e.detail === 0 ? P(!b, !0) : b ? performance.now() - M > 450 && P(!1) : P(!0);
+		e.detail === 0 ? N(!b, !0) : b ? performance.now() - M > 450 && N(!1) : N(!0);
 	}), m(a, "keydown", (e) => {
-		e.key === "ArrowDown" && (e.preventDefault(), P(!0, !0));
+		e.key === "ArrowDown" && (e.preventDefault(), N(!0, !0));
 	}), m(n, "pointerleave", (e) => {
-		e.pointerType === "mouse" && (A = setTimeout(() => P(!1), 200));
+		e.pointerType === "mouse" && (A = setTimeout(() => N(!1), 200));
 	}, { passive: !0 }), m(n, "pointerenter", () => clearTimeout(A), { passive: !0 }), c.forEach((e, t) => {
 		m(e, "pointerenter", () => D(t), { passive: !0 }), m(e, "focus", () => D(t)), m(e, "keydown", (e) => {
 			(e.key === "ArrowDown" || e.key === "ArrowUp") && (e.preventDefault(), c[(t + (e.key === "ArrowDown" ? 1 : c.length - 1)) % c.length].focus());
 		});
 	}), m(e, "focusout", (e) => {
-		b && !n.contains(e.relatedTarget) && P(!1);
+		b && !n.contains(e.relatedTarget) && N(!1);
 	}), m(document, "pointerdown", (e) => {
-		b && !n.contains(e.target) && P(!1);
+		b && !n.contains(e.target) && N(!1);
 	}, { passive: !0 }));
-	let F = !1;
-	function I(t) {
-		F !== t && o && (F = t, e.classList.toggle("is-sheet", t), o.setAttribute("aria-expanded", t), document.documentElement.classList.toggle("pvn-lock", t), window.lenis && (t ? window.lenis.stop() : window.lenis.start()), t && H(!1));
+	let P = !1;
+	function F(t) {
+		P !== t && o && (P = t, e.classList.toggle("is-sheet", t), o.setAttribute("aria-expanded", t), document.documentElement.classList.toggle("pvn-lock", t), window.lenis && (t ? window.lenis.stop() : window.lenis.start()), t && V(!1));
 	}
-	m(o, "click", () => I(!F)), f && f.querySelectorAll("a").forEach((e) => m(e, "click", () => I(!1))), m(t, "change", () => {
-		P(!1), I(!1), _();
+	m(o, "click", () => F(!P)), f && f.querySelectorAll("a").forEach((e) => m(e, "click", () => F(!1))), m(t, "change", () => {
+		N(!1), F(!1), _();
 	}), m(document, "keydown", (e) => {
-		e.key === "Escape" && (b && (P(!1), a.focus()), F && (I(!1), o.focus()));
+		e.key === "Escape" && (b && (N(!1), a.focus()), P && (F(!1), o.focus()));
 	});
-	let L = window.scrollY, R = 0, z = !1, B = !1, V = () => document.documentElement.style.setProperty("--nav-h", (z || !n ? 0 : Math.round(n.getBoundingClientRect().bottom)) + "px");
-	function H(t) {
-		z !== t && (z = t, e.classList.toggle("is-hidden", t), document.documentElement.classList.toggle("nav-hidden", t), V(), t && (P(!1), S()));
+	let I = window.scrollY, L = 0, R = !1, z = !1, B = () => document.documentElement.style.setProperty("--nav-h", (R || !n ? 0 : Math.round(n.getBoundingClientRect().bottom)) + "px");
+	function V(t) {
+		R !== t && (R = t, e.classList.toggle("is-hidden", t), document.documentElement.classList.toggle("nav-hidden", t), B(), t && (N(!1), S()));
 	}
-	V(), m(window, "resize", V, { passive: !0 });
-	let U = () => {
+	B(), m(window, "resize", B, { passive: !0 });
+	let H = () => {
 		let t = window.scrollY;
-		!B && t > 24 ? (B = !0, e.classList.add("is-float")) : B && t < 8 && (B = !1, e.classList.remove("is-float"));
-		let n = t - L;
-		L = t, n && (R = Math.sign(n) === Math.sign(R) ? R + n : n, R > 48 && t > 240 && !b && !F ? H(!0) : (R < -24 || t < 120) && H(!1));
+		!z && t > 24 ? (z = !0, e.classList.add("is-float")) : z && t < 8 && (z = !1, e.classList.remove("is-float"));
+		let n = t - I;
+		I = t, n && (L = Math.sign(n) === Math.sign(L) ? L + n : n, L > 48 && t > 240 && !b && !P ? V(!0) : (L < -24 || t < 120) && V(!1));
 	};
-	return m(window, "scroll", U, { passive: !0 }), U(), function() {
-		p.forEach((e) => e()), clearTimeout(k), clearTimeout(A), clearTimeout(j), O(), I(!1), e.classList.remove("is-open", "is-float", "is-hidden", "is-sheet"), delete e.dataset.pvInit;
+	return m(window, "scroll", H, { passive: !0 }), H(), function() {
+		p.forEach((e) => e()), clearTimeout(k), clearTimeout(A), clearTimeout(j), O(), F(!1), e.classList.remove("is-open", "is-float", "is-hidden", "is-sheet"), delete e.dataset.pvInit;
 	};
 }
-var Z, Q, ue, $, de = e((() => {
-	n(), o(), Z = [
+var Y, X, fe, Z, pe = e((() => {
+	n(), o(), Y = [
 		i[0],
 		i[1],
 		i[2],
 		i[3],
 		i[5]
-	], Q = "cubic-bezier(.2,.7,.2,1)", ue = `
+	], X = "cubic-bezier(.2,.7,.2,1)", fe = `
 html.pvn-lock, html.pvn-lock body{overflow:hidden}
-.pvn{transition:transform .7s ${Q}, opacity .5s ease}
+.pvn{transition:transform .7s ${X}, opacity .5s ease}
 .pvn.is-hidden{transform:translateY(-110%);opacity:0;transition:transform .5s cubic-bezier(.45,0,.2,1), opacity .35s ease .1s}
-.pvn-bg{transform:scale(.985);transition:opacity .45s ease, transform .8s ${Q}}
+.pvn-bg{transform:scale(.985);transition:opacity .45s ease, transform .8s ${X}}
 .pvn-bg::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:.5px;pointer-events:none;
   background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 50%, rgba(255,255,255,0) 100%);
   -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
@@ -848,13 +848,13 @@ html.pvn-lock, html.pvn-lock body{overflow:hidden}
 .pvn-link:focus-visible, .pvn.is-open .pvn-toggle, .pvn-link[aria-current="page"]{color:#f8f8f8}
 .pvn-link[aria-current="page"]::after{content:'';position:absolute;left:50%;bottom:.1rem;width:3px;height:3px;border-radius:50%;background:#928acd;transform:translateX(-50%)}
 .pvn :focus-visible{outline:2px solid rgba(248,248,248,.6);outline-offset:2px}
-.pvn-chev{transition:transform .4s ${Q}}
+.pvn-chev{transition:transform .4s ${X}}
 .pvn.is-open .pvn-chev{transform:rotate(180deg)}
-.pvn-hl{transform:translate(0,-50%);transition:transform .4s ${Q}, width .4s ${Q}, opacity .25s ease}
+.pvn-hl{transform:translate(0,-50%);transition:transform .4s ${X}, width .4s ${X}, opacity .25s ease}
 .pvn-cta .button{white-space:nowrap}
-.pvn-panel{transform:translate(-50%,-4px);transition:opacity .2s ease, transform .3s ${Q}, visibility 0s linear .3s}
+.pvn-panel{transform:translate(-50%,-4px);transition:opacity .2s ease, transform .3s ${X}, visibility 0s linear .3s}
 .pvn-panel::before{content:'';position:absolute;left:0;right:0;top:-1rem;height:1rem}
-.pvn.is-open .pvn-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);transition:opacity .3s ease, transform .5s ${Q}, visibility 0s}
+.pvn.is-open .pvn-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);transition:opacity .3s ease, transform .5s ${X}, visibility 0s}
 .pvn-panel-in{isolation:isolate}
 .pvn-panel-in::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:.5px;pointer-events:none;
   background:linear-gradient(150deg, rgba(248,248,248,.34) 0%, rgba(248,248,248,.08) 40%, rgba(248,248,248,.04) 75%, rgba(214,170,240,.18) 100%);
@@ -865,12 +865,12 @@ html.pvn-lock, html.pvn-lock body{overflow:hidden}
 .pvn-item.is-active .pvn-dot, .pvn-item[aria-current="page"] .pvn-dot{background:var(--c, #f4f4f4)}
 .pvn-scene{position:absolute !important;left:0;top:50%;width:100%;transform:translateY(-50%);opacity:0;transition:opacity .4s ease}
 .pvn-scene.is-on{opacity:1}
-.pvn-prev-go{transition:transform .4s ${Q}}
+.pvn-prev-go{transition:transform .4s ${X}}
 .pvn-prev:hover .pvn-prev-go{transform:translateX(3px)}
 .pvn-sheet{transition:opacity .35s ease, visibility 0s linear .35s}
 .pvn.is-sheet .pvn-sheet{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .4s ease, visibility 0s}
-.pvn-s > *{opacity:0;transform:translateY(10px);transition:opacity .3s ease, transform .5s ${Q};transition-delay:0s}
-.pvn.is-sheet .pvn-s > *{opacity:1;transform:none;transition:opacity .45s ease, transform .7s ${Q};transition-delay:calc(var(--i) * 30ms + 100ms)}
+.pvn-s > *{opacity:0;transform:translateY(10px);transition:opacity .3s ease, transform .5s ${X};transition-delay:0s}
+.pvn.is-sheet .pvn-s > *{opacity:1;transform:none;transition:opacity .45s ease, transform .7s ${X};transition-delay:calc(var(--i) * 30ms + 100ms)}
 .pvn-s-label{margin:0 0 .5rem;font-family:var(--af-mono, 'Roboto Mono', monospace);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#e2c70a}
 .pvn-s-prod{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:.875rem;padding:.625rem 0;color:#f8f8f8;text-decoration:none}
 .pvn-s-prod .pvn-item-n{font-size:1.125rem}
@@ -879,14 +879,14 @@ html.pvn-lock, html.pvn-lock body{overflow:hidden}
 .pvn-s-link .pvn-ext{width:.875rem;height:.875rem}
 .pvn-s-cta{margin-top:auto;padding-top:2rem}
 .pvn-s-cta .button{width:100%}
-.pvn-burger-line{transition:transform .5s ${Q}}
+.pvn-burger-line{transition:transform .5s ${X}}
 @media (max-width:991px){
   .pvn.is-sheet .pvn-burger-line:first-child{transform:translateY(3.25px) rotate(45deg)}
   .pvn.is-sheet .pvn-burger-line:last-child{transform:translateY(-3.25px) rotate(-45deg)}
   .pvn.is-sheet .pvn-bg{opacity:0}
 }
 @media (min-width:992px){ .pvn-sheet{display:none} }
-@media (prefers-reduced-motion:reduce){ .pvn, .pvn *, .pvn *::before, .pvn *::after{transition-duration:.01ms !important;transition-delay:0s !important} }`, $ = (e) => {
+@media (prefers-reduced-motion:reduce){ .pvn, .pvn *, .pvn *::before, .pvn *::after{transition-duration:.01ms !important;transition-delay:0s !important} }`, Z = (e) => {
 		try {
 			let t = new URL(e.href, location.href);
 			return t.origin === location.origin && t.pathname.replace(/\/$/, "") === location.pathname.replace(/\/$/, "");
@@ -894,8 +894,83 @@ html.pvn-lock, html.pvn-lock body{overflow:hidden}
 			return !1;
 		}
 	};
-})), fe = /* @__PURE__ */ t((() => {
-	p(), ee(), ie(), oe(), de(), f(), H(), document.querySelectorAll("header.section_header, [data-af-bg], .feature-grid > .video-animation").forEach(re), document.querySelectorAll("[data-pv=\"faq\"]").forEach(ae), document.querySelectorAll("[data-pv=\"nav\"]").forEach(le);
 }));
 //#endregion
-export default fe();
+//#region src/sliders.js
+function me() {
+	if (!$) {
+		if (!document.querySelector("link[data-pv-swiper]")) {
+			let e = document.createElement("link");
+			e.rel = "stylesheet", e.href = `${Q}/swiper-bundle.min.css`, e.dataset.pvSwiper = "", document.head.appendChild(e);
+		}
+		$ = import(
+			/* @vite-ignore */
+			`${Q}/swiper-bundle.min.mjs`
+).then((e) => e.default || e.Swiper);
+	}
+	return $;
+}
+function he(e, t) {
+	let n = e.getAttribute("data-swiper-id");
+	if (n) {
+		let e = [...document.querySelectorAll(`[data-swiper-${t}="${n}"]`)];
+		if (e.length) return e;
+	}
+	for (let n = e; n && n !== document.body; n = n.parentElement) {
+		let e = n.querySelectorAll(`[data-swiper-${t}]`);
+		if (e.length) return [...e];
+	}
+	return [];
+}
+function ge(e) {
+	if (!e || e.dataset.pvInit) return null;
+	let t = ve[e.getAttribute("data-swiper")], n = e.querySelector(".swiper");
+	if (!t || !n) return null;
+	e.dataset.pvInit = "1";
+	let r = null, i = !1, a = [];
+	return me().then((o) => {
+		if (i || !o) return;
+		n.swiper && !n.swiper.destroyed && n.swiper.destroy(!0, !0);
+		let s = {
+			grabCursor: !0,
+			watchOverflow: !0,
+			...t
+		};
+		_e() && (s.speed = 0), r = new o(n, s);
+		let c = he(e, "prev"), l = he(e, "next"), u = () => r.slidePrev(), d = () => r.slideNext();
+		c.forEach((e) => {
+			e.addEventListener("click", u), a.push(() => e.removeEventListener("click", u));
+		}), l.forEach((e) => {
+			e.addEventListener("click", d), a.push(() => e.removeEventListener("click", d));
+		});
+		let f = [...new Set([...c, ...l].map((e) => e.closest(".slider-arrows-wrapper") || e))], p = () => {
+			c.forEach((e) => e.classList.toggle("is-disabled", r.isBeginning)), l.forEach((e) => e.classList.toggle("is-disabled", r.isEnd)), f.forEach((e) => {
+				e.style.display = r.isLocked ? "none" : "";
+			});
+		};
+		r.on("slideChange reachBeginning reachEnd fromEdge resize lock unlock", p), p();
+	}).catch(() => {}), function() {
+		i = !0, a.forEach((e) => e()), r && !r.destroyed && r.destroy(!0, !0), delete e.dataset.pvInit;
+	};
+}
+var Q, _e, ve, $, ye = e((() => {
+	Q = "https://cdn.jsdelivr.net/npm/swiper@11.2.10", _e = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches, ve = {
+		news: {
+			slidesPerView: "auto",
+			spaceBetween: 20,
+			breakpoints: { 768: { spaceBetween: 40 } }
+		},
+		feature: {
+			slidesPerView: 1,
+			spaceBetween: 24,
+			speed: 600,
+			autoHeight: !0,
+			observer: !0,
+			observeParents: !0
+		}
+	}, $ = null;
+})), be = /* @__PURE__ */ t((() => {
+	p(), te(), ae(), se(), pe(), ye(), f(), V(), document.querySelectorAll("header.section_header, [data-af-bg], .feature-grid > .video-animation").forEach(ie), document.querySelectorAll("[data-pv=\"faq\"]").forEach(oe), document.querySelectorAll("[data-pv=\"nav\"]").forEach(de), document.querySelectorAll("[data-swiper]").forEach(ge);
+}));
+//#endregion
+export default be();

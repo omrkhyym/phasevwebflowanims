@@ -1,0 +1,78 @@
+<!-- Sauvegarde 2026-11-17 : les deux scripts de l'ancienne navigation (navbar_component), retirés du footer de code global du site
+     au nettoyage de fin de refonte. Remplacés par src/nav.js (navigation en île, chargée par site.js). -->
+<script>
+  (function () {
+    const nav = document.querySelector('.navbar_component');
+    if (!nav || typeof gsap === 'undefined') return;
+
+    const root = document.documentElement;
+    const SCROLLED_AT = 50;
+    const HIDE_AFTER = 150;
+    const DELTA = 8;
+
+    let lastY = 0;
+    let hidden = false;
+
+    const show = gsap.quickTo(nav, 'yPercent', { duration: 0.4, ease: 'power3.out' });
+
+    // keep --nav-h in sync with the real navbar height
+    const setNavH = () => root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    setNavH();
+    window.addEventListener('resize', setNavH, { passive: true });
+
+    function onScroll(y) {
+      nav.classList.toggle('is-scrolled', y > SCROLLED_AT);
+
+      const diff = y - lastY;
+      if (Math.abs(diff) < DELTA) return;
+
+      const scrollingDown = diff > 0;
+
+      if (scrollingDown && y > HIDE_AFTER && !hidden) {
+        hidden = true;
+        show(-100);
+        root.classList.add('nav-hidden'); // sticky drops to top: 0
+      } else if (!scrollingDown && hidden) {
+        hidden = false;
+        show(0);
+        root.classList.remove('nav-hidden'); // sticky returns below nav
+      }
+
+      lastY = y;
+    }
+
+    if (window.lenis && typeof window.lenis.on === 'function') {
+      window.lenis.on('scroll', (e) => onScroll(e.scroll));
+    } else {
+      let ticking = false;
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            onScroll(window.scrollY);
+            ticking = false;
+          });
+        },
+        { passive: true },
+      );
+    }
+  })();
+</script>
+<script>
+  const nav = document.querySelector('.navbar_component');
+  const btn = document.querySelector('.navbar_menu-button');
+
+  const syncNav = () => {
+    const isOpen = btn.classList.contains('w--open');
+    nav.classList.toggle('nav-open', isOpen); // second arg = force to match
+    isOpen ? window.lenis?.stop() : window.lenis?.start();
+  };
+
+  // Mirror Webflow's state no matter what opens/closes it
+  new MutationObserver(syncNav).observe(btn, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+</script>

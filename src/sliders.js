@@ -30,6 +30,15 @@ const CONFIGS = {
   },
 };
 
+// flèche au bout du slider : presque transparente et inactive (repris de .arrow.is-left/right.is-disabled de Webflow,
+// classe posée seulement par ce module, donc supprimée par le Clean up des classes)
+const CSS = `:is([data-swiper-prev],[data-swiper-next]).is-disabled{opacity:.1;pointer-events:none;cursor:default}`;
+
+function injectCss() {
+  if (document.getElementById('pv-sliders-css')) return;
+  const st = document.createElement('style'); st.id = 'pv-sliders-css'; st.textContent = CSS; document.head.appendChild(st);
+}
+
 let loading = null;
 function loadSwiper() {
   if (!loading) {
@@ -65,6 +74,7 @@ export function initSlider(root) {
   const el = root.querySelector('.swiper');
   if (!config || !el) return null;
   root.dataset.pvInit = '1';
+  injectCss();
 
   let swiper = null;
   let dead = false;

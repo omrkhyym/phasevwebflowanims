@@ -16,8 +16,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.15.1` | `trial-hero-bg`, `trial-hero-slot` ; refonte : `design-space-glossy` (dans `.ss-anim` de la success story), `platform-connect-v2` (dans `.animation-wrapper` du bloc plateforme), `faq` (sur `.faq-wrap`) |
 | Toutes (code global) | site | `site.js` | `v0.23.0` | fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` ; navigation en île sur `[data-pv="nav"]` (composant `nav-island`) |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.18.0` | `portfolio-hero-bg`, `portfolio-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux de Build conviction, `data-mode` rank et dist, et un dans `.ss-anim` du bloc Evidence, rank), `platform-connect-v2`, `faq` |
-| AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` | `conductor-hero-bg`, `conductor-hero-slot`, `platform-connect` (dans un `.animation-wrapper` créé à la place de l'`.entry-grid`) |
-| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.13.0` | `bonv-hero-bg` (premier enfant du header), `bonv-hero-slot` (dernier enfant de la grille) |
+| AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.24.0` | `conductor-hero-bg`, `conductor-hero-slot` ; refonte : `cond-answer` (panneau `cond-panel`), `cond-dose` (`.ss-anim` du Proof), `cond-backbone`, `cond-protocol`, `cond-report` (panneaux des étapes, classe `cond-mount`), `platform-connect-v2`, `faq` ; texte des scènes dans les enfants `[data-role]` |
+| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.24.0` | `bonv-hero-bg`, `bonv-hero-slot` ; refonte : `bonv-answer` (panneau `cond-panel`), `bonv-ask`, `bonv-collab`, `bonv-orch` (panneaux des étapes, classe `cond-mount`), `faq` absent (pas de FAQ dans le document) ; texte des scènes dans les enfants `[data-role]` |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.21.0` | `case-studies` (attribut sur le `container-large` de la section des cartes), slider `[data-swiper="feature"]` du header |
 | Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.21.0` | `case-study` (attribut sur `main-wrapper`) |
 | Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.22.0` | `data-af-lib` (container de la liste et des filtres Finsweet) |
@@ -53,6 +53,9 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/resources.js` | Refonte, Resources : CSS du proto (liste, filtres Finsweet en barre segmentée avec pastille glissante, cartes, mise en page de l'article, heros) ; masque les paragraphes vides des articles |
 | `src/news-cards.js` | Refonte, Home : cartes Latest news (`swiper-item`) restylées, CSS seulement |
 | `src/nav.js` | Refonte : comportement de la navigation en île (fond au scroll, masquage en descendant, pastille de survol, panneau Platform avec aperçus animés, menu plein écran rempli depuis la barre, `--nav-h` et `nav-hidden`) ; structure native dans le composant `nav-island` |
+| `src/cond-answer.js`, `src/cond-dose.js`, `src/cond-backbone.js`, `src/cond-protocol.js`, `src/cond-report.js` | Refonte, AI Conductor : scènes dans le style du film BonV (copies du kit), texte lu dans les `[data-role]` |
+| `src/bonv-answer.js`, `src/bonv-ask.js`, `src/bonv-collab.js`, `src/bonv-orch.js` | Refonte, BonV : scènes d'après le film (copies du kit), texte lu dans les `[data-role]` |
+| `src/cond-roles.js` | Masque à l'œil les `[data-role]` des scènes cond-/bonv- (lus par les lecteurs d'écran) ; panneau des étapes en pleine largeur en tablette |
 | `src/case-studies.js` | Case Studies : filtres Product et Therapeutic area (pilules `fs_radio_field`, liste `filter-select`, paramètres d'URL `?product=` et `?area=`), lien et chiffre clé des cas mis en avant, tableau At a glance (lignes et colonne 3 vides masquées), récit, cartes Why it matters avec icône, FAQ en accordéon, source facultative, 3 études liées sans l'étude en cours. CSS injecté, ciblé par attributs `data-cs-*` (proto `protos/case-studies/phasev-case-studies-protos.html`) |
 | `src/success-design-space.js` | Success story Trial Optimizer : nuage de designs simulés, cible 90 %, design retenu N 574 (proto 1 de `protos/trial/phasev-success-story-protos.html`) |
 
@@ -77,6 +80,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.24.0` | (voir journal) | Refonte, AI Conductor et BonV : `conductor.js` et `bonv.js` montent leurs scènes ; chunks renommés (`bonv-draw-Db5acgQk.mjs`, `mini-scene-BypIfqjG.mjs`, nouveau `cond-roles-*.mjs`) ; `site.js`, `main.js`, `company.js` régénérés sans changement de comportement |
 | `v0.23.0` | `6f86c22` | Refonte, navigation : `site.js` monte `src/nav.js` ; `mini-scene` devient un chunk partagé (`dist/main.js` régénéré, Home reste en `v0.22.0`) |
 | `v0.22.0` | `943bf13` | Refonte, Resources : nouvelle entrée `resources.js` (bibliothèque et article) ; Home : `main.js` ajoute `news-cards` (Latest news) |
 | `v0.21.0` | (voir journal) | Refonte, Case Studies : CSS du proto (bloc Case Studies d'`affine.css`) ajouté au module `src/case-studies.js`, sections sombres repérées par `.surface-dark` ; pastille glissante des filtres |
@@ -126,6 +130,11 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-17
+- **AI Conductor et BonV refaits en natif** (protos `conductor-affine`, `bonv-affine`), à la demande de Romain avant le nettoyage. Section vidéo d'origine conservée en tête (comme le proto).
+  - AI Conductor : hero (titre recréé sur deux lignes, l'ancien masqué ; paragraphe du document) ; cost (2 chiffres en cartes, `glance-grid.is-cards.is-two`, source `rp-note.is-source`) ; answer (`cond-panel`, fond entre-deux au lieu du bleu BonV du proto, règle du fond sombre unique) ; Proof sombre (chiffres `number-span.is-company.is-on-dark`, success story `ss-wrap.is-more` avec `ss-body`, chiffre long `ss-number.is-long`, scène `cond-dose`) ; How it works (3 étapes numérotées, libellés de listes `text-size-label.is-list-label`) ; Governed sombre (cartes `rp-step` en 2 colonnes `rp-steps.is-two`, icônes `gov-icon` blanchies, pastilles `chips` / `chip`) ; FAQ (10) ; plateforme ; See it in your workflow (bouton violet « Watch a Demo Video », lien `#` à fournir).
+  - BonV : hero (titre et paragraphe du document, second bouton « Learn more ») ; cost (2 chiffres réels ; les 2 chiffres d'enquête « XX% » du document sont laissés de côté) ; answer (`cond-panel`, `bonv-answer`) ; Ask / Collaborate / Orchestrate (scènes `bonv-ask`, `bonv-collab`, `bonv-orch`) ; cas client sombre sans visuel ni métrique (`ss-wrap.is-solo`) ; Flexible entry points (4–10 weeks) ; Governed sombre (3 cartes `rp-steps.is-three`, pastilles) ; See it in your workflow (lien `#` à fournir). Bandeau de footer propre à BonV non repris (footer unique).
+  - Placeholders du document retirés des pages (✓?, XX%, métrique, lien vidéo), listés dans les points ouverts.
+  - Release `v0.24.0` ; loaders AI Conductor (`v0.6.0` → `v0.24.0`) et BonV (`v0.13.0` → `v0.24.0`).
 - **Navigation en île, native** (proto `_kit/nav-island.js`, validé) : nouveau composant `nav-island` (groupe global), construit sur la Home puis posé en tête du `page-wrapper` de Home, Company, ClinOps, Response, Trial, Portfolio, AI Conductor, BonV, Case Studies (liste et template), Resources (liste et template), Contact, Privacy Policy, 404.
   - Structure éditable : logo, Platform (bouton), Case Studies, Resources, About, Careers (nouvel onglet), bouton « Book a Demo » (composant button vers Contact) ; panneau Platform avec les 6 produits (`data-scene`, `data-col`, `data-group`, question en mono) et zone d'aperçu ; conteneur du menu mobile (`.pvn-s`) rempli par le module. Classes `pvn-*` (mise en page de base dans Webflow), états et transitions dans `src/nav.js`.
   - Ancienne nav : classe `navbar_component` en `display:none` (composant `nav` et ses instances conservés). Le script global de l'ancienne nav (code du site) tourne encore à vide : à retirer au nettoyage.
@@ -450,6 +459,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
+- AI Conductor et BonV, contenu client : liens des boutons « Watch a Demo Video » (`#`) ; AI Conductor : usage public des chiffres Proof (10 partenaires, top-5), accord du sponsor pour l'exemple dose, liste des intégrations, CRF-to-EDC, réponse FAQ sur la simulation ; BonV : 2 chiffres d'enquête et leur source, métrique du cas client.
 - Nav : retirer au nettoyage le composant `nav` (et ses 22 instances), `nav-dropdown`, `nav_link`, et dans le code global du site les scripts de l'ancienne nav (masquage GSAP, `syncNav`).
 - **Footer, demandé par Romain** : supprimer le composant `section_footer`, qui ne sert plus (remplacer ses instances par `only-footer` sur chaque page, puis supprimer le composant) ; retirer les éléments masqués de `only-footer`.
 - Home : ancre `#phasev-platform` à déplacer si un lien l'utilise ; code de page mort (carte de décision `dm-*`, CSS et script) à retirer au nettoyage.

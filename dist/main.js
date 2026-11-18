@@ -1,6 +1,6 @@
 import { n as e, t } from "./rolldown-runtime-wf392T_D.mjs";
-import { c as n, m as r, s as i } from "./bonv-draw-D7G52O51.mjs";
-import { n as a, t as o } from "./mini-scene-D5mHvjMS.mjs";
+import { d as n, u as r, v as i } from "./bonv-draw-Db5acgQk.mjs";
+import { n as a, t as o } from "./mini-scene-BypIfqjG.mjs";
 //#region src/hero-sequence/engine.js
 function s(e) {
 	let t = e.getContext("webgl2", {
@@ -1194,14 +1194,14 @@ function ye(e) {
 	}
 	let h = 0, g = 0, _ = 1, v = !1;
 	function y() {
-		v = h < 640, _ = i(h / 1100, .7, 1.15);
-		let e = 64 * _, t = (v ? 40 : 54) * _, n = v ? 118 * _ : 230 * _, r = 24 * _;
+		v = h < 640, _ = r(h / 1100, .7, 1.15);
+		let e = 64 * _, t = (v ? 40 : 54) * _, n = v ? 118 * _ : 230 * _, i = 24 * _;
 		return {
 			top: e,
 			rowH: t,
 			padL: n,
-			padR: r,
-			w: h - n - r,
+			padR: i,
+			w: h - n - i,
 			BH: (v ? 12 : 16) * _,
 			gridTop: e + 14 * _,
 			bottom: e + 14 * _ + t * Q.length
@@ -1213,24 +1213,24 @@ function ye(e) {
 	}
 	function x(e) {
 		n.clearRect(0, 0, h, g);
-		let { top: t, rowH: i, padL: a, w: o, BH: s, gridTop: c, bottom: l } = y(), u = K.slip / be, b = (e) => a + e * o, x = Math.max(12, (v ? 12 : 15) * _), S = Math.max(8.5, 10 * _);
+		let { top: t, rowH: r, padL: a, w: o, BH: s, gridTop: c, bottom: l } = y(), u = K.slip / be, b = (e) => a + e * o, x = Math.max(12, (v ? 12 : 15) * _), S = Math.max(8.5, 10 * _);
 		for (let e = 0; e <= 8; e++) {
 			let n = e / 8, r = Math.round(be * n), i = b(n);
 			m(i, c - 6 * _, i, l, q, e === 0 ? .18 : .07), (!v || e % 2 == 0) && d("W" + r, i, t - 6 * _, 400, S, J, 1, e === 0 ? "left" : e === 8 ? "right" : "center", !0);
 		}
 		d("STUDY TIMELINE", 0, t - 6 * _, 400, S, J, 1, "left", !0);
-		let C = $(r(e, .7, 1.7)), w = !1;
+		let C = $(i(e, .7, 1.7)), w = !1;
 		Q.forEach((t, a) => {
-			let l = c + a * i + i / 2, f = t.tool * K.lag, h = a === 0 ? C : $(r(e, 1.6 + f, 2.6 + f));
+			let l = c + a * r + r / 2, f = t.tool * K.lag, h = a === 0 ? C : $(i(e, 1.6 + f, 2.6 + f));
 			a > 0 && h < 1 && C >= 1 && (w = !0);
 			let g = t.a * X + (a === 0 ? 0 : u * h), y = t.b * X + u * (a === 0 ? C : h);
-			if (a && m(0, l - i / 2, b(1), l - i / 2, q, .06), d(t.n, 0, l + (v ? 4 : -1) * _, 400, x, h > 0 || a === 0 ? q : J), v || d(Z[t.tool].n, 0, l + 15 * _, 400, S * .9, Z[t.tool].c, .85, "left", !0), n.save(), n.setLineDash([2, 3]), p(b(t.a * X) + .5, l - s / 2 + .5, (t.b - t.a) * X * o - 1, s - 1, s / 2), n.strokeStyle = "rgba(244,244,244,.28)", n.lineWidth = 1, n.stroke(), n.restore(), a > 0 && C >= 1 && h < 1) {
+			if (a && m(0, l - r / 2, b(1), l - r / 2, q, .06), d(t.n, 0, l + (v ? 4 : -1) * _, 400, x, h > 0 || a === 0 ? q : J), v || d(Z[t.tool].n, 0, l + 15 * _, 400, S * .9, Z[t.tool].c, .85, "left", !0), n.save(), n.setLineDash([2, 3]), p(b(t.a * X) + .5, l - s / 2 + .5, (t.b - t.a) * X * o - 1, s - 1, s / 2), n.strokeStyle = "rgba(244,244,244,.28)", n.lineWidth = 1, n.stroke(), n.restore(), a > 0 && C >= 1 && h < 1) {
 				let e = b(t.a * X + u), r = b(g);
 				n.save(), n.setLineDash([3, 3]), p(r, l - s / 2 - 3 * _, e - r + (y - g) * o, s + 6 * _, (s + 6 * _) / 2), n.strokeStyle = Y, n.globalAlpha = .8, n.lineWidth = 1, n.stroke(), n.restore(), n.globalAlpha = 1, d("STALE", b(y) + 10 * _, l + S * .36, 400, S, Y, .9, "left", !0);
 			}
 			p(b(g), l - s / 2, (y - g) * o, s, s / 2), n.globalAlpha = .92, n.fillStyle = Z[t.tool].c, n.fill(), n.globalAlpha = 1;
 		});
-		let T = Q[Q.length - 1], E = $(r(e, 1.6 + T.tool * K.lag, 2.6 + T.tool * K.lag)), D = b(T.b * X), O = b(T.b * X + u * E), k = c - 6 * _, A = l + 8 * _;
+		let T = Q[Q.length - 1], E = $(i(e, 1.6 + T.tool * K.lag, 2.6 + T.tool * K.lag)), D = b(T.b * X), O = b(T.b * X + u * E), k = c - 6 * _, A = l + 8 * _;
 		if (n.save(), n.setLineDash([3, 4]), m(D, k, D, A, q, .5), n.restore(), d("PLANNED", D, A + 18 * _, 400, S, J, 1, "center", !0), E > .03) {
 			n.save(), n.beginPath(), n.rect(D, k, O - D, A - k), n.clip();
 			for (let e = D - 80; e < O + 80; e += 7 * _) m(e, k, e - 70 * _, A, Y, .14);

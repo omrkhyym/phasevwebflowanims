@@ -8,6 +8,7 @@ import { initDarkBg } from './src/dark-bg.js';
 import { initFaq } from './src/faq.js';
 import { initNav } from './src/nav.js';
 import { initSlider } from './src/sliders.js';
+import { initBackToTop } from './src/back-to-top.js';
 
 initFloatingBg();
 initLineFields();
@@ -17,3 +18,5 @@ document.querySelectorAll('[data-pv="faq"]').forEach(initFaq);
 document.querySelectorAll('[data-pv="nav"]').forEach(initNav);
 // sliders : un seul système pour tous les [data-swiper] (nettoyage, 2026-11-17)
 document.querySelectorAll('[data-swiper]').forEach(initSlider);
+// footer : « Back to top » avec easing (2026-11-18)
+document.querySelectorAll('[data-pv="back-to-top"]').forEach(initBackToTop);

@@ -14,7 +14,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.17.0` | `clinops-hero-bg`, `clinops-hero-slot` ; refonte : `clinops-proof-glossy` (dans `.ss-anim` du bloc Proof, chiffres en attributs `data-sites`, `data-rec`, `data-other`, `data-gain`), `platform-connect-v2`, `faq` |
 | Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.16.0` | `response-hero-bg`, `response-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux vidéo, `data-mode` precision et split), `platform-connect-v2`, `faq` |
 | Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.15.1` | `trial-hero-bg`, `trial-hero-slot` ; refonte : `design-space-glossy` (dans `.ss-anim` de la success story), `platform-connect-v2` (dans `.animation-wrapper` du bloc plateforme), `faq` (sur `.faq-wrap`) |
-| Toutes (code global) | site | `site.js` | `v0.23.0` | fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` ; navigation en île sur `[data-pv="nav"]` (composant `nav-island`) |
+| Toutes (code global) | site | `site.js` | `v0.25.0` | sliders `[data-swiper]` ; fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` ; navigation en île sur `[data-pv="nav"]` (composant `nav-island`) |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.18.0` | `portfolio-hero-bg`, `portfolio-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux de Build conviction, `data-mode` rank et dist, et un dans `.ss-anim` du bloc Evidence, rank), `platform-connect-v2`, `faq` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.24.0` | `conductor-hero-bg`, `conductor-hero-slot` ; refonte : `cond-answer` (panneau `cond-panel`), `cond-dose` (`.ss-anim` du Proof), `cond-backbone`, `cond-protocol`, `cond-report` (panneaux des étapes, classe `cond-mount`), `platform-connect-v2`, `faq` ; texte des scènes dans les enfants `[data-role]` |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.24.0` | `bonv-hero-bg`, `bonv-hero-slot` ; refonte : `bonv-answer` (panneau `cond-panel`), `bonv-ask`, `bonv-collab`, `bonv-orch` (panneaux des étapes, classe `cond-mount`), `faq` absent (pas de FAQ dans le document) ; texte des scènes dans les enfants `[data-role]` |
@@ -470,7 +470,6 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 - « Static Page » (`/static-template-slug-…`) : page vide du template d'origine, encore publiée ; à supprimer ou passer en brouillon (étape 5 du nettoyage).
 - AI Conductor et BonV, contenu client : liens des boutons « Watch a Demo Video » (`#`) ; AI Conductor : usage public des chiffres Proof (10 partenaires, top-5), accord du sponsor pour l'exemple dose, liste des intégrations, CRF-to-EDC, réponse FAQ sur la simulation ; BonV : 2 chiffres d'enquête et leur source, métrique du cas client.
-- Home : code de page mort (carte de décision `dm-*`, CSS et script) à retirer au nettoyage.
 - Portfolio, contenu client : lien du bouton « Explore an example analysis » (`#`) ; FAQ, textes à fournir : métrique de validation des modèles, fourchette de délai standard, GDPR/HIPAA si vérifié, texte de confidentialité pour les deals ; bandeau de footer propre à Portfolio (proto) à traiter avec le footer unifié.
 - Home : pas de titre SEO ni de meta description.
 - Home DEV : à passer en brouillon pour qu'elle ne soit plus publiée à `/home-dev`.
@@ -479,7 +478,6 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - `section_header` tablette (height auto + min-height 100svh) : à publier, puis vérifier sur iPhone les pages produit, Company (au moins un écran) et Resources (hauteur du contenu).
 - Home, hero `v0.12.1` : à publier, puis vérifier sur un vrai mobile (bloc carré sous le texte, espacement 2rem, points coupés aux bords) et les cinq formes.
 - `platform-tabs` : point de montage sans module.
-- Nettoyage de fin de refonte (code des pages) : ancien script d'onglets GSAP et son CSS encore dans le footer de Response (plus d'onglets sur la page depuis la refonte), même copie sur Portfolio et AI Conductor, à retirer quand ces pages sont refaites ; ancien point de montage `response-hero-bg` et `platform-connect` v1 à vérifier dans `response.js`.
 - Brief ClinOps : opacité côté texte, Amériques sous le texte.
 - Brief Response : lisibilité de la séparation des deux bras.
 - Brief Trial : lisibilité des croisements entre courbes.

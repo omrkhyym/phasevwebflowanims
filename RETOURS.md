@@ -19,7 +19,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 | # | Point | Précisions | Statut |
 |---|---|---|---|
 | 4 | Graisse des titres | Les headers sont en gras, les autres titres non : harmoniser en non gras. Fait : heros produit, Company et Contact passés de 500 à 300 (comme les titres de section). Validé par Romain pour les pages faites. Heros des fiches Resources et Case Studies passés en 300 avec la release v0.27.0 | fait, à vérifier |
-| 18 | Resources et Case Studies : header réduit | Slider du header retiré, header comme Privacy Policy, titre et intro en Lorem Ipsum, surtitre jaune comme sur tous les headers (nom de la page). Fait, release v0.27.0 | fait, à vérifier |
+| 18 | Resources et Case Studies : header réduit | Slider du header retiré, header comme Privacy Policy, titre et intro en Lorem Ipsum, surtitre jaune comme sur tous les headers (nom de la page). Fait, release v0.27.0 | validé |
 | 2 | Liens qui ne mènent nulle part | Scanner toutes les pages, lister tous les liens morts (pas seulement le header Portfolio) | à faire |
 | 7 | Footer : titre et texte éditables par page | Le footer actuel devient celui par défaut si rien n'est rempli. Reprendre les textes des anciennes pages de phasevtrials.com, sauf le défaut de l'époque (titre seul « Better decisions / Connected development ») | à faire |
 | 8 | Case studies des pages produit dynamiques | Collection List CMS filtrée par produit : une étude supprimée ne s'affiche plus | à faire |

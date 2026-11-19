@@ -6,13 +6,13 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 
 | # | Point | Précisions | Statut |
 |---|---|---|---|
-| 13 | BonV : virer le bloc Flexible Entry Point | Suppression demandée explicitement (pas un simple masquage) | à faire |
-| 12 | BonV : cacher le bloc case studies | | à faire |
-| 11 | BonV : premier bloc sur fond light | Le bloc juste après le hero | à faire |
-| 17 | Contact : éclaircir le fond des champs | | à faire |
-| 14 | BonV : intégrer une FAQ | Lorem Ipsum en attendant le vrai contenu | à faire |
-| 5 | Case studies : surtitre « Evidence » remplacé par « Case studies », gros chiffres retirés du bas des cartes | Home et toutes les autres pages. « Evidence » n'existe plus comme section | à faire |
-| 6 | Slider du bas (All insights) : plus de bouton en contour seul | Home et toutes les autres pages | à faire |
+| 13 | BonV : virer le bloc Flexible Entry Point | Suppression demandée explicitement (pas un simple masquage) | fait, à vérifier |
+| 12 | BonV : cacher le bloc case studies | | fait, à vérifier |
+| 11 | BonV : premier bloc sur fond light | Le bloc juste après le hero | fait, à vérifier |
+| 17 | Contact : éclaircir le fond des champs | 1re passe trop timide (10 %), 2e passe à 20 % | fait, à vérifier |
+| 14 | BonV : intégrer une FAQ | Lorem Ipsum en attendant le vrai contenu | fait, à vérifier |
+| 5 | Case studies : surtitre « Evidence » remplacé par « Case studies », gros chiffres retirés du bas des cartes | Home et toutes les autres pages. « Evidence » n'existe plus comme section. Anciens surtitres et chiffres supprimés, pas masqués | fait, à vérifier |
+| 6 | Slider du bas (All insights) : plus de bouton en contour seul | Home et toutes les autres pages, heros compris. Fait : Home (2 « All insights ») et heros AI Conductor et BonV (« Learn more ») passés en Purple. Restent les sliders des headers Resources et Case Studies, qui partent au point 18. Ensuite : supprimer les variantes « Transparent » et « Transparent on White » du composant button | en cours |
 
 ## Moyens
 

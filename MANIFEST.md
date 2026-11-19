@@ -136,6 +136,12 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-11-19
 
+- **Retours généraux de Romain : tâches rapides** (suivi dans `RETOURS.md`, points 13, 12, 11, 17, 14, 5, 6). Designer et code de page seulement, pas de release.
+  - BonV : section Flexible entry points **supprimée** (demande explicite de Romain) ; section cas client sombre (`ss-title` « From a single question to a working project team ») masquée ; section vidéo `#bonv-video` passée de `is-white` à `is-light` ; nouvelle section FAQ `is-light` (6 questions Lorem Ipsum, structure `faq-wrap` `data-pv="faq"` comme AI Conductor, montée par `site.js`) entre Governed et See it in your workflow.
+  - Contact : fond des champs du formulaire éclairci dans le code de page (head), en deux passes (la première jugée trop timide) : fond `rgba(255,255,255,.04)` → `.2`, focus `.06` → `.26`, bord `.14` → `.24` (survol `.36`, focus `.7`), placeholder `.38` → `.5`. Reste du bloc inchangé.
+  - Surtitre « Evidence » → « Case studies » sur Home et Portfolio : nouveau bloc texte `text-size-label text-color-yellow`, l'ancien div **supprimé** (son texte n'est pas modifiable par l'API). Response disait déjà « Case studies », les autres pages n'ont pas ce surtitre.
+  - Gros chiffres en bas des cartes case studies (`cs-fig`) **supprimés** : Home (1), ClinOps (3), Response (1), Portfolio (1). Décision de Romain : ne pas garder d'éléments masqués quand il demande un retrait.
+  - Boutons en contour passés en « Purple » : Home, les deux « All insights » (variante « Transparent on White ») ; heros AI Conductor et BonV, « Learn more » (variante « Transparent »).
 - **Company, « PhaseV at a glance » : chiffres 2026 du client** (tableau « Last year → This year », accord de Romain). Sponsors and CROs 50+ → 55+ ; Patient-level records 10M+ → 20M+. Inchangés : 10 (top 20 pharma), 100+ (clinical trials), 50+ (disease models), 10+ (papers). Libellés non touchés.
 
 - **CMS Case Studies : 12 fiches archivées** (liste client « LIST TO KEEP_DELETE CASE STUDIES », accord de Romain). Archivées, pas supprimées : réversibles. Disparaissent du site à la prochaine publication de Romain. Archivées : ClinOps #3 Sickle Cell, #4 IgA, #5 Vitiligo ; Trial #3 Denali, #4 N-of-1 ASO, #5 MASH 2/3, #6 Seamless 2/3 ; Portfolio #2 MASH Indication, #3 Trispecific, #5 HLA-G, #6 PD-L1, #7 Hunter. Restent 9 fiches : NSCLC, COPD, Infectious Disease, Rheumatic, Oral Insulin, ALS, Lupus, Pipeline Acquisition, et Obesity (à fusionner avec Pipeline Acquisition, contenu à reprendre plus tard).
@@ -487,6 +493,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
+- Retours généraux du 2026-11-19 : avancement point par point dans `RETOURS.md`. Boutons en contour restants : sliders des headers Resources (« Read More ») et Case Studies (« Read the case »), qui partent au point 18 ; ensuite supprimer les variantes « Transparent » et « Transparent on White » du composant `button` (vérifier d'abord qu'aucune instance ne les utilise, y compris dans les composants).
 - Case Studies : fiche Obesity à fusionner avec Pipeline Acquisition (édition plus tard) ; ligne « Oncology RO » de la liste client sans fiche CMS (à créer ?) ; cartes case studies statiques des pages produit à vérifier, certaines peuvent pointer vers des fiches archivées.
 - Terms of Service : page à créer si le client en a une (lien masqué dans le footer). SEO des modèles CMS (Resources, Case Studies) à lier aux champs dans le Designer. Redirections `/evidence` → `/case-studies` si besoin. Contenu client : voir le doc « PhaseV website: review notes ».
 - AI Conductor et BonV, contenu client : liens des boutons « Watch a Demo Video » (`#`) ; AI Conductor : usage public des chiffres Proof (10 partenaires, top-5), accord du sponsor pour l'exemple dose, liste des intégrations, CRF-to-EDC, réponse FAQ sur la simulation ; BonV : 2 chiffres d'enquête et leur source, métrique du cas client.

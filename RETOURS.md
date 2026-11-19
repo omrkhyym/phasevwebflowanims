@@ -22,7 +22,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 | 18 | Resources et Case Studies : header réduit | Slider du header retiré, header comme Privacy Policy, titre et intro en Lorem Ipsum, surtitre jaune comme sur tous les headers (nom de la page). Fait, release v0.27.0 | validé |
 | 2 | Liens qui ne mènent nulle part | Scanner toutes les pages, lister tous les liens morts (pas seulement le header Portfolio). Relevé fait le 2026-11-19, voir plus bas. Tout est corrigé sauf les cartes case studies en 404, réglées par le point 8 | en cours |
 | 7 | Footer : titre et texte éditables par page | Le footer actuel devient celui par défaut si rien n'est rempli. Reprendre les textes des anciennes pages de phasevtrials.com, sauf le défaut de l'époque (titre seul « Better decisions / Connected development ») | à faire |
-| 8 | Case studies des pages produit dynamiques | Collection List CMS filtrée par produit : une étude supprimée ne s'affiche plus. Pages concernées : Portfolio, Response, ClinOps (Trial n'a pas de cartes). Portfolio fait (Romain, Designer). Response et ClinOps : grilles statiques supprimées, liste à coller depuis Portfolio et filtre produit à changer | en cours |
+| 8 | Case studies des pages produit dynamiques | Collection List CMS filtrée par produit : une étude supprimée ne s'affiche plus. Pages concernées : Portfolio, Response, ClinOps (Trial n'a pas de cartes). Portfolio fait (Romain, Designer). Response et ClinOps : grilles statiques supprimées, liste à coller depuis Portfolio et filtre produit à changer. Trial (décision de Romain) : ajouter le bloc complet copié de ClinOps sous la success story, filtre Trial Optimizer ; titre et bouton ajustés ensuite par Claude | en cours |
 
 ## À discuter d'abord
 

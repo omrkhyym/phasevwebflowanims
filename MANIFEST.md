@@ -505,7 +505,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
-- Retours généraux du 2026-11-19 : avancement point par point dans `RETOURS.md`. Points 13, 12, 11, 17, 14, 5, 6, 4, 18 faits, à vérifier après publication.
+- Retours généraux du 2026-11-19 : avancement point par point dans `RETOURS.md` (section « Pour plus tard » : doublon de lien sur Trial, tri des listes case studies). Points 13, 12, 11, 17, 14, 5, 6, 4, 18 faits, à vérifier après publication.
 - Case Studies : fiche Obesity à fusionner avec Pipeline Acquisition (édition plus tard) ; ligne « Oncology RO » de la liste client sans fiche CMS (à créer ?) ; cartes case studies statiques des pages produit à vérifier, certaines peuvent pointer vers des fiches archivées.
 - Terms of Service : page à créer si le client en a une (lien masqué dans le footer). SEO des modèles CMS (Resources, Case Studies) à lier aux champs dans le Designer. Redirections `/evidence` → `/case-studies` si besoin. Contenu client : voir le doc « PhaseV website: review notes ».
 - AI Conductor et BonV, contenu client : liens des boutons « Watch a Demo Video » (`#`) ; AI Conductor : usage public des chiffres Proof (10 partenaires, top-5), accord du sponsor pour l'exemple dose, liste des intégrations, CRF-to-EDC, réponse FAQ sur la simulation ; BonV : 2 chiffres d'enquête et leur source, métrique du cas client.

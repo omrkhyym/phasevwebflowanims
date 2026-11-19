@@ -22,7 +22,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 | 18 | Resources et Case Studies : header réduit | Slider du header retiré, header comme Privacy Policy, titre et intro en Lorem Ipsum, surtitre jaune comme sur tous les headers (nom de la page). Fait, release v0.27.0 | validé |
 | 2 | Liens qui ne mènent nulle part | Scanner toutes les pages, lister tous les liens morts (pas seulement le header Portfolio). Relevé fait le 2026-11-19, voir plus bas. Tout est corrigé ; les cartes case studies en 404 ont disparu avec le point 8 | fait, à vérifier |
 | 7 | Footer : titre et texte éditables par page | Le footer actuel devient celui par défaut si rien n'est rempli. Reprendre les textes des anciennes pages de phasevtrials.com, sauf le défaut de l'époque (titre seul « Better decisions / Connected development ») | à faire |
-| 8 | Case studies des pages produit dynamiques | Collection List CMS filtrée par produit : une étude supprimée ne s'affiche plus. Pages concernées : Portfolio, Response, ClinOps (Trial n'a pas de cartes). Portfolio fait (Romain, Designer). Fait sur Portfolio, Response, ClinOps et Trial (bloc ajouté sous la success story). Filtres vérifiés. Ouvert : tri par Order (aucun posé), lien « Explore the case study library → » de la success story Trial en doublon du bouton | fait, à vérifier |
+| 8 | Case studies des pages produit dynamiques | Collection List CMS filtrée par produit : une étude supprimée ne s'affiche plus. Pages concernées : Portfolio, Response, ClinOps (Trial n'a pas de cartes). Portfolio fait (Romain, Designer). Fait sur Portfolio, Response, ClinOps et Trial (bloc ajouté sous la success story). Vérifié par Romain. Pour plus tard : tri par Order (aucun posé) | validé |
 
 ## À discuter d'abord
 
@@ -65,3 +65,8 @@ Exploration du site publié (`phasev-2026.webflow.io`, publication du 2026-11-19
 - Menu (Platform, burger) et « Back to top » : `#` voulu, le comportement est en JS.
 - Cartes des fiches Case Studies (`detail_case-studies`) : lien réécrit en JS par le module, fonctionne dans le navigateur.
 - 15 liens externes (Fierce Biotech, Axios, BMJ…) refusent les robots (403) et 4 liens FDA ou Clinical Trials Arena n'ont pas répondu au test : à ouvrir à la main si besoin, ce sont des articles de presse et de la FDA.
+
+## Pour plus tard
+
+- Trial : le lien « Explore the case study library → » de la success story fait doublon avec le bouton « All Trial Optimizer case studies » du bloc juste dessous. Gardé pour l'instant (décision de Romain, 2026-11-19).
+- Listes case studies des pages produit : aucun tri posé (ordre par défaut du CMS) ; tri par Order à régler dans le Designer si besoin.

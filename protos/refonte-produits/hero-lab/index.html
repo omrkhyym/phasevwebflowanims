@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier hero Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#141238; --white:#F4F4F4; --grey:rgba(244,244,244,.62); --dim:rgba(244,244,244,.38); --line:rgba(244,244,244,.12); --mono:"Roboto Mono", monospace; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100%; }
+  body{ font-family:Roboto, sans-serif; color:var(--white); overflow:hidden;
+    /* fond de la charte : bleu nuit et deux dégradés radiaux violets */
+    background:radial-gradient(60% 70% at 85% 10%, rgba(66,72,176,.55), transparent 70%), radial-gradient(50% 60% at 10% 90%, rgba(70,40,140,.35), transparent 70%), var(--ink); }
+  .lab{ display:grid; grid-template-columns:1fr 340px; grid-template-rows:1fr auto; height:100vh; }
+  .lab-stage{ position:relative; grid-row:1; grid-column:1; min-height:0; }
+  #stage{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  /* repère de composition : le texte du hero Home, à gauche (case « Texte du hero ») */
+  .lab-text{ position:absolute; left:4vw; top:50%; transform:translateY(-50%); max-width:38rem; pointer-events:none; display:none; }
+  .show-text .lab-text{ display:block; }
+  .lab-text h1{ font-weight:500; font-size:3.25rem; line-height:1.05; margin:0 0 1.5rem; }
+  .lab-text h1 span{ color:#E2C70A; display:block; }
+  .lab-text p{ font-size:1rem; line-height:1.6; color:var(--white); margin:0; }
+  .lab-lost{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); margin:0; font:400 .8rem var(--mono); color:var(--grey); }
+  .lab-panel{ grid-row:1 / span 2; grid-column:2; border-left:1px solid var(--line); background:rgba(6,4,26,.55); backdrop-filter:blur(12px); overflow:auto; padding:1.25rem 1.25rem 2rem; }
+  .lab-panel h2{ font:400 .7rem/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin:0 0 .75rem; }
+  #scenes{ display:flex; flex-direction:column; gap:.35rem; margin-bottom:1.5rem; }
+  .lab-scene{ text-align:left; font:400 .875rem Roboto, sans-serif; color:var(--grey); background:none; border:1px solid var(--line); border-radius:.5rem; padding:.55rem .75rem; cursor:pointer; }
+  .lab-scene[aria-pressed="true"]{ color:var(--white); border-color:rgba(244,244,244,.5); }
+  .lab-scene:disabled{ opacity:.4; cursor:default; }
+  .lab-group{ border-top:1px solid var(--line); padding-top:1rem; margin-top:1rem; }
+  .lab-group h3{ font:400 .7rem/1 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin:0 0 .9rem; }
+  .lab-row{ display:block; margin-bottom:.85rem; }
+  .lab-row-head{ display:flex; justify-content:space-between; font-size:.8rem; color:var(--grey); margin-bottom:.3rem; }
+  .lab-row output{ font-family:var(--mono); color:var(--white); }
+  input[type=range]{ width:100%; accent-color:#928ACD; }
+  .lab-row.is-locked{ opacity:.45; }
+  .lab-seq{ margin-bottom:.5rem; }
+  .lab-seg{ font:400 .8rem var(--mono); color:var(--dim); margin:0 0 .5rem; }
+  .lab-seg.is-on{ color:var(--white); }
+  .is-seq .lab-actions{ display:none; }
+  .lab-row-note{ display:block; font:400 .65rem var(--mono); letter-spacing:.06em; color:var(--dim); margin-top:.2rem; }
+  .lab-actions{ display:flex; gap:.5rem; margin-top:1.25rem; }
+  .lab-btn{ font:500 .8rem Roboto, sans-serif; border-radius:999px; padding:.55rem 1rem; cursor:pointer; border:1px solid var(--line); background:none; color:var(--white); }
+  .lab-btn.is-main{ background:var(--white); color:#06041A; border-color:var(--white); }
+  #dump{ width:100%; height:12rem; margin-top:.75rem; font:400 .75rem var(--mono); background:rgba(0,0,0,.3); color:var(--white); border:1px solid var(--line); border-radius:.5rem; }
+  .lab-bar{ grid-row:2; grid-column:1; display:flex; align-items:center; gap:1rem; padding:.9rem 1.25rem; border-top:1px solid var(--line); background:rgba(6,4,26,.55); font-size:.8rem; color:var(--grey); }
+  .lab-bar #time{ flex:1; }
+  #clock{ font-family:var(--mono); color:var(--white); min-width:4.5rem; text-align:right; }
+  .lab-bar select{ background:none; color:var(--white); border:1px solid var(--line); border-radius:.4rem; padding:.3rem .4rem; }
+  .lab-bar select option{ color:#06041A; }
+  @media (max-width:900px){ .lab{ grid-template-columns:1fr; grid-template-rows:55vh auto auto; } .lab-panel{ grid-row:3; grid-column:1; border-left:0; } .lab-bar{ grid-row:2; } body{ overflow:auto; } }
+</style>
+</head>
+<body>
+<div class="lab">
+  <div class="lab-stage">
+    <canvas id="stage" aria-label="Scène du hero en cours de réglage"></canvas>
+    <div class="lab-text" aria-hidden="true">
+      <h1>Better decisions<span>Connected development</span></h1>
+      <p>PhaseV brings advanced statistical, causal, and simulation methods, and AI-assisted workflows into one clinical development platform, so teams can reduce avoidable risk, rework and delays</p>
+    </div>
+  </div>
+  <div class="lab-bar">
+    <button type="button" id="play" class="lab-btn is-main" aria-pressed="true">Pause</button>
+    <input type="range" id="time" min="0" max="10" step="0.01" value="0" aria-label="Temps">
+    <span id="clock">0.00 s</span>
+    <label><input type="checkbox" id="loop" checked> Boucle</label>
+    <label>Vitesse <select id="speed"><option value="0.25">×0,25</option><option value="0.5">×0,5</option><option value="1" selected>×1</option><option value="2">×2</option></select></label>
+    <label><input type="checkbox" id="text"> Texte du hero</label>
+  </div>
+  <aside class="lab-panel">
+    <h2>Scènes</h2>
+    <div id="scenes"></div>
+    <div id="controls"></div>
+    <div class="lab-actions">
+      <button type="button" id="copy" class="lab-btn is-main">Copier les valeurs</button>
+      <button type="button" id="reset" class="lab-btn">Réinitialiser</button>
+    </div>
+    <textarea id="dump" hidden aria-label="Valeurs"></textarea>
+  </aside>
+</div>
+<script type="module" src="./lab.js"></script>
+</body>
+</html>

@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petits éléments · inventaire</title>
+<!-- CSS du site (head de la Home et embed global styles), recopié par inventaire.py -->
+<link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/css/phasev-2026.webflow.shared.d1eb539b9.css" rel="stylesheet" type="text/css" integrity="sha384-0etTm5rS0TPvFlimTG/H+sDn+gp9zf+WFZHTw5dLM9RKda33DgIFMt0cezem2S81" crossorigin="anonymous"/><style>
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  html,
+  body {
+    overflow-x: clip;
+  }
+</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /><style>
+  .dm-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .dm-card {
+    cursor: pointer;
+    outline: none;
+  }
+  .dm-card rect {
+    transition:
+      fill 0.25s ease,
+      fill-opacity 0.25s ease,
+      stroke 0.25s ease,
+      stroke-opacity 0.25s ease;
+  }
+
+  .dm-card.dm-corner > rect:nth-of-type(1) {
+    fill: #18113f;
+    fill-opacity: 0.92;
+  }
+  .dm-card.dm-corner > rect:nth-of-type(2) {
+    stroke: #fff;
+    stroke-opacity: 0.18;
+  }
+  .dm-card.dm-corner:not(.is-active):hover > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 0.5;
+  }
+  .dm-card.dm-corner.is-active > rect:nth-of-type(1) {
+    fill: #41246f;
+    fill-opacity: 0.95;
+  }
+  .dm-card.dm-corner.is-active > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 1;
+  }
+  .dm-card.dm-wide.is-active > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 1;
+  }
+  .dm-card.dm-wide:not(.is-active):hover > rect:nth-of-type(2) {
+    stroke-opacity: 0.85;
+  }
+
+  /* Visibility. If a panel uses flex/grid, change block to match. */
+  .dm-panel {
+    display: none;
+  }
+  .dm-panel.is-active {
+    display: flex;
+  }
+  /* Make the injected SVG scale to its container at every breakpoint */
+  #dm-map,
+  .dm-map {
+    width: 100%;
+    max-width: 670px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #dm-map svg,
+  .dm-map svg {
+    width: 100% !important; /* beats the SVG's built-in width="670" */
+    height: auto !important; /* keeps aspect ratio, no distortion */
+    max-width: 100%;
+    display: block;
+  }
+</style><style>
+  html {
+    font-size: calc(0.625rem + 0.41666666666666663vw);
+  }
+  @media screen and (max-width: 1920px) {
+    html {
+      font-size: calc(0.625rem + 0.41666666666666674vw);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+    }
+  }
+  @media screen and (max-width: 479px) {
+    html {
+      font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+    }
+  }
+
+  /* Make text look crisper and more legible in all browsers */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus state style for keyboard navigation for the focusable elements */
+  *[tabindex]:focus-visible,
+  input[type='file']:focus-visible {
+    outline: 0.125rem solid #4d65ff;
+    outline-offset: 0.125rem;
+  }
+
+  /* Get rid of top margin on first element in any rich text element */
+  .w-richtext > :not(div):first-child,
+  .w-richtext > div:first-child > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Get rid of bottom margin on last element in any rich text element */
+  .w-richtext > :last-child,
+  .w-richtext ol li:last-child,
+  .w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Prevent all click and hover interaction with an element */
+  .pointer-events-off {
+    pointer-events: none;
+  }
+
+  /* Enables all click and hover interaction with an element */
+  .pointer-events-on {
+    pointer-events: auto;
+  }
+
+  /* Create a class of .div-square which maintains a 1:1 dimension of a div */
+  .div-square::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  /* Make sure containers never lose their center alignment */
+  .container-medium,
+  .container-small,
+  .container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  /* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+  /*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+
+  /* Apply "..." after 3 lines of text */
+  .text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 2 lines of text */
+  .text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Adds inline flex display */
+  .display-inlineflex {
+    display: inline-flex;
+  }
+
+  /* These classes are never overwritten */
+  .hide {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 991px) {
+    .hide,
+    .hide-tablet {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .hide-mobile {
+      display: none !important;
+    }
+  }
+
+  .margin-0 {
+    margin: 0rem !important;
+  }
+
+  .padding-0 {
+    padding: 0rem !important;
+  }
+
+  .spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+  }
+
+  .margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+  * {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance !important;
+  }
+  [data-bg='purple-gradient'] {
+    background: radial-gradient(157.44% 98.4% at 84% 18%, rgba(126, 91, 178, 0.46) 0%, rgba(126, 91, 178, 0) 28%), radial-gradient(162.26% 101.42% at 14% 86%, rgba(65, 34, 125, 0.48) 0%, rgba(65, 34, 125, 0) 34%), #141238;
+  }
+  .header_image-wrapper {
+    background: linear-gradient(157deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+  }
+  .animation-2 {
+    opacity: 0.5;
+    background: radial-gradient(70.71% 70.71% at 50% 50%, rgba(79, 45, 131, 0.13) 3.93%, rgba(79, 45, 131, 0) 4.71%);
+  }
+  .tab-graph-line.is-gradient {
+    background: linear-gradient(90deg, #67439a 0%, #f3d400 100%);
+  }
+  [data-swiper='news'] .swiper {
+    overflow: visible;
+  }
+  .navbar_component {
+    will-change: transform; /* smoother hide/show */
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  /* your scrolled color state */
+  .navbar_component.is-scrolled {
+    background-color: #141238; /* whatever your scrolled look is */
+    /* color, box-shadow, backdrop-filter, etc. */
+  }
+  /* ---- Structural: text-swap mask button ---- */
+  .button {
+    --btn-lh: 1.4; /* leading buffer: hides ink bleed at the clip seam */
+    --btn-nudge: -0.05em; /* optional optical centering, usually leave at 0 */
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    /* keep your own padding / background / border-radius / color / font-size */
+  }
+  .button .btn-inner {
+    position: relative;
+    overflow: hidden; /* the real clip */
+    display: block;
+    transform: translateY(var(--btn-nudge));
+  }
+  .button .btn-row {
+    display: block;
+    line-height: var(--btn-lh);
+    white-space: nowrap;
+  }
+  .button .btn-row.is-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .button .word {
+    display: inline-block;
+    white-space: nowrap; /* keeps spaces intact */
+  }
+  .button .char {
+    display: inline-block;
+    line-height: var(--btn-lh);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .button .char {
+      transform: none !important;
+    }
+  }
+  :root {
+    --nav-h: 72px; /* fallback; JS overwrites with the real height */
+  }
+
+  /* your sticky element — add the data hook in Designer */
+  [data-sticky-nav-offset] {
+    position: sticky;
+    top: var(--nav-h); /* default: below nav */
+    transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1); /* ~matches nav slide */
+  }
+
+  /* nav hidden → let it stick flush to the very top */
+  html.nav-hidden [data-sticky-nav-offset] {
+    top: 0;
+  }
+  * {
+    scrollbar-color: #f3d400 #141238; /* thumb  track */
+    scrollbar-width: thin; /* auto | thin | none */
+  }
+  .build-card {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%), var(--Primary-Dark-Navy, #141238);
+  }
+  .filter_list-wrapper,
+  .filter_list {
+    display: contents;
+  }
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 56, 0.8); /* optional tint, keep low-alpha */
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      visibility 0.35s ease;
+    z-index: 1; /* below the menu card */
+  }
+
+  /* make sure the menu card paints on top of the backdrop */
+  .navbar_container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .evidence_card{
+    box-shadow: 0 15px 44px 0 rgba(18, 13, 53, 0.08);
+  }
+  .evidence-filter{
+    box-shadow: 0 16px 44px 0 rgba(18, 13, 53, 0.10);
+  }
+.filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3rem;
+  margin: 0;
+  padding: 0 3rem 0 1rem; /* 16px left; right leaves room for arrow */
+  border: 1px solid #626262;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M7 12 0 0h14z' fill='%626262'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center; /* 16px from right edge */
+  background-size: 0.875rem 0.75rem;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-select::-ms-expand { display: none; }
+
+.filter-select:hover { border-color: #111827; }
+
+.filter-select:focus-visible {
+  outline: none;
+  border-color: #3b0764;
+  box-shadow: 0 0 0 3px rgba(59, 7, 100, 0.15);
+}
+
+/* Placeholder look while "All" (empty value) is selected */
+.filter-select:has(option[value=""]:checked) { color: #9ca3af; }
+
+.filter-select option { color: #111827; }
+[data-cases="groups"] { transition: opacity 0.3s ease; }
+[data-cases="groups"]:not(.is-ready) { opacity: 0; }
+</style>
+<link rel="stylesheet" href="../_kit/kit.css">
+<link rel="stylesheet" href="inv-ui.css">
+<style>
+  /* Généré par _build/inventaire.py depuis _build/elements.tpl.html : modifier le modèle, pas ce fichier. */
+  body{ margin:0; background:#f8f8f8; }
+  .iv-atoms{ display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,34rem),1fr)); gap:1rem; }
+  .iv-atom{ background:#fff; border:1px solid var(--line); border-radius:1rem; overflow:hidden; display:flex; flex-direction:column; scroll-margin-top:8rem; }
+  .iv-atom:target{ outline:3px solid var(--mau); }
+  .iv-tile{ padding:0; min-height:6rem; display:flex; align-items:center; justify-content:center; overflow:hidden; max-height:24rem; position:relative; }
+  .iv-tile > div{ width:100%; padding:1.5rem; display:flex; justify-content:center; align-items:center; min-height:6rem; background:transparent !important; }
+  .iv-tile > div > *{ max-width:100%; }
+  .iv-atom[data-cat="cartes"] .iv-tile > div > *{ width:var(--w); flex:none; }
+  .iv-atom[data-cat="titres"] .iv-tile > div, .iv-atom[data-cat="textes"] .iv-tile > div{ justify-content:flex-start; }
+  .iv-atom .iv-head{ grid-template-columns:1fr; border-bottom:0; border-top:1px solid var(--line); }
+  .iv-atom .iv-dec{ align-items:flex-start; min-width:0; }
+  .iv-atom:has(.iv-dec[data-d="drop"]) .iv-tile{ opacity:.35; }
+  .iv-ctx{ font-size:13px; font-weight:600; }
+  .iv-ctx a{ text-decoration:underline; text-underline-offset:2px; }
+  .iv-gap-h{ font-size:1.0625rem; font-weight:700; margin:1.75rem 0 .5rem; color:var(--ink); line-height:1.3; letter-spacing:0; }
+  .iv-gaps{ width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:.75rem; overflow:hidden; font-size:13px; }
+  .iv-gaps th, .iv-gaps td{ text-align:left; padding:.45rem .7rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  .iv-gaps th{ font-size:11.5px; text-transform:uppercase; letter-spacing:.5px; color:#626262; font-weight:600; }
+  .iv-gaps tr.is-off td{ background:#fdf0ee; }
+  .iv-gaps tr.is-off td:first-child{ color:#c0392b; font-weight:700; white-space:nowrap; }
+  .iv-gaps a{ text-decoration:underline; text-underline-offset:2px; }
+  #progress{ font-size:12.5px; color:#626262; }
+  .iv-load{ position:absolute; left:-20000px; top:0; width:1440px; height:900px; border:0; visibility:hidden; }
+</style>
+</head>
+<body class="iv">
+<div class="iv-bar">
+  <h1>Petits éléments</h1>
+  <small id="progress">relevé en cours…</small>
+  <select id="dec">
+    <option value="">Toutes les décisions</option><option value="none">À trancher</option>
+    <option value="keep">Garder</option><option value="merge">Fusionner</option><option value="drop">Virer</option><option value="ask">À discuter</option>
+  </select>
+  <span class="iv-sp"></span>
+  <a class="iv-btn" href="blocs.html">Blocs témoins</a>
+  <a class="iv-btn" href="../index.html">Index refonte</a>
+  <button type="button" class="iv-btn is-main" id="export">Copier mes choix</button>
+  <div class="iv-chips" id="cats" style="flex-basis:100%"></div>
+</div>
+<main class="iv-main" id="main"></main>
+
+<script type="module">
+import { decisionUI, exportButton, load } from './inv-ui.js';
+
+const CATS = [['boutons', 'Boutons'], ['liens', 'Liens texte'], ['pastilles', 'Pastilles et étiquettes'], ['labels', 'Labels'],
+  ['titres', 'Titres'], ['textes', 'Textes'], ['cartes', 'Cartes'], ['icones', 'Icônes'], ['gaps', 'Espacements']];
+
+// espacements : référence du site pour les éléments côte à côte (cartes, colonnes) = gap de la grille Resources
+const GRID_REF = 3;
+const ROLES = { rangee: 'Cartes et colonnes côte à côte (référence : 3rem)', pile: 'Grands éléments empilés', texte: 'Contenu (textes, boutons, listes)' };
+const remTxt = v => (v ? v + 'rem' : '0');
+function gapRow(it) {
+  const off = it.role === 'rangee' && Math.abs(it.cg - GRID_REF) > .01;
+  const b = it.ctx.block != null && byBlock[it.src + '|' + it.ctx.block];
+  const seen = it.ctx.zone ? (it.ctx.zone === 'navbar' ? 'navbar' : 'footer')
+    : b ? `<a href="blocs.html#${b.id}" target="_blank" rel="noopener">${b.id}</a> ${esc((b.title || '').slice(0, 40))}` : esc(label[it.src] || it.src);
+  const where = Object.entries(it.pages).map(([k, n]) => `${label[k] || k} ×${n}`).join(', ');
+  return `<tr class="${off ? 'is-off' : ''}"><td>${off ? '⚠ hors échelle' : ''}</td>
+    <td><b>${it.dir === 'grid' ? 'grille' : it.dir === 'column' ? 'flex ↓' : 'flex →'}</b> ${remTxt(it.rg)} / ${remTxt(it.cg)}</td>
+    <td class="iv-code">${esc(it.sig)}</td><td>${seen}</td><td>${esc(where)}</td></tr>`;
+}
+function renderGaps(list) {
+  const box = document.createElement('div');
+  Object.entries(ROLES).forEach(([role, name]) => {
+    const rows = list.filter(it => it.role === role)
+      .sort((a, b) => (role === 'rangee' ? (Math.abs(b.cg - GRID_REF) > .01) - (Math.abs(a.cg - GRID_REF) > .01) : 0) || b.total - a.total);
+    if (!rows.length) return;
+    // résumé : combien de conteneurs par valeur de gap (le désordre se voit ici)
+    const freq = {};
+    rows.forEach(it => { const v = it.role === 'pile' || it.dir === 'column' ? it.rg : it.cg; freq[v] = (freq[v] || 0) + it.total; });
+    const sum = Object.entries(freq).sort((a, b) => b[1] - a[1]).map(([v, n]) => `<span class="iv-tag">${remTxt(+v)} ×${n}</span>`).join(' ');
+    const off = role === 'rangee' ? rows.filter(it => Math.abs(it.cg - GRID_REF) > .01).length : 0;
+    box.insertAdjacentHTML('beforeend', `<h3 class="iv-gap-h">${name}${off ? ` · <span style="color:#c0392b">${off} hors échelle</span>` : ''}</h3>
+      <div class="iv-line" style="margin-bottom:.75rem">${sum}</div>
+      <table class="iv-gaps"><tr><th></th><th>gap ligne / colonne</th><th>conteneur</th><th>vu dans</th><th>pages</th></tr>${rows.map(gapRow).join('')}</table>`);
+  });
+  return box;
+}
+const data = await (await fetch('blocs.json', { cache: 'no-store' })).json();
+const pages = [{ key: 'global', label: 'Navbar et footer', file: 'site-home.html', global: true }, ...data.pages];
+const label = Object.fromEntries(pages.map(p => [p.key, p.label]));
+const byBlock = Object.fromEntries(data.blocks.map(b => [b.page + '|' + b.n, b]));
+
+// lisibilité : si le texte (ou l'élément plein) se confond avec le fond de la tuile, la tuile passe sur un fond de contraste
+const rgb = s => { const m = (s || '').match(/[\d.]+/g); return m ? { r: +m[0], g: +m[1], b: +m[2], a: m[3] === undefined ? 1 : +m[3] } : null; };
+const lum = c => { const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; return .2126 * f(c.r) + .7152 * f(c.g) + .0722 * f(c.b); };
+const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+function readable(card) {
+  const tile = card.querySelector('.iv-tile'), tbg = rgb(getComputedStyle(tile).backgroundColor);
+  if (!tbg) return;
+  const fillOf = (el) => { for (let e = el; e && e !== tile; e = e.parentElement) { const c = rgb(getComputedStyle(e).backgroundColor); if (c && c.a > .5) return c; } return tbg; };
+  let worst = 99, ink = null;
+  tile.querySelectorAll('*').forEach(el => {
+    if (![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) return;
+    const c = rgb(getComputedStyle(el).color); if (!c || !el.getClientRects().length) return;
+    const r = ratio(c, fillOf(el)); if (r < worst) { worst = r; ink = c; }
+  });
+  // élément plein (bouton, pastille, carte) de la même couleur que le fond
+  const top = tile.firstElementChild && tile.firstElementChild.firstElementChild;
+  const fill = top && rgb(getComputedStyle(top).backgroundColor);
+  const flat = fill && fill.a > .5 && ratio(fill, tbg) < 1.3 && getComputedStyle(top).borderTopWidth === '0px';
+  if (worst >= 2 && !flat) return;
+  const dark = flat ? lum(fill) < .4 : lum(ink) < .4;   // contenu sombre : fond clair, et inversement
+  tile.style.background = dark ? '#ececec' : '#141238';
+  card.querySelector('.iv-line').insertAdjacentHTML('beforeend', '<span class="iv-tag is-warn" title="Le fond d’origine rendait l’élément illisible ici">fond de contraste</span>');
+}
+const items = new Map();   // cat|sig -> élément agrégé
+const state = { cat: '', dec: '' };
+const main = document.getElementById('main'), progress = document.getElementById('progress');
+
+// identifiant stable tiré de la signature (catégorie + balise + classes)
+const hash = s => { let h = 5381; for (const c of s) h = (h * 33 ^ c.charCodeAt(0)) >>> 0; return h.toString(36).slice(0, 5).toUpperCase(); };
+const hex = c => { const m = c && c.match(/[\d.]+/g); if (!m || (m[3] !== undefined && +m[3] === 0)) return 'transparent';
+  return '#' + m.slice(0, 3).map(x => (+x).toString(16).padStart(2, '0')).join('') + (m[3] !== undefined && +m[3] < 1 ? ' ' + Math.round(m[3] * 100) + '%' : ''); };
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// relevé : chaque page est chargée à son tour dans une iframe cachée, qui renvoie ses éléments
+function collect(i) {
+  if (i >= pages.length) { progress.textContent = `${items.size} éléments distincts sur ${pages.length} sources`; return; }
+  const p = pages[i];
+  progress.textContent = `relevé ${i + 1} / ${pages.length} : ${p.label}…`;
+  const f = document.createElement('iframe');
+  f.className = 'iv-load'; f.src = `${p.file}?atoms${p.global ? '=global' : ''}&page=${p.key}`;
+  let done = false;
+  const next = () => { if (done) return; done = true; removeEventListener('message', onMsg); f.remove(); render(); collect(i + 1); };
+  const onMsg = e => {
+    if (e.source !== f.contentWindow || !e.data || e.data.inv !== 'atoms') return;
+    e.data.items.forEach(it => {
+      const k = it.cat === 'gaps' ? ['gaps', it.sig, it.role, it.rg, it.cg].join('|') : it.cat + '|' + it.sig;
+      const cur = items.get(k) || { ...it, src: p.key, id: 'E-' + hash(k), pages: {}, total: 0 };
+      cur.pages[p.key] = (cur.pages[p.key] || 0) + it.count; cur.total += it.count;
+      if (!cur.shown && it.shown) Object.assign(cur, { html: it.html, ctx: it.ctx, tileBg: it.tileBg, style: it.style, shown: true, src: p.key });
+      items.set(k, cur);
+    });
+    next();
+  };
+  addEventListener('message', onMsg);
+  setTimeout(next, 25000);
+  document.body.append(f);
+}
+
+function render() {
+  main.textContent = '';
+  const dec = load();
+  CATS.forEach(([cat, name]) => {
+    if (state.cat && state.cat !== cat) return;
+    const list = [...items.values()].filter(it => it.cat === cat
+      && (!state.dec || (state.dec === 'none' ? !(dec[it.id] && dec[it.id].d) : dec[it.id] && dec[it.id].d === state.dec)))
+      .sort((a, b) => b.total - a.total);
+    if (!list.length) return;
+    const h = document.createElement('div'); h.className = 'iv-fam'; h.id = 'cat-' + cat;
+    h.innerHTML = `<h2>${name}</h2><span>${list.length} variantes</span>`;
+    if (cat === 'gaps') { main.append(h, renderGaps(list)); return; }
+    const grid = document.createElement('div'); grid.className = 'iv-atoms';
+    list.forEach(it => grid.append(atom(it)));
+    main.append(h, grid);
+  });
+  main.querySelectorAll('.iv-atom').forEach(readable);
+  renderCats();
+}
+
+function atom(it) {
+  const el = document.createElement('article'); el.className = 'iv-atom'; el.id = it.id; el.dataset.cat = it.cat;
+  const s = it.style, ctxCls = (it.ctx.cls || '').split(/\s+/).filter(c => c && c !== 'hide').join(' ');
+  const look = [`${s.font} ${s.size} / ${s.weight}`, s.tt !== 'none' ? s.tt : '', s.ls !== 'normal' ? 'ls ' + s.ls : '',
+    'texte ' + hex(s.color), hex(s.bg) !== 'transparent' ? 'fond ' + hex(s.bg) : '', s.border ? 'contour ' + s.border.replace(/rgba?\([^)]*\)/, m => hex(m)) : '',
+    s.radius !== '0px' ? 'r ' + s.radius : ''].filter(Boolean).join(' · ');
+  const where = Object.entries(it.pages).map(([k, n]) => `${label[k] || k} ×${n}`).join(', ');
+  const b = it.ctx.block != null && byBlock[it.src + '|' + it.ctx.block];
+  const seen = it.ctx.zone ? `vu dans ${it.ctx.zone === 'navbar' ? 'la navbar' : 'le footer'}`
+    : b ? `vu dans <a href="blocs.html#${b.id}" target="_blank" rel="noopener">${b.id}</a> · ${esc(b.title || b.family)}`
+    : `vu sur ${esc(label[it.src] || it.src)}${it.ctx.block === 0 ? ' (hero)' : ''}`;
+  el.innerHTML = `<div class="iv-tile" style="background:${it.tileBg}"><div class="${esc(ctxCls)}" ${it.ctx.bg ? `data-bg="${esc(it.ctx.bg)}"` : ''} style="--w:${Math.min(s.w || 360, 520)}px">${it.html}</div></div>
+    <div class="iv-head"><div class="iv-meta">
+      <div class="iv-line"><span class="iv-id">${it.id}</span><span class="iv-tag">${it.total} occurrence${it.total > 1 ? 's' : ''}</span>${it.shown ? '' : '<span class="iv-tag is-warn">jamais visible (masqué ou mobile)</span>'}</div>
+      <div class="iv-ctx">${seen}</div>
+      <div class="iv-code">${esc(it.sig)}</div>
+      <div class="iv-code">${esc(look)}</div>
+      <div class="iv-code">${esc(where)}</div>
+    </div></div>`;
+  el.querySelector('.iv-head').append(decisionUI(it.id, `${it.cat} ${it.sig}`, () => state.dec && render()));
+  return el;
+}
+
+const cats = document.getElementById('cats');
+function renderCats() {
+  cats.textContent = '';
+  [['', 'Toutes'], ...CATS].forEach(([k, l]) => {
+    const n = k ? [...items.values()].filter(i => i.cat === k).length : items.size;
+    const c = document.createElement('button'); c.type = 'button'; c.className = 'iv-chip';
+    c.textContent = `${l} · ${n}`; c.setAttribute('aria-pressed', state.cat === k);
+    c.addEventListener('click', () => { state.cat = k; render(); scrollTo(0, 0); });
+    cats.append(c);
+  });
+}
+document.getElementById('dec').addEventListener('change', e => { state.dec = e.target.value; render(); });
+exportButton(document.getElementById('export'));
+collect(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!-- Système de blocs : proposition. Assemblé par inventaire/_build/inventaire.py.
+     Un marqueur BLOCK:ID est remplacé par le bloc réel (copie du site ou proto), pour les composants qui existent déjà sous leur bonne forme.
+     Les composants fusionnés (Cartes, Chiffres) sont écrits ici, avec systeme.css. -->
+
+<!-- ===================== AVIS ===================== -->
+<section data-new-block class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top _2col">
+    <div class="section-top_left max-width-670"><div class="text-size-label">Proposition · système de blocs</div><h2 class="text-size-display">17 composants pour tout le site, au lieu de 73 blocs</h2></div>
+    <div class="section-top_right max-width-555"><div class="text-size-large">Le site a été construit page par page. Chaque page a fini par inventer sa version des mêmes blocs. Voici le système que je recommande : une seule façon de faire chaque chose, des variantes réglées par propriétés, et des blocs uniques seulement quand on n’a pas le choix.</div></div>
+  </div>
+  <div class="sy-verdict">
+    <div><div class="n"><s>73</s>17</div><div class="text-size-large">composants Webflow pour les 12 pages : 2 de structure, 3 heros, 12 blocs de contenu</div></div>
+    <div><div class="n"><s>8</s>2</div><div class="text-size-large">composants (Cartes, Chiffres) à la place de 8 sortes de cartes qui font le même travail</div></div>
+    <div><div class="n">1</div><div class="text-size-large">échelle d’espacement : 3rem entre les cartes et les colonnes, partout</div></div>
+    <div><div class="n">3</div><div class="text-size-large">blocs vraiment uniques, parce qu’interactifs ou animés et propres à une page</div></div>
+  </div>
+  <div class="sy-points">
+    <div><h3 class="heading-style-h4">Ce que je constate</h3><ul>
+      <li><b>Les mêmes blocs, refaits à chaque page.</b> Un repère, un titre, un texte : why-card, methodology-card, difference-card, glance-stat, rp-card, rp-step, rp-stat, cartes du case study. Huit classes pour une seule idée.</li>
+      <li><b>Mes protos en ont ajouté.</b> Les classes rp-* ont servi à valider le rendu. Elles ne doivent pas partir telles quelles dans Webflow : elles se fondent dans le système.</li>
+      <li><b>Pas d’échelle d’espacement.</b> Les gaps changent d’un bloc à l’autre (audit dans Petits éléments, rubrique Espacements).</li>
+      <li><b>Trois fonds clairs pour le même rôle</b> (blanc, lightpurple, gris) et deux tailles de titre de section qui se concurrencent.</li>
+    </ul></div>
+    <div><h3 class="heading-style-h4">Ce que je conseille</h3><ul>
+      <li><b>Une page = une suite de Sections.</b> Une Section = un fond, un en-tête, un bloc de contenu. Dans Webflow : un composant Section avec un emplacement (slot), un composant En-tête, et 12 blocs qu’on glisse dans l’emplacement.</li>
+      <li><b>Fixer les fondations d’abord</b> : fonds, espacements, rayons, boutons, titres. C’est ce qui rend les blocs cohérents entre eux, plus que les blocs eux-mêmes.</li>
+      <li><b>Construire dans cet ordre</b> : Section et En-tête, Cartes, Chiffres, Média + texte, Cas. Puis migrer page par page, en commençant par les pages produit, déjà refaites en proto.</li>
+      <li><b>Nettoyer les classes en dernier</b>, une fois les pages migrées, pour ne rien casser en route.</li>
+    </ul></div>
+  </div>
+</div></div></section>
+
+<!-- ===================== FONDATIONS ===================== -->
+<div class="sy-chap"><div class="padding-global"><div class="container-large"><b>Partie 1</b><h2>Fondations</h2><p>Les règles communes à tous les blocs. Une fois fixées, chaque composant les applique sans réglage.</p></div></div></div>
+<section data-new-block class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="sy-tokens">
+    <div class="sy-token"><h3 class="heading-style-h4">Trois fonds</h3>
+      <div class="sy-swatches"><div class="sy-sw" style="background:#f8f8f8">Blanc<br>par défaut</div><div class="sy-sw" style="background:#ececec">Gris<br>alternance</div><div class="sy-sw is-dark">Sombre<br>1 à 2 par page</div></div>
+      <p class="text-size-medium text-color-gray">Les sections alternent blanc et gris. Le lightpurple disparaît au profit du gris (is-light). Le sombre marque les moments forts.</p></div>
+    <div class="sy-token"><h3 class="heading-style-h4">Cinq espacements</h3>
+      <div class="sy-scale">
+        <div><b>.5rem</b><i style="width:4%"></i></div>
+        <div><b>1rem</b><i style="width:8%"></i></div>
+        <div><b>1.5rem</b><i style="width:12%"></i></div>
+        <div><b>3rem</b><i style="width:24%"></i></div>
+        <div><b>7.5rem</b><i style="width:60%"></i></div>
+      </div>
+      <p class="text-size-medium text-color-gray">.5 dans un label, 1 dans une carte, 1.5 dans un en-tête et entre boutons, 3 entre cartes et colonnes (2.5 empilées en mobile), 7.5 entre sections (5 en tablette, 4 en mobile).</p></div>
+    <div class="sy-token"><h3 class="heading-style-h4">Boutons, pastilles, rayons</h3>
+      <div class="sy-row"><a href="#" class="button w-button">Request a demo</a><a href="#" data-wf--button--variant="purple" class="button w-variant-58c08a06-063e-0511-57f6-d9ffdefdef79 w-button">Explore case studies</a></div>
+      <div class="sy-row"><span class="sy-tag">Oncology</span><span class="sy-tag">Phase 3</span><span class="sy-tag">Site strategy</span></div>
+      <div class="sy-radius"><div><i style="border-radius:1.5rem"></i>1.5rem · cartes</div><div><i style="border-radius:1rem"></i>1rem · visuels</div><div><i style="border-radius:999px"></i>pastilles</div></div>
+      <p class="text-size-medium text-color-gray">Deux boutons, toujours pleins : jaune pour l’action principale, violet pour la secondaire. Le contour est réservé aux pastilles.</p></div>
+  </div>
+</div></div></section>
+
+<!-- ===================== STRUCTURE ===================== -->
+<div class="sy-chap"><div class="padding-global"><div class="container-large"><b>Partie 2</b><h2>Structure</h2><p>Deux composants qui enveloppent tous les autres.</p></div></div></div>
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>S1</b><h2>Section</h2></div><p class="sy-note-role">L’enveloppe de chaque bloc : fond, marges hautes et basses, largeur du contenu. Le bloc de contenu se glisse dans son emplacement.</p></div>
+  <dl><dt>Remplace</dt><dd>section_layout + padding-global + padding-section-main + container-large, recomposés à la main dans chaque section</dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">fond : blanc, gris, sombre</span><span class="sy-pill">emplacement (slot)</span><span class="sy-pill">ancre</span></dd>
+    <dt>Pages</dt><dd>toutes</dd></dl>
+</div></div></div>
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>S2</b><h2>En-tête de section</h2></div><p class="sy-note-role">Label, titre, texte facultatif, bouton facultatif. Trois dispositions. Les couleurs suivent le fond de la Section.</p></div>
+  <dl><dt>Remplace</dt><dd>section-top, section-top _2col, align-center, slider-top (avec flèches)</dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">disposition : empilé, 2 colonnes, centré</span><span class="sy-pill">texte</span><span class="sy-pill">bouton</span><span class="sy-pill">flèches de slider</span></dd>
+    <dt>Pages</dt><dd>toutes</dd></dl>
+</div></div></div>
+<section data-new-block class="section_layout is-light"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="sy-heads">
+    <div class="sy-head"><small>Empilé</small><div class="stack"><i style="width:25%"></i><i class="t" style="width:85%"></i><i class="t" style="width:55%"></i><i style="width:70%;margin-top:.5rem"></i></div></div>
+    <div class="sy-head"><small>2 colonnes</small><div class="two"><div><i style="width:40%"></i><i class="t"></i><i class="t" style="width:70%"></i></div><div><i></i><i></i><i style="width:60%"></i></div></div></div>
+    <div class="sy-head"><small>Centré</small><div class="center"><i style="width:25%"></i><i class="t" style="width:80%"></i><i class="t" style="width:50%"></i><i style="width:65%;margin-top:.5rem"></i></div></div>
+  </div>
+</div></div></section>
+
+<!-- ===================== HEROS ===================== -->
+<div class="sy-chap"><div class="padding-global"><div class="container-large"><b>Partie 3</b><h2>Heros</h2><p>Trois composants. Ils ne s’affichent pas ici : chacun a besoin de sa page et de son animation. Les liens ouvrent un exemple réel.</p></div></div></div>
+<section data-new-block class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="sy-links">
+    <a class="sy-link" href="../trial/phasev-trial.html" target="_blank"><span class="text-size-label">H1 · 6 pages produit</span><h3 class="heading-style-h4">Hero produit</h3><p>Titre sur deux lignes, la seconde en jaune, texte, deux boutons. Même socle partout (hero-stage), l’animation change par page.</p><span>Voir sur Trial →</span></a>
+    <a class="sy-link" href="../inventaire/site-resources.html" target="_blank"><span class="text-size-label">H2 · listes et fiches CMS</span><h3 class="heading-style-h4">Hero CMS</h3><p>Fiche mise en avant : catégorie, date, titre, image, bouton. Variante slider (Resources, Case Studies) ou fiche seule (article, case study).</p><span>Voir sur Resources →</span></a>
+    <a class="sy-link" href="../inventaire/site-company.html" target="_blank"><span class="text-size-label">H3 · pages institutionnelles</span><h3 class="heading-style-h4">Hero texte</h3><p>Titre, texte, fond animé. Celui d’About, réutilisable pour Contact, Careers ou toute page sans visuel propre.</p><span>Voir sur About →</span></a>
+  </div>
+</div></div></section>
+
+<!-- ===================== CONTENU ===================== -->
+<div class="sy-chap"><div class="padding-global"><div class="container-large"><b>Partie 4</b><h2>Blocs de contenu</h2><p>Douze composants. Chacun est montré dans ses variantes, avec du vrai contenu. Les deux premiers sont nouveaux : ils fusionnent des blocs existants.</p></div></div></div>
+
+<!-- C1 Cartes -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C1</b><h2>Cartes</h2></div><p class="sy-note-role">Le bloc le plus utilisé du site : une grille de cartes avec un repère, un titre et un texte. Sur la base POR-04, ton choix.</p></div>
+  <dl><dt>Remplace</dt><dd><span class="sy-pill is-new">why-card</span><span class="sy-pill is-new">methodology-card</span><span class="sy-pill is-new">difference-card</span><span class="sy-pill is-new">rp-card</span><span class="sy-pill is-new">rp-step</span><span class="sy-pill is-new">cartes Why it matters du case study</span></dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">repère : icône, numéro, aucun</span><span class="sy-pill">label</span><span class="sy-pill">puces</span><span class="sy-pill">frise</span><span class="sy-pill">2, 3 ou 4 colonnes</span><span class="sy-pill">fond (suit la Section)</span></dd>
+    <dt>Variantes</dt><dd>ci-dessous : icône sur blanc, numéro et puces sur gris, frise, icône sur sombre</dd>
+    <dt>Pages</dt><dd>Home, Response, ClinOps, Portfolio, AI Conductor, BonV, fiche case study (13 blocs)</dd></dl>
+</div></div></div>
+<section data-new-block class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top left-align"><div class="text-size-label">What you can do with the results</div><h2 class="text-size-display">Turn the finding into the next development decision</h2></div>
+  <div class="sy-cards" data-mark="icon">
+    <div class="sy-card"><img class="sy-card_icon" src="../../_shared/icons/response-act.svg" alt=""><h3 class="heading-style-h4">Act on the finding</h3><p>Translate supported findings into analysis adjustment, enrichment, stratification, biomarker, I/E, or next-study options.</p></div>
+    <div class="sy-card"><img class="sy-card_icon" src="../../_shared/icons/response-quantify.svg" alt=""><h3 class="heading-style-h4">Quantify the impact</h3><p>Quantify the potential impact on sample size, timeline, and statistical probability of success.</p></div>
+    <div class="sy-card"><img class="sy-card_icon" src="../../_shared/icons/response-deliver.svg" alt=""><h3 class="heading-style-h4">Deliver the evidence</h3><p>Deliver a regulatory-discussion-ready evidence package, including limitations and a clear no-go when warranted.</p></div>
+  </div>
+</div></div></section>
+<section data-new-block class="section_layout is-light"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top _2col">
+    <div class="section-top_left max-width-670"><div class="text-size-label">How we approach it</div><h2 class="text-size-display">Evidence to probability to value</h2></div>
+    <div class="section-top_right max-width-555"><div class="text-size-large">In either mode, Portfolio Optimizer follows the same transparent logic: assemble the right evidence, quantify what it supports, and translate it into action.</div></div>
+  </div>
+  <div class="sy-cards" data-mark="number">
+    <div class="sy-card"><div class="text-size-label">Build the evidence</div><h3 class="heading-style-h4">Build the evidence around the decision</h3><div class="feature_list-wrapper">
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Begin with public evidence and comparable programs, then add sponsor or diligence-room data.</p></div></div>
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Apply the right mix of causal modeling, TTE, RCT and RWD integration, or mechanistic simulation.</p></div></div>
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Evaluate the relevance, reliability, overlap, and uncertainty of every source.</p></div></div></div></div>
+    <div class="sy-card"><div class="text-size-label">Probability</div><h3 class="heading-style-h4">Quantify the conclusion and its uncertainty</h3><div class="feature_list-wrapper">
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Treat historical rates as a prior that widens when a program is novel or comparability is weak.</p></div></div>
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Calibrate predictive, causal, and mechanistic evidence by context, performance, bias, and comparability.</p></div></div>
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Down-weight redundant agreement and widen uncertainty when the evidence conflicts.</p></div></div></div></div>
+    <div class="sy-card"><div class="text-size-label">Value</div><h3 class="heading-style-h4">Translate the evidence into the next action</h3><div class="feature_list-wrapper">
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Rank indications, combinations, sequencing paths, or late-stage opportunities.</p></div></div>
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Stress-test how readouts, evidence gaps, design choices, and assumptions change the answer.</p></div></div>
+      <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Translate probability into priorities, deal structure, milestones, risk-adjusted value, and next actions.</p></div></div></div></div>
+  </div>
+</div></div></section>
+<section data-new-block class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top left-align"><div class="text-size-label">How an engagement works</div><h2 class="text-size-display">Your data in. Decision-ready evidence out</h2></div>
+  <div class="sy-cards" data-cols="4" data-flow>
+    <div class="sy-card"><div class="text-size-label">Input</div><h3 class="heading-style-h4">Share study data</h3><p>SDTM, ADaM, CSV, protocol, SAP, and study context.</p></div>
+    <div class="sy-card"><div class="text-size-label">Analyze</div><h3 class="heading-style-h4">Run the right track</h3><p>Prognostic modeling, HTE analysis, or both.</p></div>
+    <div class="sy-card"><div class="text-size-label">Validate</div><h3 class="heading-style-h4">Test robustness</h3><p>Model agreement, sensitivity, stability, and transportability.</p></div>
+    <div class="sy-card"><div class="text-size-label">Output</div><h3 class="heading-style-h4">Receive the evidence package</h3><p>Clear visuals, recommendations, and draft analysis-ready language.</p></div>
+  </div>
+</div></div></section>
+<section data-new-block data-bg="purple-gradient" data-line-field="" class="section_layout is-gradient"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top _2col">
+    <div class="section-top_left max-width-670"><div class="text-size-label text-color-yellow">How the forecast works</div><h2 class="text-size-display text-color-alternate">Forecasts you can edit</h2></div>
+    <div class="section-top_right max-width-555"><div class="text-size-large text-color-nwhite">Every forecast shows its inputs, assumptions, and uncertainty. Change any of them and the forecast reruns.</div></div>
+  </div>
+  <div class="sy-cards" data-mark="icon">
+    <div class="sy-card"><img class="sy-card_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a7db60ee37d7b8c1753ecef_Icon%204_1%201.svg" alt=""><h3 class="heading-style-h4">Data</h3><p>Public trial data, licensed real-world data, site-level operational data, and sponsor trial data, combined for your protocol.</p></div>
+    <div class="sy-card"><img class="sy-card_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a7db606c61b8f475ce3d62a_Icon%204%201.svg" alt=""><h3 class="heading-style-h4">Modeling</h3><p>Bayesian hierarchical models learn how sites and countries recruit. Monte Carlo simulation shows the range of likely enrollment and dates.</p></div>
+    <div class="sy-card"><img class="sy-card_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a7db61430596965d6454f0c_Icon%205%201.svg" alt=""><h3 class="heading-style-h4">Transparency</h3><p>See what drives each recommendation and how confident the model is. AI helps read the protocol, find comparable studies, and set up scenarios. The forecast itself comes from statistical models.</p></div>
+  </div>
+</div></div></section>
+
+<!-- C2 Chiffres -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C2</b><h2>Chiffres</h2></div><p class="sy-note-role">Une rangée de chiffres clés. Structure d’About (ton choix), avec une variante de couleurs pour les fonds clairs.</p></div>
+  <dl><dt>Remplace</dt><dd><span class="sy-pill is-new">glance-stat</span><span class="sy-pill is-new">rp-stat</span><span class="sy-pill is-new">chiffres de preuve (Conductor)</span></dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">2 à 6 chiffres</span><span class="sy-pill">icône</span><span class="sy-pill">source</span><span class="sy-pill">fond (suit la Section)</span></dd>
+    <dt>Variantes</dt><dd>ci-dessous : sombre avec icônes (About), blanc sans icône (AI Conductor)</dd>
+    <dt>Pages</dt><dd>About, AI Conductor, BonV (5 blocs)</dd></dl>
+</div></div></div>
+<section data-new-block data-bg="purple-gradient" data-line-field="" class="section_layout is-gradient"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top _2col">
+    <div class="section-top_left max-width-670"><div class="text-size-label text-color-yellow">PhaseV at a glance</div><h2 class="text-size-display text-color-alternate">Trusted across clinical development</h2></div>
+  </div>
+  <div class="sy-stats">
+    <div class="sy-stat"><div class="sy-stat_head"><img class="sy-stat_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6ada824e58eee008da10e636_glance-sponsors.svg" alt=""><div class="sy-stat_n">50+</div></div><div class="sy-stat_c">Sponsors and CROs</div></div>
+    <div class="sy-stat"><div class="sy-stat_head"><img class="sy-stat_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6ada824f548cb69b1b1e9a17_glance-top20.svg" alt=""><div class="sy-stat_n">10</div></div><div class="sy-stat_c">Of the top 20 pharmaceutical companies</div></div>
+    <div class="sy-stat"><div class="sy-stat_head"><img class="sy-stat_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6ada824f548cb69b1b1e9a39_glance-trials.svg" alt=""><div class="sy-stat_n">100+</div></div><div class="sy-stat_c">Clinical trials supported</div></div>
+    <div class="sy-stat"><div class="sy-stat_head"><img class="sy-stat_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6ada824f88a9ef478a435003_glance-records.svg" alt=""><div class="sy-stat_n">10M+</div></div><div class="sy-stat_c">Patient-level records</div></div>
+    <div class="sy-stat"><div class="sy-stat_head"><img class="sy-stat_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6ada8250fbf3b5c01843a08f_glance-models.svg" alt=""><div class="sy-stat_n">50+</div></div><div class="sy-stat_c">Disease models</div></div>
+    <div class="sy-stat"><div class="sy-stat_head"><img class="sy-stat_icon" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6ada82504868e7ad0884ad2a_glance-papers.svg" alt=""><div class="sy-stat_n">10+</div></div><div class="sy-stat_c">Scientific papers</div></div>
+  </div>
+</div></div></section>
+<section data-new-block class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top _2col">
+    <div class="section-top_left max-width-670"><div class="text-size-label">The cost of fragmented work</div><h2 class="text-size-display">Clinical development does not lose time in one place. It loses time at every handoff</h2></div>
+    <div class="section-top_right max-width-555"><div class="text-size-large">When documents, decisions, vendors and code live in separate systems, every update triggers another round of alignment, rework and review. AI Conductor is built to shorten those cycles without removing expert judgment.</div></div>
+  </div>
+  <div class="sy-stats" data-cols="4">
+    <div class="sy-stat"><div class="sy-stat_n">88%</div><div class="sy-stat_c">reported five weeks or more to develop SAP, SDTM, ADaM, TLF and CSR deliverables.</div></div>
+    <div class="sy-stat"><div class="sy-stat_n">76%</div><div class="sy-stat_c">use two to three vendors per trial across these workflows, multiplying handoffs, reconciliation and rework.</div></div>
+    <div class="sy-stat"><div class="sy-stat_n">10</div><div class="sy-stat_c">large pharma partners, including top-5 representation.</div></div>
+    <div class="sy-stat"><div class="sy-stat_n">100+</div><div class="sy-stat_c">programs optimized.</div></div>
+  </div>
+  <p class="sy-source">Démo : les deux rangées d’AI Conductor (enquête et preuve) réunies en une. Source des deux premiers chiffres : PhaseV June 2026 Biopharma Survey (N=51), conducted by an independent third-party research firm.</p>
+</div></div></section>
+
+<!-- C3 Média + texte -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C3</b><h2>Média + texte</h2></div><p class="sy-note-role">Texte et bouton d’un côté, un média de l’autre. Le média peut être une vidéo, une image ou une animation : la plateforme connectée est ce même bloc, avec son animation.</p></div>
+  <dl><dt>Remplace</dt><dd>« See AI Conductor in action », « See BonV in action », « Build with us » (About), Plateforme connectée</dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">média : vidéo, image, animation</span><span class="sy-pill">côté du média</span><span class="sy-pill">bouton</span><span class="sy-pill">fond</span></dd>
+    <dt>Variantes</dt><dd>ci-dessous : lien (AI Conductor), vidéo (BonV), animation (plateforme, Trial)</dd>
+    <dt>Pages</dt><dd>About, les 6 pages produit (8 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:CON-02-->
+<!--BLOCK:BON-02-->
+<!--BLOCK:TRI-04-->
+
+<!-- C4 Étapes avec média -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C4</b><h2>Étapes avec média</h2></div><p class="sy-note-role">Les étapes d’un produit, une par ligne, le média alterné à gauche et à droite. Validé sur Trial (workflow A).</p></div>
+  <dl><dt>Remplace</dt><dd>feature-grid, workflow des pages produit</dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">en-tête</span><span class="sy-pill">par étape : label, titre, texte, puces, vidéo ou image</span><span class="sy-pill">fond</span></dd>
+    <dt>Pages</dt><dd>Trial, ClinOps, AI Conductor, BonV (4 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:CLI-03-->
+
+<!-- C5 Cas -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C5</b><h2>Cas</h2></div><p class="sy-note-role">Un cas mis en avant (texte, chiffre clé en carte violette, visuel), avec ou sans cas secondaires dessous. La success story Trial et la preuve ClinOps y logent leur visuel animé.</p></div>
+  <dl><dt>Remplace</dt><dd>rp-feature, rp-case, success story (Trial), Evidence (Response, Portfolio), cas BonV, preuve AI Conductor</dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">labels</span><span class="sy-pill">chiffre clé</span><span class="sy-pill">visuel ou animation</span><span class="sy-pill">cas secondaires : 0 à 3</span><span class="sy-pill">fond</span></dd>
+    <dt>Variantes</dt><dd>ci-dessous : avec cas secondaires (Response)</dd>
+    <dt>Pages</dt><dd>Trial, Response, ClinOps, Portfolio, AI Conductor, BonV (6 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:RSP-07-->
+
+<!-- C6 Onglets avec visuel -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C6</b><h2>Onglets avec visuel</h2></div><p class="sy-note-role">Plusieurs angles d’une même idée, un onglet chacun, avec un visuel animé par onglet.</p></div>
+  <dl><dt>Propriétés</dt><dd><span class="sy-pill">en-tête</span><span class="sy-pill">par onglet : nom, question, texte, lignes, type de visuel</span><span class="sy-pill">fond</span></dd>
+    <dt>Pages</dt><dd>Response, Portfolio (2 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:RSP-02-->
+
+<!-- C7 Visuel pleine largeur -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C7</b><h2>Visuel pleine largeur</h2></div><p class="sy-note-role">Un en-tête et un visuel sur toute la largeur : schéma, image, vidéo ou animation. Évite de créer un bloc pour chaque schéma.</p></div>
+  <dl><dt>Remplace</dt><dd>schéma avant / après (AI Conductor, BonV), et tout futur schéma</dd>
+    <dt>Propriétés</dt><dd><span class="sy-pill">en-tête</span><span class="sy-pill">visuel (emplacement)</span><span class="sy-pill">fond</span></dd>
+    <dt>Pages</dt><dd>AI Conductor, BonV (2 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:CON-04-->
+
+<!-- C8 FAQ -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C8</b><h2>FAQ</h2></div><p class="sy-note-role">Accordéon, une question ouverte à la fois. La fiche case study passe dessus (fusion validée).</p></div>
+  <dl><dt>Propriétés</dt><dd><span class="sy-pill">label, titre</span><span class="sy-pill">questions / réponses</span><span class="sy-pill">fond</span></dd>
+    <dt>Pages</dt><dd>5 pages produit, fiche case study (6 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:TRI-05-->
+
+<!-- C9 Slider -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C9</b><h2>Slider</h2></div><p class="sy-note-role">Une coque commune (en-tête, flèches, défilement). Seule la carte change (fusion validée).</p></div>
+  <dl><dt>Propriétés</dt><dd><span class="sy-pill">carte : citation, cas, article, personne</span><span class="sy-pill">en-tête et flèches</span><span class="sy-pill">fond</span></dd>
+    <dt>Variantes</dt><dd>ci-dessous : citations, articles</dd>
+    <dt>Pages</dt><dd>Home, About (5 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:HOM-07-->
+<!--BLOCK:HOM-08-->
+
+<!-- C10 Grille CMS -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C10</b><h2>Grille CMS</h2></div><p class="sy-note-role">Les cartes ressource en grille, avec ou sans filtres. Gap de référence du site (3rem).</p></div>
+  <dl><dt>Propriétés</dt><dd><span class="sy-pill">collection</span><span class="sy-pill">filtres</span><span class="sy-pill">nombre de cartes</span><span class="sy-pill">fond</span></dd>
+    <dt>Pages</dt><dd>Case Studies, Resources, fiche case study (3 blocs)</dd></dl>
+</div></div></div>
+<!--BLOCK:CSD-06-->
+
+<!-- C11 Logos -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C11</b><h2>Logos</h2></div><p class="sy-note-role">Une grille de logos (investisseurs, partenaires, clients si un jour autorisé).</p></div>
+  <dl><dt>Propriétés</dt><dd><span class="sy-pill">en-tête</span><span class="sy-pill">logos (CMS)</span><span class="sy-pill">fond</span></dd>
+    <dt>Pages</dt><dd>About (1 bloc, réutilisable)</dd></dl>
+</div></div></div>
+<!--BLOCK:ABO-06-->
+
+<!-- C12 Texte long -->
+<div class="sy-note"><div class="padding-global"><div class="container-large">
+  <div><div class="sy-note-k"><b>C12</b><h2>Texte long</h2></div><p class="sy-note-role">Le rich text des articles et des chapitres de case study. Non affiché ici (trop long) : voir les exemples.</p></div>
+  <dl><dt>Propriétés</dt><dd><span class="sy-pill">une colonne (article)</span><span class="sy-pill">deux colonnes avec titre collant (chapitres)</span></dd>
+    <dt>Exemples</dt><dd><a href="../inventaire/site-article.html" target="_blank">article</a> · <a href="../inventaire/site-case-study.html" target="_blank">fiche case study</a></dd></dl>
+</div></div></div>
+
+<!-- ===================== UNIQUES ===================== -->
+<div class="sy-chap"><div class="padding-global"><div class="container-large"><b>Partie 5</b><h2>Blocs uniques</h2><p>Là où un composant n’apporte rien : le contenu est interactif ou animé, et propre à une seule page.</p></div></div></div>
+<section data-new-block class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="sy-links">
+    <a class="sy-link" href="../inventaire/site-home.html?plan" target="_blank"><span class="text-size-label">U1 · Home</span><h3 class="heading-style-h4">Hero Home</h3><p>L’animation d’ouverture du site. Une seule page, un seul usage.</p><span>Voir →</span></a>
+    <a class="sy-link" href="../inventaire/site-home.html?plan" target="_blank"><span class="text-size-label">U2 · Home</span><h3 class="heading-style-h4">Plateforme en onglets</h3><p>Le sélecteur de questions et les panneaux produit de la Home. Interactif, propre à la Home.</p><span>Voir →</span></a>
+    <a class="sy-link" href="../inventaire/site-case-study.html?plan" target="_blank"><span class="text-size-label">U3 · fiche case study</span><h3 class="heading-style-h4">At a glance</h3><p>Le tableau des résultats, rempli par le CMS. Unique au template, donc un seul exemplaire de toute façon.</p><span>Voir →</span></a>
+  </div>
+  <p class="sy-source" style="margin-top:3rem">Pas des blocs uniques : la success story Trial et la preuve ClinOps sont des visuels animés, logés dans le composant Cas (C5). Le bloc « Decisions are connected » de la Home (HOM-02) reste à classer : probablement Média + texte (C3) ou Cartes (C1).</p>
+</div></div></section>

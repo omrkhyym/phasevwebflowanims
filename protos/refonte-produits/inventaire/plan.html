@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan des pages · inventaire</title>
+<link rel="stylesheet" href="inv-ui.css">
+<style>
+  body{ margin:0; background:#f8f8f8; }
+  .pl-intro{ max-width:52rem; color:#4a4868; font-size:15px; margin:0 0 1.5rem; }
+  .pl-legend{ display:flex; flex-wrap:wrap; gap:.5rem 1.25rem; margin:0 0 2rem; font-size:13.5px; }
+  .pl-legend span{ display:inline-flex; align-items:center; gap:.4rem; }
+  .pl-legend i, .pl-bar i{ display:block; }
+  .pl-legend i{ width:.8rem; height:.8rem; border-radius:50%; }
+  .pl-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,20rem),1fr)); gap:1rem; }
+  .pl-page{ display:flex; flex-direction:column; gap:.6rem; background:#fff; border:1px solid var(--line); border-radius:1rem; padding:1.25rem; text-decoration:none; color:inherit; transition:border-color .2s; }
+  .pl-page:hover{ border-color:var(--ink); }
+  .pl-page b{ font-size:17px; }
+  .pl-page small{ color:#626262; }
+  .pl-bar{ display:flex; height:.55rem; border-radius:999px; overflow:hidden; background:var(--soft); }
+  .pl-bar i{ height:100%; }
+  .pl-h{ font-size:1.25rem; font-weight:700; margin:2rem 0 .75rem; }
+</style>
+</head>
+<body class="iv">
+<div class="iv-bar">
+  <h1>Plan des pages</h1>
+  <span class="iv-sp"></span>
+  <a class="iv-btn" href="blocs.html">Blocs témoins</a>
+  <a class="iv-btn" href="elements.html">Petits éléments</a>
+  <a class="iv-btn" href="../index.html">Index refonte</a>
+</div>
+<main class="iv-main">
+  <p class="pl-intro">Chaque page entière, telle qu’aujourd’hui, avec sur chaque bloc ce qu’il devient d’après tes choix (<code>decisions.md</code>). Le panneau en bas à droite liste les blocs de la page ; un clic y mène. Rien n’est encore construit : c’est la carte des changements.</p>
+  <div class="pl-legend" id="legend"></div>
+  <div id="pages"></div>
+</main>
+<script type="module">
+const COL = { garde: ['#2f8f5b', 'Gardé'], fusion: ['#78a8e0', 'Fusionné dans un composant'], masque: ['#c0392b', 'Masqué'], revoir: ['#e2c70a', 'À revoir'] };
+const data = await (await fetch('blocs.json', { cache: 'no-store' })).json();
+document.getElementById('legend').innerHTML = Object.values(COL).map(([c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('');
+const wrap = document.getElementById('pages');
+[['site', 'Pages du site'], ['proto', 'Pages produit (protos de la refonte)']].forEach(([kind, title]) => {
+  const h = document.createElement('div'); h.className = 'pl-h'; h.textContent = title;
+  const grid = document.createElement('div'); grid.className = 'pl-grid';
+  data.pages.filter(p => p.kind === kind).forEach(p => {
+    const bl = data.blocks.filter(b => b.page === p.key);
+    const n = s => bl.filter(b => b.plan[0] === s).length;
+    const a = document.createElement('a'); a.className = 'pl-page'; a.href = `${p.file}?plan`;
+    a.innerHTML = `<b>${p.label}</b><div class="pl-bar">${Object.keys(COL).map(s => `<i style="background:${COL[s][0]};width:${100 * n(s) / bl.length}%"></i>`).join('')}</div>
+      <small>${bl.length} blocs · ${Object.keys(COL).filter(n).map(s => n(s) + ' ' + COL[s][1].split(' ')[0].toLowerCase()).join(' · ')}</small>`;
+    grid.append(a);
+  });
+  wrap.append(h, grid);
+});
+</script>
+</body>
+</html>

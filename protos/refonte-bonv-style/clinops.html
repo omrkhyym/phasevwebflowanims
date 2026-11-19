@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PROTO style BonV · ClinOps Optimizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="_bv/tokens.css">
+<link rel="stylesheet" href="_bv/bonv.css">
+<link rel="stylesheet" href="_bv/pages.css">
+</head>
+<body class="bv-page p-clinops">
+
+<nav class="nav" aria-label="Main">
+  <div class="bv-wrap">
+    <a class="nav__brand" href="home.html"><img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV"><span>ClinOps Optimizer</span></a>
+    <div class="nav__links"><a href="#why">Why</a><a href="#how">How it works</a><a href="#proof">Proof</a><a href="#faq">FAQ</a></div>
+    <a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Request a demo</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bv-wrap">
+    <div class="hero__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>PhaseV / ClinOps Optimizer</span>
+      <h1 class="bv-hero" data-bv-in>Find the right sites. <span class="bv-soft">Forecast your enrollment.</span></h1>
+      <p class="bv-lead" data-bv-in>See which sites can reach the right patients for your protocol, <span class="bv-soft">and how fast you will enroll, before you open a single site.</span></p>
+      <p class="body" data-bv-in>Clinical trial site selection and enrollment forecasting software for sponsors and CROs.</p>
+      <div class="actions" data-bv-in><a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Request a demo</a><a class="bv-link" href="#proof">See the proof <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="chart-card bv-glass" data-bv-in>
+      <svg class="bv-viz" viewBox="0 0 560 380" role="img" aria-label="Enrollment forecast with its uncertainty band, reaching the target before the milestone date">
+        <defs><linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F4F4" stop-opacity=".16"/><stop offset="1" stop-color="#F4F4F4" stop-opacity=".04"/></linearGradient></defs>
+        <text x="32" y="36">PATIENTS ENROLLED</text>
+        <path class="grid" d="M32 120 H540 M32 215 H540"/>
+        <path class="axis" d="M32 310 H540"/>
+        <!-- objectif d'enrollment -->
+        <path class="ctrl" d="M32 96 H540"/><text x="540" y="86" text-anchor="end">TARGET</text>
+        <!-- bande d'incertitude (simulation Monte Carlo) et médiane -->
+        <path d="M32 310 C120 300 200 240 280 170 C340 120 400 84 540 60 L540 128 C420 150 350 190 290 236 C210 290 120 306 32 310 Z" fill="url(#band)"/>
+        <path class="treat" d="M32 310 C120 304 200 268 285 204 C345 158 405 118 540 94"/>
+        <path class="hl" d="M500 96 V310" stroke-dasharray="2 5"/><circle cx="500" cy="96" r="3.2" fill="#E2C70A"/>
+        <text class="hl-label" x="492" y="292" text-anchor="end">TARGET MET</text>
+        <text x="32" y="340">SITE ACTIVATION</text><text x="540" y="340" text-anchor="end">MILESTONE DATE</text>
+        <g transform="translate(32 362)"><path class="treat" d="M0 0 H22"/><text x="30" y="4">MEDIAN FORECAST</text><rect x="180" y="-6" width="22" height="12" fill="url(#band)"/><text x="210" y="4">RANGE OF LIKELY ENROLLMENT</text></g>
+      </svg>
+    </div>
+  </div>
+  <span class="bv-hud hero__hud">Feasibility. Site strategy. Enrollment. Reforecasting.</span>
+</header>
+
+<!-- Why -->
+<section class="bv-section" id="why">
+  <div class="bv-wrap split" style="align-items:start">
+    <div class="split__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>Why ClinOps Optimizer?</span>
+      <h2 class="bv-h1" data-bv-in>Choose sites <span class="bv-soft">with confidence.</span></h2>
+      <p class="muted" data-bv-in>Experience is one input. ClinOps Optimizer is not tied to existing site relationships. It draws on data from many sources to find the sites that can reach the right patients for your protocol, and you decide what to prioritize for each study.</p>
+    </div>
+    <ul class="rows rows--num" data-bv-group>
+      <li data-bv-in><span><b>Start with your protocol.</b> We match each site’s patients to your eligibility criteria and expected screen failure.</span></li>
+      <li data-bv-in><span><b>Account for the landscape.</b> Competing trials and standard of care affect where patients are available. We factor both in when choosing countries and sites.</span></li>
+      <li data-bv-in><span><b>Combine your data with new data.</b> Add your own trial data and your CRO’s historical site data to current trial, real-world, geographic and competitive data. The result is a clearer view of the best mix of countries and sites for each study, and a trial that runs faster with fewer resources.</span></li>
+      <li data-bv-in><span><b>Find new sites.</b> Keep proven sites and see emerging centers with strong potential for your study.</span></li>
+      <li data-bv-in><span><b>Set your own priorities.</b> Favor experienced sites on one study, newer sites on another, or sites with fewer competing trials on a third. See why each site ranks where it does, adjust the weights, add what you know, and compare options.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="bv-section" id="how">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in>How it works</span>
+      <h2 class="bv-h1" data-bv-in>From feasibility <span class="bv-soft">to an enrollment plan that updates as you go.</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Feasibility</span><h3 class="bv-h2" data-bv-in>Test eligibility criteria early.</h3><p class="muted" data-bv-in style="color:var(--bv-grey)">See how criteria, prevalence, screen failure and competing trials shape your patient pool.</p></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/5_ClinOps%20Optimizer_Feasibility.mp4"></video></div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Site strategy</span><h3 class="bv-h2" data-bv-in>Build a site list <span class="bv-soft">your team can defend.</span></h3><p data-bv-in style="color:var(--bv-grey)">Start from a protocol, a goal or your current list. Sites are ranked on protocol fit, recruitment potential, operational performance and your own metrics, with reasons and confidence shown.</p></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/6_ClinOps%20Optimizer_Site%20Strategy.mp4"></video></div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Enrollment</span><h3 class="bv-h2" data-bv-in>See if your plan will deliver.</h3><p data-bv-in style="color:var(--bv-grey)">Forecast enrollment and the chance of hitting milestone dates. Compare site lists side by side.</p></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/7_ClinOps%20Optimizer_Enrollment%20Forecast.mp4"></video></div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Reforecasting</span><h3 class="bv-h2" data-bv-in>Stay on track.</h3><p data-bv-in style="color:var(--bv-grey)">Update the forecast with actual study data and review recovery options before you commit resources.</p></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/8_ClinOps%20Optimizer_Reforecast.mp4"></video></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How the forecast works -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in>How the forecast works</span>
+      <h2 class="bv-h1" data-bv-in>Forecasts you can edit.</h2>
+      <p class="bv-lead" data-bv-in style="color:var(--bv-grey);font-size:var(--bv-fs-body)">Every forecast shows its inputs, assumptions and uncertainty. Change any of them and the forecast reruns.</p>
+    </div>
+    <div class="cards" data-bv-group>
+      <article class="card bv-glass" data-bv-in><div class="bv-ring" style="--c:var(--pc);--p:.7"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/database.svg" alt=""></div><h3>Data</h3><p>Public trial data, licensed real-world data, site-level operational data and sponsor trial data, combined for your protocol.</p></article>
+      <article class="card bv-glass" data-bv-in><div class="bv-ring" style="--c:var(--pc);--p:.7"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/distribution.svg" alt=""></div><h3>Modeling</h3><p>Bayesian hierarchical models learn how sites and countries recruit. Monte Carlo simulation shows the range of likely enrollment and dates.</p></article>
+      <article class="card bv-glass" data-bv-in><div class="bv-ring" style="--c:var(--pc);--p:.7"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/sliders.svg" alt=""></div><h3>Transparency</h3><p>See what drives each recommendation and how confident the model is. AI helps read the protocol, find comparable studies, and set up scenarios. The forecast itself comes from statistical models.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- Proof -->
+<section class="bv-section" id="proof">
+  <div class="bv-wrap">
+    <div class="figure">
+      <div data-bv-group>
+        <span class="bv-label" data-bv-in>Proof · Phase III breast cancer retrospective · top-5 pharma</span>
+        <p class="bv-display" data-bv-in>50%+</p>
+        <p class="cap-line" data-bv-in>faster recruiting <span class="bv-soft">at recommended sites, in a blinded test run without the real site results.</span></p>
+      </div>
+      <div class="panel bv-glass" data-bv-in>
+        <svg class="bv-viz" viewBox="0 0 560 150" role="img" aria-label="0.4 patients per site per month at recommended sites, 0.3 at others" style="display:block;width:100%;height:auto;margin-bottom:20px">
+          <text x="0" y="14">PATIENTS / SITE / MONTH</text>
+          <rect x="0" y="34" width="440" height="34" rx="4" fill="#F4F4F4" fill-opacity=".1" stroke="#F4F4F4" stroke-width="1.6"/><text x="452" y="56" style="fill:var(--bv-white)">0.4</text>
+          <rect x="0" y="96" width="330" height="34" rx="4" fill="none" class="ctrl"/><text x="342" y="118">0.3</text>
+          <path class="hl" d="M330 113 H440"/><circle cx="440" cy="113" r="3" fill="#E2C70A"/>
+        </svg>
+        <ul class="kv">
+          <li><b>350 ≈ 360</b><span>sites predicted, sites activated</span></li>
+          <li><b>0.7</b><span>correlation between predicted and actual enrollment, by performance tier</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="minis" data-bv-group>
+      <article class="mini bv-glass" data-bv-in><span class="bv-label">Connected optimization · Phase III NSCLC</span><h4>ClinOps Optimizer and Trial Optimizer worked together on the design and site list.</h4><p>9 months projected savings · 95 fewer subjects · 33 fewer sites · $30M estimated savings</p></article>
+      <article class="mini bv-glass" data-bv-in><span class="bv-label">Independent corroboration</span><h4>A CRO reached the same answer.</h4><p>In a biotech bid-defense analysis, PhaseV and a leading global CRO worked separately and chose the same five-country strategy. PhaseV 0.42 · CRO 0.41</p></article>
+    </div>
+    <div class="actions" style="margin-top:40px"><a class="bv-link" href="https://phasev-2026.webflow.io/case-studies">Explore the case study library <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<!-- Connected -->
+<section class="bv-section">
+  <div class="bv-wrap split">
+    <div class="split__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>Connected PhaseV platform</span>
+      <h2 class="bv-h1" data-bv-in>Start <span class="bv-soft">where you are.</span></h2>
+      <p class="muted" data-bv-in>Begin with a protocol, an existing site list, sponsor and CRO history, or your own assumptions. Connect to PhaseV design tools and document workflows when useful.</p>
+    </div>
+    <div class="orbit" aria-hidden="true" data-bv-in>
+      <svg class="links" viewBox="0 0 560 560">
+        <path class="bv-flow" d="M280 184 L280 104"/><path class="bv-flow" d="M187 256 L114 236"/><path class="bv-flow bv-flow--accent" d="M226 359 L178 430"/><path class="bv-flow" d="M334 359 L382 430"/><path class="bv-flow" d="M373 256 L446 236"/>
+      </svg>
+      <div class="core-ring"><span class="bv-label">PhaseV</span></div>
+      <div class="cap p-portfolio" style="left:50%;top:10%;flex-direction:column-reverse"><div class="bv-ring" style="--p:.6"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/distribution.svg" alt=""></div><span class="bv-cap-label">Portfolio</span></div>
+      <div class="cap p-trial" style="left:12%;top:40%"><div class="bv-ring" style="--p:.72"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/sliders.svg" alt=""></div><span class="bv-cap-label">Trial</span></div>
+      <div class="cap p-clinops is-current" style="left:27%;top:84%"><div class="bv-ring"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/network.svg" alt=""></div><span class="bv-cap-label">ClinOps</span></div>
+      <div class="cap p-response" style="left:73%;top:84%"><div class="bv-ring" style="--p:.5"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/scatter.svg" alt=""></div><span class="bv-cap-label">Response</span></div>
+      <div class="cap p-conductor" style="left:88%;top:40%"><div class="bv-ring" style="--p:.58"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/document.svg" alt=""></div><span class="bv-cap-label">AI Conductor</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="bv-section" id="faq">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group><span class="bv-label" data-bv-in>FAQs</span><h2 class="bv-h1" data-bv-in>Questions, <span class="bv-soft">answered.</span></h2></div>
+    <ul class="faq">
+      <li><details><summary>How do I choose the right clinical trial sites?</summary><div class="a">Match each site’s patients to your protocol’s eligibility criteria, then rank sites on protocol fit, recruitment potential and operational performance. ClinOps Optimizer does this and shows the reasons behind each ranking.</div></details></li>
+      <li><details><summary>How can I reduce enrollment delays?</summary><div class="a">Test your eligibility criteria early, choose sites that can reach the right patients, and track enrollment against a forecast. ClinOps Optimizer supports all three.</div></details></li>
+      <li><details><summary>How is ClinOps Optimizer different from my CRO’s recommendations?</summary><div class="a">It works alongside your CRO. PhaseV draws on data from many CROs and studies, so it can surface sites your CRO has not worked with, and it explains why sites succeed.</div></details></li>
+      <li><details><summary>How does it handle new sites or sites with little data?</summary><div class="a">It borrows from related data, such as a high-performing investigator’s past enrollment at a previous institution, and shows the added uncertainty in the forecast.</div></details></li>
+      <li><details><summary>Where does the data come from, and is it protected?</summary><div class="a">Public sources, licensed real-world data, partnerships, and sponsor data shared under your confidentiality terms. PhaseV works only with de-identified or anonymized data.</div></details></li>
+      <li><details><summary>What do I need to start, and how long does it take?</summary><div class="a">A protocol, an indication and target geographies are enough. Historical trial data and site lists make the results more specific. If your indication is already live on our self-serve platform, you can have results in 48 hours. Otherwise, expect 2 to 3 weeks.</div></details></li>
+    </ul>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap end" data-bv-group>
+    <h2 class="bv-h1" data-bv-in data-proposed>Know your sites <span class="bv-soft">before you open them.</span></h2>
+    <div class="actions" data-bv-in style="justify-content:center"><a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Request a demo</a><a class="bv-link" href="home.html#platform">Explore the platform <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="bv-wrap">
+    <img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV">
+    <nav aria-label="Footer"><a href="home.html">Home</a><a href="trial.html">Trial Optimizer</a><a href="bonv.html">BonV</a><a href="https://phasev-2026.webflow.io/case-studies">Case studies</a></nav>
+    <span class="bv-label bv-label--dim">Adaptive. Causal. Intuitive.</span>
+  </div>
+</footer>
+
+<script src="_bv/bonv-bg.js"></script>
+<script src="_bv/bonv-mark.js"></script>
+<script src="_bv/bonv-motion.js"></script>
+<script src="_bv/pages.js"></script>
+</body>
+</html>

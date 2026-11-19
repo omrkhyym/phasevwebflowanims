@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blocs témoins · inventaire</title>
+<link rel="stylesheet" href="inv-ui.css">
+<style>
+  body{ margin:0; background:#f8f8f8; }
+  .iv-part{ margin:3rem 0 1.25rem; padding-top:1.5rem; border-top:2px solid var(--ink); scroll-margin-top:7rem; }
+  .iv-part h2{ font-size:1.75rem; font-weight:700; margin:0 0 .35rem; line-height:1.2; letter-spacing:0; color:var(--ink); }
+  .iv-part p{ margin:0; color:#4a4868; max-width:52rem; font-size:15px; }
+  .iv-part p b{ color:var(--ink); }
+  .iv-name{ font-weight:700; font-size:18px; }
+  .iv-why{ font-size:14px; background:#f3f1fb; border-left:3px solid var(--mau); padding:.5rem .75rem; border-radius:0 .5rem .5rem 0; }
+  .iv-props{ font-size:13px; color:#4a4868; }
+  .iv-props b{ color:var(--ink); }
+  .iv-see{ font-size:12.5px; color:#4a4868; }
+  .iv-see a{ text-decoration:underline; text-underline-offset:2px; }
+  .iv-occ-head{ display:flex; flex-wrap:wrap; gap:.4rem .75rem; align-items:center; padding:.55rem 1.25rem; background:#fbfbfd; border-top:1px solid var(--line); font-size:13px; }
+  .iv-occ-head b{ font-family:ui-monospace, Consolas, monospace; }
+  .iv-occ-head span{ color:#626262; }
+  .iv-occ-head a{ margin-left:auto; text-decoration:underline; text-underline-offset:2px; }
+  .iv-more{ display:block; width:100%; border:0; border-top:1px solid var(--line); background:#fbfbfd; padding:.7rem 1.25rem; text-align:left; cursor:pointer; font-size:13px; font-weight:600; }
+  .iv-progress{ display:flex; align-items:center; gap:.5rem; font-size:12.5px; }
+  .iv-progress i{ display:block; width:8rem; height:.4rem; border-radius:999px; background:var(--soft); overflow:hidden; }
+  .iv-progress i b{ display:block; height:100%; background:#2f8f5b; }
+  .iv-spec.is-done .iv-stage, .iv-spec.is-done .iv-occ-head, .iv-spec.is-done .iv-more{ display:none; }
+  .iv-spec.is-done.is-open .iv-stage, .iv-spec.is-done.is-open .iv-occ-head, .iv-spec.is-done.is-open .iv-more{ display:block; }
+  .iv-spec.is-done.is-open .iv-occ-head{ display:flex; }
+  .iv-reopen{ display:none; border:0; border-top:1px solid var(--line); background:#fbfbfd; width:100%; text-align:left; padding:.6rem 1.25rem; cursor:pointer; font-size:12.5px; }
+  .iv-spec.is-done .iv-reopen{ display:block; }
+</style>
+</head>
+<body class="iv">
+<div class="iv-bar">
+  <h1>Blocs témoins</h1>
+  <div class="iv-progress"><i><b id="bar"></b></i><span id="done"></span></div>
+  <div class="iv-seg" id="width" aria-label="Largeur">
+    <button type="button" data-w="" aria-pressed="true">Bureau</button>
+    <button type="button" data-w="991">991</button>
+    <button type="button" data-w="390">390</button>
+  </div>
+  <select id="page"><option value="">Toutes les pages</option></select>
+  <span class="iv-sp"></span>
+  <a class="iv-btn" href="elements.html">Petits éléments</a>
+  <a class="iv-btn" href="../index.html">Index refonte</a>
+  <button type="button" class="iv-btn is-main" id="export">Copier mes choix</button>
+  <div class="iv-chips" id="parts" style="flex-basis:100%"></div>
+</div>
+<main class="iv-main" id="main"></main>
+
+<script type="module">
+import { decisionUI, exportButton, load } from './inv-ui.js';
+
+// Trois parties, une question chacune. Un témoin tranché se replie (on peut le rouvrir).
+const PARTS = [
+  { type: 'same', title: '1. Composants existants', keys: ['keep', 'drop', 'ask'],
+    text: 'Blocs <b>strictement identiques</b> : seuls le contenu et le fond changent d’une page à l’autre. Chacun deviendra un composant Webflow. <b>Question : on le garde ?</b> Une seule occurrence est affichée, les autres sont dépliables.' },
+  { type: 'merge', title: '2. Fusions possibles', keys: ['merge', 'apart', 'ask'],
+    text: 'Blocs <b>différents</b> qui font le même travail. Ma raison est indiquée en violet. <b>Question : on en fait un seul composant ?</b> Toutes les versions sont affichées l’une sous l’autre pour comparer. « Laisser séparés » envoie ces blocs en partie 3, à trancher un par un.' },
+  { type: 'unique', title: '3. Blocs uniques', keys: ['keep', 'drop', 'ask'],
+    text: 'Blocs qui n’existent qu’une fois. <b>Question : on le garde ?</b> Les blocs d’une fusion possible n’arrivent ici que si tu as choisi « Laisser séparés ».' },
+];
+
+const data = await (await fetch('blocs.json', { cache: 'no-store' })).json();
+const B = Object.fromEntries(data.blocks.map(b => [b.id, b]));
+const C = Object.fromEntries(data.components.map(c => [c.id, c]));
+const mergesOf = {}; data.components.filter(c => c.type === 'merge').forEach(c => c.members.forEach(m => (mergesOf[m] = mergesOf[m] || []).push(c.id)));
+const sameOf = {}; data.components.filter(c => c.type === 'same').forEach(c => c.members.forEach(m => { sameOf[m] = c.id; }));
+const main = document.getElementById('main'), root = document.body;
+const frames = new Map();   // contentWindow -> iframe
+const state = { part: '', page: '' };
+
+addEventListener('message', e => {
+  const f = frames.get(e.source);
+  if (!f || !e.data || e.data.inv !== 'h') return;
+  f.style.height = Math.min(e.data.h, f.dataset.tag === 'header' ? 1000 : 4000) + 'px';
+});
+
+const pageSel = document.getElementById('page');
+data.pages.forEach(p => pageSel.add(new Option(p.label, p.key)));
+
+const decided = id => { const d = load()[id]; return !!(d && d.d); };
+function progress() {
+  const all = active(), n = all.filter(c => decided(c.id)).length, t = all.length;
+  document.getElementById('done').textContent = `${n} / ${t} tranchés`;
+  document.getElementById('bar').style.width = (100 * n / t) + '%';
+}
+
+// un bloc proposé en fusion se tranche en partie 2 ; il ne descend en partie 3 que si la fusion est refusée
+const listed = c => c.type !== 'unique' || !mergesOf[c.id] || mergesOf[c.id].some(i => (load()[i] || {}).d === 'apart');
+const active = () => data.components.filter(listed);
+
+function render() {
+  main.textContent = '';
+  PARTS.forEach(p => {
+    const wrap = document.createElement('div'); wrap.id = 'wrap-' + p.type;
+    main.append(wrap);
+    renderPart(p);
+  });
+  progress();
+}
+function renderPart(p) {
+  const wrap = document.getElementById('wrap-' + p.type);
+  wrap.querySelectorAll('iframe').forEach(f => frames.delete(f.contentWindow));
+  wrap.textContent = '';
+  if (state.part && state.part !== p.type) return;
+  const list = active().filter(c => c.type === p.type && (!state.page || c.members.some(m => B[m].page === state.page)));
+  if (!list.length) return;
+  const h = document.createElement('div'); h.className = 'iv-part'; h.id = 'part-' + p.type;
+  h.innerHTML = `<h2>${p.title} <small style="font-size:1rem;color:#626262;font-weight:400">· ${list.length}</small></h2><p>${p.text}</p>`;
+  wrap.append(h);
+  list.forEach(c => wrap.append(spec(c, p)));
+}
+
+function occurrence(b, variant) {
+  const frag = document.createDocumentFragment();
+  const head = document.createElement('div'); head.className = 'iv-occ-head';
+  head.innerHTML = `<b>${b.id}</b> ${b.pageLabel}<span>${variant || b.variant}${b.hidden ? ' · masqué sur le site' : ''}</span>`
+    + `<a href="${b.open}" target="_blank" rel="noopener">page entière ↗</a>`;
+  const stage = document.createElement('div'); stage.className = 'iv-stage';
+  const f = document.createElement('iframe');
+  f.loading = 'lazy'; f.title = b.id; f.src = b.url; f.dataset.tag = b.tag;
+  if (b.tag === 'header') f.style.height = '820px';
+  stage.append(f);
+  frag.append(head, stage);
+  requestAnimationFrame(() => f.contentWindow && frames.set(f.contentWindow, f));
+  return frag;
+}
+
+function spec(c, part) {
+  const el = document.createElement('article'); el.className = 'iv-spec'; el.id = c.id;
+  const pages = [...new Set(c.members.map(m => B[m].pageLabel))];
+  const b0 = B[c.members[0]];
+  const see = c.type === 'unique' && mergesOf[c.id]
+    ? `<div class="iv-see">Fait partie d’une fusion possible : ${mergesOf[c.id].map(i => `<a href="#${i}">${i} · ${C[i].name}</a>`).join(', ')}</div>` : '';
+  const tag = c.type === 'same' ? `composant · ${c.members.length} pages` : c.type === 'merge' ? `${c.members.length} versions à comparer` : 'bloc unique';
+  el.innerHTML = `<div class="iv-head"><div class="iv-meta">
+      <div class="iv-line"><span class="iv-id">${c.id}</span><span class="iv-tag ${c.type !== 'unique' ? 'is-proto' : ''}">${tag}</span>
+        <span class="iv-tag">${c.type === 'unique' ? b0.variant : pages.join(', ')}</span>${c.type === 'unique' && b0.hidden ? '<span class="iv-tag is-warn">masqué sur le site</span>' : ''}</div>
+      <div class="iv-name">${c.name}</div>
+      ${c.why ? `<div class="iv-why">${c.why}</div>` : ''}
+      ${c.props ? `<div class="iv-props"><b>Propriétés :</b> ${c.props}</div>` : ''}${see}
+    </div></div>`;
+  const what = c.type === 'unique' ? `${b0.pageLabel} : ${c.name}` : `${c.name} (${c.members.join(', ')})`;
+  el.querySelector('.iv-head').append(decisionUI(c.id, what, () => {
+    el.classList.toggle('is-done', decided(c.id)); el.classList.remove('is-open');
+    if (c.type === 'merge') { renderPart(PARTS[2]); renderParts(); }   // « laisser séparés » fait descendre les blocs en partie 3
+    progress();
+  }, part.keys));
+
+  const reopen = document.createElement('button'); reopen.type = 'button'; reopen.className = 'iv-reopen'; reopen.textContent = 'Tranché · revoir le bloc';
+  reopen.addEventListener('click', () => el.classList.toggle('is-open'));
+  el.append(reopen);
+  el.classList.toggle('is-done', decided(c.id));
+
+  // occurrences : la page filtrée d'abord
+  const mem = [...c.members].sort((a, b) => (B[b].page === state.page) - (B[a].page === state.page));
+  const variant = m => (B[m].variants && B[m].variants[c.id]) || B[m].variant;
+  const shown = c.type === 'same' ? 1 : mem.length;
+  mem.slice(0, shown).forEach(m => el.append(occurrence(B[m], variant(m))));
+  if (mem.length > shown) {
+    const more = document.createElement('button'); more.type = 'button'; more.className = 'iv-more';
+    more.textContent = `Voir les ${mem.length - shown} autres occurrences (${mem.slice(shown).join(', ')})`;
+    more.addEventListener('click', () => { mem.slice(shown).forEach(m => el.append(occurrence(B[m], variant(m)))); more.remove(); });
+    el.append(more);
+  }
+  return el;
+}
+
+// filtres
+const parts = document.getElementById('parts');
+function renderParts() {
+  parts.textContent = '';
+  [{ type: '', title: 'Tout' }, ...PARTS].forEach(p => {
+    const k = p.type ? active().filter(c => c.type === p.type).length : active().length;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'iv-chip';
+    b.textContent = `${p.title} · ${k}`; b.setAttribute('aria-pressed', state.part === p.type);
+    b.addEventListener('click', () => { state.part = p.type; renderParts(); render(); scrollTo(0, 0); });
+    parts.append(b);
+  });
+}
+pageSel.addEventListener('change', () => { state.page = pageSel.value; render(); });
+document.querySelectorAll('#width button').forEach(btn => btn.addEventListener('click', () => {
+  root.dataset.w = btn.dataset.w;
+  document.querySelectorAll('#width button').forEach(x => x.setAttribute('aria-pressed', x === btn));
+}));
+exportButton(document.getElementById('export'));
+renderParts();
+render();
+
+// lien entrant (depuis la page des éléments) : un bloc mène à son composant, ou à lui-même s'il est unique
+const t = location.hash.slice(1), dest = document.getElementById(sameOf[t] || t);
+if (dest) { dest.classList.add('is-open'); dest.scrollIntoView(); }
+</script>
+</body>
+</html>

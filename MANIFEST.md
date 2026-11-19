@@ -134,6 +134,12 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Journal
 
+### 2026-11-19
+
+- **Company, « PhaseV at a glance » : chiffres 2026 du client** (tableau « Last year → This year », accord de Romain). Sponsors and CROs 50+ → 55+ ; Patient-level records 10M+ → 20M+. Inchangés : 10 (top 20 pharma), 100+ (clinical trials), 50+ (disease models), 10+ (papers). Libellés non touchés.
+
+- **CMS Case Studies : 12 fiches archivées** (liste client « LIST TO KEEP_DELETE CASE STUDIES », accord de Romain). Archivées, pas supprimées : réversibles. Disparaissent du site à la prochaine publication de Romain. Archivées : ClinOps #3 Sickle Cell, #4 IgA, #5 Vitiligo ; Trial #3 Denali, #4 N-of-1 ASO, #5 MASH 2/3, #6 Seamless 2/3 ; Portfolio #2 MASH Indication, #3 Trispecific, #5 HLA-G, #6 PD-L1, #7 Hunter. Restent 9 fiches : NSCLC, COPD, Infectious Disease, Rheumatic, Oral Insulin, ALS, Lupus, Pipeline Acquisition, et Obesity (à fusionner avec Pipeline Acquisition, contenu à reprendre plus tard).
+
 ### 2026-11-18
 - **Footer, « Back to top » avec easing** (demande de Romain, publié sans passage `?dev` à sa demande) : lien `footer-bottom` passé en `href="#"` (il n'avait pas de lien, donc pas atteignable au clavier) + `data-pv="back-to-top"` ; module `src/back-to-top.js` dans `site.js` `v0.26.0`, loader global mis à jour.
 - **Assets : 21 images `cs-*.jpg` supprimées** (accord de Romain). Envois inaboutis (0 octet), utilisées nulle part : ni élément de page, ni style, ni code ; les fiches Case Studies utilisent leurs propres copies CMS (21 images vérifiées, toutes en 200 après suppression). Collection Evidences : 10 fiches de démo, à supprimer par Romain dans le CMS. Le webclip du site est celui par défaut de Webflow (`webclip.png`, 1 Ko), à remplacer avec le favicon.
@@ -481,6 +487,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
+- Case Studies : fiche Obesity à fusionner avec Pipeline Acquisition (édition plus tard) ; ligne « Oncology RO » de la liste client sans fiche CMS (à créer ?) ; cartes case studies statiques des pages produit à vérifier, certaines peuvent pointer vers des fiches archivées.
 - Terms of Service : page à créer si le client en a une (lien masqué dans le footer). SEO des modèles CMS (Resources, Case Studies) à lier aux champs dans le Designer. Redirections `/evidence` → `/case-studies` si besoin. Contenu client : voir le doc « PhaseV website: review notes ».
 - AI Conductor et BonV, contenu client : liens des boutons « Watch a Demo Video » (`#`) ; AI Conductor : usage public des chiffres Proof (10 partenaires, top-5), accord du sponsor pour l'exemple dose, liste des intégrations, CRF-to-EDC, réponse FAQ sur la simulation ; BonV : 2 chiffres d'enquête et leur source, métrique du cas client.
 - Portfolio, contenu client : lien du bouton « Explore an example analysis » (`#`) ; FAQ, textes à fournir : métrique de validation des modèles, fourchette de délai standard, GDPR/HIPAA si vérifié, texte de confidentialité pour les deals ; bandeau de footer propre à Portfolio (proto) à traiter avec le footer unifié.
@@ -502,7 +509,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 - Resources : texte du bouton « Watch recording » à adapter pour les cartes qui ne sont pas des webinars.
 - Pages produit sans `inner-nav` : à valider en Preview sur les cinq pages (largeur de `feature-grid` avec les vidéos en `container-large`). Ensuite, décider du sort du composant `inner-nav` (plus aucune instance), de `._1st` et du CSS `data-sticky-nav-offset`.
 - ClinOps, rythme vertical : padding-bottom irréguliers (40 px sous The PhaseV difference, 145 px sous le workflow, 80 px sous les blocs feature) ; `padding-section-custom2` ne se réduit qu'en mobile.
-- Company, « PhaseV at a glance » : h2 et texte d'intro proposés par Claude, à valider ; chiffres à confirmer par PhaseV (l'ancien site disait 45+ clients) ; vérifier en Preview le compteur et l'alignement icône / chiffre.
+- Company, « PhaseV at a glance » : h2 et texte d'intro proposés par Claude, à valider ; chiffres 55+ et 20M+ donnés par le client le 2026-11-19 ; à lui demander : « 100+ Programs » de son tableau = « 100+ Clinical trials supported » de la page ? (un programme peut compter plusieurs essais) ; vérifier en Preview le compteur et l'alignement icône / chiffre.
 - Company, SAB : vérifier en Preview le cadrage 4:5 des portraits (Leadership et SAB) ; les entrées CMS seront en ligne à la publication du site.
 - Home, citations : vérifier en Preview (cartes, flèches desktop et mobile, logos) ; NeuroSense sans auteur nommé ; citations tronquées en « … » dans l'original (NeuroSense, Alimentiv, iOMEDICO) ; composant `quote` peut-être inutilisé.
 - Home, Evidence : +53 % (brief ClinOps) contre 0.43 / 0.28 = +54 %, à faire trancher par PhaseV ; titre du cas proposé par Claude ; lien « Read the case » à réactiver avec la page Evidence.

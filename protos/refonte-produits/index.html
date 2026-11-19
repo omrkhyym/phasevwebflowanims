@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refonte du site · protos</title>
+<style>
+  /* Index de la refonte du site PhaseV (style affiné) : pages, outils, archives. Tenu à jour à chaque page validée. */
+  :root{ --ink:#141238; --mau:#928acd; --grey:#ececec; --bg:#f8f8f8; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font:400 16px/1.5 Aspekta, "Inter", Arial, sans-serif; }
+  main{ max-width:72rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+  h1{ font-size:2.5rem; line-height:1.1; margin:0 0 .75rem; letter-spacing:-.01em; }
+  h2{ font-size:1.25rem; margin:3.5rem 0 1rem; }
+  p{ margin:0; color:#2b2a48; max-width:44rem; }
+  .pages{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem; margin-top:1.5rem; }
+  .page{ display:flex; flex-direction:column; gap:.75rem; padding:1.5rem; border-radius:1.25rem; background:#fff; color:inherit; text-decoration:none; border:1px solid #14123814; transition:border-color .2s, transform .2s; }
+  a.page:hover{ border-color:var(--ink); transform:translateY(-2px); }
+  .page b{ font-size:1.25rem; }
+  .st{ align-self:flex-start; font-size:.75rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:.3rem .6rem; border-radius:999px; background:var(--grey); }
+  .st.ok{ background:var(--ink); color:#fff; } .st.wip{ background:var(--mau); color:#fff; }
+  .page small{ color:#626262; }
+  span.page{ opacity:.6; }
+  code{ font-size:.85em; background:var(--grey); padding:.1em .35em; border-radius:.25em; }
+  @media(max-width:800px){ .pages{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Refonte du site PhaseV</h1>
+  <p>Toutes les pages du site en style affiné, assemblées depuis le kit commun (<code>_kit/</code>) et le build unique (<code>_build/build.py</code>). Une règle de composant vaut pour toutes les pages. Ce qui est validé est consigné dans <code>INTEGRATION.md</code> pour le passage Webflow.</p>
+
+  <h2>Pages</h2>
+  <div class="pages">
+    <a class="page" href="home-affine/phasev-home-affine.html"><span class="st ok">validé</span><b>Home</b><small>Hero en séquence de particules (atelier ci-dessous), The problem (Gantt restylé), plateforme en cartes avec mini-scènes, Why PhaseV, Evidence en cartes case studies, citation centrée</small></a>
+    <a class="page" href="trial-affine/phasev-trial-affine.html"><span class="st ok">validé</span><b>Trial Optimizer</b><small>Template du style affiné : Roboto léger, labels mono, verre, fond animé ; design space glossy</small></a>
+    <a class="page" href="response-affine/phasev-response-affine.html"><span class="st ok">validé</span><b>Response Optimizer</b><small>Deux approches en 50/50, cartes icône, frise sombre, case studies, FAQ, plateforme</small></a>
+    <a class="page" href="clinops-affine/phasev-clinops-affine.html"><span class="st ok">validé</span><b>ClinOps Optimizer</b><small>Cartes numérotées, étapes vidéo, forecast, Proof en success story glossy, FAQ, plateforme</small></a>
+    <a class="page" href="portfolio-affine/phasev-portfolio-affine.html"><span class="st ok">validé</span><b>Portfolio Optimizer</b><small>Challenge, étapes avec graphes, cartes à puces, frise, Evidence en success story</small></a>
+    <a class="page" href="bonv-affine/phasev-bonv-affine.html"><span class="st wip">en suspens</span><b>BonV</b><small>The PhaseV answer et étapes Ask, Collaborate, Orchestrate en scènes animées ; page entière soumise au client, repasse selon son retour</small></a>
+    <a class="page" href="conductor-affine/phasev-conductor-affine.html"><span class="st wip">en suspens</span><b>AI Conductor</b><small>Cinq scènes animées et cartes de coût ; rangée Proof (10 / 100+) à reprendre après le retour du client</small></a>
+    <a class="page" href="company-affine/phasev-company-affine.html"><span class="st ok">validé</span><b>About (Company)</b><small>Hero « Orbites » (anneaux et V en plexus), fonds alternés, chiffres en cartes, Leadership en sombre, SAB en light, Build with us avec l'animation carrières (verre fin, anneau de fusion jaune)</small></a>
+    <a class="page" href="cs-affine/phasev-cs-affine.html"><span class="st ok">validé</span><b>Case Studies · bibliothèque</b><small>Hero aligné sur les heros produit, filtres en barre segmentée, cartes claires 3 par ligne sur fond blanc</small></a>
+    <a class="page" href="cs-study-affine/phasev-cs-study-affine.html"><span class="st ok">validé</span><b>Case Studies · fiche</b><small>Modèle de toutes les études (ici Denali) : chiffre clé, At a glance, récit, Why it matters, FAQ, études liées</small></a>
+    <a class="page" href="res-affine/phasev-res-affine.html"><span class="st ok">validé</span><b>Resources · bibliothèque</b><small>Mêmes règles que Case Studies : hero aligné, catégories en barre segmentée et recherche, cartes claires 3 par ligne</small></a>
+    <a class="page" href="res-article-affine/phasev-res-article-affine.html"><span class="st ok">validé</span><b>Resources · article</b><small>Modèle de tous les articles : hero aligné, intertitres dans la marge de gauche, texte régulier</small></a>
+    <a class="page" href="contact-affine/phasev-contact-affine.html"><span class="st ok">validé</span><b>Contact</b><small>Section unique en hero sombre animé, une colonne centrée : en-tête, formulaire en carte de verre sombre, cases produits, ligne de coordonnées</small></a>
+  </div>
+
+  <h2>Outils</h2>
+  <div class="pages">
+    <a class="page" href="hero-lab/"><span class="st ok">validé</span><b>Atelier du hero Home</b><small>Une scène à la fois, barre de temps, réglages, séquence complète en un seul programme ; fiche des valeurs : <code>hero-lab/SCENES.md</code></small></a>
+    <a class="page" href="INTEGRATION.md"><span class="st ok">à jour</span><b>Document d'intégration</b><small>Fondations, composants, modules JS à créer, décisions ouvertes, journal des validations</small></a>
+    <a class="page" href="inventaire/plan.html"><span class="st">référence</span><b>Plan des pages</b><small>Chaque page du site actuel, avec ce que devient chaque bloc</small></a>
+    <a class="page" href="inventaire/blocs.html"><span class="st">référence</span><b>Blocs témoins</b><small>Les blocs du site actuel et des premiers protos, rangés par famille</small></a>
+    <a class="page" href="inventaire/elements.html"><span class="st">référence</span><b>Petits éléments</b><small>Boutons, liens, pastilles, labels, titres, cartes, icônes, espacements</small></a>
+  </div>
+
+  <h2>Archives</h2>
+  <p>Premières versions des pages produit, page système et essais écartés (heros, scènes, visuels) : déplacés dans <code>_archive/</code> le 2026-11-16, pas supprimés. La liste, les anciens chemins et la façon de restaurer sont dans <a href="_archive/README.md"><code>_archive/README.md</code></a>.</p>
+</main>
+</body>
+</html>

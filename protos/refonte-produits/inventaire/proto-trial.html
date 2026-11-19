@@ -1,0 +1,751 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Sat Nov 14 2026 00:38:51 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="phasev-2026.webflow.io" data-wf-page="6a7f24a28679cdce6cd676e7" data-wf-site="6a7494c19b6df905487ffd7e" lang="en"><head><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>PROTO · Trial Optimizer</title><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/css/phasev-2026.webflow.shared.d1eb539b9.css" rel="stylesheet" type="text/css" integrity="sha384-0etTm5rS0TPvFlimTG/H+sDn+gp9zf+WFZHTw5dLM9RKda33DgIFMt0cezem2S81" crossorigin="anonymous"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3fef79561f6feb52bf8_phasev-webclip-256.png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3fef79561f6feb52bf8_phasev-webclip-256.png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3ff9b5d62b97c4f25ba_phasev-webclip-256.png" rel="icon" type="image/png" sizes="48x48"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3ff71713b24eed96325_phasev-webclip-256.png" rel="apple-touch-icon" sizes="180x180"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3fe5d3295848820a618_phasev-webclip-256.png" rel="icon" type="image/png" sizes="192x192"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3ff430cdeafe6d0d024_phasev-webclip-256.png" rel="icon" type="image/png" sizes="512x512"/><!-- Start of HubSpot Embed Code -->
+
+<!-- End of HubSpot Embed Code -->
+
+<style>
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  html,
+  body {
+    overflow-x: clip;
+  }
+</style><script>(function(w,i,g){w[g]=w[g]||[];if(typeof w[g].push=='function')w[g].push.apply(w[g],Array.isArray(i)?i:[i]);})(window,['G-71YD791J35'],'google_tags_first_party');</script><script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('set', 'developer_id.dZGVlNj', true);gtag('set', 'developer_id.dYWYxNW', true);gtag('js', new Date());gtag('config', 'G-71YD791J35');</script><link rel="stylesheet" href="../_kit/kit.css">
+</head><body><div class="page-wrapper"><div class="global-styles w-embed"><style>
+  html {
+    font-size: calc(0.625rem + 0.41666666666666663vw);
+  }
+  @media screen and (max-width: 1920px) {
+    html {
+      font-size: calc(0.625rem + 0.41666666666666674vw);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+    }
+  }
+  @media screen and (max-width: 479px) {
+    html {
+      font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+    }
+  }
+
+  /* Make text look crisper and more legible in all browsers */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus state style for keyboard navigation for the focusable elements */
+  *[tabindex]:focus-visible,
+  input[type='file']:focus-visible {
+    outline: 0.125rem solid #4d65ff;
+    outline-offset: 0.125rem;
+  }
+
+  /* Get rid of top margin on first element in any rich text element */
+  .w-richtext > :not(div):first-child,
+  .w-richtext > div:first-child > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Get rid of bottom margin on last element in any rich text element */
+  .w-richtext > :last-child,
+  .w-richtext ol li:last-child,
+  .w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Prevent all click and hover interaction with an element */
+  .pointer-events-off {
+    pointer-events: none;
+  }
+
+  /* Enables all click and hover interaction with an element */
+  .pointer-events-on {
+    pointer-events: auto;
+  }
+
+  /* Create a class of .div-square which maintains a 1:1 dimension of a div */
+  .div-square::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  /* Make sure containers never lose their center alignment */
+  .container-medium,
+  .container-small,
+  .container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  /* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+  /*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+
+  /* Apply "..." after 3 lines of text */
+  .text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 2 lines of text */
+  .text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Adds inline flex display */
+  .display-inlineflex {
+    display: inline-flex;
+  }
+
+  /* These classes are never overwritten */
+  .hide {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 991px) {
+    .hide,
+    .hide-tablet {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .hide-mobile {
+      display: none !important;
+    }
+  }
+
+  .margin-0 {
+    margin: 0rem !important;
+  }
+
+  .padding-0 {
+    padding: 0rem !important;
+  }
+
+  .spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+  }
+
+  .margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+  * {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance !important;
+  }
+  [data-bg='purple-gradient'] {
+    background: radial-gradient(157.44% 98.4% at 84% 18%, rgba(126, 91, 178, 0.46) 0%, rgba(126, 91, 178, 0) 28%), radial-gradient(162.26% 101.42% at 14% 86%, rgba(65, 34, 125, 0.48) 0%, rgba(65, 34, 125, 0) 34%), #141238;
+  }
+  .header_image-wrapper {
+    background: linear-gradient(157deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+  }
+  .animation-2 {
+    opacity: 0.5;
+    background: radial-gradient(70.71% 70.71% at 50% 50%, rgba(79, 45, 131, 0.13) 3.93%, rgba(79, 45, 131, 0) 4.71%);
+  }
+  .tab-graph-line.is-gradient {
+    background: linear-gradient(90deg, #67439a 0%, #f3d400 100%);
+  }
+  [data-swiper='news'] .swiper {
+    overflow: visible;
+  }
+  .navbar_component {
+    will-change: transform; /* smoother hide/show */
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  /* your scrolled color state */
+  .navbar_component.is-scrolled {
+    background-color: #141238; /* whatever your scrolled look is */
+    /* color, box-shadow, backdrop-filter, etc. */
+  }
+  /* ---- Structural: text-swap mask button ---- */
+  .button {
+    --btn-lh: 1.4; /* leading buffer: hides ink bleed at the clip seam */
+    --btn-nudge: -0.05em; /* optional optical centering, usually leave at 0 */
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    /* keep your own padding / background / border-radius / color / font-size */
+  }
+  .button .btn-inner {
+    position: relative;
+    overflow: hidden; /* the real clip */
+    display: block;
+    transform: translateY(var(--btn-nudge));
+  }
+  .button .btn-row {
+    display: block;
+    line-height: var(--btn-lh);
+    white-space: nowrap;
+  }
+  .button .btn-row.is-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .button .word {
+    display: inline-block;
+    white-space: nowrap; /* keeps spaces intact */
+  }
+  .button .char {
+    display: inline-block;
+    line-height: var(--btn-lh);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .button .char {
+      transform: none !important;
+    }
+  }
+  :root {
+    --nav-h: 72px; /* fallback; JS overwrites with the real height */
+  }
+
+  /* your sticky element — add the data hook in Designer */
+  [data-sticky-nav-offset] {
+    position: sticky;
+    top: var(--nav-h); /* default: below nav */
+    transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1); /* ~matches nav slide */
+  }
+
+  /* nav hidden → let it stick flush to the very top */
+  html.nav-hidden [data-sticky-nav-offset] {
+    top: 0;
+  }
+  * {
+    scrollbar-color: #f3d400 #141238; /* thumb  track */
+    scrollbar-width: thin; /* auto | thin | none */
+  }
+  .build-card {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%), var(--Primary-Dark-Navy, #141238);
+  }
+  .filter_list-wrapper,
+  .filter_list {
+    display: contents;
+  }
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 56, 0.8); /* optional tint, keep low-alpha */
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      visibility 0.35s ease;
+    z-index: 1; /* below the menu card */
+  }
+
+  /* make sure the menu card paints on top of the backdrop */
+  .navbar_container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .evidence_card{
+    box-shadow: 0 15px 44px 0 rgba(18, 13, 53, 0.08);
+  }
+  .evidence-filter{
+    box-shadow: 0 16px 44px 0 rgba(18, 13, 53, 0.10);
+  }
+.filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3rem;
+  margin: 0;
+  padding: 0 3rem 0 1rem; /* 16px left; right leaves room for arrow */
+  border: 1px solid #626262;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M7 12 0 0h14z' fill='%626262'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center; /* 16px from right edge */
+  background-size: 0.875rem 0.75rem;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-select::-ms-expand { display: none; }
+
+.filter-select:hover { border-color: #111827; }
+
+.filter-select:focus-visible {
+  outline: none;
+  border-color: #3b0764;
+  box-shadow: 0 0 0 3px rgba(59, 7, 100, 0.15);
+}
+
+/* Placeholder look while "All" (empty value) is selected */
+.filter-select:has(option[value=""]:checked) { color: #9ca3af; }
+
+.filter-select option { color: #111827; }
+[data-cases="groups"] { transition: opacity 0.3s ease; }
+[data-cases="groups"]:not(.is-ready) { opacity: 0; }
+</style></div><div data-animation="default" class="navbar_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="a380dcaf-b10a-d34b-96df-ecbcfab61750" data-wf--nav--variant="base" role="banner" data-duration="400"><div class="nav-backdrop"></div><div class="navbar_container"><a href="https://phasev-2026.webflow.io/" class="navbar_logo-link w-nav-brand"><div class="logo-embed w-embed"><svg width="100%" height="100%" viewBox="0 0 167 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M149.429 0.0746441C158.247 -0.771797 166.083 5.67781 166.926 14.4772C167.769 23.2766 161.301 31.0908 152.481 31.9271C143.669 32.7627 135.845 26.3151 135.003 17.5228C134.16 8.73054 140.618 0.920387 149.429 0.0746441Z" fill="#E2C709"/>
+<path d="M142.014 8.33008L146.63 8.32999C148.164 11.6632 149.472 15.1348 150.982 18.4634C152.237 15.2525 153.968 11.5531 155.354 8.33203L159.874 8.33953C159.002 10.2009 158.116 12.0555 157.217 13.9031L153.5 21.6823C153.097 22.533 151.623 25.8068 151.104 26.4087L150.911 26.4044C150.443 26.124 150.2 25.2808 149.953 24.7863C149.188 23.2571 148.443 21.7185 147.718 20.1706C145.837 16.2142 143.935 12.2673 142.014 8.33008Z" fill="currentcolor"/>
+<path d="M94.0463 0.940079C96.5617 0.779309 99.871 1.51809 102.228 2.39682C102.293 4.22674 102.229 6.33163 102.251 8.19704C100.149 7.10529 97.8258 6.50384 95.4581 6.43792C93.9908 6.4024 92.0054 6.63303 90.9145 7.6817C90.4254 8.14449 90.1463 8.78555 90.1404 9.45803C90.1224 11.9072 94.0027 13.1385 95.8712 13.8963C100.209 15.6562 104.119 17.6186 103.961 23.0405C103.762 29.8536 97.8335 31.4304 92.2034 31.3262C88.9949 31.1582 87.2801 30.7295 84.3225 29.6985V23.6452C87.1315 24.8896 89.997 25.9371 93.1389 25.7349C94.5388 25.6448 96.5498 25.2879 97.446 24.1647C97.7738 23.754 97.8617 23.3421 97.8224 22.8154C97.6022 19.9139 92.6609 19.0308 90.4246 17.9436C89.041 17.3682 87.8127 16.7063 86.6425 15.7593C83.3255 13.0758 83.0592 7.4767 85.8128 4.29196C87.9015 1.8756 90.9547 1.18253 94.0463 0.940079Z" fill="currentcolor"/>
+<path d="M0 1.4331C2.56613 1.3531 5.18076 1.45829 7.75178 1.41152C10.7503 1.35697 13.8531 1.52393 16.5077 3.07453C18.4545 4.19803 19.8611 6.06157 20.4059 8.23869C21.042 10.6825 20.8216 13.8695 19.4851 16.0372C17.7564 18.841 15.6609 19.6057 12.7106 20.371C12.2234 18.6475 11.7214 16.9281 11.2045 15.2131C15.0244 14.2093 15.4363 9.20091 12.4336 7.29955C10.6573 6.44661 8.20494 6.63201 6.25053 6.66591C6.37575 13.2779 6.16415 19.9579 6.25557 26.5747C6.274 27.9041 6.19863 29.2945 6.30379 30.6145C4.65044 30.5112 1.71707 30.5942 0.00521528 30.6145L0 1.4331Z" fill="currentcolor"/>
+<path d="M64.7245 1.09927C65.1422 1.30151 69.2336 10.1447 69.7688 11.2619L79.1709 30.7978L72.5918 30.8126L67.5828 19.3834C66.746 17.4785 65.7842 15.107 64.8674 13.2764L64.7675 13.3089C64.0168 14.7118 62.806 17.7259 62.1053 19.3206L57.0823 30.8073L50.4879 30.8028C50.8156 30.2748 51.5939 28.5394 51.884 27.9252L54.5646 22.2896L64.7245 1.09927Z" fill="currentcolor"/>
+<path d="M26.3563 1.43262C28.4444 1.41386 30.5326 1.40629 32.6208 1.40991L32.6157 13.248L36.2422 13.2235C36.2212 14.8858 36.2077 16.6812 36.2396 18.3372C35.1204 18.2659 33.7534 18.3109 32.6151 18.3201L32.6157 26.8374C32.6152 27.8848 32.5632 29.6182 32.6712 30.6022C30.6474 30.5566 28.3905 30.5961 26.3614 30.6126L26.3563 1.43262Z" fill="currentcolor"/>
+<path d="M39.3371 1.41539L45.6488 1.41022L45.6412 18.5328C45.641 22.5353 45.5903 26.6446 45.6557 30.6324C44.3574 30.4934 40.788 30.6053 39.3317 30.6189L39.3371 1.41539Z" fill="currentcolor"/>
+<path d="M128.778 25.31L128.838 25.3372C128.981 25.7564 128.903 29.7834 128.907 30.6147C126.983 30.5163 124.378 30.6004 122.387 30.6001L109.608 30.6064C109.392 30.3769 109.49 26.0047 109.492 25.339C115.893 25.2415 122.366 25.3878 128.778 25.31Z" fill="currentcolor"/>
+<path d="M109.481 1.43457C115.795 1.29595 122.542 1.42845 128.893 1.40858L128.902 6.66753C128.031 6.6097 126.955 6.62273 126.076 6.63908C120.578 6.74137 114.975 6.48689 109.488 6.66353L109.481 1.43457Z" fill="currentcolor"/>
+<path d="M109.479 13.268C115.752 13.0853 122.561 13.2649 128.89 13.2169L128.892 18.3498C128.268 18.2663 126.696 18.2998 126.031 18.3L120.653 18.3039L113.491 18.3019C112.342 18.3017 110.594 18.2533 109.49 18.3446L109.479 13.268Z" fill="currentcolor"/>
+</svg>
+</div></a><div id="w-node-f6f1da3b-306e-ad2d-0c4a-d2bc7fac3e76-fab61750" class="navbar-right-wrapper"><nav role="navigation" id="w-node-a380dcaf-b10a-d34b-96df-ecbcfab61754-fab61750" class="navbar_menu w-nav-menu"><div data-delay="200" data-hover="true" data-wf--nav-dropdown--variant="base" data-w-id="9457f8c6-6832-184c-ef37-35fae6877b6b" class="navbar_menu-dropdown w-dropdown"><div class="navbar_dropdwn-toggle w-dropdown-toggle"><div class="text-block">Platform</div><div class="dropdown-chevron w-embed"><svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.72225 4.59125V7.27775H11.4087V8.72225H8.72225V11.4088H7.27775V8.72225H4.59125V7.27775H7.27775V4.59125H8.72225Z" fill="currentcolor"/>
+</svg>
+</div></div><nav class="dropdown-nav-wrapper w-dropdown-list"><div class="navbar_dropdown-list"><a href="https://phasev-2026.webflow.io/trial-optimizer" data-wf--nav-dropdown_link--variant="base" aria-current="page" class="navbar_dropdown-link w-dropdown-link w--current">Trial Optimizer</a><a href="https://phasev-2026.webflow.io/clinops-optimizer" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">ClinOps Optimizer</a><a href="https://phasev-2026.webflow.io/response-optimizer" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">Response Optimizer</a><a href="https://phasev-2026.webflow.io/portfolio-optimizer" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">Portfolio Optimizer</a><a href="https://phasev-2026.webflow.io/ai-conductor" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">AI Conductor</a><a href="https://phasev-2026.webflow.io/bonv" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">BonV</a></div></nav></div><a href="https://phasev-2026.webflow.io/company" data-wf--nav_link--variant="base" class="navbar_link w-nav-link">Company</a><a href="https://phasev-2026.webflow.io/resources" data-wf--nav_link--variant="base" class="navbar_link w-nav-link">Resources</a><a href="https://job-boards.greenhouse.io/phasev" data-wf--nav_link--variant="base" target="_blank" class="navbar_link w-nav-link">Careers</a><div class="div-block"><a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/contact" class="button w-button">Book a Demo</a></div></nav><div class="navbar_button-wrapper"><div class="navbar_menu-button w-nav-button"><div class="menu-icon"><div class="menu-icon_line-top"></div><div class="menu-icon_line-middle"><div class="menu-icon_line-middle-inner"></div></div><div class="menu-icon_line-bottom"></div></div></div></div></div></div></div><main class="main-wrapper"><header data-inv-block="0" data-bg="purple-gradient" class="section_header"><div data-pv="trial-hero-bg"></div><div class="padding-global padding-section-home_header"><div class="container-large"><div class="header_component"><div class="w-layout-grid header_content"><div id="w-node-_2fd2bd32-c3d8-e437-5e6d-d952b6372e73-6cd676e7" class="header_content-left"><div class="margin-bottom margin-medium gap-24"><div class="text-size-label text-color-yellow">Trial Optimizer</div><h1 class="text-size-display text-color-alternate" data-new>Design for uncertainty <br/><span class="text-color-yellow">Decide with clarity</span></h1><div class="text-size-large" data-new">A design can look strong under one assumed effect size and fail under another. Trial Optimizer helps you find a design that meets your objectives within your constraints. It simulates and optimizes adaptive, fixed, and Bayesian designs, explores trade-offs, and tests performance across the scenarios that matter, including those where your assumptions miss, so you can choose a robust design you can defend.</div></div><div class="button-group gap-24"><a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/contact" class="button w-button">Request a demo</a></div></div><div data-pv="trial-hero-slot"></div></div></div></div></div></header><section data-inv-block="1" class="section_layout is-white" data-wf="A"><div class="padding-global padding-section-trial"><div class="container-large"><div class="section-top align-center"><div class="text-size-label">The Trial Optimizer workflow</div><h2 class="text-size-display text-align-center">A simulation workbench <br/>for design trade-off exploration</h2></div></div></div>
+<div id="setup" class="padding-global is-feature is-white"><div class="container-large"><div class="feature-grid"><div class="section-top left-align"><div class="text-size-label">Set Up</div><h2 class="heading-style-h1" data-new>Set up a trial design in minutes</h2><div class="feature_list-wrapper"><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p data-new>Start from a prior design or go through a guided setup.</p></div></div><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Use the GenAI Assistant to retrieve relevant public studies and inform placebo or standard-of-care response, with source-level review and selectable reference trials.</p></div></div></div></div><div id="w-node-f2ead720-fe84-7362-16a7-387d7d1f6626-ccbcd6f4" class="video-animation w-embed"><video style="width:100%;height:auto;display:block;max-width:100%" autoplay muted loop playsinline src="https://wunderdogs.b-cdn.net/PhaseV/%2333_Trial%20Optimizer_Setup.mp4"></video></div></div></div></div>
+<div id="explore" class="padding-global is-feature is-purple"><div class="container-large"><div class="feature-grid reverse"><div id="w-node-_10198eed-bd52-198f-0242-caebdd9710bb-ccbcd6f4" class="video-animation w-embed"><video style="width:100%;height:auto;display:block;max-width:100%" autoplay muted loop playsinline src="https://wunderdogs.b-cdn.net/PhaseV/%2334_Trial%20Optimizer_Explore.mp4"></video></div><div class="section-top left-align"><div class="text-size-label">Explore</div><h2 class="heading-style-h1" data-new>Explore how clinical, operational, and statistical assumptions and decisions interact</h2><div class="feature_list-wrapper"><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p data-new>Vary treatment and control effects, recruitment, allocation, interim strategy, and other consequential assumptions.</p></div></div><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p data-new>Compare a wide range of designs, including fixed, adaptive, Bayesian, and your own customized designs, to find the one that suits your study best.</p></div></div></div></div></div></div></div>
+<div id="simulate" class="padding-global is-feature is-white"><div class="container-large"><div class="feature-grid"><div class="section-top left-align"><div class="text-size-label">Simulate</div><h2 class="heading-style-h1">Simulate how each design performs</h2><div class="feature_list-wrapper"><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Configure and run rapid Monte Carlo simulations across the selected scenarios and design options.</p></div></div><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Examine and compare simulated outcomes side by side.</p></div></div></div></div><div id="w-node-efffa7b9-d674-27e6-d2bc-61106744dbe5-ccbcd6f4" class="video-animation w-embed"><video style="width:100%;height:auto;display:block;max-width:100%" autoplay muted loop playsinline src="https://wunderdogs.b-cdn.net/PhaseV/%2334-2(new)%20-%20Trial%20Optimizer_Simulate.mp4"></video></div></div></div></div>
+<div id="optimize" class="padding-global is-feature is-purple"><div class="container-large"><div class="feature-grid"><div id="w-node-_8bcdce7e-eca8-2293-bf1b-4264f7460054-ccbcd6f4" class="video-animation w-embed"><video style="width:100%;height:auto;display:block;max-width:100%" autoplay muted loop playsinline src="https://wunderdogs.b-cdn.net/PhaseV/%2335_Trial%20Optimizer_Optimize.mp4"></video></div><div class="section-top left-align"><div class="text-size-label">Optimize</div><h2 class="heading-style-h1">Refine the selected design</h2><div class="feature_list-wrapper"><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p data-new>Choose what outcomes to optimize for - minimizing sample size and/or trial duration under null and alternative hypotheses - and what parameters to optimize over - e.g. when to have interim looks and stopping criteria.</p></div></div><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p data-new>PhaseV’s proprietary stochastic optimization algorithm searches the parameter space for further improvement.</p></div></div><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Export the selected design with supporting evidence, audit trail, and reproducibility settings.</p></div></div></div></div></div></div></div>
+</section>
+<section data-inv-block="2" class="section_layout is-light" data-new-block><div class="padding-global padding-section-main"><div class="container-large"><div data-ss="C">
+  <div class="ss-left">
+    <div class="ss-labels"><div class="text-size-label">Success story</div><div class="text-size-label ss-ctx">Anonymized Phase 3 infectious disease trial</div></div>
+    <h2 class="text-size-display">A Phase 3 design refined for speed, cost, and statistical performance</h2>
+    <div class="ss-figs">
+      <div class="ss-big"><div class="number-span is-proof">$6M+</div><div class="c">conservative direct<br>cost savings</div></div>
+      <div class="ss-rows">
+        <div class="ss-row"><div class="v">630 → 575</div><div class="c" data-proposed>modeled enrollment</div></div>
+        <div class="ss-row"><div class="v">6 <small>months</small></div><div class="c" data-proposed>shorter modeled duration</div></div>
+        <div class="ss-row"><div class="v">90%+</div><div class="c">power, 2.5% Type I error</div></div>
+      </div>
+    </div>
+    <div class="ss-actions">
+      <a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/case-studies/phase-3-infectious-disease-trial-optimization" class="button w-button">View details</a>
+      <a class="ss-link text-size-large" href="https://phasev-2026.webflow.io/case-studies">Explore the case study library →</a>
+    </div>
+  </div>
+  <div class="ss-anim"><div data-pv="success-design-space"></div></div>
+</div></div></div></section>
+<section data-inv-block="3" class="section_layout is-white"><div class="padding-global padding-section-large"><div class="container-large"><div class="grid-2 gap-2-5"><div class="animation-wrapper"><div data-current="trial" data-pv="platform-connect-v2"></div></div><div class="section-top max-width-555"><div class="text-size-label">Standalone or connected</div><h2 class="text-size-display">Complete on its own. Stronger when connected</h2><div class="text-size-large" data-new>When connected to the broader PhaseV platform, reviewed insights can enter the scenario space, design decisions can inform operational planning in ClinOps Optimizer, and approved parameters can return to the protocol, SAP, and other connected documents for expert review.</div></div></div></div></div></section>
+<section data-inv-block="4" class="section_layout is-light" data-new-block><div class="padding-global padding-section-main"><div class="container-large"><div data-pv="faq">
+  <div class="section-top left-align"><div class="text-size-label">FAQs</div><h2 class="text-size-display" data-proposed>Questions, answered</h2></div>
+  <div data-faq-list>
+    <div data-faq-item><h3 class="heading-style-h4">What is Trial Optimizer?</h3><div class="text-size-large">Trial Optimizer is a simulation workbench for clinical trial design. It lets you set up candidate designs, vary the assumptions that drive them, simulate performance across scenarios, and refine the design you select.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">Which designs can I compare?</h3><div class="text-size-large">Fixed, adaptive, and Bayesian designs, along with your own customized designs. You can compare them side by side across the same set of scenarios.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">How does it handle uncertainty in my assumptions?</h3><div class="text-size-large">You vary treatment and control effects, recruitment, allocation, interim strategy, and other assumptions, then simulate each design across those scenarios. The results show how each design performs when assumptions miss, so you can see which designs hold up.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">What does the GenAI Assistant do?</h3><div class="text-size-large">It retrieves relevant public studies to inform placebo or standard-of-care response. You review each source and select the reference trials you want to use.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">How does the optimization work?</h3><div class="text-size-large">After you select a design, PhaseV’s proprietary stochastic optimization algorithm searches the parameter space for further improvement against your objectives and constraints.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">What can I export?</h3><div class="text-size-large">The selected design, with supporting evidence, an audit trail, and reproducibility settings.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">Does Trial Optimizer forecast enrollment?</h3><div class="text-size-large">You can vary recruitment assumptions and see their effect on design performance. For forecasts built from site-level and regional data, use ClinOps Optimizer.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">Do I need the rest of the PhaseV platform?</h3><div class="text-size-large">No. Trial Optimizer is complete on its own. When connected to the broader platform, reviewed insights can enter the scenario space and approved parameters can return to connected documents for expert review.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">How long does setup take?</h3><div class="text-size-large">You can set up a design in minutes, starting from a prior design or a guided setup.</div></div>
+  </div>
+</div></div></div></section>
+</main><section data-bg="purple-gradient" class="section_footer is-gradient"><div class="padding-global padding-section-footer"><div class="container-large"><div data-line-field="swimmer" class="footer-band"><div class="footer-band-copy"><div class="text-size-label is-footer-label">See Trial Optimizer in context</div><h2 class="footer-statement is-cta">Bring us a protocol draft, a design question, or a set of assumptions</h2></div><div class="footer-band-actions"><a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/contact" class="button w-button" data-new>Contact us</a></div></div><div class="footer-bottom"><div class="footer-grid4"><div class="footer-col"><div class="text-size-label is-footer-label">Platform</div><div class="footer-links"><a href="https://phasev-2026.webflow.io/portfolio-optimizer" class="footer-item_link">Portfolio Optimizer</a><a href="https://phasev-2026.webflow.io/response-optimizer" class="footer-item_link">Response Optimizer</a><a href="https://phasev-2026.webflow.io/trial-optimizer" aria-current="page" class="footer-item_link w--current">Trial Optimizer</a><a href="https://phasev-2026.webflow.io/clinops-optimizer" class="footer-item_link">ClinOps Optimizer</a><a href="https://phasev-2026.webflow.io/ai-conductor" class="footer-item_link">AI Conductor</a><a href="https://phasev-2026.webflow.io/bonv" class="footer-item_link">BonV</a></div></div><div class="footer-col"><div class="text-size-label is-footer-label">Company</div><div class="footer-links"><a href="https://phasev-2026.webflow.io/company" class="footer-item_link">About</a><a href="https://phasev-2026.webflow.io/resources" class="footer-item_link">Resources</a><a href="https://phasev-2026.webflow.io/contact" class="footer-item_link">Contact</a></div></div><div id="w-node-cd49c67c-e30a-2235-8494-9f13a0414283-a0414281" class="footer-col is-contact"><div class="text-size-label is-footer-label">Contact</div><a href="mailto:info@phasevtrials.com" class="footer-item_link">info@phasevtrials.com</a><div class="footer-social"><a href="https://www.linkedin.com/company/phasevtrials" target="_blank" class="footer-item_link">LinkedIn</a><link rel="noopener" href="https://www.linkedin.com/company/phasevtrials"/></div></div><div class="footer-col"><div class="text-size-label is-footer-label">Offices</div><div class="footer-links"><div><div class="text-size-medium text-color-white">Boston</div><div class="text-size-label">USA</div></div><div><div class="text-size-medium text-color-white">Tel Aviv</div><div class="text-size-label">Israel</div></div></div></div></div><div class="footer-legal"><div id="w-node-cd49c67c-e30a-2235-8494-9f13a04142a3-a0414281" class="text-size-medium text-color-neutralw text-size-small">© <span class="data-year">2026</span><span> PhaseV. All rights reserved.</span></div><div class="footer-legal-links"><a href="#" class="text-size-medium text-color-neutralw is-link text-size-small">Terms of Service</a><a href="https://phasev-2026.webflow.io/privacy-policy" class="text-size-medium text-color-neutralw is-link text-size-small">Privacy Policy</a><a href="#top" class="text-size-medium text-color-neutralw is-link text-size-small">Back to top ↑</a></div></div></div></div></div></section></div><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6a7494c19b6df905487ffd7e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript" integrity="sha384-4abIlA5/v7XaW1HMXKBgnUuhnjBYJ/Z9C1OSg4OhmVw9O3QeHJ/qJqFBERCDPv7G" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/js/webflow.schunk.c10c0aefcd3bb392.js" type="text/javascript" integrity="sha384-MvVg3UHsF5AZXmWnPHYRz2D5h9wG2WnlJxugvMk34s4eJVd/lNISBcsTLx8h/PXF" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/js/webflow.b4de0594.c070398ef649e35b.js" type="text/javascript" integrity="sha384-154+BodzHA2I41ZCmvOzHXjnPbqjdji1Ffy8Lhtv8qOa2LJDZZGrVxQY659qpLyb" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js" type="text/javascript"></script><script type="text/javascript">gsap.registerPlugin(ScrollTrigger,SplitText);</script><script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+<script>
+  window.lenis = new Lenis({
+    // Value between 0 and 1
+    // Default value: 0.1
+    // The lower the value, the smoother the scroll
+    lerp: 0.05,
+    // Default value: 1
+    // The higher the value, the faster the scrolling
+    wheelMultiplier: 1,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // get the current year
+    const currentYear = new Date().getFullYear();
+    // target elements with the "data-year" attribute
+    const currentYearSpans = document.querySelectorAll('[data-year]');
+    // update each element with the current year
+    currentYearSpans.forEach((element) => {
+      element.textContent = currentYear;
+    });
+  });
+</script>
+<script>
+  // Fond flottant + line field (repo PhaseV-anims, site.js). Remplace l'ancien window.LineField.
+  (function () {
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src = true
+      ? 'http://localhost:5173/site.js'
+      : 'https://cdn.jsdelivr.net/gh/omrkhyym/phasevwebflowanims@v0.11.0/dist/site.js';
+    document.body.appendChild(s);
+  })();
+</script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.number-span').forEach((el) => {
+    const raw = el.textContent.trim();
+
+    // prefix (non-digits) | numeric core (digits, dot, comma) | suffix (non-digits)
+    const match = raw.match(/^(\D*?)([\d.,]+)(\D*)$/);
+    if (!match) return; // no clean number, leave the element untouched
+
+    const [, prefix, numericStr, suffix] = match;
+    const target = parseFloat(numericStr.replace(/,/g, ''));
+    if (isNaN(target)) return;
+
+    const decimals = (numericStr.split('.')[1] || '').length;
+    const useGrouping = numericStr.includes(',');
+
+    const format = (val) =>
+      prefix +
+      val.toLocaleString('en-US', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+        useGrouping,
+      }) +
+      suffix;
+
+    if (reduceMotion) {
+      el.textContent = format(target);
+      return;
+    }
+
+    const counter = { value: 0 };
+    el.textContent = format(0);
+
+    gsap.to(counter, {
+      value: target,
+      duration: 1.5,
+      ease: 'power1.out',
+      onUpdate: () => {
+        el.textContent = format(counter.value);
+      },
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 65%',
+        once: true,
+      },
+    });
+  });
+</script>
+<script>
+  (function () {
+    const nav = document.querySelector('.navbar_component');
+    if (!nav || typeof gsap === 'undefined') return;
+
+    const root = document.documentElement;
+    const SCROLLED_AT = 50;
+    const HIDE_AFTER = 150;
+    const DELTA = 8;
+
+    let lastY = 0;
+    let hidden = false;
+
+    const show = gsap.quickTo(nav, 'yPercent', { duration: 0.4, ease: 'power3.out' });
+
+    // keep --nav-h in sync with the real navbar height
+    const setNavH = () => root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    setNavH();
+    window.addEventListener('resize', setNavH, { passive: true });
+
+    function onScroll(y) {
+      nav.classList.toggle('is-scrolled', y > SCROLLED_AT);
+
+      const diff = y - lastY;
+      if (Math.abs(diff) < DELTA) return;
+
+      const scrollingDown = diff > 0;
+
+      if (scrollingDown && y > HIDE_AFTER && !hidden) {
+        hidden = true;
+        show(-100);
+        root.classList.add('nav-hidden'); // sticky drops to top: 0
+      } else if (!scrollingDown && hidden) {
+        hidden = false;
+        show(0);
+        root.classList.remove('nav-hidden'); // sticky returns below nav
+      }
+
+      lastY = y;
+    }
+
+    if (window.lenis && typeof window.lenis.on === 'function') {
+      window.lenis.on('scroll', (e) => onScroll(e.scroll));
+    } else {
+      let ticking = false;
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            onScroll(window.scrollY);
+            ticking = false;
+          });
+        },
+        { passive: true },
+      );
+    }
+  })();
+</script>
+
+
+<script>
+  (function () {
+    if (typeof gsap === 'undefined' || typeof SplitText === 'undefined') return;
+    gsap.registerPlugin(SplitText);
+
+    var buttons = document.querySelectorAll('.button');
+    if (!buttons.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var SPLIT_OPTS = { type: 'words,chars', wordsClass: 'word', charsClass: 'char' };
+    var DUR = 0.4,
+      EASE = 'power3.inOut',
+      STAGGER = 0.015;
+
+    // Reliable line box: computed line-height is in px and survives
+    // transformed ancestors AND elements that start hidden (offsetHeight can be 0).
+    function lineBox(el) {
+      var lh = parseFloat(getComputedStyle(el).lineHeight);
+      if (lh && !isNaN(lh)) return lh;
+      return el.offsetHeight || parseFloat(getComputedStyle(el).fontSize) * 1.4;
+    }
+
+    function makeButton(btn) {
+      var text = btn.textContent.trim();
+      if (!text) return null;
+      var state = { tl: null };
+
+      function build() {
+        if (state.tl) state.tl.kill();
+
+        btn.innerHTML = '<span class="btn-inner">' + '<span class="btn-row is-top">' + text + '</span>' + '<span class="btn-row is-bottom">' + text + '</span>' + '</span>';
+
+        var topRow = btn.querySelector('.is-top');
+        var bottomRow = btn.querySelector('.is-bottom');
+        if (!topRow || !bottomRow) return;
+
+        var topSplit = new SplitText(topRow, SPLIT_OPTS);
+        var bottomSplit = new SplitText(bottomRow, SPLIT_OPTS);
+
+        var h = lineBox(topRow); // full box incl. leading -> seam sits in empty space
+        gsap.set(bottomSplit.chars, { y: h });
+
+        state.tl = gsap.timeline({ paused: true });
+        state.tl.to(topSplit.chars, { y: -h, duration: DUR, ease: EASE, stagger: { each: STAGGER } }, 0);
+        state.tl.to(bottomSplit.chars, { y: 0, duration: DUR, ease: EASE, stagger: { each: STAGGER } }, 0);
+      }
+
+      build();
+
+      btn.addEventListener('mouseenter', function () {
+        if (state.tl) state.tl.play();
+      });
+      btn.addEventListener('mouseleave', function () {
+        if (state.tl) state.tl.reverse();
+      });
+      btn.addEventListener('focus', function () {
+        if (state.tl) state.tl.play();
+      });
+      btn.addEventListener('blur', function () {
+        if (state.tl) state.tl.reverse();
+      });
+
+      return build;
+    }
+
+    var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+
+    ready.then(function () {
+      var rebuilds = [];
+      buttons.forEach(function (btn) {
+        var rb = makeButton(btn);
+        if (rb) rebuilds.push(rb);
+      });
+
+      var t;
+      window.addEventListener('resize', function () {
+        clearTimeout(t);
+        t = setTimeout(function () {
+          rebuilds.forEach(function (rb) {
+            rb();
+          });
+        }, 200);
+      });
+    });
+  })();
+</script>
+<script>
+  const nav = document.querySelector('.navbar_component');
+  const btn = document.querySelector('.navbar_menu-button');
+
+  const syncNav = () => {
+    const isOpen = btn.classList.contains('w--open');
+    nav.classList.toggle('nav-open', isOpen); // second arg = force to match
+    isOpen ? window.lenis?.stop() : window.lenis?.start();
+  };
+
+  // Mirror Webflow's state no matter what opens/closes it
+  new MutationObserver(syncNav).observe(btn, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+</script><script>
+  (function () {
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src = true
+      ? 'http://localhost:5173/trial.js'
+      : 'https://cdn.jsdelivr.net/gh/omrkhyym/phasevwebflowanims@v0.6.0/dist/trial.js';
+    document.body.appendChild(s);
+  })();
+</script>
+<div class="pv-proto" data-lenis-prevent>
+  <b>Proto Trial</b>
+  <a class="pv-proto-home" href="../index.html">Toutes les pages</a>
+  <button type="button" data-cls="show-new" aria-pressed="false">Copy nouvelle</button>
+  <button type="button" data-cls="show-proposed" aria-pressed="false">Copy proposée</button>
+  <button type="button" data-cls="show-fix" aria-pressed="false">À corriger (client)</button>
+</div>
+<script type="module" src="../_kit/kit.js"></script>
+<script src="inv.js"></script>
+</body></html>

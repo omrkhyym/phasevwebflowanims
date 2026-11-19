@@ -1,0 +1,956 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Sat Nov 14 2026 00:38:51 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="phasev-2026.webflow.io" data-wf-page="6a7494c19b6df905487ffd48" data-wf-site="6a7494c19b6df905487ffd7e" lang="en"><head><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>COPIE · PhaseV</title><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/css/phasev-2026.webflow.shared.d1eb539b9.css" rel="stylesheet" type="text/css" integrity="sha384-0etTm5rS0TPvFlimTG/H+sDn+gp9zf+WFZHTw5dLM9RKda33DgIFMt0cezem2S81" crossorigin="anonymous"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3fef79561f6feb52bf8_phasev-webclip-256.png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3fef79561f6feb52bf8_phasev-webclip-256.png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3ff9b5d62b97c4f25ba_phasev-webclip-256.png" rel="icon" type="image/png" sizes="48x48"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3ff71713b24eed96325_phasev-webclip-256.png" rel="apple-touch-icon" sizes="180x180"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3fe5d3295848820a618_phasev-webclip-256.png" rel="icon" type="image/png" sizes="192x192"/><link href="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adee3ff430cdeafe6d0d024_phasev-webclip-256.png" rel="icon" type="image/png" sizes="512x512"/><!-- Start of HubSpot Embed Code -->
+
+<!-- End of HubSpot Embed Code -->
+
+<style>
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  html,
+  body {
+    overflow-x: clip;
+  }
+</style><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<style>
+  .dm-map svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .dm-card {
+    cursor: pointer;
+    outline: none;
+  }
+  .dm-card rect {
+    transition:
+      fill 0.25s ease,
+      fill-opacity 0.25s ease,
+      stroke 0.25s ease,
+      stroke-opacity 0.25s ease;
+  }
+
+  .dm-card.dm-corner > rect:nth-of-type(1) {
+    fill: #18113f;
+    fill-opacity: 0.92;
+  }
+  .dm-card.dm-corner > rect:nth-of-type(2) {
+    stroke: #fff;
+    stroke-opacity: 0.18;
+  }
+  .dm-card.dm-corner:not(.is-active):hover > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 0.5;
+  }
+  .dm-card.dm-corner.is-active > rect:nth-of-type(1) {
+    fill: #41246f;
+    fill-opacity: 0.95;
+  }
+  .dm-card.dm-corner.is-active > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 1;
+  }
+  .dm-card.dm-wide.is-active > rect:nth-of-type(2) {
+    stroke: #f3d400;
+    stroke-opacity: 1;
+  }
+  .dm-card.dm-wide:not(.is-active):hover > rect:nth-of-type(2) {
+    stroke-opacity: 0.85;
+  }
+
+  /* Visibility. If a panel uses flex/grid, change block to match. */
+  .dm-panel {
+    display: none;
+  }
+  .dm-panel.is-active {
+    display: flex;
+  }
+  /* Make the injected SVG scale to its container at every breakpoint */
+  #dm-map,
+  .dm-map {
+    width: 100%;
+    max-width: 670px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #dm-map svg,
+  .dm-map svg {
+    width: 100% !important; /* beats the SVG's built-in width="670" */
+    height: auto !important; /* keeps aspect ratio, no distortion */
+    max-width: 100%;
+    display: block;
+  }
+</style><script>(function(w,i,g){w[g]=w[g]||[];if(typeof w[g].push=='function')w[g].push.apply(w[g],Array.isArray(i)?i:[i]);})(window,['G-71YD791J35'],'google_tags_first_party');</script><script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('set', 'developer_id.dZGVlNj', true);gtag('set', 'developer_id.dYWYxNW', true);gtag('js', new Date());gtag('config', 'G-71YD791J35');</script></head><body><div class="page-wrapper"><div class="global-styles w-embed"><style>
+  html {
+    font-size: calc(0.625rem + 0.41666666666666663vw);
+  }
+  @media screen and (max-width: 1920px) {
+    html {
+      font-size: calc(0.625rem + 0.41666666666666674vw);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+    }
+  }
+  @media screen and (max-width: 479px) {
+    html {
+      font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+    }
+  }
+
+  /* Make text look crisper and more legible in all browsers */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus state style for keyboard navigation for the focusable elements */
+  *[tabindex]:focus-visible,
+  input[type='file']:focus-visible {
+    outline: 0.125rem solid #4d65ff;
+    outline-offset: 0.125rem;
+  }
+
+  /* Get rid of top margin on first element in any rich text element */
+  .w-richtext > :not(div):first-child,
+  .w-richtext > div:first-child > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Get rid of bottom margin on last element in any rich text element */
+  .w-richtext > :last-child,
+  .w-richtext ol li:last-child,
+  .w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Prevent all click and hover interaction with an element */
+  .pointer-events-off {
+    pointer-events: none;
+  }
+
+  /* Enables all click and hover interaction with an element */
+  .pointer-events-on {
+    pointer-events: auto;
+  }
+
+  /* Create a class of .div-square which maintains a 1:1 dimension of a div */
+  .div-square::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  /* Make sure containers never lose their center alignment */
+  .container-medium,
+  .container-small,
+  .container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  /* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+  /*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+*/
+
+  /* Apply "..." after 3 lines of text */
+  .text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 2 lines of text */
+  .text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Adds inline flex display */
+  .display-inlineflex {
+    display: inline-flex;
+  }
+
+  /* These classes are never overwritten */
+  .hide {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 991px) {
+    .hide,
+    .hide-tablet {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .hide-mobile {
+      display: none !important;
+    }
+  }
+
+  .margin-0 {
+    margin: 0rem !important;
+  }
+
+  .padding-0 {
+    padding: 0rem !important;
+  }
+
+  .spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+  }
+
+  .margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+  * {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance !important;
+  }
+  [data-bg='purple-gradient'] {
+    background: radial-gradient(157.44% 98.4% at 84% 18%, rgba(126, 91, 178, 0.46) 0%, rgba(126, 91, 178, 0) 28%), radial-gradient(162.26% 101.42% at 14% 86%, rgba(65, 34, 125, 0.48) 0%, rgba(65, 34, 125, 0) 34%), #141238;
+  }
+  .header_image-wrapper {
+    background: linear-gradient(157deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+  }
+  .animation-2 {
+    opacity: 0.5;
+    background: radial-gradient(70.71% 70.71% at 50% 50%, rgba(79, 45, 131, 0.13) 3.93%, rgba(79, 45, 131, 0) 4.71%);
+  }
+  .tab-graph-line.is-gradient {
+    background: linear-gradient(90deg, #67439a 0%, #f3d400 100%);
+  }
+  [data-swiper='news'] .swiper {
+    overflow: visible;
+  }
+  .navbar_component {
+    will-change: transform; /* smoother hide/show */
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  /* your scrolled color state */
+  .navbar_component.is-scrolled {
+    background-color: #141238; /* whatever your scrolled look is */
+    /* color, box-shadow, backdrop-filter, etc. */
+  }
+  /* ---- Structural: text-swap mask button ---- */
+  .button {
+    --btn-lh: 1.4; /* leading buffer: hides ink bleed at the clip seam */
+    --btn-nudge: -0.05em; /* optional optical centering, usually leave at 0 */
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    /* keep your own padding / background / border-radius / color / font-size */
+  }
+  .button .btn-inner {
+    position: relative;
+    overflow: hidden; /* the real clip */
+    display: block;
+    transform: translateY(var(--btn-nudge));
+  }
+  .button .btn-row {
+    display: block;
+    line-height: var(--btn-lh);
+    white-space: nowrap;
+  }
+  .button .btn-row.is-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .button .word {
+    display: inline-block;
+    white-space: nowrap; /* keeps spaces intact */
+  }
+  .button .char {
+    display: inline-block;
+    line-height: var(--btn-lh);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .button .char {
+      transform: none !important;
+    }
+  }
+  :root {
+    --nav-h: 72px; /* fallback; JS overwrites with the real height */
+  }
+
+  /* your sticky element — add the data hook in Designer */
+  [data-sticky-nav-offset] {
+    position: sticky;
+    top: var(--nav-h); /* default: below nav */
+    transition: top 0.4s cubic-bezier(0.22, 1, 0.36, 1); /* ~matches nav slide */
+  }
+
+  /* nav hidden → let it stick flush to the very top */
+  html.nav-hidden [data-sticky-nav-offset] {
+    top: 0;
+  }
+  * {
+    scrollbar-color: #f3d400 #141238; /* thumb  track */
+    scrollbar-width: thin; /* auto | thin | none */
+  }
+  .build-card {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%), var(--Primary-Dark-Navy, #141238);
+  }
+  .filter_list-wrapper,
+  .filter_list {
+    display: contents;
+  }
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 18, 56, 0.8); /* optional tint, keep low-alpha */
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity 0.35s ease,
+      visibility 0.35s ease;
+    z-index: 1; /* below the menu card */
+  }
+
+  /* make sure the menu card paints on top of the backdrop */
+  .navbar_container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .nav-open .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .evidence_card{
+    box-shadow: 0 15px 44px 0 rgba(18, 13, 53, 0.08);
+  }
+  .evidence-filter{
+    box-shadow: 0 16px 44px 0 rgba(18, 13, 53, 0.10);
+  }
+.filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3rem;
+  margin: 0;
+  padding: 0 3rem 0 1rem; /* 16px left; right leaves room for arrow */
+  border: 1px solid #626262;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M7 12 0 0h14z' fill='%626262'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center; /* 16px from right edge */
+  background-size: 0.875rem 0.75rem;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-select::-ms-expand { display: none; }
+
+.filter-select:hover { border-color: #111827; }
+
+.filter-select:focus-visible {
+  outline: none;
+  border-color: #3b0764;
+  box-shadow: 0 0 0 3px rgba(59, 7, 100, 0.15);
+}
+
+/* Placeholder look while "All" (empty value) is selected */
+.filter-select:has(option[value=""]:checked) { color: #9ca3af; }
+
+.filter-select option { color: #111827; }
+[data-cases="groups"] { transition: opacity 0.3s ease; }
+[data-cases="groups"]:not(.is-ready) { opacity: 0; }
+</style></div><div data-animation="default" class="navbar_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="a380dcaf-b10a-d34b-96df-ecbcfab61750" data-wf--nav--variant="base" role="banner" data-duration="400"><div class="nav-backdrop"></div><div class="navbar_container"><a href="https://phasev-2026.webflow.io/" aria-current="page" class="navbar_logo-link w-nav-brand w--current"><div class="logo-embed w-embed"><svg width="100%" height="100%" viewBox="0 0 167 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M149.429 0.0746441C158.247 -0.771797 166.083 5.67781 166.926 14.4772C167.769 23.2766 161.301 31.0908 152.481 31.9271C143.669 32.7627 135.845 26.3151 135.003 17.5228C134.16 8.73054 140.618 0.920387 149.429 0.0746441Z" fill="#E2C709"/>
+<path d="M142.014 8.33008L146.63 8.32999C148.164 11.6632 149.472 15.1348 150.982 18.4634C152.237 15.2525 153.968 11.5531 155.354 8.33203L159.874 8.33953C159.002 10.2009 158.116 12.0555 157.217 13.9031L153.5 21.6823C153.097 22.533 151.623 25.8068 151.104 26.4087L150.911 26.4044C150.443 26.124 150.2 25.2808 149.953 24.7863C149.188 23.2571 148.443 21.7185 147.718 20.1706C145.837 16.2142 143.935 12.2673 142.014 8.33008Z" fill="currentcolor"/>
+<path d="M94.0463 0.940079C96.5617 0.779309 99.871 1.51809 102.228 2.39682C102.293 4.22674 102.229 6.33163 102.251 8.19704C100.149 7.10529 97.8258 6.50384 95.4581 6.43792C93.9908 6.4024 92.0054 6.63303 90.9145 7.6817C90.4254 8.14449 90.1463 8.78555 90.1404 9.45803C90.1224 11.9072 94.0027 13.1385 95.8712 13.8963C100.209 15.6562 104.119 17.6186 103.961 23.0405C103.762 29.8536 97.8335 31.4304 92.2034 31.3262C88.9949 31.1582 87.2801 30.7295 84.3225 29.6985V23.6452C87.1315 24.8896 89.997 25.9371 93.1389 25.7349C94.5388 25.6448 96.5498 25.2879 97.446 24.1647C97.7738 23.754 97.8617 23.3421 97.8224 22.8154C97.6022 19.9139 92.6609 19.0308 90.4246 17.9436C89.041 17.3682 87.8127 16.7063 86.6425 15.7593C83.3255 13.0758 83.0592 7.4767 85.8128 4.29196C87.9015 1.8756 90.9547 1.18253 94.0463 0.940079Z" fill="currentcolor"/>
+<path d="M0 1.4331C2.56613 1.3531 5.18076 1.45829 7.75178 1.41152C10.7503 1.35697 13.8531 1.52393 16.5077 3.07453C18.4545 4.19803 19.8611 6.06157 20.4059 8.23869C21.042 10.6825 20.8216 13.8695 19.4851 16.0372C17.7564 18.841 15.6609 19.6057 12.7106 20.371C12.2234 18.6475 11.7214 16.9281 11.2045 15.2131C15.0244 14.2093 15.4363 9.20091 12.4336 7.29955C10.6573 6.44661 8.20494 6.63201 6.25053 6.66591C6.37575 13.2779 6.16415 19.9579 6.25557 26.5747C6.274 27.9041 6.19863 29.2945 6.30379 30.6145C4.65044 30.5112 1.71707 30.5942 0.00521528 30.6145L0 1.4331Z" fill="currentcolor"/>
+<path d="M64.7245 1.09927C65.1422 1.30151 69.2336 10.1447 69.7688 11.2619L79.1709 30.7978L72.5918 30.8126L67.5828 19.3834C66.746 17.4785 65.7842 15.107 64.8674 13.2764L64.7675 13.3089C64.0168 14.7118 62.806 17.7259 62.1053 19.3206L57.0823 30.8073L50.4879 30.8028C50.8156 30.2748 51.5939 28.5394 51.884 27.9252L54.5646 22.2896L64.7245 1.09927Z" fill="currentcolor"/>
+<path d="M26.3563 1.43262C28.4444 1.41386 30.5326 1.40629 32.6208 1.40991L32.6157 13.248L36.2422 13.2235C36.2212 14.8858 36.2077 16.6812 36.2396 18.3372C35.1204 18.2659 33.7534 18.3109 32.6151 18.3201L32.6157 26.8374C32.6152 27.8848 32.5632 29.6182 32.6712 30.6022C30.6474 30.5566 28.3905 30.5961 26.3614 30.6126L26.3563 1.43262Z" fill="currentcolor"/>
+<path d="M39.3371 1.41539L45.6488 1.41022L45.6412 18.5328C45.641 22.5353 45.5903 26.6446 45.6557 30.6324C44.3574 30.4934 40.788 30.6053 39.3317 30.6189L39.3371 1.41539Z" fill="currentcolor"/>
+<path d="M128.778 25.31L128.838 25.3372C128.981 25.7564 128.903 29.7834 128.907 30.6147C126.983 30.5163 124.378 30.6004 122.387 30.6001L109.608 30.6064C109.392 30.3769 109.49 26.0047 109.492 25.339C115.893 25.2415 122.366 25.3878 128.778 25.31Z" fill="currentcolor"/>
+<path d="M109.481 1.43457C115.795 1.29595 122.542 1.42845 128.893 1.40858L128.902 6.66753C128.031 6.6097 126.955 6.62273 126.076 6.63908C120.578 6.74137 114.975 6.48689 109.488 6.66353L109.481 1.43457Z" fill="currentcolor"/>
+<path d="M109.479 13.268C115.752 13.0853 122.561 13.2649 128.89 13.2169L128.892 18.3498C128.268 18.2663 126.696 18.2998 126.031 18.3L120.653 18.3039L113.491 18.3019C112.342 18.3017 110.594 18.2533 109.49 18.3446L109.479 13.268Z" fill="currentcolor"/>
+</svg>
+</div></a><div id="w-node-f6f1da3b-306e-ad2d-0c4a-d2bc7fac3e76-fab61750" class="navbar-right-wrapper"><nav role="navigation" id="w-node-a380dcaf-b10a-d34b-96df-ecbcfab61754-fab61750" class="navbar_menu w-nav-menu"><div data-delay="200" data-hover="true" data-wf--nav-dropdown--variant="base" data-w-id="9457f8c6-6832-184c-ef37-35fae6877b6b" class="navbar_menu-dropdown w-dropdown"><div class="navbar_dropdwn-toggle w-dropdown-toggle"><div class="text-block">Platform</div><div class="dropdown-chevron w-embed"><svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.72225 4.59125V7.27775H11.4087V8.72225H8.72225V11.4088H7.27775V8.72225H4.59125V7.27775H7.27775V4.59125H8.72225Z" fill="currentcolor"/>
+</svg>
+</div></div><nav class="dropdown-nav-wrapper w-dropdown-list"><div class="navbar_dropdown-list"><a href="https://phasev-2026.webflow.io/trial-optimizer" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">Trial Optimizer</a><a href="https://phasev-2026.webflow.io/clinops-optimizer" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">ClinOps Optimizer</a><a href="https://phasev-2026.webflow.io/response-optimizer" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">Response Optimizer</a><a href="https://phasev-2026.webflow.io/portfolio-optimizer" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">Portfolio Optimizer</a><a href="https://phasev-2026.webflow.io/ai-conductor" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">AI Conductor</a><a href="https://phasev-2026.webflow.io/bonv" data-wf--nav-dropdown_link--variant="base" class="navbar_dropdown-link w-dropdown-link">BonV</a></div></nav></div><a href="https://phasev-2026.webflow.io/company" data-wf--nav_link--variant="base" class="navbar_link w-nav-link">Company</a><a href="https://phasev-2026.webflow.io/resources" data-wf--nav_link--variant="base" class="navbar_link w-nav-link">Resources</a><a href="https://job-boards.greenhouse.io/phasev" data-wf--nav_link--variant="base" target="_blank" class="navbar_link w-nav-link">Careers</a><div class="div-block"><a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/contact" class="button w-button">Book a Demo</a></div></nav><div class="navbar_button-wrapper"><div class="navbar_menu-button w-nav-button"><div class="menu-icon"><div class="menu-icon_line-top"></div><div class="menu-icon_line-middle"><div class="menu-icon_line-middle-inner"></div></div><div class="menu-icon_line-bottom"></div></div></div></div></div></div></div><main class="main-wrapper"><header data-inv-block="0" data-bg="purple-gradient" class="section_header"><div class="padding-global padding-section-home_header"><div class="container-large"><div class="header_component"><div class="w-layout-grid header_content"><div id="w-node-_023caa4c-f7c6-2feb-51f3-f6860ac0a837-487ffd48" class="header_content-left"><div class="margin-bottom margin-medium gap-24"><h1 class="text-size-display text-color-alternate">Better decisions<br/><span class="text-color-yellow">Connected development</span></h1><div class="text-size-large">PhaseV brings advanced statistical, causal, and simulation methods, and AI-assisted workflows into one clinical development platform, so teams can reduce avoidable risk, rework and delays</div></div></div></div><div class="w-embed"><div data-pv="hero-homepage"></div></div></div></div></div></header><section data-inv-block="1" class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large"><div class="section-top"><div class="text-size-label">The problem</div><h2 class="text-size-display">Decisions are connected<br/>Tools rarely are</h2></div><div class="layout_component"><div class="w-layout-grid layout_content is-problem"><div class="layout_content-left"><div class="w-embed"><div data-pv="gantt"></div></div></div><div id="w-node-_023caa4c-f7c6-2feb-51f3-f6860ac0a854-487ffd48" class="layout_content-right"><div class="text-size-large">The population you choose shapes the trial design. The design determines where the trial can run. Each approved choice then flows into sites, data, analyses, and documents, and every program competes with others for the same budget and resources. Yet these decisions are usually made in separate tools, by separate teams and vendors, through manual handoffs. Context gets lost, work gets redone, and the cost shows up as delay, avoidable risk, and decisions made on partial information.</div></div></div></div></div></div></section><section data-inv-block="2" id="phasev-platform" data-bg="purple-gradient" class="section_layout is-gradient"><div class="padding-global padding-section-main"><div class="container-large"><div class="margin-bottom margin-xlarge"><div class="section-top"><div class="text-size-label text-color-yellow">The PhaseV platform</div><div class="grid-2 gap-8-5"><h2 class="text-size-display text-color-alternate">One Platform for Connected Clinical Development Decisions</h2><div class="text-size-large text-color-alternate">PhaseV links asset strategy, patient response, trial design, operational planning, and study workflows in one modular platform. Each capability answers a focused question, while the evidence, assumptions, and approved choices move forward with the decision instead of being rebuilt at each handoff</div></div></div></div><div class="text-size-medium text-color-neutralw">Select the question your team needs to answer</div><div data-pv="platform-tabs"></div><div class="grid-2 is-platform"><div class="div-block-3"><div data-pv="platform-hub" class="platform-animation"></div></div><div id="dm-panels" class="platform-animation_panels w-node-_023caa4c-f7c6-2feb-51f3-f6860ac0a869-487ffd48"><div data-panel="pursue" class="dm-panel"><div class="dm-panel_title-wrapper"><div class="text-size-label text-color-yellow">What should we pursue?</div><h3 class="dm-panel_title">Portfolio Optimizer</h3><div class="text-size-medium text-color-white">Prioritize indications, combinations, lifecycle paths, transactions, and late-stage investments using causal evidence and explainable probability of success.</div><div class="dm-panel_list-wrapper"><div class="text-size-medium text-color-white">Most relevant to</div><div class="dm-panel_list"><div class="dm-panel_list-item">Portfolio Strategy</div><div class="dm-panel_list-item">R&amp;D Leadership</div><div class="dm-panel_list-item">BD and M&amp;A</div><div class="dm-panel_list-item">Investors</div></div></div></div><div class="button-wrapper"><a data-wf--button--variant="yellow" href="https://phasevtrials.com/portfolio-optimizer" class="button w-button">Explore Portfolio Optimizer</a><a data-wf--button--variant="transparent" href="https://phasevtrials.com/contact" class="button w-variant-a4343b71-de97-ab07-2e4d-8afb553ce387 w-button">Discuss this decision</a></div></div><div data-panel="design" class="dm-panel"><div class="dm-panel_title-wrapper"><div class="text-size-label text-color-yellow">How should we design it?</div><h3 class="dm-panel_title">Trial Optimizer</h3><div class="text-size-medium text-color-white">Explore assumptions, compare fixed, adaptive, Bayesian, and customized designs, then optimize the selected path before protocol commitments are locked.</div><div class="dm-panel_list-wrapper"><div class="text-size-medium text-color-white">Most relevant to</div><div class="dm-panel_list"><div class="dm-panel_list-item">Biostatistics</div><div class="dm-panel_list-item">Clinical Development</div><div class="dm-panel_list-item">Program Leadership</div></div></div></div><div class="button-wrapper"><a data-wf--button--variant="yellow" href="#" class="button w-button">Explore Trial Optimizer</a><a data-wf--button--variant="transparent" href="#" class="button w-variant-a4343b71-de97-ab07-2e4d-8afb553ce387 w-button">Discuss this decision</a></div></div><div data-panel="run" class="dm-panel"><div class="dm-panel_title-wrapper"><div class="text-size-label text-color-yellow">Where should we run it?</div><h3 class="dm-panel_title">ClinOps Optimizer</h3><div class="text-size-medium text-color-white">Assess eligibility feasibility, build an explainable country and site strategy, and simulate whether the proposed footprint can meet the enrollment plan.</div><div class="dm-panel_list-wrapper"><div class="text-size-medium text-color-white">Most relevant to</div><div class="dm-panel_list"><div class="dm-panel_list-item">Clinical Operations</div><div class="dm-panel_list-item">Feasibility</div><div class="dm-panel_list-item">Study Teams</div><div class="dm-panel_list-item">Program Leadership</div></div></div></div><div class="button-wrapper"><a data-wf--button--variant="yellow" href="#" class="button w-button">Explore ClinOps Optimizer</a><a data-wf--button--variant="transparent" href="#" class="button w-variant-a4343b71-de97-ab07-2e4d-8afb553ce387 w-button">Discuss this decision</a></div></div><div data-panel="benefits" class="dm-panel"><div class="dm-panel_title-wrapper"><div class="text-size-label text-color-yellow">Who benefits?</div><h3 class="dm-panel_title">Response Optimizer</h3><div class="text-size-medium text-color-white">Separate predictable outcome variation from differential treatment benefit, then translate the result into a clearer patient and development strategy.</div><div class="dm-panel_list-wrapper"><div class="text-size-medium text-color-white">Most relevant to</div><div class="dm-panel_list"><div class="dm-panel_list-item">Clinical Development</div><div class="dm-panel_list-item">Program Teams</div><div class="dm-panel_list-item">Biometrics</div><div class="dm-panel_list-item">Translational Medicine</div></div></div></div><div class="button-wrapper"><a data-wf--button--variant="yellow" href="#" class="button w-button">Explore Response Optimizer</a><a data-wf--button--variant="transparent" href="#" class="button w-variant-a4343b71-de97-ab07-2e4d-8afb553ce387 w-button">Discuss this decision</a></div></div><div data-panel="connect" class="dm-panel"><div class="dm-panel_title-wrapper"><div class="text-size-label text-color-yellow">How do we carry decisions into execution?</div><h3 class="dm-panel_title">AI Conductor</h3><div class="text-size-medium text-color-white">Connect approved decisions to protocols, SAPs, data specifications, code, analyses, outputs, and cross-functional review, while keeping experts in control.</div><div class="dm-panel_list-wrapper"><div class="text-size-medium text-color-white">Most relevant to</div><div class="dm-panel_list"><div class="dm-panel_list-item">Medical Writing</div><div class="dm-panel_list-item">Statistical Programming</div><div class="dm-panel_list-item">Data Standards</div><div class="dm-panel_list-item">Regulatory</div><div class="dm-panel_list-item">Cross-functional Teams</div></div></div></div><div class="button-wrapper"><a data-wf--button--variant="yellow" href="#" class="button w-button">Explore AI Conductor</a><a data-wf--button--variant="transparent" href="#" class="button w-variant-a4343b71-de97-ab07-2e4d-8afb553ce387 w-button">Discuss this decision</a></div></div></div></div></div></div></section><section data-inv-block="3" class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large"><div class="section-top align-center max-width-large"><div class="text-size-label">Why PhaseV</div><h2 class="text-size-display text-align-center">Built differently for clinical development</h2><div class="text-size-large text-align-center">PhaseV combines the rigor of clinical and statistical expertise with purpose-built, modular software, explainable modeling, and a fit-for-purpose partnership model.</div></div><div class="grid-3 margin-top"><div data-wf--why-card--variant="homepage" class="why-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a847069d9a35a3ad13ec779_Icon%201%201.svg" loading="lazy" alt="" class="icon-1x1-large"/><h3 class="heading-style-h4 max-width-small">Tech + Clinical domain expertise</h3><div class="text-size-medium text-color-gray">Clinical development is not only a software or data-engineering problem. PhaseV combines clinical-trial expertise with statistics, causal inference, machine learning, simulation, optimization, and software engineering.</div></div><div data-wf--why-card--variant="homepage" class="why-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a8470717639cfcdb97c51e0_Icon%202%201.svg" loading="lazy" alt="" class="icon-1x1-large"/><h3 class="heading-style-h4 max-width-small">Modular by design Connect by context</h3><div class="text-size-medium text-color-gray">Start with one analysis or workflow. Add capabilities, evidence sources, and integrations when useful, without introducing another disconnected system or forcing a full-platform implementation.</div></div><div data-wf--why-card--variant="homepage" class="why-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a8470772abc6db673009c47_Icon%203%201.svg" loading="lazy" alt="" class="icon-1x1-large"/><h3 class="heading-style-h4 max-width-small">Built around how your team works</h3><div class="text-size-medium text-color-gray">PhaseV complements sponsor teams, CROs, and existing systems. Models, dashboards, governance, integrations, deployment, and operating workflows can be configured around the organization rather than a fixed template.</div></div></div></div></div></section><section data-inv-block="4" data-inv-hidden data-bg="purple-gradient" class="section_layout is-gradient hide"><div class="padding-global padding-section-main"><div class="container-large"><div class="section-top max-width-555"><div class="text-size-label text-color-yellow">Evidence</div><h2 class="text-size-display text-color-alternate">See what better decisions can change.</h2><div class="text-size-large text-color-alternate">Explore anonymized examples across patient strategy, trial design, site strategy, and portfolio decisions.</div></div><div data-current="Site strategy" data-easing="ease" data-duration-in="300" data-duration-out="100" class="evidence-tabs w-tabs"><div class="tabs_menu is-home w-tab-menu"><a data-w-tab="Site strategy" class="tab_link w-inline-block w-tab-link w--current"><div>Site strategy</div></a><a data-w-tab="Trial and operations" class="tab_link w-inline-block w-tab-link"><div>Trial and operations</div></a><a data-w-tab="Response" class="tab_link w-inline-block w-tab-link"><div>Response</div></a><a data-w-tab="Portfolio" class="tab_link w-inline-block w-tab-link"><div>Tab</div></a></div><div class="tabs_content is-home w-tab-content"><div data-w-tab="Site strategy" class="tab_pane w-tab-pane w--tab-active"><div class="tab_pane-wrapper"><div class="tab_pane-left-wrapper"><div class="text-size-label text-color-yellow">Top-5 pharma retrospective</div><h3 class="pane-title">See what better decisions can change.</h3><div class="text-size-large text-color-black70">In an anonymized Phase III breast-cancer retrospective, sites identified by PhaseV recruited materially faster than non-recommended sites, while the model closely estimated the footprint needed to reach the enrollment target.</div></div><div class="tab_pane-right-wrapper"><div class="tab_pane-right-top"><h4 class="heading-style-h5 text-color-white">Recruitment comparison</h4><div class="pane-label">Patients per site per month</div></div><div class="tab_pane-right-middle"><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">PhaseV cohort</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-gradient"></div></div><div class="tab-number">0.43</div></div><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">Other sites</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-grey"></div></div><div class="tab-number">0.28</div></div></div><div class="number-counter-wrapper"><div class="number-single"><div class="number-span">349</div><div class="text-size-medium text-color-neutralw">Predicted required</div></div><div class="text-tilda">≈</div><div class="number-single"><div class="number-span">357</div><div class="text-size-medium text-color-neutralw">Actually activated</div></div></div></div></div></div><div data-w-tab="Trial and operations" class="tab_pane w-tab-pane"><div class="tab_pane-wrapper"><div class="tab_pane-left-wrapper"><div class="text-size-label text-color-yellow">Top-5 pharma retrospective</div><h3 class="pane-title">See what better decisions can change.</h3><div class="text-size-large text-color-black70">In an anonymized Phase III breast-cancer retrospective, sites identified by PhaseV recruited materially faster than non-recommended sites, while the model closely estimated the footprint needed to reach the enrollment target.</div></div><div class="tab_pane-right-wrapper"><div class="tab_pane-right-top"><h4 class="heading-style-h5 text-color-white">Recruitment comparison</h4><div class="pane-label">Patients per site per month</div></div><div class="tab_pane-right-middle"><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">PhaseV cohort</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-gradient"></div></div><div class="tab-number">0.43</div></div><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">Other sites</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-grey"></div></div><div class="tab-number">0.28</div></div></div><div class="number-counter-wrapper"><div class="number-single"><div class="number-span">349</div><div class="text-size-medium text-color-neutralw">Predicted required</div></div><div class="text-tilda">≈</div><div class="number-single"><div class="number-span">357</div><div class="text-size-medium text-color-neutralw">Actually activated</div></div></div></div></div></div><div data-w-tab="Response" class="tab_pane w-tab-pane"><div class="tab_pane-wrapper"><div class="tab_pane-left-wrapper"><div class="text-size-label text-color-yellow">Top-5 pharma retrospective</div><h3 class="pane-title">See what better decisions can change.</h3><div class="text-size-large text-color-black70">In an anonymized Phase III breast-cancer retrospective, sites identified by PhaseV recruited materially faster than non-recommended sites, while the model closely estimated the footprint needed to reach the enrollment target.</div></div><div class="tab_pane-right-wrapper"><div class="tab_pane-right-top"><h4 class="heading-style-h5 text-color-white">Recruitment comparison</h4><div class="pane-label">Patients per site per month</div></div><div class="tab_pane-right-middle"><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">PhaseV cohort</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-gradient"></div></div><div class="tab-number">0.43</div></div><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">Other sites</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-grey"></div></div><div class="tab-number">0.28</div></div></div><div class="number-counter-wrapper"><div class="number-single"><div class="number-span">349</div><div class="text-size-medium text-color-neutralw">Predicted required</div></div><div class="text-tilda">≈</div><div class="number-single"><div class="number-span">357</div><div class="text-size-medium text-color-neutralw">Actually activated</div></div></div></div></div></div><div data-w-tab="Portfolio" class="tab_pane w-tab-pane"><div class="tab_pane-wrapper"><div class="tab_pane-left-wrapper"><div class="text-size-label text-color-yellow">Top-5 pharma retrospective</div><h3 class="pane-title">See what better decisions can change.</h3><div class="text-size-large text-color-black70">In an anonymized Phase III breast-cancer retrospective, sites identified by PhaseV recruited materially faster than non-recommended sites, while the model closely estimated the footprint needed to reach the enrollment target.</div></div><div class="tab_pane-right-wrapper"><div class="tab_pane-right-top"><h4 class="heading-style-h5 text-color-white">Recruitment comparison</h4><div class="pane-label">Patients per site per month</div></div><div class="tab_pane-right-middle"><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">PhaseV cohort</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-gradient"></div></div><div class="tab-number">0.43</div></div><div class="tab-graph-row"><div class="text-size-medium text-color-neutralw">Other sites</div><div class="tab-graph-wrapper"><div class="tab-graph-line is-grey"></div></div><div class="tab-number">0.28</div></div></div><div class="number-counter-wrapper"><div class="number-single"><div class="number-span">349</div><div class="text-size-medium text-color-neutralw">Predicted required</div></div><div class="text-tilda">≈</div><div class="number-single"><div class="number-span">357</div><div class="text-size-medium text-color-neutralw">Actually activated</div></div></div></div></div></div></div></div></div></div></section><section data-inv-block="5" data-line-field="forest" data-bg="purple-gradient" class="section_layout is-gradient"><div class="padding-global padding-section-main"><div class="container-large"><div class="section-top _2col is-bottom"><div class="section-top_left"><div class="text-size-label text-color-yellow">Evidence</div><h2 class="text-size-display text-color-alternate">Breast Cancer Retrospective Study</h2></div><div class="section-top_right"><div class="text-size-large text-color-alternate">Explore anonymized examples across patient strategy, trial design, site strategy, and portfolio decisions.</div><div class="slider-top_right hide-mobile-portrait"><div data-wf--slider-arrows--variant="light" class="slider-arrows-wrapper"><div data-swiper-prev="" class="arrow is-left w-variant-8d42f08a-cd86-49e8-facc-a95f158034bb w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div><div data-swiper-next="" class="arrow is-right w-variant-8d42f08a-cd86-49e8-facc-a95f158034bb w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div></div></div></div></div><div data-swiper="evidence" class="swiper-div evidence"><div class="swiper"><div class="swiper-wrapper"><div class="swiper-slide full"><div class="ev-case"><div class="ev-case_half"><div class="ev-case_meta"><div class="text-size-label text-color-yellow">ClinOps Optimizer</div><div class="ev-case_small">Top-5 pharma </div></div><h3 class="ev-case_title">Recommended sites recruited 50%+ faster</h3><div class="text-size-large text-color-alternate">In an anonymized Phase III breast-cancer retrospective, sites identified by PhaseV recruited materially faster than non-recommended sites, while the model closely estimated the footprint needed to reach the enrollment target.</div></div><div class="ev-case_half is-data"><div class="ev-case_kpi"><div class="ev-case_kpi-n">+50%</div><div class="ev-case_kpi-t">faster recruitment at PhaseV-recommended sites</div></div><div data-pv="evidence-bars" class="ev-case_bars"><div class="ev-case_bars-head"><div class="ev-case_small">Recruitment</div><div class="ev-case_small">Patients / site / month</div></div><div class="ev-case_bar is-main"><div>PhaseV sites</div><div class="ev-case_track"><div data-max="0.5" data-value="0.43" class="ev-case_fill is-main"></div></div><div class="text-align-right">0.5</div></div><div class="ev-case_bar"><div>Other sites</div><div class="ev-case_track"><div data-max="0.5" data-value="0.28" class="ev-case_fill"></div></div><div class="text-align-right">0.3</div></div></div><div class="ev-case_pair"><div><div class="ev-case_pair-n">350</div><div class="ev-case_small">Sites predicted</div></div><div class="ev-case_op">≈</div><div class="text-align-right"><div class="ev-case_pair-n">360</div><div class="ev-case_small">Sites activated</div></div></div></div></div></div></div></div></div><div class="slider-top_right mobile-only"><div data-wf--slider-arrows--variant="light" class="slider-arrows-wrapper"><div data-swiper-prev="" class="arrow is-left w-variant-8d42f08a-cd86-49e8-facc-a95f158034bb w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div><div data-swiper-next="" class="arrow is-right w-variant-8d42f08a-cd86-49e8-facc-a95f158034bb w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div></div></div></div></div></section><section data-inv-block="6" class="section_layout is-lightpurple"><div class="padding-global padding-section-main"><div class="container-large"><div class="slider-top"><div class="section-top max-width-555"><div class="text-size-label">Testimonials</div><h2 class="text-size-display">What our partners are saying</h2></div><div class="slider-top_right hide-mobile-portrait"><div data-wf--slider-arrows--variant="base" class="slider-arrows-wrapper"><div data-swiper-prev="" class="arrow is-left w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div><div data-swiper-next="" class="arrow is-right w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div></div></div></div><div data-swiper="news" class="swiper-div"><div class="swiper"><div class="swiper-wrapper"><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“This was an amazing collaboration between Enlivex and PhaseV leading to the identification of a higher-responder group to our drug Allocetra in Knee osteoarthritis patients. Amazing team, smart, innovative, dedicated, responsive and pleasant.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">Oren Hershkovitz, Ph.D.</h3><div class="text-size-medium text-color-gray">CEO, Enlivex</div><div class="text-size-medium text-color-lpurple">Rheumatology (Osteoarthritis)</div></div><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaef7830ac34de0ac7e170_logo-enlivex.svg" loading="lazy" alt="" class="quote-card_logo"/></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“We worked with PhaseV on one of our recent trials to identify clinically meaningful subgroups using Response Optimizer. Their expertise helped us identify a promising subpopulation that otherwise would not have been detected. They collaborated with our internal teams to ensure the findings drove real value for our development plan.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">Stu Bailey, D.Phil.</h3><div class="text-size-medium text-color-gray">SVP Head of Clinical Measurement Sciences, EMD Serono</div><div class="text-size-medium text-color-lpurple">Immunology (Confidential Program)</div></div><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaef78dcf9680811a4afe6_logo-emd-serono.avif" loading="lazy" alt="" class="quote-card_logo"/></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“Leveraging PhaseV’s ClinOps Optimizer was a game-changer for us. We identified top-performing sites with proven recruitment success while also achieving geographic and demographic diversity across our trial footprint.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">VP, Clinical Operations</h3><div class="text-size-medium text-color-gray">Big Pharma Company</div><div class="text-size-medium text-color-lpurple">Oncology (Confidential Solid Tumor Program)</div></div></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“PhaseV’s Portfolio Optimizer helped us uncover and validate new indications to pursue for, guiding our lifecycle management strategy with data-driven confidence.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">SVP, Strategy &amp; Portfolio Management</h3><div class="text-size-medium text-color-gray">Big Pharma Company</div><div class="text-size-medium text-color-lpurple">Metabolic Disease (Confidential Program)</div></div></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“PhaseV’s Portfolio Optimizer allowed us to draw clear, data-driven connections between biomarkers and clinical outcomes. This deeper understanding of therapeutic relevance has been critical in shaping our development strategy and informing key decisions for future studies, including those with combination arms.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">VP of Biometrics</h3><div class="text-size-medium text-color-gray">Big Pharma Company</div><div class="text-size-medium text-color-lpurple">Kidney Disease</div></div></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“Through our initial collaboration with PhaseV, we gained an even greater understanding of the effect of PrimeC across multiple patient subgroups. We will apply these insights to optimize the design of our Phase 3 study... We plan to continue to collaborate with PhaseV as we develop our Phase 3 trial.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">NeuroSense</h3><div class="text-size-medium text-color-lpurple">Neurology (ALS)</div></div><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaef7936f6525810af3e75_logo-neurosense.avif" loading="lazy" alt="" class="quote-card_logo"/></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“PhaseV played a vital role in the analysis of our Phase 3 trial in the US, ORA-D-013-1, for the treatment of type 2 diabetes. The analysis found subpopulations of patients that responded very well to oral insulin.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">Dr. Miriam Kidron</h3><div class="text-size-medium text-color-gray">CSO, Oramed</div><div class="text-size-medium text-color-lpurple">Metabolic Disease (Diabetes)</div></div><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaef7930ac34de0ac7e25f_logo-oramed.avif" loading="lazy" alt="" class="quote-card_logo"/></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“Combining our GI expertise with PhaseV’s advanced machine learning capabilities for trial simulation, design, and execution… accelerate success for our sponsors and help address the growing burden of GI diseases more effectively.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">Pierre Gaudreault</h3><div class="text-size-medium text-color-gray">CEO, Alimentiv</div><div class="text-size-medium text-color-lpurple">Gastrointestinal Diseases</div></div><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaef7930ac34de0ac7e27e_logo-alimentiv.avif" loading="lazy" alt="" class="quote-card_logo"/></div></div></div><div class="swiper-slide is-quote"><div class="quote-card"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaefeedf0dcce1faa9397a_quote-mark.svg" loading="lazy" alt="" class="quote-card_mark"/><div class="quote-card_text">“The addition of prospectively collected clinical-grade real world data to phase 2 results… in conjunction with PhaseV’s proven technology is a critical step forward in improving phase 3 oncology trials, helping to bring new therapies to market.”</div><div class="quote-card_foot"><div class="quote-head"><h3 class="heading-style-h5 text-color-navy">Michael Pröschel</h3><div class="text-size-medium text-color-gray">CEO, iOMEDICO</div><div class="text-size-medium text-color-lpurple">Oncology (Solid Tumors)</div></div><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6adaef792d26679b4b411d15_logo-iomedico.avif" loading="lazy" alt="" class="quote-card_logo"/></div></div></div></div></div></div><div class="slider-top_right mobile-only"><div data-wf--slider-arrows--variant="base" class="slider-arrows-wrapper"><div data-swiper-prev="" class="arrow is-left w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div><div data-swiper-next="" class="arrow is-right w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div></div></div></div></div></section><section data-inv-block="7" class="section_layout is-white"><div class="padding-global padding-section-main"><div class="container-large"><div class="slider-top"><h2 class="text-size-display">Latest news</h2><div class="slider-top_right hide-mobile-portrait"><a data-wf--button--variant="transparent-on-white" href="https://phasev-2026.webflow.io/resources" class="button w-variant-a2e1ddc3-31bd-2eec-af18-c36e71359211 w-button">All insights</a><div data-wf--slider-arrows--variant="base" class="slider-arrows-wrapper"><div data-swiper-prev="" class="arrow is-left w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div><div data-swiper-next="" class="arrow is-right w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div></div></div></div><div data-swiper="news" class="swiper-div"><div class="swiper w-dyn-list"><div role="list" class="swiper-wrapper w-dyn-items"><div role="listitem" class="swiper-slide w-dyn-item"><a href="https://52109269.fs1.hubspotusercontent-na1.net/hubfs/52109269/BBSW%20Poster%20Draft%20-%20landscape%20(1).pdf" target="_blank" class="swiper-item w-inline-block"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944.jpg" loading="lazy" alt="" sizes="100vw" srcset="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944-p-500.jpg 500w, https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944-p-800.jpg 800w, https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944-p-2600.jpg 2600w, https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944-p-3200.jpg 3200w, https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6af205576d0a853149920ef2_IMG_0944.jpg 5712w" class="post_image is-resource"/><div class="post_body is-resource"><div class="post-data-wrapper"><div fs-list-field="category" class="post_date">Blog Posts</div><div class="post_date">Nov 9, 2026</div></div><h3 fs-list-field="name" class="heading-style-h4 text-weight-bold">Better Odds of Picking the Right Dose at the Same Sample Size</h3><div class="post_description text-style-3lines">By using simulation and optimization to test dose-selection trial designs before enrollment, PhaseV and Denali Therapeutics showed in an illustrative example that tuning decision thresholds and sample-size allocation raised the probability of selecting the best dose from 64.3% to 76.3% with no increase in average sample size (about 102 participants).</div></div></a></div><div role="listitem" class="swiper-slide w-dyn-item"><a href="https://phasev-2026.webflow.io/resources/learning-more-from-less-what-causal-thinking-buys-you-in-rare-disease-trials" class="swiper-item w-inline-block"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ac611e48e911f572178d354_6ab3e28f0902bd24f2b06c09_phasev-banner-learning-more-from-less.png" loading="lazy" alt="" class="post_image is-resource"/><div class="post_body is-resource"><div class="post-data-wrapper"><div fs-list-field="category" class="post_date">Blog Posts</div><div class="post_date">Sep 24, 2026</div></div><h3 fs-list-field="name" class="heading-style-h4 text-weight-bold">Learning More From Less: What Causal Thinking Buys You in Rare Disease Trials</h3><div class="post_description text-style-3lines w-dyn-bind-empty"></div></div></a></div><div role="listitem" class="swiper-slide w-dyn-item"><a href="https://phasev-2026.webflow.io/resources/podcast-why-trials-fail-and-what-ai-can-fix" class="swiper-item w-inline-block"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6aded96491395de5945c6a93_6aded95141ad71d273f92db4_podcast-ep236-16x9.jpeg" loading="lazy" alt="Episode 236 of AI for Pharma Growth with Raviv Pryluk, PhaseV" class="post_image is-resource"/><div class="post_body is-resource"><div class="post-data-wrapper"><div fs-list-field="category" class="post_date">Blog Posts</div><div class="post_date">Sep 22, 2026</div></div><h3 fs-list-field="name" class="heading-style-h4 text-weight-bold">Podcast: Why trials fail and what AI can fix</h3><div class="post_description text-style-3lines">On AI for Pharma Growth, PhaseV joins Dr. Andrée Bates to discuss where AI can improve trial decisions, and where it can&#x27;t replace clinical judgment.</div></div></a></div><div role="listitem" class="swiper-slide w-dyn-item"><a href="https://phasev-2026.webflow.io/resources/a-tale-of-two-pilots" class="swiper-item w-inline-block"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ac611e73ff166802540150d_6a3b4d1c6bdf44996df82897_blog1-teaser.jpeg" loading="lazy" alt="" class="post_image is-resource"/><div class="post_body is-resource"><div class="post-data-wrapper"><div fs-list-field="category" class="post_date">Blog Posts</div><div class="post_date">Jun 23, 2026</div></div><h3 fs-list-field="name" class="heading-style-h4 text-weight-bold">A Tale of Two Pilots</h3><div class="post_description text-style-3lines">Why AI success in Pharma is so hard to predict</div></div></a></div><div role="listitem" class="swiper-slide w-dyn-item"><a href="https://phasev-2026.webflow.io/resources/causal-models-can-extend-what-we-learn-from-trials" class="swiper-item w-inline-block"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ac611e96e8438b971ca604a_6a288cc9cfcb08073c3daeda_pairs_grid_simulated.png" loading="lazy" alt="" class="post_image is-resource"/><div class="post_body is-resource"><div class="post-data-wrapper"><div fs-list-field="category" class="post_date">Blog Posts</div><div class="post_date">Jun 10, 2026</div></div><h3 fs-list-field="name" class="heading-style-h4 text-weight-bold">Causal models can extend what we learn from trials</h3><div class="post_description text-style-3lines">Oncology Phase 2 studies are often small, split across biomarker-defined subgroups, and frequently single-arm, leaving a fragmented view of disease biology and treatment response. To make sense of that fragmentation, we need a way to connect patient measurements, biological mechanisms, treatment, and outcomes. Causal models provide a framework for connecting data to biological mechanisms and exploring why patients respond differently, how outcomes vary across cohorts, and what might happen under alternative biological or treatment conditions. That missing layer can fundamentally change how the results are interpreted.</div></div></a></div><div role="listitem" class="swiper-slide w-dyn-item"><a href="https://phasev-2026.webflow.io/resources/causal-modeling-multiplying-data-with-mechanism" class="swiper-item w-inline-block"><img src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ac611eb01ddda03ca2af893_6a1667ddcc96dd96b84c123f_image(5).png" loading="lazy" alt="" class="post_image is-resource"/><div class="post_body is-resource"><div class="post-data-wrapper"><div fs-list-field="category" class="post_date">Blog Posts</div><div class="post_date">May 26, 2026</div></div><h3 fs-list-field="name" class="heading-style-h4 text-weight-bold">Causal Modeling: Multiplying Data With Mechanism</h3><div class="post_description text-style-3lines">The competitive edge in drug development is whatever lets you extract more signal from the same evidence. A causal model is the analytical layer that combines observed data with mechanistic knowledge about the underlying biology. That combination is often what gives better predictions than either alone.</div></div></a></div></div></div></div><div class="slider-top_right mobile-only"><div class="button-home-div"><a data-wf--button--variant="transparent-on-white" href="https://phasev-2026.webflow.io/resources" class="button w-variant-a2e1ddc3-31bd-2eec-af18-c36e71359211 w-button">All insights</a></div><div data-wf--slider-arrows--variant="base" class="slider-arrows-wrapper"><div data-swiper-prev="" class="arrow is-left w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div><div data-swiper-next="" class="arrow is-right w-embed"><svg width="100%" height="100%" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<rect width="44" height="44" rx="22" fill="currentcolor"/>
+<path d="M17.3286 18.3403H17.9966C17.6509 19.0317 17.3901 19.5181 17.2144 19.7993C17.0444 20.0747 16.7339 20.4937 16.2827 21.0562H30.3013V21.9438H16.2827C16.8921 22.5767 17.4722 23.4819 18.0229 24.6597H17.3374C16.5815 23.8159 15.9312 23.1772 15.3862 22.7437C14.8413 22.3042 14.2788 21.9438 13.6987 21.6626V21.2671C14.2085 21.0503 14.7476 20.7192 15.3159 20.2739C15.8843 19.8286 16.5552 19.1841 17.3286 18.3403Z" fill="#F8F8F8"/>
+
+</svg>
+</div></div></div></div></div></section></main><section data-bg="purple-gradient" class="section_footer is-gradient"><div class="padding-global padding-section-footer"><div class="container-large"><div data-line-field="swimmer" class="footer-band"><div class="footer-band-copy"><h2 class="footer-statement is-cta">Bring us the question in front of your team.</h2><div class="text-size-large text-color-nwhite">An asset, an ambiguous readout, a protocol, a site plan, or a workflow. We will help identify where PhaseV can create the most immediate value and where a connected path may matter next.</div></div><div class="footer-band-actions"><a data-wf--button--variant="yellow" href="https://phasev-2026.webflow.io/contact" class="button w-button">Discuss your program</a></div></div><div class="footer-bottom"><div class="footer-grid4"><div class="footer-col"><div class="text-size-label is-footer-label">Platform</div><div class="footer-links"><a href="https://phasev-2026.webflow.io/portfolio-optimizer" class="footer-item_link">Portfolio Optimizer</a><a href="https://phasev-2026.webflow.io/response-optimizer" class="footer-item_link">Response Optimizer</a><a href="https://phasev-2026.webflow.io/trial-optimizer" class="footer-item_link">Trial Optimizer</a><a href="https://phasev-2026.webflow.io/clinops-optimizer" class="footer-item_link">ClinOps Optimizer</a><a href="https://phasev-2026.webflow.io/ai-conductor" class="footer-item_link">AI Conductor</a><a href="https://phasev-2026.webflow.io/bonv" class="footer-item_link">BonV</a></div></div><div class="footer-col"><div class="text-size-label is-footer-label">Company</div><div class="footer-links"><a href="https://phasev-2026.webflow.io/company" class="footer-item_link">About</a><a href="https://phasev-2026.webflow.io/resources" class="footer-item_link">Resources</a><a href="https://phasev-2026.webflow.io/contact" class="footer-item_link">Contact</a></div></div><div id="w-node-cd49c67c-e30a-2235-8494-9f13a0414283-a0414281" class="footer-col is-contact"><div class="text-size-label is-footer-label">Contact</div><a href="mailto:info@phasevtrials.com" class="footer-item_link">info@phasevtrials.com</a><div class="footer-social"><a href="https://www.linkedin.com/company/phasevtrials" target="_blank" class="footer-item_link">LinkedIn</a><link rel="noopener" href="https://www.linkedin.com/company/phasevtrials"/></div></div><div class="footer-col"><div class="text-size-label is-footer-label">Offices</div><div class="footer-links"><div><div class="text-size-medium text-color-white">Boston</div><div class="text-size-label">USA</div></div><div><div class="text-size-medium text-color-white">Tel Aviv</div><div class="text-size-label">Israel</div></div></div></div></div><div class="footer-legal"><div id="w-node-cd49c67c-e30a-2235-8494-9f13a04142a3-a0414281" class="text-size-medium text-color-neutralw text-size-small">© <span class="data-year">2026</span><span> PhaseV. All rights reserved.</span></div><div class="footer-legal-links"><a href="#" class="text-size-medium text-color-neutralw is-link text-size-small">Terms of Service</a><a href="https://phasev-2026.webflow.io/privacy-policy" class="text-size-medium text-color-neutralw is-link text-size-small">Privacy Policy</a><a href="#top" class="text-size-medium text-color-neutralw is-link text-size-small">Back to top ↑</a></div></div></div></div></div></section><div class="w-embed w-script"><!-- Start of HubSpot Embed Code -->
+
+<!-- End of HubSpot Embed Code --></div></div><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6a7494c19b6df905487ffd7e" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript" integrity="sha384-4abIlA5/v7XaW1HMXKBgnUuhnjBYJ/Z9C1OSg4OhmVw9O3QeHJ/qJqFBERCDPv7G" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/js/webflow.schunk.c10c0aefcd3bb392.js" type="text/javascript" integrity="sha384-MvVg3UHsF5AZXmWnPHYRz2D5h9wG2WnlJxugvMk34s4eJVd/lNISBcsTLx8h/PXF" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/js/webflow.62fe9b79.009f96e63f79069e.js" type="text/javascript" integrity="sha384-61yVQNqwKaIBMkM2o/s+kQkNP6LgIheu+GBLz+GAi+mIhsoDSFea2HfVjzFBv694" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js" type="text/javascript"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js" type="text/javascript"></script><script type="text/javascript">gsap.registerPlugin(ScrollTrigger,SplitText);</script><script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+<script>
+  window.lenis = new Lenis({
+    // Value between 0 and 1
+    // Default value: 0.1
+    // The lower the value, the smoother the scroll
+    lerp: 0.05,
+    // Default value: 1
+    // The higher the value, the faster the scrolling
+    wheelMultiplier: 1,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // get the current year
+    const currentYear = new Date().getFullYear();
+    // target elements with the "data-year" attribute
+    const currentYearSpans = document.querySelectorAll('[data-year]');
+    // update each element with the current year
+    currentYearSpans.forEach((element) => {
+      element.textContent = currentYear;
+    });
+  });
+</script>
+<script>
+  // Fond flottant + line field (repo PhaseV-anims, site.js). Remplace l'ancien window.LineField.
+  (function () {
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src = true
+      ? 'http://localhost:5173/site.js'
+      : 'https://cdn.jsdelivr.net/gh/omrkhyym/phasevwebflowanims@v0.11.0/dist/site.js';
+    document.body.appendChild(s);
+  })();
+</script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.number-span').forEach((el) => {
+    const raw = el.textContent.trim();
+
+    // prefix (non-digits) | numeric core (digits, dot, comma) | suffix (non-digits)
+    const match = raw.match(/^(\D*?)([\d.,]+)(\D*)$/);
+    if (!match) return; // no clean number, leave the element untouched
+
+    const [, prefix, numericStr, suffix] = match;
+    const target = parseFloat(numericStr.replace(/,/g, ''));
+    if (isNaN(target)) return;
+
+    const decimals = (numericStr.split('.')[1] || '').length;
+    const useGrouping = numericStr.includes(',');
+
+    const format = (val) =>
+      prefix +
+      val.toLocaleString('en-US', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+        useGrouping,
+      }) +
+      suffix;
+
+    if (reduceMotion) {
+      el.textContent = format(target);
+      return;
+    }
+
+    const counter = { value: 0 };
+    el.textContent = format(0);
+
+    gsap.to(counter, {
+      value: target,
+      duration: 1.5,
+      ease: 'power1.out',
+      onUpdate: () => {
+        el.textContent = format(counter.value);
+      },
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 65%',
+        once: true,
+      },
+    });
+  });
+</script>
+<script>
+  (function () {
+    const nav = document.querySelector('.navbar_component');
+    if (!nav || typeof gsap === 'undefined') return;
+
+    const root = document.documentElement;
+    const SCROLLED_AT = 50;
+    const HIDE_AFTER = 150;
+    const DELTA = 8;
+
+    let lastY = 0;
+    let hidden = false;
+
+    const show = gsap.quickTo(nav, 'yPercent', { duration: 0.4, ease: 'power3.out' });
+
+    // keep --nav-h in sync with the real navbar height
+    const setNavH = () => root.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+    setNavH();
+    window.addEventListener('resize', setNavH, { passive: true });
+
+    function onScroll(y) {
+      nav.classList.toggle('is-scrolled', y > SCROLLED_AT);
+
+      const diff = y - lastY;
+      if (Math.abs(diff) < DELTA) return;
+
+      const scrollingDown = diff > 0;
+
+      if (scrollingDown && y > HIDE_AFTER && !hidden) {
+        hidden = true;
+        show(-100);
+        root.classList.add('nav-hidden'); // sticky drops to top: 0
+      } else if (!scrollingDown && hidden) {
+        hidden = false;
+        show(0);
+        root.classList.remove('nav-hidden'); // sticky returns below nav
+      }
+
+      lastY = y;
+    }
+
+    if (window.lenis && typeof window.lenis.on === 'function') {
+      window.lenis.on('scroll', (e) => onScroll(e.scroll));
+    } else {
+      let ticking = false;
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            onScroll(window.scrollY);
+            ticking = false;
+          });
+        },
+        { passive: true },
+      );
+    }
+  })();
+</script>
+
+
+<script>
+  (function () {
+    if (typeof gsap === 'undefined' || typeof SplitText === 'undefined') return;
+    gsap.registerPlugin(SplitText);
+
+    var buttons = document.querySelectorAll('.button');
+    if (!buttons.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var SPLIT_OPTS = { type: 'words,chars', wordsClass: 'word', charsClass: 'char' };
+    var DUR = 0.4,
+      EASE = 'power3.inOut',
+      STAGGER = 0.015;
+
+    // Reliable line box: computed line-height is in px and survives
+    // transformed ancestors AND elements that start hidden (offsetHeight can be 0).
+    function lineBox(el) {
+      var lh = parseFloat(getComputedStyle(el).lineHeight);
+      if (lh && !isNaN(lh)) return lh;
+      return el.offsetHeight || parseFloat(getComputedStyle(el).fontSize) * 1.4;
+    }
+
+    function makeButton(btn) {
+      var text = btn.textContent.trim();
+      if (!text) return null;
+      var state = { tl: null };
+
+      function build() {
+        if (state.tl) state.tl.kill();
+
+        btn.innerHTML = '<span class="btn-inner">' + '<span class="btn-row is-top">' + text + '</span>' + '<span class="btn-row is-bottom">' + text + '</span>' + '</span>';
+
+        var topRow = btn.querySelector('.is-top');
+        var bottomRow = btn.querySelector('.is-bottom');
+        if (!topRow || !bottomRow) return;
+
+        var topSplit = new SplitText(topRow, SPLIT_OPTS);
+        var bottomSplit = new SplitText(bottomRow, SPLIT_OPTS);
+
+        var h = lineBox(topRow); // full box incl. leading -> seam sits in empty space
+        gsap.set(bottomSplit.chars, { y: h });
+
+        state.tl = gsap.timeline({ paused: true });
+        state.tl.to(topSplit.chars, { y: -h, duration: DUR, ease: EASE, stagger: { each: STAGGER } }, 0);
+        state.tl.to(bottomSplit.chars, { y: 0, duration: DUR, ease: EASE, stagger: { each: STAGGER } }, 0);
+      }
+
+      build();
+
+      btn.addEventListener('mouseenter', function () {
+        if (state.tl) state.tl.play();
+      });
+      btn.addEventListener('mouseleave', function () {
+        if (state.tl) state.tl.reverse();
+      });
+      btn.addEventListener('focus', function () {
+        if (state.tl) state.tl.play();
+      });
+      btn.addEventListener('blur', function () {
+        if (state.tl) state.tl.reverse();
+      });
+
+      return build;
+    }
+
+    var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+
+    ready.then(function () {
+      var rebuilds = [];
+      buttons.forEach(function (btn) {
+        var rb = makeButton(btn);
+        if (rb) rebuilds.push(rb);
+      });
+
+      var t;
+      window.addEventListener('resize', function () {
+        clearTimeout(t);
+        t = setTimeout(function () {
+          rebuilds.forEach(function (rb) {
+            rb();
+          });
+        }, 200);
+      });
+    });
+  })();
+</script>
+<script>
+  const nav = document.querySelector('.navbar_component');
+  const btn = document.querySelector('.navbar_menu-button');
+
+  const syncNav = () => {
+    const isOpen = btn.classList.contains('w--open');
+    nav.classList.toggle('nav-open', isOpen); // second arg = force to match
+    isOpen ? window.lenis?.stop() : window.lenis?.start();
+  };
+
+  // Mirror Webflow's state no matter what opens/closes it
+  new MutationObserver(syncNav).observe(btn, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+</script><script>
+  (function () {
+    const s = document.createElement('script');
+    s.type = 'module';
+    s.src = true
+      ? 'http://localhost:5173/main.js'
+      : 'https://cdn.jsdelivr.net/gh/omrkhyym/phasevwebflowanims@v0.12.1/dist/main.js';
+    document.body.appendChild(s);
+  })();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var MAP_URL = 'https://wunderdogs.b-cdn.net/PhaseV/decision-map.svg'; // <-- your hosted URL
+    var DEFAULT = 'pursue';
+    var host = document.getElementById('dm-map');
+    if (!host) return;
+
+    fetch(MAP_URL)
+      .then(function (r) {
+        return r.text();
+      })
+      .then(function (svg) {
+        host.innerHTML = svg;
+        init(host.querySelector('svg'));
+      });
+
+    function init(map) {
+      if (!map) return;
+      var panels = document.getElementById('dm-panels');
+      var cards = [].slice.call(map.querySelectorAll('.dm-card'));
+      var pEls = panels ? [].slice.call(panels.querySelectorAll('.dm-panel')) : [];
+
+      function select(name) {
+        cards.forEach(function (c) {
+          c.classList.toggle('is-active', c.getAttribute('data-panel') === name);
+        });
+        pEls.forEach(function (p) {
+          p.classList.toggle('is-active', p.getAttribute('data-panel') === name);
+        });
+      }
+      map.addEventListener('click', function (e) {
+        var c = e.target.closest('.dm-card');
+        if (c) select(c.getAttribute('data-panel'));
+      });
+      map.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var c = e.target.closest('.dm-card');
+        if (c) {
+          e.preventDefault();
+          select(c.getAttribute('data-panel'));
+        }
+      });
+      select(DEFAULT);
+    }
+  });
+</script>
+<script>
+  (function () {
+    if (typeof Swiper === 'undefined') return;
+
+    // shared settings; per-type overrides in `configs`
+    const base = {
+      grabCursor: true,
+      watchOverflow: true,
+      spaceBetween: 20,
+      breakpoints: {
+        768: { spaceBetween: 40 },   // tablet and up
+        992: { spaceBetween: 40 },   // desktop and up
+      },
+    };
+    const configs = {
+      news: { slidesPerView: 'auto' },
+      evidence: { slidesPerView: 1, slidesPerGroup: 1 },
+    };
+
+    const roots = document.querySelectorAll('[data-swiper]');
+    if (!roots.length) return;
+
+    // climb to the nearest ancestor holding the arrows so sliders
+    // in different sections control their own siblings
+    function findNav(startEl, selector) {
+      let node = startEl;
+      while (node && node !== document.body) {
+        const found = node.querySelectorAll(selector);
+        if (found.length) return Array.from(found);
+        node = node.parentElement;
+      }
+      return Array.from(document.querySelectorAll(selector));
+    }
+
+    roots.forEach((root) => {
+      const type = root.getAttribute('data-swiper');
+      const config = configs[type];
+      if (!config) return;
+
+      const el = root.querySelector('.swiper');
+      if (!el) return;
+
+      const prevBtns = findNav(root, '[data-swiper-prev]');
+      const nextBtns = findNav(root, '[data-swiper-next]');
+
+      const swiper = new Swiper(el, { ...base, ...config });
+
+      prevBtns.forEach((b) => b.addEventListener('click', () => swiper.slidePrev()));
+      nextBtns.forEach((b) => b.addEventListener('click', () => swiper.slideNext()));
+
+      // nothing to scroll (e.g. a single evidence case): hide the arrows instead of greying them
+      const navWraps = [...new Set([...prevBtns, ...nextBtns].map((b) => b.closest('.slider-arrows-wrapper') || b))];
+
+      const syncState = () => {
+        prevBtns.forEach((b) => b.classList.toggle('is-disabled', swiper.isBeginning));
+        nextBtns.forEach((b) => b.classList.toggle('is-disabled', swiper.isEnd));
+        navWraps.forEach((w) => (w.style.display = swiper.isLocked ? 'none' : ''));
+      };
+      swiper.on('init slideChange reachBeginning reachEnd fromEdge resize lock unlock', syncState);
+      syncState();
+
+      console.log('slider bound:', type, { prev: prevBtns.length, next: nextBtns.length });
+    });
+  })();
+</script><script src="inv.js"></script>
+</body></html>

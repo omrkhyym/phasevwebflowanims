@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PROTO style BonV · Trial Optimizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="_bv/tokens.css">
+<link rel="stylesheet" href="_bv/bonv.css">
+<link rel="stylesheet" href="_bv/pages.css">
+</head>
+<body class="bv-page p-trial">
+
+<nav class="nav" aria-label="Main">
+  <div class="bv-wrap">
+    <a class="nav__brand" href="home.html"><img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV"><span>Trial Optimizer</span></a>
+    <div class="nav__links"><a href="#workflow">Workflow</a><a href="#proof">Success story</a><a href="#platform">Platform</a><a href="#faq">FAQ</a></div>
+    <a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Request a demo</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bv-wrap">
+    <div class="hero__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>PhaseV / Trial Optimizer</span>
+      <h1 class="bv-hero" data-bv-in>Design for uncertainty. <span class="bv-soft">Decide with clarity.</span></h1>
+      <p class="bv-lead" data-bv-in>A design can look strong under one assumed effect size <span class="bv-soft">and fail under another.</span></p>
+      <p class="body" data-bv-in>Trial Optimizer simulates and optimizes adaptive, fixed and Bayesian designs, explores trade-offs, and tests performance across the scenarios that matter, including those where your assumptions miss, so you can choose a robust design you can defend.</p>
+      <div class="actions" data-bv-in><a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Request a demo</a><a class="bv-link" href="#workflow">See the workflow <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="chart-card bv-glass" data-bv-in>
+      <svg class="bv-viz" viewBox="0 0 560 380" role="img" aria-label="Power across true effect sizes: the optimized design holds its power when the effect is smaller than assumed, the fixed design does not">
+        <text x="32" y="36">POWER</text>
+        <path class="grid" d="M32 110 H540 M32 210 H540"/>
+        <path class="axis" d="M32 310 H540"/>
+        <path d="M400 56 V310" stroke="#F4F4F4" stroke-opacity=".14" stroke-dasharray="2 6"/>
+        <text x="400" y="48" text-anchor="middle">ASSUMED EFFECT</text>
+        <!-- comparateur : design fixe, calé sur l'effet supposé -->
+        <path class="ctrl" d="M32 296 C120 288 200 250 270 196 C320 156 360 120 400 100 C450 80 500 72 540 70"/>
+        <!-- design retenu : robuste quand l'effet est plus petit que prévu -->
+        <path class="treat" d="M32 284 C100 250 160 176 220 130 C270 98 330 82 400 76 C450 72 500 70 540 69"/>
+        <path class="hl" d="M240 116 V172"/><circle cx="240" cy="115" r="3" fill="#E2C70A"/><circle cx="240" cy="174" r="3" fill="#E2C70A"/>
+        <text class="hl-label" x="252" y="150">HOLDS WHEN ASSUMPTIONS MISS</text>
+        <text x="32" y="340">SMALLER EFFECT</text><text x="540" y="340" text-anchor="end">LARGER EFFECT</text>
+        <g transform="translate(32 362)"><path class="treat" d="M0 0 H22"/><text x="30" y="4">OPTIMIZED DESIGN</text><path class="ctrl" d="M180 0 H202"/><text x="210" y="4">FIXED DESIGN</text></g>
+      </svg>
+    </div>
+  </div>
+  <span class="bv-hud hero__hud">Set up. Explore. Simulate. Optimize.</span>
+</header>
+
+<!-- Workflow -->
+<section class="bv-section" id="workflow">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in>The Trial Optimizer workflow</span>
+      <h2 class="bv-h1" data-bv-in>A simulation workbench <span class="bv-soft">for design trade-off exploration.</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Set up</span><h3 class="bv-h2" data-bv-in>Set up a trial design in minutes.</h3>
+          <ul class="rows" data-bv-in><li>Start from a prior design or go through a guided setup.</li><li>Use the GenAI Assistant to retrieve relevant public studies and inform placebo or standard-of-care response, with source-level review and selectable reference trials.</li></ul></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/%2333_Trial%20Optimizer_Setup.mp4"></video></div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Explore</span><h3 class="bv-h2" data-bv-in>Explore how clinical, operational and statistical assumptions <span class="bv-soft">and decisions interact.</span></h3>
+          <ul class="rows" data-bv-in><li>Vary treatment and control effects, recruitment, allocation, interim strategy and other consequential assumptions.</li><li>Compare a wide range of designs, including fixed, adaptive, Bayesian and your own customized designs, to find the one that suits your study best.</li></ul></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/%2334_Trial%20Optimizer_Explore.mp4"></video></div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Simulate</span><h3 class="bv-h2" data-bv-in>Simulate how each design performs.</h3>
+          <ul class="rows" data-bv-in><li>Configure and run rapid Monte Carlo simulations across the selected scenarios and design options.</li><li>Examine and compare simulated outcomes side by side.</li></ul></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/%2334-2(new)%20-%20Trial%20Optimizer_Simulate.mp4"></video></div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Optimize</span><h3 class="bv-h2" data-bv-in>Refine the selected design.</h3>
+          <ul class="rows" data-bv-in><li>Choose what outcomes to optimize for (minimizing sample size and/or trial duration under null and alternative hypotheses) and what parameters to optimize over (e.g. when to have interim looks and stopping criteria).</li><li>PhaseV’s proprietary stochastic optimization algorithm searches the parameter space for further improvement.</li><li>Export the selected design with supporting evidence, audit trail and reproducibility settings.</li></ul></div>
+        <div class="frame bv-glass" data-bv-in><video data-auto muted loop playsinline preload="metadata" src="https://wunderdogs.b-cdn.net/PhaseV/%2335_Trial%20Optimizer_Optimize.mp4"></video></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Success story -->
+<section class="bv-section" id="proof">
+  <div class="bv-wrap figure">
+    <div data-bv-group>
+      <span class="bv-label" data-bv-in>Success story · anonymized Phase 3 infectious disease trial</span>
+      <p class="bv-display" data-bv-in>$6M+</p>
+      <p class="cap-line" data-bv-in>conservative direct cost savings. <span class="bv-soft">A Phase 3 design refined for speed, cost and statistical performance.</span></p>
+      <div class="actions" data-bv-in style="margin-top:28px"><a class="bv-link" href="https://phasev-2026.webflow.io/case-studies">View details <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="panel bv-glass" data-bv-in>
+      <ul class="kv">
+        <li><b>630 → 575</b><span>modeled enrollment</span></li>
+        <li><b>6 months</b><span>shorter modeled duration</span></li>
+        <li><b>90%+</b><span>power, 2.5% Type I error</span></li>
+      </ul>
+      <div class="actions" style="margin-top:24px"><a class="bv-link" href="https://phasev-2026.webflow.io/case-studies">Explore the case study library <span aria-hidden="true">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- Standalone or connected -->
+<section class="bv-section" id="platform">
+  <div class="bv-wrap split">
+    <div class="split__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>Standalone or connected</span>
+      <h2 class="bv-h1" data-bv-in>Complete on its own. <span class="bv-soft">Stronger when connected.</span></h2>
+      <p class="muted" data-bv-in>When connected to the PhaseV platform, reviewed insights can enter the scenario space, design decisions can inform operational planning in ClinOps Optimizer, and approved parameters can return to the protocol, SAP and other connected documents for expert review.</p>
+    </div>
+    <div class="orbit" aria-hidden="true" data-bv-in>
+      <svg class="links" viewBox="0 0 560 560">
+        <path class="bv-flow" d="M280 184 L280 104"/><path class="bv-flow bv-flow--accent" d="M187 256 L114 236"/><path class="bv-flow" d="M226 359 L178 430"/><path class="bv-flow" d="M334 359 L382 430"/><path class="bv-flow" d="M373 256 L446 236"/>
+      </svg>
+      <div class="core-ring"><span class="bv-label">PhaseV</span></div>
+      <div class="cap p-portfolio" style="left:50%;top:10%;flex-direction:column-reverse"><div class="bv-ring" style="--p:.6"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/distribution.svg" alt=""></div><span class="bv-cap-label">Portfolio</span></div>
+      <div class="cap p-trial is-current" style="left:12%;top:40%"><div class="bv-ring"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/sliders.svg" alt=""></div><span class="bv-cap-label">Trial</span></div>
+      <div class="cap p-clinops" style="left:27%;top:84%"><div class="bv-ring" style="--p:.64"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/network.svg" alt=""></div><span class="bv-cap-label">ClinOps</span></div>
+      <div class="cap p-response" style="left:73%;top:84%"><div class="bv-ring" style="--p:.5"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/scatter.svg" alt=""></div><span class="bv-cap-label">Response</span></div>
+      <div class="cap p-conductor" style="left:88%;top:40%"><div class="bv-ring" style="--p:.58"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/document.svg" alt=""></div><span class="bv-cap-label">AI Conductor</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="bv-section" id="faq">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group><span class="bv-label" data-bv-in>FAQs</span><h2 class="bv-h1" data-bv-in>Questions, <span class="bv-soft">answered.</span></h2></div>
+    <ul class="faq">
+      <li><details><summary>What is Trial Optimizer?</summary><div class="a">Trial Optimizer is a simulation workbench for clinical trial design. It lets you set up candidate designs, vary the assumptions that drive them, simulate performance across scenarios, and refine the design you select.</div></details></li>
+      <li><details><summary>Which designs can I compare?</summary><div class="a">Fixed, adaptive and Bayesian designs, along with your own customized designs. You can compare them side by side across the same set of scenarios.</div></details></li>
+      <li><details><summary>How does it handle uncertainty in my assumptions?</summary><div class="a">You vary treatment and control effects, recruitment, allocation, interim strategy and other assumptions, then simulate each design across those scenarios. The results show how each design performs when assumptions miss, so you can see which designs hold up.</div></details></li>
+      <li><details><summary>What does the GenAI Assistant do?</summary><div class="a">It retrieves relevant public studies to inform placebo or standard-of-care response. You review each source and select the reference trials you want to use.</div></details></li>
+      <li><details><summary>How does the optimization work?</summary><div class="a">After you select a design, PhaseV’s proprietary stochastic optimization algorithm searches the parameter space for further improvement against your objectives and constraints.</div></details></li>
+      <li><details><summary>What can I export?</summary><div class="a">The selected design, with supporting evidence, an audit trail, and reproducibility settings.</div></details></li>
+      <li><details><summary>Does Trial Optimizer forecast enrollment?</summary><div class="a">You can vary recruitment assumptions and see their effect on design performance. For forecasts built from site-level and regional data, use <a href="clinops.html">ClinOps Optimizer</a>.</div></details></li>
+      <li><details><summary>Do I need the rest of the PhaseV platform?</summary><div class="a">No. Trial Optimizer is complete on its own. When connected to the broader platform, reviewed insights can enter the scenario space and approved parameters can return to connected documents for expert review.</div></details></li>
+      <li><details><summary>How long does setup take?</summary><div class="a">You can set up a design in minutes, starting from a prior design or a guided setup.</div></details></li>
+    </ul>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap end" data-bv-group>
+    <h2 class="bv-h1" data-bv-in data-proposed>Choose a design you can defend. <span class="bv-soft">We’ll show you how.</span></h2>
+    <div class="actions" data-bv-in style="justify-content:center"><a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Contact us</a><a class="bv-link" href="home.html#platform">Explore the platform <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="bv-wrap">
+    <img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV">
+    <nav aria-label="Footer"><a href="home.html">Home</a><a href="clinops.html">ClinOps Optimizer</a><a href="bonv.html">BonV</a><a href="https://phasev-2026.webflow.io/case-studies">Case studies</a></nav>
+    <span class="bv-label bv-label--dim">Adaptive. Causal. Intuitive.</span>
+  </div>
+</footer>
+
+<script src="_bv/bonv-bg.js"></script>
+<script src="_bv/bonv-mark.js"></script>
+<script src="_bv/bonv-motion.js"></script>
+<script src="_bv/pages.js"></script>
+</body>
+</html>

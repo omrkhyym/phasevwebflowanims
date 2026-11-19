@@ -1,0 +1,90 @@
+/* BonV design tokens (web). Source of truth: references/02-color.md, 03-typography.md, 07-motion.md.
+   Dark-first: BonV only exists on night blue. Do not invent a light theme without asking. */
+:root {
+  color-scheme: dark;
+
+  /* ---- Ink (backgrounds) ---- */
+  --bv-ink-0: #06041A;      /* deepest: 60 % of any viewport at least */
+  --bv-ink-1: #0D0926;      /* background transitions, solid fallbacks */
+  --bv-ink-2: #17103A;      /* PhaseV Dark Blue, base of every gradient */
+
+  /* ---- Gradient masses and light (never solid fills on UI) ---- */
+  --bv-indigo: #242C80;     /* gradient mass (#2B2A7A in print) */
+  --bv-violet: #5B44B8;     /* gradient mass, sparingly, left side */
+  --bv-blue: #3D5BE0;       /* the single light source, top right */
+  --bv-blue-soft: #7C93F2;  /* rim lights, glass edges, shockwave rings */
+  --bv-amber: #E89A3C;      /* warm counterpoint, only in BonV moments, near yellow */
+
+  /* ---- Accent ---- */
+  --bv-yellow: #E2C70A;     /* BonV, the chosen path, the V. Rare. Never a background, never a button fill */
+
+  /* ---- Text ---- */
+  --bv-white: #F4F4F4;      /* titles, first half of a sentence */
+  --bv-grey: #8C86B0;       /* second half of a sentence, labels, inactive */
+  --bv-dim: #5A5480;        /* HUD labels, axes, metadata */
+  --bv-body: #ECEAF6;       /* long body copy on dark (slightly warmer than white) */
+  --bv-row: #C9C5E0;        /* list rows, secondary body */
+
+  /* ---- Capability colours (desaturated). Thin strokes, rings, small dots only ---- */
+  --bv-cap-protocol: #86C6D0;      /* Protocol design */
+  --bv-cap-emulation: #A99FD8;     /* Target trial emulation */
+  --bv-cap-site: #D6A394;          /* Site identification */
+  --bv-cap-heterogeneity: #92CBAE; /* Heterogeneity analysis (Portfolio in older decks) */
+  --bv-cap-causal: #E2C70A;        /* Causal modeling = the chosen path, BonV yellow */
+
+  /* ---- Lines ---- */
+  --bv-line: rgba(244, 244, 244, .08);       /* dividers inside panels */
+  --bv-line-strong: rgba(244, 244, 244, .14);/* base rings around icons */
+  --bv-link: rgba(244, 244, 244, .35);       /* dashed links between elements */
+  --bv-stroke: 1px;                          /* default stroke */
+  --bv-stroke-hero: 1.5px;                   /* max stroke, hero only */
+
+  /* ---- Glass ---- */
+  --bv-glass-fill: linear-gradient(155deg, rgba(150,110,200,.16) 0%, rgba(90,60,150,.14) 50%, rgba(40,24,80,.32) 100%);
+  --bv-glass-fill-rose: linear-gradient(155deg, rgba(214,160,230,.20) 0%, rgba(160,110,200,.13) 50%, rgba(80,46,120,.24) 100%);
+  --bv-glass-edge: linear-gradient(150deg, rgba(244,244,244,.28) 0%, rgba(244,244,244,.06) 40%, rgba(244,244,244,.03) 75%, rgba(214,170,240,.12) 100%);
+  --bv-glass-blur: 40px;
+  --bv-glass-sheen: radial-gradient(120% 60% at 15% 0%, rgba(255,255,255,.04), rgba(255,255,255,0) 60%);
+
+  /* ---- Radii ---- */
+  --bv-r-panel: 24px;       /* panels, cards */
+  --bv-r-card: 18px;        /* small cards (graph cards) */
+  --bv-r-row: 12px;         /* inner rows, file cards */
+  --bv-r-pill: 999px;       /* buttons, inputs, chips */
+  --bv-r-bubble-tail: 6px;  /* chat bubble corner on the speaker side */
+
+  /* ---- Type ---- */
+  --bv-font: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bv-mono: 'Roboto Mono', ui-monospace, Menlo, Consolas, monospace;
+  /* fluid scale, 1080p video sizes mapped to a 1440 px wide desktop */
+  --bv-fs-display: clamp(3rem, 1.6rem + 5.2vw, 7.5rem);  /* Light 300, -3 %: key numbers */
+  --bv-fs-hero: clamp(2.5rem, 1.4rem + 4vw, 5.5rem);     /* Bold 700, -2 %: "Meet BonV" only */
+  --bv-fs-h1: clamp(2rem, 1.3rem + 2.6vw, 3.75rem);      /* Light 300 / Regular 400, -2 % */
+  --bv-fs-h2: clamp(1.5rem, 1.1rem + 1.4vw, 2.5rem);
+  --bv-fs-lead: clamp(1.125rem, 1rem + .45vw, 1.5rem);   /* Regular 400 */
+  --bv-fs-body: 1.0625rem;                                /* 17 px */
+  --bv-fs-small: .9375rem;
+  --bv-fs-label: .75rem;                                  /* Mono caps, +10 % tracking */
+  --bv-track-label: .1em;
+  --bv-track-tight: -.02em;
+  --bv-track-display: -.03em;
+
+  /* ---- Space (8 px grid) ---- */
+  --bv-s1: 4px; --bv-s2: 8px; --bv-s3: 12px; --bv-s4: 16px; --bv-s5: 24px; --bv-s6: 32px;
+  --bv-s7: 48px; --bv-s8: 64px; --bv-s9: 96px; --bv-s10: 144px; --bv-s11: 192px;
+  --bv-gutter: max(16px, 5vw);
+  --bv-max: 1280px;
+
+  /* ---- Motion (quint family, no overshoot) ---- */
+  --bv-ease-out: cubic-bezier(0.22, 1, 0.36, 1);    /* entrances, landings (out quint) */
+  --bv-ease-in: cubic-bezier(0.64, 0, 0.78, 0);     /* exits (in quint), a third faster */
+  --bv-ease-inout: cubic-bezier(0.83, 0, 0.17, 1);  /* camera-like moves, scroll-linked (in-out quint) */
+  --bv-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);    /* soft arrivals (chat bubbles) */
+  --bv-dur-micro: 200ms;
+  --bv-dur-base: 400ms;
+  --bv-dur-large: 800ms;
+  --bv-dur-camera: 1600ms;
+  --bv-stagger: 60ms;
+  --bv-travel: 24px;        /* max UI travel */
+  --bv-blur-in: 8px;        /* text enters from 8 px blur to 0 */
+}

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PROTO style BonV · BonV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="_bv/tokens.css">
+<link rel="stylesheet" href="_bv/bonv.css">
+<link rel="stylesheet" href="_bv/pages.css">
+<style>
+  /* BonV : la marque garde « Bon » en blanc même dans une phrase grise */
+  .bv-soft .bv-name { color: var(--bv-white); }
+  .hero__copy .bv-input { max-width: 520px; }
+  .orbit bonv-mark { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+  /* schéma : question → BonV → systèmes → résultats */
+  .route { display: grid; grid-template-columns: auto 1fr auto 1fr minmax(0, 18rem) 1fr auto; align-items: center; margin-top: 80px; }
+  .route svg.wire { width: 100%; height: 200px; overflow: visible; }
+  .pill { padding: 14px 22px; border-radius: var(--bv-r-pill); color: var(--bv-white); white-space: nowrap; }
+  .pill .bv-label { display: block; margin-bottom: 2px; }
+  .route .targets { display: flex; flex-direction: column; gap: 14px; }
+  .route .bv-row { justify-content: flex-start; }
+  .route .bv-row i { width: 8px; height: 8px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--bv-grey); }
+  .route .mark { display: grid; place-items: center; width: 132px; height: 132px; }
+  @media (max-width: 960px) {
+    .route { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 22px; }
+    .route svg.wire { display: none; }
+    .route .targets { width: 100%; max-width: 22rem; }
+  }
+
+  /* visuels des trois étapes (en attendant les vidéos) */
+  .vis { padding: 28px; display: flex; flex-direction: column; gap: 18px; min-height: 340px; justify-content: center; }
+  .vis .bv-chat { max-width: none; }
+  .team-rows { list-style: none; margin: 0; padding: 0; }
+  .team-rows li { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid var(--bv-line); }
+  .team-rows li:last-child { border-bottom: 1px solid var(--bv-line); }
+  .team-rows .bv-msg__av { margin: 0; flex: none; }
+  .team-rows b { color: var(--bv-white); font-weight: 500; display: block; }
+  .team-rows .bv-label { margin-left: auto; }
+  .credit { height: 2px; border-radius: 2px; background: var(--bv-line-strong); position: relative; }
+  .credit i { position: absolute; inset: 0 auto 0 0; width: 58%; background: var(--bv-white); border-radius: 2px; }
+  .calls { list-style: none; margin: 0; padding: 0; }
+  .calls li { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-top: 1px solid var(--bv-line); color: var(--bv-row); }
+  .calls li:last-child { border-bottom: 1px solid var(--bv-line); }
+  .calls .bv-ring { --size: 40px; }
+  .calls .bv-label { margin-left: auto; }
+
+  /* sécurité (repris de la page de démo du kit) */
+  .secure-art { position: relative; width: min(100%, 620px); aspect-ratio: 1; justify-self: center; }
+  .secure-art svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .secure-art bonv-mark { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+  .secure-art .cap { position: absolute; transform: translate(-50%, -50%); }
+  .secure-art .bv-ring { --size: 72px; }
+  .lockdisc { position: absolute; left: 9%; top: 50%; width: 112px; height: 112px; transform: translate(-50%, -50%); border-radius: 50%; display: grid; place-items: center; }
+  .datapill { position: absolute; left: 96%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 12px; align-items: center; padding: 14px 22px; border-radius: 16px; white-space: nowrap; color: var(--bv-white); }
+  .datapill img { width: 26px; height: 26px; opacity: .85; }
+  .end .bv-hero { font-size: clamp(3rem, 2rem + 4vw, 6.5rem); }
+  .end .words { display: flex; gap: 22px; font-weight: 300; font-size: var(--bv-fs-h2); color: var(--bv-row); }
+  .end .bv-input { width: min(100%, 560px); margin-top: 18px; }
+  @media (max-width: 960px) { .datapill { left: 50%; top: 100%; transform: translate(-50%, 12px); } }
+  @media (max-width: 640px) { .secure-art .bv-ring { --size: 48px; } .lockdisc { width: 76px; height: 76px; } .lockdisc svg { width: 28px; height: 28px; } }
+</style>
+</head>
+<body class="bv-page">
+
+<nav class="nav" aria-label="Main">
+  <div class="bv-wrap">
+    <a class="nav__brand" href="home.html"><img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV"><span>Bon<b style="color:var(--bv-yellow);font-weight:inherit">V</b></span></a>
+    <div class="nav__links"><a href="#in-action">See it in action</a><a href="#how">How it works</a><a href="#secure">Security</a></div>
+    <a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Book a demo</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bv-wrap">
+    <div class="hero__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>PhaseV / clinical development agent</span>
+      <h1 class="bv-hero" data-bv-in>Ask the question. <span class="bv-soft"><span class="bv-name">Bon<b>V</b></span> orchestrates the answer.</span></h1>
+      <p class="bv-lead" data-bv-in>Clinical development tools, data and teams rarely work as one. <span class="bv-soft">BonV is the agentic layer on top of the PhaseV platform and your own systems.</span></p>
+      <p class="body" data-bv-in>It turns a plain-language question into the right workflow, with explainable results and your experts approving every step.</p>
+      <label class="bv-input bv-glass" data-bv-in>
+        <span class="bv-caret" aria-hidden="true"></span>
+        <input type="text" placeholder="Ask BonV…" aria-label="Ask BonV" data-ask="heroMark">
+        <button class="bv-send" type="button" aria-label="Send"><svg viewBox="0 0 10 12"><path d="M0 0L10 6L0 12Z"/></svg></button>
+      </label>
+      <a class="bv-link" href="#in-action" data-bv-in>Learn more <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="orbit" aria-hidden="true" data-bv-in data-fit=".22">
+      <svg class="links" viewBox="0 0 560 560">
+        <path class="bv-flow" d="M280 178 L280 102"/><path class="bv-flow" d="M184 246 L122 224"/><path class="bv-flow" d="M219 362 L177 418"/><path class="bv-flow" d="M341 362 L383 418"/><path class="bv-flow bv-flow--accent" d="M376 246 L438 224"/>
+      </svg>
+      <bonv-mark size="124" state="listen" id="heroMark"></bonv-mark>
+      <div class="cap" style="left:50%;top:9%"><div class="bv-ring" style="--c:var(--bv-cap-protocol);--p:.72"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/document.svg" alt=""></div></div>
+      <div class="cap" style="left:13%;top:37%"><div class="bv-ring" style="--c:var(--bv-cap-emulation);--p:.58"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/kaplan-meier.svg" alt=""></div></div>
+      <div class="cap" style="left:26%;top:82%"><div class="bv-ring" style="--c:var(--bv-cap-heterogeneity);--p:.5"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/scatter.svg" alt=""></div></div>
+      <div class="cap" style="left:74%;top:82%"><div class="bv-ring" style="--c:var(--bv-cap-site);--p:.64"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/network.svg" alt=""></div></div>
+      <div class="cap" style="left:87%;top:37%"><div class="bv-ring bv-ring--chosen"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/forest-plot.svg" alt=""></div></div>
+    </div>
+  </div>
+  <span class="bv-hud hero__hud">Ask. Connect. Decide.</span>
+</header>
+
+<!-- See BonV in action : bloc existant de la page actuelle, conservé avec sa vidéo -->
+<section class="bv-section" id="in-action">
+  <div class="bv-wrap split">
+    <div class="split__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>Explore the product</span>
+      <h2 class="bv-h1" data-bv-in>See <span class="bv-name">Bon<b>V</b></span> <span class="bv-soft">in action.</span></h2>
+      <p class="muted" data-bv-in>Ask in plain language, such as exploring Phase 3 design options for a new study, and BonV interprets your intent and orchestrates the right capabilities, from target trial emulation and protocol design to site identification, heterogeneity analysis and causal modeling. It works alongside your existing data, applications and tools rather than replacing them.</p>
+      <p class="muted" data-bv-in>Built on PhaseV’s validated causal AI, BonV recommends and explains while your experts review and approve each step, so every result is transparent, traceable and yours to decide.</p>
+    </div>
+    <div class="frame frame--16x9 bv-glass" data-bv-in>
+      <iframe src="https://www.youtube.com/embed/LB_df-lTUXU?rel=0&amp;controls=1" title="Meet BonV: Ask. Connect. Decide." allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- The cost of disconnected tools -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="head head--2col" data-bv-group>
+      <span class="bv-label" data-bv-in>The cost of disconnected tools</span>
+      <h2 class="bv-h1" data-bv-in>Good tools still slow you down <span class="bv-soft">when no one can find the right one.</span></h2>
+      <p class="bv-lead" data-bv-in>Large sponsors already own powerful applications, datasets and methods. Adoption stalls at the handoffs: which tool, which data, which colleague. BonV replaces that search with a conversation, while keeping decisions with your team.</p>
+    </div>
+    <div class="stats" data-bv-group>
+      <div class="stat" data-bv-in><div class="n">$600K</div><p>approximate lost opportunity value for each day of clinical trial delay.</p></div>
+      <div class="stat" data-bv-in><div class="n">$8M</div><p>upper-end estimates of daily delay cost.</p></div>
+      <div class="stat" data-bv-in><div class="n"><mark data-fix="chiffre à fournir">XX%</mark></div><p><mark data-fix="placeholder">Survey stat on tool or vendor fragmentation, to be supplied.</mark></p></div>
+      <div class="stat" data-bv-in><div class="n"><mark data-fix="chiffre à fournir">XX%</mark></div><p><mark data-fix="placeholder">Survey stat on time to adopt new analytics, to be supplied.</mark></p></div>
+    </div>
+    <p class="note">Source: Hargreaves, B., “Clinical trials and their patients: The rising costs and how to stem the loss,” Pharmafile. Survey figures: <mark data-fix="source à ajouter">source and note to be added on approval</mark>.</p>
+  </div>
+</section>
+
+<!-- The PhaseV answer -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="head head--2col" data-bv-group>
+      <span class="bv-label" data-bv-in>The PhaseV answer</span>
+      <h2 class="bv-h1" data-bv-in>One conversational layer <span class="bv-soft">replaces the hunt for the right tool.</span></h2>
+      <p class="bv-lead" data-bv-in>BonV interprets your intent, breaks it into tasks and invokes the right PhaseV module, sponsor application or third-party system. Every recommendation waits for a human “yes.”</p>
+    </div>
+    <div class="route" data-bv-in>
+      <div class="pill bv-glass"><span class="bv-label">Your question</span>“Explore Phase 3 design options”</div>
+      <svg class="wire" viewBox="0 0 100 200" preserveAspectRatio="none" aria-hidden="true"><path class="bv-flow" d="M4 100 H96" vector-effect="non-scaling-stroke"/></svg>
+      <div class="mark"><bonv-mark size="72" state="think"></bonv-mark></div>
+      <svg class="wire" viewBox="0 0 100 200" preserveAspectRatio="none" aria-hidden="true"><path class="bv-flow" d="M4 100 C50 100 50 34 96 34 M4 100 H96 M4 100 C50 100 50 166 96 166" vector-effect="non-scaling-stroke"/></svg>
+      <div class="targets">
+        <div class="bv-row"><i></i><div><div class="bv-row__title">PhaseV modules</div><div class="bv-row__meta">Trial, Response, ClinOps, Portfolio, AI Conductor</div></div></div>
+        <div class="bv-row"><i></i><div><div class="bv-row__title">Sponsor tools</div><div class="bv-row__meta">your applications and data lakes</div></div></div>
+        <div class="bv-row"><i></i><div><div class="bv-row__title">Third-party systems</div><div class="bv-row__meta">cloud, warehouse, enterprise apps</div></div></div>
+      </div>
+      <svg class="wire" viewBox="0 0 100 200" preserveAspectRatio="none" aria-hidden="true"><path class="bv-flow bv-flow--accent" d="M4 100 H96" vector-effect="non-scaling-stroke"/></svg>
+      <div class="pill bv-glass"><span class="bv-label">Out</span>Reviewable results</div>
+    </div>
+  </div>
+</section>
+
+<!-- Ask, collaborate, orchestrate -->
+<section class="bv-section" id="how">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in data-proposed>How it works</span>
+      <h2 class="bv-h1" data-bv-in data-proposed>Ask. Collaborate. <span class="bv-soft">Orchestrate.</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Ask</span><h3 class="bv-h2" data-bv-in>Start with a question, <span class="bv-soft">not a menu.</span></h3>
+          <p data-bv-in style="color:var(--bv-grey)">Say “I want to explore design options for my Phase 3 study.” BonV asks for what it needs, extracts key information from the documents you upload and proposes next steps.</p>
+          <ul class="rows" data-bv-in><li>Plain-language entry</li><li>Document-aware follow-ups</li><li>Human confirmation at each step</li></ul></div>
+        <div class="vis bv-glass" data-bv-in>
+          <div class="bv-chat">
+            <div class="bv-msg"><span class="bv-msg__who">Sarah · Clinical lead</span><span class="bv-msg__av">S</span><div class="bv-bubble bv-glass">I want to explore <span class="bv-key">design options</span> for my <span class="bv-key">Phase 3</span> study.</div></div>
+            <div class="bv-msg"><span class="bv-msg__who">BonV</span><span class="bv-msg__av" style="background:none"><img src="_bv/logo/bonv-mark.svg" alt=""></span><div class="bv-bubble bv-glass" data-proposed>I read your draft protocol. <span class="bv-soft">Three questions before I propose next steps.</span>
+              <ul class="bv-rows"><li><span class="bv-letter">1</span>Primary endpoint</li><li><span class="bv-letter">2</span>Target population</li><li class="is-chosen"><span class="bv-letter">3</span>Interim strategy</li></ul></div></div>
+          </div>
+          <p class="bv-label bv-label--dim" style="margin:0"><mark data-fix="vidéo à fournir">Visual in place of the video: conversational workflow</mark></p>
+        </div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Collaborate</span><h3 class="bv-h2" data-bv-in>Decisions are made by teams. <span class="bv-soft">BonV works that way.</span></h3>
+          <p data-bv-in style="color:var(--bv-grey)">Turn any question into a project team and assign roles: reviewer, budget holder, final sign-off or end user. Each project carries its own credit allocation, so spend stays visible and controllable.</p>
+          <ul class="rows" data-bv-in><li>Role-based project teams</li><li>Project-level credits and usage visibility</li><li>Shared results, one interface</li></ul></div>
+        <div class="vis bv-glass" data-bv-in data-proposed>
+          <span class="bv-label">Project · Phase 3 design options</span>
+          <ul class="team-rows">
+            <li><span class="bv-msg__av">S</span><div><b>Sarah</b><span class="bv-row__meta">Clinical lead</span></div><span class="bv-label">Final sign-off</span></li>
+            <li><span class="bv-msg__av">D</span><div><b>Daniel</b><span class="bv-row__meta">Biostatistics</span></div><span class="bv-label">Reviewer</span></li>
+            <li><span class="bv-msg__av">M</span><div><b>Maya</b><span class="bv-row__meta">ClinOps</span></div><span class="bv-label">End user</span></li>
+            <li><span class="bv-msg__av">R</span><div><b>Ravi</b><span class="bv-row__meta">Finance</span></div><span class="bv-label">Budget holder</span></li>
+          </ul>
+          <div><div style="display:flex;justify-content:space-between;margin-bottom:10px"><span class="bv-label">Project credits</span><span class="bv-label">58% used</span></div><div class="credit"><i></i></div></div>
+          <p class="bv-label bv-label--dim" style="margin:0"><mark data-fix="vidéo à fournir">Visual in place of the video: project team creation</mark></p>
+        </div>
+      </div>
+      <div class="step" data-bv-group>
+        <div class="step__copy"><span class="bv-label" data-bv-in>Orchestrate</span><h3 class="bv-h2" data-bv-in>The right capability, <span class="bv-soft">invoked for the question.</span></h3>
+          <p data-bv-in style="color:var(--bv-grey)">BonV calls on Trial Optimizer, Response Optimizer, ClinOps Optimizer, Portfolio Optimizer, AI Conductor and Trial Monitoring. It also calls the applications you built and the systems you use, through API-based integrations. Open any result to see how it was generated and what data was used.</p>
+          <ul class="rows" data-bv-in><li>Cloud and data warehouse integrations</li><li>Enterprise application connectors</li><li>Sponsor tools and data lakes</li></ul></div>
+        <div class="vis bv-glass" data-bv-in data-proposed>
+          <span class="bv-label">BonV is working on your question</span>
+          <ul class="calls">
+            <li><span class="bv-ring" style="--c:var(--bv-cap-protocol);--p:1"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg></span>Trial Optimizer<span class="bv-label">Design scenarios</span></li>
+            <li><span class="bv-ring" style="--c:var(--bv-cap-site);--p:1"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg></span>ClinOps Optimizer<span class="bv-label">Site footprint</span></li>
+            <li><span class="bv-ring" style="--c:var(--bv-cap-heterogeneity);--p:.6"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg></span>Sponsor data lake<span class="bv-label">Reading</span></li>
+            <li><span class="bv-ring" style="--c:var(--bv-grey);--p:.25"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg></span>Your review<span class="bv-label">Waiting for a “yes”</span></li>
+          </ul>
+          <p class="bv-label bv-label--dim" style="margin:0"><mark data-fix="visuel à fournir">Visual in place of the video: orchestration</mark></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Case study -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="panel bv-glass case" data-bv-in>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <span class="bv-label">Case study · Top-10 global pharma</span>
+        <h3>From a single question <span class="bv-soft">to a working project team.</span></h3>
+        <p>In a working session, a top-10 global pharma sponsor saw BonV take a Phase 3 design question through document intake, follow-up questions and project team creation. Results then opened in the relevant PhaseV dashboards. The team valued having one interface for PhaseV methods and their own tools.</p>
+        <p class="bv-label bv-label--dim">Anonymized at the sponsor’s request. Illustrative; outcomes depend on context.</p>
+      </div>
+      <div><p class="bv-display" style="margin:0"><mark data-fix="métrique à valider">—</mark></p><p style="margin:16px 0 0;color:var(--bv-grey)">Outcome metric to be added once validated.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Flexible entry points -->
+<section class="bv-section">
+  <div class="bv-wrap figure">
+    <div data-bv-group>
+      <span class="bv-label" data-bv-in>Flexible entry points</span>
+      <p class="bv-display" data-bv-in data-proposed>4–10 wk</p>
+      <p class="cap-line" data-bv-in>typical integration, <span class="bv-soft">scoped with your IT team, before first use.</span></p>
+    </div>
+    <div class="split__copy" data-bv-group>
+      <h2 class="bv-h1" data-bv-in>Start with one or two applications.</h2>
+      <p class="muted" data-bv-in>Begin with the workflows that matter now and add modules and integrations as your teams are ready.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Governed by design -->
+<section class="bv-section" id="secure">
+  <div class="bv-wrap split">
+    <div class="split__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>Governed by design</span>
+      <h2 class="bv-h1" data-bv-in>Explainable by design. <span class="bv-soft">Secure by deployment.</span></h2>
+      <p class="muted" data-bv-in>Every suggestion is reviewable, every result traceable, and expert approval stays at the point of decision. Deploy inside your own cloud, or in a dedicated, isolated environment.</p>
+      <ul class="rows" data-bv-in><li><b>Human-in-the-loop</b></li><li><b>Full result lineage</b></li><li><b>Customer-cloud or dedicated deployment</b></li></ul>
+      <div class="chips" data-bv-in><span>AWS</span><span>Microsoft Azure</span><span>Google Cloud</span><span>Snowflake</span><span>Databricks</span><span>Veeva</span><span>Medidata</span><span>Sponsor environment</span></div>
+    </div>
+    <div class="secure-art" aria-hidden="true" data-bv-in data-fit=".135">
+      <svg viewBox="0 0 620 620">
+        <defs><linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0DC6E" stop-opacity=".4"/><stop offset=".35" stop-color="#E2C70A" stop-opacity=".85"/><stop offset="1" stop-color="#E89A3C" stop-opacity=".35"/></linearGradient>
+          <radialGradient id="space"><stop offset=".2" stop-color="#17103A" stop-opacity="0"/><stop offset="1" stop-color="#966EC8" stop-opacity=".10"/></radialGradient></defs>
+        <circle cx="310" cy="310" r="300" fill="none" stroke="#F4F4F4" stroke-opacity=".2" stroke-dasharray="3 9" class="bv-flow bv-flow--static"/>
+        <text x="310" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="11" letter-spacing="3" fill="#8C86B0">YOUR ENVIRONMENT</text>
+        <circle cx="310" cy="310" r="254" fill="url(#space)"/>
+        <circle cx="310" cy="310" r="254" fill="none" stroke="url(#rim)" stroke-width="1.6"/>
+        <text x="310" y="586" text-anchor="middle" font-family="Roboto Mono" font-size="11" letter-spacing="3" fill="#E2C70A">BONV SPACE</text>
+        <path class="bv-flow" d="M564 310 H612"/>
+        <g stroke="#F4F4F4" stroke-opacity=".22" stroke-width="1"><path d="M310 262 V200"/><path d="M265 295 L208 276"/><path d="M282 349 L246 398"/><path d="M338 349 L374 398"/><path d="M355 295 L412 276" stroke="#E2C70A" stroke-opacity=".6"/></g>
+      </svg>
+      <bonv-mark size="84" ring="off"></bonv-mark>
+      <div class="cap" style="left:50%;top:26%"><div class="bv-ring" style="--c:var(--bv-cap-protocol);--p:1"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/document.svg" alt=""></div></div>
+      <div class="cap" style="left:28%;top:42%"><div class="bv-ring" style="--c:var(--bv-cap-emulation);--p:1"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/kaplan-meier.svg" alt=""></div></div>
+      <div class="cap" style="left:36%;top:70%"><div class="bv-ring" style="--c:var(--bv-cap-heterogeneity);--p:1"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/scatter.svg" alt=""></div></div>
+      <div class="cap" style="left:64%;top:70%"><div class="bv-ring" style="--c:var(--bv-cap-site);--p:1"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/network.svg" alt=""></div></div>
+      <div class="cap" style="left:72%;top:42%"><div class="bv-ring bv-ring--chosen"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/forest-plot.svg" alt=""></div></div>
+      <div class="lockdisc bv-glass"><svg width="40" height="40" viewBox="0 0 48 48" fill="none" stroke="#E2C70A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 22 V16 A7 7 0 0 1 31 16 V22"/><path d="M13 22 H35 V39 H13 Z"/><circle cx="24" cy="31" r="1.4"/></svg></div>
+      <div class="datapill bv-glass"><img src="_bv/icons/database.svg" alt="">Your data</div>
+    </div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap end" data-bv-group>
+    <bonv-mark size="96" state="speak" data-bv-in></bonv-mark>
+    <p class="bv-hero" data-bv-in style="margin:12px 0 0"><span class="bv-name">Bon<b>V</b></span></p>
+    <div class="words" data-bv-in><span>Better questions.</span><span class="bv-soft">Connected decisions.</span></div>
+    <label class="bv-input bv-glass" data-bv-in>
+      <span class="bv-caret" aria-hidden="true"></span>
+      <input type="text" placeholder="Ask BonV…" aria-label="Ask BonV">
+      <button class="bv-send" type="button" aria-label="Send"><svg viewBox="0 0 10 12"><path d="M0 0L10 6L0 12Z"/></svg></button>
+    </label>
+    <div class="actions" data-bv-in style="justify-content:center;margin-top:12px"><a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Book a demo</a></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="bv-wrap">
+    <img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV">
+    <nav aria-label="Footer"><a href="home.html">Home</a><a href="trial.html">Trial Optimizer</a><a href="clinops.html">ClinOps Optimizer</a><a href="https://phasev-2026.webflow.io/case-studies">Case studies</a></nav>
+    <span class="bv-label bv-label--dim">Adaptive. Causal. Intuitive.</span>
+  </div>
+</footer>
+
+<script src="_bv/bonv-bg.js"></script>
+<script src="_bv/bonv-mark.js"></script>
+<script src="_bv/bonv-motion.js"></script>
+<script src="_bv/pages.js"></script>
+</body>
+</html>

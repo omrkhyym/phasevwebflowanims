@@ -1,0 +1,3215 @@
+{
+ "families": [
+  "Heros",
+  "FAQ",
+  "Plateforme connectée",
+  "Étapes avec média",
+  "Onglets",
+  "Sliders",
+  "Listes et fiches CMS",
+  "Chiffres",
+  "Cas et preuves",
+  "Schémas",
+  "Cartes",
+  "Bandeaux CTA",
+  "Logos",
+  "Texte long",
+  "Autres"
+ ],
+ "components": [
+  {
+   "id": "HERO-PRODUIT",
+   "type": "same",
+   "name": "Hero produit",
+   "family": "Heros",
+   "props": "titre sur 2 lignes (la seconde en jaune), texte, boutons ; animation propre à chaque page",
+   "why": "Même socle (hero-stage) sur les 6 pages produit ; seule l’animation change.",
+   "members": [
+    "TRI-01",
+    "RSP-01",
+    "CLI-01",
+    "POR-01",
+    "CON-01",
+    "BON-01"
+   ]
+  },
+  {
+   "id": "HERO-CMS",
+   "type": "same",
+   "name": "Hero de liste CMS",
+   "family": "Heros",
+   "props": "slider de fiches mises en avant (catégorie, date, titre, image, bouton)",
+   "why": "",
+   "members": [
+    "CSL-01",
+    "RES-01"
+   ]
+  },
+  {
+   "id": "FAQ",
+   "type": "same",
+   "name": "FAQ en accordéon",
+   "family": "FAQ",
+   "props": "label, titre, questions / réponses ; fond",
+   "why": "",
+   "members": [
+    "TRI-05",
+    "RSP-08",
+    "CLI-07",
+    "POR-08",
+    "CON-09"
+   ]
+  },
+  {
+   "id": "PLATEFORME",
+   "type": "same",
+   "name": "Plateforme connectée",
+   "family": "Plateforme connectée",
+   "props": "label, titre, texte, produit courant ; fond",
+   "why": "",
+   "members": [
+    "TRI-04",
+    "RSP-09",
+    "CLI-06",
+    "POR-07",
+    "CON-07"
+   ]
+  },
+  {
+   "id": "ETAPES-MEDIA",
+   "type": "same",
+   "name": "Étapes avec média",
+   "family": "Étapes avec média",
+   "props": "en-tête ; par étape : label, titre, texte, puces, vidéo ou image ; fond",
+   "why": "",
+   "members": [
+    "TRI-02",
+    "CLI-03",
+    "CON-06",
+    "BON-05"
+   ]
+  },
+  {
+   "id": "ONGLETS",
+   "type": "same",
+   "name": "Onglets avec visuel",
+   "family": "Onglets",
+   "props": "en-tête ; par onglet : nom, question, texte, lignes, type de visuel ; fond",
+   "why": "",
+   "members": [
+    "RSP-02",
+    "POR-03"
+   ]
+  },
+  {
+   "id": "LISTE-CMS",
+   "type": "same",
+   "name": "Liste CMS en grille",
+   "family": "Listes et fiches CMS",
+   "props": "filtres facultatifs ; cartes ressource ; fond",
+   "why": "",
+   "members": [
+    "CSL-02",
+    "RES-02",
+    "CSD-06"
+   ]
+  },
+  {
+   "id": "CHIFFRES",
+   "type": "same",
+   "name": "Rangée de chiffres",
+   "family": "Chiffres",
+   "props": "en-tête 2 colonnes ; 1 à 4 chiffres (valeur, légende) ; source facultative ; fond",
+   "why": "",
+   "members": [
+    "CON-03",
+    "BON-03",
+    "BON-07"
+   ]
+  },
+  {
+   "id": "EVIDENCE",
+   "type": "same",
+   "name": "Evidence : cas mis en avant et cas côte à côte",
+   "family": "Cas et preuves",
+   "props": "en-tête ; cas mis en avant ; cas côte à côte (labels, titre, texte, lien) ; fond",
+   "why": "",
+   "members": [
+    "RSP-07",
+    "POR-06"
+   ]
+  },
+  {
+   "id": "SCHEMA",
+   "type": "same",
+   "name": "Schéma avant / après",
+   "family": "Schémas",
+   "props": "en-tête 2 colonnes ; colonne avant, pivot, colonne après, sortie facultative ; fond",
+   "why": "",
+   "members": [
+    "CON-04",
+    "BON-04"
+   ]
+  },
+  {
+   "id": "CARTES-ICONE",
+   "type": "same",
+   "name": "Cartes icône, titre, texte",
+   "family": "Cartes",
+   "props": "en-tête simple ou 2 colonnes ; cartes (icône, titre, texte) ; fond",
+   "why": "",
+   "members": [
+    "HOM-04",
+    "RSP-04",
+    "RSP-06",
+    "POR-02"
+   ]
+  },
+  {
+   "id": "CARTES-SOMBRES",
+   "type": "same",
+   "name": "Cartes méthodologie (fond sombre)",
+   "family": "Cartes",
+   "props": "en-tête 2 colonnes ; cartes (icône, titre, texte facultatif) ; pastilles facultatives",
+   "why": "",
+   "members": [
+    "CLI-04",
+    "CON-08",
+    "BON-08"
+   ]
+  },
+  {
+   "id": "FRISE",
+   "type": "same",
+   "name": "Étapes numérotées (frise)",
+   "family": "Cartes",
+   "props": "en-tête ; étapes (numéro, titre, texte) ; fond",
+   "why": "",
+   "members": [
+    "RSP-05",
+    "POR-05"
+   ]
+  },
+  {
+   "id": "F-FAQ",
+   "type": "merge",
+   "name": "FAQ de la fiche case study → composant FAQ",
+   "family": "FAQ",
+   "props": "",
+   "why": "La fiche case study a sa propre FAQ, en rich text. La passer sur le composant FAQ donnerait le même accordéon partout.",
+   "members": [
+    "CSD-05",
+    "RSP-08"
+   ]
+  },
+  {
+   "id": "F-SLIDER",
+   "type": "merge",
+   "name": "Sliders de cartes",
+   "family": "Sliders",
+   "props": "en-tête et flèches ; type de carte (cas, citation, article, personne) ; fond",
+   "why": "Même coque (en-tête slider-top, swiper, flèches) ; seule la carte change. Un composant Slider, la carte en variante.",
+   "members": [
+    "HOM-06",
+    "HOM-07",
+    "HOM-08",
+    "ABO-04",
+    "ABO-05"
+   ]
+  },
+  {
+   "id": "F-CHIFFRES",
+   "type": "merge",
+   "name": "Chiffres About → rangée de chiffres",
+   "family": "Chiffres",
+   "props": "",
+   "why": "Deux façons d’afficher une rangée de chiffres : About avec icônes sur fond sombre, pages produit sans icône. Une seule suffirait-elle ?",
+   "members": [
+    "ABO-03",
+    "CON-03"
+   ]
+  },
+  {
+   "id": "F-CAS",
+   "type": "merge",
+   "name": "Cas mis en avant",
+   "family": "Cas et preuves",
+   "props": "labels, titre, texte, lignes, chiffre clé en carte violette, visuel ; fond",
+   "why": "Même schéma : texte à gauche, chiffre clé dans une carte violette. La success story Trial en est une version enrichie (lignes, visuel animé).",
+   "members": [
+    "TRI-03",
+    "BON-06",
+    "RSP-07"
+   ]
+  },
+  {
+   "id": "F-CARTES-NUM",
+   "type": "merge",
+   "name": "Cartes numérotées",
+   "family": "Cartes",
+   "props": "en-tête ; cartes (numéro, titre, texte, puces facultatives) ; fond",
+   "why": "Trois versions de « cartes numérotées avec titre et texte » ; Two tracks ajoute des puces. Un seul composant, puces facultatives.",
+   "members": [
+    "CLI-02",
+    "RSP-03",
+    "POR-04"
+   ]
+  },
+  {
+   "id": "F-BANDEAU",
+   "type": "merge",
+   "name": "Bandeau texte, bouton et visuel",
+   "family": "Bandeaux CTA",
+   "props": "label, titre, texte, bouton, visuel ; fond",
+   "why": "Même mise en page : texte et bouton à gauche, visuel à droite. Un seul composant, fond clair ou sombre.",
+   "members": [
+    "ABO-07",
+    "CON-02",
+    "BON-02"
+   ]
+  },
+  {
+   "id": "HOM-01",
+   "type": "unique",
+   "name": "Better decisions Connected development",
+   "family": "Heros",
+   "props": "",
+   "why": "",
+   "members": [
+    "HOM-01"
+   ]
+  },
+  {
+   "id": "ABO-01",
+   "type": "unique",
+   "name": "Better decisions ‍ Better medicines",
+   "family": "Heros",
+   "props": "",
+   "why": "",
+   "members": [
+    "ABO-01"
+   ]
+  },
+  {
+   "id": "CSD-01",
+   "type": "unique",
+   "name": "How Denali Therapeutics and PhaseV Raised the Odds of Picking the Best Dose From 64% to 76%",
+   "family": "Heros",
+   "props": "",
+   "why": "",
+   "members": [
+    "CSD-01"
+   ]
+  },
+  {
+   "id": "ART-01",
+   "type": "unique",
+   "name": "We simulated 60 million trials. Here's what we found.",
+   "family": "Heros",
+   "props": "",
+   "why": "",
+   "members": [
+    "ART-01"
+   ]
+  },
+  {
+   "id": "HOM-03",
+   "type": "unique",
+   "name": "One Platform for Connected Clinical Development Decisions",
+   "family": "Onglets",
+   "props": "",
+   "why": "",
+   "members": [
+    "HOM-03"
+   ]
+  },
+  {
+   "id": "HOM-05",
+   "type": "unique",
+   "name": "See what better decisions can change.",
+   "family": "Onglets",
+   "props": "",
+   "why": "",
+   "members": [
+    "HOM-05"
+   ]
+  },
+  {
+   "id": "HOM-06",
+   "type": "unique",
+   "name": "Breast Cancer Retrospective Study",
+   "family": "Sliders",
+   "props": "",
+   "why": "",
+   "members": [
+    "HOM-06"
+   ]
+  },
+  {
+   "id": "HOM-07",
+   "type": "unique",
+   "name": "What our partners are saying",
+   "family": "Sliders",
+   "props": "",
+   "why": "",
+   "members": [
+    "HOM-07"
+   ]
+  },
+  {
+   "id": "HOM-08",
+   "type": "unique",
+   "name": "Latest news",
+   "family": "Sliders",
+   "props": "",
+   "why": "",
+   "members": [
+    "HOM-08"
+   ]
+  },
+  {
+   "id": "ABO-04",
+   "type": "unique",
+   "name": "Leadership",
+   "family": "Sliders",
+   "props": "",
+   "why": "",
+   "members": [
+    "ABO-04"
+   ]
+  },
+  {
+   "id": "ABO-05",
+   "type": "unique",
+   "name": "Scientific Advisory Board",
+   "family": "Sliders",
+   "props": "",
+   "why": "",
+   "members": [
+    "ABO-05"
+   ]
+  },
+  {
+   "id": "ABO-03",
+   "type": "unique",
+   "name": "Trusted across clinical development",
+   "family": "Chiffres",
+   "props": "",
+   "why": "",
+   "members": [
+    "ABO-03"
+   ]
+  },
+  {
+   "id": "CON-05",
+   "type": "unique",
+   "name": "Trusted by sponsors across the industry",
+   "family": "Chiffres",
+   "props": "",
+   "why": "",
+   "members": [
+    "CON-05"
+   ]
+  },
+  {
+   "id": "TRI-03",
+   "type": "unique",
+   "name": "A Phase 3 design refined for speed, cost, and statistical performance",
+   "family": "Cas et preuves",
+   "props": "",
+   "why": "",
+   "members": [
+    "TRI-03"
+   ]
+  },
+  {
+   "id": "CLI-05",
+   "type": "unique",
+   "name": "Tested against what really happened",
+   "family": "Cas et preuves",
+   "props": "",
+   "why": "",
+   "members": [
+    "CLI-05"
+   ]
+  },
+  {
+   "id": "BON-06",
+   "type": "unique",
+   "name": "Case study",
+   "family": "Cas et preuves",
+   "props": "",
+   "why": "",
+   "members": [
+    "BON-06"
+   ]
+  },
+  {
+   "id": "RSP-03",
+   "type": "unique",
+   "name": "Two tracks. Clearer development decisions",
+   "family": "Cartes",
+   "props": "",
+   "why": "",
+   "members": [
+    "RSP-03"
+   ]
+  },
+  {
+   "id": "CLI-02",
+   "type": "unique",
+   "name": "Choose sites with confidence",
+   "family": "Cartes",
+   "props": "",
+   "why": "",
+   "members": [
+    "CLI-02"
+   ]
+  },
+  {
+   "id": "POR-04",
+   "type": "unique",
+   "name": "Evidence to probability to value",
+   "family": "Cartes",
+   "props": "",
+   "why": "",
+   "members": [
+    "POR-04"
+   ]
+  },
+  {
+   "id": "ABO-07",
+   "type": "unique",
+   "name": "Work at the intersection of science, technology, and medicine",
+   "family": "Bandeaux CTA",
+   "props": "",
+   "why": "",
+   "members": [
+    "ABO-07"
+   ]
+  },
+  {
+   "id": "CON-02",
+   "type": "unique",
+   "name": "See AI Conductor in action",
+   "family": "Bandeaux CTA",
+   "props": "",
+   "why": "",
+   "members": [
+    "CON-02"
+   ]
+  },
+  {
+   "id": "BON-02",
+   "type": "unique",
+   "name": "See BonV in action",
+   "family": "Bandeaux CTA",
+   "props": "",
+   "why": "",
+   "members": [
+    "BON-02"
+   ]
+  },
+  {
+   "id": "ABO-06",
+   "type": "unique",
+   "name": "Backed by leading investors",
+   "family": "Logos",
+   "props": "",
+   "why": "",
+   "members": [
+    "ABO-06"
+   ]
+  },
+  {
+   "id": "CSD-03",
+   "type": "unique",
+   "name": "The challenge",
+   "family": "Texte long",
+   "props": "",
+   "why": "",
+   "members": [
+    "CSD-03"
+   ]
+  },
+  {
+   "id": "ART-02",
+   "type": "unique",
+   "name": "When one number isn't enough to plan a trial",
+   "family": "Texte long",
+   "props": "",
+   "why": "",
+   "members": [
+    "ART-02"
+   ]
+  },
+  {
+   "id": "HOM-02",
+   "type": "unique",
+   "name": "Decisions are connected Tools rarely are",
+   "family": "Autres",
+   "props": "",
+   "why": "",
+   "members": [
+    "HOM-02"
+   ]
+  },
+  {
+   "id": "ABO-02",
+   "type": "unique",
+   "name": "About us",
+   "family": "Autres",
+   "props": "",
+   "why": "",
+   "members": [
+    "ABO-02"
+   ]
+  },
+  {
+   "id": "CSD-02",
+   "type": "unique",
+   "name": "Early-Phase Dose Selection",
+   "family": "Autres",
+   "props": "",
+   "why": "",
+   "members": [
+    "CSD-02"
+   ]
+  },
+  {
+   "id": "CSD-04",
+   "type": "unique",
+   "name": "What it changes, team by team.",
+   "family": "Autres",
+   "props": "",
+   "why": "",
+   "members": [
+    "CSD-04"
+   ]
+  },
+  {
+   "id": "CSD-05",
+   "type": "unique",
+   "name": "Questions, answered.",
+   "family": "Autres",
+   "props": "",
+   "why": "",
+   "members": [
+    "CSD-05"
+   ]
+  }
+ ],
+ "pages": [
+  {
+   "key": "home",
+   "label": "Home",
+   "kind": "site",
+   "file": "site-home.html"
+  },
+  {
+   "key": "company",
+   "label": "About",
+   "kind": "site",
+   "file": "site-company.html"
+  },
+  {
+   "key": "case-studies",
+   "label": "Case Studies",
+   "kind": "site",
+   "file": "site-case-studies.html"
+  },
+  {
+   "key": "case-study",
+   "label": "Fiche case study",
+   "kind": "site",
+   "file": "site-case-study.html"
+  },
+  {
+   "key": "resources",
+   "label": "Resources",
+   "kind": "site",
+   "file": "site-resources.html"
+  },
+  {
+   "key": "article",
+   "label": "Article",
+   "kind": "site",
+   "file": "site-article.html"
+  },
+  {
+   "key": "trial",
+   "label": "Trial (proto)",
+   "kind": "proto",
+   "file": "proto-trial.html"
+  },
+  {
+   "key": "response",
+   "label": "Response (proto)",
+   "kind": "proto",
+   "file": "proto-response.html"
+  },
+  {
+   "key": "clinops",
+   "label": "ClinOps (proto)",
+   "kind": "proto",
+   "file": "proto-clinops.html"
+  },
+  {
+   "key": "portfolio",
+   "label": "Portfolio (proto)",
+   "kind": "proto",
+   "file": "proto-portfolio.html"
+  },
+  {
+   "key": "conductor",
+   "label": "AI Conductor (proto)",
+   "kind": "proto",
+   "file": "proto-conductor.html"
+  },
+  {
+   "key": "bonv",
+   "label": "BonV (proto)",
+   "kind": "proto",
+   "file": "proto-bonv.html"
+  }
+ ],
+ "blocks": [
+  {
+   "id": "HOM-01",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 0,
+   "url": "site-home.html?block=0",
+   "open": "site-home.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "",
+   "title": "Better decisions Connected development",
+   "comps": [
+    "header_component",
+    "header_content",
+    "header_content-left",
+    "[pv=hero-homepage]"
+   ],
+   "tag": "header",
+   "similar": [
+    "ABO-01"
+   ],
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Hero Home, bloc unique"
+   ]
+  },
+  {
+   "id": "ABO-01",
+   "page": "company",
+   "pageLabel": "About",
+   "kind": "site",
+   "n": 0,
+   "url": "site-company.html?block=0",
+   "open": "site-company.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "",
+   "title": "Better decisions ‍ Better medicines",
+   "comps": [
+    "header_component",
+    "header_content-left"
+   ],
+   "tag": "header",
+   "similar": [
+    "HOM-01"
+   ],
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Hero About, bloc unique"
+   ]
+  },
+  {
+   "id": "CSL-01",
+   "page": "case-studies",
+   "pageLabel": "Case Studies",
+   "kind": "site",
+   "n": 0,
+   "url": "site-case-studies.html?block=0",
+   "open": "site-case-studies.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "Site Strategy",
+   "title": "How Smarter Site Selection Saved a Phase 3 Lung Cancer Trial 9 Months and $30M",
+   "comps": [
+    "featured-card",
+    "section-top",
+    "featured-label-div",
+    "button-wrapper",
+    "button",
+    "featured-image",
+    "arrow",
+    "featured-slider",
+    "swiper",
+    "slider-arrows-wrapper"
+   ],
+   "tag": "header",
+   "similar": [
+    "RES-01"
+   ],
+   "variants": {
+    "HERO-CMS": "hero, 3 éléments"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero CMS, variante slider"
+   ]
+  },
+  {
+   "id": "CSD-01",
+   "page": "case-study",
+   "pageLabel": "Fiche case study",
+   "kind": "site",
+   "n": 0,
+   "url": "site-case-study.html?block=0",
+   "open": "site-case-study.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "Trial Design Optimization",
+   "title": "How Denali Therapeutics and PhaseV Raised the Odds of Picking the Best Dose From 64% to 76%",
+   "comps": [
+    "featured-card",
+    "section-top",
+    "featured-label-div",
+    "featured-image"
+   ],
+   "tag": "header",
+   "similar": [
+    "ART-01"
+   ],
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero CMS, variante fiche seule"
+   ]
+  },
+  {
+   "id": "RES-01",
+   "page": "resources",
+   "pageLabel": "Resources",
+   "kind": "site",
+   "n": 0,
+   "url": "site-resources.html?block=0",
+   "open": "site-resources.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "Blog Posts",
+   "title": "Better Odds of Picking the Right Dose at the Same Sample Size",
+   "comps": [
+    "featured-card",
+    "section-top",
+    "featured-label-div",
+    "button-wrapper",
+    "button",
+    "featured-image",
+    "arrow",
+    "featured-slider",
+    "swiper",
+    "slider-arrows-wrapper"
+   ],
+   "tag": "header",
+   "similar": [
+    "CSL-01"
+   ],
+   "variants": {
+    "HERO-CMS": "hero, 4 éléments"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero CMS, variante slider"
+   ]
+  },
+  {
+   "id": "ART-01",
+   "page": "article",
+   "pageLabel": "Article",
+   "kind": "site",
+   "n": 0,
+   "url": "site-article.html?block=0",
+   "open": "site-article.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "Blog Posts",
+   "title": "We simulated 60 million trials. Here's what we found.",
+   "comps": [
+    "featured-card",
+    "section-top",
+    "featured-label-div",
+    "featured-image"
+   ],
+   "tag": "header",
+   "similar": [
+    "CSD-01"
+   ],
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero CMS, variante fiche seule"
+   ]
+  },
+  {
+   "id": "TRI-01",
+   "page": "trial",
+   "pageLabel": "Trial (proto)",
+   "kind": "proto",
+   "n": 0,
+   "url": "proto-trial.html?block=0",
+   "open": "proto-trial.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "Trial Optimizer",
+   "title": "Design for uncertainty Decide with clarity",
+   "comps": [
+    "header_component",
+    "header_content",
+    "header_content-left",
+    "button-group",
+    "button",
+    "[pv=trial-hero-bg]",
+    "[pv=trial-hero-slot]"
+   ],
+   "tag": "header",
+   "similar": [
+    "RSP-01",
+    "POR-01",
+    "CON-01",
+    "CLI-01"
+   ],
+   "variants": {
+    "HERO-PRODUIT": "hero"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero produit"
+   ]
+  },
+  {
+   "id": "RSP-01",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 0,
+   "url": "proto-response.html?block=0",
+   "open": "proto-response.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "Response Optimizer",
+   "title": "Clarify the treatment signal Understand who benefits",
+   "comps": [
+    "button",
+    "header_component",
+    "header_content",
+    "header_content-left",
+    "button-group",
+    "[pv=response-hero-bg]",
+    "[pv=response-hero-slot]"
+   ],
+   "tag": "header",
+   "similar": [
+    "TRI-01",
+    "POR-01",
+    "CON-01",
+    "CLI-01"
+   ],
+   "variants": {
+    "HERO-PRODUIT": "hero"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero produit"
+   ]
+  },
+  {
+   "id": "CLI-01",
+   "page": "clinops",
+   "pageLabel": "ClinOps (proto)",
+   "kind": "proto",
+   "n": 0,
+   "url": "proto-clinops.html?block=0",
+   "open": "proto-clinops.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "ClinOps Optimizer",
+   "title": "Find the right sites Forecast your enrollment",
+   "comps": [
+    "header_component",
+    "header_content",
+    "header_content-left",
+    "button-group",
+    "button",
+    "[pv=clinops-hero-bg]",
+    "[pv=clinops-hero-slot]"
+   ],
+   "tag": "header",
+   "similar": [
+    "TRI-01",
+    "RSP-01",
+    "POR-01",
+    "CON-01"
+   ],
+   "variants": {
+    "HERO-PRODUIT": "hero"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero produit"
+   ]
+  },
+  {
+   "id": "POR-01",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 0,
+   "url": "proto-portfolio.html?block=0",
+   "open": "proto-portfolio.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "Portfolio Optimizer",
+   "title": "Prioritize the path Calibrate the bet",
+   "comps": [
+    "button",
+    "header_component",
+    "header_content",
+    "header_content-left",
+    "button-group",
+    "[pv=portfolio-hero-bg]",
+    "[pv=portfolio-hero-slot]"
+   ],
+   "tag": "header",
+   "similar": [
+    "TRI-01",
+    "RSP-01",
+    "CON-01",
+    "CLI-01"
+   ],
+   "variants": {
+    "HERO-PRODUIT": "hero"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero produit"
+   ]
+  },
+  {
+   "id": "CON-01",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 0,
+   "url": "proto-conductor.html?block=0",
+   "open": "proto-conductor.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "",
+   "title": "Clinical development, orchestrated",
+   "comps": [
+    "button",
+    "header_component",
+    "header_content",
+    "header_content-left",
+    "button-group",
+    "[pv=conductor-hero-bg]",
+    "[pv=conductor-hero-slot]"
+   ],
+   "tag": "header",
+   "similar": [
+    "TRI-01",
+    "RSP-01",
+    "POR-01",
+    "CLI-01"
+   ],
+   "variants": {
+    "HERO-PRODUIT": "hero"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero produit"
+   ]
+  },
+  {
+   "id": "BON-01",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 0,
+   "url": "proto-bonv.html?block=0",
+   "open": "proto-bonv.html",
+   "family": "Heros",
+   "bg": "hero",
+   "hidden": false,
+   "label": "",
+   "title": "Ask the question BonV orchestrates the answer",
+   "comps": [
+    "button",
+    "header_component",
+    "header_content",
+    "header_content-left",
+    "button-group",
+    "[pv=bonv-hero-bg]",
+    "[pv=bonv-hero-slot]"
+   ],
+   "tag": "header",
+   "similar": [
+    "TRI-01",
+    "RSP-01",
+    "POR-01",
+    "CON-01"
+   ],
+   "variants": {
+    "HERO-PRODUIT": "hero"
+   },
+   "variant": "hero",
+   "plan": [
+    "garde",
+    "Composant Hero produit"
+   ]
+  },
+  {
+   "id": "TRI-05",
+   "page": "trial",
+   "pageLabel": "Trial (proto)",
+   "kind": "proto",
+   "n": 4,
+   "url": "proto-trial.html?block=4",
+   "open": "proto-trial.html",
+   "family": "FAQ",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "FAQs",
+   "title": "Questions, answered",
+   "comps": [
+    "section-top",
+    "left-align",
+    "[pv=faq]"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-08",
+    "POR-08",
+    "CON-09",
+    "CLI-07"
+   ],
+   "variants": {
+    "FAQ": "fond gris, en-tête simple, 9 éléments"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant FAQ"
+   ]
+  },
+  {
+   "id": "RSP-08",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 7,
+   "url": "proto-response.html?block=7",
+   "open": "proto-response.html",
+   "family": "FAQ",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "FAQs",
+   "title": "Questions, answered",
+   "comps": [
+    "section-top",
+    "left-align",
+    "[pv=faq]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-05",
+    "POR-08",
+    "CON-09",
+    "CLI-07"
+   ],
+   "variants": {
+    "FAQ": "fond blanc, en-tête simple, 6 éléments",
+    "F-FAQ": "fond blanc, en-tête simple"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant FAQ"
+   ]
+  },
+  {
+   "id": "CLI-07",
+   "page": "clinops",
+   "pageLabel": "ClinOps (proto)",
+   "kind": "proto",
+   "n": 6,
+   "url": "proto-clinops.html?block=6",
+   "open": "proto-clinops.html",
+   "family": "FAQ",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "FAQs",
+   "title": "Questions, answered",
+   "comps": [
+    "section-top",
+    "left-align",
+    "[pv=faq]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-05",
+    "RSP-08",
+    "POR-08",
+    "CON-09"
+   ],
+   "variants": {
+    "FAQ": "fond blanc, en-tête simple, 6 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant FAQ"
+   ]
+  },
+  {
+   "id": "POR-08",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 7,
+   "url": "proto-portfolio.html?block=7",
+   "open": "proto-portfolio.html",
+   "family": "FAQ",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "FAQ",
+   "title": "Questions, answered",
+   "comps": [
+    "section-top",
+    "left-align",
+    "[pv=faq]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-05",
+    "RSP-08",
+    "CON-09",
+    "CLI-07"
+   ],
+   "variants": {
+    "FAQ": "fond blanc, en-tête simple, 8 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant FAQ"
+   ]
+  },
+  {
+   "id": "CON-09",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 8,
+   "url": "proto-conductor.html?block=8",
+   "open": "proto-conductor.html",
+   "family": "FAQ",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "FAQs",
+   "title": "Questions, answered",
+   "comps": [
+    "section-top",
+    "left-align",
+    "[pv=faq]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-05",
+    "RSP-08",
+    "POR-08",
+    "CLI-07"
+   ],
+   "variants": {
+    "FAQ": "fond gris, en-tête simple, 10 éléments"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant FAQ"
+   ]
+  },
+  {
+   "id": "TRI-04",
+   "page": "trial",
+   "pageLabel": "Trial (proto)",
+   "kind": "proto",
+   "n": 3,
+   "url": "proto-trial.html?block=3",
+   "open": "proto-trial.html",
+   "family": "Plateforme connectée",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Standalone or connected",
+   "title": "Complete on its own. Stronger when connected",
+   "comps": [
+    "grid-2",
+    "animation-wrapper",
+    "section-top",
+    "[pv=platform-connect-v2]"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-09",
+    "POR-07",
+    "CON-07",
+    "CLI-06"
+   ],
+   "variants": {
+    "PLATEFORME": "fond blanc, en-tête simple"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Plateforme connectée"
+   ]
+  },
+  {
+   "id": "RSP-09",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 8,
+   "url": "proto-response.html?block=8",
+   "open": "proto-response.html",
+   "family": "Plateforme connectée",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "The PhaseV platform",
+   "title": "Response insights should not stop at the analysis",
+   "comps": [
+    "grid-2",
+    "animation-wrapper",
+    "section-top",
+    "[pv=platform-connect-v2]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-04",
+    "POR-07",
+    "CON-07",
+    "CLI-06"
+   ],
+   "variants": {
+    "PLATEFORME": "fond gris, en-tête simple"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Plateforme connectée"
+   ]
+  },
+  {
+   "id": "CLI-06",
+   "page": "clinops",
+   "pageLabel": "ClinOps (proto)",
+   "kind": "proto",
+   "n": 5,
+   "url": "proto-clinops.html?block=5",
+   "open": "proto-clinops.html",
+   "family": "Plateforme connectée",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Connected PhaseV platform",
+   "title": "Start where you are",
+   "comps": [
+    "grid-2",
+    "animation-wrapper",
+    "section-top",
+    "[pv=platform-connect-v2]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-04",
+    "RSP-09",
+    "POR-07",
+    "CON-07"
+   ],
+   "variants": {
+    "PLATEFORME": "fond gris, en-tête simple"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Plateforme connectée"
+   ]
+  },
+  {
+   "id": "POR-07",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 6,
+   "url": "proto-portfolio.html?block=6",
+   "open": "proto-portfolio.html",
+   "family": "Plateforme connectée",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Connected value creation",
+   "title": "Do more than price the risk",
+   "comps": [
+    "grid-2",
+    "animation-wrapper",
+    "section-top",
+    "[pv=platform-connect-v2]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-04",
+    "RSP-09",
+    "CON-07",
+    "CLI-06"
+   ],
+   "variants": {
+    "PLATEFORME": "fond gris, en-tête simple"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Plateforme connectée"
+   ]
+  },
+  {
+   "id": "CON-07",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 6,
+   "url": "proto-conductor.html?block=6",
+   "open": "proto-conductor.html",
+   "family": "Plateforme connectée",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Flexible entry points",
+   "title": "Start where you need us",
+   "comps": [
+    "grid-2",
+    "animation-wrapper",
+    "section-top",
+    "[pv=platform-connect-v2]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-04",
+    "RSP-09",
+    "POR-07",
+    "CLI-06"
+   ],
+   "variants": {
+    "PLATEFORME": "fond gris, en-tête simple"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Plateforme connectée"
+   ]
+  },
+  {
+   "id": "TRI-02",
+   "page": "trial",
+   "pageLabel": "Trial (proto)",
+   "kind": "proto",
+   "n": 1,
+   "url": "proto-trial.html?block=1",
+   "open": "proto-trial.html",
+   "family": "Étapes avec média",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "The Trial Optimizer workflow",
+   "title": "A simulation workbench for design trade-off exploration",
+   "comps": [
+    "text_quote-rtf",
+    "section-top",
+    "feature-grid",
+    "left-align",
+    "feature_list-wrapper",
+    "video-animation",
+    "reverse",
+    "[wf=A]"
+   ],
+   "tag": "section",
+   "similar": [
+    "CLI-03",
+    "BON-05",
+    "CON-06"
+   ],
+   "variants": {
+    "ETAPES-MEDIA": "fond blanc, en-tête simple, 4 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Étapes avec média"
+   ]
+  },
+  {
+   "id": "CLI-03",
+   "page": "clinops",
+   "pageLabel": "ClinOps (proto)",
+   "kind": "proto",
+   "n": 2,
+   "url": "proto-clinops.html?block=2",
+   "open": "proto-clinops.html",
+   "family": "Étapes avec média",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "How it works",
+   "title": "From feasibility to an enrollment plan that updates as you go",
+   "comps": [
+    "section-top",
+    "left-align",
+    "feature-grid",
+    "feature_list-wrapper",
+    "text_quote-rtf",
+    "video-animation",
+    "reverse",
+    "[wf=A]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-02",
+    "BON-05",
+    "CON-06"
+   ],
+   "variants": {
+    "ETAPES-MEDIA": "fond gris, en-tête simple, 4 éléments"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Étapes avec média"
+   ]
+  },
+  {
+   "id": "CON-06",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 5,
+   "url": "proto-conductor.html?block=5",
+   "open": "proto-conductor.html",
+   "family": "Étapes avec média",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "How it works",
+   "title": "From study backbone to submission-ready package",
+   "comps": [
+    "text_quote-rtf",
+    "section-top",
+    "left-align",
+    "feature-grid",
+    "video-animation",
+    "feature_list-wrapper",
+    "rp-row",
+    "reverse",
+    "rp-rows",
+    "[wf=A]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-02",
+    "CLI-03",
+    "BON-05"
+   ],
+   "variants": {
+    "ETAPES-MEDIA": "fond blanc, en-tête simple, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Étapes avec média"
+   ]
+  },
+  {
+   "id": "BON-05",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 4,
+   "url": "proto-bonv.html?block=4",
+   "open": "proto-bonv.html",
+   "family": "Étapes avec média",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "How it works",
+   "title": "Ask, collaborate, orchestrate",
+   "comps": [
+    "text_quote-rtf",
+    "section-top",
+    "left-align",
+    "feature-grid",
+    "feature_list-wrapper",
+    "video-animation",
+    "rp-shot",
+    "reverse",
+    "[wf=A]"
+   ],
+   "tag": "section",
+   "similar": [
+    "TRI-02",
+    "CLI-03",
+    "CON-06"
+   ],
+   "variants": {
+    "ETAPES-MEDIA": "fond blanc, en-tête simple, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Composant Étapes avec média"
+   ]
+  },
+  {
+   "id": "HOM-03",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 2,
+   "url": "site-home.html?block=2",
+   "open": "site-home.html",
+   "family": "Onglets",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "The PhaseV platform",
+   "title": "One Platform for Connected Clinical Development Decisions",
+   "comps": [
+    "dm-panel_list-item",
+    "button",
+    "dm-panel",
+    "dm-panel_title-wrapper",
+    "dm-panel_title",
+    "dm-panel_list-wrapper",
+    "dm-panel_list",
+    "button-wrapper",
+    "grid-2",
+    "section-top",
+    "platform-animation",
+    "platform-animation_panels"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variant": "fond sombre, en-tête simple",
+   "plan": [
+    "garde",
+    "Bloc unique (onglets plateforme)"
+   ]
+  },
+  {
+   "id": "HOM-05",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 4,
+   "url": "site-home.html?block=4",
+   "open": "site-home.html",
+   "family": "Onglets",
+   "bg": "is-gradient",
+   "hidden": true,
+   "label": "Evidence",
+   "title": "See what better decisions can change.",
+   "comps": [
+    "tab-graph-row",
+    "tab-graph-wrapper",
+    "tab-graph-line",
+    "tab-number",
+    "number-single",
+    "number-span",
+    "tab_link",
+    "tab_pane",
+    "tab_pane-wrapper",
+    "tab_pane-left-wrapper",
+    "pane-title",
+    "tab_pane-right-wrapper"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variant": "fond sombre, en-tête simple",
+   "plan": [
+    "masque",
+    "Déjà masqué sur le site : viré"
+   ]
+  },
+  {
+   "id": "RSP-02",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 1,
+   "url": "proto-response.html?block=1",
+   "open": "proto-response.html",
+   "family": "Onglets",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Strengthen the evidence behind your next decision",
+   "title": "Two complementary ways to understand treatment effects",
+   "comps": [
+    "rp-row",
+    "rp-tab-text",
+    "rp-rows",
+    "section-top",
+    "left-align",
+    "[rp=intro]",
+    "[pv=tabs]"
+   ],
+   "tag": "section",
+   "similar": [
+    "POR-03"
+   ],
+   "variants": {
+    "ONGLETS": "fond blanc, en-tête simple"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "revoir",
+    "Composant Onglets avec visuel : à revoir"
+   ]
+  },
+  {
+   "id": "POR-03",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 2,
+   "url": "proto-portfolio.html?block=2",
+   "open": "proto-portfolio.html",
+   "family": "Onglets",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Build conviction",
+   "title": "Build conviction from the evidence already available",
+   "comps": [
+    "rp-row",
+    "rp-tab-text",
+    "rp-note",
+    "rp-rows",
+    "section-top",
+    "left-align",
+    "[rp=intro]",
+    "[pv=tabs]"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-02"
+   ],
+   "variants": {
+    "ONGLETS": "fond gris, en-tête simple"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "revoir",
+    "Composant Onglets avec visuel : à revoir"
+   ]
+  },
+  {
+   "id": "HOM-06",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 5,
+   "url": "site-home.html?block=5",
+   "open": "site-home.html",
+   "family": "Sliders",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "Evidence",
+   "title": "Breast Cancer Retrospective Study",
+   "comps": [
+    "ev-case_small",
+    "arrow",
+    "slider-top_right",
+    "slider-arrows-wrapper",
+    "ev-case_half",
+    "ev-case_bar",
+    "ev-case_track",
+    "ev-case_fill",
+    "ev-case_pair-n",
+    "section-top",
+    "section-top_left",
+    "section-top_right"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-SLIDER": "fond sombre, en-tête 2 colonnes, 1 élément"
+   },
+   "variant": "fond sombre, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Slider (carte en variante)"
+   ]
+  },
+  {
+   "id": "HOM-07",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 6,
+   "url": "site-home.html?block=6",
+   "open": "site-home.html",
+   "family": "Sliders",
+   "bg": "is-lightpurple",
+   "hidden": false,
+   "label": "Testimonials",
+   "title": "What our partners are saying",
+   "comps": [
+    "quote-card",
+    "quote-card_mark",
+    "quote-card_text",
+    "quote-card_foot",
+    "quote-head",
+    "quote-card_logo",
+    "arrow",
+    "slider-top_right",
+    "slider-arrows-wrapper",
+    "slider-top",
+    "section-top",
+    "swiper-div"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-SLIDER": "fond lightpurple, en-tête simple, 9 éléments"
+   },
+   "variant": "fond lightpurple, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Slider (carte en variante)"
+   ]
+  },
+  {
+   "id": "HOM-08",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 7,
+   "url": "site-home.html?block=7",
+   "open": "site-home.html",
+   "family": "Sliders",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "",
+   "title": "Latest news",
+   "comps": [
+    "post_date",
+    "swiper-item",
+    "post_image",
+    "post_body",
+    "post-data-wrapper",
+    "post_description",
+    "arrow",
+    "slider-top_right",
+    "button",
+    "slider-arrows-wrapper",
+    "slider-top",
+    "swiper-div"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-SLIDER": "fond blanc, sans en-tête, 6 éléments"
+   },
+   "variant": "fond blanc, sans en-tête",
+   "plan": [
+    "fusion",
+    "Devient le composant Slider (carte en variante)"
+   ]
+  },
+  {
+   "id": "ABO-04",
+   "page": "company",
+   "pageLabel": "About",
+   "kind": "site",
+   "n": 3,
+   "url": "site-company.html?block=3",
+   "open": "site-company.html",
+   "family": "Sliders",
+   "bg": "is-lightpurple",
+   "hidden": false,
+   "label": "",
+   "title": "Leadership",
+   "comps": [
+    "leadership-card",
+    "leadership-image",
+    "leadership-text-div",
+    "leadership-item",
+    "arrow",
+    "section-top",
+    "section-top_left",
+    "leadership_mobile",
+    "slider-arrows-wrapper",
+    "leadership-grid-wrapper",
+    "leadership-grid",
+    "swiper-div"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-SLIDER": "fond lightpurple, en-tête 2 colonnes, 3 éléments"
+   },
+   "variant": "fond lightpurple, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Slider (carte en variante)"
+   ]
+  },
+  {
+   "id": "ABO-05",
+   "page": "company",
+   "pageLabel": "About",
+   "kind": "site",
+   "n": 4,
+   "url": "site-company.html?block=4",
+   "open": "site-company.html",
+   "family": "Sliders",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "",
+   "title": "Scientific Advisory Board",
+   "comps": [
+    "leadership-card",
+    "leadership-image",
+    "leadership-text-div",
+    "arrow-new",
+    "slider-top",
+    "slider-top_right",
+    "slider-arrows-wrapper",
+    "swiper-div",
+    "swiper"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-SLIDER": "fond sombre, sans en-tête, 6 éléments"
+   },
+   "variant": "fond sombre, sans en-tête",
+   "plan": [
+    "fusion",
+    "Devient le composant Slider (carte en variante)"
+   ]
+  },
+  {
+   "id": "CSL-02",
+   "page": "case-studies",
+   "pageLabel": "Case Studies",
+   "kind": "site",
+   "n": 1,
+   "url": "site-case-studies.html?block=1",
+   "open": "site-case-studies.html",
+   "family": "Listes et fiches CMS",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "",
+   "title": "How Smarter Site Selection Saved a Phase 3 Lung Cancer Trial 9 Months and $30M",
+   "comps": [
+    "post_date",
+    "resource-item",
+    "swiper-item",
+    "post_image",
+    "post_body",
+    "post-data-wrapper",
+    "post_description",
+    "resource-list-wrapper",
+    "resource-list",
+    "[pv=case-studies]"
+   ],
+   "tag": "section",
+   "similar": [
+    "CSD-06"
+   ],
+   "variants": {
+    "LISTE-CMS": "fond blanc, sans en-tête, 21 éléments"
+   },
+   "variant": "fond blanc, sans en-tête",
+   "plan": [
+    "garde",
+    "Composant Liste CMS"
+   ]
+  },
+  {
+   "id": "CSD-06",
+   "page": "case-study",
+   "pageLabel": "Fiche case study",
+   "kind": "site",
+   "n": 5,
+   "url": "site-case-study.html?block=5",
+   "open": "site-case-study.html",
+   "family": "Listes et fiches CMS",
+   "bg": "is-lightpurple",
+   "hidden": false,
+   "label": "",
+   "title": "More case studies",
+   "comps": [
+    "resource-item",
+    "swiper-item",
+    "post_image",
+    "post_body",
+    "post_description",
+    "resource-list-wrapper",
+    "resource-list"
+   ],
+   "tag": "section",
+   "similar": [
+    "CSL-02"
+   ],
+   "variants": {
+    "LISTE-CMS": "fond lightpurple, sans en-tête, 4 éléments"
+   },
+   "variant": "fond lightpurple, sans en-tête",
+   "plan": [
+    "garde",
+    "Composant Liste CMS"
+   ]
+  },
+  {
+   "id": "RES-02",
+   "page": "resources",
+   "pageLabel": "Resources",
+   "kind": "site",
+   "n": 1,
+   "url": "site-resources.html?block=1",
+   "open": "site-resources.html",
+   "family": "Listes et fiches CMS",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "",
+   "title": "Better Odds of Picking the Right Dose at the Same Sample Size",
+   "comps": [
+    "post_date",
+    "resource-item",
+    "swiper-item",
+    "post_image",
+    "post_body",
+    "post-data-wrapper",
+    "post_description",
+    "fs_radio_field",
+    "fs_radio_button",
+    "fs_radio_label",
+    "filter_item",
+    "filter_block"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "LISTE-CMS": "fond blanc, sans en-tête, 78 éléments"
+   },
+   "variant": "fond blanc, sans en-tête",
+   "plan": [
+    "garde",
+    "Composant Liste CMS"
+   ]
+  },
+  {
+   "id": "ABO-03",
+   "page": "company",
+   "pageLabel": "About",
+   "kind": "site",
+   "n": 2,
+   "url": "site-company.html?block=2",
+   "open": "site-company.html",
+   "family": "Chiffres",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "PhaseV at a glance",
+   "title": "Trusted across clinical development",
+   "comps": [
+    "glance-stat",
+    "glance-stat_head",
+    "glance-icon",
+    "number-span",
+    "company-subtitle",
+    "section-top",
+    "section-top_left",
+    "glance-grid"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-CHIFFRES": "fond sombre, en-tête 2 colonnes"
+   },
+   "variant": "fond sombre, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Base du composant Chiffres (fond sombre)"
+   ]
+  },
+  {
+   "id": "CON-03",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 2,
+   "url": "proto-conductor.html?block=2",
+   "open": "proto-conductor.html",
+   "family": "Chiffres",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "The cost of fragmented work",
+   "title": "Clinical development does not lose time in one place. It loses time at every handoff",
+   "comps": [
+    "rp-stat",
+    "number-span",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "rp-stats",
+    "rp-note"
+   ],
+   "tag": "section",
+   "similar": [
+    "BON-03",
+    "BON-07"
+   ],
+   "variants": {
+    "CHIFFRES": "fond gris, en-tête 2 colonnes, 2 éléments",
+    "F-CHIFFRES": "fond gris, en-tête 2 colonnes"
+   },
+   "variant": "fond gris, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Chiffres (base ABO-03), variante claire"
+   ]
+  },
+  {
+   "id": "CON-05",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 4,
+   "url": "proto-conductor.html?block=4",
+   "open": "proto-conductor.html",
+   "family": "Chiffres",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Proof",
+   "title": "Trusted by sponsors across the industry",
+   "comps": [
+    "number-span",
+    "rp-stat",
+    "rp-big",
+    "c",
+    "section-top",
+    "left-align",
+    "rp-ev-head",
+    "rp-stats",
+    "rp-feature",
+    "rp-feature-text",
+    "rp-labels",
+    "rp-ctx"
+   ],
+   "tag": "section",
+   "similar": [
+    "BON-06",
+    "POR-06"
+   ],
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "fusion",
+    "Chiffres → composant Chiffres ; cas → composant Cas"
+   ]
+  },
+  {
+   "id": "BON-03",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 2,
+   "url": "proto-bonv.html?block=2",
+   "open": "proto-bonv.html",
+   "family": "Chiffres",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "The cost of disconnected tools",
+   "title": "Good tools still slow you down when no one can find the right one",
+   "comps": [
+    "rp-stat",
+    "number-span",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "rp-stats",
+    "rp-note"
+   ],
+   "tag": "section",
+   "similar": [
+    "CON-03",
+    "BON-07"
+   ],
+   "variants": {
+    "CHIFFRES": "fond blanc, en-tête 2 colonnes, 4 éléments"
+   },
+   "variant": "fond blanc, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Chiffres (base ABO-03), variante claire"
+   ]
+  },
+  {
+   "id": "BON-07",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 6,
+   "url": "proto-bonv.html?block=6",
+   "open": "proto-bonv.html",
+   "family": "Chiffres",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Flexible entry points",
+   "title": "Start with one or two applications",
+   "comps": [
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "rp-stats",
+    "rp-stat",
+    "number-span"
+   ],
+   "tag": "section",
+   "similar": [
+    "CON-03",
+    "BON-03"
+   ],
+   "variants": {
+    "CHIFFRES": "fond blanc, en-tête 2 colonnes, 1 élément"
+   },
+   "variant": "fond blanc, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Chiffres (base ABO-03), variante claire"
+   ]
+  },
+  {
+   "id": "TRI-03",
+   "page": "trial",
+   "pageLabel": "Trial (proto)",
+   "kind": "proto",
+   "n": 2,
+   "url": "proto-trial.html?block=2",
+   "open": "proto-trial.html",
+   "family": "Cas et preuves",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Success story",
+   "title": "A Phase 3 design refined for speed, cost, and statistical performance",
+   "comps": [
+    "c",
+    "ss-row",
+    "v",
+    "ss-left",
+    "ss-labels",
+    "ss-ctx",
+    "ss-figs",
+    "ss-big",
+    "number-span",
+    "ss-rows",
+    "ss-actions",
+    "button"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-CAS": "fond gris, sans en-tête"
+   },
+   "variant": "fond gris, sans en-tête",
+   "plan": [
+    "fusion",
+    "Success story à refaire sur le composant Cas"
+   ]
+  },
+  {
+   "id": "RSP-07",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 6,
+   "url": "proto-response.html?block=6",
+   "open": "proto-response.html",
+   "family": "Cas et preuves",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Evidence",
+   "title": "See how sponsors turned clearer evidence into action",
+   "comps": [
+    "rp-labels",
+    "rp-ctx",
+    "rp-body",
+    "rp-row",
+    "rp-case",
+    "section-top",
+    "left-align",
+    "rp-ev-head",
+    "rp-feature",
+    "rp-feature-text",
+    "rp-feature-title",
+    "rp-placeholder"
+   ],
+   "tag": "section",
+   "similar": [
+    "POR-06"
+   ],
+   "variants": {
+    "EVIDENCE": "fond gris, en-tête simple, 2 éléments",
+    "F-CAS": "fond gris, en-tête simple"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cas (cas mis en avant et cas côte à côte)"
+   ]
+  },
+  {
+   "id": "CLI-05",
+   "page": "clinops",
+   "pageLabel": "ClinOps (proto)",
+   "kind": "proto",
+   "n": 4,
+   "url": "proto-clinops.html?block=4",
+   "open": "proto-clinops.html",
+   "family": "Cas et preuves",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Proof",
+   "title": "Tested against what really happened",
+   "comps": [
+    "tag-purple",
+    "number-span",
+    "tagline-green",
+    "proof-card",
+    "grid-2",
+    "proof-bottom-card",
+    "proof-bottom-card_top",
+    "proofl-bottom-tag-list",
+    "section-top",
+    "left-align",
+    "proof-left",
+    "proof-number-div"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "revoir",
+    "Preuve ClinOps : bloc unique ou composant Cas ? à revoir"
+   ]
+  },
+  {
+   "id": "POR-06",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 5,
+   "url": "proto-portfolio.html?block=5",
+   "open": "proto-portfolio.html",
+   "family": "Cas et preuves",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Evidence",
+   "title": "See how PhaseV turns complex evidence into portfolio action",
+   "comps": [
+    "rp-labels",
+    "rp-body",
+    "text_quote-rtf",
+    "rp-link",
+    "rp-case",
+    "rp-big",
+    "number-span",
+    "c",
+    "rp-ctx",
+    "rp-fig",
+    "section-top",
+    "left-align"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-07",
+    "CON-05"
+   ],
+   "variants": {
+    "EVIDENCE": "fond blanc, en-tête simple, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cas (cas mis en avant et cas côte à côte)"
+   ]
+  },
+  {
+   "id": "BON-06",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 5,
+   "url": "proto-bonv.html?block=5",
+   "open": "proto-bonv.html",
+   "family": "Cas et preuves",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Case study",
+   "title": "Case study",
+   "comps": [
+    "rp-feature",
+    "rp-feature-text",
+    "rp-labels",
+    "rp-ctx",
+    "rp-feature-title",
+    "rp-body",
+    "rp-note",
+    "rp-big",
+    "number-span",
+    "c"
+   ],
+   "tag": "section",
+   "similar": [
+    "CON-05"
+   ],
+   "variants": {
+    "F-CAS": "fond gris, sans en-tête"
+   },
+   "variant": "fond gris, sans en-tête",
+   "plan": [
+    "fusion",
+    "Devient le composant Cas"
+   ]
+  },
+  {
+   "id": "CON-04",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 3,
+   "url": "proto-conductor.html?block=3",
+   "open": "proto-conductor.html",
+   "family": "Schémas",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "The PhaseV answer",
+   "title": "One governed study model replaces repeated handoffs",
+   "comps": [
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "rp-compare",
+    "rp-pivot"
+   ],
+   "tag": "section",
+   "similar": [
+    "BON-04"
+   ],
+   "variants": {
+    "SCHEMA": "fond blanc, en-tête 2 colonnes"
+   },
+   "variant": "fond blanc, en-tête 2 colonnes",
+   "plan": [
+    "revoir",
+    "Composant Schéma avant / après : à revoir"
+   ]
+  },
+  {
+   "id": "BON-04",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 3,
+   "url": "proto-bonv.html?block=3",
+   "open": "proto-bonv.html",
+   "family": "Schémas",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "The PhaseV answer",
+   "title": "One conversational layer replaces the hunt for the right tool",
+   "comps": [
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "rp-compare",
+    "rp-pivot",
+    "rp-flow-out"
+   ],
+   "tag": "section",
+   "similar": [
+    "CON-04"
+   ],
+   "variants": {
+    "SCHEMA": "fond gris, en-tête 2 colonnes"
+   },
+   "variant": "fond gris, en-tête 2 colonnes",
+   "plan": [
+    "revoir",
+    "Composant Schéma avant / après : à revoir"
+   ]
+  },
+  {
+   "id": "HOM-04",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 3,
+   "url": "site-home.html?block=3",
+   "open": "site-home.html",
+   "family": "Cartes",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Why PhaseV",
+   "title": "Built differently for clinical development",
+   "comps": [
+    "why-card",
+    "icon-1x1-large",
+    "section-top",
+    "grid-3"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-06",
+    "RSP-04",
+    "POR-02",
+    "ABO-02"
+   ],
+   "variants": {
+    "CARTES-ICONE": "fond blanc, en-tête simple, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère icône"
+   ]
+  },
+  {
+   "id": "RSP-03",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 2,
+   "url": "proto-response.html?block=2",
+   "open": "proto-response.html",
+   "family": "Cartes",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "Prognostic modeling",
+   "title": "Two tracks. Clearer development decisions",
+   "comps": [
+    "text_quote-rtf",
+    "rp-card",
+    "rp-card-n",
+    "feature_list-wrapper",
+    "section-top",
+    "left-align",
+    "[rp=tracks]"
+   ],
+   "tag": "section",
+   "similar": [
+    "POR-04"
+   ],
+   "variants": {
+    "F-CARTES-NUM": "fond gris, en-tête simple, 2 éléments"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère numéro, puces"
+   ]
+  },
+  {
+   "id": "RSP-04",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 3,
+   "url": "proto-response.html?block=3",
+   "open": "proto-response.html",
+   "family": "Cartes",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "What you can do with the results",
+   "title": "Turn the finding into the next development decision",
+   "comps": [
+    "why-card",
+    "icon-1x1-large",
+    "section-top",
+    "left-align",
+    "grid-3"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-06",
+    "HOM-04",
+    "POR-02"
+   ],
+   "variants": {
+    "CARTES-ICONE": "fond blanc, en-tête simple, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère icône"
+   ]
+  },
+  {
+   "id": "RSP-05",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 4,
+   "url": "proto-response.html?block=4",
+   "open": "proto-response.html",
+   "family": "Cartes",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "How an engagement looks",
+   "title": "Your data in Decision-ready evidence out",
+   "comps": [
+    "rp-step",
+    "rp-step-k",
+    "section-top",
+    "left-align",
+    "[rp=steps]"
+   ],
+   "tag": "section",
+   "similar": [
+    "POR-05"
+   ],
+   "variants": {
+    "FRISE": "fond gris, en-tête simple, 4 éléments"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère numéro, liaison en frise"
+   ]
+  },
+  {
+   "id": "RSP-06",
+   "page": "response",
+   "pageLabel": "Response (proto)",
+   "kind": "proto",
+   "n": 5,
+   "url": "proto-response.html?block=5",
+   "open": "proto-response.html",
+   "family": "Cartes",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Methodology",
+   "title": "Built for decisions that need to withstand scrutiny",
+   "comps": [
+    "why-card",
+    "icon-1x1-large",
+    "section-top",
+    "left-align",
+    "grid-3"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-04",
+    "HOM-04",
+    "POR-02"
+   ],
+   "variants": {
+    "CARTES-ICONE": "fond blanc, en-tête simple, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère icône"
+   ]
+  },
+  {
+   "id": "CLI-02",
+   "page": "clinops",
+   "pageLabel": "ClinOps (proto)",
+   "kind": "proto",
+   "n": 1,
+   "url": "proto-clinops.html?block=1",
+   "open": "proto-clinops.html",
+   "family": "Cartes",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Why ClinOps Optimizer?",
+   "title": "Choose sites with confidence",
+   "comps": [
+    "difference-card",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "grid-3",
+    "[kit=cards]"
+   ],
+   "tag": "section",
+   "similar": [
+    "POR-02",
+    "CLI-04",
+    "CON-08",
+    "BON-08"
+   ],
+   "variants": {
+    "F-CARTES-NUM": "fond blanc, en-tête 2 colonnes, 5 éléments"
+   },
+   "variant": "fond blanc, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère numéro"
+   ]
+  },
+  {
+   "id": "CLI-04",
+   "page": "clinops",
+   "pageLabel": "ClinOps (proto)",
+   "kind": "proto",
+   "n": 3,
+   "url": "proto-clinops.html?block=3",
+   "open": "proto-clinops.html",
+   "family": "Cartes",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "How the forecast works",
+   "title": "Forecasts you can edit",
+   "comps": [
+    "methodology-card",
+    "methodology-icon",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "grid-3",
+    "[kit=cards]"
+   ],
+   "tag": "section",
+   "similar": [
+    "CON-08",
+    "BON-08",
+    "CLI-02",
+    "POR-02"
+   ],
+   "variants": {
+    "CARTES-SOMBRES": "fond sombre, en-tête 2 colonnes, 3 éléments"
+   },
+   "variant": "fond sombre, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère icône, fond sombre"
+   ]
+  },
+  {
+   "id": "POR-02",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 1,
+   "url": "proto-portfolio.html?block=1",
+   "open": "proto-portfolio.html",
+   "family": "Cartes",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "The challenge",
+   "title": "More data does not automatically create more conviction",
+   "comps": [
+    "why-card",
+    "icon-1x1-large",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "grid-3",
+    "[kit=cards]"
+   ],
+   "tag": "section",
+   "similar": [
+    "CLI-02",
+    "HOM-04",
+    "CLI-04",
+    "RSP-06"
+   ],
+   "variants": {
+    "CARTES-ICONE": "fond blanc, en-tête 2 colonnes, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère icône"
+   ]
+  },
+  {
+   "id": "POR-04",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 3,
+   "url": "proto-portfolio.html?block=3",
+   "open": "proto-portfolio.html",
+   "family": "Cartes",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "How we approach it",
+   "title": "Evidence to probability to value",
+   "comps": [
+    "text_quote-rtf",
+    "rp-card",
+    "rp-card-n",
+    "feature_list-wrapper",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "[rp=tracks]"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-03"
+   ],
+   "variants": {
+    "F-CARTES-NUM": "fond blanc, en-tête 2 colonnes, 3 éléments"
+   },
+   "variant": "fond blanc, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Base du composant Cartes (repère numéro, puces)"
+   ]
+  },
+  {
+   "id": "POR-05",
+   "page": "portfolio",
+   "pageLabel": "Portfolio (proto)",
+   "kind": "proto",
+   "n": 4,
+   "url": "proto-portfolio.html?block=4",
+   "open": "proto-portfolio.html",
+   "family": "Cartes",
+   "bg": "is-light",
+   "hidden": false,
+   "label": "How an engagement looks",
+   "title": "One decision in An interactive evidence environment out",
+   "comps": [
+    "rp-step",
+    "rp-step-k",
+    "section-top",
+    "left-align",
+    "[rp=steps]"
+   ],
+   "tag": "section",
+   "similar": [
+    "RSP-05"
+   ],
+   "variants": {
+    "FRISE": "fond gris, en-tête simple, 4 éléments"
+   },
+   "variant": "fond gris, en-tête simple",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère numéro, liaison en frise"
+   ]
+  },
+  {
+   "id": "CON-08",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 7,
+   "url": "proto-conductor.html?block=7",
+   "open": "proto-conductor.html",
+   "family": "Cartes",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "Governed by design",
+   "title": "Traceable by design. Flexible by deployment",
+   "comps": [
+    "methodology-card",
+    "methodology-icon",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "grid-3",
+    "rp-chips",
+    "[kit=cards]"
+   ],
+   "tag": "section",
+   "similar": [
+    "BON-08",
+    "CLI-04",
+    "CLI-02",
+    "POR-02"
+   ],
+   "variants": {
+    "CARTES-SOMBRES": "fond sombre, en-tête 2 colonnes, 2 éléments"
+   },
+   "variant": "fond sombre, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère icône, fond sombre"
+   ]
+  },
+  {
+   "id": "BON-08",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 7,
+   "url": "proto-bonv.html?block=7",
+   "open": "proto-bonv.html",
+   "family": "Cartes",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "Governed by design",
+   "title": "Explainable by design. Secure by deployment",
+   "comps": [
+    "methodology-card",
+    "methodology-icon",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "grid-3",
+    "rp-chips",
+    "[kit=cards]"
+   ],
+   "tag": "section",
+   "similar": [
+    "CON-08",
+    "CLI-04",
+    "CLI-02",
+    "POR-02"
+   ],
+   "variants": {
+    "CARTES-SOMBRES": "fond sombre, en-tête 2 colonnes, 3 éléments"
+   },
+   "variant": "fond sombre, en-tête 2 colonnes",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes (base POR-04), repère icône, fond sombre"
+   ]
+  },
+  {
+   "id": "ABO-07",
+   "page": "company",
+   "pageLabel": "About",
+   "kind": "site",
+   "n": 6,
+   "url": "site-company.html?block=6",
+   "open": "site-company.html",
+   "family": "Bandeaux CTA",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "Build with us",
+   "title": "Work at the intersection of science, technology, and medicine",
+   "comps": [
+    "dm-panel_list-item",
+    "grid-2",
+    "section-top",
+    "section-top_up",
+    "dm-panel_list",
+    "button",
+    "animation-wrapper",
+    "[pv=company-careers]"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-BANDEAU": "fond sombre, en-tête simple"
+   },
+   "variant": "fond sombre, en-tête simple",
+   "plan": [
+    "fusion",
+    "Composant Bandeau texte, bouton, visuel (fond sombre)"
+   ]
+  },
+  {
+   "id": "CON-02",
+   "page": "conductor",
+   "pageLabel": "AI Conductor (proto)",
+   "kind": "proto",
+   "n": 1,
+   "url": "proto-conductor.html?block=1",
+   "open": "proto-conductor.html",
+   "family": "Bandeaux CTA",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Explore the product",
+   "title": "See AI Conductor in action",
+   "comps": [
+    "grid-2",
+    "section-top",
+    "button"
+   ],
+   "tag": "section",
+   "similar": [
+    "BON-02"
+   ],
+   "variants": {
+    "F-BANDEAU": "fond blanc, en-tête simple"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "fusion",
+    "Bloc existant conservé ; composant Bandeau texte, bouton, visuel"
+   ]
+  },
+  {
+   "id": "BON-02",
+   "page": "bonv",
+   "pageLabel": "BonV (proto)",
+   "kind": "proto",
+   "n": 1,
+   "url": "proto-bonv.html?block=1",
+   "open": "proto-bonv.html",
+   "family": "Bandeaux CTA",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Explore the product",
+   "title": "See BonV in action",
+   "comps": [
+    "grid-2",
+    "section-top"
+   ],
+   "tag": "section",
+   "similar": [
+    "CON-02",
+    "TRI-04",
+    "RSP-09",
+    "POR-07"
+   ],
+   "variants": {
+    "F-BANDEAU": "fond blanc, en-tête simple"
+   },
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "fusion",
+    "Bloc existant conservé (vidéo) ; composant Bandeau texte, bouton, visuel"
+   ]
+  },
+  {
+   "id": "ABO-06",
+   "page": "company",
+   "pageLabel": "About",
+   "kind": "site",
+   "n": 5,
+   "url": "site-company.html?block=5",
+   "open": "site-company.html",
+   "family": "Logos",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "Investors",
+   "title": "Backed by leading investors",
+   "comps": [
+    "backed-by-grid-item",
+    "partnership-logo",
+    "section-top",
+    "section-top_left",
+    "section-top_right",
+    "backed-by-wrapper",
+    "backed-by-grid_wrapper",
+    "backed-by-grid"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variant": "fond blanc, en-tête 2 colonnes",
+   "plan": [
+    "revoir",
+    "Logos investisseurs : à revoir"
+   ]
+  },
+  {
+   "id": "CSD-03",
+   "page": "case-study",
+   "pageLabel": "Fiche case study",
+   "kind": "site",
+   "n": 2,
+   "url": "site-case-study.html?block=2",
+   "open": "site-case-study.html",
+   "family": "Texte long",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "",
+   "title": "The challenge",
+   "comps": [
+    "post-rtf"
+   ],
+   "tag": "section",
+   "similar": [
+    "ART-02"
+   ],
+   "variant": "fond blanc, sans en-tête",
+   "plan": [
+    "garde",
+    "Chapitres de la fiche, bloc unique"
+   ]
+  },
+  {
+   "id": "ART-02",
+   "page": "article",
+   "pageLabel": "Article",
+   "kind": "site",
+   "n": 1,
+   "url": "site-article.html?block=1",
+   "open": "site-article.html",
+   "family": "Texte long",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "",
+   "title": "When one number isn't enough to plan a trial",
+   "comps": [
+    "post-rtf"
+   ],
+   "tag": "section",
+   "similar": [
+    "CSD-03"
+   ],
+   "variant": "fond blanc, sans en-tête",
+   "plan": [
+    "garde",
+    "Texte long, bloc unique"
+   ]
+  },
+  {
+   "id": "HOM-02",
+   "page": "home",
+   "pageLabel": "Home",
+   "kind": "site",
+   "n": 1,
+   "url": "site-home.html?block=1",
+   "open": "site-home.html",
+   "family": "Autres",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "The problem",
+   "title": "Decisions are connected Tools rarely are",
+   "comps": [
+    "section-top",
+    "layout_component",
+    "layout_content",
+    "layout_content-left",
+    "layout_content-right",
+    "[pv=gantt]"
+   ],
+   "tag": "section",
+   "similar": [],
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Bloc unique"
+   ]
+  },
+  {
+   "id": "ABO-02",
+   "page": "company",
+   "pageLabel": "About",
+   "kind": "site",
+   "n": 1,
+   "url": "site-company.html?block=1",
+   "open": "site-company.html",
+   "family": "Autres",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "About us",
+   "title": "About us",
+   "comps": [
+    "section-top",
+    "grid-3"
+   ],
+   "tag": "section",
+   "similar": [
+    "HOM-04"
+   ],
+   "variant": "fond blanc, en-tête simple",
+   "plan": [
+    "garde",
+    "Bloc unique"
+   ]
+  },
+  {
+   "id": "CSD-02",
+   "page": "case-study",
+   "pageLabel": "Fiche case study",
+   "kind": "site",
+   "n": 1,
+   "url": "site-case-study.html?block=1",
+   "open": "site-case-study.html",
+   "family": "Autres",
+   "bg": "is-lightpurple",
+   "hidden": false,
+   "label": "This is some text inside of a div block.",
+   "title": "Early-Phase Dose Selection",
+   "comps": [],
+   "tag": "section",
+   "similar": [],
+   "variant": "fond lightpurple, sans en-tête",
+   "plan": [
+    "revoir",
+    "At a glance de la fiche : à revoir"
+   ]
+  },
+  {
+   "id": "CSD-04",
+   "page": "case-study",
+   "pageLabel": "Fiche case study",
+   "kind": "site",
+   "n": 3,
+   "url": "site-case-study.html?block=3",
+   "open": "site-case-study.html",
+   "family": "Autres",
+   "bg": "is-gradient",
+   "hidden": false,
+   "label": "This is some text inside of a div block.",
+   "title": "What it changes, team by team.",
+   "comps": [],
+   "tag": "section",
+   "similar": [],
+   "variant": "fond sombre, sans en-tête",
+   "plan": [
+    "fusion",
+    "Devient le composant Cartes, repère icône, fond sombre"
+   ]
+  },
+  {
+   "id": "CSD-05",
+   "page": "case-study",
+   "pageLabel": "Fiche case study",
+   "kind": "site",
+   "n": 4,
+   "url": "site-case-study.html?block=4",
+   "open": "site-case-study.html",
+   "family": "Autres",
+   "bg": "is-white",
+   "hidden": false,
+   "label": "This is some text inside of a div block.",
+   "title": "Questions, answered.",
+   "comps": [],
+   "tag": "section",
+   "similar": [],
+   "variants": {
+    "F-FAQ": "fond blanc, sans en-tête"
+   },
+   "variant": "fond blanc, sans en-tête",
+   "plan": [
+    "fusion",
+    "Passe sur le composant FAQ"
+   ]
+  }
+ ]
+}

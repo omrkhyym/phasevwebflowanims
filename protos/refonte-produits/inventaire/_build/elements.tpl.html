@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petits éléments · inventaire</title>
+<!-- CSS du site (head de la Home et embed global styles), recopié par inventaire.py -->
+<!--SITE-HEAD-->
+<link rel="stylesheet" href="../_kit/kit.css">
+<link rel="stylesheet" href="inv-ui.css">
+<style>
+  /* Généré par _build/inventaire.py depuis _build/elements.tpl.html : modifier le modèle, pas ce fichier. */
+  body{ margin:0; background:#f8f8f8; }
+  .iv-atoms{ display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,34rem),1fr)); gap:1rem; }
+  .iv-atom{ background:#fff; border:1px solid var(--line); border-radius:1rem; overflow:hidden; display:flex; flex-direction:column; scroll-margin-top:8rem; }
+  .iv-atom:target{ outline:3px solid var(--mau); }
+  .iv-tile{ padding:0; min-height:6rem; display:flex; align-items:center; justify-content:center; overflow:hidden; max-height:24rem; position:relative; }
+  .iv-tile > div{ width:100%; padding:1.5rem; display:flex; justify-content:center; align-items:center; min-height:6rem; background:transparent !important; }
+  .iv-tile > div > *{ max-width:100%; }
+  .iv-atom[data-cat="cartes"] .iv-tile > div > *{ width:var(--w); flex:none; }
+  .iv-atom[data-cat="titres"] .iv-tile > div, .iv-atom[data-cat="textes"] .iv-tile > div{ justify-content:flex-start; }
+  .iv-atom .iv-head{ grid-template-columns:1fr; border-bottom:0; border-top:1px solid var(--line); }
+  .iv-atom .iv-dec{ align-items:flex-start; min-width:0; }
+  .iv-atom:has(.iv-dec[data-d="drop"]) .iv-tile{ opacity:.35; }
+  .iv-ctx{ font-size:13px; font-weight:600; }
+  .iv-ctx a{ text-decoration:underline; text-underline-offset:2px; }
+  .iv-gap-h{ font-size:1.0625rem; font-weight:700; margin:1.75rem 0 .5rem; color:var(--ink); line-height:1.3; letter-spacing:0; }
+  .iv-gaps{ width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:.75rem; overflow:hidden; font-size:13px; }
+  .iv-gaps th, .iv-gaps td{ text-align:left; padding:.45rem .7rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  .iv-gaps th{ font-size:11.5px; text-transform:uppercase; letter-spacing:.5px; color:#626262; font-weight:600; }
+  .iv-gaps tr.is-off td{ background:#fdf0ee; }
+  .iv-gaps tr.is-off td:first-child{ color:#c0392b; font-weight:700; white-space:nowrap; }
+  .iv-gaps a{ text-decoration:underline; text-underline-offset:2px; }
+  #progress{ font-size:12.5px; color:#626262; }
+  .iv-load{ position:absolute; left:-20000px; top:0; width:1440px; height:900px; border:0; visibility:hidden; }
+</style>
+</head>
+<body class="iv">
+<div class="iv-bar">
+  <h1>Petits éléments</h1>
+  <small id="progress">relevé en cours…</small>
+  <select id="dec">
+    <option value="">Toutes les décisions</option><option value="none">À trancher</option>
+    <option value="keep">Garder</option><option value="merge">Fusionner</option><option value="drop">Virer</option><option value="ask">À discuter</option>
+  </select>
+  <span class="iv-sp"></span>
+  <a class="iv-btn" href="blocs.html">Blocs témoins</a>
+  <a class="iv-btn" href="../index.html">Index refonte</a>
+  <button type="button" class="iv-btn is-main" id="export">Copier mes choix</button>
+  <div class="iv-chips" id="cats" style="flex-basis:100%"></div>
+</div>
+<main class="iv-main" id="main"></main>
+
+<script type="module">
+import { decisionUI, exportButton, load } from './inv-ui.js';
+
+const CATS = [['boutons', 'Boutons'], ['liens', 'Liens texte'], ['pastilles', 'Pastilles et étiquettes'], ['labels', 'Labels'],
+  ['titres', 'Titres'], ['textes', 'Textes'], ['cartes', 'Cartes'], ['icones', 'Icônes'], ['gaps', 'Espacements']];
+
+// espacements : référence du site pour les éléments côte à côte (cartes, colonnes) = gap de la grille Resources
+const GRID_REF = 3;
+const ROLES = { rangee: 'Cartes et colonnes côte à côte (référence : 3rem)', pile: 'Grands éléments empilés', texte: 'Contenu (textes, boutons, listes)' };
+const remTxt = v => (v ? v + 'rem' : '0');
+function gapRow(it) {
+  const off = it.role === 'rangee' && Math.abs(it.cg - GRID_REF) > .01;
+  const b = it.ctx.block != null && byBlock[it.src + '|' + it.ctx.block];
+  const seen = it.ctx.zone ? (it.ctx.zone === 'navbar' ? 'navbar' : 'footer')
+    : b ? `<a href="blocs.html#${b.id}" target="_blank" rel="noopener">${b.id}</a> ${esc((b.title || '').slice(0, 40))}` : esc(label[it.src] || it.src);
+  const where = Object.entries(it.pages).map(([k, n]) => `${label[k] || k} ×${n}`).join(', ');
+  return `<tr class="${off ? 'is-off' : ''}"><td>${off ? '⚠ hors échelle' : ''}</td>
+    <td><b>${it.dir === 'grid' ? 'grille' : it.dir === 'column' ? 'flex ↓' : 'flex →'}</b> ${remTxt(it.rg)} / ${remTxt(it.cg)}</td>
+    <td class="iv-code">${esc(it.sig)}</td><td>${seen}</td><td>${esc(where)}</td></tr>`;
+}
+function renderGaps(list) {
+  const box = document.createElement('div');
+  Object.entries(ROLES).forEach(([role, name]) => {
+    const rows = list.filter(it => it.role === role)
+      .sort((a, b) => (role === 'rangee' ? (Math.abs(b.cg - GRID_REF) > .01) - (Math.abs(a.cg - GRID_REF) > .01) : 0) || b.total - a.total);
+    if (!rows.length) return;
+    // résumé : combien de conteneurs par valeur de gap (le désordre se voit ici)
+    const freq = {};
+    rows.forEach(it => { const v = it.role === 'pile' || it.dir === 'column' ? it.rg : it.cg; freq[v] = (freq[v] || 0) + it.total; });
+    const sum = Object.entries(freq).sort((a, b) => b[1] - a[1]).map(([v, n]) => `<span class="iv-tag">${remTxt(+v)} ×${n}</span>`).join(' ');
+    const off = role === 'rangee' ? rows.filter(it => Math.abs(it.cg - GRID_REF) > .01).length : 0;
+    box.insertAdjacentHTML('beforeend', `<h3 class="iv-gap-h">${name}${off ? ` · <span style="color:#c0392b">${off} hors échelle</span>` : ''}</h3>
+      <div class="iv-line" style="margin-bottom:.75rem">${sum}</div>
+      <table class="iv-gaps"><tr><th></th><th>gap ligne / colonne</th><th>conteneur</th><th>vu dans</th><th>pages</th></tr>${rows.map(gapRow).join('')}</table>`);
+  });
+  return box;
+}
+const data = await (await fetch('blocs.json', { cache: 'no-store' })).json();
+const pages = [{ key: 'global', label: 'Navbar et footer', file: 'site-home.html', global: true }, ...data.pages];
+const label = Object.fromEntries(pages.map(p => [p.key, p.label]));
+const byBlock = Object.fromEntries(data.blocks.map(b => [b.page + '|' + b.n, b]));
+
+// lisibilité : si le texte (ou l'élément plein) se confond avec le fond de la tuile, la tuile passe sur un fond de contraste
+const rgb = s => { const m = (s || '').match(/[\d.]+/g); return m ? { r: +m[0], g: +m[1], b: +m[2], a: m[3] === undefined ? 1 : +m[3] } : null; };
+const lum = c => { const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; return .2126 * f(c.r) + .7152 * f(c.g) + .0722 * f(c.b); };
+const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+function readable(card) {
+  const tile = card.querySelector('.iv-tile'), tbg = rgb(getComputedStyle(tile).backgroundColor);
+  if (!tbg) return;
+  const fillOf = (el) => { for (let e = el; e && e !== tile; e = e.parentElement) { const c = rgb(getComputedStyle(e).backgroundColor); if (c && c.a > .5) return c; } return tbg; };
+  let worst = 99, ink = null;
+  tile.querySelectorAll('*').forEach(el => {
+    if (![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) return;
+    const c = rgb(getComputedStyle(el).color); if (!c || !el.getClientRects().length) return;
+    const r = ratio(c, fillOf(el)); if (r < worst) { worst = r; ink = c; }
+  });
+  // élément plein (bouton, pastille, carte) de la même couleur que le fond
+  const top = tile.firstElementChild && tile.firstElementChild.firstElementChild;
+  const fill = top && rgb(getComputedStyle(top).backgroundColor);
+  const flat = fill && fill.a > .5 && ratio(fill, tbg) < 1.3 && getComputedStyle(top).borderTopWidth === '0px';
+  if (worst >= 2 && !flat) return;
+  const dark = flat ? lum(fill) < .4 : lum(ink) < .4;   // contenu sombre : fond clair, et inversement
+  tile.style.background = dark ? '#ececec' : '#141238';
+  card.querySelector('.iv-line').insertAdjacentHTML('beforeend', '<span class="iv-tag is-warn" title="Le fond d’origine rendait l’élément illisible ici">fond de contraste</span>');
+}
+const items = new Map();   // cat|sig -> élément agrégé
+const state = { cat: '', dec: '' };
+const main = document.getElementById('main'), progress = document.getElementById('progress');
+
+// identifiant stable tiré de la signature (catégorie + balise + classes)
+const hash = s => { let h = 5381; for (const c of s) h = (h * 33 ^ c.charCodeAt(0)) >>> 0; return h.toString(36).slice(0, 5).toUpperCase(); };
+const hex = c => { const m = c && c.match(/[\d.]+/g); if (!m || (m[3] !== undefined && +m[3] === 0)) return 'transparent';
+  return '#' + m.slice(0, 3).map(x => (+x).toString(16).padStart(2, '0')).join('') + (m[3] !== undefined && +m[3] < 1 ? ' ' + Math.round(m[3] * 100) + '%' : ''); };
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// relevé : chaque page est chargée à son tour dans une iframe cachée, qui renvoie ses éléments
+function collect(i) {
+  if (i >= pages.length) { progress.textContent = `${items.size} éléments distincts sur ${pages.length} sources`; return; }
+  const p = pages[i];
+  progress.textContent = `relevé ${i + 1} / ${pages.length} : ${p.label}…`;
+  const f = document.createElement('iframe');
+  f.className = 'iv-load'; f.src = `${p.file}?atoms${p.global ? '=global' : ''}&page=${p.key}`;
+  let done = false;
+  const next = () => { if (done) return; done = true; removeEventListener('message', onMsg); f.remove(); render(); collect(i + 1); };
+  const onMsg = e => {
+    if (e.source !== f.contentWindow || !e.data || e.data.inv !== 'atoms') return;
+    e.data.items.forEach(it => {
+      const k = it.cat === 'gaps' ? ['gaps', it.sig, it.role, it.rg, it.cg].join('|') : it.cat + '|' + it.sig;
+      const cur = items.get(k) || { ...it, src: p.key, id: 'E-' + hash(k), pages: {}, total: 0 };
+      cur.pages[p.key] = (cur.pages[p.key] || 0) + it.count; cur.total += it.count;
+      if (!cur.shown && it.shown) Object.assign(cur, { html: it.html, ctx: it.ctx, tileBg: it.tileBg, style: it.style, shown: true, src: p.key });
+      items.set(k, cur);
+    });
+    next();
+  };
+  addEventListener('message', onMsg);
+  setTimeout(next, 25000);
+  document.body.append(f);
+}
+
+function render() {
+  main.textContent = '';
+  const dec = load();
+  CATS.forEach(([cat, name]) => {
+    if (state.cat && state.cat !== cat) return;
+    const list = [...items.values()].filter(it => it.cat === cat
+      && (!state.dec || (state.dec === 'none' ? !(dec[it.id] && dec[it.id].d) : dec[it.id] && dec[it.id].d === state.dec)))
+      .sort((a, b) => b.total - a.total);
+    if (!list.length) return;
+    const h = document.createElement('div'); h.className = 'iv-fam'; h.id = 'cat-' + cat;
+    h.innerHTML = `<h2>${name}</h2><span>${list.length} variantes</span>`;
+    if (cat === 'gaps') { main.append(h, renderGaps(list)); return; }
+    const grid = document.createElement('div'); grid.className = 'iv-atoms';
+    list.forEach(it => grid.append(atom(it)));
+    main.append(h, grid);
+  });
+  main.querySelectorAll('.iv-atom').forEach(readable);
+  renderCats();
+}
+
+function atom(it) {
+  const el = document.createElement('article'); el.className = 'iv-atom'; el.id = it.id; el.dataset.cat = it.cat;
+  const s = it.style, ctxCls = (it.ctx.cls || '').split(/\s+/).filter(c => c && c !== 'hide').join(' ');
+  const look = [`${s.font} ${s.size} / ${s.weight}`, s.tt !== 'none' ? s.tt : '', s.ls !== 'normal' ? 'ls ' + s.ls : '',
+    'texte ' + hex(s.color), hex(s.bg) !== 'transparent' ? 'fond ' + hex(s.bg) : '', s.border ? 'contour ' + s.border.replace(/rgba?\([^)]*\)/, m => hex(m)) : '',
+    s.radius !== '0px' ? 'r ' + s.radius : ''].filter(Boolean).join(' · ');
+  const where = Object.entries(it.pages).map(([k, n]) => `${label[k] || k} ×${n}`).join(', ');
+  const b = it.ctx.block != null && byBlock[it.src + '|' + it.ctx.block];
+  const seen = it.ctx.zone ? `vu dans ${it.ctx.zone === 'navbar' ? 'la navbar' : 'le footer'}`
+    : b ? `vu dans <a href="blocs.html#${b.id}" target="_blank" rel="noopener">${b.id}</a> · ${esc(b.title || b.family)}`
+    : `vu sur ${esc(label[it.src] || it.src)}${it.ctx.block === 0 ? ' (hero)' : ''}`;
+  el.innerHTML = `<div class="iv-tile" style="background:${it.tileBg}"><div class="${esc(ctxCls)}" ${it.ctx.bg ? `data-bg="${esc(it.ctx.bg)}"` : ''} style="--w:${Math.min(s.w || 360, 520)}px">${it.html}</div></div>
+    <div class="iv-head"><div class="iv-meta">
+      <div class="iv-line"><span class="iv-id">${it.id}</span><span class="iv-tag">${it.total} occurrence${it.total > 1 ? 's' : ''}</span>${it.shown ? '' : '<span class="iv-tag is-warn">jamais visible (masqué ou mobile)</span>'}</div>
+      <div class="iv-ctx">${seen}</div>
+      <div class="iv-code">${esc(it.sig)}</div>
+      <div class="iv-code">${esc(look)}</div>
+      <div class="iv-code">${esc(where)}</div>
+    </div></div>`;
+  el.querySelector('.iv-head').append(decisionUI(it.id, `${it.cat} ${it.sig}`, () => state.dec && render()));
+  return el;
+}
+
+const cats = document.getElementById('cats');
+function renderCats() {
+  cats.textContent = '';
+  [['', 'Toutes'], ...CATS].forEach(([k, l]) => {
+    const n = k ? [...items.values()].filter(i => i.cat === k).length : items.size;
+    const c = document.createElement('button'); c.type = 'button'; c.className = 'iv-chip';
+    c.textContent = `${l} · ${n}`; c.setAttribute('aria-pressed', state.cat === k);
+    c.addEventListener('click', () => { state.cat = k; render(); scrollTo(0, 0); });
+    cats.append(c);
+  });
+}
+document.getElementById('dec').addEventListener('change', e => { state.dec = e.target.value; render(); });
+exportButton(document.getElementById('export'));
+collect(0);
+</script>
+</body>
+</html>

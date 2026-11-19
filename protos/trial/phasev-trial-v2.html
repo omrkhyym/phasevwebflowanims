@@ -451,7 +451,7 @@ a,
   [data-ss] .v small{ font-size:1rem; font-weight:500; color:#626262; letter-spacing:0; }
   [data-ss] .ss-kpi .c, [data-ss] .ss-row .c{ font-size:.9375rem; line-height:1.4; color:#626262; }
   [data-ss] .ss-body{ margin:0; color:#2b2a48; font-size:1.0625rem; line-height:155%; max-width:34rem; }
-  [data-ss] .ss-actions{ display:flex; align-items:center; gap:1rem 2rem; flex-wrap:wrap; }
+  [data-ss] .ss-actions{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
   [data-ss] .ss-link{ color:#141238; text-decoration:none; border-bottom:1px solid #14123866; padding-bottom:.2rem; transition:border-color .2s; }
   [data-ss] .ss-link:hover{ border-color:#141238; }
   [data-ss] .ss-big .number-span{ font-size:clamp(3.5rem,5.5vw,5rem); line-height:.9; letter-spacing:-.04em; font-weight:600; color:#141238; }
@@ -475,10 +475,10 @@ a,
   [data-ss="A"] .ss-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:1.5rem 4rem; flex-wrap:wrap; }
 
   /* C : tout en une rangée ; texte compact à gauche, animation encadrée à droite */
-  [data-ss="C"]{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,30rem); gap:3rem 5rem; align-items:center; }
-  [data-ss="C"] .ss-left{ display:flex; flex-direction:column; gap:1.75rem; }
+  [data-ss="C"]{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,30rem); gap:3rem; align-items:center; }
+  [data-ss="C"] .ss-left{ display:flex; flex-direction:column; gap:1.5rem; }
   [data-ss="C"] .ss-labels{ display:flex; flex-wrap:wrap; gap:.5rem 1rem; align-items:center; }
-  [data-ss="C"] .ss-figs{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:1.5rem 3rem; align-items:center; }
+  [data-ss="C"] .ss-figs{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:3rem; align-items:center; }
 
   /* D : titre et actions en tête ; trois colonnes : chiffre héros, chiffres, animation */
   [data-ss="D"]{ display:flex; flex-direction:column; gap:3rem; }
@@ -808,7 +808,7 @@ a,
    Sans JS : questions et réponses restent toutes lisibles. */
 (function () {
   const CSS = `
-  [data-pv="faq"]{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:2.5rem 4rem; align-items:start; }
+  [data-pv="faq"]{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:2.5rem 3rem; align-items:start; }
   [data-pv="faq"] > .section-top{ position:sticky; top:8rem; }
   [data-faq-list]{ border-top:1px solid #14123826; }
   [data-faq-item]{ border-bottom:1px solid #14123826; }
@@ -922,7 +922,7 @@ a,
 
   /* ---------- A : Stage. Fond blanc continu, vidéo posée sur une scène grise ---------- */
   [data-wf="A"] .padding-global.is-feature{ background:var(--neutral-white) !important; }
-  [data-wf="A"] .feature-grid{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:3rem 5rem; align-items:center; }
+  [data-wf="A"] .feature-grid{ grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:3rem; align-items:center; }
   [data-wf="A"] .feature-grid > .video-animation:first-child{ order:0; }
   [data-wf="A"] #explore .feature-grid, [data-wf="A"] #optimize .feature-grid{ grid-template-columns:minmax(0,7fr) minmax(0,5fr); }
   [data-wf="A"] .video-animation{ position:relative; padding:clamp(1.5rem,3.5vw,3.5rem); border-radius:1.75rem; background:#ececec; overflow:hidden; }

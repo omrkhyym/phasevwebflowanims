@@ -1,0 +1,58 @@
+/* Inventaire : interface des pages blocs.html et elements.html (préfixe iv-, indépendante du CSS du site). */
+.iv, .iv *{ box-sizing:border-box; }
+.iv{ --ink:#141238; --mau:#928acd; --line:#14123818; --soft:#ececec; --bg:#f8f8f8;
+  font:400 14px/1.45 Aspekta, Inter, "Segoe UI", Arial, sans-serif; color:var(--ink); }
+.iv button, .iv select, .iv textarea{ font:inherit; color:inherit; }
+.iv a{ color:inherit; }
+
+.iv-bar{ position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid var(--line); padding:.75rem 1.5rem; display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; }
+.iv-bar h1{ font-size:1.125rem; font-weight:700; margin:0; letter-spacing:0; line-height:1.2; color:var(--ink); }
+.iv-bar .iv-sp{ flex:1; }
+.iv-bar small{ color:#626262; }
+.iv-chips{ display:flex; flex-wrap:wrap; gap:.35rem; }
+.iv-chip, .iv-btn, .iv-seg button{ border:1px solid var(--line); background:#fff; border-radius:999px; padding:.3rem .7rem; cursor:pointer; font-size:12.5px; line-height:1.2; text-decoration:none; white-space:nowrap; }
+.iv-chip[aria-pressed="true"], .iv-seg button[aria-pressed="true"]{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.iv-btn.is-main{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.iv-seg{ display:inline-flex; gap:.25rem; }
+.iv select{ border:1px solid var(--line); border-radius:999px; padding:.3rem .6rem; background:#fff; font-size:12.5px; }
+
+.iv-main{ max-width:1500px; margin:0 auto; padding:1.5rem 1.5rem 6rem; }
+.iv-fam{ margin:2.5rem 0 1rem; display:flex; align-items:baseline; gap:.75rem; scroll-margin-top:8rem; }
+.iv-fam h2{ font-size:1.5rem; font-weight:700; margin:0; line-height:1.2; letter-spacing:0; color:var(--ink); }
+.iv-fam span{ color:#626262; }
+.iv-fam p{ margin:0; color:#626262; }
+
+.iv-spec{ background:#fff; border:1px solid var(--line); border-radius:1rem; margin:0 0 2rem; overflow:hidden; scroll-margin-top:8rem; }
+.iv-spec:target{ outline:3px solid var(--mau); }
+.iv-head{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.75rem 1.5rem; padding:1rem 1.25rem; border-bottom:1px solid var(--line); }
+.iv-meta{ display:flex; flex-direction:column; gap:.45rem; min-width:0; }
+.iv-line{ display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; }
+.iv-id{ font:700 13px/1 ui-monospace, Consolas, monospace; background:var(--ink); color:#fff; padding:.3rem .5rem; border-radius:.35rem; }
+.iv-tag{ font-size:11.5px; padding:.2rem .5rem; border-radius:999px; background:var(--soft); white-space:nowrap; }
+.iv-tag.is-proto{ background:var(--mau); color:#fff; }
+.iv-tag.is-warn{ background:#e2c70a; }
+.iv-title{ font-weight:600; font-size:15px; }
+.iv-title em{ font-style:normal; color:#626262; font-weight:400; }
+.iv-code{ font:12px/1.4 ui-monospace, Consolas, monospace; color:#4a4868; }
+.iv-code a{ text-decoration:underline; text-underline-offset:2px; }
+
+.iv-dec{ display:flex; flex-direction:column; gap:.4rem; align-items:flex-end; min-width:18rem; }
+.iv-dec-row{ display:flex; gap:.3rem; }
+.iv-dec button{ border:1px solid var(--line); background:#fff; border-radius:999px; padding:.3rem .65rem; cursor:pointer; font-size:12.5px; }
+.iv-dec button[data-k="keep"][aria-pressed="true"]{ background:#2f8f5b; border-color:#2f8f5b; color:#fff; }
+.iv-dec button[data-k="merge"][aria-pressed="true"]{ background:#78a8e0; border-color:#78a8e0; color:#fff; }
+.iv-dec button[data-k="drop"][aria-pressed="true"]{ background:#c0392b; border-color:#c0392b; color:#fff; }
+.iv-dec button[data-k="ask"][aria-pressed="true"]{ background:#e2c70a; border-color:#e2c70a; }
+.iv-dec button[data-k="apart"][aria-pressed="true"]{ background:#928acd; border-color:#928acd; color:#fff; }
+.iv-dec textarea{ width:100%; border:1px solid var(--line); border-radius:.5rem; padding:.35rem .5rem; font-size:12.5px; resize:vertical; background:#fff; }
+.iv-spec:has(.iv-dec[data-d="drop"]) .iv-stage{ opacity:.35; }
+
+.iv-stage{ background:#d9d9de; overflow-x:auto; transition:opacity .2s; }
+.iv-stage iframe{ display:block; margin:0 auto; border:0; width:100%; height:600px; background:#f8f8f8; }
+.iv[data-w="991"] .iv-stage iframe{ width:991px; }
+.iv[data-w="390"] .iv-stage iframe{ width:390px; }
+
+@media (max-width:900px){
+  .iv-head{ grid-template-columns:1fr; }
+  .iv-dec{ align-items:flex-start; min-width:0; }
+}

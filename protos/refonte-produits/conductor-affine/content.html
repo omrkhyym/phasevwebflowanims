@@ -1,0 +1,139 @@
+<!-- AI Conductor « style affiné » : copie de conductor/content.html. Changements : cost en-tête centré ; answer avant / après en verre ; Proof en section sombre (chiffres + success story sans visuel) ; étapes titre centré, étape 03 en deux listes titrées ; Governed by design en carte unique sur fond animé ; FAQ, plateforme, puis le bloc See it in your workflow (manquant), sans formulaire. -->
+<!-- ===== The cost of fragmented work : en-tête centré, les deux chiffres dans la carte unifiée (composant Chiffres en variante carte), source en note ; fond light ===== -->
+<section class="section_layout is-light" data-new-block><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top align-center af-head-center">
+    <div class="text-size-label">The cost of fragmented work</div>
+    <h2 class="text-size-display text-align-center">Clinical development does not lose time in one place. It loses time at every handoff</h2>
+    <div class="text-size-large text-align-center">When documents, decisions, vendors and code live in separate systems, every update triggers another round of alignment, rework and review. AI Conductor is built to shorten those cycles without removing expert judgment.</div>
+  </div>
+  <div class="glance-grid">
+    <div class="glance-stat why-card"><div class="glance-stat_head"><div class="number-span is-company">88%</div></div><div class="company-subtitle">reported five weeks or more to develop SAP, SDTM, ADaM, TLF and CSR deliverables.</div></div>
+    <div class="glance-stat why-card"><div class="glance-stat_head"><div class="number-span is-company">76%</div></div><div class="company-subtitle">use two to three vendors per trial across these workflows, multiplying handoffs, reconciliation and rework.</div></div>
+  </div>
+  <p class="rp-note" style="margin-top:2rem"><em>Source: PhaseV June 2026 Biopharma Survey (N=51), conducted by an independent third-party research firm. Findings are based on self-reported responses and were not independently validated by PhaseV. The 88% figure combines the 5-8, 9-12 and 13+ week response bands.</em></p>
+</div></div></section>
+
+<!-- ===== The PhaseV answer : scène animée dans le style du film BonV (cond-answer.js, v2 autour du cercle) : allers-retours entre documents → anneau du modèle d'étude → onde du changement, validation au centre, anneau fermé en jaune ===== -->
+<section class="section_layout is-white" data-new-block><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top left-align">
+    <div class="text-size-label">The PhaseV answer</div>
+    <h2 class="text-size-display">One governed study model replaces repeated handoffs</h2>
+    <div class="text-size-large">AI Conductor connects authoring, protocol decisions, programming and reporting through one source library and study schema. Changes stay visible, reviewable and connected to the work that follows.</div>
+  </div>
+  <div data-pv="cond-answer">
+    <ul data-role="docs"><li data-icon="doc">Protocol</li><li data-icon="doc">SAP</li><li data-icon="app">CRF / EDC</li><li data-icon="db">SDTM / ADaM</li><li data-icon="app">R / SAS programs</li><li data-icon="trend">TLFs &amp; CSR</li></ul>
+    <p data-role="handoffs">Handoffs</p>
+    <p data-role="hub">Study schema</p>
+    <p data-role="change">Change · visit schedule</p>
+    <p data-role="approve">Approve</p>
+  </div>
+</div></div></section>
+
+<!-- ===== Proof : composant Chiffres (glance de Company), puis le cas au format success story avec visuel (cond-dose.js : chiffres du texte seulement) ; section sombre ===== -->
+<section data-bg="purple-gradient" class="section_layout is-gradient" data-af-bg="bonv" data-af-dark data-new-block><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top left-align"><div class="text-size-label">Proof</div><h2 class="text-size-display">Trusted by sponsors across the industry</h2></div>
+  <div class="glance-grid">
+    <div class="glance-stat"><div class="glance-stat_head"><div class="number-span is-company">10</div></div><div class="company-subtitle">large pharma partners, including top-5 representation <mark data-fix="à confirmer : usage public et à jour">✓?</mark></div></div>
+    <div class="glance-stat"><div class="glance-stat_head"><div class="number-span is-company">100+</div></div><div class="company-subtitle">programs optimized</div></div>
+  </div>
+  <div data-ss="C" class="af-ss-more">
+    <div class="ss-left">
+      <div class="ss-labels"><div class="text-size-label">Illustrative example</div><div class="text-size-label ss-ctx">Dose selection</div></div>
+      <h3 class="text-size-display">Better designs, before the first patient enrolls</h3>
+      <p class="ss-body">In an illustrative example developed with a biopharma sponsor, simulating and optimizing a dose-selection design raised the chance of choosing the best dose by 12 points, with no increase in sample size.</p>
+      <div class="ss-figs">
+        <div class="ss-big"><div class="number-span is-proof">~64% → ~76%</div><div class="c">probability of selecting<br>the best dose</div></div>
+        <div class="ss-rows">
+          <div class="ss-row"><div class="v">~100</div><div class="c">average participants, unchanged</div></div>
+        </div>
+      </div>
+      <p class="rp-note"><em>Illustrative example; results vary by study. Developed with a sponsor and presented as a poster at a 2026 biostatistics workshop.</em> <mark data-fix="à confirmer : accord du sponsor, attribution Trial Optimizer">✓?</mark></p>
+    </div>
+    <div class="ss-anim" data-cap="Dose selection simulation"><div data-pv="cond-dose" data-a="64" data-b="76" data-n="100">
+      <p data-role="label-a">Standard design</p><p data-role="label-b">Optimized design</p>
+      <p data-role="metric">Probability of selecting the best dose</p><p data-role="unit">pts</p>
+      <p data-role="n-label">~100 participants, unchanged</p>
+    </div></div>
+  </div>
+</div></div></section>
+
+<!-- ===== Capacités 01 à 03 : étapes avec média (composant des étapes), titre centré ; étape 03 : les deux onglets du document en deux listes titrées ; visuels : scènes animées dans le style du film BonV (cond-backbone, cond-protocol, cond-report) ===== -->
+<section class="section_layout is-white" data-wf="A" data-new-block><div class="padding-global padding-section-trial"><div class="container-large"><div class="section-top align-center"><div class="text-size-label" data-proposed>How it works</div><h2 class="text-size-display text-align-center" data-proposed>From study backbone to <br/>submission-ready package</h2></div></div></div>
+<div class="padding-global is-feature is-white"><div class="container-large"><div class="feature-grid"><div class="section-top left-align"><div class="text-size-label">Study backbone</div><h2 class="heading-style-h1">Build a governed foundation for the study</h2><div class="text-size-large">Curated sources, sponsor standards and a shared study schema ground first drafts and downstream work in the same context.</div><div class="feature_list-wrapper">
+  <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Source-grounded drafts<br/>Sponsor-configured standards<br/>CRF-to-EDC gap checks <mark data-fix="à vérifier par les product owners">✓?</mark></p></div></div>
+</div></div><div class="video-animation"><div data-pv="cond-backbone">
+    <ul data-role="sources"><li data-icon="doc">Curated sources</li><li data-icon="app">Sponsor standards</li><li data-icon="db">Sponsor templates</li></ul>
+    <p data-role="hub">Study schema</p>
+    <p data-role="draft">First draft · Protocol</p>
+    <p data-role="check">CRF → EDC check</p>
+    <p data-role="crf">CRF</p><p data-role="edc">EDC</p><p data-role="gap">Gap</p><p data-role="fixed">Resolved</p>
+  </div></div></div></div></div>
+<div class="padding-global is-feature is-white"><div class="container-large"><div class="feature-grid reverse"><div class="video-animation"><div data-pv="cond-protocol">
+    <p data-role="doc">Protocol</p><p data-role="v-before">v3</p><p data-role="v-after">v4</p>
+    <ul data-role="sections"><li>Objectives</li><li data-focus>Design</li><li>Population</li><li data-impact>Statistical analysis</li><li data-impact>Timeline &amp; sites</li></ul>
+    <p data-role="user">Sarah</p>
+    <p data-role="question">What sample size do we need for 90% power?</p>
+    <p data-role="app">Evidence app · sample size</p>
+    <p data-role="x-axis">Sample size</p><p data-role="y-axis">Power</p>
+    <p data-role="approve">Approve</p>
+  </div></div><div class="section-top left-align"><div class="text-size-label">Interactive protocol</div><h2 class="heading-style-h1">Turn a static protocol into an interactive study backbone</h2><div class="text-size-large">Explore a question in context, invoke the right evidence app, see downstream impact and carry the approved decision forward.</div><div class="feature_list-wrapper">
+  <div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Explore trade-offs<br/>Review impact<br/>Propagate decisions</p></div></div>
+</div></div></div></div></div>
+<div class="padding-global is-feature is-white"><div class="container-large"><div class="feature-grid"><div class="section-top left-align"><div class="text-size-label">Analysis &amp; reporting</div><h2 class="heading-style-h1">Move from cleaned data to validated code, TLFs and CSR</h2><div class="text-size-large">Keep specifications, code, validation, outputs and review history connected in one traceable flow.</div>
+  <div class="text-size-label af-list-label">Programming &amp; QC</div><div class="feature_list-wrapper"><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>SDTM / ADaM specifications<br/>R &amp; SAS generation<br/>Independent AI QC + expert approval</p></div></div></div>
+  <div class="text-size-label af-list-label">TLFs &amp; Reporting</div><div class="feature_list-wrapper"><div class="text-quote-wrapper is-list"><div class="text_quote-rtf w-richtext"><p>Natural-language TLF generation<br/>Fast iteration in sponsor format<br/>Complete CSR first draft + expert review</p></div></div></div>
+</div><div class="video-animation"><div data-pv="cond-report">
+    <ul data-role="stations"><li>Data</li><li>Specs</li><li>Code</li><li>QC</li><li>Outputs</li></ul>
+    <ul data-role="panels"><li>Cleaned data</li><li>SDTM / ADaM specifications</li><li>R &amp; SAS programs</li><li>Independent AI QC</li><li>TLFs &amp; CSR first draft</li></ul>
+    <ul data-role="spec"><li>DM → ADSL</li><li>AE → ADAE</li><li>LB → ADLB</li></ul>
+    <p data-role="qc-a">Program</p><p data-role="qc-b">Independent QC</p>
+    <p data-role="approve">Approve</p>
+    <p data-role="csr">CSR first draft</p>
+  </div></div></div></div></div>
+</section>
+
+<!-- ===== Governed by design : section sombre animée, carte unique + intégrations en pastilles de verre ===== -->
+<section data-bg="purple-gradient" class="section_layout is-gradient" data-af-bg="bonv" data-af-dark data-new-block><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="section-top left-align">
+    <div class="text-size-label">Governed by design</div>
+    <h2 class="text-size-display">Traceable by design. Flexible by deployment</h2>
+    <div class="text-size-large">Ground outputs in source, preserve lineage and versions, validate throughout, and keep expert approval at the point of decision.</div>
+  </div>
+  <div class="grid-3 margin-top" data-kit="cards" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    <div class="methodology-card"><img loading="lazy" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a7db606c61b8f475ce3d62a_Icon%204%201.svg" alt="" class="methodology-icon"/><h3 class="heading-style-h4" data-proposed>Independent AI QC</h3><div class="text-size-medium">Different AI models compare results.</div></div>
+    <div class="methodology-card"><img loading="lazy" src="https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7e/6a7db61430596965d6454f0c_Icon%205%201.svg" alt="" class="methodology-icon"/><h3 class="heading-style-h4">Expert approval</h3><div class="text-size-medium">Users accept, revise or reject.</div></div>
+  </div>
+  <div class="rp-chips"><span>CDISC</span><span>Veeva</span><span>Medidata</span><span>AWS</span><span>Microsoft Azure</span><span>Sponsor environment</span><mark data-fix="liste à vérifier par les product owners">✓?</mark></div>
+</div></div></section>
+
+<!-- ===== FAQ ===== -->
+<section class="section_layout is-white" data-new-block><div class="padding-global padding-section-main"><div class="container-large"><div data-pv="faq">
+  <div class="section-top left-align"><div class="text-size-label">FAQs</div><h2 class="text-size-display" data-proposed>Questions, answered</h2></div>
+  <div data-faq-list>
+    <div data-faq-item><h3 class="heading-style-h4">Does AI Conductor replace our statisticians, programmers or medical writers?</h3><div class="text-size-large">No. It drafts and runs checks. Your experts accept, revise or reject every output.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">Do we need an existing protocol to start?</h3><div class="text-size-large">No. You can start from a blank slate, early drafts or past trials.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">What happens when the protocol changes?</h3><div class="text-size-large">Changes are reflected across dependent documents, and your team reviews and approves them, with no manual re-sync across teams.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">How does it catch data collection gaps?</h3><div class="text-size-large">It compares your CRF requirements against incoming EDC data automatically, so mismatches surface early instead of in manual reconciliation.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">How do we trace an output back to its source?</h3><div class="text-size-large">Outputs are grounded in your source library, with versions, review history and an audit trail from raw data to the CSR.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">How is AI-generated code validated?</h3><div class="text-size-large">Independent AI QC compares results across different AI models, then an expert approves.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">Does it follow our templates and standards?</h3><div class="text-size-large">Templates and code libraries are configurable with your own, and outputs follow CDISC standards (SDTM and ADaM).</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">Can we start with one workflow?</h3><div class="text-size-large">Yes. Start with the workflow that matters now and expand to the full study lifecycle.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">What systems does it connect with?</h3><div class="text-size-large">It is built to fit alongside Veeva, Medidata, AWS, Microsoft Azure and your own environment.</div></div>
+    <div data-faq-item><h3 class="heading-style-h4">Can we test our study design before enrolling?</h3><div class="text-size-large">Yes. PhaseV’s simulation and optimization tools let teams see how a design performs across plausible scenarios before the first patient enrolls, and AI Conductor can connect to them. <mark data-fix="à confirmer">✓?</mark></div></div>
+  </div>
+</div></div></div></section>
+
+<!-- ===== Flexible entry points : plateforme en cartes ===== -->
+<section class="section_layout is-light"><div class="padding-global padding-section-large"><div class="container-large"><div class="grid-2 gap-2-5"><div class="animation-wrapper"><div data-current="conductor" data-pv="platform-connect-v2"></div></div><div class="section-top max-width-555"><div class="text-size-label">Flexible entry points</div><h2 class="text-size-display">Start where you need us</h2><div class="text-size-large">Begin from a blank slate, early drafts or past trials. Use one workflow, or connect the full study lifecycle through the same governed foundation.</div></div></div></div></div></section>
+
+<!-- ===== See it in your workflow : bloc manquant du document (Current Copy). Texte et lien vers la vidéo de démo ; formulaire retiré (Romain) ===== -->
+<section class="section_layout is-white" data-new-block><div class="padding-global padding-section-main"><div class="container-large">
+  <div class="af-demo">
+    <div class="section-top left-align">
+      <div class="text-size-label">See it in your workflow</div>
+      <h2 class="text-size-display">Start with the workflow that matters now</h2>
+      <div class="text-size-large">See how AI Conductor can connect study context, protocol decisions, programming and reporting in one governed workflow.</div>
+      <a class="ss-link text-size-large af-demo-link" href="#">Watch a Demo Video →</a> <mark data-fix="lien de la vidéo de démo à fournir">✓?</mark>
+    </div>
+  </div>
+</div></div></section>

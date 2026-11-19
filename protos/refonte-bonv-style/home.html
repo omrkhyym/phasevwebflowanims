@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PROTO style BonV · Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="_bv/tokens.css">
+<link rel="stylesheet" href="_bv/bonv.css">
+<link rel="stylesheet" href="_bv/pages.css">
+<style>
+  /* Home : chaîne de décisions (bloc « The problem ») */
+  .chain { margin-top: 80px; }
+  .chain svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .chain .node { fill: rgba(13,9,38,.8); stroke: rgba(244,244,244,.14); stroke-width: 1; }
+  .chain .lab { font-family: var(--bv-mono); font-size: 12px; letter-spacing: .12em; fill: var(--bv-grey); text-transform: uppercase; }
+  .chain .gap { font-family: var(--bv-mono); font-size: 10px; letter-spacing: .14em; fill: var(--bv-dim); }
+  @media (max-width: 640px) { .chain { overflow-x: auto; } .chain svg { min-width: 640px; } }
+</style>
+</head>
+<body class="bv-page">
+
+<nav class="nav" aria-label="Main">
+  <div class="bv-wrap">
+    <a class="nav__brand" href="home.html"><img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV"></a>
+    <div class="nav__links"><a href="#platform">Platform</a><a href="trial.html">Trial Optimizer</a><a href="clinops.html">ClinOps Optimizer</a><a href="bonv.html">Bon<b style="color:var(--bv-yellow);font-weight:inherit">V</b></a><a href="https://phasev-2026.webflow.io/case-studies">Case studies</a></div>
+    <a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Book a demo</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bv-wrap">
+    <div class="hero__copy" data-bv-group>
+      <span class="bv-label" data-bv-in>PhaseV / clinical development platform</span>
+      <h1 class="bv-hero" data-bv-in>Better decisions. <span class="bv-soft">Connected development.</span></h1>
+      <p class="bv-lead" data-bv-in>One clinical development platform. <span class="bv-soft">Statistical, causal and simulation methods, with AI-assisted workflows.</span></p>
+      <p class="body" data-bv-in>So teams can reduce avoidable risk, rework and delays.</p>
+      <div class="actions" data-bv-in><a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Book a demo</a><a class="bv-link" href="#platform">Explore the platform <span aria-hidden="true">→</span></a></div>
+    </div>
+
+    <div class="orbit" aria-hidden="true" data-bv-in>
+      <svg class="links" viewBox="0 0 560 560">
+        <!-- liens arrêtés au bord de l'anneau central et au bord de chaque produit -->
+        <path class="bv-flow" d="M280 184 L280 104"/>
+        <path class="bv-flow" d="M187 256 L114 236"/>
+        <path class="bv-flow" d="M226 359 L178 430"/>
+        <path class="bv-flow" d="M334 359 L382 430"/>
+        <path class="bv-flow" d="M373 256 L446 236"/>
+      </svg>
+      <div class="core-ring"><img src="_bv/logo/phasev-mark.svg" alt=""></div>
+      <div class="cap p-portfolio" style="left:50%;top:10%;flex-direction:column-reverse"><div class="bv-ring" style="--p:.6"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/distribution.svg" alt=""></div><span class="bv-cap-label">Portfolio</span></div>
+      <div class="cap p-trial" style="left:12%;top:40%"><div class="bv-ring" style="--p:.72"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/sliders.svg" alt=""></div><span class="bv-cap-label">Trial</span></div>
+      <div class="cap p-clinops" style="left:27%;top:84%"><div class="bv-ring" style="--p:.64"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/network.svg" alt=""></div><span class="bv-cap-label">ClinOps</span></div>
+      <div class="cap p-response" style="left:73%;top:84%"><div class="bv-ring" style="--p:.5"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/scatter.svg" alt=""></div><span class="bv-cap-label">Response</span></div>
+      <div class="cap p-conductor" style="left:88%;top:40%"><div class="bv-ring" style="--p:.58"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/document.svg" alt=""></div><span class="bv-cap-label">AI Conductor</span></div>
+    </div>
+  </div>
+  <span class="bv-hud hero__hud">Pursue. Design. Run. Learn. Deliver.</span>
+</header>
+
+<!-- The problem -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="head--2col head" data-bv-group>
+      <span class="bv-label" data-bv-in>The problem</span>
+      <h2 class="bv-h1" data-bv-in>Decisions are connected. <span class="bv-soft">Tools rarely are.</span></h2>
+      <p class="bv-lead" data-bv-in>The population you choose shapes the trial design. The design determines where the trial can run. Each approved choice flows into sites, data, analyses and documents. Yet these decisions are made in separate tools, by separate teams, through manual handoffs. Context gets lost, work gets redone, and the cost shows up as delay and avoidable risk.</p>
+    </div>
+    <div class="chain" aria-hidden="true" data-bv-in>
+      <svg viewBox="0 0 1200 150">
+        <g class="lab" text-anchor="middle"><text x="60" y="140">Population</text><text x="330" y="140">Design</text><text x="600" y="140">Sites</text><text x="870" y="140">Data</text><text x="1140" y="140">Documents</text></g>
+        <g><circle class="node" cx="60" cy="60" r="40"/><circle class="node" cx="330" cy="60" r="40"/><circle class="node" cx="600" cy="60" r="40"/><circle class="node" cx="870" cy="60" r="40"/><circle class="node" cx="1140" cy="60" r="40"/></g>
+        <g transform="translate(40 40)"><image href="_bv/icons/scatter.svg" width="40" height="40"/></g>
+        <g transform="translate(310 40)"><image href="_bv/icons/sliders.svg" width="40" height="40"/></g>
+        <g transform="translate(580 40)"><image href="_bv/icons/network.svg" width="40" height="40"/></g>
+        <g transform="translate(850 40)"><image href="_bv/icons/database.svg" width="40" height="40"/></g>
+        <g transform="translate(1120 40)"><image href="_bv/icons/document.svg" width="40" height="40"/></g>
+        <!-- chaque passage de relais est coupé : le contexte se perd -->
+        <g><path class="bv-flow bv-flow--static" d="M110 60 H175 M215 60 H280"/><path class="bv-flow bv-flow--static" d="M380 60 H445 M485 60 H550"/><path class="bv-flow bv-flow--static" d="M650 60 H715 M755 60 H820"/><path class="bv-flow bv-flow--static" d="M920 60 H985 M1025 60 H1090"/></g>
+        <g class="gap" text-anchor="middle"><text x="195" y="38">HANDOFF</text><text x="465" y="38">HANDOFF</text><text x="735" y="38">HANDOFF</text><text x="1005" y="38">HANDOFF</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- The PhaseV platform -->
+<section class="bv-section" id="platform">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in>The PhaseV platform</span>
+      <h2 class="bv-h1" data-bv-in>One platform <span class="bv-soft">for connected clinical development decisions.</span></h2>
+      <p class="bv-lead" data-bv-in style="color:var(--bv-grey);font-size:var(--bv-fs-body)">Each capability answers a focused question, while the evidence, assumptions and approved choices move forward with the decision instead of being rebuilt at each handoff.</p>
+    </div>
+    <div class="ask" data-tabs data-bv-in>
+      <ul class="ask__list" role="tablist" aria-label="Select the question your team needs to answer">
+        <li class="p-portfolio"><button role="tab" id="t1" aria-controls="q1"><i></i>What should we pursue?</button></li>
+        <li class="p-trial"><button role="tab" id="t2" aria-controls="q2"><i></i>How should we design it?</button></li>
+        <li class="p-clinops"><button role="tab" id="t3" aria-controls="q3"><i></i>Where should we run it?</button></li>
+        <li class="p-response"><button role="tab" id="t4" aria-controls="q4"><i></i>Who benefits?</button></li>
+        <li class="p-conductor"><button role="tab" id="t5" aria-controls="q5"><i></i>How do we carry decisions into execution?</button></li>
+      </ul>
+      <div>
+        <div class="ask__panel bv-glass p-portfolio" role="tabpanel" id="q1" aria-labelledby="t1">
+          <header><div class="bv-ring"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/distribution.svg" alt=""></div><div><span class="bv-label">What should we pursue?</span><h3>Portfolio Optimizer</h3></div></header>
+          <p>Prioritize indications, combinations, lifecycle paths, transactions and late-stage investments using causal evidence and explainable probability of success.</p>
+          <div class="chips"><span>Portfolio Strategy</span><span>R&amp;D Leadership</span><span>BD and M&amp;A</span><span>Investors</span></div>
+          <div class="actions"><a class="bv-link" href="https://phasev-2026.webflow.io/portfolio-optimizer">Explore Portfolio Optimizer <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="ask__panel bv-glass p-trial" role="tabpanel" id="q2" aria-labelledby="t2">
+          <header><div class="bv-ring"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/sliders.svg" alt=""></div><div><span class="bv-label">How should we design it?</span><h3>Trial Optimizer</h3></div></header>
+          <p>Explore assumptions, compare fixed, adaptive, Bayesian and customized designs, then optimize the selected path before protocol commitments are locked.</p>
+          <div class="chips"><span>Biostatistics</span><span>Clinical Development</span><span>Program Leadership</span></div>
+          <div class="actions"><a class="bv-link" href="trial.html">Explore Trial Optimizer <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="ask__panel bv-glass p-clinops" role="tabpanel" id="q3" aria-labelledby="t3">
+          <header><div class="bv-ring"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/network.svg" alt=""></div><div><span class="bv-label">Where should we run it?</span><h3>ClinOps Optimizer</h3></div></header>
+          <p>Assess eligibility feasibility, build an explainable country and site strategy, and simulate whether the proposed footprint can meet the enrollment plan.</p>
+          <div class="chips"><span>Clinical Operations</span><span>Feasibility</span><span>Study Teams</span><span>Program Leadership</span></div>
+          <div class="actions"><a class="bv-link" href="clinops.html">Explore ClinOps Optimizer <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="ask__panel bv-glass p-response" role="tabpanel" id="q4" aria-labelledby="t4">
+          <header><div class="bv-ring"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/scatter.svg" alt=""></div><div><span class="bv-label">Who benefits?</span><h3>Response Optimizer</h3></div></header>
+          <p>Separate predictable outcome variation from differential treatment benefit, then translate the result into a clearer patient and development strategy.</p>
+          <div class="chips"><span>Clinical Development</span><span>Program Teams</span><span>Biometrics</span><span>Translational Medicine</span></div>
+          <div class="actions"><a class="bv-link" href="https://phasev-2026.webflow.io/response-optimizer">Explore Response Optimizer <span aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="ask__panel bv-glass p-conductor" role="tabpanel" id="q5" aria-labelledby="t5">
+          <header><div class="bv-ring"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/document.svg" alt=""></div><div><span class="bv-label">How do we carry decisions into execution?</span><h3>AI Conductor</h3></div></header>
+          <p>Connect approved decisions to protocols, SAPs, data specifications, code, analyses, outputs and cross-functional review, while keeping experts in control.</p>
+          <div class="chips"><span>Medical Writing</span><span>Statistical Programming</span><span>Data Standards</span><span>Regulatory</span></div>
+          <div class="actions"><a class="bv-link" href="https://phasev-2026.webflow.io/ai-conductor">Explore AI Conductor <span aria-hidden="true">→</span></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why PhaseV -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in>Why PhaseV</span>
+      <h2 class="bv-h1" data-bv-in>Built differently <span class="bv-soft">for clinical development.</span></h2>
+    </div>
+    <div class="cards" data-bv-group>
+      <article class="card bv-glass" data-bv-in><div class="bv-ring" style="--p:.7"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/forest-plot.svg" alt=""></div><h3>Tech + clinical domain expertise</h3><p>Clinical-trial expertise combined with statistics, causal inference, machine learning, simulation, optimization and software engineering.</p></article>
+      <article class="card bv-glass" data-bv-in><div class="bv-ring" style="--p:.7"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/heatmap.svg" alt=""></div><h3>Modular by design. Connected by context</h3><p>Start with one analysis or workflow. Add capabilities, evidence sources and integrations when useful, without another disconnected system.</p></article>
+      <article class="card bv-glass" data-bv-in><div class="bv-ring" style="--p:.7"><svg class="bv-ring__arc" viewBox="0 0 100 100"><circle cx="50" cy="50" r="49.5" pathLength="1"/></svg><img src="_bv/icons/check.svg" alt=""></div><h3>Built around how your team works</h3><p>PhaseV complements sponsor teams, CROs and existing systems. Models, dashboards, governance and deployment are configured around the organization.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- Evidence -->
+<section class="bv-section">
+  <div class="bv-wrap figure">
+    <div data-bv-group>
+      <span class="bv-label" data-bv-in>Evidence · Top-5 pharma · Phase III breast cancer</span>
+      <p class="bv-display" data-bv-in>+50%</p>
+      <p class="cap-line" data-bv-in>faster recruitment <span class="bv-soft">at PhaseV-recommended sites.</span></p>
+      <p class="note" data-bv-in style="margin-top:20px"><mark data-fix="chiffres à harmoniser">0.5 / 0.3 ici, 0.43 / 0.28 dans les onglets Evidence de la Home, 0.4 / 0.3 sur ClinOps.</mark></p>
+      <div class="actions" data-bv-in style="margin-top:28px"><a class="bv-link" href="https://phasev-2026.webflow.io/case-studies">Explore case studies <span aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="chart-card bv-glass" data-bv-in>
+      <svg class="bv-viz" viewBox="0 0 640 300" role="img" aria-label="Patients per site per month: 0.5 at PhaseV sites, 0.3 at other sites">
+        <path class="grid" d="M40 70 H620 M40 170 H620"/>
+        <text x="40" y="40">PATIENTS / SITE / MONTH</text>
+        <rect x="40" y="86" width="500" height="44" rx="4" fill="#F4F4F4" fill-opacity=".1" stroke="#F4F4F4" stroke-width="1.6"/>
+        <rect x="40" y="186" width="300" height="44" rx="4" fill="none" class="ctrl"/>
+        <text x="40" y="78" style="fill:var(--bv-white)">PHASEV SITES  0.5</text>
+        <text x="40" y="178">OTHER SITES  0.3</text>
+        <path class="hl" d="M340 208 H540"/><circle cx="340" cy="208" r="3" fill="#E2C70A"/><circle cx="540" cy="208" r="3" fill="#E2C70A"/>
+        <text class="hl-label" x="540" y="250" text-anchor="end">FASTER</text>
+        <text x="40" y="286">350 SITES PREDICTED  ≈  360 ACTIVATED</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in>Testimonials</span>
+      <h2 class="bv-h1" data-bv-in>What our partners <span class="bv-soft">are saying.</span></h2>
+    </div>
+    <div class="quotes" data-bv-group>
+      <figure class="quote bv-glass bv-glass--rose" data-bv-in><blockquote>“This was an amazing collaboration between Enlivex and PhaseV leading to the identification of a higher-responder group to our drug Allocetra in Knee osteoarthritis patients. …”</blockquote><footer><b>Oren Hershkovitz, Ph.D.</b><span class="bv-label">CEO, Enlivex</span></footer></figure>
+      <figure class="quote bv-glass bv-glass--rose" data-bv-in><blockquote>“… Their expertise helped us identify a promising subpopulation that otherwise would not have been detected. …”</blockquote><footer><b>Stu Bailey, D.Phil.</b><span class="bv-label">SVP Head of Clinical Measurement Sciences, EMD Serono</span></footer></figure>
+      <figure class="quote bv-glass bv-glass--rose" data-bv-in><blockquote>“Leveraging PhaseV’s ClinOps Optimizer was a game-changer for us. We identified top-performing sites with proven recruitment success while also achieving geographic and demographic diversity across our trial footprint.”</blockquote><footer><b>VP, Clinical Operations</b><span class="bv-label">Big pharma company</span></footer></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Latest news -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="head" data-bv-group>
+      <span class="bv-label" data-bv-in>Resources</span>
+      <h2 class="bv-h1" data-bv-in>Latest news.</h2>
+    </div>
+    <ul class="news" data-bv-group>
+      <li data-bv-in><a href="https://phasev-2026.webflow.io/resources/better-odds-of-picking-the-right-dose-at-the-same-sample-size"><span class="bv-label">Nov 9, 2026</span><strong>Better odds of picking the right dose at the same sample size</strong><em>Read →</em></a></li>
+      <li data-bv-in><a href="https://phasev-2026.webflow.io/resources/we-simulated-60-million-trials-heres-what-we-found"><span class="bv-label">Apr 8, 2026</span><strong>We simulated 60 million trials. Here’s what we found</strong><em>Read →</em></a></li>
+      <li data-bv-in><a href="https://phasev-2026.webflow.io/resources/real-world-data-is-noisy-your-model-has-to-know-that"><span class="bv-label">Blog post</span><strong>Real-world data is noisy. Your model has to know that</strong><em>Read →</em></a></li>
+    </ul>
+    <div class="actions" style="margin-top:40px"><a class="bv-link" href="https://phasev-2026.webflow.io/resources">All insights <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap end" data-bv-group>
+    <img src="_bv/logo/phasev-mark.svg" alt="" width="72" height="72" data-bv-in>
+    <h2 class="bv-h1" data-bv-in data-proposed>Start with one decision. <span class="bv-soft">Connect the rest when you’re ready.</span></h2>
+    <div class="actions" data-bv-in style="justify-content:center"><a class="bv-btn" href="https://phasev-2026.webflow.io/contact">Book a demo</a><a class="bv-link" href="https://phasev-2026.webflow.io/contact">Contact us <span aria-hidden="true">→</span></a></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="bv-wrap">
+    <img src="_bv/logo/phasev-logotype-dark-bg.svg" alt="PhaseV">
+    <nav aria-label="Footer"><a href="trial.html">Trial Optimizer</a><a href="clinops.html">ClinOps Optimizer</a><a href="bonv.html">BonV</a><a href="https://phasev-2026.webflow.io/company">Company</a><a href="https://phasev-2026.webflow.io/resources">Resources</a></nav>
+    <span class="bv-label bv-label--dim">Adaptive. Causal. Intuitive.</span>
+  </div>
+</footer>
+
+<script src="_bv/bonv-bg.js"></script>
+<script src="_bv/bonv-mark.js"></script>
+<script src="_bv/bonv-motion.js"></script>
+<script src="_bv/pages.js"></script>
+</body>
+</html>

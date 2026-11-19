@@ -1,4 +1,4 @@
-﻿# Retours généraux sur le site (2026-11-19)
+# Retours généraux sur le site (2026-11-19)
 
 Liste des commentaires de Romain, traitée du plus simple au plus complexe. Statuts : à faire, en discussion, en attente, fait (à vérifier), validé.
 

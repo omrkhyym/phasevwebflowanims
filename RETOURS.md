@@ -28,7 +28,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 
 | # | Point | Précisions | Statut |
 |---|---|---|---|
-| 1 | Navigation : style du lien de la page courante | À décider ensemble | en discussion |
+| 1 | Navigation : style du lien de la page courante | Pastille sombre fixe sur le lien courant (Platform sur les pages produit), point parasite de Platform corrigé. Release v0.28.0 | validé |
 | 9 | Flexible Entry Point : animation | Bloc de bas de page des produits (complémentarité des produits). Le client aime le concept, pas le style : brainstorm | en discussion |
 | 10 | BonV : vidéo hors YouTube | Réencoder proprement le dégradé, player vidéo maison. En parler avant | en discussion |
 | 16 | Careers : offres Greenhouse | Page qui récupère les offres de Greenhouse. Méthode à voir ensemble | en discussion |
@@ -38,7 +38,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 | # | Point | Précisions | Statut |
 |---|---|---|---|
 | 3 | Retours à la ligne | Romain indique lesquels | en attente |
-| 15 | Company : fond des portraits | Romain fournit les images | en attente |
+| 15 | Company : fond des portraits | Fait par Romain | fait |
 
 ## Relevé des liens morts (point 2, 2026-11-19)
 

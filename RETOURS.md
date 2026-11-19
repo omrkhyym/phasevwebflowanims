@@ -45,7 +45,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 Exploration du site publié (`phasev-2026.webflow.io`, publication du 2026-11-19 à 21:33) : 40 pages, chaque lien testé.
 
 **Boutons sans destination (`#`)**
-- Portfolio : « Explore an example analysis » (header).
+- Portfolio : « Explore an example analysis » (header). **Fait** : bouton supprimé.
 - AI Conductor et BonV : « Watch a Demo Video » (See it in your workflow). **Fait** : section entière masquée sur les deux pages, en attendant le lien de la vidéo.
 
 **Cartes case studies vers des fiches archivées (404)**

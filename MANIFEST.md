@@ -142,6 +142,11 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
   - Surtitre « Evidence » → « Case studies » sur Home et Portfolio : nouveau bloc texte `text-size-label text-color-yellow`, l'ancien div **supprimé** (son texte n'est pas modifiable par l'API). Response disait déjà « Case studies », les autres pages n'ont pas ce surtitre.
   - Gros chiffres en bas des cartes case studies (`cs-fig`) **supprimés** : Home (1), ClinOps (3), Response (1), Portfolio (1). Décision de Romain : ne pas garder d'éléments masqués quand il demande un retrait.
   - Boutons en contour passés en « Purple » : Home, les deux « All insights » (variante « Transparent on White ») ; heros AI Conductor et BonV, « Learn more » (variante « Transparent »).
+- **Graisse des titres de hero alignée sur les titres de section** (retour 4 de Romain : heros en gras, autres titres non). Tous en 300 :
+  - combo `text-size-display.is-hero` : `font-weight` 500 → 300 (heros des 6 pages produit et de Company) ;
+  - Contact, code de page (head) : `[data-af-contact] .section-top h1` 500 → 300 ;
+  - Home et Privacy Policy étaient déjà en 300 (`text-size-display`).
+  - Reste : h1 des headers Resources et Case Studies, en 500 dans `src/resources.js` et `src/case-studies.js` (`.section_header.is-resources .heading-style-h1`), à passer en 300 avec la release du point 18 qui refait ces headers.
 - **Company, « PhaseV at a glance » : chiffres 2026 du client** (tableau « Last year → This year », accord de Romain). Sponsors and CROs 50+ → 55+ ; Patient-level records 10M+ → 20M+. Inchangés : 10 (top 20 pharma), 100+ (clinical trials), 50+ (disease models), 10+ (papers). Libellés non touchés.
 
 - **CMS Case Studies : 12 fiches archivées** (liste client « LIST TO KEEP_DELETE CASE STUDIES », accord de Romain). Archivées, pas supprimées : réversibles. Disparaissent du site à la prochaine publication de Romain. Archivées : ClinOps #3 Sickle Cell, #4 IgA, #5 Vitiligo ; Trial #3 Denali, #4 N-of-1 ASO, #5 MASH 2/3, #6 Seamless 2/3 ; Portfolio #2 MASH Indication, #3 Trispecific, #5 HLA-G, #6 PD-L1, #7 Hunter. Restent 9 fiches : NSCLC, COPD, Infectious Disease, Rheumatic, Oral Insulin, ALS, Lupus, Pipeline Acquisition, et Obesity (à fusionner avec Pipeline Acquisition, contenu à reprendre plus tard).

@@ -20,7 +20,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 |---|---|---|---|
 | 4 | Graisse des titres | Les headers sont en gras, les autres titres non : harmoniser en non gras. Fait : heros produit, Company et Contact passés de 500 à 300 (comme les titres de section). Validé par Romain pour les pages faites. Heros des fiches Resources et Case Studies passés en 300 avec la release v0.27.0 | fait, à vérifier |
 | 18 | Resources et Case Studies : header réduit | Slider du header retiré, header comme Privacy Policy, titre et intro en Lorem Ipsum, surtitre jaune comme sur tous les headers (nom de la page). Fait, release v0.27.0 | validé |
-| 2 | Liens qui ne mènent nulle part | Scanner toutes les pages, lister tous les liens morts (pas seulement le header Portfolio). Relevé fait le 2026-11-19, voir plus bas | en discussion |
+| 2 | Liens qui ne mènent nulle part | Scanner toutes les pages, lister tous les liens morts (pas seulement le header Portfolio). Relevé fait le 2026-11-19, voir plus bas. Tout est corrigé sauf les cartes case studies en 404, réglées par le point 8 | en cours |
 | 7 | Footer : titre et texte éditables par page | Le footer actuel devient celui par défaut si rien n'est rempli. Reprendre les textes des anciennes pages de phasevtrials.com, sauf le défaut de l'époque (titre seul « Better decisions / Connected development ») | à faire |
 | 8 | Case studies des pages produit dynamiques | Collection List CMS filtrée par produit : une étude supprimée ne s'affiche plus | à faire |
 
@@ -56,9 +56,10 @@ Exploration du site publié (`phasev-2026.webflow.io`, publication du 2026-11-19
 **Liens dans le texte des articles Resources**
 - « Learning more from less… » : deux liens vers l'ancien site (`phasevtrials.com/post/…`, 404) ; les articles existent sous `/resources/adaptive-trial-designs-will-increase-clinical-trial-speed-safety-and-effectiveness` et `/resources/causal-models-can-extend-what-we-learn-from-trials`.
 - « Adaptive trial designs will increase… » : lien « estimated in 2013 » vers un PDF HubSpot (Tufts) qui n'existe plus (404).
+- **Fait** : les deux liens repointés sur les articles du nouveau site, le lien du PDF retiré (texte gardé).
 
 **Slider Publications & Media (Resources)**
-- « New ML-Powered Solution… » (pharmaceuticalmanufacturer.media, 7 mars 2024) : article supprimé chez l'éditeur (404).
+- « New ML-Powered Solution… » (pharmaceuticalmanufacturer.media, 7 mars 2024) : article supprimé chez l'éditeur (404). **Fait** : entrée archivée dans le CMS.
 
 **Sans problème (pour mémoire)**
 - Menu (Platform, burger) et « Back to top » : `#` voulu, le comportement est en JS.

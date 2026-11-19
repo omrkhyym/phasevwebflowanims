@@ -28,8 +28,9 @@ html.pvn-lock, html.pvn-lock body{overflow:hidden}
 .pvn.is-float .pvn-bg{opacity:1;transform:none}
 .pvn-logo svg{display:block;width:100%;height:100%}
 .pvn-link{font:inherit;transition:color .25s ease}
-.pvn-link:focus-visible, .pvn.is-open .pvn-toggle, .pvn-link[aria-current="page"]{color:#f8f8f8}
-.pvn-link[aria-current="page"]::after{content:'';position:absolute;left:50%;bottom:.1rem;width:3px;height:3px;border-radius:50%;background:#928acd;transform:translateX(-50%)}
+.pvn-link:focus-visible, .pvn.is-open .pvn-toggle, .pvn-link[aria-current="page"], .pvn-toggle.is-current{color:#f8f8f8}
+/* page en cours : pastille sombre fixe, même forme que la pastille de survol (qui passe dessous) */
+.pvn-link[aria-current="page"], .pvn-toggle.is-current{background-color:rgba(10,8,30,.55);box-shadow:inset 0 0 0 .5px rgba(248,248,248,.12)}
 .pvn :focus-visible{outline:2px solid rgba(248,248,248,.6);outline-offset:2px}
 .pvn-chev{transition:transform .4s ${OUT}}
 .pvn.is-open .pvn-chev{transform:rotate(180deg)}
@@ -114,7 +115,10 @@ export function initNav(root) {
   /* page en cours, couleur de chaque produit */
   const color = el => el.dataset.col !== undefined && el.dataset.col !== '' ? COLS[+el.dataset.col % COLS.length] : '#F4F4F4';
   items.forEach(it => { it.style.setProperty('--c', color(it)); if (samePage(it)) it.setAttribute('aria-current', 'page'); });
-  root.querySelectorAll('.pvn-links a.pvn-link').forEach(a => { if (samePage(a)) a.setAttribute('aria-current', 'page'); });
+  // Platform (bouton sans adresse) exclu : sans href, il passait pour un lien vers la page en cours sur toutes les pages
+  root.querySelectorAll('.pvn-links a.pvn-link').forEach(a => { if (a !== toggle && a.hasAttribute('href') && samePage(a)) a.setAttribute('aria-current', 'page'); });
+  // page produit : la page en cours est dans le panneau Platform, c'est lui qui porte la pastille
+  if (toggle && items.some(it => it.getAttribute('aria-current') === 'page')) toggle.classList.add('is-current');
 
   /* menu plein écran : rempli à partir de la barre (produits, liens, bouton) */
   if (sheetBox && !sheetBox.children.length) {
@@ -270,6 +274,7 @@ export function initNav(root) {
     off.forEach(f => f()); clearTimeout(tOpen); clearTimeout(tClose); clearTimeout(tClear);
     clearPreview(); setSheet(false);
     root.classList.remove('is-open', 'is-float', 'is-hidden', 'is-sheet');
+    toggle && toggle.classList.remove('is-current');
     delete root.dataset.pvInit;
   };
 }

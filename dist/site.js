@@ -705,8 +705,8 @@ function me(e) {
 	if (c.forEach((e) => {
 		e.style.setProperty("--c", h(e)), J(e) && e.setAttribute("aria-current", "page");
 	}), e.querySelectorAll(".pvn-links a.pvn-link").forEach((e) => {
-		J(e) && e.setAttribute("aria-current", "page");
-	}), f && !f.children.length) {
+		e !== a && e.hasAttribute("href") && J(e) && e.setAttribute("aria-current", "page");
+	}), a && c.some((e) => e.getAttribute("aria-current") === "page") && a.classList.add("is-current"), f && !f.children.length) {
 		let t = document.createElement("div");
 		t.className = "pvn-s-label", t.textContent = (a ? a.textContent : "Platform").trim(), f.appendChild(t);
 		let n = null;
@@ -824,7 +824,7 @@ function me(e) {
 		I = t, n && (L = Math.sign(n) === Math.sign(L) ? L + n : n, L > 48 && t > 240 && !b && !P ? V(!0) : (L < -24 || t < 120) && V(!1));
 	};
 	return m(window, "scroll", H, { passive: !0 }), H(), function() {
-		p.forEach((e) => e()), clearTimeout(k), clearTimeout(A), clearTimeout(j), O(), F(!1), e.classList.remove("is-open", "is-float", "is-hidden", "is-sheet"), delete e.dataset.pvInit;
+		p.forEach((e) => e()), clearTimeout(k), clearTimeout(A), clearTimeout(j), O(), F(!1), e.classList.remove("is-open", "is-float", "is-hidden", "is-sheet"), a && a.classList.remove("is-current"), delete e.dataset.pvInit;
 	};
 }
 var K, q, he, J, ge = e((() => {
@@ -845,8 +845,9 @@ html.pvn-lock, html.pvn-lock body{overflow:hidden}
 .pvn.is-float .pvn-bg{opacity:1;transform:none}
 .pvn-logo svg{display:block;width:100%;height:100%}
 .pvn-link{font:inherit;transition:color .25s ease}
-.pvn-link:focus-visible, .pvn.is-open .pvn-toggle, .pvn-link[aria-current="page"]{color:#f8f8f8}
-.pvn-link[aria-current="page"]::after{content:'';position:absolute;left:50%;bottom:.1rem;width:3px;height:3px;border-radius:50%;background:#928acd;transform:translateX(-50%)}
+.pvn-link:focus-visible, .pvn.is-open .pvn-toggle, .pvn-link[aria-current="page"], .pvn-toggle.is-current{color:#f8f8f8}
+/* page en cours : pastille sombre fixe, même forme que la pastille de survol (qui passe dessous) */
+.pvn-link[aria-current="page"], .pvn-toggle.is-current{background-color:rgba(10,8,30,.55);box-shadow:inset 0 0 0 .5px rgba(248,248,248,.12)}
 .pvn :focus-visible{outline:2px solid rgba(248,248,248,.6);outline-offset:2px}
 .pvn-chev{transition:transform .4s ${q}}
 .pvn.is-open .pvn-chev{transform:rotate(180deg)}

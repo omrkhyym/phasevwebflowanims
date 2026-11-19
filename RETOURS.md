@@ -12,14 +12,14 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 | 17 | Contact : éclaircir le fond des champs | 1re passe trop timide (10 %), 2e passe à 20 % | fait, à vérifier |
 | 14 | BonV : intégrer une FAQ | Lorem Ipsum en attendant le vrai contenu | fait, à vérifier |
 | 5 | Case studies : surtitre « Evidence » remplacé par « Case studies », gros chiffres retirés du bas des cartes | Home et toutes les autres pages. « Evidence » n'existe plus comme section. Anciens surtitres et chiffres supprimés, pas masqués | fait, à vérifier |
-| 6 | Slider du bas (All insights) : plus de bouton en contour seul | Home et toutes les autres pages, heros compris. Fait : Home (2 « All insights ») et heros AI Conductor et BonV (« Learn more ») passés en Purple. Restent les sliders des headers Resources et Case Studies, qui partent au point 18. Ensuite : supprimer les variantes « Transparent » et « Transparent on White » du composant button | en cours |
+| 6 | Slider du bas (All insights) : plus de bouton en contour seul | Home et toutes les autres pages, heros compris. Fait : Home (2 « All insights ») et heros AI Conductor et BonV (« Learn more ») passés en Purple. Sliders des headers Resources et Case Studies supprimés (point 18). Variantes en contour du composant button supprimées (Transparent, Transparent on White, Purple Transparent), ainsi que les composants inutilisés dm-panel et transparent-card | fait, à vérifier |
 
 ## Moyens
 
 | # | Point | Précisions | Statut |
 |---|---|---|---|
-| 4 | Graisse des titres | Les headers sont en gras, les autres titres non : harmoniser en non gras. Fait : heros produit, Company et Contact passés de 500 à 300 (comme les titres de section). Validé par Romain pour les pages faites. Reste : Resources et Case Studies, avec le point 18 | en cours |
-| 18 | Resources et Case Studies : header réduit | Slider du header retiré, header comme Privacy Policy, titre et intro en Lorem Ipsum | à faire |
+| 4 | Graisse des titres | Les headers sont en gras, les autres titres non : harmoniser en non gras. Fait : heros produit, Company et Contact passés de 500 à 300 (comme les titres de section). Validé par Romain pour les pages faites. Heros des fiches Resources et Case Studies passés en 300 avec la release v0.27.0 | fait, à vérifier |
+| 18 | Resources et Case Studies : header réduit | Slider du header retiré, header comme Privacy Policy, titre et intro en Lorem Ipsum. Fait, release v0.27.0 | fait, à vérifier |
 | 2 | Liens qui ne mènent nulle part | Scanner toutes les pages, lister tous les liens morts (pas seulement le header Portfolio) | à faire |
 | 7 | Footer : titre et texte éditables par page | Le footer actuel devient celui par défaut si rien n'est rempli. Reprendre les textes des anciennes pages de phasevtrials.com, sauf le défaut de l'époque (titre seul « Better decisions / Connected development ») | à faire |
 | 8 | Case studies des pages produit dynamiques | Collection List CMS filtrée par produit : une étude supprimée ne s'affiche plus | à faire |

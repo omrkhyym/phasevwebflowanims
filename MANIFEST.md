@@ -18,10 +18,10 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.18.0` | `portfolio-hero-bg`, `portfolio-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux de Build conviction, `data-mode` rank et dist, et un dans `.ss-anim` du bloc Evidence, rank), `platform-connect-v2`, `faq` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.24.0` | `conductor-hero-bg`, `conductor-hero-slot` ; refonte : `cond-answer` (panneau `cond-panel`), `cond-dose` (`.ss-anim` du Proof), `cond-backbone`, `cond-protocol`, `cond-report` (panneaux des étapes, classe `cond-mount`), `platform-connect-v2`, `faq` ; texte des scènes dans les enfants `[data-role]` |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.24.0` | `bonv-hero-bg`, `bonv-hero-slot` ; refonte : `bonv-answer` (panneau `cond-panel`), `bonv-ask`, `bonv-collab`, `bonv-orch` (panneaux des étapes, classe `cond-mount`), `faq` absent (pas de FAQ dans le document) ; texte des scènes dans les enfants `[data-role]` |
-| Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.21.0` | `case-studies` (attribut sur le `container-large` de la section des cartes), slider `[data-swiper="feature"]` du header |
-| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.21.0` | `case-study` (attribut sur `main-wrapper`) |
-| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.22.0` | `data-af-lib` (container de la liste et des filtres Finsweet) |
-| Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.22.0` | `data-af-article` (container du texte de l'article) |
+| Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.27.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
+| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.27.0` | `case-study` (attribut sur `main-wrapper`) |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.27.0` | `data-af-lib` (container de la liste et des filtres Finsweet) ; header réduit natif (comme Privacy Policy), sans slider |
+| Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.27.0` | `data-af-article` (container du texte de l'article) |
 
 ### Modules
 
@@ -82,6 +82,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.27.0` | `44feb13` | Resources et Case Studies : règles du slider de header retirées (`src/resources.js`, `src/case-studies.js`), `initCaseStudiesFeatured` supprimé de l'entrée `case-studies.js` ; titre des heros de fiche (`.section_header.is-resources .heading-style-h1`) 500 → 300. Seuls `dist/resources.js` et `dist/case-studies.js` changent |
 | `v0.26.0` | (voir journal) | `site.js` monte `src/back-to-top.js` (Back to top du footer avec easing) |
 | `v0.25.1` | (voir journal) | Sliders : style de la flèche grisée (`is-disabled`) dans `src/sliders.js`, avant le Clean up des classes Webflow |
 | `v0.25.0` | (voir journal) | Nettoyage : `site.js` monte `src/sliders.js` (sliders unifiés) |
@@ -136,6 +137,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-11-19
 
+- **Composant `button` : variantes en contour supprimées** (retour 6 de Romain, accord sur le nettoyage). Après passage de tous les boutons en contour en « Purple », plus aucune instance n'utilisait « Transparent », « Transparent on White » ni « Purple Transparent » (pages et composants vérifiés) ; les trois variantes sont supprimées. Restent « Yellow » (base) et « Purple ». Composants inutilisés `dm-panel` et `transparent-card` (0 instance, dont le bouton avait une variante en contour par défaut) supprimés aussi. `dm-panel_list-item` (4 instances) conservé.
+- **Resources et Case Studies : header réduit** (retour 18 de Romain). Sur les deux bibliothèques, ancien header `section_header is-resources` (slider `[data-swiper="feature"]` des contenus mis en avant + flèches) **supprimé**, remplacé par une section comme Privacy Policy : `section_layout is-gradient` (`data-bg="purple-gradient"`) > `padding-global padding-section-contact` > `container-large` > `section-top` avec h1 `text-size-display text-color-alternate` (« Resources », « Case studies ») et intro `text-size-large text-color-alternate` en Lorem Ipsum. Code de page (head) : CSS du slider retiré (Resources garde le script Finsweet ; Case Studies vide). Release `v0.27.0` (`44feb13`), URLs jsDelivr vérifiées (200) ; loaders passés en `v0.27.0` sur Resources et son modèle (`v0.22.0` avant), Case Studies et son modèle (`v0.21.0` avant). Ferme aussi le point 4 sur les heros des fiches (titre en 300).
 - **Retours généraux de Romain : tâches rapides** (suivi dans `RETOURS.md`, points 13, 12, 11, 17, 14, 5, 6). Designer et code de page seulement, pas de release.
   - BonV : section Flexible entry points **supprimée** (demande explicite de Romain) ; section cas client sombre (`ss-title` « From a single question to a working project team ») masquée ; section vidéo `#bonv-video` passée de `is-white` à `is-light` ; nouvelle section FAQ `is-light` (6 questions Lorem Ipsum, structure `faq-wrap` `data-pv="faq"` comme AI Conductor, montée par `site.js`) entre Governed et See it in your workflow.
   - Contact : fond des champs du formulaire éclairci dans le code de page (head), en deux passes (la première jugée trop timide) : fond `rgba(255,255,255,.04)` → `.2`, focus `.06` → `.26`, bord `.14` → `.24` (survol `.36`, focus `.7`), placeholder `.38` → `.5`. Reste du bloc inchangé.
@@ -498,7 +501,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ## Points ouverts
 
-- Retours généraux du 2026-11-19 : avancement point par point dans `RETOURS.md`. Boutons en contour restants : sliders des headers Resources (« Read More ») et Case Studies (« Read the case »), qui partent au point 18 ; ensuite supprimer les variantes « Transparent » et « Transparent on White » du composant `button` (vérifier d'abord qu'aucune instance ne les utilise, y compris dans les composants).
+- Retours généraux du 2026-11-19 : avancement point par point dans `RETOURS.md`. Points 13, 12, 11, 17, 14, 5, 6, 4, 18 faits, à vérifier après publication.
 - Case Studies : fiche Obesity à fusionner avec Pipeline Acquisition (édition plus tard) ; ligne « Oncology RO » de la liste client sans fiche CMS (à créer ?) ; cartes case studies statiques des pages produit à vérifier, certaines peuvent pointer vers des fiches archivées.
 - Terms of Service : page à créer si le client en a une (lien masqué dans le footer). SEO des modèles CMS (Resources, Case Studies) à lier aux champs dans le Designer. Redirections `/evidence` → `/case-studies` si besoin. Contenu client : voir le doc « PhaseV website: review notes ».
 - AI Conductor et BonV, contenu client : liens des boutons « Watch a Demo Video » (`#`) ; AI Conductor : usage public des chiffres Proof (10 partenaires, top-5), accord du sponsor pour l'exemple dose, liste des intégrations, CRF-to-EDC, réponse FAQ sur la simulation ; BonV : 2 chiffres d'enquête et leur source, métrique du cas client.

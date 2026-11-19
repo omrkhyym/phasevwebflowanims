@@ -230,13 +230,7 @@ html body [data-cs-tags], html body [data-cs-tags] [data-cs-tags-list] .w-dyn-it
 html body [data-cs-tags] > [data-cs-tags-list]:first-child .w-dyn-item:first-child [data-cs-tag]::before,
 html body [data-cs-tags] > [data-cs-tags-list]:has(.w-dyn-empty) + [data-cs-tags-list] .w-dyn-item:first-child [data-cs-tag]::before{ display:none; }
 
-/* Case Studies, hero de la bibliothèque (slider) : sans le chiffre clé, description sur 3 lignes au plus ; le bouton reste visible */
-html body [data-swiper="feature"] [data-cs-kpi]{ display:none !important; }
-html body [data-swiper="feature"] .section-top.is-featured .text-size-large{ display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-
-/* Case Studies, bibliothèque : filtres plus près du hero et des cartes. Écart hero → filtres : 8rem à l'origine
-   (bas du hero 3rem + haut de la section 5rem), ramené à 3rem ; filtres → cartes : 4rem → 1.25rem */
-html body .section_header:has([data-swiper="feature"]) .padding-section-home_header{ padding-bottom:1.5rem; }
+/* Case Studies, bibliothèque : filtres plus près du header réduit et des cartes ; filtres → cartes : 4rem → 1.25rem */
 html body .padding-section-large:has(> [data-pv="case-studies"]){ padding-top:1.5rem; }
 html body [data-pv="case-studies"] .cs-filters{ margin-bottom:1.25rem; }
 @media (max-width:991px){ html body .padding-section-large:has(> [data-pv="case-studies"]){ padding-top:1.25rem; } html body [data-pv="case-studies"] .cs-filters{ margin-bottom:1rem; } }
@@ -266,9 +260,10 @@ html body [data-cs-related] [data-cs-all]{ color:#141238; border-bottom-color:rg
    Section blanche → carte gris clair ; section light → carte blanche (verre clair) ; section sombre → verre sombre. */
 html body .section_layout.is-light [data-cs-card]{ background:var(--af-glass); }
 
-/* Case Studies, heros (bibliothèque et fiche) : alignés sur les heros produit validés.
-   Titre en Roboto medium, même taille ; texte léger ; catégories en mono, claires ; image dans un cadre arrondi au bord fin */
-html body .section_header.is-resources .heading-style-h1{ font-weight:500; font-size:clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); line-height:1.06; letter-spacing:-.02em; color:#f8f8f8; }
+/* Case Studies, hero de la fiche : aligné sur les heros produit validés.
+   Titre léger comme tous les titres (retour 2026-11-19), même taille ; catégories en mono, claires ; image dans un cadre arrondi au bord fin.
+   La bibliothèque n'a plus de slider dans son header (header réduit natif, comme Privacy Policy). */
+html body .section_header.is-resources .heading-style-h1{ font-weight:300; font-size:clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); line-height:1.06; letter-spacing:-.02em; color:#f8f8f8; }
 /* catégories du hero (fond sombre) en jaune, dans les deux heros (règle des surtitres sur fond sombre) */
 html body .section_header.is-resources .featured-label-div .text-size-label,
 html body .section_header.is-resources .featured-label-div [data-cs-tag]{ color:var(--_colors---primary--yellow, #e1c721); }
@@ -309,16 +304,6 @@ function fixLinks(scope) {
 function hideEmptyStats(scope) {
   scope.querySelectorAll('[data-cs-stat]').forEach(el => { if (isEmpty(el.querySelector('[data-cs-stat-n]'))) el.setAttribute('data-cs-hidden', ''); });
   scope.querySelectorAll('[data-cs-kpi]').forEach(el => { if (isEmpty(el.querySelector('[data-cs-kpi-n]'))) el.setAttribute('data-cs-hidden', ''); });
-}
-
-/* ---------- header de la bibliothèque : chiffre clé et lien des cas mis en avant ---------- */
-export function initCaseStudiesFeatured(root) {
-  if (root.dataset.pvInit) return () => {};
-  root.dataset.pvInit = '1';
-  injectCSS();
-  hideEmptyStats(root);
-  fixLinks(root);   // le bouton « Read the case » : le slug est porté par son conteneur
-  return () => {};
 }
 
 /* ---------- bibliothèque : filtres Product + Therapeutic area ---------- */

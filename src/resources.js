@@ -22,14 +22,10 @@ html body [data-cs-tags], html body [data-cs-tags] [data-cs-tags-list] .w-dyn-it
 html body [data-cs-tags] > [data-cs-tags-list]:first-child .w-dyn-item:first-child [data-cs-tag]::before,
 html body [data-cs-tags] > [data-cs-tags-list]:has(.w-dyn-empty) + [data-cs-tags-list] .w-dyn-item:first-child [data-cs-tag]::before{ display:none; }
 
-/* Case Studies, hero de la bibliothèque (slider) : sans le chiffre clé, description sur 3 lignes au plus ; le bouton reste visible */
-html body [data-swiper="feature"] [data-cs-kpi]{ display:none !important; }
-html body [data-swiper="feature"] .section-top.is-featured .text-size-large{ display:-webkit-box; -webkit-line-clamp:3; line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-
-html body .section_header:has([data-swiper="feature"]) .padding-section-home_header{ padding-bottom:1.5rem; }
-/* Case Studies, heros (bibliothèque et fiche) : alignés sur les heros produit validés.
-   Titre en Roboto medium, même taille ; texte léger ; catégories en mono, claires ; image dans un cadre arrondi au bord fin */
-html body .section_header.is-resources .heading-style-h1{ font-weight:500; font-size:clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); line-height:1.06; letter-spacing:-.02em; color:#f8f8f8; }
+/* Heros des fiches (article) : alignés sur les heros produit validés.
+   Titre léger comme tous les titres (retour 2026-11-19), même taille ; catégories en mono, claires ; image dans un cadre arrondi au bord fin.
+   La bibliothèque n'a plus de slider dans son header (header réduit natif, comme Privacy Policy). */
+html body .section_header.is-resources .heading-style-h1{ font-weight:300; font-size:clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); line-height:1.06; letter-spacing:-.02em; color:#f8f8f8; }
 /* catégories du hero (fond sombre) en jaune, dans les deux heros (règle des surtitres sur fond sombre) */
 html body .section_header.is-resources .featured-label-div .text-size-label,
 html body .section_header.is-resources .featured-label-div [data-cs-tag]{ color:var(--_colors---primary--yellow, #e1c721); }
@@ -43,7 +39,7 @@ html body .section_header.is-resources .featured-image{ display:block; width:100
 
 
 /* ===================== Resources (bibliothèque et article) =====================
-   Mêmes règles que Case Studies. Le hero (.section_header.is-resources, slider [data-swiper="feature"]) reprend déjà
+   Mêmes règles que Case Studies. Le hero de l'article (.section_header.is-resources) reprend déjà
    les règles des heros Case Studies. Les filtres sont ceux de Finsweet (radios + recherche), la liste est la liste CMS. */
 
 /* marges réduites autour des filtres */

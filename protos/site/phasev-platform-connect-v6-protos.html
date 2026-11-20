@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plateforme connectée, v6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141238; --white:#f8f8f8; --light:#f1f0f7; --mono:'Roboto Mono', ui-monospace, monospace;
+    --panel: linear-gradient(155deg, #2b1f68 0%, #1f1753 55%, #161140 100%);
+    --af-edge-dark: linear-gradient(150deg, rgba(248,248,248,.32) 0%, rgba(248,248,248,.07) 40%, rgba(248,248,248,.03) 75%, rgba(214,170,240,.14) 100%);
+    --af-glass: linear-gradient(155deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.7) 55%, rgba(255,255,255,.55) 100%);
+    --af-edge: linear-gradient(150deg, rgba(20,18,56,.18) 0%, rgba(20,18,56,.06) 40%, rgba(20,18,56,.04) 75%, rgba(104,74,158,.2) 100%);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#fff; color:var(--ink); font-family:Roboto, Arial, sans-serif; }
+  .top{ max-width:80rem; margin:0 auto; padding:2.5rem 1rem 1.5rem; }
+  .top h1{ margin:0 0 .5rem; font-weight:300; font-size:2rem; letter-spacing:-.02em; }
+  .top p{ margin:0; max-width:56rem; line-height:1.6; color:#4a4868; }
+  .picker{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem; }
+  .picker button{ font:500 .75rem var(--mono); letter-spacing:.08em; text-transform:uppercase; padding:.5rem .875rem; border-radius:999px;
+    border:1px solid rgba(20,18,56,.18); background:#fff; color:var(--ink); cursor:pointer; }
+  .picker button[aria-pressed="true"]{ background:var(--ink); color:var(--white); border-color:var(--ink); }
+
+  /* bloc en diptyque, comme sur les pages produit : texte à gauche, animation à droite */
+  .v{ background:var(--light); padding:5rem 1rem; }
+  .v + .v{ border-top:1px solid rgba(20,18,56,.08); }
+  .v-in{ max-width:80rem; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:4rem; align-items:center; }
+  @media (max-width:991px){ .v-in{ grid-template-columns:1fr; gap:2.5rem; } }
+  .v-tag{ display:inline-block; margin-bottom:1rem; font:500 .6875rem var(--mono); letter-spacing:.12em; text-transform:uppercase; color:#a09ab8; }
+  .v-label{ font:400 .8125rem var(--mono); letter-spacing:.12em; text-transform:uppercase; color:#684a9e; }
+  .v h2{ margin:1rem 0 1.25rem; font-weight:300; font-size:clamp(2rem, 1.3rem + 2vw, 3rem); line-height:1.08; letter-spacing:-.02em; }
+  .v p{ margin:0; font-size:1.0625rem; line-height:1.6; color:#4a4868; max-width:34rem; }
+
+  /* éléments : vignette (mini-scène + nom) et carte du produit de la page */
+  .pc{ position:relative; isolation:isolate; z-index:1; transition:transform .5s cubic-bezier(.2,.7,.2,1); }
+  .pc-viz{ position:relative; border-radius:.75rem; overflow:hidden; background:var(--panel); }
+  .pc-viz::after{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:2; background:var(--af-edge-dark);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; transition:padding .3s ease, background .3s ease; }
+  .pc-viz > div{ position:relative; z-index:1; width:100%; }
+  .pc-name{ margin:.5rem 0 0; font:400 .6875rem/1.3 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:rgba(20,18,56,.72); }
+  .pc.is-on{ transform:translateY(-3px); }
+  .pc.is-on .pc-viz::after, .pc.is-hit .pc-viz::after{ padding:1.5px; background:var(--c); }
+  /* produit de la page : vraie carte bleu nuit */
+  .pc.is-center{ padding:.625rem; border-radius:1.125rem; background:var(--panel); }
+  .pc.is-center::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:2; background:var(--af-edge-dark);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+  .pc.is-center .pc-viz{ background:rgba(13,9,38,.55); border-radius:.625rem; }
+  .pc.is-center .pc-viz::after{ display:none; }
+  .pc.is-center .pc-name{ margin:.625rem .25rem .125rem; font-size:.75rem; color:var(--white); }
+  .pc.is-center.is-hit{ box-shadow:inset 0 0 0 1.5px var(--c); }
+
+  /* wrapper sombre de la scène (fond des sections sombres du site) */
+  .wrap{ position:relative; isolation:isolate; padding:2.25rem; border-radius:1.5rem;
+    background:radial-gradient(60% 55% at 88% 6%, rgba(108,105,209,.52), rgba(108,105,209,0) 70%),
+      radial-gradient(55% 60% at 22% 70%, rgba(96,62,152,.46), rgba(96,62,152,0) 70%), radial-gradient(90% 90% at 50% 45%, #281d60, #181344 85%); }
+  .wrap::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; background:var(--af-edge-dark);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+  @media (max-width:767px){ .wrap{ padding:1.25rem; } }
+  .wrap .pc-name{ color:rgba(248,248,248,.72); }
+  .wrap .pc-viz{ background:rgba(13,9,38,.55); }
+  .wrap .pc.is-center{ background:radial-gradient(120% 60% at 15% 0%, rgba(255,255,255,.06), rgba(255,255,255,0) 60%), linear-gradient(155deg, rgba(150,110,200,.2) 0%, rgba(90,60,150,.16) 50%, rgba(40,24,80,.34) 100%); }
+  .stage{ position:relative; width:100%; }
+  .wires{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:0; }
+
+  /* H : étoile compacte */
+  .star{ aspect-ratio:1.2/1; }
+  .star .pc{ position:absolute; width:27%; transform:translate(-50%,-50%); }
+  .star .pc.is-on{ transform:translate(-50%,calc(-50% - 3px)); }
+  .star .pc.is-center{ width:40%; }
+  /* I : carte du produit en haut, les quatre autres en rangée dessous */
+  .tree{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:1rem; row-gap:3.5rem; }
+  .tree .pc.is-center{ grid-column:2 / span 2; grid-row:1; }
+  .tree .pc:not(.is-center){ grid-row:2; }
+  /* mobile : carte en pleine largeur, vignettes en 2 × 2 (deux fois plus grandes), fil par une colonne centrale */
+  @media (max-width:767px){
+    .tree{ grid-template-columns:repeat(2, minmax(0,1fr)); column-gap:2rem; row-gap:1.75rem; }
+    .tree .pc.is-center{ grid-column:1 / -1; margin-bottom:1rem; }
+    .tree .pc:not(.is-center){ grid-row:auto; }
+  }
+  /* J : liste */
+  .list{ display:flex; flex-direction:column; gap:.625rem; padding-left:2rem; }
+  .list .pc{ display:grid; grid-template-columns:7.5rem minmax(0,1fr); align-items:center; gap:1rem; }
+  .list .pc .pc-name{ margin:0; }
+  .list .pc.is-center{ grid-template-columns:9.5rem minmax(0,1fr); margin:.25rem 0; }
+  .list .pc.is-center .pc-name{ margin:0; font-size:.8125rem; }
+  .list .pc.is-on{ transform:translateX(3px); }
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Plateforme connectée : carte et rangée, allégée</h1>
+  <p>Version retenue (carte du produit de la page, les quatre autres en rangée), allégée : plus de pointillés, plus de petits ronds aux extrémités des fils, un seul point qui voyage pendant l\'échange. I1 garde des fils très fins au repos ; I2 ne montre que le trajet de l\'échange en cours, qui se dessine puis s\'efface.</p>
+  <div class="picker" id="picker"></div>
+</div>
+
+<section class="v"><div class="v-in">
+  <div><span class="v-tag">I1 · Fils fins au repos</span><div class="v-label">Standalone or connected</div><h2>Complete on its own. Stronger when connected</h2>
+    <p>When connected to the broader PhaseV platform, reviewed insights can enter the scenario space, design decisions can inform operational planning in ClinOps Optimizer, and approved parameters can return to the protocol, SAP, and other connected documents for expert review.</p></div>
+  <div class="wrap"><div class="stage" data-layout="tree" data-rest="thin"></div></div>
+</div></section>
+
+<section class="v"><div class="v-in">
+  <div><span class="v-tag">I2 · Seulement le trajet en cours</span><div class="v-label">Standalone or connected</div><h2>Complete on its own. Stronger when connected</h2>
+    <p>When connected to the broader PhaseV platform, reviewed insights can enter the scenario space, design decisions can inform operational planning in ClinOps Optimizer, and approved parameters can return to the protocol, SAP, and other connected documents for expert review.</p></div>
+  <div class="wrap"><div class="stage" data-layout="tree" data-rest="none"></div></div>
+</div></section>
+
+<script type="module">
+import { initMiniScene } from './mini-scene-lite.js';
+import { CAP } from '/src/bonv-draw.js';
+
+const P = {
+  portfolio: { name: 'Portfolio Optimizer', scene: 'rank', col: 0 },
+  response:  { name: 'Response Optimizer', scene: 'split', col: 3 },
+  trial:     { name: 'Trial Optimizer', scene: 'curve', col: 1 },
+  clinops:   { name: 'ClinOps Optimizer', scene: 'sites', col: 2 },
+  conductor: { name: 'AI Conductor', scene: 'doc', col: 4 },
+};
+const ORDER = ['portfolio', 'response', 'trial', 'clinops', 'conductor'];
+const COLS = [CAP[0], CAP[1], CAP[2], CAP[3], CAP[5]];
+const SPOT = [[50, 50], [15, 19], [85, 19], [15, 81], [85, 81]];
+const EV = [[1, 0], [0, 3], [2, 0], [0, 4], [3, 0], [0, 1], [4, 0], [0, 2]];   // 0 = produit de la page
+const GAP = 2.6, TRAVEL = 1.1;
+const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS = 'http://www.w3.org/2000/svg';
+const STROKE = 'rgba(248,248,248,.3)';
+
+function item(key, center) {
+  const d = P[key], el = document.createElement('div');
+  el.className = 'pc' + (center ? ' is-center' : '');
+  el.style.setProperty('--c', COLS[d.col]);
+  el.innerHTML = `<div class="pc-viz"><div data-scene="${d.scene}" data-col="${d.col}"></div></div><div class="pc-name">${d.name}</div>`;
+  return el;
+}
+
+function stage(root) {
+  const layout = root.dataset.layout;
+  // I1 : fils très fins au repos ; I2 : aucun fil au repos, seul le trajet en cours apparaît
+  const REST = root.dataset.rest === 'none' ? 'rgba(248,248,248,0)' : 'rgba(248,248,248,.16)';
+  let cur = 'trial', cards = [], svg, paths = {}, dotEl, scenes = [], t0 = performance.now();
+
+  function build() {
+    scenes.forEach(s => s && s.destroy && s.destroy());
+    root.innerHTML = ''; root.className = 'stage ' + layout;
+    svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'wires'); root.appendChild(svg);
+    // index 0 = produit de la page ; la liste garde l'ordre du développement
+    const keys = [cur, ...ORDER.filter(k => k !== cur)];
+    cards = keys.map((k, i) => {
+      const c = item(k, i === 0);
+      if (layout === 'star') { c.style.left = SPOT[i][0] + '%'; c.style.top = SPOT[i][1] + '%'; }
+      if (layout === 'list') c.style.order = ORDER.indexOf(k);
+      root.appendChild(c); return c;
+    });
+    scenes = cards.map(c => initMiniScene(c.querySelector('[data-scene]')));
+    t0 = performance.now();
+    requestAnimationFrame(wires);
+  }
+
+  function wires() {
+    const R = root.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${R.width} ${R.height}`); svg.innerHTML = ''; paths = {};
+    const box = el => { const v = (el.querySelector('.pc-viz') || el).getBoundingClientRect(), b = el.getBoundingClientRect();
+      return { l: b.left - R.left, t: b.top - R.top, r: b.right - R.left, b: b.bottom - R.top, cx: (b.left + b.right) / 2 - R.left, cy: (b.top + b.bottom) / 2 - R.top, vt: v.top - R.top, vb: v.bottom - R.top, vl: v.left - R.left }; };
+    const add = (d, id) => {
+      const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('fill', 'none');
+      p.setAttribute('stroke', REST); p.setAttribute('stroke-width', '1'); p.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(p); paths[id] = p;
+    };
+    const B = cards.map(box), c0 = B[0];
+    if (layout === 'star') {
+      for (let i = 1; i < 5; i++) {
+        const b = B[i], up = b.cy < c0.cy, left = b.cx < c0.cx;
+        const a = [b.cx, up ? b.b + 4 : b.t - 4], z = [c0.cx + (left ? -1 : 1) * (c0.r - c0.l) * .26, up ? c0.t : c0.b], my = (a[1] + z[1]) / 2;
+        add(`M${a[0]},${a[1]} C${a[0]},${my} ${z[0]},${my} ${z[0]},${z[1]}`, i);
+      }
+    } else if (layout === 'tree') {
+      const twoRows = Math.abs(B[1].t - B[4].t) > 4;   // mobile : vignettes en 2 × 2
+      if (!twoRows) {
+        const bus = (c0.b + Math.min(...B.slice(1).map(b => b.t))) / 2;
+        add(`M${c0.cx},${c0.b} L${c0.cx},${bus}`, 'stem');
+        for (let i = 1; i < 5; i++) { const b = B[i]; add(`M${b.cx},${b.t} L${b.cx},${bus} L${c0.cx},${bus}`, i); }
+      } else {
+        // colonne centrale entre les vignettes, une branche horizontale vers chaque vignette, à hauteur de sa mini-scène
+        add(`M${c0.cx},${c0.b} L${c0.cx},${c0.b + 8}`, 'stem');
+        for (let i = 1; i < 5; i++) { const b = B[i], y = (b.vt + b.vb) / 2, edge = b.cx < c0.cx ? b.r : b.l;
+          add(`M${edge},${y} L${c0.cx},${y} L${c0.cx},${c0.b + 8}`, i); }
+      }
+    } else {
+      const x = 8;
+      for (let i = 0; i < 5; i++) { const b = B[i], y = (b.vt + b.vb) / 2; add(`M${b.vl},${y} L${x},${y}`, 't' + i); }
+      const ys = B.map(b => (b.vt + b.vb) / 2); add(`M${x},${Math.min(...ys)} L${x},${Math.max(...ys)}`, 'rail');
+    }
+    dotEl = document.createElementNS(NS, 'circle'); dotEl.setAttribute('r', '4'); dotEl.style.opacity = 0; svg.appendChild(dotEl);
+  }
+
+  // trajet d'un échange, de la vignette « from » à « to » (0 = produit de la page)
+  function route(from, to) {
+    const seq = [];
+    if (layout === 'star') { const sat = from || to; seq.push([paths[sat], !!from]); }
+    else if (layout === 'tree') { const sat = from || to; if (from) { seq.push([paths[sat], true]); seq.push([paths.stem, false]); } else { seq.push([paths.stem, true]); seq.push([paths[sat], false]); } }
+    else {
+      const ya = paths['t' + from].getPointAtLength(paths['t' + from].getTotalLength()).y, yb = paths['t' + to].getPointAtLength(paths['t' + to].getTotalLength()).y;
+      seq.push([paths['t' + from], true]); seq.push([{ rail: true, ya, yb }, true]); seq.push([paths['t' + to], false]);
+    }
+    const lens = seq.map(([p]) => p.rail ? Math.abs(p.yb - p.ya) : p.getTotalLength()), tot = lens.reduce((a, b) => a + b, 0);
+    return { ids: seq.map(([p]) => p), at(u) {
+      let s = u * tot;
+      for (let k = 0; k < seq.length; k++) {
+        if (s <= lens[k] || k === seq.length - 1) { const [p, fwd] = seq[k], f = Math.min(s, lens[k]);
+          if (p.rail) return { x: paths.rail.getPointAtLength(0).x, y: p.ya + Math.sign(p.yb - p.ya) * f };
+          return p.getPointAtLength(fwd ? f : lens[k] - f); }
+        s -= lens[k];
+      }
+    } };
+  }
+
+  function tick(now) {
+    requestAnimationFrame(tick);
+    if (!dotEl || !Object.keys(paths).length || reduced) return;
+    const t = (now - t0) / 1000 - 1.2; if (t < 0) return;
+    const i = Math.floor(t / GAP) % EV.length, ph = (t % GAP) / GAP, [from, to] = EV[i];
+    const u = Math.min(1, Math.max(0, ph * GAP / TRAVEL)), r = route(from, to), at = r.at(ease(u));
+    dotEl.setAttribute('cx', at.x); dotEl.setAttribute('cy', at.y); dotEl.setAttribute('fill', getComputedStyle(cards[from]).getPropertyValue('--c').trim());
+    dotEl.style.opacity = u > 0 && u < 1 ? 1 : 0;
+    cards.forEach((c, k) => { c.classList.toggle('is-on', k === from && u < 1); c.classList.toggle('is-hit', k === to && u >= 1 && ph < .85); });
+    // fils : au repos selon la version ; le trajet de l'échange se colore pendant le voyage puis revient au repos
+    const col = getComputedStyle(cards[from]).getPropertyValue('--c').trim();
+    const k = u < 1 ? Math.min(1, u * 6) : Math.max(0, 1 - (ph - TRAVEL / GAP) / .2);
+    Object.values(paths).forEach(p => { p.setAttribute('stroke', REST); p.style.opacity = 1; });
+    if (k > 0) r.ids.forEach(p => { p.setAttribute('stroke', col); p.style.opacity = k * .85; });
+  }
+
+  new ResizeObserver(() => wires()).observe(root);
+  build(); requestAnimationFrame(tick);
+  return { set(k) { cur = k; build(); } };
+}
+
+const stages = [...document.querySelectorAll('.stage')].map(stage);
+const picker = document.getElementById('picker');
+ORDER.forEach(k => {
+  const b = document.createElement('button'); b.type = 'button'; b.textContent = P[k].name; b.setAttribute('aria-pressed', k === 'trial');
+  b.addEventListener('click', () => { picker.querySelectorAll('button').forEach(o => o.setAttribute('aria-pressed', o === b)); stages.forEach(s => s.set(k)); });
+  picker.appendChild(b);
+});
+</script>
+</body>
+</html>

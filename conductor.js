@@ -1,5 +1,5 @@
 import { initConductorHeroBg } from './src/conductor-hero-bg.js';
-import { initPlatformConnect as initPlatformConnectCards } from './src/platform-connect-cards.js';
+import { initPlatformConnectTree } from './src/platform-connect-tree.js';
 import { injectCondRoles } from './src/cond-roles.js';
 import { initCondAnswer } from './src/cond-answer.js';
 import { initCondDose } from './src/cond-dose.js';
@@ -16,4 +16,4 @@ document.querySelectorAll('[data-pv="cond-dose"]').forEach(initCondDose);
 document.querySelectorAll('[data-pv="cond-backbone"]').forEach(initCondBackbone);
 document.querySelectorAll('[data-pv="cond-protocol"]').forEach(initCondProtocol);
 document.querySelectorAll('[data-pv="cond-report"]').forEach(initCondReport);
-document.querySelectorAll('[data-pv="platform-connect-v2"]').forEach((el) => initPlatformConnectCards(el));
+document.querySelectorAll('[data-pv="platform-connect-v2"]').forEach((el) => initPlatformConnectTree(el));

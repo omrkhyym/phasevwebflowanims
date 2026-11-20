@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plateforme connectée, v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#141238; --light:#f1f0f7; --mauve:#928acd; --mono:'Roboto Mono', ui-monospace, monospace; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#fff; color:var(--ink); font-family:Roboto, Arial, sans-serif; }
+  header{ padding:2.5rem 1rem 1.5rem; max-width:80rem; margin:0 auto; }
+  h1{ margin:0 0 .5rem; font-weight:300; font-size:2rem; letter-spacing:-.02em; }
+  header p{ margin:0; max-width:52rem; line-height:1.6; color:#4a4868; }
+  .picker{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem; }
+  .picker button{ font:500 .75rem var(--mono); letter-spacing:.08em; text-transform:uppercase; padding:.5rem .875rem; border-radius:999px;
+    border:1px solid rgba(20,18,56,.18); background:#fff; color:var(--ink); cursor:pointer; }
+  .picker button[aria-pressed="true"]{ background:var(--ink); color:#f8f8f8; border-color:var(--ink); }
+  main{ max-width:80rem; margin:0 auto; padding:0 1rem 4rem; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:1.5rem; }
+  @media (max-width:860px){ main{ grid-template-columns:1fr; } }
+  section{ background:var(--light); border-radius:1.25rem; padding:1.5rem 1.5rem 1rem; }
+  section h2{ margin:0; font:500 .75rem var(--mono); letter-spacing:.12em; text-transform:uppercase; color:#684a9e; }
+  section p{ margin:.375rem 0 0; font-size:.9375rem; line-height:1.5; color:#4a4868; }
+  .stage{ position:relative; width:100%; aspect-ratio:1.2/1; margin-top:.75rem; }
+  .stage canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Plateforme connectée : sans l'effet carte bancaire</h1>
+  <p>Même principe et mêmes échanges que le bloc en ligne : le produit de la page au centre, les quatre autres autour, un échange à la fois, chaque produit avec le motif de son hero. Seul l'objet qui porte chaque produit change. Partout : pas d'ombre portée, pas de halo, pas de voyant ni de lignes factices, paquets en points pleins.</p>
+  <div class="picker" id="picker"></div>
+</header>
+<main>
+  <section><h2>A · Disques</h2><p>Disque au trait fin, motif dedans, nom en mono sous le disque. Le produit de la page : disque plein bleu nuit, plus grand.</p><div class="stage" data-style="discs"></div></section>
+  <section><h2>B · Motifs nus</h2><p>Aucun contenant : le motif seul sur le fond, un label mono dessous. Le produit de la page : plus grand, cerné d'un anneau fin.</p><div class="stage" data-style="bare"></div></section>
+  <section><h2>C · Tuiles carrées</h2><p>Carrés en verre clair au bord fin, comme les cartes du site, motif centré, nom dessous. Le produit de la page : tuile bleu nuit en aplat.</p><div class="stage" data-style="tiles"></div></section>
+  <section><h2>D · Pastilles</h2><p>Étiquettes arrondies avec le motif dans une pastille et le nom à côté, sur une ligne, comme les puces du site. Le produit de la page : pastille bleu nuit plus grande.</p><div class="stage" data-style="pills"></div></section>
+</main>
+
+<script>
+const INK = '20,18,56', MAU = '146,138,205';
+const NAMES = { portfolio: 'PORTFOLIO OPTIMIZER', trial: 'TRIAL OPTIMIZER', response: 'RESPONSE OPTIMIZER', clinops: 'CLINOPS OPTIMIZER', conductor: 'AI CONDUCTOR' };
+const ORDER = ['portfolio', 'trial', 'response', 'clinops', 'conductor'];
+const COL = { trial: MAU, portfolio: MAU, response: '120,168,224', clinops: '127,232,207', conductor: '104,74,158' };
+const EV = [[1, 0], [0, 3], [2, 0], [0, 4], [3, 0], [0, 1], [4, 0], [0, 2]];
+const GAP = 2.6, INTRO = 1.8;
+const SPOT = [[.5, .5], [.2, .17], [.8, .17], [.2, .83], [.8, .83]];
+
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const seg = (t, a, b) => cl((t - a) / (b - a));
+const ease = v => v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2;
+const back = v => { const c = 1.4; return 1 + (c + 1) * Math.pow(v - 1, 3) + c * Math.pow(v - 1, 2); };
+const hash = n => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
+function current(t) {
+  if (t < INTRO) return [null, 0];
+  const L = EV.length * GAP, u = ((t - INTRO) % L) / GAP, i = Math.floor(u);
+  return [EV[i], u - i];
+}
+
+function makeStage(mount, style) {
+  let cur = 'trial', KEYS = [];
+  const setCur = k => { cur = k; KEYS = [cur, ...ORDER.filter(o => o !== cur)]; clock = 0; };
+  const cv = document.createElement('canvas'); mount.appendChild(cv);
+  const x = cv.getContext('2d');
+  const MONO = "'Roboto Mono', ui-monospace, monospace";
+  const hasLS = 'letterSpacing' in x;
+  const font = (w, s, ls = .08) => { x.font = `${w} ${s}px ${MONO}`; if (hasLS) x.letterSpacing = (ls * s).toFixed(2) + 'px'; };
+  const rr = (bx, by, bw, bh, r) => { x.beginPath(); x.roundRect ? x.roundRect(bx, by, bw, bh, r) : x.rect(bx, by, bw, bh); };
+  const dot = (X, Y, r, c) => { x.beginPath(); x.arc(X, Y, r, 0, 6.283); x.fillStyle = c; x.fill(); };
+
+  /* motifs des heros produit (repris du module en ligne) ; dark : dessin sur fond bleu nuit */
+  function glyph(key, cx, cy, s, dark, pr, col) {
+    const base = dark ? 'rgba(255,255,255,.45)' : `rgba(${col || MAU},.95)`, hi = dark ? '#ffffff' : '#141238';
+    const L = cx - s / 2, T = cy - s / 2, d = Math.max(.8, s * .045);
+    if (key === 'trial') {
+      for (let j = 1; j < 6; j++) {
+        const b = (hash(j) - .5) * 2, f = 2 + hash(j + 9) * 4;
+        for (let q = 0; q <= 12; q++) { const u = q / 12; dot(L + u * s, cy + s * .3 - u * s * .45 + u * s * (.32 * b + .08 * Math.sin(f * u * 3)), d * .8, base); }
+      }
+      x.beginPath(); for (let q = 0; q <= 30 * pr; q++) { const u = q / 30, X = L + u * s, Y = cy + s * .3 - u * s * .45; q ? x.lineTo(X, Y) : x.moveTo(X, Y); }
+      x.strokeStyle = hi; x.lineWidth = Math.max(1.5, s * .07); x.lineCap = 'round'; x.stroke();
+    } else if (key === 'portfolio') {
+      const W_ = [1, .78, .6, .44, .3], bh = s * .12, gap = s * .085;
+      W_.forEach((w, j) => { const ww = s * w * (.25 + .75 * ease(cl(pr * 1.4 - j * .1))), y = T + s * .04 + j * (bh + gap); rr(cx - ww / 2, y, ww, bh, bh / 2); x.fillStyle = j < 2 ? hi : base; x.fill(); });
+    } else if (key === 'response') {
+      const g = s * .06 * ease(pr);
+      for (let j = 0; j < 26; j++) { const resp = j < 11, a = hash(j + 3) * 6.283, r = Math.sqrt(hash(j + 40)) * (resp ? .2 : .24); dot(cx + Math.cos(a) * r * s * 1.5, cy + (resp ? -.13 : .13) * s + (resp ? -g : g) + Math.sin(a) * r * s * .75, d, resp ? hi : base); }
+    } else if (key === 'clinops') {
+      const n = 7, st = s / (n - 1);
+      for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) { const u = a / (n - 1) - .5, v = b / (n - 1) - .5; if (Math.hypot(u * 1.1 + .05 * Math.sin(b * 2), v * 1.4) < .5 + .08 * hash(a * 7 + b)) dot(L + a * st, T + b * st, d * .8, base); }
+      [[.3, .35], [.62, .55], [.45, .78]].forEach(([u, v], j) => {
+        const on = cl(pr * 3 - j), X = L + u * s, Y = T + v * s;
+        if (on > 0) { x.beginPath(); x.arc(X, Y, s * (.08 + .1 * on), 0, 6.283); x.strokeStyle = dark ? `rgba(255,255,255,${.5 * (1 - on) + .15})` : `rgba(${INK},${.4 * (1 - on) + .12})`; x.lineWidth = 1; x.stroke(); }
+        dot(X, Y, d * 1.7, on > 0 ? hi : base);
+      });
+    } else {
+      for (let p = 0; p < 3; p++) {
+        const px = L + p * s * .2, py = T + p * s * .14, pw = s * .6, ph = s * .72;
+        rr(px, py, pw, ph, s * .06); x.fillStyle = dark ? '#141238' : (style === 'tiles' || style === 'discs' ? '#fff' : '#f1f0f7'); x.fill();
+        x.strokeStyle = base; x.lineWidth = 1; x.stroke();
+        for (let l = 0; l < 4; l++) { x.fillStyle = l === 2 && pr * 3 > p ? hi : (dark ? 'rgba(255,255,255,.22)' : `rgba(${MAU},.45)`); x.fillRect(px + pw * .16, py + ph * (.2 + l * .18), pw * (l === 3 ? .4 : .68), Math.max(1.2, s * .045)); }
+      }
+    }
+  }
+
+  // courbe douce entre deux points (cubique, tangentes verticales)
+  function wire(a, b) {
+    const my = (a[1] + b[1]) / 2;
+    return u => { const q = 1 - u; return [q*q*q*a[0] + 3*q*q*u*a[0] + 3*q*u*u*b[0] + u*u*u*b[0], q*q*q*a[1] + 3*q*q*u*my + 3*q*u*u*my + u*u*u*b[1]]; };
+  }
+  const path = (f, u0, u1, n = 48) => { x.beginPath(); for (let k = 0; k <= n; k++) { const [X, Y] = f(u0 + (u1 - u0) * k / n); k ? x.lineTo(X, Y) : x.moveTo(X, Y); } };
+
+  /* nom : deux lignes en mono (PORTFOLIO / OPTIMIZER) ou une ligne (pastilles) */
+  function label(key, cx, top, fs, strong, align = 'center', oneLine = false) {
+    const [a, b] = NAMES[key].split(/ (?=OPTIMIZER|CONDUCTOR)/);
+    x.textAlign = align; x.textBaseline = 'top'; x.fillStyle = strong ? '#141238' : 'rgba(20,18,56,.82)';
+    if (oneLine) { font(strong ? 500 : 400, fs); x.fillText(NAMES[key], cx, top); }
+    else {
+      font(strong ? 500 : 400, fs); x.fillText(a, cx, top);
+      if (b) { x.globalAlpha *= .55; font(400, fs); x.fillText(b, cx, top + fs * 1.45); x.globalAlpha /= .55; }
+    }
+    x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  }
+
+  let W = 0, H = 0, clock = 0;
+  setCur('trial');
+
+  function draw(t) {
+    x.clearRect(0, 0, W, H);
+    const m = Math.min(W, H), fs = W < 420 ? 8.5 : 10.5;
+    const [ev, ph] = current(t), from = ev ? ev[0] : -1, to = ev ? ev[1] : -1, sat = ev ? (from || to) : -1;
+    const act = ev ? Math.min(seg(ph, 0, .1), 1 - seg(ph, .88, 1)) : 0;
+    const arrive = ev ? seg(ph, .6, .72) * (1 - seg(ph, .78, 1)) : 0;
+
+    // trame de points très légère
+    const step = m / 20; x.fillStyle = `rgba(${INK},.06)`;
+    for (let gy = step / 2; gy < H; gy += step) for (let gx = step / 2; gx < W; gx += step) { x.beginPath(); x.arc(gx, gy, .9, 0, 6.283); x.fill(); }
+
+    // géométrie de chaque style : demi-hauteur du porteur (ports haut/bas), taille du motif
+    const geo = i => {
+      const c = i === 0;
+      if (style === 'discs') { const r = m * (c ? .15 : .085); return { hw: r, hh: r, s: r * (c ? 1.05 : 1.05) }; }
+      if (style === 'bare')  { const s = m * (c ? .2 : .12); return { hw: s * .6, hh: s * .6, s }; }
+      if (style === 'tiles') { const h = m * (c ? .27 : .16); return { hw: h / 2, hh: h / 2, s: h * .56 }; }
+      const h = m * (c ? .1 : .075), w = m * (c ? .6 : .44); return { hw: w / 2, hh: h / 2, s: h * .62 };   // pills
+    };
+    const G = [0, 1, 2, 3, 4].map(geo);
+    const P = SPOT.map(([u, v], i) => {
+      const k = back(seg(t, .05 + i * .1, .65 + i * .1));
+      const lift = (i === sat ? act : 0) * m * .01;
+      return [u * W, v * H + (1 - k) * m * .04 + Math.sin(t * .7 + i * 1.9) * m * .004 - lift, k];
+    });
+    // ports : bas/haut du porteur ; pour les disques et motifs nus, sur le bord, côté du voisin
+    const below = i => SPOT[i][1] < .5;
+    const portSat = i => {
+      if (style === 'discs' || style === 'bare') { const a = Math.atan2(P[0][1] - P[i][1], P[0][0] - P[i][0]); return [P[i][0] + Math.cos(a) * G[i].hw, P[i][1] + Math.sin(a) * G[i].hh]; }
+      return [P[i][0], P[i][1] + (below(i) ? 1 : -1) * G[i].hh];
+    };
+    const portCen = i => {
+      if (style === 'discs' || style === 'bare') { const a = Math.atan2(P[i][1] - P[0][1], P[i][0] - P[0][0]); return [P[0][0] + Math.cos(a) * G[0].hw, P[0][1] + Math.sin(a) * G[0].hh]; }
+      return [P[0][0] + (SPOT[i][0] < .5 ? -1 : 1) * G[0].hw * .45, P[0][1] + (below(i) ? -1 : 1) * G[0].hh];
+    };
+    const mkWire = i => (style === 'discs' || style === 'bare') ? (() => { const a = portSat(i), b = portCen(i); return u => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u]; })() : wire(portSat(i), portCen(i));
+
+    // fils : pointillé au repos, plein et coloré pendant un échange
+    const wireIn = ease(seg(t, .6, 1.5));
+    for (let i = 1; i < 5; i++) {
+      const f = mkWire(i), on = i === sat ? act : 0, c = COL[KEYS[i]];
+      path(f, 0, wireIn); x.setLineDash([2, 5]); x.lineDashOffset = -t * 10; x.strokeStyle = `rgba(${INK},.26)`; x.lineWidth = 1; x.stroke(); x.setLineDash([]);
+      if (on > 0) { path(f, 0, 1); x.strokeStyle = `rgba(${c === MAU ? MAU : c},${on})`; x.lineWidth = 1.75; x.stroke(); }
+    }
+
+    // paquets : points pleins, sans lueur
+    if (ev) {
+      const f = mkWire(sat), dir = from === 0 ? -1 : 1, c = COL[KEYS[sat]];
+      for (let n = 0; n < 5; n++) {
+        const u = seg(ph, .1 + n * .06, .62 + n * .06); if (u <= 0 || u >= 1) continue;
+        const e = ease(u), uu = dir > 0 ? e : 1 - e, [bx, by] = f(uu);
+        dot(bx, by, n ? 2.6 : 3.6, n ? `rgba(${c},.85)` : '#141238');
+      }
+    }
+
+    // porteurs
+    for (let i = 0; i < 5; i++) {
+      const [cx, cy, k] = P[i]; if (k <= 0) continue;
+      const key = KEYS[i], c = COL[key], center = i === 0, on = i === sat ? act : 0, glow = i === to ? arrive : 0;
+      const g = G[i], pr = center ? (to === 0 ? ease(seg(ph, .62, .95)) : 1) : (i === sat ? ease(seg(ph, .05, .6)) : 1);
+      x.globalAlpha = cl(k);
+      const ring = (r, a) => { x.beginPath(); x.arc(cx, cy, r, 0, 6.283); x.strokeStyle = a; x.lineWidth = 1; x.stroke(); };
+      const wave = (draw) => { if (glow > 0) { const e = seg(ph, .6, .9); draw(e * m * .035, `rgba(${MAU},${(1 - e) * .6})`); } };
+
+      if (style === 'discs') {
+        x.beginPath(); x.arc(cx, cy, g.hw, 0, 6.283); x.fillStyle = center ? '#141238' : '#fff'; x.fill();
+        x.strokeStyle = center ? '#141238' : (on || glow ? `rgba(${c},${.6 + Math.max(on, glow) * .4})` : `rgba(${INK},.16)`); x.lineWidth = 1 + Math.max(on, glow); x.stroke();
+        wave((d, a) => ring(g.hw + d, a));
+        glyph(key, cx, cy, g.s, center, pr, c);
+        label(key, cx, cy + g.hh + m * .025, center ? fs + 1 : fs, center);
+      } else if (style === 'bare') {
+        if (center) ring(g.hw * 1.15, `rgba(${INK},.22)`);
+        wave((d, a) => ring(g.hw * (center ? 1.15 : 1) + d, a));
+        if (on > 0) ring(g.hw, `rgba(${c},${on * .7})`);
+        glyph(key, cx, cy, g.s, false, pr, c);
+        label(key, cx, cy + g.hh * (center ? 1.15 : 1) + m * .022, center ? fs + 1 : fs, center);
+      } else if (style === 'tiles') {
+        const r = m * .03;
+        rr(cx - g.hw, cy - g.hh, g.hw * 2, g.hh * 2, r);
+        if (center) { x.fillStyle = '#141238'; x.fill(); }
+        else { const gr = x.createLinearGradient(cx - g.hw, cy - g.hh, cx + g.hw, cy + g.hh); gr.addColorStop(0, 'rgba(255,255,255,.98)'); gr.addColorStop(1, 'rgba(255,255,255,.72)'); x.fillStyle = gr; x.fill();
+          x.strokeStyle = on || glow ? `rgba(${c},${.6 + Math.max(on, glow) * .4})` : `rgba(${INK},.12)`; x.lineWidth = 1 + Math.max(on, glow); x.stroke(); }
+        wave((d, a) => { rr(cx - g.hw - d, cy - g.hh - d, (g.hw + d) * 2, (g.hh + d) * 2, r + d); x.strokeStyle = a; x.lineWidth = 1.25; x.stroke(); });
+        glyph(key, cx, cy, g.s, center, pr, c);
+        label(key, cx, cy + g.hh + m * .022, center ? fs + 1 : fs, center);
+      } else { // pills
+        const r = g.hh;
+        rr(cx - g.hw, cy - g.hh, g.hw * 2, g.hh * 2, r);
+        x.fillStyle = center ? '#141238' : '#fff'; x.fill();
+        if (!center) { x.strokeStyle = on || glow ? `rgba(${c},${.6 + Math.max(on, glow) * .4})` : `rgba(${INK},.14)`; x.lineWidth = 1 + Math.max(on, glow); x.stroke(); }
+        wave((d, a) => { rr(cx - g.hw - d, cy - g.hh - d, (g.hw + d) * 2, (g.hh + d) * 2, r + d); x.strokeStyle = a; x.lineWidth = 1.25; x.stroke(); });
+        const dr = g.hh * .78, dx = cx - g.hw + g.hh;
+        x.beginPath(); x.arc(dx, cy, dr, 0, 6.283); x.fillStyle = center ? 'rgba(255,255,255,.1)' : `rgba(${c},.18)`; x.fill();
+        glyph(key, dx, cy, dr * 1.25, center, pr, c);
+        font(center ? 500 : 400, center ? fs + 1 : fs); x.textBaseline = 'middle'; x.fillStyle = center ? '#f8f8f8' : '#141238';
+        x.fillText(NAMES[key], dx + dr + m * .022, cy + .5); x.textBaseline = 'alphabetic';
+      }
+      x.globalAlpha = 1;
+    }
+  }
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let raf = 0, last = 0;
+  function fit() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = mount.clientWidth; H = mount.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw(reduced ? INTRO + GAP * .55 : clock);
+  }
+  function frame(now) { raf = requestAnimationFrame(frame); clock += Math.min((now - last) / 1000, .05); last = now; draw(clock); }
+  new ResizeObserver(fit).observe(mount);
+  new IntersectionObserver(([e]) => {
+    if (reduced) return;
+    if (e.isIntersecting && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+    else if (!e.isIntersecting) { cancelAnimationFrame(raf); raf = 0; }
+  }, { threshold: .2 }).observe(mount);
+  return { setCur: k => { setCur(k); if (reduced) fit(); } };
+}
+
+const stages = [...document.querySelectorAll('.stage')].map(el => makeStage(el, el.dataset.style));
+const picker = document.getElementById('picker');
+ORDER.forEach(k => {
+  const b = document.createElement('button'); b.type = 'button'; b.textContent = NAMES[k]; b.setAttribute('aria-pressed', k === 'trial');
+  b.addEventListener('click', () => { picker.querySelectorAll('button').forEach(o => o.setAttribute('aria-pressed', o === b)); stages.forEach(s => s.setCur(k)); });
+  picker.appendChild(b);
+});
+document.fonts && document.fonts.ready.then(() => stages.forEach(s => s.setCur('trial')));
+</script>
+</body>
+</html>

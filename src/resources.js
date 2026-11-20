@@ -161,6 +161,12 @@ html body [data-af-article] .post-rtf > :is(figure, blockquote, .w-richtext-figu
 }
 /* paragraphes vides servant d'espaceurs dans Webflow : masqués par affine.js (classe af-empty) ; un seul espace régulier */
 html body [data-af-article] .post-rtf > p.af-empty{ display:none; }
+/* images et embeds dans la colonne du texte (retour de Romain, 2026-11-20 : en pleine largeur ils débordaient sur la colonne
+   des intertitres et passaient sous eux) ; les citations restent en pleine largeur. Webflow met les figures en display:table. */
+html body [data-af-article] .post-rtf > :is(figure, .w-richtext-figure-type-image, .w-embed){ margin-left:0; margin-right:0; width:100%; max-width:46rem; }
+html body [data-af-article] .post-rtf > figure.w-richtext-figure-type-image{ display:block; }
+html body [data-af-article] .post-rtf > figure.w-richtext-figure-type-image > div{ display:block; max-width:100%; }
+html body [data-af-article] .post-rtf > figure img{ display:block; width:100%; height:auto; }
 
 /* Publications & Media (2026-11-20) : la Main Image est un logo blanc sur transparent (logos/build_white_logos.py),
    posé au centre d'un panneau violet foncé à la place de la photo. Le logo tient dans 58 % de la largeur et 34 % de la hauteur

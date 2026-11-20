@@ -17,7 +17,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Toutes (code global) | site | `site.js` | `v0.32.0` | sliders `[data-swiper]` ; fond flottant, line field ; refonte : fond sombre animé sur `header.section_header`, `[data-af-bg]`, `.feature-grid > .video-animation` ; FAQ sur `[data-pv="faq"]` ; navigation en île sur `[data-pv="nav"]` (composant `nav-island`) |
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.29.0` | `portfolio-hero-bg`, `portfolio-hero-slot` ; refonte : `viz` (deux `.rp-viz` dans les panneaux de Build conviction, `data-mode` rank et dist, et un dans `.ss-anim` du bloc Evidence, rank), `platform-connect-v2`, `faq` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.29.0` | `conductor-hero-bg`, `conductor-hero-slot` ; refonte : `cond-answer` (panneau `cond-panel`), `cond-dose` (`.ss-anim` du Proof), `cond-backbone`, `cond-protocol`, `cond-report` (panneaux des étapes, classe `cond-mount`), `platform-connect-v2`, `faq` ; texte des scènes dans les enfants `[data-role]` |
-| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.37.0` | `bonv-hero-bg`, `bonv-hero-slot` ; refonte : `bonv-answer` (panneau `cond-panel`), `bonv-ask`, `bonv-collab`, `bonv-orch` (panneaux des étapes, classe `cond-mount`), `faq` absent (pas de FAQ dans le document) ; texte des scènes dans les enfants `[data-role]` |
+| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.38.0` | `bonv-hero-bg`, `bonv-hero-slot` ; refonte : `bonv-answer` (panneau `cond-panel`), `bonv-ask`, `bonv-collab`, `bonv-orch` (panneaux des étapes, classe `cond-mount`), `faq` absent (pas de FAQ dans le document) ; texte des scènes dans les enfants `[data-role]` |
 | Careers (`/careers`, hors menu, en test) | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` | `careers` (div dans le `container-large` de la section blanche ; attributs `data-board`, `data-all`, `data-empty`, `data-error`, `data-link`, `data-apply`) |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.36.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
 | Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.36.0` | `case-study` (attribut sur `main-wrapper`) |
@@ -84,6 +84,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.38.0` | `9d0c58e` | BonV : hero, V un peu plus grand (rayon `min(W*.085, H*.135)` au lieu de `min(W*.075, H*.12)`) et plus près du centre (71 % de la largeur au lieu de 74 %) en mode fond ; mode bloc inchangé. Seul `dist/bonv.js` change. Validé en `?dev` par Romain |
 | `v0.37.0` | `032647e` | BonV : hero `src/bonv-hero-bg.js` réécrit, le V et son anneau de points en boucle « parle » / « réfléchit » (proto `protos/bonv/phasev-bonv-hero-v-proto.html`). Seul `dist/bonv.js` change ; aucun autre module de BonV modifié depuis `v0.24.0` (graphe vérifié) |
 | `v0.36.0` | `e25b438` | Case Studies : cartes de la bibliothèque et de « More case studies » (fiches) cliquables en entier, le lien du titre (`[data-cs-link="title"]::after`) couvre la carte. Seul `dist/case-studies.js` change. Testé en `?dev` par Romain |
 | `v0.35.0` | `e9028cc` | Case Studies : message « No case study matches these filters yet. » masqué tant que des études s'affichent (`.cs-empty{display:flex}` passait devant l'attribut `hidden`). Seul `dist/case-studies.js` change. Testé en `?dev` par Romain |
@@ -148,6 +149,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-20
+
+- **BonV, hero : V un peu plus grand et plus près du centre** (retour de Romain), en desktop seulement ; proto mis à jour à l'identique. Release `v0.38.0`, URL jsDelivr vérifiée, loader BonV `v0.37.0` → `v0.38.0`.
 
 - **BonV, header : nouveau hero et bouton « Watch the video »** (demandes de Romain). Hero : le V et son anneau de points comme un chatbot, boucle « parle » puis « réfléchit » (proto validé `protos/bonv/phasev-bonv-hero-v-proto.html`), `src/bonv-hero-bg.js` réécrit sur le même montage (`bonv-hero-bg` / `bonv-hero-slot`, aucune modification d'élément). Release `v0.37.0`, URLs jsDelivr vérifiées (`bonv.js` et les chunks `hero-stage`, `bonv-draw`) ; loader BonV `v0.24.0` → `v0.37.0` (graphe des modules de `bonv.js` vérifié : seul le hero a changé depuis `v0.24.0`). Bouton secondaire du header (instance `button` `8f8972bc…d495`) : « Learn more » vers `#bonv-video` → « Watch the video » vers `https://www.youtube.com/watch?v=LB_df-lTUXU`, nouvel onglet, `rel=noopener`. À noter : une instance « Watch a Demo Video » (lien `#`) existe dans la page mais n'est pas publiée (absente du HTML en ligne).
 

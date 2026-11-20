@@ -148,6 +148,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-11-20
 
+- **BonV, « See BonV in action » : player YouTube remplacé par une image cliquable** (demande de Romain, point 10 de RETOURS). Image tirée du film de lancement (dossier `TEST - v82`, rendu `final` à t = 30 s du script, scène Orchestrates : V et les 5 modules, chat « Thanks. »), capturée par un script à part sans toucher au dossier (`render.js` vide `out/<scène>`), JPEG 1920 × 1080 qualité 90 (258 Ko), asset `bonv-video-cover.jpg`. Lien `dc026a75…bd7a` vers `https://www.youtube.com/watch?v=LB_df-lTUXU`, nouvel onglet, `rel=noopener` ; image en classe existante `video-screen` (coins arrondis, ombre), alt explicite. Élément YouTube `c2526ea6…510b` supprimé.
+
 - **Case Studies : cartes cliquables en entier** (retour de Romain). Bibliothèque et « More case studies » des fiches : seuls l'image et le titre étaient des liens. `src/case-studies.js` : le lien du titre s'étend à toute la carte (`::after` en `inset:0`), curseur main sur la carte, comme `.cs-link:after` des pages produit (déjà cliquables en entier). Testé en `?dev` par Romain, release `v0.36.0` ; loaders de Case Studies et de son modèle `v0.35.0` → `v0.36.0`.
 
 - **Company, bloc Investors : intro sur une ligne** (retour de Romain, point 3 de RETOURS). Pas de `<br>` : l'intro était dans `section-top_right` (max-width 27,5 rem, classe partagée, non modifiée) et passait sur deux lignes. Le texte `text-size-large` (`a7323002…10b9`) est déplacé en enfant direct du `section-top left-align`, sous `section-top_left`, comme l'intro de « Build with us » ; la colonne `section-top_right` vide (`5dc0c067…b020`) est supprimée.

@@ -30,7 +30,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 |---|---|---|---|
 | 1 | Navigation : style du lien de la page courante | Pastille sombre fixe sur le lien courant (Platform sur les pages produit), point parasite de Platform corrigé. Release v0.28.0 | validé |
 | 9 | Flexible Entry Point : animation | Bloc de bas de page des produits (complémentarité des produits). Le client aime le concept, pas le style (cartes type carte bancaire). Nouvelle version « carte et rangée » (proto v6 I1), release v0.29.0 sur les 5 pages produit ; texte élargi et passé à gauche | validé |
-| 10 | BonV : vidéo hors YouTube | Réencoder proprement le dégradé, player vidéo maison. En parler avant | en discussion |
+| 10 | BonV : vidéo hors YouTube | Décision 2026-11-20 : plus de player intégré. Image tirée du film (scène Orchestrates, dossier TEST v82) avec lien vers la vidéo YouTube dans un nouvel onglet | fait |
 | 16 | Careers : offres Greenhouse | Page qui récupère les offres de Greenhouse. Page `/careers` créée en test (liens actuels vers Greenhouse gardés), offres en direct par équipe avec filtre par bureau. Validé, release v0.30.0. Liens du menu, du footer et de Company basculés vers `/careers` | validé |
 
 ## En attente de Romain

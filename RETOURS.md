@@ -31,7 +31,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 | 1 | Navigation : style du lien de la page courante | Pastille sombre fixe sur le lien courant (Platform sur les pages produit), point parasite de Platform corrigé. Release v0.28.0 | validé |
 | 9 | Flexible Entry Point : animation | Bloc de bas de page des produits (complémentarité des produits). Le client aime le concept, pas le style (cartes type carte bancaire). Nouvelle version « carte et rangée » (proto v6 I1), release v0.29.0 sur les 5 pages produit ; texte élargi et passé à gauche | validé |
 | 10 | BonV : vidéo hors YouTube | Réencoder proprement le dégradé, player vidéo maison. En parler avant | en discussion |
-| 16 | Careers : offres Greenhouse | Page qui récupère les offres de Greenhouse. Page `/careers` créée en test (liens actuels vers Greenhouse gardés), offres en direct par équipe avec filtre par bureau. Validé, release v0.30.0. Reste : basculer les liens vers `/careers` après les tests | fait, à vérifier |
+| 16 | Careers : offres Greenhouse | Page qui récupère les offres de Greenhouse. Page `/careers` créée en test (liens actuels vers Greenhouse gardés), offres en direct par équipe avec filtre par bureau. Validé, release v0.30.0. Liens du menu, du footer et de Company basculés vers `/careers` | validé |
 
 ## En attente de Romain
 
@@ -73,6 +73,5 @@ Recette mobile du site (après publication par Romain). À regarder en particuli
 ## Pour plus tard
 
 - Trial : le lien « Explore the case study library → » de la success story fait doublon avec le bouton « All Trial Optimizer case studies » du bloc juste dessous. Gardé pour l'instant (décision de Romain, 2026-11-19).
-- Careers : basculer les liens du menu, du footer et du bouton de Company vers `/careers` après les tests.
 - Nettoyage du code mort : `src/platform-connect-cards.js` (plus monté), règles du chiffre clé dans `src/case-studies.js`.
 - Listes case studies des pages produit : aucun tri posé (ordre par défaut du CMS) ; tri par Order à régler dans le Designer si besoin.

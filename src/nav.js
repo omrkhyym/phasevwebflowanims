@@ -131,7 +131,8 @@ export function initNav(root) {
       const a = it.cloneNode(true); a.className = 'pvn-s-prod'; a.querySelector('.pvn-item-q')?.remove(); sheetBox.appendChild(a);
     });
     const sep = document.createElement('div'); sep.className = 'pvn-s-sep'; sheetBox.appendChild(sep);
-    root.querySelectorAll('.pvn-links a.pvn-link').forEach(l => { const a = l.cloneNode(true); a.className = 'pvn-s-link'; sheetBox.appendChild(a); });
+    // Platform (le bouton du panneau) n'est pas recopié : le libellé du haut le remplace déjà
+    root.querySelectorAll('.pvn-links a.pvn-link').forEach(l => { if (l === toggle) return; const a = l.cloneNode(true); a.className = 'pvn-s-link'; sheetBox.appendChild(a); });
     const ctaSrc = root.querySelector('.pvn-cta .button');
     if (ctaSrc) { const c = document.createElement('div'); c.className = 'pvn-s-cta'; c.appendChild(ctaSrc.cloneNode(true)); sheetBox.appendChild(c); }
     [...sheetBox.children].forEach((el, i) => el.style.setProperty('--i', i));

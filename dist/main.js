@@ -1052,15 +1052,15 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
   evapMix(g, r, t, Op, Oa, Oc, P, A, C);
 }`
 	};
-})), V, H, ce, U, le, ue, de, fe = e((() => {
+})), V, H, U, W, ce, le, ue, de = e((() => {
 	h(), w(), N(), se(), V = (e) => {
 		let t = Number.isInteger(e) ? e.toFixed(1) : String(e);
 		return e < 0 ? "(" + t + ")" : t;
-	}, H = m.duration, ce = H + C.duration, U = ce + M.duration, le = U + B.duration, ue = B.glsl.replace("void scene(", "void evapScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in B.params && t !== "count" ? V(B.params[t].value) : e), de = {
+	}, H = m.duration, U = H + C.duration, W = U + M.duration, ce = W + B.duration, le = B.glsl.replace("void scene(", "void evapScene(").replace(/\bu_(\w+)\b/g, (e, t) => t in B.params && t !== "count" ? V(B.params[t].value) : e), ue = {
 		id: "sequence",
 		name: "Séquence (un seul programme)",
 		inSequence: !1,
-		duration: le,
+		duration: ce,
 		camera: { ...m.camera },
 		params: { count: {
 			label: "Densité (particules)",
@@ -1071,43 +1071,44 @@ void scene(vec2 g, vec4 r, float t, out vec3 P, out float A, out vec3 C){
 		} },
 		fixed: { ...B.fixed },
 		glsl: `
-${ue}
+${le}
 void scene(vec2 g, vec4 r, float T, out vec3 P, out float A, out vec3 C){
   if(T<${V(H)}){ blobScene(g, r, T, P, A, C); return; }
-  if(T<${V(ce)}){ planeScene(g, r, T-${V(H)}, P, A, C); return; }
+  if(T<${V(U)}){ planeScene(g, r, T-${V(H)}, P, A, C); return; }
   // le paysage : calculé une seule fois, ici, pour la fin des montagnes comme pour le retour au blob
   vec3 Lp; float La; vec3 Lc;
-  landScene(g, r, T-${V(ce)}, Lp, La, Lc);
-  if(T<${V(U)}){ P=Lp; A=La; C=Lc; return; }
-  evapMix(g, r, T-${V(U)}, Lp, La, Lc, P, A, C);
+  landScene(g, r, T-${V(U)}, Lp, La, Lc);
+  if(T<${V(W)}){ P=Lp; A=La; C=Lc; return; }
+  evapMix(g, r, T-${V(W)}, Lp, La, Lc, P, A, C);
 }`
 	};
 }));
 //#endregion
 //#region src/hero-sequence/index.js
-function pe(e) {
+function fe(e) {
 	if (e.dataset.pvReady) return;
 	if (e.dataset.pvReady = "1", !document.getElementById("pv-hero-seq-css")) {
 		let e = document.createElement("style");
-		e.id = "pv-hero-seq-css", e.textContent = me, document.head.appendChild(e);
+		e.id = "pv-hero-seq-css", e.textContent = pe, document.head.appendChild(e);
 	}
 	let t = document.createElement("canvas");
 	t.setAttribute("aria-hidden", "true"), e.appendChild(t);
 	let n;
 	try {
-		n = s(t), n.useScene(de);
+		n = s(t), n.useScene(ue);
 	} catch {
 		t.remove(), delete e.dataset.pvReady;
 		return;
 	}
 	let r = matchMedia("(prefers-reduced-motion: reduce)").matches, i = !1;
 	function a(e) {
-		let t = G.find((t) => e < t.at + t.end) || G[G.length - 1], r = Math.min(e - t.at, t.end), a = t.sc.cameraAt ? {
+		let t = K.find((t) => e < t.at + t.end) || K[K.length - 1], r = Math.min(e - t.at, t.end), a = t.sc.cameraAt ? {
 			...t.v,
 			...t.sc.cameraAt(r, t.v)
 		} : t.v, o = i ? {
 			...a,
-			shift: 0
+			shift: 0,
+			zoom: a.zoom * ge
 		} : a;
 		n.render(e, o, t.v.count * (i ? .5 : 1));
 	}
@@ -1116,7 +1117,7 @@ function pe(e) {
 	}
 	let c = 0, l = 0, u = 0;
 	function d(e) {
-		c = requestAnimationFrame(d), l += Math.min((e - u) / 1e3, .05), u = e, a(l % ge);
+		c = requestAnimationFrame(d), l += Math.min((e - u) / 1e3, .05), u = e, a(l % he);
 	}
 	function f() {
 		c || r || (u = performance.now(), c = requestAnimationFrame(d));
@@ -1134,23 +1135,29 @@ function pe(e) {
 		p(), m.disconnect(), h && h.disconnect(), t.remove(), delete e.dataset.pvReady;
 	} };
 }
-var W, me, he, G, ge, _e, ve = e((() => {
-	p(), h(), w(), N(), se(), fe(), W = "[data-pv=\"hero-sequence\"]", me = `
-.header_image-wrapper:has(${W}){ background:none!important; border:0!important; box-shadow:none!important; position:relative; overflow:visible!important; min-height:30rem; }
-.header_component:has(${W}), .header_content:has(${W}){ position:relative; }
-.header_content:has(${W}) .header_content-left{ position:relative; z-index:2; }
+var G, pe, me, K, he, ge, _e, ve = e((() => {
+	p(), h(), w(), N(), se(), de(), G = "[data-pv=\"hero-sequence\"]", pe = `
+.header_image-wrapper:has(${G}){ background:none!important; border:0!important; box-shadow:none!important; position:relative; overflow:visible!important; min-height:30rem; }
+.header_component:has(${G}), .header_content:has(${G}){ position:relative; }
+.header_content:has(${G}) .header_content-left{ position:relative; z-index:2; }
 /* très grand, ancré à droite, passe sous la colonne de texte ; s'estompe côté texte */
-${W}{ position:absolute; top:-16%; bottom:-16%; right:-6%; width:95vw; z-index:0; pointer-events:none;
+${G}{ position:absolute; top:-16%; bottom:-16%; right:-6%; width:95vw; z-index:0; pointer-events:none;
   -webkit-mask-image:linear-gradient(90deg, transparent 2%, rgba(0,0,0,.4) 24%, #000 46%); mask-image:linear-gradient(90deg, transparent 2%, rgba(0,0,0,.4) 24%, #000 46%); }
-${W} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+${G} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
 @media (max-width:991px){
-  .section_header:has(${W}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow-x:clip; }
-  .header_component:has(${W}), .header_component:has(${W}) .header_content{ height:auto; }
-  ${W}{ position:relative; top:auto; bottom:auto; right:auto; width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:1/1; margin-top:1rem; -webkit-mask-image:none; mask-image:none; }
-}`, he = (e) => ({
+  .section_header:has(${G}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow-x:clip; }
+  .header_component:has(${G}), .header_component:has(${G}) .header_content{ height:auto; }
+  ${G}{ position:relative; top:auto; bottom:auto; right:auto; width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:1/1; margin-top:1rem; -webkit-mask-image:none; mask-image:none; }
+  /* l'animation descend jusqu'au bas de l'écran : elle prend toute la hauteur laissée par le texte, sans marge dessous */
+  .section_header:has(${G}){ justify-content:flex-start; }
+  .section_header:has(${G}) > .padding-global{ flex:1 0 auto; display:flex; flex-direction:column; padding-bottom:0; }
+  .section_header:has(${G}) > .padding-global > .container-large{ flex:1 0 auto; display:flex; flex-direction:column; width:100%; }
+  .header_component:has(${G}){ flex:1 0 auto; display:flex; flex-direction:column; }
+  ${G}{ flex:1 0 auto; aspect-ratio:auto; min-height:100vw; }
+}`, me = (e) => ({
 		...Object.fromEntries(Object.entries(c).map(([t, n]) => [t, e.camera && t in e.camera ? e.camera[t] : n.value])),
 		...Object.fromEntries(Object.entries(e.params).map(([e, t]) => [e, t.value]))
-	}), G = [];
+	}), K = [];
 	{
 		let e = 0;
 		[
@@ -1159,15 +1166,15 @@ ${W} canvas{ position:absolute; inset:0; width:100%; height:100%; display:block;
 			M,
 			B
 		].forEach((t) => {
-			G.push({
+			K.push({
 				sc: t,
 				at: e,
 				end: t.duration,
-				v: he(t)
+				v: me(t)
 			}), e += t.duration;
 		});
 	}
-	ge = de.duration, _e = G[2].at + 7.5;
+	he = ue.duration, ge = 1.5, _e = K[2].at + 7.5;
 }));
 //#endregion
 //#region src/gantt-glossy.js
@@ -1204,7 +1211,7 @@ function ye(e) {
 			w: h - n - i,
 			BH: (v ? 12 : 16) * _,
 			gridTop: e + 14 * _,
-			bottom: e + 14 * _ + t * Q.length
+			bottom: e + 14 * _ + t * $.length
 		};
 	}
 	function b() {
@@ -1213,32 +1220,32 @@ function ye(e) {
 	}
 	function x(e) {
 		n.clearRect(0, 0, h, g);
-		let { top: t, rowH: r, padL: a, w: o, BH: s, gridTop: c, bottom: l } = y(), u = K.slip / be, b = (e) => a + e * o, x = Math.max(12, (v ? 12 : 15) * _), S = Math.max(8.5, 10 * _);
+		let { top: t, rowH: r, padL: a, w: o, BH: s, gridTop: c, bottom: l } = y(), u = q.slip / be, b = (e) => a + e * o, x = Math.max(12, (v ? 12 : 15) * _), S = Math.max(8.5, 10 * _);
 		for (let e = 0; e <= 8; e++) {
 			let n = e / 8, r = Math.round(be * n), i = b(n);
-			m(i, c - 6 * _, i, l, q, e === 0 ? .18 : .07), (!v || e % 2 == 0) && d("W" + r, i, t - 6 * _, 400, S, J, 1, e === 0 ? "left" : e === 8 ? "right" : "center", !0);
+			m(i, c - 6 * _, i, l, J, e === 0 ? .18 : .07), (!v || e % 2 == 0) && d("W" + r, i, t - 6 * _, 400, S, Y, 1, e === 0 ? "left" : e === 8 ? "right" : "center", !0);
 		}
-		d("STUDY TIMELINE", 0, t - 6 * _, 400, S, J, 1, "left", !0);
-		let C = $(i(e, .7, 1.7)), w = !1;
-		Q.forEach((t, a) => {
-			let l = c + a * r + r / 2, f = t.tool * K.lag, h = a === 0 ? C : $(i(e, 1.6 + f, 2.6 + f));
+		d("STUDY TIMELINE", 0, t - 6 * _, 400, S, Y, 1, "left", !0);
+		let C = Ce(i(e, .7, 1.7)), w = !1;
+		$.forEach((t, a) => {
+			let l = c + a * r + r / 2, f = t.tool * q.lag, h = a === 0 ? C : Ce(i(e, 1.6 + f, 2.6 + f));
 			a > 0 && h < 1 && C >= 1 && (w = !0);
-			let g = t.a * X + (a === 0 ? 0 : u * h), y = t.b * X + u * (a === 0 ? C : h);
-			if (a && m(0, l - r / 2, b(1), l - r / 2, q, .06), d(t.n, 0, l + (v ? 4 : -1) * _, 400, x, h > 0 || a === 0 ? q : J), v || d(Z[t.tool].n, 0, l + 15 * _, 400, S * .9, Z[t.tool].c, .85, "left", !0), n.save(), n.setLineDash([2, 3]), p(b(t.a * X) + .5, l - s / 2 + .5, (t.b - t.a) * X * o - 1, s - 1, s / 2), n.strokeStyle = "rgba(244,244,244,.28)", n.lineWidth = 1, n.stroke(), n.restore(), a > 0 && C >= 1 && h < 1) {
-				let e = b(t.a * X + u), r = b(g);
-				n.save(), n.setLineDash([3, 3]), p(r, l - s / 2 - 3 * _, e - r + (y - g) * o, s + 6 * _, (s + 6 * _) / 2), n.strokeStyle = Y, n.globalAlpha = .8, n.lineWidth = 1, n.stroke(), n.restore(), n.globalAlpha = 1, d("STALE", b(y) + 10 * _, l + S * .36, 400, S, Y, .9, "left", !0);
+			let g = t.a * Z + (a === 0 ? 0 : u * h), y = t.b * Z + u * (a === 0 ? C : h);
+			if (a && m(0, l - r / 2, b(1), l - r / 2, J, .06), d(t.n, 0, l + (v ? 4 : -1) * _, 400, x, h > 0 || a === 0 ? J : Y), v || d(Q[t.tool].n, 0, l + 15 * _, 400, S * .9, Q[t.tool].c, .85, "left", !0), n.save(), n.setLineDash([2, 3]), p(b(t.a * Z) + .5, l - s / 2 + .5, (t.b - t.a) * Z * o - 1, s - 1, s / 2), n.strokeStyle = "rgba(244,244,244,.28)", n.lineWidth = 1, n.stroke(), n.restore(), a > 0 && C >= 1 && h < 1) {
+				let e = b(t.a * Z + u), r = b(g);
+				n.save(), n.setLineDash([3, 3]), p(r, l - s / 2 - 3 * _, e - r + (y - g) * o, s + 6 * _, (s + 6 * _) / 2), n.strokeStyle = X, n.globalAlpha = .8, n.lineWidth = 1, n.stroke(), n.restore(), n.globalAlpha = 1, d("STALE", b(y) + 10 * _, l + S * .36, 400, S, X, .9, "left", !0);
 			}
-			p(b(g), l - s / 2, (y - g) * o, s, s / 2), n.globalAlpha = .92, n.fillStyle = Z[t.tool].c, n.fill(), n.globalAlpha = 1;
+			p(b(g), l - s / 2, (y - g) * o, s, s / 2), n.globalAlpha = .92, n.fillStyle = Q[t.tool].c, n.fill(), n.globalAlpha = 1;
 		});
-		let T = Q[Q.length - 1], E = $(i(e, 1.6 + T.tool * K.lag, 2.6 + T.tool * K.lag)), D = b(T.b * X), O = b(T.b * X + u * E), k = c - 6 * _, A = l + 8 * _;
-		if (n.save(), n.setLineDash([3, 4]), m(D, k, D, A, q, .5), n.restore(), d("PLANNED", D, A + 18 * _, 400, S, J, 1, "center", !0), E > .03) {
+		let T = $[$.length - 1], E = Ce(i(e, 1.6 + T.tool * q.lag, 2.6 + T.tool * q.lag)), D = b(T.b * Z), O = b(T.b * Z + u * E), k = c - 6 * _, A = l + 8 * _;
+		if (n.save(), n.setLineDash([3, 4]), m(D, k, D, A, J, .5), n.restore(), d("PLANNED", D, A + 18 * _, 400, S, Y, 1, "center", !0), E > .03) {
 			n.save(), n.beginPath(), n.rect(D, k, O - D, A - k), n.clip();
-			for (let e = D - 80; e < O + 80; e += 7 * _) m(e, k, e - 70 * _, A, Y, .14);
-			n.restore(), m(O, k, O, A, Y, 1, 1.5);
-			let e = "SUBMISSION  +" + Math.round(K.slip * E) + " WEEKS", t = f(e, 500, S * 1.05, !0) + 22 * _, r = 24 * _, i = Math.min(O + 10 * _, h - t - 2), a = A + 6 * _;
-			n.globalAlpha = E, p(i, a, t, r, r / 2), n.fillStyle = "rgba(214,163,148,.16)", n.fill(), n.strokeStyle = Y, n.lineWidth = 1, n.stroke(), n.globalAlpha = 1, d(e, i + 11 * _, a + r / 2 + S * .38, 500, S * 1.05, Y, E, "left", !0);
+			for (let e = D - 80; e < O + 80; e += 7 * _) m(e, k, e - 70 * _, A, X, .14);
+			n.restore(), m(O, k, O, A, X, 1, 1.5);
+			let e = "SUBMISSION  +" + Math.round(q.slip * E) + " WEEKS", t = f(e, 500, S * 1.05, !0) + 22 * _, r = 24 * _, i = Math.min(O + 10 * _, h - t - 2), a = A + 6 * _;
+			n.globalAlpha = E, p(i, a, t, r, r / 2), n.fillStyle = "rgba(214,163,148,.16)", n.fill(), n.strokeStyle = X, n.lineWidth = 1, n.stroke(), n.globalAlpha = 1, d(e, i + 11 * _, a + r / 2 + S * .38, 500, S * 1.05, X, E, "left", !0);
 		}
-		let j = C < 1 ? "ONE ELIGIBILITY CRITERION CHANGES" : w ? "THREE TOOLS HAVE NOT RECALCULATED YET" : "EVERY DOWNSTREAM DATE HAS MOVED", M = C < 1 ? q : w ? Y : q, N = A + 58 * _;
+		let j = C < 1 ? "ONE ELIGIBILITY CRITERION CHANGES" : w ? "THREE TOOLS HAVE NOT RECALCULATED YET" : "EVERY DOWNSTREAM DATE HAS MOVED", M = C < 1 ? J : w ? X : J, N = A + 58 * _;
 		n.globalAlpha = 1, n.fillStyle = M, n.beginPath(), n.arc(5 * _, N - S * .35, 3.5 * _, 0, Math.PI * 2), n.fill(), d(j, 18 * _, N, 400, S, M, .9, "left", !0);
 	}
 	let S = matchMedia("(prefers-reduced-motion: reduce)").matches, C = 0, w = 0, T = 0, E = !1, D = 0;
@@ -1268,12 +1275,12 @@ function ye(e) {
 		j(), M.disconnect(), N && N.disconnect(), t.remove(), delete e.dataset.pvReady;
 	} };
 }
-var K, q, J, Y, be, X, Z, Q, xe, Se, $, Ce = e((() => {
-	n(), K = {
+var q, J, Y, X, be, Z, Q, $, xe, Se, Ce, we = e((() => {
+	n(), q = {
 		slip: 18,
 		lag: 1.15,
 		hold: 2.8
-	}, q = "#F4F4F4", J = "rgba(244,244,244,.42)", Y = "#D6A394", be = 104, X = .72, Z = [
+	}, J = "#F4F4F4", Y = "rgba(244,244,244,.42)", X = "#D6A394", be = 104, Z = .72, Q = [
 		{
 			n: "PROTOCOL",
 			c: "#C9C4EF"
@@ -1290,7 +1297,7 @@ var K, q, J, Y, be, X, Z, Q, xe, Se, $, Ce = e((() => {
 			n: "eTMF",
 			c: "#7FE8CF"
 		}
-	], Q = [
+	], $ = [
 		{
 			n: "Final protocol",
 			a: 0,
@@ -1327,11 +1334,11 @@ var K, q, J, Y, be, X, Z, Q, xe, Se, $, Ce = e((() => {
 			b: .95,
 			tool: 3
 		}
-	], xe = 2.6 + Z.length * K.lag, Se = xe + K.hold, $ = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
+	], xe = 2.6 + Q.length * q.lag, Se = xe + q.hold, Ce = (e) => e < .5 ? 4 * e * e * e : 1 - (-2 * e + 2) ** 3 / 2;
 }));
 //#endregion
 //#region src/testimonials.js
-function we(e) {
+function Te(e) {
 	if (!e || e.dataset.pvInit) return null;
 	e.dataset.pvInit = "1";
 	let t = [...e.querySelectorAll(".tm-tab")], n = [...e.querySelectorAll(".tm-quote")];
@@ -1353,7 +1360,7 @@ function we(e) {
 		});
 	}
 	function m(e) {
-		s = requestAnimationFrame(m), !c || l ? o = e - u * Te : (u = Math.min(1, (e - o) / Te), f(a, u), u >= 1 && p(a + 1));
+		s = requestAnimationFrame(m), !c || l ? o = e - u * Ee : (u = Math.min(1, (e - o) / Ee), f(a, u), u >= 1 && p(a + 1));
 	}
 	let h = (e) => {
 		let n = t.indexOf(e.target.closest(".tm-tab"));
@@ -1371,25 +1378,25 @@ function we(e) {
 	d.addEventListener("click", h), d.addEventListener("keydown", g), e.addEventListener("pointerenter", _, { passive: !0 }), e.addEventListener("pointerleave", v, { passive: !0 }), e.addEventListener("focusin", _), e.addEventListener("focusout", v), p(0);
 	let y = null;
 	return i || (y = new IntersectionObserver(([e]) => {
-		c = e.isIntersecting, c && !s ? (o = performance.now() - u * Te, s = requestAnimationFrame(m)) : c || (cancelAnimationFrame(s), s = 0);
+		c = e.isIntersecting, c && !s ? (o = performance.now() - u * Ee, s = requestAnimationFrame(m)) : c || (cancelAnimationFrame(s), s = 0);
 	}, { threshold: .4 }), y.observe(e)), function() {
 		cancelAnimationFrame(s), y && y.disconnect(), d.removeEventListener("click", h), d.removeEventListener("keydown", g), e.removeEventListener("pointerenter", _), e.removeEventListener("pointerleave", v), e.removeEventListener("focusin", _), e.removeEventListener("focusout", v), delete e.dataset.pvInit;
 	};
 }
-var Te, Ee = e((() => {
-	Te = 8e3;
+var Ee, De = e((() => {
+	Ee = 8e3;
 }));
 //#endregion
 //#region src/news-cards.js
-function De() {
-	if (document.getElementById(Oe) || !document.querySelector(".swiper-item")) return;
+function Oe() {
+	if (document.getElementById(ke) || !document.querySelector(".swiper-item")) return;
 	let e = document.createElement("style");
-	e.id = Oe, e.textContent = ke, document.head.appendChild(e);
+	e.id = ke, e.textContent = Ae, document.head.appendChild(e);
 }
-var Oe, ke, Ae = e((() => {
-	Oe = "pv-news-cards-css", ke = "\n:root{--af-mono:'Roboto Mono',ui-monospace,Consolas,monospace;--af-edge:linear-gradient(150deg,rgba(20,18,56,.18) 0%,rgba(20,18,56,.06) 40%,rgba(20,18,56,.04) 75%,rgba(104,74,158,.2) 100%)}\n/* Latest news : carte d'article au style des cartes case studies (verre clair, image arrondie, label mono) */\n.section_layout .swiper-item{ position:relative; isolation:isolate; display:flex; flex-direction:column; gap:1.25rem; height:100%; padding:1rem 1rem 1.5rem; border-radius:1.5rem; background:linear-gradient(155deg, #f6f6f9 0%, #eeedf4 100%); }\n.section_layout .swiper-item::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:1; background:var(--af-edge);\n  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }\n.section_layout .swiper-item img{ border-radius:1rem; }\n.section_layout .swiper-item .post_body{ padding:0 .5rem; }\n.section_layout .swiper-item .post_date{ font-family:var(--af-mono); font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; }\n/* Latest news (et tout slider d'articles) : cartes moins larges, toutes de la même hauteur ; image 2:1, titre plus petit, 3 lignes max */\n.section_layout .swiper-slide:has(> .swiper-item){ max-width:24rem; height:auto; }\n.section_layout .swiper-item .post_image{ aspect-ratio:2 / 1; margin-bottom:0; }\n.section_layout .swiper-item .heading-style-h4{ font-size:1.25rem; line-height:1.35; font-weight:500; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }\n";
-})), je = /* @__PURE__ */ t((() => {
-	ve(), Ce(), a(), Ee(), Ae(), document.querySelectorAll("[data-pv=\"hero-sequence\"]").forEach(pe), document.querySelectorAll("[data-pv=\"gantt-glossy\"]").forEach(ye), document.querySelectorAll("[data-pv=\"mini-scene\"]").forEach(o), document.querySelectorAll("[data-pv=\"testimonials\"]").forEach(we), De();
+var ke, Ae, je = e((() => {
+	ke = "pv-news-cards-css", Ae = "\n:root{--af-mono:'Roboto Mono',ui-monospace,Consolas,monospace;--af-edge:linear-gradient(150deg,rgba(20,18,56,.18) 0%,rgba(20,18,56,.06) 40%,rgba(20,18,56,.04) 75%,rgba(104,74,158,.2) 100%)}\n/* Latest news : carte d'article au style des cartes case studies (verre clair, image arrondie, label mono) */\n.section_layout .swiper-item{ position:relative; isolation:isolate; display:flex; flex-direction:column; gap:1.25rem; height:100%; padding:1rem 1rem 1.5rem; border-radius:1.5rem; background:linear-gradient(155deg, #f6f6f9 0%, #eeedf4 100%); }\n.section_layout .swiper-item::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:1; background:var(--af-edge);\n  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }\n.section_layout .swiper-item img{ border-radius:1rem; }\n.section_layout .swiper-item .post_body{ padding:0 .5rem; }\n.section_layout .swiper-item .post_date{ font-family:var(--af-mono); font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; }\n/* Latest news (et tout slider d'articles) : cartes moins larges, toutes de la même hauteur ; image 2:1, titre plus petit, 3 lignes max */\n.section_layout .swiper-slide:has(> .swiper-item){ max-width:24rem; height:auto; }\n.section_layout .swiper-item .post_image{ aspect-ratio:2 / 1; margin-bottom:0; }\n.section_layout .swiper-item .heading-style-h4{ font-size:1.25rem; line-height:1.35; font-weight:500; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }\n";
+})), Me = /* @__PURE__ */ t((() => {
+	ve(), we(), a(), De(), je(), document.querySelectorAll("[data-pv=\"hero-sequence\"]").forEach(fe), document.querySelectorAll("[data-pv=\"gantt-glossy\"]").forEach(ye), document.querySelectorAll("[data-pv=\"mini-scene\"]").forEach(o), document.querySelectorAll("[data-pv=\"testimonials\"]").forEach(Te), Oe();
 }));
 //#endregion
-export default je();
+export default Me();

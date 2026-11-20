@@ -24,6 +24,12 @@ ${SEL} canvas{ position:absolute; inset:0; width:100%; height:100%; display:bloc
   .section_header:has(${SEL}){ height:auto; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow-x:clip; }
   .header_component:has(${SEL}), .header_component:has(${SEL}) .header_content{ height:auto; }
   ${SEL}{ position:relative; top:auto; bottom:auto; right:auto; width:100vw; margin-left:calc(50% - 50vw); aspect-ratio:1/1; margin-top:1rem; -webkit-mask-image:none; mask-image:none; }
+  /* l'animation descend jusqu'au bas de l'écran : elle prend toute la hauteur laissée par le texte, sans marge dessous */
+  .section_header:has(${SEL}){ justify-content:flex-start; }
+  .section_header:has(${SEL}) > .padding-global{ flex:1 0 auto; display:flex; flex-direction:column; padding-bottom:0; }
+  .section_header:has(${SEL}) > .padding-global > .container-large{ flex:1 0 auto; display:flex; flex-direction:column; width:100%; }
+  .header_component:has(${SEL}){ flex:1 0 auto; display:flex; flex-direction:column; }
+  ${SEL}{ flex:1 0 auto; aspect-ratio:auto; min-height:100vw; }
 }`;
 
 // la chronologie : chaque scène figée, avec ses valeurs et sa trajectoire de caméra
@@ -36,6 +42,7 @@ const SEGS = []; {
   [blob, plane, land, evap].forEach(sc => { SEGS.push({ sc, at, end: sc.duration, v: defaults(sc) }); at += sc.duration; });
 }
 const LOOP = sequence.duration;
+const SMALL_ZOOM = 1.5;   // mobile : la scène est réglée pour le grand écran, elle paraissait petite dans le carré
 const STILL_T = SEGS[2].at + 7.5;   // image fixe (animation réduite) : le paysage, pendant l'orbite
 
 export function initHeroSequence(root) {
@@ -56,8 +63,8 @@ export function initHeroSequence(root) {
     const s = SEGS.find(x => T < x.at + x.end) || SEGS[SEGS.length - 1];
     const t = Math.min(T - s.at, s.end);
     const v = s.sc.cameraAt ? { ...s.v, ...s.sc.cameraAt(t, s.v) } : s.v;
-    // petit écran (bloc sous le texte) : scène recentrée, moitié moins de particules
-    const vv = small ? { ...v, shift: 0 } : v;
+    // petit écran (bloc sous le texte) : scène recentrée et agrandie, moitié moins de particules
+    const vv = small ? { ...v, shift: 0, zoom: v.zoom * SMALL_ZOOM } : v;
     engine.render(T, vv, s.v.count * (small ? .5 : 1));
   }
 

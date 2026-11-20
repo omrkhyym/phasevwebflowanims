@@ -66,6 +66,18 @@ Exploration du site publié (`phasev-2026.webflow.io`, publication du 2026-11-19
 - Cartes des fiches Case Studies (`detail_case-studies`) : lien réécrit en JS par le module, fonctionne dans le navigateur.
 - 15 liens externes (Fierce Biotech, Axios, BMJ…) refusent les robots (403) et 4 liens FDA ou Clinical Trials Arena n'ont pas répondu au test : à ouvrir à la main si besoin, ce sont des articles de presse et de la FDA.
 
+## Recette mobile (2026-11-20)
+
+| # | Point | Précisions | Statut |
+|---|---|---|---|
+| M1 | Menu : lien Platform inutile | Doublon du libellé Platform dans le menu plein écran. Retiré dans `nav.js` | fait, en attente de release `site.js` |
+| M2 | Home : animation du header trop petite, marge dessous | Scène agrandie en mobile, animation jusqu'au bas de l'écran | fait, en attente de release `main.js` |
+| M3 | Cartes « Why PhaseV » : padding | Padding latéral à 0 en mobile portrait sur `why-card` (Home, Portfolio, ClinOps, Response). Remis à 1,5 rem | fait, à vérifier après publication |
+| M4 | Portfolio : padding dans la card | Mêmes cartes que M3 (bloc The Challenge) | fait, à vérifier après publication |
+| M5 | Portfolio, Build Conviction : animation minuscule, texte avant l'anim | Conteneur d'animation sur toute la largeur en tablette et mobile (`feature-grid`), texte toujours en premier | fait, à vérifier après publication |
+| M6 | Workflow (Trial et autres pages) : texte d'abord, vidéo ensuite | Même réglage que M5, 6 pages produit | fait, à vérifier après publication |
+| M7 | Portfolio, Connected value creation : texte d'abord, anim ensuite | Bloc sur une colonne en tablette et mobile (`grid-2.gap-2-5`), 5 pages produit | fait, à vérifier après publication |
+
 ## Prochaine session (2026-11-21)
 
 Recette mobile du site (après publication par Romain). À regarder en particulier : bloc plateforme connectée (2 × 2, colonne centrale), Careers (liste et filtres), headers réduits (Resources, Case Studies, Careers, Privacy, fiches et articles), Privacy (une colonne), boutons « Request a Demo » (menu et heros), footer (bandeau et YouTube).

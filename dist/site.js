@@ -255,6 +255,7 @@ function k(e) {
 		});
 		let r = document.createElement("div");
 		r.className = "pvn-s-sep", f.appendChild(r), e.querySelectorAll(".pvn-links a.pvn-link").forEach((e) => {
+			if (e === a) return;
 			let t = e.cloneNode(!0);
 			t.className = "pvn-s-link", f.appendChild(t);
 		});

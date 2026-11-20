@@ -1,0 +1,864 @@
+[
+  {
+    "md5": "da333bc43b3e345c57797bc54a566df9",
+    "file": "white/phasev-survey-finds-88-of-sponsors-face-five-week-delays-in-clinical-trial-reporting.png",
+    "media": "discover-pharma",
+    "items": [
+      {
+        "id": "6ac611e6a68d28689397ec8b",
+        "slug": "phasev-survey-finds-88-of-sponsors-face-five-week-delays-in-clinical-trial-reporting",
+        "name": "PhaseV survey finds 88% of sponsors face five-week delays in clinical trial reporting",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172b0",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172b0_6ad8d5a5912d9aa979615785_pm-discover-pharma.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac611fd56be7c9ed1d8fbd3",
+        "slug": "phasev-launches-ai-enrollment-lab-to-model-clinical-trial-feasibility-before-protocol-lock",
+        "name": "PhaseV launches AI enrollment lab to model clinical trial feasibility before protocol lock",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172b0",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172b0_6ad8d5a5912d9aa979615785_pm-discover-pharma.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6121f31095f8f8b16acce",
+        "slug": "phasev-and-crohns-colitis-foundation-join-forces-to-fast-track-ibd-clinical-trials-with-ai",
+        "name": "PhaseV and Crohn’s & Colitis Foundation join forces to fast-track IBD clinical trials with AI",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172b0",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172b0_6ad8d5a5912d9aa979615785_pm-discover-pharma.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-discover-pharma-white.png"
+  },
+  {
+    "md5": "8712317705aa97dce7d5f15fab57a204",
+    "file": "white/navigating-complexity-in-master-protocols-with-key-operational-partners.png",
+    "media": "jcs",
+    "items": [
+      {
+        "id": "6ac611f08d118f7c2f9bf538",
+        "slug": "navigating-complexity-in-master-protocols-with-key-operational-partners",
+        "name": "Navigating Complexity in Master Protocols with Key Operational Partners",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa979617301",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa979617301_6ad8d5a68095b707813687e3_pm-jcs.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-jcs-white.png"
+  },
+  {
+    "md5": "a3101583710a3e18fa80d1d36bcc15f2",
+    "file": "white/companies-applying-ai-to-de-risk-clinical-trials-2026-watchlist.png",
+    "media": "bio-pharma-trend",
+    "items": [
+      {
+        "id": "6ac611f6c9b734cbe3f337e9",
+        "slug": "companies-applying-ai-to-de-risk-clinical-trials-2026-watchlist",
+        "name": "Companies Applying AI to De-Risk Clinical Trials: 2026 Watchlist",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172f7",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172f7_6ad8d5a17fd4b7fdf5ba1e84_pm-bio-pharma-trend.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-bio-pharma-trend-white.png"
+  },
+  {
+    "md5": "8c5c3ca4c128ed526f59dde644010783",
+    "file": "white/scrip-asks-what-does-2026-hold-for-biopharma-part-5-ai-and-operational-excellence.png",
+    "media": "citeline",
+    "items": [
+      {
+        "id": "6ac611f78e911f572178f56e",
+        "slug": "scrip-asks-what-does-2026-hold-for-biopharma-part-5-ai-and-operational-excellence",
+        "name": "Scrip Asks... What Does 2026 Hold For Biopharma? Part 5: AI And Operational Excellence",
+        "old_image": {
+          "fileId": "6ad8d6443aeabdc71ef2c556",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d6443aeabdc71ef2c556_6ad8d5a251745dcaf8523533_pm-citeline.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac61217584d26881f8a952d",
+        "slug": "as-pricing-pressures-mount-biopharma-turns-to-ai-to-reduce-trial-failure-rates",
+        "name": "As Pricing Pressures Mount, Biopharma Turns To AI To Reduce Trial Failure Rates",
+        "old_image": {
+          "fileId": "6ad8d6443aeabdc71ef2c556",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d6443aeabdc71ef2c556_6ad8d5a251745dcaf8523533_pm-citeline.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-citeline-white.png"
+  },
+  {
+    "md5": "d6f40c6925094476858ccca10c389c1a",
+    "file": "white/phasev-launches-ai-powered-enrollment-lab-eliminating-guesswork-grounding-study-design-in-clinical-reality.png",
+    "media": "ddd",
+    "items": [
+      {
+        "id": "6ac611f96e8438b971ca7d6d",
+        "slug": "phasev-launches-ai-powered-enrollment-lab-eliminating-guesswork-grounding-study-design-in-clinical-reality",
+        "name": "PhaseV Launches AI-Powered Enrollment Lab: Eliminating Guesswork & Grounding Study Design in Clinical Reality",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172fa",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172fa_6ad8d5a4b0ed7331dc91e9c4_pm-ddd.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-ddd-white.png"
+  },
+  {
+    "md5": "63c7d4d1fed2417772dd6b98cf13a9c0",
+    "file": "white/scope-2026-ai-in-clinical-research-poised-for-boom-times.png",
+    "media": "clinicalresearchnews-2",
+    "items": [
+      {
+        "id": "6ac61201551d1d0429b8af2a",
+        "slug": "scope-2026-ai-in-clinical-research-poised-for-boom-times",
+        "name": "SCOPE 2026: AI in Clinical Research Poised for Boom Times",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172fd",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172fd_6ad8d5a446d1faef41a73793_pm-clinicalresearchnews-2.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac612039f05248e6481ed95",
+        "slug": "trendspotting-embracing-ai-dei-changes-restrategizing-research-sites",
+        "name": "Trendspotting: Embracing AI, DEI Changes, Restrategizing Research Sites",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172fd",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172fd_6ad8d5a446d1faef41a73793_pm-clinicalresearchnews-2.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-clinicalresearchnews-2-white.png"
+  },
+  {
+    "md5": "85900756f8dc3e94d9fc6e750efe3912",
+    "file": "white/scope-summit-is-expected-to-be-a-major-platform-for-news-in-clinical-trial-innovation.png",
+    "media": "medika-life",
+    "items": [
+      {
+        "id": "6ac6120230eb71dead62f8bf",
+        "slug": "scope-summit-is-expected-to-be-a-major-platform-for-news-in-clinical-trial-innovation",
+        "name": "SCOPE Summit is Expected to be a Major Platform for News in Clinical Trial Innovation",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172ed",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172ed_6ad8d5a63aeabdc71ef29c0a_pm-medika-life.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-medika-life-white.png"
+  },
+  {
+    "md5": "5a4e3a69178704f82b959b901d2787b5",
+    "file": "white/computer-aided-clinical-trials-for-medical-devices-from-research-to-reality.png",
+    "media": "mddi",
+    "items": [
+      {
+        "id": "6ac61204551d1d0429b8b13d",
+        "slug": "computer-aided-clinical-trials-for-medical-devices-from-research-to-reality",
+        "name": "Computer-Aided Clinical Trials for Medical Devices: From Research to Reality",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172f4",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172f4_6ad8d5a696d304b0f51b08b5_pm-mddi.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-mddi-white.png"
+  },
+  {
+    "md5": "470e92c41dfb0e3c4ed84cf7c6590a50",
+    "file": "white/melanie-ivarsson-scientific-advisory-board-member-phasev.png",
+    "media": "pharma-boardroom",
+    "items": [
+      {
+        "id": "6ac61205c9b734cbe3f3513c",
+        "slug": "melanie-ivarsson---scientific-advisory-board-member-phasev",
+        "name": "Melanie Ivarsson – Scientific Advisory Board Member, PhaseV",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172e4",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172e4_6ad8d5a71725834482f34108_pm-pharma-boardroom.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-pharma-boardroom-white.png"
+  },
+  {
+    "md5": "33b790a44c51568b82381139db77983a",
+    "file": "white/melanie-ivarsson-scientific-advisory-board-member-phasev-phasev-ceo-now-is-the-time-to-embrace-ai-for-clinical-trial-success.png",
+    "media": "fierce-biotech-2",
+    "items": [
+      {
+        "id": "6ac612103ff1668025403fac",
+        "slug": "melanie-ivarsson---scientific-advisory-board-member-phasev-phasev-ceo-now-is-the-time-to-embrace-ai-for-clinical-trial-success",
+        "name": "Melanie Ivarsson – Scientific Advisory Board Member, PhaseV PhaseV CEO: Now is the Time to Embrace AI for Clinical Trial Success",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172ea",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172ea_6ad8d5a580781d94facd2e62_pm-fierce-biotech-2.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-fierce-biotech-2-white.png"
+  },
+  {
+    "md5": "596270d35f9c7c1f93ece2e00445d1a6",
+    "file": "white/5th-annual-biotech-breakthrough-awards-program-honors-worlds-most-innovative-life-sciences-and-biotechnology-companies.png",
+    "media": "globenewswire",
+    "items": [
+      {
+        "id": "6ac61212bf838e94442dea06",
+        "slug": "5th-annual-biotech-breakthrough-awards-program-honors-worlds-most-innovative-life-sciences-and-biotechnology-companies",
+        "name": "5th Annual BioTech Breakthrough Awards Program Honors World’s Most Innovative Life Sciences and Biotechnology Companies",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172e7",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172e7_6ad8d5a54a7c0bfd080655ae_pm-globenewswire.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-globenewswire-white.png"
+  },
+  {
+    "md5": "23f221be772be68522ce52ec705fe1ea",
+    "file": "white/meet-the-ai-disruptors-60-the-startups-defining-ais-future.png",
+    "media": "techcrunch",
+    "items": [
+      {
+        "id": "6ac61215616a5d73e7067309",
+        "slug": "meet-the-ai-disruptors-60-the-startups-defining-ais-future",
+        "name": "Meet the AI Disruptors 60: The Startups Defining AI’s Future",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172e1",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172e1_6ad8d5a74a7c0bfd0806567d_pm-techcrunch.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-techcrunch-white.png"
+  },
+  {
+    "md5": "99fdec6a728b2aba9037b5ea35fe1825",
+    "file": "white/digital-health-50-the-most-promising-digital-health-startups-of-2025.png",
+    "media": "cbinsights",
+    "items": [
+      {
+        "id": "6ac612169952420033e70c3e",
+        "slug": "digital-health-50-the-most-promising-digital-health-startups-of-2025",
+        "name": "Digital Health 50: The most promising digital health startups of 2025",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172f0",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172f0_6ad8d5a248b5df44619364ba_pm-cbinsights.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-cbinsights-white.png"
+  },
+  {
+    "md5": "0cc7b0a16d9fb6dcb6afac4db3d30a73",
+    "file": "white/bioforum-becomes-latest-cro-to-deploy-phasevs-ai-trial-design-tech.png",
+    "media": "bioxconomy",
+    "items": [
+      {
+        "id": "6ac61218fb63b80480204926",
+        "slug": "bioforum-becomes-latest-cro-to-deploy-phasevs-ai-trial-design-tech",
+        "name": "Bioforum becomes latest CRO to deploy PhaseV’s AI trial design tech",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172aa",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172aa_6ad8d5a27e84ac832fb97377_pm-bioxconomy.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac612253ff1668025405d9c",
+        "slug": "cros-must-embrace-ai-says-phasev-following-50m-funding-round-to-expand-platform",
+        "name": "CROs must embrace AI says PhaseV, following $50m funding round to expand platform",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172aa",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172aa_6ad8d5a27e84ac832fb97377_pm-bioxconomy.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-bioxconomy-white.png"
+  },
+  {
+    "md5": "ada080cf05a4dab0e251fceb3dbfb083",
+    "file": "white/phasev-and-bioforum-partner-to-enhance-clinical-trials-with-ai-ml.png",
+    "media": "yahoofinance",
+    "items": [
+      {
+        "id": "6ac6121b074378f84a38544f",
+        "slug": "phasev-and-bioforum-partner-to-enhance-clinical-trials-with-ai-ml",
+        "name": "PhaseV and Bioforum partner to enhance clinical trials with AI/ML",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172b3",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172b3_6ad8d5a751745dcaf8523721_pm-yahoofinance.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-yahoofinance-white.png"
+  },
+  {
+    "md5": "ec96ca48d8aa124c3d62ba46ea65f347",
+    "file": "white/phasev-and-bioforum-partner-to-enhance-clinical-trials-with-ai-ml-2.png",
+    "media": "clinical-trials-arena-2",
+    "items": [
+      {
+        "id": "6ac6121a8e911f572179098e",
+        "slug": "phasev-and-bioforum-partner-to-enhance-clinical-trials-with-ai-ml-2",
+        "name": "PhaseV and Bioforum partner to enhance clinical trials with AI/ML",
+        "old_image": {
+          "fileId": "6ad8d5f7912d9aa9796172dd",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f7912d9aa9796172dd_6ad8d5a3bd8c66d16cea400f_pm-clinical-trials-arena-2.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-clinical-trials-arena-2-white.png"
+  },
+  {
+    "md5": "42bc2689a6ad264607ef847b633e5298",
+    "file": "white/phasev-announces-new-clinops-ai-platform-transforming-clinical-trial-operations-with-precision-guided-site-selection.png",
+    "media": "pr-newswire",
+    "items": [
+      {
+        "id": "6ac6121fe8707962bdab9773",
+        "slug": "phasev-announces-new-clinops-ai-platform-transforming-clinical-trial-operations-with-precision-guided-site-selection",
+        "name": "PhaseV Announces New ClinOps AI Platform: Transforming Clinical Trial Operations with Precision-Guided Site Selection",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961725b",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961725b_6ad8d5a74a7c0bfd08065665_pm-pr-newswire.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6124b3e8b494eb0b951fb",
+        "slug": "seven-top-pharma-companies-adopt-phasevs-machine-learning-technology-for-drug-development-2",
+        "name": "Seven Top Pharma Companies Adopt PhaseV's Machine Learning Technology for Drug Development",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961725b",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961725b_6ad8d5a74a7c0bfd08065665_pm-pr-newswire.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-pr-newswire-white.png"
+  },
+  {
+    "md5": "ecd7177bd3627de185e48fb92b4b3d40",
+    "file": "white/european-biotech-trends-to-watch-in-2025.png",
+    "media": "labiotech",
+    "items": [
+      {
+        "id": "6ac612209952420033e71dc5",
+        "slug": "european-biotech-trends-to-watch-in-2025",
+        "name": "European biotech: trends to watch in 2025",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172b6",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172b6_6ad8d5a68095b70781368806_pm-labiotech.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-labiotech-white.png"
+  },
+  {
+    "md5": "8a560cdbaf0e1844c27821ad7ee5282c",
+    "file": "white/phasev-raises-50m-for-ai-platform-to-enhance-clinical-trials.png",
+    "media": "becaris-publishing",
+    "items": [
+      {
+        "id": "6ac6122b13a31b3b2fdff1e9",
+        "slug": "phasev-raises-50m-for-ai-platform-to-enhance-clinical-trials",
+        "name": "PhaseV raises $50M for AI platform to enhance clinical trials",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172a7",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172a7_6ad8d5a18095b7078136856a_pm-becaris-publishing.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6123e9f05248e648225a6",
+        "slug": "new-partnership-between-phasev-and-crohns-colitis-foundation-leverages-ai-and-rwd-to-transform-ibd-trials",
+        "name": "New partnership between PhaseV and Crohn’s & Colitis Foundation leverages AI and RWD to transform IBD trials",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172a7",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172a7_6ad8d5a18095b7078136856a_pm-becaris-publishing.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-becaris-publishing-white.png"
+  },
+  {
+    "md5": "d75aa546598ca940818a1bfbb122fcc7",
+    "file": "white/supercharging-ai-for-clinical-development-our-investment-in-phase.png",
+    "media": "accel",
+    "items": [
+      {
+        "id": "6ac61232074378f84a387247",
+        "slug": "supercharging-ai-for-clinical-development-our-investment-in-phase",
+        "name": "Supercharging AI for Clinical Development: Our Investment in Phase",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172a4",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172a4_6ad8d5649697784d7880c524_pm-accel.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-accel-white.png"
+  },
+  {
+    "md5": "640b2ca3d85ef5973a27953241549540",
+    "file": "white/exclusive-phasev-raises-50m-series-a-to-optimize-clinical-development.png",
+    "media": "axios-pro",
+    "items": [
+      {
+        "id": "6ac6122e8e911f57217912f7",
+        "slug": "exclusive-phasev-raises-50m-series-a-to-optimize-clinical-development",
+        "name": "Exclusive: PhaseV raises $50M Series A to optimize clinical development",
+        "old_image": {
+          "fileId": "6ad8d5f5912d9aa9796172ad",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f5912d9aa9796172ad_6ad8d5a18aafa178eb65dd72_pm-axios-pro.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-axios-pro-white.png"
+  },
+  {
+    "md5": "bba020ff4a8b4f9e06d07afbf7eb8692",
+    "file": "white/exact-statistical-tests-using-integer-programming.png",
+    "media": "phasev",
+    "items": [
+      {
+        "id": "6ac6123a074378f84a3875c7",
+        "slug": "exact-statistical-tests-using-integer-programming",
+        "name": "Exact Statistical Tests Using Integer Programming",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617270",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617270_6ad8d5a77748b453dfa6d133_pm-phasev.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6125b79f6e3059a71154c",
+        "slug": "robust-cate-estimation-using-novel-ensemble-methods",
+        "name": "Robust CATE Estimation Using Novel Ensemble Methods",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617270",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617270_6ad8d5a77748b453dfa6d133_pm-phasev.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac61261eb91c69864aa95cd",
+        "slug": "causal-responder-detection",
+        "name": "Causal Responder Detection",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617270",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617270_6ad8d5a77748b453dfa6d133_pm-phasev.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-phasev-white.png"
+  },
+  {
+    "md5": "19ce089b2f890cc9426d569f3c91e67e",
+    "file": "white/phasev-and-alimentiv-to-support-execution-of-adaptive-clinical-trials-for-gi.png",
+    "media": "clinical-trials-arena",
+    "items": [
+      {
+        "id": "6ac6123fbf838e94442e148c",
+        "slug": "phasev-and-alimentiv-to-support-execution-of-adaptive-clinical-trials-for-gi",
+        "name": "PhaseV and Alimentiv to support execution of adaptive clinical trials for GI",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961724f",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961724f_6ad8d5a3bd8c66d16cea4037_pm-clinical-trials-arena.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6126ae15dcc183f01beba",
+        "slug": "neurosense-taps-phasevs-ml-tech-for-phase-iii-als-trial-analysis",
+        "name": "NeuroSense taps PhaseV’s ML tech for Phase III ALS trial analysis",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961724f",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961724f_6ad8d5a3bd8c66d16cea4037_pm-clinical-trials-arena.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac612799f05248e64827299",
+        "slug": "sustainability-challenges-in-rare-disease-trials-remain-but-change-is-happening",
+        "name": "Sustainability challenges in rare disease trials remain, but change is happening",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961724f",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961724f_6ad8d5a3bd8c66d16cea4037_pm-clinical-trials-arena.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6127d8645a8d4126d1a41",
+        "slug": "phasev-raise-15m-for-ml-technology-to-optimise-trial-design",
+        "name": "PhaseV raise $15m for ML technology to optimise trial design",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961724f",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961724f_6ad8d5a3bd8c66d16cea4037_pm-clinical-trials-arena.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-clinical-trials-arena-white.png"
+  },
+  {
+    "md5": "9c6b524a21aadf176100783962dd6fe7",
+    "file": "white/gi-focused-cro-alimentiv-ups-trial-tech-with-phasevs-adaptive-machine-learning-software.png",
+    "media": "fierce-biotech",
+    "items": [
+      {
+        "id": "6ac612400f6e1822b8c74a25",
+        "slug": "gi-focused-cro-alimentiv-ups-trial-tech-with-phasevs-adaptive-machine-learning-software",
+        "name": "GI-focused CRO Alimentiv ups trial tech with PhaseV’s adaptive machine learning software",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617261",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617261_6ad8d5a54a7c0bfd08065596_pm-fierce-biotech.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac61272857188276a5d2e84",
+        "slug": "quanticate-and-phasev-partner-on-new-adaptive-clinical-trial-service",
+        "name": "Quanticate and PhaseV partner on new adaptive clinical trial service",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617261",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617261_6ad8d5a54a7c0bfd08065596_pm-fierce-biotech.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6127cf58398ed6f46a91a",
+        "slug": "phasev-reaps-15m-in-funding-to-streamline-trial-design-with-machine-learning",
+        "name": "PhaseV reaps $15M in funding to streamline trial design with machine learning",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617261",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617261_6ad8d5a54a7c0bfd08065596_pm-fierce-biotech.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-fierce-biotech-white.png"
+  },
+  {
+    "md5": "f4972c5fb5185d40dde625278ccd7ecd",
+    "file": "white/seven-new-drug-discovery-deals-powered-by-ai.png",
+    "media": "ddw",
+    "items": [
+      {
+        "id": "6ac612439f05248e648228ba",
+        "slug": "seven-new-drug-discovery-deals-powered-by-ai",
+        "name": "Seven new drug discovery deals powered by AI",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617273",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617273_6ad8d5a5b0ed7331dc91ea0e_pm-ddw.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac6125e857188276a5d15ef",
+        "slug": "ml-could-facilitate-increased-adoption-of-adaptive-clinical-trials---drug-discovery-world-ddw",
+        "name": "ML could facilitate increased adoption of adaptive clinical trials - Drug Discovery World (DDW)",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617273",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617273_6ad8d5a5b0ed7331dc91ea0e_pm-ddw.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-ddw-white.png"
+  },
+  {
+    "md5": "211bd63b3d004fe98f2f835ba5bd695f",
+    "file": "white/phasev-advances-machine-learning-driven-lupus-research-in-new-toronto-collaboration.png",
+    "media": "healthtech",
+    "items": [
+      {
+        "id": "6ac612458645a8d4126ce21c",
+        "slug": "phasev-advances-machine-learning-driven-lupus-research-in-new-toronto-collaboration",
+        "name": "PhaseV Advances Machine Learning-Driven Lupus Research in New Toronto Collaboration",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617264",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617264_6ad8d5a551745dcaf852363a_pm-healthtech.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-healthtech-white.png"
+  },
+  {
+    "md5": "ef37a42af78ad49ddf3df9a73fda54ef",
+    "file": "white/colorectal-cancer-in-elderly-patients.png",
+    "media": "mdpi",
+    "items": [
+      {
+        "id": "6ac612488645a8d4126ce3e5",
+        "slug": "colorectal-cancer-in-elderly-patients",
+        "name": "Colorectal Cancer in Elderly Patients",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617243",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617243_6ad8d5a6a23263808599bd48_pm-mdpi.png",
+          "alt": null
+        }
+      },
+      {
+        "id": "6ac612700d699c2e4cbdf234",
+        "slug": "efficacy-of-pembrolizumab-vs-nivolumab-plus-ipilimumab",
+        "name": "Efficacy of Pembrolizumab vs. Nivolumab Plus Ipilimumab",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617243",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617243_6ad8d5a6a23263808599bd48_pm-mdpi.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-mdpi-white.png"
+  },
+  {
+    "md5": "2ffbe5901dd209d95ad54c928c725c8e",
+    "file": "white/seven-top-pharma-companies-adopt-phasevs-machine-learning-technology-for-drug-development.png",
+    "media": "clinicalresearchnews",
+    "items": [
+      {
+        "id": "6ac6124765e7ac07a43992be",
+        "slug": "seven-top-pharma-companies-adopt-phasevs-machine-learning-technology-for-drug-development",
+        "name": "Seven Top Pharma Companies Adopt PhaseV's Machine Learning Technology for Drug Development",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961726a",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961726a_6ad8d5a4f3eead870fffa1ef_pm-clinicalresearchnews.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-clinicalresearchnews-white.png"
+  },
+  {
+    "md5": "f6f48c07a8db5d99c4ea8cf7b620de9d",
+    "file": "white/how-a-i-is-disrupting-pharma-the-high-stakes-race-to-revolutionize-drug-discovery.png",
+    "media": "observer",
+    "items": [
+      {
+        "id": "6ac6124e65e7ac07a4399915",
+        "slug": "how-a-i-is-disrupting-pharma-the-high-stakes-race-to-revolutionize-drug-discovery",
+        "name": "How A.I. Is Disrupting Pharma: The High-Stakes Race to Revolutionize Drug Discovery",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617267",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617267_6ad8d5a63019923381dba042_pm-observer.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-observer-white.png"
+  },
+  {
+    "md5": "6227e1b3011964d1cd704c3c84fd8ded",
+    "file": "white/phasev-appoints-hamza-sheikh-as-head-of-business-development.png",
+    "media": "citybiz",
+    "items": [
+      {
+        "id": "6ac6124f551d1d0429b8ea79",
+        "slug": "phasev-appoints-hamza-sheikh-as-head-of-business-development",
+        "name": "PhaseV Appoints Hamza Sheikh as Head of Business Development",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617276",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617276_6ad8d5a28aafa178eb65de3e_pm-citybiz.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-citybiz-white.png"
+  },
+  {
+    "md5": "fb75f9bdc4d05e2e6f81a8a35da24e84",
+    "file": "white/phasev-unveils-machine-learning-powered-platform-to-improve-oncology-clinical-trials-bioquick-news.png",
+    "media": "bioquick",
+    "items": [
+      {
+        "id": "6ac612578645a8d4126cf654",
+        "slug": "phasev-unveils-machine-learning-powered-platform-to-improve-oncology-clinical-trials---bioquick-news",
+        "name": "PhaseV Unveils Machine Learning-Powered Platform to Improve Oncology Clinical Trials - BioQuick News",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617279",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617279_6ad8d5a18aafa178eb65dd97_pm-bioquick.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-bioquick-white.png"
+  },
+  {
+    "md5": "8be5ec8cafefececf2d5750208dd61e1",
+    "file": "white/marks-fda-struggles-to-keep-up-with-innovation-in-gene-editing-ai.png",
+    "media": "insidehealthpilicy",
+    "items": [
+      {
+        "id": "6ac61259616a5d73e706cd72",
+        "slug": "marks-fda-struggles-to-keep-up-with-innovation-in-gene-editing-ai",
+        "name": "Marks: FDA Struggles To Keep Up With Innovation In Gene Editing, AI",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961727c",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961727c_6ad8d5a5aac9df9edc9438b3_pm-insidehealthpilicy.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-insidehealthpilicy-white.png"
+  },
+  {
+    "md5": "ea9e83bbbb2a58273888f5b6e69f8934",
+    "file": "white/dia-2024-machine-learning-and-simulations-to-facilitate-clinical-trials.png",
+    "media": "applied-clinical-trials",
+    "items": [
+      {
+        "id": "6ac61260857188276a5d1c46",
+        "slug": "dia-2024-machine-learning-and-simulations-to-facilitate-clinical-trials",
+        "name": "DIA 2024: Machine Learning and Simulations to Facilitate Clinical Trials",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617258",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617258_6ad8d5a1c560d487eee2267d_pm-applied-clinical-trials.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-applied-clinical-trials-white.png"
+  },
+  {
+    "md5": "751781367b5f02e3218e091ed2b5bcae",
+    "file": "white/22-pub-machine-learning-based-optimization.png",
+    "media": "american-diabetes-association",
+    "items": [
+      {
+        "id": "6ac61264616a5d73e706db7f",
+        "slug": "22-pub-machine-learning-based-optimization",
+        "name": "22-PUB: Machine Learning–Based Optimization",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961726d",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961726d_6ad8d5a19697784d7880da9c_pm-american-diabetes-association.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-american-diabetes-association-white.png"
+  },
+  {
+    "md5": "59cbf4663a204a0caba47ee9718f4f96",
+    "file": "white/pos1014-use-of-an-interactive-adaptive-trial-ai-simulation.png",
+    "media": "bmj-journals",
+    "items": [
+      {
+        "id": "6ac61265e0d07b1bf1eb96c4",
+        "slug": "pos1014-use-of-an-interactive-adaptive-trial-ai-simulation",
+        "name": "POS1014 Use of an Interactive Adaptive-Trial AI Simulation",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617255",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617255_6ad8d5a248b5df4461936469_pm-bmj-journals.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-bmj-journals-white.png"
+  },
+  {
+    "md5": "005f8a1f78e7de74a0c7a12bbaf3ec49",
+    "file": "white/pos1014-use-of-an-interactive-adaptive-trial-ai-simulation-tool.png",
+    "media": "bmj",
+    "items": [
+      {
+        "id": "6ac61265ac0747e25eae361f",
+        "slug": "pos1014-use-of-an-interactive-adaptive-trial-ai-simulation-tool",
+        "name": "POS1014 USE OF AN INTERACTIVE ADAPTIVE-TRIAL AI SIMULATION TOOL",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa97961725e",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa97961725e_6ad8d5a248b5df446193648f_pm-bmj.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-bmj-white.png"
+  },
+  {
+    "md5": "3f6bb169e24f2e4a27b969ea4cc2559d",
+    "file": "white/machine-learning-drafted-to-aid-phase-3-testing-of-als-therapy-primec.png",
+    "media": "als-news-today",
+    "items": [
+      {
+        "id": "6ac61266ac0747e25eae36fd",
+        "slug": "machine-learning-drafted-to-aid-phase-3-testing-of-als-therapy-primec",
+        "name": "Machine learning drafted to aid Phase 3 testing of ALS therapy PrimeC",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617249",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617249_6ad8d5a09697784d7880da7d_pm-als-news-today.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-als-news-today-white.png"
+  },
+  {
+    "md5": "0f5aa5530d09e60ee2bb752477fac13d",
+    "file": "white/phasev-and-quanticate-partner-to-help-sponsors-run-more-adaptive-trialsphasev-and-iomedico-partner-to-launch-new-ml-powered-solution-to-increase-success-rates-of-phase-3-oncology-trials-biospace.png",
+    "media": "biospace",
+    "items": [
+      {
+        "id": "6ac6127901ddda03ca2b7beb",
+        "slug": "phasev-and-quanticate-partner-to-help-sponsors-run-more-adaptive-trialsphasev-and-iomedico-partner-to-launch-new-ml-powered-solution-to-increase-success-rates-of-phase-3-oncology-trials-biospace",
+        "name": "PhaseV and Quanticate partner to help sponsors run more adaptive trialsPhaseV and iOMEDICO Partner to Launch New ML-Powered Solution to Increase Success Rates of Phase 3 Oncology Trials | BioSpace",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617252",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617252_6ad8d5a18aafa178eb65ddaf_pm-biospace.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-biospace-white.png"
+  },
+  {
+    "md5": "2668fbe731ec467ed88d6041bd25d83a",
+    "file": "white/9xchange-biopharma-marketplace-partners-with-phasev-to-bring-ml-powered-clinical-trial-optimization-technology-to-ecosystem-members.png",
+    "media": "aithority",
+    "items": [
+      {
+        "id": "6ac6127aa2eabc66740d3f27",
+        "slug": "9xchange-biopharma-marketplace-partners-with-phasev-to-bring-ml-powered-clinical-trial-optimization-technology-to-ecosystem-members",
+        "name": "9xchange Biopharma Marketplace Partners with PhaseV to Bring ML-Powered Clinical Trial Optimization Technology to Ecosystem Members",
+        "old_image": {
+          "fileId": "6ad8d5f4912d9aa979617246",
+          "url": "https://cdn.prod.website-files.com/6a7494c19b6df905487ffd7c/6ad8d5f4912d9aa979617246_6ad8d5a0c560d487eee22634_pm-aithority.png",
+          "alt": null
+        }
+      }
+    ],
+    "asset_name": "pm-aithority-white.png"
+  }
+]

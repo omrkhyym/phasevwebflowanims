@@ -162,6 +162,12 @@ html body [data-af-article] .post-rtf > :is(figure, blockquote, .w-richtext-figu
 /* paragraphes vides servant d'espaceurs dans Webflow : masqués par affine.js (classe af-empty) ; un seul espace régulier */
 html body [data-af-article] .post-rtf > p.af-empty{ display:none; }
 
+/* Publications & Media (2026-11-20) : la Main Image est un logo blanc sur transparent (logos/build_white_logos.py),
+   posé au centre d'un panneau violet foncé à la place de la photo. Le logo tient dans 58 % de la largeur et 34 % de la hauteur
+   (padding en % de la largeur : 21 % de chaque côté, 18,6 % en haut et en bas sur un 16:9). Carte repérée par initResourcesLibrary. */
+html body [data-af-lib] .swiper-item[data-af-logo] .post_image{ box-sizing:border-box; aspect-ratio:16/9; object-fit:contain; padding:18.6% 21%;
+  background:radial-gradient(70% 90% at 15% 0%, rgba(146,138,205,.28) 0%, transparent 60%), radial-gradient(60% 80% at 100% 100%, rgba(104,74,158,.35) 0%, transparent 65%), #1E1846; }
+
 `;
 
 function injectCSS() {
@@ -196,7 +202,14 @@ export function initResourcesLibrary(root) {
   root.dataset.pvInit = '1';
   injectCSS();
   const offs = [...root.querySelectorAll('.filter_block.margin-bottom')].map(segmented);
-  return function destroy() { offs.forEach(f => f()); delete root.dataset.pvInit; };
+  // cartes dont l'image est un logo blanc : catégorie réglable par l'attribut data-af-logo-cat du conteneur
+  const logoCat = (root.dataset.afLogoCat || 'Publications & Media').trim();
+  const logos = [...root.querySelectorAll('.swiper-item')].filter(a => {
+    const c = a.querySelector('[fs-list-field="category"]');
+    return c && c.textContent.trim() === logoCat;
+  });
+  logos.forEach(a => { a.dataset.afLogo = ''; });
+  return function destroy() { offs.forEach(f => f()); logos.forEach(a => delete a.dataset.afLogo); delete root.dataset.pvInit; };
 }
 
 export function initResourcesArticle(root) {

@@ -70,8 +70,8 @@ Exploration du site publié (`phasev-2026.webflow.io`, publication du 2026-11-19
 
 | # | Point | Précisions | Statut |
 |---|---|---|---|
-| M1 | Menu : lien Platform inutile | Doublon du libellé Platform dans le menu plein écran. Retiré dans `nav.js` | fait, en attente de release `site.js` |
-| M2 | Home : animation du header trop petite, marge dessous | Scène agrandie en mobile, animation jusqu'au bas de l'écran | fait, en attente de release `main.js` |
+| M1 | Menu : lien Platform inutile | Doublon du libellé Platform dans le menu plein écran. Retiré dans `nav.js` | fait, release v0.39.0, à vérifier |
+| M2 | Home : animation du header trop petite, marge dessous | Scène agrandie en mobile, animation jusqu'au bas de l'écran | fait, release v0.39.0, à vérifier |
 | M3 | Cartes « Why PhaseV » : padding | Padding latéral à 0 en mobile portrait sur `why-card` (Home, Portfolio, ClinOps, Response). Remis à 1,5 rem | fait, à vérifier après publication |
 | M4 | Portfolio : padding dans la card | Mêmes cartes que M3 (bloc The Challenge) | fait, à vérifier après publication |
 | M5 | Portfolio, Build Conviction : animation minuscule, texte avant l'anim | Conteneur d'animation sur toute la largeur en tablette et mobile (`feature-grid`), texte toujours en premier | fait, à vérifier après publication |

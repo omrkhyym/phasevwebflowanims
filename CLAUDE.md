@@ -11,7 +11,7 @@ Avant toute modification (fichier, git, Webflow) : décris en quelques lignes ce
 ## Architecture
 
 ```
-site.js            entrée commune, footer global du site : fond flottant + line field (voir LINE-FIELD.md) → dist/site.js
+site.js            entrée commune, footer global du site : fond flottant, fond sombre animé, navigation, FAQ, sliders, back to top → dist/site.js (le line field est retiré depuis v0.32.0, LINE-FIELD.md est une archive)
 main.js            entrée de la page Home (et Home DEV)   → dist/main.js
 company.js         entrée de la page Company              → dist/company.js
 clinops.js         entrée de la page ClinOps Optimizer    → dist/clinops.js
@@ -145,7 +145,7 @@ Règles :
 - Jaune `#E2C70A` **réservé au moment de décision**, jamais décoratif.
 - Secondaires : mauve `#928ACD`, bleu `#78A8E0`, turquoise `#7FE8CF`.
 - Rouge hors charte (connoté sécurité patient), à faire valider.
-- La charte est flat : pas de grain, de texture ou de rétro sans validation. Exception validée : fond flottant et grain de `site.js` (line field v2).
+- La charte est flat : pas de grain, de texture ou de rétro sans validation. Exception validée : fond flottant de `site.js` (le grain du line field v2 n'est plus utilisé depuis v0.32.0).
 
 ## Standards de code
 

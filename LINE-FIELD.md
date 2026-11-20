@@ -1,4 +1,6 @@
-# Line field : registre
+# Line field : registre (archive)
+
+> **Archive, 2026-11-20.** Le line field n'est plus utilisé : aucune page ne portait plus `data-line-field` depuis la refonte, et le code (`src/line-field/index.js`, `core.js`, `util.js`, `textures/`) a été supprimé en `v0.32.0` (récupérable dans l'historique git, commit `bff1ea2`). Seul `src/line-field/css.js` reste, utilisé par le fond flottant (`src/floating-bg.js`). Le contenu ci-dessous décrit l'état d'avant.
 
 Source de vérité pour l'attribution des textures. Toute modification d'attribution passe par ce fichier.
 Code : `site.js` (chargé depuis le footer de code global du site) → `src/line-field/` et `src/floating-bg.js`.

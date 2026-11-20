@@ -33,6 +33,20 @@ const CSS = `
 .pv-job:focus-visible{outline:2px solid #141238;outline-offset:4px;border-radius:4px}
 .pv-jobs-note{margin:0;font-size:1.0625rem;line-height:1.6;color:#4a4868}
 .pv-jobs-note a{color:#141238}
+/* sur fond sombre (section surface-dark) : texte clair, filets clairs */
+[data-pv="careers"].is-dark .pv-jobs-filters button{border-color:rgba(248,248,248,.22);color:#f8f8f8}
+[data-pv="careers"].is-dark .pv-jobs-filters button:hover{border-color:rgba(248,248,248,.55)}
+[data-pv="careers"].is-dark .pv-jobs-filters button[aria-pressed="true"]{background:#f8f8f8;border-color:#f8f8f8;color:#141238}
+[data-pv="careers"].is-dark .pv-jobs-filters button:focus-visible, [data-pv="careers"].is-dark .pv-job:focus-visible{outline-color:rgba(248,248,248,.7)}
+[data-pv="careers"].is-dark .pv-jobs-group{border-top-color:rgba(248,248,248,.14)}
+[data-pv="careers"].is-dark .pv-jobs-group:last-of-type{border-bottom-color:rgba(248,248,248,.14)}
+[data-pv="careers"].is-dark .pv-jobs-team{color:#c9c4ef}
+[data-pv="careers"].is-dark .pv-jobs-team span{color:rgba(248,248,248,.45)}
+[data-pv="careers"].is-dark .pv-jobs-list li + li{border-top-color:rgba(248,248,248,.1)}
+[data-pv="careers"].is-dark .pv-job{color:#f8f8f8}
+[data-pv="careers"].is-dark .pv-job-meta{color:rgba(248,248,248,.6)}
+[data-pv="careers"].is-dark .pv-jobs-note{color:rgba(248,248,248,.72)}
+[data-pv="careers"].is-dark .pv-jobs-note a{color:#f8f8f8}
 @media (max-width:767px){.pv-jobs-group{grid-template-columns:1fr;gap:1rem;padding:2rem 0}.pv-job-go{display:none}}
 @media (prefers-reduced-motion:reduce){.pv-job-go,.pv-jobs-filters button{transition:none}}`;
 
@@ -56,6 +70,7 @@ export function initCareers(root) {
   const boardUrl = `https://job-boards.greenhouse.io/${board}`;
   const label = (root.closest('main') || document).querySelector('.text-size-label');
   if (label) root.style.setProperty('--pv-jobs-mono', getComputedStyle(label).fontFamily);
+  root.classList.toggle('is-dark', !!root.closest('[data-af-bg="dark"], .surface-dark'));
 
   const ctrl = new AbortController();
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
@@ -119,5 +134,5 @@ export function initCareers(root) {
     draw();
   }
 
-  return { destroy() { ctrl.abort(); root.replaceChildren(); delete root.dataset.pvInit; } };
+  return { destroy() { ctrl.abort(); root.replaceChildren(); root.classList.remove('is-dark'); delete root.dataset.pvInit; } };
 }

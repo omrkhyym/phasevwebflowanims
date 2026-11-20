@@ -66,7 +66,13 @@ Exploration du site publié (`phasev-2026.webflow.io`, publication du 2026-11-19
 - Cartes des fiches Case Studies (`detail_case-studies`) : lien réécrit en JS par le module, fonctionne dans le navigateur.
 - 15 liens externes (Fierce Biotech, Axios, BMJ…) refusent les robots (403) et 4 liens FDA ou Clinical Trials Arena n'ont pas répondu au test : à ouvrir à la main si besoin, ce sont des articles de presse et de la FDA.
 
+## Prochaine session (2026-11-21)
+
+Recette mobile du site (après publication par Romain). À regarder en particulier : bloc plateforme connectée (2 × 2, colonne centrale), Careers (liste et filtres), headers réduits (Resources, Case Studies, Careers, Privacy, fiches et articles), Privacy (une colonne), boutons « Request a Demo » (menu et heros), footer (bandeau et YouTube).
+
 ## Pour plus tard
 
 - Trial : le lien « Explore the case study library → » de la success story fait doublon avec le bouton « All Trial Optimizer case studies » du bloc juste dessous. Gardé pour l'instant (décision de Romain, 2026-11-19).
+- Careers : basculer les liens du menu, du footer et du bouton de Company vers `/careers` après les tests.
+- Nettoyage du code mort : `src/platform-connect-cards.js` (plus monté), règles du chiffre clé dans `src/case-studies.js`.
 - Listes case studies des pages produit : aucun tri posé (ordre par défaut du CMS) ; tri par Order à régler dans le Designer si besoin.

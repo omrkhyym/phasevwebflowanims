@@ -1,5 +1,5 @@
 /* Proof ClinOps, variante « glossy » sur fond sombre (recherche style affiné), sur le modèle de design-space-glossy.js.
-   Copie adaptée de src/clinops-proof.js (validé, non modifié) : mêmes sites, mêmes attributs, même chronologie.
+   Copie adaptée de src/clinops-proof.js (supprimé le 2026-11-20) : mêmes sites, mêmes attributs, même chronologie.
    Rendu sombre : sites non recommandés en mauve atténué, sites recommandés en turquoise en lumière additive,
    grille quasi invisible, étiquettes mono, jaune réservé à l'écart. Monté sur [data-pv="clinops-proof-glossy"]. */
 const INK = '#C9C4EF', MUT = 'rgba(244,244,244,.62)', GRID = 'rgba(244,244,244,.08)', WHITE = '#F4F4F4', TEA = '#7FE8CF', YEL = '#E2C70A';

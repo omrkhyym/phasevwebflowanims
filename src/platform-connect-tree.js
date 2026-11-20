@@ -1,5 +1,5 @@
 /* Bloc « plateforme connectée » des pages produit, version « carte et rangée » (proto validé :
-   protos/site/phasev-platform-connect-v6-protos.html, variante I1). Remplace src/platform-connect-cards.js.
+   protos/site/phasev-platform-connect-v6-protos.html, variante I1). Remplace src/platform-connect-cards.js (supprimé le 2026-11-20).
    Même contrat de montage : <div data-pv="platform-connect-v2" data-current="trial"></div>, dans le diptyque
    (texte dans Webflow à gauche, ce montage à droite). Les noms des produits sont surchargeables sur le montage :
    data-name-clinops="ClinOps Optimizer", etc.

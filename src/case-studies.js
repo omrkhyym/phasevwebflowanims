@@ -11,9 +11,6 @@ const CSS = `
 [data-cs-tags-list] .w-dyn-empty{display:none}
 [data-cs-stat]{font-size:1rem;line-height:140%;color:#626262}
 [data-cs-stat] b{color:#141238;font-weight:700;margin-right:.375rem}
-[data-cs-kpi]{display:flex;align-items:baseline;gap:.875rem 1.125rem;flex-wrap:wrap}
-[data-cs-kpi-n]{font-size:3rem;font-weight:600;line-height:.95;letter-spacing:-1px;color:#e1c721;font-variant-numeric:tabular-nums}
-[data-cs-kpi-t]{font-size:1.125rem;line-height:140%;color:#f8f8f8;max-width:16rem}
 [data-cs-hidden]{display:none!important}
 
 /* bibliothèque : filtres */
@@ -179,8 +176,6 @@ html body .cs-filters .filter-select{ height:auto; padding:.9375rem 2.75rem .937
 @media (prefers-reduced-motion:reduce){ html body .cs-pill-ind{ transition:none; } }
 
 /* chiffre clé des heros (bibliothèque et fiche) : grand, léger, blanc */
-html body [data-cs-kpi-n]{ font-weight:300; font-size:clamp(3rem, 2rem + 3vw, 4.5rem); letter-spacing:-.03em; color:#f8f8f8; }
-html body [data-cs-kpi-t]{ color:rgba(248,248,248,.7); }
 
 /* At a glance (fond light) : tableau en verre clair, en-têtes en mono, colonne optimisée en mauve léger */
 html body [data-cs-table]{ position:relative; isolation:isolate; background:var(--af-glass); box-shadow:none; border-radius:1.5rem; }
@@ -292,10 +287,9 @@ function fixLinks(scope) {
   });
 }
 
-/* masque les blocs « chiffre clé » sans valeur */
+/* masque les chiffres des cartes sans valeur */
 function hideEmptyStats(scope) {
   scope.querySelectorAll('[data-cs-stat]').forEach(el => { if (isEmpty(el.querySelector('[data-cs-stat-n]'))) el.setAttribute('data-cs-hidden', ''); });
-  scope.querySelectorAll('[data-cs-kpi]').forEach(el => { if (isEmpty(el.querySelector('[data-cs-kpi-n]'))) el.setAttribute('data-cs-hidden', ''); });
 }
 
 /* ---------- bibliothèque : filtres Product + Therapeutic area ---------- */

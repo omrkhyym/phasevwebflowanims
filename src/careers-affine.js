@@ -1,5 +1,5 @@
 /* PhaseV · Careers · trois disciplines qui fusionnent, dans le style du film BonV (proto, 2026-11-17)
-   Même récit que src/company-careers.js : trois populations séparées en triangle, qui fusionnent en une seule, puis se séparent.
+   Même récit que src/company-careers.js (supprimé le 2026-11-20) : trois populations séparées en triangle, qui fusionnent en une seule, puis se séparent.
    Vocabulaire BonV (socle bonv-draw.js), tout net : petits points pleins, anneaux fins avec arc de progression,
    pointillés qui défilent entre les groupes, anneau jaune qui se ferme à la fusion (seul jaune). Pas de flou, pas de halo.
    Montage : <div data-pv="careers-affine"></div> dans le panneau sombre de Build with us. Retourne destroy(). */

@@ -1,5 +1,5 @@
 /* Success story Trial, variante « glossy » sur fond sombre (recherche style affiné, inspirée de BonV).
-   Copie adaptée de src/success-design-space.js (validé, non modifié) : mêmes données et même chronologie,
+   Copie adaptée de src/success-design-space.js (supprimé le 2026-11-20) : mêmes données et même chronologie,
    rendu sombre : frontière blanche avec dégradé dessous, nuage en lumière additive, grille quasi invisible,
    étiquettes mono, jaune réservé au design retenu et à l'écart. Monté sur [data-pv="design-space-glossy"]. */
 

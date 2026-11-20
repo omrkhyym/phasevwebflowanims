@@ -50,5 +50,6 @@ Statuts : **en cours**, **validé** (choix fait, pas encore intégré), **intég
 | [conductor/phasev-conductor-site-cta-protos.html](conductor/phasev-conductor-site-cta-protos.html) | AI Conductor | 2026-10-26 | intégré | A | bloc site produit (Webflow) |
 | [bonv/phasev-bonv-header-proto.html](bonv/phasev-bonv-header-proto.html) | BonV | 2026-11-02 | intégré | | header BonV, `v0.13.0` |
 | [bonv/phasev-bonv-hero-proto.html](bonv/phasev-bonv-hero-proto.html) | BonV | 2026-11-02 | intégré | B streaming v3 | `src/bonv-hero-bg.js`, `v0.13.0` |
+| [bonv/phasev-bonv-hero-v-proto.html](bonv/phasev-bonv-hero-v-proto.html) | BonV | 2026-11-20 | validé | | hero : le V et son anneau de points en boucle « parle » (pulsation de voix, 3,6 s) puis « réfléchit » (vague qui tourne, 3,6 s) ; logique de `bonv-mark.js` (skill bonv-style), rendu par `src/hero-stage.js` ; `?t=` fige l'instant |
 | [case-studies/phasev-case-studies-protos.html](case-studies/phasev-case-studies-protos.html) | Case Studies | 2026-11-13 | intégré | header A | `src/case-studies.js`, `v0.14.1` |
 | [contact/phasev-contact-protos.html](contact/phasev-contact-protos.html) | Contact | 2026-10-25 | intégré | B | mise en page Contact (Webflow) |

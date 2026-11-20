@@ -1,112 +1,59 @@
-/* PhaseV · hero /bonv · réponse en streaming
+/* PhaseV · hero /bonv · le V et son anneau de points, comme un chatbot
    Montage via le socle hero-stage :
    - <div data-pv="bonv-hero-bg"></div>, premier enfant du header : fond plein cadre au-dessus de 991 px ;
    - <div data-pv="bonv-hero-slot"></div>, dernier enfant de la grille header_content : bloc 4:3 à 991 px et moins.
-   Une réponse s'écrit sur six lignes de points : chaque mot arrive au curseur, s'écrit clair puis se pose en mauve ou bleu.
-   Fin d'écriture : le dernier mot passe au jaune (la décision), le reste s'efface un peu, puis fondu et boucle.
-   Rendu validé dans protos/bonv/phasev-bonv-hero-proto.html. Titre, texte et boutons restent dans Webflow. */
+   Boucle : BonV parle (les points de l'anneau pulsent comme une voix), puis réfléchit (une vague fait le tour de l'anneau).
+   Logique de l'anneau reprise du kit bonv-style (bonv-mark.js). Rendu validé dans protos/bonv/phasev-bonv-hero-v-proto.html
+   (2026-11-20), qui remplace la réponse en streaming (protos/bonv/phasev-bonv-hero-proto.html, récupérable dans git).
+   Titre, texte et boutons restent dans Webflow. */
 
-import { mountHeroStage, cl, seg, ease, smooth, rng, TAU } from './hero-stage.js';
+import { mountHeroStage, cl, smooth, TAU } from './hero-stage.js';
 
-const MAU = [146, 138, 205], BLU = [120, 168, 224], YEL = [226, 199, 10], PALE = [237, 235, 255];
+const YEL = '#E2C70A', WHITE = '#F4F4F4';
+/* Polygone du V du logo, en rayons du disque */
+const VPTS = [[0.2749, -0.4797], [-0.0004, 0.1548], [-0.2181, -0.3639], [-0.2710, -0.4797], [-0.5574, -0.4797], [-0.0170, 0.6489], [0.0186, 0.6489], [0.5574, -0.4797]];
+/* Chronologie (s) : parle, puis réfléchit ; fondu de X s entre les deux. STILL : instant affiché en reduced motion (parle). */
+const SPEAK = 3.6, THINK = 3.6, LOOP = SPEAK + THINK, X = .7, STILL = 1.8;
 
-/* Texte simulé, en unités (1 = interligne). DENS : points par unité de longueur de mot. */
-const COLS = 13, ROWS = 6, PITCH = 1, THICK = .1, DENS = 55, H_ = (ROWS - 1) * PITCH;
-/* Chronologie (s) : écriture, décision, tenue, fondu */
-const T0 = .7, TYPE = 5.4, DEC = T0 + TYPE + .6, DEC_D = .8, OUT = 9.4, OUT_D = 1.2, LOOP = 11, STILL = 8.2;
-/* Teintes de pose (mauve → bleu) et pas de quantification des couleurs, pour mettre les disques en cache */
-const TINTS = 3, STEPS = 8;
-
-const mix = (a, b, k) => [0, 1, 2].map(i => Math.round(a[i] + (b[i] - a[i]) * k));
+/* poids de « réfléchit » : monte autour de SPEAK, redescend sur la fin de boucle pour repartir de « parle » sans saut */
+const thinking = k => cl(smooth(SPEAK - X / 2, SPEAK + X / 2, k) - smooth(LOOP - X, LOOP, k));
 
 export function initBonvHeroBg(root) {
   if (!root || root.dataset.pvInit) return;
 
-  const R = rng(7), words = [];
-  for (let row = 0; row < ROWS; row++) {
-    const maxW = row === ROWS - 1 ? 6.2 : COLS - R() * 1.8; let x = 0;
-    while (x < maxW) { const w = Math.min(.45 + R() * R() * 2.3, maxW - x); if (w < .35) break; words.push({ x, w, row, t: 0, pts: [] }); x += w + .27; }
-  }
-  let tc = 0; words.forEach(w => { w.t = tc; tc += .09 + w.w * .05; });
-  words.forEach(w => w.t = T0 + w.t / tc * TYPE);
-  const LAST = words[words.length - 1];
-  words.forEach(w => {
-    const n = Math.round(w.w * DENS);
-    for (let i = 0; i < n; i++) {
-      const s = R();
-      w.pts.push({ x: w.x + R() * w.w, y: w.row * PITCH + (R() - .5) * THICK, ox: .25 + R() * .9, oy: (R() - .5) * .16, s, tint: Math.min(TINTS - 1, Math.floor((s * .5 + ((w.x * .13) % 1) * .5) * TINTS)) });
-    }
-  });
-  const caret = [...Array(110)].map(() => ({ x: (R() - .5) * .045, y: (R() - .5) * .6, s: R() }));
-
-  /* Disques antialiasés en cache : une petite image par couleur quantifiée, redessinée au changement de taille */
-  let rad = 1, sprites = new Map(), dpr = 1;
-  function sprite(c) {
-    const key = c.join(',');
-    let cv = sprites.get(key);
-    if (!cv) {
-      const S = Math.ceil((rad + 1) * 2 * dpr);
-      cv = document.createElement('canvas'); cv.width = cv.height = S;
-      const g = cv.getContext('2d');
-      g.fillStyle = `rgb(${key})`; g.beginPath(); g.arc(S / 2, S / 2, rad * dpr, 0, TAU); g.fill();
-      sprites.set(key, cv);
-    }
-    return cv;
-  }
-
-  let s = 1, X0 = 0, Y0 = 0;
-  function layout({ W, H, flow }) {
-    // fond : lignes sur 42 % de la largeur, à droite du texte ; bloc : 88 % de la largeur, centrées
-    s = flow ? W * .88 / COLS : W * .42 / COLS;
-    X0 = flow ? W * .06 : W * .53; Y0 = H * .5 - H_ / 2 * s;
-    rad = Math.max(.75, s * .028); dpr = Math.min(devicePixelRatio || 1, 2); sprites = new Map();
-  }
-
   function draw(stage, T) {
-    const { ctx: x, W, H, mouse } = stage;
-    const k = T % LOOP;
-    x.clearRect(0, 0, W, H);
-    const dec = ease(seg(k, DEC, DEC + DEC_D)), fade = 1 - ease(seg(k, OUT, OUT + OUT_D));
-    if (fade <= 0) return;
-    const D = rad + 1, D2 = D * 2;
+    const { ctx: c, W, H, flow, mouse } = stage;
+    c.clearRect(0, 0, W, H);
+    const th = thinking(T % LOOP), sp = 1 - th;
 
-    let cx = -.14, cy = 0;
-    for (const w of words) {
-      if (w.t > k) break;
-      cx = w.x + w.w + .13; cy = w.row * PITCH;
-      const age = smooth(.1, 1.5, k - w.t), q = Math.round(age * STEPS) / STEPS, yel = w === LAST;
-      const z = w.row / (ROWS - 1) * 2 - 1, mx = z * 14 * mouse.x, my = z * 14 * mouse.y;
-      // couleur du mot : clair à l'écriture, puis posé ; seul le dernier mot passe au jaune
-      const cols = [...Array(TINTS)].map((_, i) => {
-        let c = mix(PALE, mix(MAU, BLU, i / (TINTS - 1)), q);
-        if (yel) c = mix(c, YEL, Math.round(dec * STEPS) / STEPS);
-        return sprite(c);
-      });
-      const base = (.95 + (.6 - .95) * age) * fade * (yel ? 1 : 1 - .4 * dec), top = yel ? .98 * fade : 0;
-      for (const p of w.pts) {
-        const e = ease(cl((k - w.t - p.s * .1) / .42)); if (e <= 0) continue;
-        const px = X0 + (p.x + p.ox * (1 - e)) * s + mx;
-        const py = Y0 + (p.y + p.oy * (1 - e) + Math.sin(T * .5 + p.s * 70) * .004) * s + my;
-        const a = e * (yel ? base + (top - base) * dec : base) * stage.fade(px);
-        if (a <= .003) continue;
-        x.globalAlpha = a;
-        x.drawImage(cols[p.tint], px - D, py - D, D2, D2);
-      }
+    // place : à droite du texte en mode fond, centré dans le bloc 4:3 en mode bloc
+    const r = flow ? Math.min(W, H) * .17 : Math.min(W * .075, H * .12);
+    const x = (flow ? W * .5 : W * .74) + mouse.x * 18, y = H * .5 + mouse.y * 18;
+    const alpha = stage.fade(x);
+
+    // anneau de points : rotation lente ; vague qui tourne (réfléchit) ; pulsation de voix (parle)
+    const rr = r * 1.47, rot = T * .22;
+    const n = Math.max(24, Math.round(TAU * rr / Math.max(9, r * .16))), dr = Math.max(1.1, r * .028);
+    const head = T * 3.6, voice = .55 + .45 * Math.sin(T * 13) * Math.sin(T * 7.3 + 1);
+    c.fillStyle = YEL;
+    for (let i = 0; i < n; i++) {
+      const a = rot + i / n * TAU;
+      const d = ((a - head) % TAU + Math.PI * 3) % TAU - Math.PI;
+      const bump = Math.exp(-((d / .42) ** 2)) * th;
+      const amp = .5 + .5 * Math.sin(a * 3 + T * 9) * Math.sin(a * 5 - T * 7 + 1.3), vo = sp * voice * amp;
+      const R = rr + r * (.06 * bump + .18 * vo), s = dr * (1 + 1.2 * bump + 1.3 * vo), light = .72 + .28 * Math.cos(a + Math.PI * .75);
+      c.globalAlpha = Math.min(1, (.8 + .2 * bump + .2 * vo) * light) * alpha;
+      c.beginPath(); c.arc(x + Math.cos(a) * R, y + Math.sin(a) * R, s, 0, TAU); c.fill();
     }
 
-    // curseur clair : plein pendant l'écriture, clignote ensuite, s'éteint à la décision
-    const typing = k > T0 && k < T0 + TYPE;
-    const blink = (typing ? 1 : .5 + .5 * Math.cos(k * TAU * .9)) * (1 - seg(k, DEC, DEC + DEC_D)) * .9 * fade;
-    if (blink > .003) {
-      const img = sprite(PALE);
-      for (const p of caret) {
-        const px = X0 + (cx + p.x) * s, py = Y0 + (cy + p.y) * s;
-        x.globalAlpha = blink * stage.fade(px);
-        x.drawImage(img, px - D, py - D, D2, D2);
-      }
-    }
-    x.globalAlpha = 1;
+    // disque jaune et V blanc
+    c.globalAlpha = alpha;
+    c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill();
+    c.fillStyle = WHITE; c.beginPath();
+    VPTS.forEach(([px, py], i) => { const vx = x + px * r, vy = y + py * r; i ? c.lineTo(vx, vy) : c.moveTo(vx, vy); });
+    c.closePath(); c.fill();
+    c.globalAlpha = 1;
   }
 
-  return mountHeroStage(root, { name: 'bonv', draw, still: STILL, onResize: layout });
+  return mountHeroStage(root, { name: 'bonv', draw, still: STILL });
 }

@@ -147,6 +147,9 @@ html body [data-pv="case-studies"] [data-cs-card], html body [data-cs-related] [
 html body [data-pv="case-studies"] [data-cs-card]::before, html body [data-cs-related] [data-cs-card]::before{ content:''; position:absolute; inset:0; border-radius:inherit; padding:.5px; pointer-events:none; z-index:2; background:var(--af-edge);
   -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
 html body [data-pv="case-studies"] [data-cs-card]:hover, html body [data-cs-related] [data-cs-card]:hover{ transform:translateY(-4px); }
+/* carte entièrement cliquable (retour de Romain, 2026-11-20) : le lien du titre s'étend à toute la carte, comme .cs-link sur les pages produit */
+html body [data-pv="case-studies"] [data-cs-card] [data-cs-link="title"]::after, html body [data-cs-related] [data-cs-card] [data-cs-link="title"]::after{ content:''; position:absolute; inset:0; z-index:1; border-radius:inherit; }
+html body [data-pv="case-studies"] [data-cs-card], html body [data-cs-related] [data-cs-card]{ cursor:pointer; }
 html body [data-pv="case-studies"] [data-cs-card] .post_image, html body [data-cs-related] [data-cs-card] .post_image{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:0; margin:0; }
 html body [data-pv="case-studies"] [data-cs-card] .post_body, html body [data-cs-related] [data-cs-card] .post_body{ display:flex; flex-direction:column; gap:1rem; flex:1; padding:1.5rem 1.5rem 1.75rem; background:none; }
 html body [data-pv="case-studies"] [data-cs-card] [data-cs-tag], html body [data-cs-related] [data-cs-card] [data-cs-tag]{ font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.6875rem; letter-spacing:.12em; text-transform:uppercase; color:var(--af-violet, #5b4fb0); }

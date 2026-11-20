@@ -150,6 +150,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-11-20
 
+- **BonV, FAQ : contenu du client** (point 14 de RETOURS). Les 6 questions en Lorem Ipsum remplacées par les 6 premières du client (`set_text` sur les `faq-q` et `faq-a-text`), 4 questions ajoutées dans `faq-list` avec la même structure (`faq-item` + `data-faq-item`, `h3.faq-q`, `faq-a` > `p.faq-a-text`). 10 questions au total, dans l'ordre fourni. Barre oblique parasite retirée devant « BonV » (réponse sur la protection des données).
+
 - **Resources, vignettes des blog posts** (demande de Romain, outil `phasev-case-thumbs`, gabarit `cover`). 18 posts sur 21 lus en entier, accroche tirée du texte (specs `specs/blog.json` du dépôt de vignettes, avec la citation source en `_source`). Fond des vignettes remplacé par le dégradé du film BonV (shader de `TEST - v82/js/bgshader.js` porté dans `lib/bg-film.js`, forme tirée du slug, teinte du thème) ; chiffre en filigrane retiré du gabarit (refus de Romain). Commits `ad9ab45` et `6f8c4dc` du dépôt `phasev-case-thumbs`. JPEG 1920 × 1080 qualité 90 (281 Ko max), 18 assets `blog-<slug>.jpg`, Main Image des 18 posts remplacée (statut publié conservé). Anciennes images : `cms-backups/blog-main-image-2026-11-20.json`. Non remplacés, photo réelle de personnes : « Better Odds of Picking the Right Dose » (session poster), podcast « Why Trials Fail » (portrait de Raviv Pryluk), interview PharmaShots (portrait). Les 9 vignettes de case studies gardent l'ancien fond.
 
 - **BonV, hero : V un peu plus grand et plus près du centre** (retour de Romain), en desktop seulement ; proto mis à jour à l'identique. Release `v0.38.0`, URL jsDelivr vérifiée, loader BonV `v0.37.0` → `v0.38.0`.

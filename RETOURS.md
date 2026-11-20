@@ -10,7 +10,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 | 12 | BonV : cacher le bloc case studies | | fait, à vérifier |
 | 11 | BonV : premier bloc sur fond light | Le bloc juste après le hero | fait, à vérifier |
 | 17 | Contact : éclaircir le fond des champs | 1re passe trop timide (10 %), 2e passe à 20 % | fait, à vérifier |
-| 14 | BonV : intégrer une FAQ | Lorem Ipsum en attendant le vrai contenu | fait, à vérifier |
+| 14 | BonV : intégrer une FAQ | Lorem Ipsum remplacé le 2026-11-20 par les 10 questions fournies par le client | fait |
 | 5 | Case studies : surtitre « Evidence » remplacé par « Case studies », gros chiffres retirés du bas des cartes | Home et toutes les autres pages. « Evidence » n'existe plus comme section. Anciens surtitres et chiffres supprimés, pas masqués | fait, à vérifier |
 | 6 | Slider du bas (All insights) : plus de bouton en contour seul | Home et toutes les autres pages, heros compris. Fait : Home (2 « All insights ») et heros AI Conductor et BonV (« Learn more ») passés en Purple. Sliders des headers Resources et Case Studies supprimés (point 18). Variantes en contour du composant button supprimées (Transparent, Transparent on White, Purple Transparent), ainsi que les composants inutilisés dm-panel et transparent-card | fait, à vérifier |
 

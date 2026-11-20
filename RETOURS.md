@@ -73,5 +73,4 @@ Recette mobile du site (après publication par Romain). À regarder en particuli
 ## Pour plus tard
 
 - Trial : le lien « Explore the case study library → » de la success story fait doublon avec le bouton « All Trial Optimizer case studies » du bloc juste dessous. Gardé pour l'instant (décision de Romain, 2026-11-19).
-- Nettoyage du code mort : `src/platform-connect-cards.js` (plus monté), règles du chiffre clé dans `src/case-studies.js`.
 - Listes case studies des pages produit : aucun tri posé (ordre par défaut du CMS) ; tri par Order à régler dans le Designer si besoin.

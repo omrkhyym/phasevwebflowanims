@@ -8,7 +8,7 @@ function C(e) {
 	function t(e, t) {
 		let { ctx: n, W: r, H: i, flow: a, mouse: o } = e;
 		n.clearRect(0, 0, r, i);
-		let s = j(t % O), c = 1 - s, l = a ? Math.min(r, i) * .17 : Math.min(r * .075, i * .12), u = (a ? r * .5 : r * .74) + o.x * 18, d = i * .5 + o.y * 18, f = e.fade(u), p = l * 1.47, m = t * .22, h = Math.max(24, Math.round(b * p / Math.max(9, l * .16))), g = Math.max(1.1, l * .028), _ = t * 3.6, v = .55 + .45 * Math.sin(t * 13) * Math.sin(t * 7.3 + 1);
+		let s = j(t % O), c = 1 - s, l = a ? Math.min(r, i) * .17 : Math.min(r * .085, i * .135), u = (a ? r * .5 : r * .71) + o.x * 18, d = i * .5 + o.y * 18, f = e.fade(u), p = l * 1.47, m = t * .22, h = Math.max(24, Math.round(b * p / Math.max(9, l * .16))), g = Math.max(1.1, l * .028), _ = t * 3.6, v = .55 + .45 * Math.sin(t * 13) * Math.sin(t * 7.3 + 1);
 		n.fillStyle = w;
 		for (let e = 0; e < h; e++) {
 			let r = m + e / h * b, i = ((r - _) % b + Math.PI * 3) % b - Math.PI, a = Math.exp(-((i / .42) ** 2)) * s, o = .5 + .5 * Math.sin(r * 3 + t * 9) * Math.sin(r * 5 - t * 7 + 1.3), y = c * v * o, x = p + l * (.06 * a + .18 * y), S = g * (1 + 1.2 * a + 1.3 * y), C = .72 + .28 * Math.cos(r + Math.PI * .75);

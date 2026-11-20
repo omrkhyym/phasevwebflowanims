@@ -447,8 +447,8 @@ function draw(stage, T) {
   if (label) label.textContent = sp > th ? 'BonV parle' : 'BonV réfléchit';
 
   // place : à droite du texte en mode fond, centré dans le bloc 4:3 en mode bloc
-  const r = flow ? Math.min(W, H) * .17 : Math.min(W * .075, H * .12);
-  const x = (flow ? W * .5 : W * .74) + mouse.x * 18, y = H * .5 + mouse.y * 18;
+  const r = flow ? Math.min(W, H) * .17 : Math.min(W * .085, H * .135);
+  const x = (flow ? W * .5 : W * .71) + mouse.x * 18, y = H * .5 + mouse.y * 18;
   const alpha = stage.fade(x);
 
   // anneau de points (logique de bonv-mark.js)

@@ -21,7 +21,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Careers (`/careers`, hors menu, en test) | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` | `careers` (div dans le `container-large` de la section blanche ; attributs `data-board`, `data-all`, `data-empty`, `data-error`, `data-link`, `data-apply`) |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.32.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
 | Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.32.0` | `case-study` (attribut sur `main-wrapper`) |
-| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.31.0` | `data-af-lib` (container de la liste et des filtres Finsweet) ; header réduit natif (comme Privacy Policy), sans slider |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.33.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
 | Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.31.0` | `data-af-article` (container du texte de l'article) |
 
 ### Modules
@@ -52,7 +52,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `src/testimonials.js` | Refonte, Home : témoignages en onglets (bascule `is-active` sur `.tm-quote` / `.tm-tab`, trait `.tm-bar`, défilement 8 s à l'écran, pause au survol) |
 | `src/about-orbits.js` | Refonte, hero About : anneaux et V en plexus (copie du kit) |
 | `src/careers-affine.js` | Refonte, Build with us : trois disciplines qui fusionnent, style BonV (copie de `_kit/careers.js`) ; `bonv-draw.js` devient un chunk partagé |
-| `src/resources.js` | Refonte, Resources : CSS du proto (liste, filtres Finsweet en barre segmentée avec pastille glissante, cartes, mise en page de l'article, heros) ; masque les paragraphes vides des articles |
+| `src/resources.js` | Refonte, Resources : CSS du proto (liste, filtres Finsweet en barre segmentée avec pastille glissante, cartes, mise en page de l'article, heros) ; masque les paragraphes vides des articles ; cartes Publications & Media : logo blanc sur panneau violet (`data-af-logo`) |
 | `src/news-cards.js` | Refonte, Home : cartes Latest news (`swiper-item`) restylées, CSS seulement |
 | `src/nav.js` | Refonte : comportement de la navigation en île (fond au scroll, masquage en descendant, pastille de survol, panneau Platform avec aperçus animés, menu plein écran rempli depuis la barre, `--nav-h` et `nav-hidden`) ; structure native dans le composant `nav-island` |
 | `src/sliders.js` | Nettoyage : un seul système pour tous les `[data-swiper]` (types `news` et `feature`), monté par `site.js` ; charge Swiper 11.2.10 (ESM et CSS jsDelivr) seulement si la page a un slider ; flèches par `data-swiper-id` ou les plus proches, `is-disabled` au bout, cachées quand rien ne défile ; remplace les scripts Swiper des pages Home, Company, Resources, Case Studies |
@@ -84,6 +84,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.33.0` | `dc6e122` | Resources : cartes de la catégorie Publications & Media repérées (`data-af-logo`), Main Image (logo blanc sur transparent) en `contain` sur un panneau violet `#1E1846`. Seul `dist/resources.js` change |
 | `v0.32.0` | `6187be0` | Nettoyage du code mort : `site.js` sans line field (49 → 32 ko), `trial.js` et `response.js` sans `platform-connect` v1 ni `success-design-space`, `case-studies.js` sans les règles du chiffre clé ; chunk `platform-connect-Dh9cewVn.mjs` retiré. Testé en `?dev` par Romain |
 | `v0.31.0` | `7674bb5` | Fiches Case Study et articles Resources : règles CSS de l'ancien header (image, carte, titre) retirées de `src/case-studies.js` et `src/resources.js` ; jaune des étiquettes CMS (`.featured-label-div [data-cs-tag]`) détaché de `.section_header.is-resources`. Seuls `dist/case-studies.js` et `dist/resources.js` changent |
 | `v0.30.0` | `8c35cc6` | Nouvelle entrée `careers.js` (`src/careers.js`) : page Careers, offres Greenhouse en direct ; seul `dist/careers.js` est ajouté (utilise le runtime partagé), aucun autre bundle ne change |
@@ -143,6 +144,13 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-20
+
+- **Resources, logos des posts Publications & Media en blanc** (demande de Romain : logos de média en PNG sur fond blanc, à poser sur un fond violet foncé ; maquette de carte validée).
+  - Outil : `logos/build_white_logos.py` (Pillow + numpy) : luminance → alpha, chaque ton du logo ramené au blanc plein, rognage, 480 × 120 max marge comprise ; rapport `logos/report.md`, planche `logos/preview.html`, maquette `logos/card-preview.html`. `logos/source/` garde les originaux (le script ne retélécharge plus sans `--force-download`, le CMS portant désormais les logos blancs).
+  - Sources remplacées par Romain dans `logos/missing/` (reliées aux posts par `missing/map.json`) : InsideHealthPolicy (fond bleu inversé), BMJ, BioQuick, HealthTech, Axios Pro, DDW.
+  - Webflow : 39 assets `pm-<média>-white.png` créés (dossier racine) ; Main Image des 55 posts de la catégorie remplacée (statut publié conservé, en attente de publication du site). Anciennes images dans `logos/cms-backup.json` pour revenir en arrière. Les images ne s'affichent que sur `/resources` (vérifié sur toutes les pages du menu).
+  - Code : `src/resources.js`, release `v0.33.0`, URL jsDelivr vérifiée ; loader de Resources passé de `v0.31.0` à `v0.33.0` (Resources Template reste en `v0.31.0`, pas concerné).
+  - Nouveau post Publications & Media : uploader directement un logo blanc sur transparent en Main Image, ou passer par `logos/missing/` et le script.
 
 - **Nettoyage du code mort** (rapport validé par Romain). Supprimés de `src/` : `platform-connect-cards.js`, `platform-connect.js` (v1), `platform-hub.js`, `evidence-bars.js`, `gantt.js`, `hero-homepage.js`, `clinops-proof.js`, `clinops-workflow.js`, `company-careers.js`, `company-hero-lines.js`, `success-design-space.js`, et le line field (`src/line-field/index.js`, `core.js`, `util.js`, `textures/`) : plus aucune page ne les montait (montages vérifiés dans Webflow, `data-line-field` absent des 16 pages publiées). Gardé : `src/line-field/css.js` (utilisé par le fond flottant). `site.js` ne lance plus le line field ; `response.js` et `trial.js` ne montent plus `platform-connect` v1 ni `success-design-space` ; `src/case-studies.js` perd les règles du chiffre clé (`data-cs-kpi`). Effet : `dist/site.js` 49 → 32 ko, `dist/trial.js` 17,6 → 10,2 ko, chunk `platform-connect-Dh9cewVn.mjs` retiré. Commit `bff1ea2`, testé en `?dev` par Romain, release `v0.32.0` ; URLs jsDelivr vérifiées (4 entrées, 6 chunks) ; loaders passés en `v0.32.0` : code global (`site.js`, avant `v0.28.0`, seul le tag change), Trial et Response (`v0.29.0`), Case Studies et son modèle (`v0.31.0`).
 - **Careers : flèche « lien externe » retirée** du lien Careers du menu (`pvn-ext`), maintenant que le lien mène à `/careers`.

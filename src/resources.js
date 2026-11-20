@@ -22,24 +22,16 @@ html body [data-cs-tags], html body [data-cs-tags] [data-cs-tags-list] .w-dyn-it
 html body [data-cs-tags] > [data-cs-tags-list]:first-child .w-dyn-item:first-child [data-cs-tag]::before,
 html body [data-cs-tags] > [data-cs-tags-list]:has(.w-dyn-empty) + [data-cs-tags-list] .w-dyn-item:first-child [data-cs-tag]::before{ display:none; }
 
-/* Heros des fiches (article) : alignés sur les heros produit validés.
-   Titre léger comme tous les titres (retour 2026-11-19), même taille ; catégories en mono, claires ; image dans un cadre arrondi au bord fin.
-   La bibliothèque n'a plus de slider dans son header (header réduit natif, comme Privacy Policy). */
-html body .section_header.is-resources .heading-style-h1{ font-weight:300; font-size:clamp(2.25rem, 1.5rem + 1.9vw, 3.25rem); line-height:1.06; letter-spacing:-.02em; color:#f8f8f8; }
-/* catégories du hero (fond sombre) en jaune, dans les deux heros (règle des surtitres sur fond sombre) */
-html body .section_header.is-resources .featured-label-div .text-size-label,
-html body .section_header.is-resources .featured-label-div [data-cs-tag]{ color:var(--_colors---primary--yellow, #e1c721); }
+/* Header de l'article : header réduit natif, comme la bibliothèque (sans image, retour 2026-11-20) ; mise en forme dans Webflow. */
+/* catégories du header (fond sombre) en jaune, y compris les étiquettes CMS (règle des surtitres sur fond sombre) */
+html body .featured-label-div .text-size-label,
+html body .featured-label-div [data-cs-tag]{ color:var(--_colors---primary--yellow, #e1c721); }
 /* décalage de la première catégorie : une liste CMS vide (produits ou aires) restait dans la ligne et ajoutait un écart avant elle */
 html body .featured-label-div [data-cs-tags-list]:not(:has([data-cs-tag])){ display:none; }
-html body .section_header.is-resources .section-top.is-featured{ gap:1.5rem; }
-html body .section_header.is-resources .featured-card{ column-gap:4rem; }
-html body .section_header.is-resources .featured-image{ display:block; width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:1.5rem;
-  box-shadow:0 0 0 .5px rgba(248,248,248,.22); }
-@media (max-width:991px){ html body .section_header.is-resources .featured-card{ column-gap:1.5rem; } html body .section_header.is-resources .featured-image{ border-radius:1.25rem; } }
 
 
 /* ===================== Resources (bibliothèque et article) =====================
-   Mêmes règles que Case Studies. Le hero de l'article (.section_header.is-resources) reprend déjà
+   Mêmes règles que Case Studies. Le header de l'article (header réduit, comme la bibliothèque) reprend déjà
    les règles des heros Case Studies. Les filtres sont ceux de Finsweet (radios + recherche), la liste est la liste CMS. */
 
 /* marges réduites autour des filtres */

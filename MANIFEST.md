@@ -145,6 +145,11 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-11-20
 
+- **Resources, article « Causal models can extend what we learn from trials » : page cassée réparée** (signalé par Romain). Le Post Body commençait par un embed contenant une page HTML complète (simulateur « Atezolizumab Trial Simulator », d3) dont le CSS était global (`* { margin:0; padding:0 }`, `body { max-width:1080px; margin:auto; background:#fff }`, `h1`) : toute la page perdait ses marges et sa largeur. Le simulateur ne marchait pas non plus : `id` et réglages des curseurs perdus à l'import du 7 octobre, retours à la ligne du script perdus (le premier commentaire `//` neutralisait tout le script).
+  - Correctif dans le CMS (Post Body, cet article seulement) : simulateur enveloppé dans `#pv-atz`, CSS limité à ce bloc (style d'origine gardé, décision de Romain) ; `id` remis (`chart` en `<svg viewBox="0 0 580 460">`, `sl-*`, `val-*`, `m-*`) ; curseurs Desert 0 à 1, Excluded 0 à 0,7 (pas 0,05), scale M 1 à 15 (pas 0,5 ; bornes supposées, absentes de la source) ; commentaires retirés, script isolé dans une fonction (syntaxe vérifiée avec `node --check`) ; titre parasite « Atezolizumab Trial Simulator » retiré. Reste du texte inchangé.
+  - Sauvegardes : `cms-backups/causal-models-post-body-2026-11-20.html` (avant, version publiée) et `…-fixed.html` (après). Seul article concerné (les 20 articles vérifiés).
+  - À noter pour le client : le texte « Try It Yourself » parle du simulateur comme s'il était plus bas, alors qu'il ouvre l'article.
+
 - **Resources, logos des posts Publications & Media en blanc** (demande de Romain : logos de média en PNG sur fond blanc, à poser sur un fond violet foncé ; maquette de carte validée).
   - Outil : `logos/build_white_logos.py` (Pillow + numpy) : luminance → alpha, chaque ton du logo ramené au blanc plein, rognage, 480 × 120 max marge comprise ; rapport `logos/report.md`, planche `logos/preview.html`, maquette `logos/card-preview.html`. `logos/source/` garde les originaux (le script ne retélécharge plus sans `--force-download`, le CMS portant désormais les logos blancs).
   - Sources remplacées par Romain dans `logos/missing/` (reliées aux posts par `missing/map.json`) : InsideHealthPolicy (fond bleu inversé), BMJ, BioQuick, HealthTech, Axios Pro, DDW.

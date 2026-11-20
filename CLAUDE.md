@@ -20,9 +20,13 @@ trial.js           entrée de la page Trial Optimizer      → dist/trial.js
 portfolio.js       entrée de la page Portfolio Optimizer  → dist/portfolio.js
 conductor.js       entrée de la page AI Conductor         → dist/conductor.js
 bonv.js            entrée de la page BonV                 → dist/bonv.js
+case-studies.js    entrée de Case Studies et de son modèle de fiche → dist/case-studies.js
+resources.js       entrée de Resources et de son modèle d'article  → dist/resources.js
+careers.js         entrée de la page Careers (offres Greenhouse en direct) → dist/careers.js
 src/<bloc>.js      un module par bloc animé
 src/hero-stage.js  socle partagé des heros produit        → dist/hero-stage-<hash>.mjs (6 pages produit)
-src/platform-connect.js  bloc « plateforme connectée »    → dist/platform-connect-<hash>.mjs (5 pages produit, pas BonV)
+src/platform-connect-tree.js  bloc « plateforme connectée » (carte et rangée, mini-scènes de src/mini-scene-lite.js) → dist/platform-connect-tree-<hash>.mjs (5 pages produit, pas BonV)
+src/bonv-draw.js   socle de dessin partagé (mini-scènes de la Home et du menu, scènes BonV) → dist/bonv-draw-<hash>.mjs
 protos/<page>/     prototypes, un dossier par page (non buildés) ; index et statuts dans protos/README.md, à tenir à jour
 dist/              build, COMMITÉ (servi par jsDelivr)
 ```
@@ -48,8 +52,8 @@ Contrat de chaque module :
 - **Le texte reste dans Webflow**, éditable par le client (exemple : les composants `dm-panel`). Le JS ne porte que la logique et l'animation, jamais de contenu en dur.
 
 Exceptions en place :
-- Un div de montage placé dans un embed HTML doit avoir une largeur : dans un parent flex centré, l'embed fait 0 px. Dans ce cas, pose l'attribut `data-pv` sur l'embed lui-même (c'est le cas de `company-careers`).
-- `company-hero` se monte sur le header du hero lui-même, pour que le canvas passe sous le texte.
+- Un div de montage placé dans un embed HTML doit avoir une largeur : dans un parent flex centré, l'embed fait 0 px. Dans ce cas, pose l'attribut `data-pv` sur l'embed lui-même (c'est le cas de `careers-affine` sur Company).
+- Textes d'interface d'un module (libellés de filtre, messages vides) : en attributs du montage, éditables dans le Designer (exemple : `careers`, `data-all`, `data-empty`…).
 - Le CSS de positionnement est injecté par le module et ciblé avec `:has([data-pv="…"])`, pour ne modifier aucune classe Webflow.
 
 ### Heros produit à deux modes (`src/hero-stage.js`)
@@ -61,7 +65,6 @@ Convention des heros ClinOps, Response, Trial, Portfolio, AI Conductor et BonV. 
   - `<div data-pv="<nom>-hero-slot"></div>`, dernier enfant de la grille `header_content` : bloc 4:3 à 991 px et moins.
 - Le module d'animation ne fournit que son dessin et appelle `mountHeroStage(root, { name, draw, still, onResize })`. Le socle gère le canvas unique, son déplacement entre les deux emplacements, la boucle unique, les observers, la parallaxe (coupée en mode bloc), l'atténuation côté texte (1 en mode bloc), le reduced motion et le CSS.
 - Sur tablette, la colonne de texte `header_content-left` est en « Order : Last » dans le Designer, donc le bloc passe au-dessus du texte. Ce réglage n'est pas lisible par l'API : vérifie-le dans le CSS publié (`#w-node-…{order:9999}`).
-- Retire `data-line-field` du header du hero : sinon le LineField global dessine par-dessus l'animation.
 - Les helpers communs (`seg`, `ease`, `smooth`, `rng`, `rgba`, `TAU`) s'importent depuis `hero-stage.js`.
 
 ### Config Vite (mode lib, ES)
@@ -70,9 +73,10 @@ Convention des heros ClinOps, Response, Trial, Portfolio, AI Conductor et BonV. 
 build: {
   lib: {
     entry: {
-      main: 'main.js', company: 'company.js',
+      site: 'site.js', main: 'main.js', company: 'company.js',
       clinops: 'clinops.js', response: 'response.js', trial: 'trial.js',
       portfolio: 'portfolio.js', conductor: 'conductor.js', bonv: 'bonv.js',
+      'case-studies': 'case-studies.js', resources: 'resources.js', careers: 'careers.js',
     },
     formats: ['es'],
     fileName: (format, name) => `${name}.js`,
@@ -100,15 +104,21 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 
 | Page | ID | Entrée | Tag |
 |---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.12.1` |
+| Toutes (code global du site) | site | `site.js` | `v0.32.0` |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.22.0` |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` (page de test) |
-| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.11.0` |
-| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.8.0` |
-| Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.6.0` |
-| Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.6.0` |
-| Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.6.0` |
-| AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.6.0` |
-| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.13.0` |
+| Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.20.0` |
+| ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.29.0` |
+| Response Optimizer | `6a7efdffc7cdcaeee09a8ad5` | `response.js` | `v0.32.0` |
+| Trial Optimizer | `6a7f24a28679cdce6cd676e7` | `trial.js` | `v0.32.0` |
+| Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.29.0` |
+| AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.29.0` |
+| BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.24.0` |
+| Case Studies | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.32.0` |
+| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.32.0` |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.31.0` |
+| Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.31.0` |
+| Careers | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` |
 
 Les tags changent à chaque release : `MANIFEST.md` fait foi pour l'état courant.
 
@@ -132,9 +142,9 @@ Loader standard, dans le **footer** de la page (pas le head) :
 Règles :
 - **Ne publie jamais.** C'est Romain qui publie.
 - `set_page_freeform_code` **remplace tout le bloc** : lis le code existant d'abord, ajoute le tien sans rien perdre (scripts Swiper, carte de décision, quotes…).
-- Ne supprime aucun élément : masque-le (`set_visibility false`), pour qu'on puisse revenir en arrière.
+- Suppression : quand Romain demande de retirer un élément, ou quand tu en remplaces un (texte non modifiable par l'API, par exemple), supprime l'ancien dans la même passe ; il ne veut pas d'éléments masqués qui s'accumulent. Masque (`set_visibility false`) seulement quand il dit « cacher » ou pour un retrait temporaire.
 - Ne crée pas de classes, ne modifie pas le système de classes ni les composants. Le remodelage du site n'est pas dans le périmètre.
-- Le code global du site (Lenis, LineField, navbar, boutons SplitText, compteurs) n'est pas à toi : n'y touche pas sans qu'on te le demande.
+- Le code global du site (Lenis, loader de `site.js`, boutons SplitText, compteurs, Userback) n'est pas à toi : n'y touche pas sans qu'on te le demande ; pour une release de `site.js`, ne change que le tag.
 - Les scripts d'embed ne tournent pas dans le canvas du Designer : la vérification se fait en Preview ou sur `webflow.io`.
 - Rythme vertical (référence : Company) : toute section de contenu prend `padding-global padding-section-main` (7.5rem, 5rem en tablette, 4rem en mobile) ; seul le hero garde sa propre classe. Les autres pages migrent au moment de leur refonte, pas avant.
 - Une partie du style est dans l’embed du composant global styles (data-bg, .build-card, .animation-2, la navbar, les boutons) : vérifie là avant de conclure qu’un style n’existe pas.
@@ -165,6 +175,10 @@ Après chaque modification validée, mets-le à jour dans la même passe :
 - ajoute une entrée datée en haut du journal : ce qui a changé, sur quelle page, et pourquoi ;
 - mets à jour les tableaux d'état si une page, un module, un tag ou un point de montage change ;
 - mets à jour la liste des points ouverts.
+
+`RETOURS.md` suit les listes de retours de Romain (une ligne par point, statut, section « Pour plus tard »). Mets-le à jour à chaque point traité, en même temps que le MANIFEST.
+
+Documentation : tu fais le suivi du projet. Quand un fichier de documentation (ce fichier, `MANIFEST.md`, `RETOURS.md`, `protos/README.md`, `INTEGRATION.md`…) ne correspond plus à la réalité, mets-le à jour de toi-même, sans attendre qu'on te le demande.
 
 ## Quand tu as fini
 

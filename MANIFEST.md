@@ -19,8 +19,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.29.0` | `conductor-hero-bg`, `conductor-hero-slot` ; refonte : `cond-answer` (panneau `cond-panel`), `cond-dose` (`.ss-anim` du Proof), `cond-backbone`, `cond-protocol`, `cond-report` (panneaux des étapes, classe `cond-mount`), `platform-connect-v2`, `faq` ; texte des scènes dans les enfants `[data-role]` |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.24.0` | `bonv-hero-bg`, `bonv-hero-slot` ; refonte : `bonv-answer` (panneau `cond-panel`), `bonv-ask`, `bonv-collab`, `bonv-orch` (panneaux des étapes, classe `cond-mount`), `faq` absent (pas de FAQ dans le document) ; texte des scènes dans les enfants `[data-role]` |
 | Careers (`/careers`, hors menu, en test) | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` | `careers` (div dans le `container-large` de la section blanche ; attributs `data-board`, `data-all`, `data-empty`, `data-error`, `data-link`, `data-apply`) |
-| Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.32.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
-| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.32.0` | `case-study` (attribut sur `main-wrapper`) |
+| Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.35.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
+| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.35.0` | `case-study` (attribut sur `main-wrapper`) |
 | Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.33.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
 | Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.34.0` | `data-af-article` (container du texte de l'article) |
 
@@ -84,6 +84,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.35.0` | `e9028cc` | Case Studies : message « No case study matches these filters yet. » masqué tant que des études s'affichent (`.cs-empty{display:flex}` passait devant l'attribut `hidden`). Seul `dist/case-studies.js` change. Testé en `?dev` par Romain |
 | `v0.34.0` | `79754b8` | Articles Resources : figures et embeds ramenés dans la colonne du texte (46 rem, `display:block` au lieu du `table` de Webflow) ; les citations restent en pleine largeur. Seul `dist/resources.js` change. Testé en `?dev` par Romain |
 | `v0.33.0` | `dc6e122` | Resources : cartes de la catégorie Publications & Media repérées (`data-af-logo`), Main Image (logo blanc sur transparent) en `contain` sur un panneau violet `#1E1846`. Seul `dist/resources.js` change |
 | `v0.32.0` | `6187be0` | Nettoyage du code mort : `site.js` sans line field (49 → 32 ko), `trial.js` et `response.js` sans `platform-connect` v1 ni `success-design-space`, `case-studies.js` sans les règles du chiffre clé ; chunk `platform-connect-Dh9cewVn.mjs` retiré. Testé en `?dev` par Romain |
@@ -145,6 +146,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-20
+
+- **Case Studies : message « aucun résultat » affiché en permanence** (signalé par Romain). Le message était bien masqué par l'attribut `hidden`, mais la règle `.cs-empty{display:flex}` du module passait devant. Ajout de `.cs-empty[hidden]{display:none}` dans `src/case-studies.js`. Testé en `?dev` par Romain, release `v0.35.0`, URL jsDelivr vérifiée ; loaders de Case Studies et de son modèle `v0.32.0` → `v0.35.0`.
 
 - **Case Studies : vignettes standardisées pour 9 études** (demande de Romain, outil `C:\PROJECTS\phasev-case-thumbs`, dépôt `omrkhyym/phasev-case-thumbs`, skill du dépôt). Les 9 études relues en entier, specs corrigées (`specs/specs.json`, non poussé) : NSCLC −9 mo en barres réelles 33 → 24 mo, légende « Enrollment time » ; COPD −1.85 yrs (au lieu de −49 %) ; maladie infectieuse −6 mo (au lieu de −25 %) ; ALS sans chiffre dans le texte, titre « Smaller Phase 3 » gardé. Rendu 1920 × 1080 converti en JPEG qualité 90 (PNG à 2,5 Mo, limite du champ 500 Ko ; JPEG 276 à 320 Ko). 9 assets `cs-<slug>.jpg` créés, Main Image des 9 fiches remplacée (statut publié conservé, en attente de publication). Anciennes images : `cms-backups/case-studies-main-image-2026-11-20.json`. Les versions 1200 × 630 (partage) restent en local : la collection n'a pas de champ pour elles. Les 12 autres études gardent leur image.
 

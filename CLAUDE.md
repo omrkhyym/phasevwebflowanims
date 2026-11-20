@@ -114,8 +114,8 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.29.0` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.29.0` |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.24.0` |
-| Case Studies | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.32.0` |
-| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.32.0` |
+| Case Studies | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.35.0` |
+| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.35.0` |
 | Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.33.0` |
 | Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.34.0` |
 | Careers | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` |

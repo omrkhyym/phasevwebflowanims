@@ -22,7 +22,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.32.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
 | Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.32.0` | `case-study` (attribut sur `main-wrapper`) |
 | Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.33.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
-| Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.31.0` | `data-af-article` (container du texte de l'article) |
+| Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.34.0` | `data-af-article` (container du texte de l'article) |
 
 ### Modules
 
@@ -84,6 +84,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.34.0` | `79754b8` | Articles Resources : figures et embeds ramenés dans la colonne du texte (46 rem, `display:block` au lieu du `table` de Webflow) ; les citations restent en pleine largeur. Seul `dist/resources.js` change. Testé en `?dev` par Romain |
 | `v0.33.0` | `dc6e122` | Resources : cartes de la catégorie Publications & Media repérées (`data-af-logo`), Main Image (logo blanc sur transparent) en `contain` sur un panneau violet `#1E1846`. Seul `dist/resources.js` change |
 | `v0.32.0` | `6187be0` | Nettoyage du code mort : `site.js` sans line field (49 → 32 ko), `trial.js` et `response.js` sans `platform-connect` v1 ni `success-design-space`, `case-studies.js` sans les règles du chiffre clé ; chunk `platform-connect-Dh9cewVn.mjs` retiré. Testé en `?dev` par Romain |
 | `v0.31.0` | `7674bb5` | Fiches Case Study et articles Resources : règles CSS de l'ancien header (image, carte, titre) retirées de `src/case-studies.js` et `src/resources.js` ; jaune des étiquettes CMS (`.featured-label-div [data-cs-tag]`) détaché de `.section_header.is-resources`. Seuls `dist/case-studies.js` et `dist/resources.js` changent |
@@ -144,6 +145,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-20
+
+- **Articles Resources : images dans la colonne du texte** (retour de Romain sur « Causal modeling: multiplying data with mechanism » : l'image sortait de sa colonne). Les figures et embeds étaient en pleine largeur (marge négative sur la colonne des intertitres) et passaient sous un intertitre placé juste avant. `src/resources.js` : figures et embeds dans la colonne du texte, largeur du texte (46 rem), citations inchangées. Testé en `?dev` par Romain, release `v0.34.0`, URL jsDelivr vérifiée ; loader de Resources Template `v0.31.0` → `v0.34.0` (récupère aussi le CSS des cartes à logo de `v0.33.0`, sans effet sur l'article). Resources reste en `v0.33.0`.
 
 - **Resources, article « Causal models can extend what we learn from trials » : page cassée réparée** (signalé par Romain). Le Post Body commençait par un embed contenant une page HTML complète (simulateur « Atezolizumab Trial Simulator », d3) dont le CSS était global (`* { margin:0; padding:0 }`, `body { max-width:1080px; margin:auto; background:#fff }`, `h1`) : toute la page perdait ses marges et sa largeur. Le simulateur ne marchait pas non plus : `id` et réglages des curseurs perdus à l'import du 7 octobre, retours à la ligne du script perdus (le premier commentaire `//` neutralisait tout le script).
   - Correctif dans le CMS (Post Body, cet article seulement) : simulateur enveloppé dans `#pv-atz`, CSS limité à ce bloc (style d'origine gardé, décision de Romain) ; `id` remis (`chart` en `<svg viewBox="0 0 580 460">`, `sl-*`, `val-*`, `m-*`) ; curseurs Desert 0 à 1, Excluded 0 à 0,7 (pas 0,05), scale M 1 à 15 (pas 0,5 ; bornes supposées, absentes de la source) ; commentaires retirés, script isolé dans une fonction (syntaxe vérifiée avec `node --check`) ; titre parasite « Atezolizumab Trial Simulator » retiré. Reste du texte inchangé.

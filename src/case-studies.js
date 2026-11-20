@@ -21,6 +21,7 @@ const CSS = `
 .cs-pills .fs_radio_field.is-list-active{background:#141238;color:#f8f8f8}
 .cs-filters .filter-select{width:20.3125rem;max-width:100%}
 .cs-empty{padding:4rem 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.cs-empty[hidden]{display:none}
 .cs-empty button{font:inherit;color:#141238;background:none;border:0;border-bottom:1px solid #14123866;cursor:pointer;padding:0 0 .125rem}
 [data-cs-card].cs-in{animation:csIn .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*35ms)}
 @keyframes csIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}

@@ -142,6 +142,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 ### 2026-11-20
 
+- **Navigation : plus d'espace entre les liens** (demande de Romain). Classe `pvn-links` (barre desktop du composant `nav-island`) : `column-gap` `.125rem` → `.625rem`. Pastilles de survol et de page courante inchangées.
 - **Privacy Policy : style du texte légal et date** (demandes de Romain). Code de page (head) remplacé : typographie des articles Resources (titres `h2` en 300 à l'encre, au lieu du gras 600 par défaut ; paragraphes 1,125 rem / 1,6 ; gras en 500 ; liens mauves soulignés ; listes à tiret mauve et listes numérotées en pastilles mono), sur une seule colonne. Header : « Last updated: May 1, 2025 » → « Last updated: November 20, 2026 » (nouveau bloc texte, l'ancien supprimé) ; `section-top` en `max-width-xlarge`.
 
 ### 2026-11-19

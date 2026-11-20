@@ -37,7 +37,7 @@ Liste des commentaires de Romain, traitée du plus simple au plus complexe. Stat
 
 | # | Point | Précisions | Statut |
 |---|---|---|---|
-| 3 | Retours à la ligne | Romain indique lesquels | en attente |
+| 3 | Retours à la ligne | Romain indique lesquels. 2026-11-20 : Company, intro du bloc Investors sur une ligne (sortie de `section-top_right`, plafonnée à 440 px, colonne vide supprimée) | en cours (au fil des signalements) |
 | 15 | Company : fond des portraits | Fait par Romain | fait |
 
 ## Relevé des liens morts (point 2, 2026-11-19)

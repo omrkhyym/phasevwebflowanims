@@ -78,6 +78,7 @@ Exploration du site publié (`phasev-2026.webflow.io`, publication du 2026-11-19
 | M6 | Workflow (Trial et autres pages) : texte d'abord, vidéo ensuite | Même réglage que M5, 6 pages produit | fait, à vérifier après publication |
 | M8 | Resources : filtres en mobile | Catégories empilées et coupées. Barre sur une ligne qui défile, fondu, recentrage. Release v0.40.0 | fait, à vérifier |
 | M9 | Case Studies : filtres qui mènent à une page vide | Catégories sans étude masquées, aires selon le produit choisi. Release v0.41.0 | fait, à vérifier |
+| M10 | Titres : gras en mobile, tailles incohérentes | Gras de `text-size-display` en tablette retiré ; hiérarchie mobile des pages produit (hero 40 px, étapes 30 px) ; Short Name des fiches en Light ; titres de cartes tous en Regular 400. Release v0.42.0 | fait, à vérifier |
 | M7 | Portfolio, Connected value creation : texte d'abord, anim ensuite | Bloc sur une colonne en tablette et mobile (`grid-2.gap-2-5`), 5 pages produit | fait, à vérifier après publication |
 
 ## Prochaine session (2026-11-21)

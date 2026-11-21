@@ -105,7 +105,7 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 | Page | ID | Entrée | Tag |
 |---|---|---|---|
 | Toutes (code global du site) | site | `site.js` | `v0.39.0` |
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.39.0` |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.42.0` |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` (page de test) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.20.0` |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.29.0` |
@@ -114,9 +114,9 @@ Site : **PhaseV**, `6a7494c19b6df905487ffd7e` (le site client, plan premium). Ne
 | Portfolio Optimizer | `6a7eebc5135141aa80fab3ff` | `portfolio.js` | `v0.29.0` |
 | AI Conductor | `6a7dcf32f8a4279d35e73b0c` | `conductor.js` | `v0.29.0` |
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.38.0` |
-| Case Studies | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.41.0` |
-| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.36.0` |
-| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.40.0` |
+| Case Studies | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.42.0` |
+| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.42.0` |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.42.0` |
 | Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.34.0` |
 | Careers | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` |
 

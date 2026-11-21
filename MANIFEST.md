@@ -8,7 +8,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 
 | Page | ID Webflow | Entrée | Tag du loader | Points de montage |
 |---|---|---|---|---|
-| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.39.0` | refonte : `hero-sequence` (div natif dans `header_component`, après la grille), `gantt-glossy` (dans `.stage-wide` de The problem), `mini-scene` (cinq cartes `.pcard` du slider plateforme), `testimonials` (`.tm`) ; anciens points (`hero-homepage`, `gantt`, `platform-hub`, `evidence-bars`) dans des blocs masqués |
+| Home | `6a7494c19b6df905487ffd48` | `main.js` | `v0.42.0` | refonte : `hero-sequence` (div natif dans `header_component`, après la grille), `gantt-glossy` (dans `.stage-wide` de The problem), `mini-scene` (cinq cartes `.pcard` du slider plateforme), `testimonials` (`.tm`) ; anciens points (`hero-homepage`, `gantt`, `platform-hub`, `evidence-bars`) dans des blocs masqués |
 | Home DEV | `6ac94d28fa53acb3a833343b` | `main.js` | `v0.2.0` | mêmes points que Home ; loader non standard (`const s` global) |
 | Company | `6a841e56404f040c0e6bc5cc` | `company.js` | `v0.20.0` | refonte : `about-orbits` (premier enfant du header du hero, line field retiré), `careers-affine` (attribut sur l'embed de Build with us, dans `.animation-wrapper.is-dark`) |
 | ClinOps Optimizer | `6a7d9a55a0f59e17da317ab6` | `clinops.js` | `v0.29.0` | `clinops-hero-bg`, `clinops-hero-slot` ; refonte : `clinops-proof-glossy` (dans `.ss-anim` du bloc Proof, chiffres en attributs `data-sites`, `data-rec`, `data-other`, `data-gain`), `platform-connect-v2`, `faq` |
@@ -20,8 +20,9 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | BonV | `6ae8c9c3671fb0d99ba262dc` | `bonv.js` | `v0.38.0` | `bonv-hero-bg`, `bonv-hero-slot` ; refonte : `bonv-answer` (panneau `cond-panel`), `bonv-ask`, `bonv-collab`, `bonv-orch` (panneaux des étapes, classe `cond-mount`), `faq` absent (pas de FAQ dans le document) ; texte des scènes dans les enfants `[data-role]` |
 | Careers (`/careers`, hors menu, en test) | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` | `careers` (div dans le `container-large` de la section blanche ; attributs `data-board`, `data-all`, `data-empty`, `data-error`, `data-link`, `data-apply`) |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.36.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
-| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.36.0` | `case-study` (attribut sur `main-wrapper`) |
-| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.41.0` | `1e5c4bc` | Case Studies, filtres : catégorie sans étude masquée (Hematology, Nephrology, Rare Disease aujourd'hui), menu des aires limité aux aires du produit choisi, retour à « All » si l'aire n'existe pas pour ce produit. Seul `dist/case-studies.js` change |
+| Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.42.0` | `case-study` (attribut sur `main-wrapper`) |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.42.0` | `7a8184c` | Titres de cartes en Regular (400) : cartes d'articles (Resources, Home) et de case studies (bibliothèque, fiches liées, sections sombres) ; cartes Latest news de la Home à la taille de Resources. `dist/main.js`, `dist/case-studies.js`, `dist/resources.js` |
+| `v0.41.0` | `1e5c4bc` | Case Studies, filtres : catégorie sans étude masquée (Hematology, Nephrology, Rare Disease aujourd'hui), menu des aires limité aux aires du produit choisi, retour à « All » si l'aire n'existe pas pour ce produit. Seul `dist/case-studies.js` change |
 | `v0.40.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
 | Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.34.0` | `data-af-article` (container du texte de l'article) |
 
@@ -152,6 +153,12 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-20
+
+- **Titres : état des lieux desktop / mobile et harmonisation** (demande de Romain). Mesure de tous les titres de 15 pages en 1440 et 390 px. Corrigé, validé par Romain :
+  - `text-size-display` : graisse 600 en tablette supprimée (titres de section en gras sur téléphone seulement) ;
+  - hiérarchie mobile des pages produit (le h1 était plus petit que les titres de section, les étapes à la même taille) : `text-size-display.is-hero` 2,5 rem en mobile paysage (34 → 40 px), `heading-style-h1` 1,875 rem en mobile paysage (38 → 30 px) ;
+  - `heading-style-h2` (Short Name au-dessus du tableau des fiches) : 300 au lieu du 600 hérité du h2, 1,5 rem en mobile portrait (19 → 24 px) ;
+  - titres de cartes sur une seule graisse, Regular 400 : `heading-style-h4`, `rp-step-title`, `person-name` (500 → 400), `cs-title` (300 → 400), et dans le code les cartes d'articles de Resources, les cartes de case studies, les cartes Latest news de la Home (500 → 400, taille alignée sur Resources). Release `v0.42.0`, URLs jsDelivr vérifiées ; loaders Home (`v0.39.0`), Case Studies (`v0.41.0`), Case Studies Template (`v0.36.0`) et Resources (`v0.40.0`) passés en `v0.42.0`. Non touchés : le simulateur de l'article causal-models (style gardé), la FAQ.
 
 - **Case Studies, filtres sans page vide** (signalé par Romain). Certaines catégories n'avaient aucune étude publiée et menaient à une liste vide. `src/case-studies.js` : produits et aires sans étude retirés des filtres (ils reviennent dès qu'une étude y est rattachée) ; le menu Therapeutic area ne propose que les aires présentes pour le produit choisi, et revient sur « All » si l'aire choisie n'existe pas pour le nouveau produit. Message « No case study matches… » gardé pour les vieux liens. Release `v0.41.0`, URL jsDelivr vérifiée (fichier identique au build), loader Case Studies `v0.36.0` → `v0.41.0` (Case Studies Template reste en `v0.36.0`, pas de filtres).
 

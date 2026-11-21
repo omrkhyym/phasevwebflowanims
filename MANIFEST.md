@@ -21,7 +21,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Careers (`/careers`, hors menu, en test) | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` | `careers` (div dans le `container-large` de la section blanche ; attributs `data-board`, `data-all`, `data-empty`, `data-error`, `data-link`, `data-apply`) |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.36.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
 | Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.36.0` | `case-study` (attribut sur `main-wrapper`) |
-| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.40.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.41.0` | `1e5c4bc` | Case Studies, filtres : catégorie sans étude masquée (Hematology, Nephrology, Rare Disease aujourd'hui), menu des aires limité aux aires du produit choisi, retour à « All » si l'aire n'existe pas pour ce produit. Seul `dist/case-studies.js` change |
+| `v0.40.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
 | Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.34.0` | `data-af-article` (container du texte de l'article) |
 
 ### Modules
@@ -151,6 +152,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-20
+
+- **Case Studies, filtres sans page vide** (signalé par Romain). Certaines catégories n'avaient aucune étude publiée et menaient à une liste vide. `src/case-studies.js` : produits et aires sans étude retirés des filtres (ils reviennent dès qu'une étude y est rattachée) ; le menu Therapeutic area ne propose que les aires présentes pour le produit choisi, et revient sur « All » si l'aire choisie n'existe pas pour le nouveau produit. Message « No case study matches… » gardé pour les vieux liens. Release `v0.41.0`, URL jsDelivr vérifiée (fichier identique au build), loader Case Studies `v0.36.0` → `v0.41.0` (Case Studies Template reste en `v0.36.0`, pas de filtres).
 
 - **Resources, filtres en mobile** (recette mobile, signalé par Romain). En mobile, Webflow passe `filter_block` en colonne : les 4 catégories s'empilaient, la pastille blanche se déformait et coupait « All » et « Publications & Media ». Option retenue par Romain : barre sur une ligne qui défile au doigt (`flex-direction:row`), fondu sur le bord où il reste des catégories (`is-more-l` / `is-more-r`), catégorie touchée recentrée, `:hover` sous `@media (hover:hover)`. `src/resources.js`, release `v0.40.0`, URL jsDelivr vérifiée (fichier identique au build), loader Resources `v0.33.0` → `v0.40.0` (Resources Template reste en `v0.34.0`, pas de filtres).
 

@@ -21,7 +21,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | Careers (`/careers`, hors menu, en test) | `6affd207cf7ddb2b614f3a2f` | `careers.js` | `v0.30.0` | `careers` (div dans le `container-large` de la section blanche ; attributs `data-board`, `data-all`, `data-empty`, `data-error`, `data-link`, `data-apply`) |
 | Case Studies (`/case-studies`, hors menu) | `6af79c8af6cee4c14dd8916a` | `case-studies.js` | `v0.36.0` | `case-studies` (attribut sur le `container-large` de la section des cartes) ; header réduit natif (comme Privacy Policy), sans slider |
 | Case Studies Template | `6af799a98b87e257e4ed1db0` | `case-studies.js` | `v0.36.0` | `case-study` (attribut sur `main-wrapper`) |
-| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.33.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
+| Resources | `6a806930d8bebf05f9b4d08d` | `resources.js` | `v0.40.0` | `data-af-lib` (container de la liste et des filtres Finsweet ; `data-af-logo-cat` optionnel, catégorie des cartes à logo, défaut « Publications & Media ») ; header réduit natif (comme Privacy Policy), sans slider |
 | Resources Template | `6a7494c19b6df905487ffd76` | `resources.js` | `v0.34.0` | `data-af-article` (container du texte de l'article) |
 
 ### Modules
@@ -84,6 +84,7 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 | `v0.3.0` | `107ab12` | Fonds animés des heros ClinOps, Response, Trial, Portfolio |
 | `v0.4.0` | `591d543` | Hero AI Conductor, socle `hero-stage`, mode bloc mobile sur les cinq heros produit |
 | `v0.5.0` | `fc6e0a4` | Success story Trial Optimizer (`success-design-space`) ; seul `dist/trial.js` change |
+| `v0.40.0` | `ecd5d3b` | Resources, filtres en mobile : catégories sur une ligne qui défile (Webflow passait `filter_block` en colonne), fondu sur le bord caché, catégorie touchée recentrée, survol réservé aux écrans à souris. Seul `dist/resources.js` change |
 | `v0.39.0` | `86eb6c9` | Recette mobile : `site.js`, menu plein écran sans le bouton Platform en double ; `main.js`, hero Home agrandi en mobile (×1,5) et descendu jusqu'au bas de l'écran. Seuls `dist/site.js` et `dist/main.js` changent |
 | `v0.38.0` | `9d0c58e` | BonV : hero, V un peu plus grand (rayon `min(W*.085, H*.135)` au lieu de `min(W*.075, H*.12)`) et plus près du centre (71 % de la largeur au lieu de 74 %) en mode fond ; mode bloc inchangé. Seul `dist/bonv.js` change. Validé en `?dev` par Romain |
 | `v0.37.0` | `032647e` | BonV : hero `src/bonv-hero-bg.js` réécrit, le V et son anneau de points en boucle « parle » / « réfléchit » (proto `protos/bonv/phasev-bonv-hero-v-proto.html`). Seul `dist/bonv.js` change ; aucun autre module de BonV modifié depuis `v0.24.0` (graphe vérifié) |
@@ -150,6 +151,8 @@ Journal de tout ce qui a été fait sur le repo et sur le site Webflow PhaseV. C
 ## Journal
 
 ### 2026-11-20
+
+- **Resources, filtres en mobile** (recette mobile, signalé par Romain). En mobile, Webflow passe `filter_block` en colonne : les 4 catégories s'empilaient, la pastille blanche se déformait et coupait « All » et « Publications & Media ». Option retenue par Romain : barre sur une ligne qui défile au doigt (`flex-direction:row`), fondu sur le bord où il reste des catégories (`is-more-l` / `is-more-r`), catégorie touchée recentrée, `:hover` sous `@media (hover:hover)`. `src/resources.js`, release `v0.40.0`, URL jsDelivr vérifiée (fichier identique au build), loader Resources `v0.33.0` → `v0.40.0` (Resources Template reste en `v0.34.0`, pas de filtres).
 
 - **Recette mobile, 1re passe** (retours de Romain, section « Recette mobile » de RETOURS). Réglages Webflow, valables sur toutes les pages qui utilisent ces classes :
   - `why-card` : padding gauche et droit à 0 en mobile portrait supprimé (repris de 1,5 rem du mobile paysage). Home, Portfolio, ClinOps, Response.

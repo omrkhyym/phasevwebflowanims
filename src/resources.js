@@ -49,7 +49,7 @@ html body [data-af-lib] .filter_block.margin-bottom::-webkit-scrollbar{ display:
 html body [data-af-lib] .filter_list-wrapper, html body [data-af-lib] .filter_list, html body [data-af-lib] .filter_item{ display:contents; }
 html body [data-af-lib] .fs_radio_field{ position:relative; z-index:1; flex:none; display:flex; align-items:center; margin:0; padding:.625rem 1.125rem; border-radius:999px; cursor:pointer;
   font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:#6b6890; background:transparent; transition:color .3s; }
-html body [data-af-lib] .fs_radio_field:hover{ color:#141238; }
+@media (hover:hover){ html body [data-af-lib] .fs_radio_field:hover{ color:#141238; } }
 html body [data-af-lib] .fs_radio_button{ display:none; }
 html body [data-af-lib] .fs_radio_label{ margin:0; font:inherit; letter-spacing:inherit; color:inherit; cursor:pointer; }
 html body [data-af-lib] .fs_radio_field.is-list-active, html body [data-af-lib] .fs_radio_field:has(input:checked){ color:#141238; background:#fff; box-shadow:0 0 0 1px rgba(20,18,56,.08); }
@@ -117,6 +117,12 @@ html body [data-af-lib] .filter_block.margin-bottom{ margin-bottom:0; padding-bo
 html body [data-af-lib] .filter_block:not(.margin-bottom){ margin-left:auto; }
 html body [data-af-lib] .filter_search{ min-width:0; min-height:0; }
 @media (max-width:767px){ html body [data-af-lib] .filter_block:not(.margin-bottom){ margin-left:0; width:100%; } }
+/* mobile (recette 2026-11-20) : Webflow passe filter_block en colonne, les catégories s'empilaient.
+   Barre sur une ligne qui défile au doigt ; fondu sur le bord où il reste des catégories cachées */
+html body [data-af-lib] .filter_block.margin-bottom{ flex-direction:row; }
+html body [data-af-lib] .filter_block.margin-bottom.is-more-r{ -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 3rem),transparent); mask-image:linear-gradient(90deg,#000 calc(100% - 3rem),transparent); }
+html body [data-af-lib] .filter_block.margin-bottom.is-more-l{ -webkit-mask-image:linear-gradient(90deg,transparent,#000 3rem); mask-image:linear-gradient(90deg,transparent,#000 3rem); }
+html body [data-af-lib] .filter_block.margin-bottom.is-more-l.is-more-r{ -webkit-mask-image:linear-gradient(90deg,transparent,#000 3rem,#000 calc(100% - 3rem),transparent); mask-image:linear-gradient(90deg,transparent,#000 3rem,#000 calc(100% - 3rem),transparent); }
 
 /* Resources, article (retour de Romain : trop centré, trop étroit, pas de variation) : sur le modèle du récit des fiches Case Studies.
    Largeur des autres pages ; intertitres à gauche, numérotés dans un repère rond, alignés sur leur premier paragraphe ;
@@ -196,11 +202,26 @@ function segmented(bar) {
     if (!on) { ind.style.width = '0'; return; }
     ind.style.transform = `translateX(${on.offsetLeft}px)`; ind.style.width = on.offsetWidth + 'px';
   };
+  // barre plus large que l'écran (mobile) : fondu côté caché, catégorie choisie recentrée
+  const edges = () => {
+    const max = bar.scrollWidth - bar.clientWidth;
+    bar.classList.toggle('is-more-l', max > 1 && bar.scrollLeft > 1);
+    bar.classList.toggle('is-more-r', max > 1 && bar.scrollLeft < max - 1);
+  };
+  const reveal = e => {
+    place();
+    // la catégorie touchée : la classe active de Finsweet n'est pas encore à jour à ce moment
+    const on = e.target.closest && e.target.closest('.fs_radio_field');
+    if (on && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: on.offsetLeft - (bar.clientWidth - on.offsetWidth) / 2, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
   const mo = new MutationObserver(place); mo.observe(bar, { subtree: true, attributes: true, attributeFilter: ['class'] });
-  const ro = new ResizeObserver(place); ro.observe(bar);
-  bar.addEventListener('change', place);
-  place();
-  return () => { mo.disconnect(); ro.disconnect(); bar.removeEventListener('change', place); ind.remove(); bar.classList.remove('has-ind'); delete bar.dataset.pvSeg; };
+  const onResize = () => { place(); edges(); };
+  const ro = new ResizeObserver(onResize); ro.observe(bar);
+  bar.addEventListener('change', reveal);
+  bar.addEventListener('scroll', edges, { passive: true });
+  place(); edges();
+  document.fonts?.ready.then(onResize);   // la largeur des libellés change quand Roboto Mono arrive
+  return () => { mo.disconnect(); ro.disconnect(); bar.removeEventListener('change', reveal); bar.removeEventListener('scroll', edges); ind.remove(); bar.classList.remove('has-ind', 'is-more-l', 'is-more-r'); delete bar.dataset.pvSeg; };
 }
 
 export function initResourcesLibrary(root) {

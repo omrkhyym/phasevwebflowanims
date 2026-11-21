@@ -305,14 +305,18 @@ export function initCaseStudiesLibrary(root) {
   fixLinks(root);
 
   const names = kind => [...root.querySelectorAll(`[data-cs-source="${kind}"] [data-cs-name]`)].map(txt).filter(Boolean);
-  const products = names('product');
-  const areas = names('area');
   const cards = [...root.querySelectorAll('[data-cs-list] [data-cs-card]')].map(card => ({
     el: card.closest('.w-dyn-item') || card,
     card,
     p: [...card.querySelectorAll('[data-cs-tags-list="product"] .w-dyn-item')].map(txt).filter(Boolean),
     a: [...card.querySelectorAll('[data-cs-tags-list="area"] .w-dyn-item')].map(txt).filter(Boolean),
   }));
+  // une catégorie sans étude n'est pas proposée (elle reviendra quand une étude y sera rattachée dans le CMS)
+  const products = names('product').filter(n => cards.some(c => c.p.includes(n)));
+  const areas = names('area').filter(n => cards.some(c => c.a.includes(n)));
+  const hasProduct = (c, p) => !p || c.p.some(n => slugify(n) === p);
+  // aires proposées : celles qui ont au moins une étude pour le produit choisi
+  const areasFor = p => areas.filter(n => cards.some(c => hasProduct(c, p) && c.a.includes(n)));
 
   const mount = root.querySelector('[data-cs-filters]');
   if (!mount) return () => {};
@@ -333,7 +337,14 @@ export function initCaseStudiesLibrary(root) {
     ind.style.transform = `translateX(${on.offsetLeft}px)`; ind.style.width = on.offsetWidth + 'px';
   };
   const roInd = new ResizeObserver(placeInd); roInd.observe(pills);
-  select.innerHTML = `<option value="">All therapeutic areas</option>` + areas.map(n => `<option value="${slugify(n)}">${n}</option>`).join('');
+  let optsFor = null;
+  const fillSelect = () => {
+    if (optsFor === state.product) return;
+    optsFor = state.product;
+    const list = areasFor(state.product);
+    select.innerHTML = `<option value="">All therapeutic areas</option>` + list.map(n => `<option value="${slugify(n)}">${n}</option>`).join('');
+    if (state.area && !list.some(n => slugify(n) === state.area)) state.area = '';   // aire absente pour ce produit : retour à « All »
+  };
 
   const empty = document.createElement('div');
   empty.className = 'cs-empty';
@@ -353,6 +364,7 @@ export function initCaseStudiesLibrary(root) {
       b.setAttribute('aria-checked', on);
     });
     placeInd();
+    fillSelect();
     select.value = state.area;
     let shown = 0;
     cards.forEach(c => {

@@ -19,53 +19,58 @@ function i(e) {
 function a(e) {
 	if (e.dataset.pvInit) return () => {};
 	e.dataset.pvInit = "1", n(), i(e), r(e);
-	let t = (t) => [...e.querySelectorAll(`[data-cs-source="${t}"] [data-cs-name]`)].map(f).filter(Boolean), a = t("product"), o = t("area"), s = [...e.querySelectorAll("[data-cs-list] [data-cs-card]")].map((e) => ({
+	let t = (t) => [...e.querySelectorAll(`[data-cs-source="${t}"] [data-cs-name]`)].map(f).filter(Boolean), a = [...e.querySelectorAll("[data-cs-list] [data-cs-card]")].map((e) => ({
 		el: e.closest(".w-dyn-item") || e,
 		card: e,
 		p: [...e.querySelectorAll("[data-cs-tags-list=\"product\"] .w-dyn-item")].map(f).filter(Boolean),
 		a: [...e.querySelectorAll("[data-cs-tags-list=\"area\"] .w-dyn-item")].map(f).filter(Boolean)
-	})), c = e.querySelector("[data-cs-filters]");
-	if (!c) return () => {};
-	c.className = "cs-filters", c.innerHTML = "<div class=\"cs-pills\" role=\"radiogroup\" aria-label=\"Product\"></div>\n    <select class=\"filter-select\" aria-label=\"Therapeutic area\"></select>";
-	let l = c.querySelector(".cs-pills"), u = c.querySelector("select");
-	l.innerHTML = ["All", ...a].map((e, t) => `<button type="button" class="fs_radio_field" role="radio" data-p="${t ? m(e) : ""}">${e}</button>`).join("");
-	let d = document.createElement("span");
-	d.className = "cs-pill-ind", d.setAttribute("aria-hidden", "true"), l.prepend(d), l.classList.add("has-ind");
-	let p = () => {
-		let e = l.querySelector(".fs_radio_field.is-list-active");
-		e ? (d.style.transform = `translateX(${e.offsetLeft}px)`, d.style.width = e.offsetWidth + "px") : d.style.width = "0";
-	}, g = new ResizeObserver(p);
-	g.observe(l), u.innerHTML = "<option value=\"\">All therapeutic areas</option>" + o.map((e) => `<option value="${m(e)}">${e}</option>`).join("");
-	let _ = document.createElement("div");
-	_.className = "cs-empty", _.hidden = !0, _.innerHTML = "<h3 class=\"heading-style-h4\">No case study matches these filters yet.</h3><button type=\"button\">Show all case studies</button>", e.querySelector("[data-cs-list]")?.after(_);
-	let v = {
+	})), o = t("product").filter((e) => a.some((t) => t.p.includes(e))), s = t("area").filter((e) => a.some((t) => t.a.includes(e))), c = (e, t) => !t || e.p.some((e) => m(e) === t), l = (e) => s.filter((t) => a.some((n) => c(n, e) && n.a.includes(t))), u = e.querySelector("[data-cs-filters]");
+	if (!u) return () => {};
+	u.className = "cs-filters", u.innerHTML = "<div class=\"cs-pills\" role=\"radiogroup\" aria-label=\"Product\"></div>\n    <select class=\"filter-select\" aria-label=\"Therapeutic area\"></select>";
+	let d = u.querySelector(".cs-pills"), p = u.querySelector("select");
+	d.innerHTML = ["All", ...o].map((e, t) => `<button type="button" class="fs_radio_field" role="radio" data-p="${t ? m(e) : ""}">${e}</button>`).join("");
+	let g = document.createElement("span");
+	g.className = "cs-pill-ind", g.setAttribute("aria-hidden", "true"), d.prepend(g), d.classList.add("has-ind");
+	let _ = () => {
+		let e = d.querySelector(".fs_radio_field.is-list-active");
+		e ? (g.style.transform = `translateX(${e.offsetLeft}px)`, g.style.width = e.offsetWidth + "px") : g.style.width = "0";
+	}, v = new ResizeObserver(_);
+	v.observe(d);
+	let y = null, b = () => {
+		if (y === S.product) return;
+		y = S.product;
+		let e = l(S.product);
+		p.innerHTML = "<option value=\"\">All therapeutic areas</option>" + e.map((e) => `<option value="${m(e)}">${e}</option>`).join(""), S.area && !e.some((e) => m(e) === S.area) && (S.area = "");
+	}, x = document.createElement("div");
+	x.className = "cs-empty", x.hidden = !0, x.innerHTML = "<h3 class=\"heading-style-h4\">No case study matches these filters yet.</h3><button type=\"button\">Show all case studies</button>", e.querySelector("[data-cs-list]")?.after(x);
+	let S = {
 		product: "",
 		area: ""
-	}, y = new URLSearchParams(location.search);
-	v.product = y.get("product") || "", v.area = y.get("area") || "";
-	function b(e) {
-		l.querySelectorAll("[data-p]").forEach((e) => {
-			let t = e.dataset.p === v.product;
+	}, C = new URLSearchParams(location.search);
+	S.product = C.get("product") || "", S.area = C.get("area") || "";
+	function w(e) {
+		d.querySelectorAll("[data-p]").forEach((e) => {
+			let t = e.dataset.p === S.product;
 			e.classList.toggle("is-list-active", t), e.setAttribute("aria-checked", t);
-		}), p(), u.value = v.area;
+		}), _(), b(), p.value = S.area;
 		let t = 0;
-		s.forEach((n) => {
-			let r = (!v.product || n.p.some((e) => m(e) === v.product)) && (!v.area || n.a.some((e) => m(e) === v.area));
+		a.forEach((n) => {
+			let r = (!S.product || n.p.some((e) => m(e) === S.product)) && (!S.area || n.a.some((e) => m(e) === S.area));
 			n.el.toggleAttribute("data-cs-hidden", !r), n.card.classList.remove("cs-in"), r && e && !h() && (n.card.style.setProperty("--i", t), n.card.offsetWidth, n.card.classList.add("cs-in")), r && t++;
-		}), _.hidden = t > 0;
+		}), x.hidden = t > 0;
 		let n = new URLSearchParams(location.search);
-		v.product ? n.set("product", v.product) : n.delete("product"), v.area ? n.set("area", v.area) : n.delete("area"), history.replaceState(null, "", location.pathname + (n.toString() ? "?" + n : "") + location.hash);
+		S.product ? n.set("product", S.product) : n.delete("product"), S.area ? n.set("area", S.area) : n.delete("area"), history.replaceState(null, "", location.pathname + (n.toString() ? "?" + n : "") + location.hash);
 	}
-	let x = (e) => {
+	let T = (e) => {
 		let t = e.target.closest("[data-p]");
-		t && (v.product = t.dataset.p, b(!0));
-	}, S = () => {
-		v.area = u.value, b(!0);
+		t && (S.product = t.dataset.p, w(!0));
+	}, E = () => {
+		S.area = p.value, w(!0);
 	};
-	return l.addEventListener("click", x), u.addEventListener("change", S), _.querySelector("button").addEventListener("click", () => {
-		v.product = "", v.area = "", b(!0);
-	}), b(!1), function() {
-		l.removeEventListener("click", x), g.disconnect(), d.remove(), u.removeEventListener("change", S), _.remove();
+	return d.addEventListener("click", T), p.addEventListener("change", E), x.querySelector("button").addEventListener("click", () => {
+		S.product = "", S.area = "", w(!0);
+	}), w(!1), function() {
+		d.removeEventListener("click", T), v.disconnect(), g.remove(), p.removeEventListener("change", E), x.remove();
 	};
 }
 function o(e) {

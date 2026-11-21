@@ -14,7 +14,7 @@ const CSS = `
 /* Latest news (et tout slider d'articles) : cartes moins larges, toutes de la même hauteur ; image 2:1, titre plus petit, 3 lignes max */
 .section_layout .swiper-slide:has(> .swiper-item){ max-width:24rem; height:auto; }
 .section_layout .swiper-item .post_image{ aspect-ratio:2 / 1; margin-bottom:0; }
-.section_layout .swiper-item .heading-style-h4{ font-size:1.25rem; line-height:1.35; font-weight:500; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.section_layout .swiper-item .heading-style-h4{ font-size:clamp(1.375rem, 1.15rem + .55vw, 1.625rem); line-height:1.25; letter-spacing:-.015em; font-weight:400; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
 `;
 export function initNewsCards() {
   if (document.getElementById(CSS_ID) || !document.querySelector('.swiper-item')) return;

@@ -130,7 +130,7 @@ html body .surface-dark [data-cs-card]:hover{ transform:translateY(-4px); backgr
 html body .surface-dark [data-cs-card] .post_image{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:0; margin:0; }
 html body .surface-dark [data-cs-card] .post_body{ display:flex; flex-direction:column; gap:1.25rem; flex:1; padding:2rem 2.25rem 2.5rem; background:none; }
 html body .surface-dark [data-cs-card] [data-cs-tag]{ font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--_colors---primary--yellow, #e1c721); }
-html body .surface-dark [data-cs-card] h3{ margin:0; font-weight:300; font-size:clamp(1.375rem, 1.1rem + .7vw, 1.75rem); line-height:1.25; letter-spacing:-.015em; color:#f8f8f8; }
+html body .surface-dark [data-cs-card] h3{ margin:0; font-weight:400; font-size:clamp(1.375rem, 1.1rem + .7vw, 1.75rem); line-height:1.25; letter-spacing:-.015em; color:#f8f8f8; }
 html body .surface-dark [data-cs-card] .post_description{ font-size:1rem; line-height:1.6; color:rgba(248,248,248,.7); }
 html body .surface-dark [data-cs-card] [data-cs-stat]{ display:flex; align-items:baseline; gap:.75rem; margin-top:auto; padding-top:1.25rem; border-top:1px solid rgba(248,248,248,.14); font-size:.9375rem; line-height:1.4; color:rgba(248,248,248,.75); }
 html body .surface-dark [data-cs-card] [data-cs-stat] b{ margin:0; font-weight:300; font-size:2.5rem; line-height:1; letter-spacing:-.03em; color:#f8f8f8; }
@@ -247,7 +247,7 @@ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .
 @media (max-width:991px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:2.5rem 2rem; } }
 @media (max-width:599px){ html body [data-pv="case-studies"] .resource-list, html body [data-cs-related] .resource-list{ grid-template-columns:1fr; gap:2rem; } }
 html body [data-pv="case-studies"] [data-cs-card] .post_body, html body [data-cs-related] [data-cs-card] .post_body{ gap:1.25rem; padding:2rem 2rem 2.25rem; }
-html body [data-pv="case-studies"] [data-cs-card] h3, html body [data-cs-related] [data-cs-card] h3{ font-weight:300; font-size:clamp(1.375rem, 1.15rem + .55vw, 1.625rem); line-height:1.25; letter-spacing:-.015em; }
+html body [data-pv="case-studies"] [data-cs-card] h3, html body [data-cs-related] [data-cs-card] h3{ font-weight:400; font-size:clamp(1.375rem, 1.15rem + .55vw, 1.625rem); line-height:1.25; letter-spacing:-.015em; }
 html body [data-pv="case-studies"] [data-cs-card] .post_description, html body [data-cs-related] [data-cs-card] .post_description{ font-size:1rem; line-height:1.6; }
 @media (max-width:767px){ html body [data-pv="case-studies"] [data-cs-card] .post_body, html body [data-cs-related] [data-cs-card] .post_body{ padding:1.75rem 1.5rem 2rem; } }
 

@@ -78,7 +78,7 @@ html body [data-af-lib] .swiper-item .post_body{ display:flex; flex-direction:co
 html body [data-af-lib] .post-data-wrapper{ display:flex; flex-wrap:wrap; align-items:center; gap:.25rem .75rem; }
 html body [data-af-lib] .post_date{ font-family:var(--af-mono, "Roboto Mono", monospace); font-size:.6875rem; letter-spacing:.12em; text-transform:uppercase; color:var(--af-violet, #5b4fb0); }
 html body [data-af-lib] .post_date + .post_date::before{ content:''; display:inline-block; width:1px; height:.9em; margin-right:.75rem; vertical-align:-.1em; background:currentColor; opacity:.35; }
-html body [data-af-lib] .swiper-item h3{ margin:0; font-weight:300; font-size:clamp(1.375rem, 1.15rem + .55vw, 1.625rem); line-height:1.25; letter-spacing:-.015em; color:#141238; }
+html body [data-af-lib] .swiper-item h3{ margin:0; font-weight:400; font-size:clamp(1.375rem, 1.15rem + .55vw, 1.625rem); line-height:1.25; letter-spacing:-.015em; color:#141238; }
 html body [data-af-lib] .swiper-item .post_description{ font-size:1rem; line-height:1.6; color:#4a4868; }
 html body [data-af-lib] .swiper-item .post_description.w-dyn-bind-empty{ display:none; }
 @media (max-width:767px){ html body [data-af-lib] .swiper-item .post_body{ padding:1.75rem 1.5rem 2rem; } }
